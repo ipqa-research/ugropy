@@ -1,0 +1,16 @@
+include LICENCE
+include README.md
+include requirements.txt
+include pyproject.toml
+
+recursive-include ugropy *.py *.csv
+
+exclude tox.ini
+exclude .readthedocs.yml
+exclude requirements-dev.txt
+exclude *.png
+
+recursive-exclude dist *
+recursive-exclude tests *
+recursive-exclude docs *
+recursive-exclude tools *
