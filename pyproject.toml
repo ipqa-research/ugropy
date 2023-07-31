@@ -10,6 +10,11 @@ testpaths = [
     "tests"
 ]
 
+[tool.pytest.ini_options]
+markers = [
+    "CH2: CH3, CH2, CH, and C subgroups test",
+]
+
 [project]
 name = "ugropy"
 version = "0.0.1"
@@ -30,5 +35,7 @@ urls = {Homepage = "https://github.com/SalvadorBrandolin/ugrupy"}
 
 dependencies = [
     'numpy >= 1.25.1',
-    'pandas >= 2.0.3', 
+    'pandas >= 2.0.3',
+    'pubchempy == 1.0.4',
+    'rdkit == 2023.3.2'
 ]

@@ -24,20 +24,19 @@ def get_groups(name, subgroups, subgroups_matrix):
             smarts = df.loc[group]["smarts"].split()
 
             for idx, s in enumerate(smarts):
-                #import ipdb
-                #ipdb.set_trace()
                 count = 0
 
                 func_group = Chem.MolFromSmarts(s)
-                match = chem_object.GetSubstructMatches(func_group)
-                how_many = len(match)
-
+                matches = chem_object.GetSubstructMatches(func_group)
+                how_many = len(matches)
+                
                 if how_many > 0:
                     count += how_many
                     if idx == 0:
                         groups = np.append(groups, group)
             
-            np.append(many_groups, count)
+            if count > 0:
+                many_groups = np.append(many_groups, count).astype(int)
         except:
             ...
 
