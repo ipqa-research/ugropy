@@ -8,3 +8,7 @@ TODO:
 Remember:
 CHO it's for aldehyde
 CH-O ether
+
+Diferencias entre UNIFAC y PSRK:
+
+[CH2]=[CH2] not in UNIFAC but yes in PSRK

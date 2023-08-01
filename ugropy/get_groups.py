@@ -40,11 +40,14 @@ def get_groups(name, subgroups, subgroups_matrix):
         except:
             ...
 
+    #import ipdb
+    #ipdb.set_trace()
+
     # get final dict
     dff = dfm.loc[groups][groups]
-    dff = dff * many_groups
+    dff = dff.mul(many_groups, axis= 0)
     dff_sum = dff.sum(axis=0)
     dff_sum.replace(0, pd.NA, inplace=True)
-    final_dict = dff_sum.to_dict()
+    dff_final = dff_sum.dropna()
 
-    return final_dict
+    return dff_final.to_dict()
