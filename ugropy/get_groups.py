@@ -40,8 +40,8 @@ def get_groups(name, subgroups, subgroups_matrix):
         except:
             ...
 
-    #import ipdb
-    #ipdb.set_trace()
+    import ipdb
+    ipdb.set_trace()
 
     # get final dict
     dff = dfm.loc[groups][groups]

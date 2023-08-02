@@ -17,7 +17,10 @@ markers = [
     "CeqC: CH2=CH, CH=CH, CH2=C, CH=C, C=C",
     "ACH: ACH, AC",
     "ACCH2: ACCH3, ACCH2, ACCH",
-    "OH: OH, CH3OH"
+    "OH: OH, CH3OH",
+    "H2O: H2O",
+    "ACOH: ACOH",
+    "CH2CO: CH3CO, CH2CO",
 ]
 
 [project]
