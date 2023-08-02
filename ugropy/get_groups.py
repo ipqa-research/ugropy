@@ -24,6 +24,9 @@ def get_groups(name, subgroups, subgroups_matrix):
             smarts = df.loc[group]["smarts"].split()
 
             for idx, s in enumerate(smarts):
+                #import ipdb
+                #ipdb.set_trace()
+                
                 count = 0
 
                 func_group = Chem.MolFromSmarts(s)
@@ -40,8 +43,8 @@ def get_groups(name, subgroups, subgroups_matrix):
         except:
             ...
 
-    import ipdb
-    ipdb.set_trace()
+    #import ipdb
+    #ipdb.set_trace()
 
     # get final dict
     dff = dfm.loc[groups][groups]
