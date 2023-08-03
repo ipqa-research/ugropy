@@ -21,6 +21,9 @@ markers = [
     "H2O: H2O",
     "ACOH: ACOH",
     "CH2CO: CH3CO, CH2CO",
+    "CHO: CHO",
+    "CCOO: CH3COO, CH2COO",
+    "HCOO: HCOO"
 ]
 
 [project]

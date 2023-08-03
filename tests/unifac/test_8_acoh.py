@@ -18,6 +18,6 @@ trials_unifac = [
 @pytest.mark.ACOH
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("name, result", trials_unifac)
-def test_ch2_unifac(name, result):
-    substance = ug.Substance(name)
-    assert substance.unifac_groups == result
+def test_acoh_unifac(name, result):
+    groups = ug.Groups(name)
+    assert groups.unifac_groups == result

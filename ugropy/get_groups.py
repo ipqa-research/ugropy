@@ -22,12 +22,12 @@ def get_groups(name, subgroups, subgroups_matrix):
     for group in df.index:
         try:
             smarts = df.loc[group]["smarts"].split()
+            count = 0
 
             for idx, s in enumerate(smarts):
+                count = 0
                 #import ipdb
                 #ipdb.set_trace()
-                
-                count = 0
 
                 func_group = Chem.MolFromSmarts(s)
                 matches = chem_object.GetSubstructMatches(func_group)
