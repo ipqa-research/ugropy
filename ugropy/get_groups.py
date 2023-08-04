@@ -21,25 +21,28 @@ def get_groups(name, subgroups, subgroups_matrix):
 
     for group in df.index:
         try:
+            #import ipdb
+            #ipdb.set_trace(cond=group == "CH2O")
+            
+            group_count = 0
             smarts = df.loc[group]["smarts"].split()
-            count = 0
 
-            for idx, s in enumerate(smarts):
-                count = 0
-                #import ipdb
-                #ipdb.set_trace()
-
-                func_group = Chem.MolFromSmarts(s)
+            for smt in smarts:
+                
+                func_group = Chem.MolFromSmarts(smt)
                 matches = chem_object.GetSubstructMatches(func_group)
                 how_many = len(matches)
                 
                 if how_many > 0:
-                    count += how_many
-                    if idx == 0:
+                    group_count += how_many
+                    if group not in groups:
                         groups = np.append(groups, group)
             
-            if count > 0:
-                many_groups = np.append(many_groups, count).astype(int)
+            if group_count > 0:
+                many_groups = np.append(many_groups, group_count).astype(int)
+                #import ipdb
+                #ipdb.set_trace(cond= (many_groups == np.array([3, 2, 1, 3, 2])).all())
+                
         except:
             ...
 
