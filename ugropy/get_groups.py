@@ -1,5 +1,7 @@
 from rdkit import Chem
 
+import json
+
 import pubchempy as pcp
 
 import numpy as np
@@ -7,14 +9,14 @@ import numpy as np
 import pandas as pd
 
 
-def get_groups(name, subgroups, subgroups_matrix):
+def get_groups(name, subgroups, subgroups_matrix, problematic_structures):
     pcp_object = pcp.get_compounds(name, "name")[0]
     smiles = pcp_object.canonical_smiles
     chem_object = Chem.MolFromSmiles(smiles)
 
     df = subgroups
     dfm = subgroups_matrix
-    df_problematics = ...
+    df_problematics = problematic_structures
 
     # Groups and occurence in name:
     groups = np.array([])
@@ -45,12 +47,21 @@ def get_groups(name, subgroups, subgroups_matrix):
         except:
             ...
 
-    #import ipdb
-    #ipdb.set_trace()
-
-    # get final dict
     dff = dfm.loc[groups][groups]
     dff = dff.mul(many_groups, axis= 0)
+
+    for smarts in df_problematics.index:
+        structure = Chem.MolFromSmarts(smarts)
+        matches = chem_object.GetSubstructMatches(structure)
+        how_many_problems = len(matches)
+
+        if how_many_problems > 0:
+            problm_dict = json.loads(df_problematics.loc[smarts].contribute)
+
+            for grp in problm_dict.keys():
+                dff.loc[grp][grp] += problm_dict[grp] * how_many_problems
+
+
     dff_sum = dff.sum(axis=0)
     dff_sum.replace(0, pd.NA, inplace=True)
     dff_final = dff_sum.dropna()

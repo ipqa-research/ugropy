@@ -1,4 +1,2 @@
-group|smarts|contribute
-CH3OCOOCH3|
-CH3OCOOCH2|
-CH3OCOOCH|
+smarts|contribute
+[CH3]OC(=O)O[CH3]|"{""COO"": -1, ""CH3O"": -1, ""CH3"": 1}"

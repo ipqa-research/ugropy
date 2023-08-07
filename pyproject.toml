@@ -23,7 +23,8 @@ markers = [
     "CH2CO: CH3CO, CH2CO",
     "CHO: CHO",
     "CCOO: CH3COO, CH2COO",
-    "HCOO: HCOO"
+    "HCOO: HCOO",
+    "CH2O: CH2O, CH-O, THF"
 ]
 
 [project]
