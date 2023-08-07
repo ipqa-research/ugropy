@@ -14,6 +14,7 @@ def get_groups(name, subgroups, subgroups_matrix):
 
     df = subgroups
     dfm = subgroups_matrix
+    df_problematics = ...
 
     # Groups and occurence in name:
     groups = np.array([])
@@ -25,24 +26,22 @@ def get_groups(name, subgroups, subgroups_matrix):
             #ipdb.set_trace(cond=group == "CH2O")
             
             group_count = 0
-            smarts = df.loc[group]["smarts"].split()
+            smarts = df.loc[group]["smarts"]
 
-            for smt in smarts:
-                
-                func_group = Chem.MolFromSmarts(smt)
-                matches = chem_object.GetSubstructMatches(func_group)
-                how_many = len(matches)
-                
-                if how_many > 0:
-                    group_count += how_many
-                    if group not in groups:
-                        groups = np.append(groups, group)
+            func_group = Chem.MolFromSmarts(smarts)
+            matches = chem_object.GetSubstructMatches(func_group)
+            how_many = len(matches)
+            
+            if how_many > 0:
+                group_count += how_many
+                if group not in groups:
+                    groups = np.append(groups, group)
             
             if group_count > 0:
                 many_groups = np.append(many_groups, group_count).astype(int)
                 #import ipdb
                 #ipdb.set_trace(cond= (many_groups == np.array([3, 2, 1, 3, 2])).all())
-                
+
         except:
             ...
 

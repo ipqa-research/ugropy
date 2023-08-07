@@ -9,8 +9,9 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("Dimethyl carbonate", {"CH3": 1, "COO": 1, "CH3O": 1}),
     ("phenyl formate", {"ACH": 5, "AC": 1, "HCOO": 1}),
-    ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1})
+    ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1}),
 ]
 
 @pytest.mark.HCOO
