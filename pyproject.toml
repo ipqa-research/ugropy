@@ -24,7 +24,8 @@ markers = [
     "CHO: CHO",
     "CCOO: CH3COO, CH2COO",
     "HCOO: HCOO",
-    "CH2O: CH2O, CH-O, THF"
+    "CH2O: CH2O, CH-O, THF",
+    "mix: a mix of a lot of subgroupss"
 ]
 
 [project]

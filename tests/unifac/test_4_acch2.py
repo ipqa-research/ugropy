@@ -9,6 +9,8 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("Atrolactic acid", {"ACH": 5, "AC": 1, "OH": 1, "CH3": 1, "C": 1, "COOH": 1}),
+    ("Gastrodigenin", {"ACH": 4, "ACOH": 1, "ACCH2": 1, "OH": 1}),
     ("1-Phenyl-2-methyl-1,3-butadiene", {"ACH": 5, "AC": 1, "CH=C": 1, "CH2=CH": 1, "CH3": 1}),
     ("9-(3-Butenyl)anthracene", {"ACH": 9, "ACCH2": 1, "AC": 4, "CH2": 1, "CH2=CH": 1}),
     ("9-Methylanthracene", {"ACH": 9, "ACCH3": 1, "AC": 4}),

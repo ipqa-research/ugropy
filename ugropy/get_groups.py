@@ -1,19 +1,13 @@
-from rdkit import Chem
-
 import json
 
-import pubchempy as pcp
+from rdkit import Chem
 
 import numpy as np
 
 import pandas as pd
 
 
-def get_groups(name, subgroups, subgroups_matrix, problematic_structures):
-    pcp_object = pcp.get_compounds(name, "name")[0]
-    smiles = pcp_object.canonical_smiles
-    chem_object = Chem.MolFromSmiles(smiles)
-
+def get_groups(chem_object, subgroups, subgroups_matrix, problematic_structures):
     df = subgroups
     dfm = subgroups_matrix
     df_problematics = problematic_structures
