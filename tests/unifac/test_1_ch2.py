@@ -8,19 +8,19 @@ import pytest
 # =============================================================================
 # UNIFAC
 trials_unifac = [
-    ("ethane", {"CH3": 2}),
-    ("3-Ethyl-2,2-dimethylpentane", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}),
-    ("Decahydronaphthalene", {"CH2": 8, "CH": 2}),
-    ("Dicyclohexylmethane", {"CH2": 11, "CH": 2}),
-    ("hexane", {"CH3": 2, "CH2": 4}),
-    ("2-methylpropane", {"CH3": 3, "CH": 1}),
-    ("2,2-dimethylpropane", {"CH3": 4, "C": 1}),
-    ("cyclohexane", {"CH2": 6}),
+    ("CCC(CC)C(C)(C)C", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}, "smiles"),
+    ("C1CCC2CCCCC2C1", {"CH2": 8, "CH": 2}, "smiles"),
+    ("C1CCC(CC1)CC2CCCCC2", {"CH2": 11, "CH": 2}, "smiles"),
+    ("ethane", {"CH3": 2}, "name"),
+    ("hexane", {"CH3": 2, "CH2": 4}, "name"),
+    ("2-methylpropane", {"CH3": 3, "CH": 1}, "name"),
+    ("2,2-dimethylpropane", {"CH3": 4, "C": 1}, "name"),
+    ("cyclohexane", {"CH2": 6}, "name"),
 ]
 
 @pytest.mark.CH2
 @pytest.mark.UNIFAC
-@pytest.mark.parametrize("name, result", trials_unifac)
-def test_ch2(name, result):
-    groups = ug.Groups(name)
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_ch2(identifier, result, identifier_type):
+    groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result

@@ -9,14 +9,16 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("phenyl formate", {"ACH": 5, "AC": 1, "HCOO": 1}),
-    ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1}),
-    ("methyl formate", {"HCOO": 1, "CH3": 1})
+    # phenyl formate
+    ("C1=CC=C(C=C1)OC=O", {"ACH": 5, "AC": 1, "HCOO": 1}, "smiles"),
+    # methyl formate
+    ("COC=O", {"HCOO": 1, "CH3": 1}, "smiles"),
+    ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1}, "name"),
 ]
 
 @pytest.mark.HCOO
 @pytest.mark.UNIFAC
-@pytest.mark.parametrize("name, result", trials_unifac)
-def test_cho_unifac(name, result):
-    groups = ug.Groups(name)
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_cho_unifac(identifier, result, identifier_type):
+    groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
