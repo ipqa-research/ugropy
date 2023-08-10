@@ -4,7 +4,7 @@ import pytest
 
 
 # =============================================================================
-# 5 and 6- OH Main group: OH, CH3OH
+# 5- OH Main group: OH
 # =============================================================================
 
 # UNIFAC
@@ -14,7 +14,6 @@ trials_unifac = [
     # (2S,3S)-2-Methyl-1,3-hexanediol
     ("CCCC(C(C)CO)O", {"CH3": 2, "CH2": 3, "CH": 2, "OH": 2}, "smiles"),
     ("2-propanol", {"CH3": 2, "CH": 1, "OH": 1}, "name"),
-    ("methanol", {"CH3OH": 1}, "name")
 ]
 
 @pytest.mark.OH

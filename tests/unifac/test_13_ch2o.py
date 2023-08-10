@@ -9,6 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("tetrahydrofuran", {"THF": 1}, "name"),
     ("diisopropyl ether", {"CH3": 4, "CH": 1, "CH-O": 1}, "name"),
     ("diethyl ether", {"CH3": 2, "CH2": 1, "CH2O": 1}, "name"),
     ("dimethyl ether", {"CH3": 1, "CH3O": 1}, "name"),
