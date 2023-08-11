@@ -43,6 +43,18 @@ markers = [
     "CS2: CS2",
     "CH3SH: CH3SH, CH2SH",
     "FURFURAL: FURFURAL",
+    "DOH: DOH",
+    "I: I",
+    "BR: Br",
+    "alquine: CH=-C",
+    "DMSO: DMSO",
+    "ACRY: ACRY",
+    "CLCeqC: CL-(C=C)",
+    "ACF: ACF",
+    "DMF: DMF, HCON(..",
+    "CF2: CF3, CF2, CF",
+    "COO: COO",
+    "SIH2: SIH3, SIH2, SIH, SI",
     "mix: a mix of a lot of subgroupss"
 ]
 
