@@ -8,3 +8,4 @@ smarts|contribute
 [CH2]OC(=O)O[CH0,c]|"{""COO"": -1}"
 [CH]OC(=O)O[CH]|"{""COO"": -1, ""CHO"": -1, ""CH"": 1}"
 [CH]OC(=O)O[CH0,c]|"{""COO"": -1}"
+[SiH0]O[SiH]O[SiH0]|"{""SIHO"": -2, ""SIH"": 2}"

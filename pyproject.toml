@@ -56,6 +56,13 @@ markers = [
     "COO: COO",
     "SIH2: SIH3, SIH2, SIH, SI",
     "SIO: SIH2O, SIHO, SIO",
+    "NMP: NMP",
+    "CCLF: CCL3F, CCL2F, HCCL2F, HCCLF, CCLF2, HCCLF2, CCLF3, CCL2F2",
+    "CON: CONH2, CONHCH3, CONHCH2, CON(CH3)2, CONCH3CH2, CON(CH2)2",
+    "OCCOH: C2H2O2, C2H4O2",
+    "CH2S: CH3S, CH2S, CHS",
+    "morpholine: MORPH",
+    "thiophene: C4H4S, C4H3S, C4H2S",
     "mix: a mix of a lot of subgroupss"
 ]
 

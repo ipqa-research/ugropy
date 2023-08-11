@@ -4,19 +4,17 @@ import pytest
 
 
 # =============================================================================
-# 43- SIO Main group: SIH2O, SIHO, SIO
+# 44- NPM Main group: NPM
 # =============================================================================
 
 # UNIFAC
 trials_unifac = [
-    ("C[Si](O[Si](C)([H])[H])([H])[H]", {"CH3": 2, "SIH2O": 1, "SIH2": 1}, "smiles"),
-    ("C[Si](C)(O[Si](C)(C)[H])[H]", {"CH3": 4, "SIHO": 1, "SIH": 1}, "smiles"),
-    ("Octamethylcyclotetrasiloxane", {"CH3": 8, "SIO": 4}, "name"),
+    ("N-Methyl-2-pyrrolidone", {"NMP": 1}, "name"),
 ]
 
-@pytest.mark.SIO
+@pytest.mark.NMP
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
-def test_sio_unifac(identifier, result, identifier_type):
+def test_npm_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result

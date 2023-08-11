@@ -17,7 +17,7 @@ trials_unifac = [
     ("2H-Pyran, 2-(cyclohexyloxy)tetrahydro-", {"CH2": 8, "CH": 1, "CH2O": 1, "CH-O": 1}, "name"),
     # Problematic ones
     # Benzyl 2-hydroxyethyl carbonate
-    ("C1=CC=C(C=C1)COC(=O)OCCO", {"CH2": 1, "OH": 1, "ACCH2": 1, "ACH": 5, "COO": 1, "CH2O": 1}, "smiles"),
+    ("C1=CC=C(C=C1)COC(=O)OCCO", {"ACCH2": 1, "ACH": 5, "COO": 1, "C2H5O2": 1}, "smiles"),
     # tert-Butyl ethyl carbonate
     ("CCOC(=O)OC(C)(C)C", {"CH3": 4, "C": 1, "COO": 1, "CH2O": 1}, "smiles"),
     # Ethyl phenyl carbonate

@@ -4,19 +4,19 @@ import pytest
 
 
 # =============================================================================
-# 43- SIO Main group: SIH2O, SIHO, SIO
+# 48- CH2S Main group: CH3S, CH2S, CHS
 # =============================================================================
 
 # UNIFAC
 trials_unifac = [
-    ("C[Si](O[Si](C)([H])[H])([H])[H]", {"CH3": 2, "SIH2O": 1, "SIH2": 1}, "smiles"),
-    ("C[Si](C)(O[Si](C)(C)[H])[H]", {"CH3": 4, "SIHO": 1, "SIH": 1}, "smiles"),
-    ("Octamethylcyclotetrasiloxane", {"CH3": 8, "SIO": 4}, "name"),
+    ("Dimethylsulfide", {"CH3": 1, "CH3S": 1}, "name"),
+    ("Diethylsulfide", {"CH3": 2, "CH2": 1, "CH2S": 1}, "name"),
+    ("Isopropyl Sulfide", {"CH3": 4, "CH": 1, "CHS": 1}, "name"),
 ]
 
-@pytest.mark.SIO
+@pytest.mark.CH2S
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
-def test_sio_unifac(identifier, result, identifier_type):
+def test_ch2s_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
