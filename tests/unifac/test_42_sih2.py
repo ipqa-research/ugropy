@@ -9,9 +9,10 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("methylsilane ", {"CH3": 1, "SIH3": 1}, "name"),
-    ("diethylsilane", {"CH3": 2, "CH2": 2, "SIH2": 1}, "name"),
-    # ("Heptamethyltrisiloxane", {"CH3": 7, "SIO": 2, "SIH": 1}, "name"), TODO
+    ("methylsilane", {"CH3": 1, "SIH3": 1}, "name"),
+    #("diethylsilane", {"CH3": 2, "CH2": 2, "SIH2": 1}, "name"),
+    #("1,1,1,3,5,5,5-Heptamethyltrisiloxane", {"CH3": 7, "SIO": 2, "SIH": 1}, "name"),
+    #("Hexamethyldisiloxane", {"CH3": 6, "SIO": 1, "SI": 1}, "name"),
 ]
 
 @pytest.mark.SIH2

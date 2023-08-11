@@ -55,6 +55,7 @@ markers = [
     "CF2: CF3, CF2, CF",
     "COO: COO",
     "SIH2: SIH3, SIH2, SIH, SI",
+    "SIO: SIH2O, SIHO, SIO",
     "mix: a mix of a lot of subgroupss"
 ]
 
