@@ -4,20 +4,18 @@ import pytest
 
 
 # =============================================================================
-# 50- thiophene Main group: C4H4S, C4H3S, C4H2S
+# 55- sulfones Main group: (CH2)2SU, CH2CHSU
 # =============================================================================
 
 # UNIFAC
 trials_unifac = [
-    ("thiophene", {"C4H4S": 1}, "name"),
-    ("2-methylthiophene", {"C4H3S": 1, "CH3": 1}, "name"),
-    ("2,3-dimethylthiophene", {"C4H2S": 1, "CH3": 2}, "name"),
+    ("sulfolane", {"(CH2)2SU": 1, "CH2": 2}, "name"),
+    ("2,4-dimethylsulfolane", {"CH2CHSU": 1, "CH3": 2, "CH2": 1, "CH": 1}, "name"),
 ]
 
-@pytest.mark.thiophene
+@pytest.mark.sulfones
 @pytest.mark.UNIFAC
-@pytest.mark.skip
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
-def test_thiophene_unifac(identifier, result, identifier_type):
+def test_sulfones_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
