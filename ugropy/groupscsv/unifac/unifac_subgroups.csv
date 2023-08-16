@@ -107,8 +107,5 @@ MORPH|[CH2]1O[CH2][CH2][NH][CH2]1|"{""MORPH"": 1, ""CH2"": -2, ""CH2O"": -1, ""C
 C4H4S|[s](:[cH]:[cH]1):[cH]:[cH]:1|"{""C4H4S"": 1, ""ACH"": -4}"
 C4H3S|[$([s](:[cH0]:[cH]1):[cH]:[cH]:1),$([s](:[cH]:[cH0]1):[cH]:[cH]:1)]|"{""C4H3S"": 1, ""ACH"": -3}"
 C4H2S|[$([s](:[cH]:[cH]1):[cH0]:[cH0]:1),$([s](:[cH]:[cH0]1):[cH0]:[cH]:1),$([s](:[cH0]:[cH]1):[cH0]:[cH]:1),$([s](:[cH]:[cH0]1):[cH]:[cH0]:1)]|"{""C4H2S"": 1, ""ACH"": -2}"
-/ NCO||"{""NCO"": 1}"
 (CH2)2SU|[CH2]S(=O)(=O)[CH2]|"{""(CH2)2SU"": 1, ""CH2"": -1, ""CH2S"": -1}"
 CH2CHSU|[CH2]S(=O)(=O)[CH]|"{""CH2CHSU"": 1, ""CH"": -1, ""CH2S"": -1}"
-/ IMIDAZOL||"{""IMIDAZOL"": 1}"
-/ BTI||"{""BTI"": 1}"

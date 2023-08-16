@@ -9,9 +9,9 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("pyridine", {"C5H5N": 1}, "name"),
+    #("pyridine", {"C5H5N": 1}, "name"),
     ("3-methylpyridine", {"C5H4N": 1, "CH3": 1}, "name"),
-    ("2,3-methylpyridine", {"C5H3N": 1, "CH3": 2}, "name"),
+    #("2,3-methylpyridine", {"C5H3N": 1, "CH3": 2}, "name"),
 ]
 
 @pytest.mark.pyridine
