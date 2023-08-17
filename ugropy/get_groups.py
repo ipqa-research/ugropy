@@ -1,6 +1,7 @@
 import json
 
 from rdkit import Chem
+from rdkit.Chem import Descriptors
 
 import numpy as np
 
@@ -8,18 +9,16 @@ import pandas as pd
 
 
 def get_groups(chem_object, subgroups, subgroups_matrix, problematic_structures):
+    # Shorter names for dataframes:
     df = subgroups
     dfm = subgroups_matrix
     df_problematics = problematic_structures
 
-    # Groups and occurence in name:
+    # Groups and occurence number in chem_object:
     groups = np.array([])
     many_groups = np.array([])
 
     for group in df.index:
-        #import ipdb
-        #ipdb.set_trace(cond=group == "CH2O")
-        
         group_count = 0
         smarts = df.loc[group]["smarts"]
 
@@ -34,8 +33,6 @@ def get_groups(chem_object, subgroups, subgroups_matrix, problematic_structures)
         
         if group_count > 0:
             many_groups = np.append(many_groups, group_count).astype(int)
-            #import ipdb
-            #ipdb.set_trace(cond= (many_groups == np.array([3, 2, 1, 3, 2])).all())
 
     dff = dfm.loc[groups][groups]
     dff = dff.mul(many_groups, axis= 0)
