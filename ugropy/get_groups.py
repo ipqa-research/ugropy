@@ -18,21 +18,19 @@ def get_groups(chem_object, subgroups, subgroups_matrix, problematic_structures)
     groups = np.array([])
     many_groups = np.array([])
 
+    # =========================================================================
+    # Detect present functional groups in the molecule
+    # =========================================================================
     for group in df.index:
-        group_count = 0
         smarts = df.loc[group]["smarts"]
 
         func_group = Chem.MolFromSmarts(smarts)
         matches = chem_object.GetSubstructMatches(func_group)
-        how_many = len(matches)
+        how_many_matches = len(matches)
         
-        if how_many > 0:
-            group_count += how_many
-            if group not in groups:
-                groups = np.append(groups, group)
-        
-        if group_count > 0:
-            many_groups = np.append(many_groups, group_count).astype(int)
+        if how_many_matches > 0:
+            groups = np.append(groups, group)
+            many_groups = np.append(many_groups, how_many_matches).astype(int)
 
     dff = dfm.loc[groups][groups]
     dff = dff.mul(many_groups, axis= 0)
