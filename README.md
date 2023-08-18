@@ -3,9 +3,9 @@
 TODO:
 
 - Test all the combinations of the pyridine groups
-- Add R, Q and main group to the unifac_smarts.csv
 - More complex algorithm to handle the composed structure problem. (test set as "composed")
 - pyridine problematic or composed structures problem? NEED TEST
+- Check amides and silanes problematic structures as ether+ester problematics
 
 Remember:
 CHO it's for aldehyde
