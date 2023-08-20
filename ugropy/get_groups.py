@@ -45,8 +45,9 @@ def get_groups(
     dff_final = dff_sum.dropna()
     
     # Check for composed structures.
-    
-    return dff_final.to_dict()
+    if check_molecular_weight(chem_object=chem_object, chem_object_subgroups=dff_final, subgroups=df):
+        return dff_final.to_dict()
+    #return dff_final.to_dict()
 
 
 def detect_groups(
@@ -157,13 +158,13 @@ def check_molecular_weight(
     chem_object: Chem.rdchem.Mol, 
     chem_object_subgroups: pd.DataFrame,
     subgroups: pd.DataFrame,
-    tolerance: float = 1e-4
 ) -> bool:
     """Check the molecular weight of the molecule using its functional groups.
     
     Compares the RDKit molecular weight of the molecule to the computed
     colecular weight from the functional groups. Returns True if both molecular
-    weight are equals with "tolerance" as atol of numpy.allclose().
+    weight are equals with 0.5 u (half hydrogen atom) as atol of 
+    numpy.allclose().
 
     Parameters
     ----------
@@ -189,9 +190,11 @@ def check_molecular_weight(
     
     # Get molecular weight from functional groups
     func_group_mw = 0
+
+    tolerance = 0.5 # 1/2 hydrogen atom.
     
     for group in dff.index:
-        func_group_mw += df.loc[group]["molecular weight"]
+        func_group_mw += df.loc[group]["molecular_weight"] * dff[group]
     
     return np.allclose(rdkit_mw, func_group_mw, atol=tolerance)
     
