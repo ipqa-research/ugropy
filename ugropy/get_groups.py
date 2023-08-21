@@ -1,5 +1,7 @@
 import json
 
+from itertools import combinations
+
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
@@ -42,12 +44,24 @@ def get_groups(
     # Calculate the number of each functional group.
     dff_sum = dff_corrected.sum(axis=0)
     dff_sum.replace(0, pd.NA, inplace=True)
-    dff_final = dff_sum.dropna()
+    chem_subgroups = dff_sum.dropna()
+    chem_subgroups = chem_subgroups.to_dict()
+
+    if chem_subgroups == {}:
+        # No functional groups detected for the molecule. Example: hydrogen
+        # peroxide.
+        return chem_subgroups
     
     # Check for composed structures.
-    if check_molecular_weight(chem_object=chem_object, chem_object_subgroups=dff_final, subgroups=df):
-        return dff_final.to_dict()
-    #return dff_final.to_dict()
+    if check_molecular_weight(chem_object=chem_object, chem_subgroups=chem_subgroups, subgroups=df):
+        return chem_subgroups
+    else:
+        chem_subgroups = correct_composed(
+            chem_object=chem_object,
+            molecule_func_groups=chem_subgroups,
+            subgroups=df
+        )
+        return chem_subgroups
 
 
 def detect_groups(
@@ -156,7 +170,7 @@ def correct_problematics(
 
 def check_molecular_weight(
     chem_object: Chem.rdchem.Mol, 
-    chem_object_subgroups: pd.DataFrame,
+    chem_subgroups: dict,
     subgroups: pd.DataFrame,
 ) -> bool:
     """Check the molecular weight of the molecule using its functional groups.
@@ -170,8 +184,8 @@ def check_molecular_weight(
     ----------
     chem_object : Chem.rdchem.Mol
         RDKit Chem object
-    chem_object_subgroups : pd.DataFrame
-        DataFrame with the UNIFAC subgroups of the chem_object
+    chem_subgroups : dict
+        dict with the UNIFAC subgroups of the chem_object
     subgroups : pd.DataFrame
         DataFrame with the UNIFAC model's subgroups
     tolerance : float
@@ -182,8 +196,11 @@ def check_molecular_weight(
     bool
         True if RDKit and ugropy molecular weight are equals with a tolerance.
     """
-    df = subgroups.copy()
-    dff = chem_object_subgroups.copy()
+    dff = chem_subgroups.copy()
+
+    # check for negative occurrences
+    if not all(occurrence > 0 for occurrence in dff.values()):
+        return False
     
     # rdkit molecular weight
     rdkit_mw = Descriptors.MolWt(chem_object)
@@ -193,8 +210,110 @@ def check_molecular_weight(
 
     tolerance = 0.5 # 1/2 hydrogen atom.
     
-    for group in dff.index:
-        func_group_mw += df.loc[group]["molecular_weight"] * dff[group]
+    for group in chem_subgroups.keys():
+        func_group_mw += subgroups.loc[group]["molecular_weight"] * chem_subgroups[group]
     
     return np.allclose(rdkit_mw, func_group_mw, atol=tolerance)
+
+
+def correct_composed(chem_object: Chem.rdchem.Mol, molecule_func_groups: dict, subgroups: pd.DataFrame):
+    chem_subgroups = molecule_func_groups.copy()
+    df = subgroups.copy()
+
+    #import ipdb
+    #ipdb.set_trace()
+
+    # Get composed structures from subgroups DataFrame
+    composed_structures = df[df["composed"] == "y"].index
+
+    # Create list of composed structures present in molecule's func_g. If a 
+    # composed structure has occurrence 2, will appear twice in the list
+    comp_in_mol = np.array([])
+
+    for stru in composed_structures:
+        if stru in chem_subgroups.keys():
+            comp_in_mol = np.append(comp_in_mol, [stru] * chem_subgroups[stru])
+
+
+    # Create a combinatory list of the possible decomposition of the structures
+    combinatory_list = []
+    for i in range(1, len(comp_in_mol) + 1):
+        # turn into set eliminates duplicated corrections combinations.
+        for combinatory in set(combinations(comp_in_mol, i)):
+            combinatory_list.append(combinatory)
+
+    if len(combinatory_list) == 0:
+        # There is no possible correction and probably no way to represent the
+        # molecule by UNIFAC's functional groups.
+        return {}
+
+
+    # Try by brute force all combinatories and store the successfull ones
+    successfull_corrections = np.array([])
+
+    for combination in combinatory_list:
+        # Get subgroups with decomposed structures
+        correction = apply_decompose_correction(
+            chem_subgroups=chem_subgroups,
+            subgroups=df,
+            combination=combination
+        )
+
+        # Did the correction work?
+        did_it_work = check_molecular_weight(
+            chem_object=chem_object,
+            chem_subgroups=correction,
+            subgroups=subgroups
+        )
+
+        if did_it_work:
+            successfull_corrections = np.append(successfull_corrections, correction)
+
+    # No posible correction found, can't represent molecule with func groups
+    if len(successfull_corrections) == 0:
+        return {}    
+    
+    # Get rid of duplicated successfull_corrections
+    dict_strs = np.array([str(d) for d in successfull_corrections])
+    unique_indices = np.unique(dict_strs, return_index=True)[1]
+    unique_corrections = successfull_corrections[unique_indices]
+
+    # Return decomposed subgroups solutions 
+    if len(unique_corrections) == 1:
+        # Unique solution found
+        return unique_corrections[0]
+    else:
+        # Find the solution/s that uses the minimun number of functional groups
+        subgroups_used = np.array(
+            [np.sum(list(d.values())) for d in unique_corrections]
+        )
+        min_subgroups_used = np.min(subgroups_used)
+        idx_min_lens = np.where(subgroups_used == min_subgroups_used)[0]
+        dicts_with_min_len = unique_corrections[idx_min_lens]
+
+        return dicts_with_min_len
+
+
+def apply_decompose_correction(
+        chem_subgroups: dict, 
+        subgroups: pd.DataFrame,
+        combination: tuple
+    ): 
+    
+    chm_grps = chem_subgroups.copy()
+    df = subgroups.copy()
+
+    for group in combination:
+        contribute_dict = json.loads(df.loc[group].contribute)
+        for grp in contribute_dict.keys():
+            try:
+                chm_grps[grp] += -1 * contribute_dict[grp]
+            except KeyError:
+                chm_grps[grp] = -1 * contribute_dict[grp]
+
+    # Eliminate occurrences == 0
+    groups_corrected = {key: value for key, value in chm_grps.items() if value > 0}
+
+    return groups_corrected
+
     

@@ -7,9 +7,6 @@ import pytest
 # 11- CCOO Main group: CH3COO, CH2COO
 # =============================================================================
 
-def condicion_para_saltar(saltar):
-    return saltar
-
 # UNIFAC
 trials_unifac = [
     # Tert-butyl acetate
