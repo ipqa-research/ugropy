@@ -220,9 +220,6 @@ def correct_composed(chem_object: Chem.rdchem.Mol, molecule_func_groups: dict, s
     chem_subgroups = molecule_func_groups.copy()
     df = subgroups.copy()
 
-    #import ipdb
-    #ipdb.set_trace()
-
     # Get composed structures from subgroups DataFrame
     composed_structures = df[df["composed"] == "y"].index
 
