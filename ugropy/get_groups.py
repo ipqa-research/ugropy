@@ -55,13 +55,13 @@ def get_groups(
     # Check for composed structures.
     if check_molecular_weight(chem_object=chem_object, chem_subgroups=chem_subgroups, subgroups=df):
         return chem_subgroups
-    else:
-        chem_subgroups = correct_composed(
-            chem_object=chem_object,
-            molecule_func_groups=chem_subgroups,
-            subgroups=df
-        )
-        return chem_subgroups
+    # else:
+        # chem_subgroups = correct_composed(
+            # chem_object=chem_object,
+            # molecule_func_groups=chem_subgroups,
+            # subgroups=df
+        # )
+        # return chem_subgroups
 
 
 def detect_groups(

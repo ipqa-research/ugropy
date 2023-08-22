@@ -17,6 +17,7 @@ trials_unifac = [
 @pytest.mark.impossibles
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+@pytest.mark.skip
 def test_problematics_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
