@@ -55,13 +55,13 @@ def get_groups(
     # Check for composed structures.
     if check_molecular_weight(chem_object=chem_object, chem_subgroups=chem_subgroups, subgroups=df):
         return chem_subgroups
-    # else:
-        # chem_subgroups = correct_composed(
-            # chem_object=chem_object,
-            # molecule_func_groups=chem_subgroups,
-            # subgroups=df
-        # )
-        # return chem_subgroups
+    else:
+        chem_subgroups = correct_composed(
+            chem_object=chem_object,
+            molecule_func_groups=chem_subgroups,
+            subgroups=df
+        )
+        return chem_subgroups
 
 
 def detect_groups(
@@ -291,6 +291,61 @@ def correct_composed(chem_object: Chem.rdchem.Mol, molecule_func_groups: dict, s
         return dicts_with_min_len
 
 
+def check_ghosts(
+    chem_object: Chem.rdchem.Mol, 
+    molecule_func_groups: dict, 
+    subgroups: pd.DataFrame
+) -> bool:
+    func_groups = molecule_func_groups.copy()
+    df = subgroups.copy()
+    
+    # Get composed structures from subgroups DataFrame
+    composed_structures = df[df["composed"] == "y"].index
+    
+    # Get composed structures in molecule
+    composed_in_mol = np.array([])
+    for composed in composed_structures:
+        if composed in func_groups.key():
+            composed_in_mol = np.append(composed_in_mol, composed)
+            
+    # Get uncomposed structures in molecule
+    not_composed_in_mol = np.array([])
+    for structure in func_groups:
+        if structure not in composed_structures:
+            not_composed_in_mol = np.append(not_composed_in_mol, structure)
+            
+    # Get atoms participating in composed structures
+    composed_atoms = {}
+    for fgrp in composed_in_mol:
+        smarts = df.loc[fgrp]["smarts"]
+        mol = Chem.MolFromSmarts(smarts)
+        matches = chem_object.GetSubstructMatches(mol)
+        composed_atoms.update({fgrp: matches})
+        
+    # Get atoms participatins in no composed structures
+    no_composed_atoms = {}
+    for fgrp in not_composed_in_mol:
+        smarts = df.loc[fgrp]["smarts"]
+        mol = Chem.MolFromSmarts(fgrp)
+        matches = chem_object.GetSubstructMatches(mol)
+        no_composed_atoms.update({fgrp: matches})
+        
+    # Get supect atoms
+    for c_fgrp in composed_in_mol:
+        # Get decomposed funcitonal groups
+        contribute = json.loads(df.loc[c_fgrp].contribute)
+        decomposed = contribute.pop(c_fgrp)
+        
+        decomposed_atoms = {}
+        
+        # Need the decomposed atoms in structure
+        for dcmp in decomposed.keys():
+            smarts = df.loc[dcmp]["smarts"]
+            mol = Chem.MolFromSmarts(smarts)
+            matches = chem_object.GetSubstructMatches(mol)
+            decomposed_atoms.update({dcmp: matches})
+
+
 def apply_decompose_correction(
         chem_subgroups: dict, 
         subgroups: pd.DataFrame,
@@ -312,5 +367,3 @@ def apply_decompose_correction(
     groups_corrected = {key: value for key, value in chm_grps.items() if value > 0}
 
     return groups_corrected
-
-    
