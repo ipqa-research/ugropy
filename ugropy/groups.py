@@ -2,7 +2,7 @@ from rdkit import Chem
 
 import pubchempy as pcp
 
-from .get_groups import get_groups
+from .core.get_groups import get_groups
 
 from .constants import unifac_subgroups, unifac_matrix, problematic_structures
 

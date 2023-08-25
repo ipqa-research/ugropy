@@ -1,5 +1,4 @@
-from . import constants
-from .get_groups import get_groups
+from . import constants, core
 from .groups import Groups
 
-__all__ = ["constants", "get_groups", "Groups"]
+__all__ = ["constants", "core", "Groups"]
