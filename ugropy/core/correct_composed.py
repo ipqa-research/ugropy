@@ -8,7 +8,7 @@ import numpy as np
 
 import pandas as pd
 
-from .checks import check_molecular_weight, check_sneaky_ch2_ch
+from .checks import check_molecular_weight
 
 
 def correct_composed(
@@ -52,13 +52,7 @@ def correct_composed(
             subgroups=subgroups
         )
         
-        check_sneaky = check_sneaky_ch2_ch(
-            chem_object=chem_object,
-            chem_subgroups=chem_subgroups,
-            subgroups=subgroups
-        )
-
-        if check_mw and check_sneaky:
+        if check_mw:
             successfull_corrections = np.append(
                 successfull_corrections, 
                 correction

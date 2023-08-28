@@ -4,7 +4,7 @@ import pandas as pd
 
 from .detect_groups import detect_groups
 from .correct_problematics import correct_problematics
-from .checks import check_molecular_weight, check_sneaky_ch2_ch
+from .checks import check_molecular_weight
 from .correct_composed import correct_composed
 
 
@@ -56,13 +56,7 @@ def get_groups(
         subgroups=df
     )
     
-    check_sneaky = check_sneaky_ch2_ch(
-        chem_object=chem_object,
-        chem_subgroups=chem_subgroups,
-        subgroups=subgroups
-    )
-    
-    if check_mw and check_sneaky:
+    if check_mw:
         return chem_subgroups
     else:
         chem_subgroups = correct_composed(
