@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 
 from .detect_groups import group_matches
+from ugropy.constants import ch2_hideouts, ch_hideouts
 
 
-def check_molecular_weight(
+def check_has_molecular_weight_right(
     chem_object: Chem.rdchem.Mol, 
     chem_subgroups: dict,
     subgroups: pd.DataFrame,
@@ -51,40 +52,27 @@ def check_molecular_weight(
     return np.allclose(rdkit_mw, func_group_mw, atol=0.5)
 
 
-def check_sneaky_ch2_ch(
+def check_has_composed(
+    chem_subgroups: dict,
+    subgroups: pd.DataFrame,
+) -> bool:
+    composed_structures = subgroups[subgroups["composed"] == "y"].index
+    
+    for composed in composed_structures:
+        if composed in chem_subgroups.keys():
+            return True
+        
+    return False
+
+
+def check_has_hidden_ch2_ch(
     chem_object: Chem.rdchem.Mol, 
     chem_subgroups: dict, 
     subgroups: pd.DataFrame
 ) -> bool:
-    subgroups_no_ch2_ch = chem_subgroups.copy()    
     
-    ch2_matches = np.array(
-        group_matches(chem_object, "CH2", subgroups)
-    ).flatten()
-    ch_matches = np.array(
-        group_matches(chem_object, "CH", subgroups)
-    ).flatten()
-
-    # Get composed structures from subgroups DataFrame
-    composed_structures = subgroups[subgroups["composed"] == "y"].index
-
-    comp_in_mol = np.array([])
-    for stru in composed_structures:
-        if stru in chem_subgroups.keys():
-            comp_in_mol = np.append(comp_in_mol, [stru] * chem_subgroups[stru])
-            
-    # Atoms of composed structures            
-    grps_matches = []
-    for group in chem_subgroups.keys():
-        matches = group_matches(chem_object, group, subgroups)
-        if len(matches) > 0:
-            grps_matches.append(matches)
-    
-    # Flat composed matches
-    f_composed_matches = np.array([atom for subtuple in grps_matches for atom in subtuple])
-    
-    lonely_ch2 = np.setdiff1d(ch2_matches, f_composed_matches)
-    lonely_ch = np.setdiff1d(ch_matches, f_composed_matches)
+    #import ipdb
+    #ipdb.set_trace()
     
     try:
         ch2_num = chem_subgroups["CH2"]
@@ -96,9 +84,34 @@ def check_sneaky_ch2_ch(
     except KeyError:
         ch_num = 0
     
-    if len(lonely_ch2) != ch2_num:
-        return False
-    elif len(lonely_ch) != ch_num:
-        return False
-    else:
+    
+    all_ch2_atoms = group_matches(chem_object, "CH2", subgroups)
+    all_ch2_atoms = np.array(all_ch2_atoms).flatten()
+    
+    all_ch_atoms = group_matches(chem_object, "CH", subgroups)
+    all_ch_atoms = np.array(all_ch_atoms).flatten()
+    
+    ch2_hidings_atoms = np.array([])
+    for hideout in ch2_hideouts:
+        if hideout in chem_subgroups.keys():
+            hidings = group_matches(chem_object, hideout, subgroups)
+            hidings = np.array(hidings).flatten()
+            ch2_hidings_atoms = np.append(ch2_hidings_atoms, hidings)
+            
+    ch_hidings_atoms = np.array([])
+    for hideout in ch_hideouts:
+        if hideout in chem_subgroups.keys():
+            hidings = group_matches(chem_object, hideout, subgroups)
+            hidings = np.array(hidings).flatten()
+            ch_hidings_atoms = np.append(ch_hidings_atoms, hidings)
+            
+    ch2_diff = np.setdiff1d(all_ch2_atoms, ch2_hidings_atoms)
+    ch_diff = np.setdiff1d(all_ch_atoms, ch_hidings_atoms)
+    
+    if len(ch2_diff) != ch2_num:
         return True
+    elif len(ch_diff) != ch_num:
+        return True
+    else:
+        return False           
+    

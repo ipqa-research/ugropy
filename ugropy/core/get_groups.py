@@ -4,7 +4,7 @@ import pandas as pd
 
 from .detect_groups import detect_groups
 from .correct_problematics import correct_problematics
-from .checks import check_molecular_weight, check_sneaky_ch2_ch
+from .checks import check_has_molecular_weight_right, check_has_composed, check_has_hidden_ch2_ch
 from .correct_composed import correct_composed
 
 
@@ -50,26 +50,42 @@ def get_groups(
         return chem_subgroups
     
     # Check for composed structures.
-    check_mw = check_molecular_weight(
+    right_mw = check_has_molecular_weight_right(
         chem_object=chem_object, 
         chem_subgroups=chem_subgroups, 
         subgroups=df
     )
     
-    check_sneaky = check_sneaky_ch2_ch(
-        chem_object=chem_object,
+    has_composed = check_has_composed(
         chem_subgroups=chem_subgroups,
         subgroups=subgroups
     )
     
-    if check_mw and check_sneaky:
+    if right_mw and not has_composed:
         return chem_subgroups
-    else:
+    elif not right_mw and not has_composed:
+        return {}
+    elif not right_mw and has_composed:
         chem_subgroups = correct_composed(
             chem_object=chem_object,
             chem_subgroups=chem_subgroups,
             subgroups=df
         )
         return chem_subgroups
+    elif right_mw and has_composed:
+        has_hidden = check_has_hidden_ch2_ch(
+            chem_object=chem_object,
+            chem_subgroups=chem_subgroups,
+            subgroups=subgroups
+        )
+        if has_hidden:
+            chem_subgroups = correct_composed(
+                chem_object=chem_object,
+                chem_subgroups=chem_subgroups,
+                subgroups=df
+            )
+            return chem_subgroups
+        else:
+            return chem_subgroups
 
 

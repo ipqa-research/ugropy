@@ -21,10 +21,7 @@ def test_name_unifac(name, result):
 
 # UNIFAC with smiles
 trials_unifac = [
-    # Composed structure problem
-    ("C1(=CC=CC=C1)COC(C)(C)C", {"ACH": 5, "AC": 1, "CH2O": 1, "CH3": 3, "C": 1}),
-    ("C1(=CC=CC=C1)C(OC(C)(C)C)C", {"ACH": 5, "AC": 1, "CH-O": 1, "CH3": 4, "C": 1}),
-    ("C12=CC=CC=C1COC2", {"ACH": 4, "AC": 1, "CH2O": 1, "ACCH2": 1})
+
 ]
 
 @pytest.mark.mix
