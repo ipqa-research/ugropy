@@ -9,7 +9,7 @@ from .detect_groups import group_matches
 from ugropy.constants import ch2_hideouts, ch_hideouts
 
 
-def check_molecular_weight(
+def check_has_molecular_weight_right(
     chem_object: Chem.rdchem.Mol, 
     chem_subgroups: dict,
     subgroups: pd.DataFrame,
@@ -65,11 +65,14 @@ def check_has_composed(
     return False
 
 
-def check_has_hided_ch2_ch(
+def check_has_hidden_ch2_ch(
     chem_object: Chem.rdchem.Mol, 
     chem_subgroups: dict, 
     subgroups: pd.DataFrame
 ) -> bool:
+    
+    #import ipdb
+    #ipdb.set_trace()
     
     try:
         ch2_num = chem_subgroups["CH2"]

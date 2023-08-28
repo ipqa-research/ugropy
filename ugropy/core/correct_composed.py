@@ -8,7 +8,7 @@ import numpy as np
 
 import pandas as pd
 
-from .checks import check_molecular_weight
+from .checks import check_has_molecular_weight_right, check_has_hidden_ch2_ch
 
 
 def correct_composed(
@@ -46,13 +46,19 @@ def correct_composed(
         )
 
         # Did the correction work?
-        check_mw = check_molecular_weight(
+        right_mw = check_has_molecular_weight_right(
             chem_object=chem_object,
             chem_subgroups=correction,
             subgroups=subgroups
         )
         
-        if check_mw:
+        has_hidden = check_has_hidden_ch2_ch(
+            chem_object=chem_object,
+            chem_subgroups=correction,
+            subgroups=subgroups
+        )
+        
+        if right_mw and not has_hidden:
             successfull_corrections = np.append(
                 successfull_corrections, 
                 correction
@@ -90,7 +96,7 @@ def apply_decompose_correction(
         groups_to_decompose: tuple
     ):
     """
-
+    
     Parameters
     ----------
     chem_subgroups : dict
