@@ -9,6 +9,8 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    # 4-flavanol
+    ("OC1CC(OC2=CC=CC=C12)C1=CC=CC=C1", {"ACH": 9, "AC": 2, "ACCH": 1, "CH-O": 1, "CH2": 1, "OH": 1}, "smiles"),
     ("O[C@@H]1CO[C@H](O)[C@@H](O)[C@@H]1O", {"CH2O": 1, "CH": 4, "OH": 4}, "smiles"),
     ("C1COCCOCCOCCOC1", {"CH2O": 4, "CH2": 5}, "smiles"),
     ("C1COCCO1", {"CH2O": 2, "CH2": 2}, "smiles"),

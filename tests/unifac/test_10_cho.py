@@ -9,7 +9,6 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    # smiles
     ("C(=O)C=O", {"CHO": 2}, "smiles"),
     # salicylaldehyde
     ("C1=CC=C(C(=C1)C=O)O", {"ACH": 4, "ACOH": 1, "AC": 1, "CHO": 1}, "smiles"),

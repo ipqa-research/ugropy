@@ -51,9 +51,6 @@ def correct_problematics(
     """
     dff = filtered_subgroups.copy()
     
-    #import ipdb
-    #ipdb.set_trace()
-    
     for smarts in problematic_structures.index:
         structure = Chem.MolFromSmarts(smarts)
         matches = chem_object.GetSubstructMatches(structure)
@@ -62,6 +59,10 @@ def correct_problematics(
         if how_many_problems > 0:
             p_dict = json.loads(problematic_structures.loc[smarts].contribute)
             for grp in p_dict.keys():
-                dff.loc[grp][grp] += p_dict[grp] * how_many_problems
-                
+                try:
+                    dff.loc[grp, grp] += p_dict[grp] * how_many_problems
+                except KeyError:
+                    dff[grp] = 0
+                    dff.loc[grp] = 0
+                    dff.loc[grp, grp] += p_dict[grp] * how_many_problems
     return dff

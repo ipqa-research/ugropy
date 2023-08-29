@@ -9,7 +9,10 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("CC(C)NCN", {"CHNH": 1, "CH3": 2, "CH2NH2": 1}, "smiles"),
+    ("CC(C)N(CN)C(C)C", {}, "smiles"),
+    ("CC(C)N(C)CN", {"CH3": 2, "CH": 1, "CH2NH2": 1, "CH3N": 1}, "smiles"),
+    ("CC(C)NC(C)NC(C)(C)C", {"CHNH": 2, "CH3": 6, "C": 1}, "smiles"),
+    ("CC(C)NC(C)N", {"CHNH2": 1, "CHNH": 1, "CH3": 3}, "smiles"),
     ("CCC(C)(C)NC(C)C", {"CH3": 5, "CHNH": 1, "CH2": 1, "C": 1}, "smiles"),
     ("CCNC(C)CC", {"CH3": 3, "CH2NH": 1, "CH": 1, "CH2": 1}, "smiles"),
     ("CCCNC", {"CH3NH": 1, "CH2": 2, "CH3": 1}, "smiles"),
@@ -17,6 +20,8 @@ trials_unifac = [
     ("dimethylamine", {"CH3": 1, "CH3NH": 1}, "name"),
     ("diethylamine", {"CH3": 2, "CH2": 1, "CH2NH": 1}, "name"),
     ("diisopropylamine", {"CH3": 4, "CH": 1, "CHNH": 1}, "name"),
+    # Problematics
+    ("CC(C)NCN", {"CHNH": 1, "CH3": 2, "CH2NH2": 1}, "smiles"),
 ]
 
 @pytest.mark.CNH
