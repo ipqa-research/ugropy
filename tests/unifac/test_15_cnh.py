@@ -9,6 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("CC(C)NCN", {"CHNH": 1, "CH3": 2, "CH2NH2": 1}, "smiles"),
     ("CCC(C)(C)NC(C)C", {"CH3": 5, "CHNH": 1, "CH2": 1, "C": 1}, "smiles"),
     ("CCNC(C)CC", {"CH3": 3, "CH2NH": 1, "CH": 1, "CH2": 1}, "smiles"),
     ("CCCNC", {"CH3NH": 1, "CH2": 2, "CH3": 1}, "smiles"),

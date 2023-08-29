@@ -1,4 +1,5 @@
 smarts|contribute
+? Eter group problematics
 [CH3]OC(=O)O[CH3]|"{""COO"": -1, ""CH3O"": -1, ""CH3"": 1}"
 [CH3]OC(=O)O[CH2]|"{""COO"": -1, ""CH2O"": -1, ""CH2"": 1}"
 [CH3]OC(=O)O[CH]|"{""COO"": -1, ""CH-O"": -1, ""CH"": 1}"
@@ -8,4 +9,7 @@ smarts|contribute
 [CH2]OC(=O)O[CH0,c]|"{""COO"": -1}"
 [CH]OC(=O)O[CH]|"{""COO"": -1, ""CHO"": -1, ""CH"": 1}"
 [CH]OC(=O)O[CH0,c]|"{""COO"": -1}"
+? Aliphatic N
+[NH2][CH2][NH][CH]|"{""CH2NH"": -1, ""CH2"": 1, ""CHNH"": 1, ""CH"": -1}"
+? Silanes
 [SiH0]O[SiH]O[SiH0]|"{""SIHO"": -2, ""SIH"": 2}"

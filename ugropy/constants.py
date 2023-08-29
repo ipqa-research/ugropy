@@ -23,4 +23,4 @@ with open(f"{here}/groupscsv/unifac/ch_hideouts.csv", mode='r') as f:
 
 # Problematics
 with open(f"{here}/groupscsv/problematic_structures.csv", mode='r') as f:
-    problematic_structures = pd.read_csv(f, sep='|', index_col='smarts')
+    problematic_structures = pd.read_csv(f, sep='|', index_col='smarts', comment="?")

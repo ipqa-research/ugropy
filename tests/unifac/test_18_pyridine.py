@@ -9,6 +9,19 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    # pyridine sharing side with benzene ring
+    ("C1=CC2=C(C=C1)C1=C(C=NC=C1)C1=C2C=CC=C1", {"C5H3N": 1, "ACH": 8, "AC": 4}, "smiles"),    
+    # cyclic ester with pyridine
+    ("O=C1CCC2=C(O1)C=CN=C2", {"C5H3N": 1, "CH2COO": 1, "CH2": 1}, "smiles"),
+    # Pyrydine sharin CH2 with phenyl
+    ("CCCC1=CC=C(CC2=CC=NC=C2)C=C1", {"C5H4N": 1, "ACCH2": 2, "ACH": 4, "CH2": 1, "CH3": 1}, "smiles"),
+    # Nicotine
+    ("CN1CCCC1C2=CN=CC=C2", {"C5H4N": 1, "CH3N": 1, "CH2": 3, "CH": 1}, "smiles"),
+    # Impossible
+    ("CC1=CC(C)=C(C)C=N1", {}, "smiles"),
+    ("C1=CC=C(C=C1)C1=CC=NC=C1", {"C5H4N": 1, "AC": 1, "ACH": 5}, "smiles"),
+    ("CC(=C)C1=CC=NC=C1", {"C5H4N": 1 ,"CH2=C": 1, "CH3": 1}, "smiles"),
+    ("CC1=NC=CC(O)=C1", {"C5H3N": 1, "CH3": 1, "OH": 1}, "smiles"),
     ("pyridine", {"C5H5N": 1}, "name"),
     ("3-methylpyridine", {"C5H4N": 1, "CH3": 1}, "name"),
     ("2,3-Dimethylpyridine", {"C5H3N": 1, "CH3": 2}, "name"),

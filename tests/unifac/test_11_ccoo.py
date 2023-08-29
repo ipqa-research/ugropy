@@ -9,6 +9,8 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    # Aspirin
+    ("CC(=O)OC1=CC=CC=C1C(=O)O", {"CH3COO": 1, "AC": 2, "ACH": 4, "COOH": 1}, "smiles"),    
     # Tert-butyl acetate
     ("CC(=O)OC(C)(C)C", {"CH3COO": 1, "CH3": 3, "C": 1}, "smiles"),
     # triacetin

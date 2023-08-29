@@ -51,6 +51,9 @@ def correct_problematics(
     """
     dff = filtered_subgroups.copy()
     
+    #import ipdb
+    #ipdb.set_trace()
+    
     for smarts in problematic_structures.index:
         structure = Chem.MolFromSmarts(smarts)
         matches = chem_object.GetSubstructMatches(structure)

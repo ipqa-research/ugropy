@@ -9,6 +9,10 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("CC(C)CC(=O)OCC(=O)C(C)O", {"CH3": 3, "CH": 2, "CH2COO": 1, "CH2CO": 1, "OH": 1}, "smiles"),
+    ("O=C(CC1=CC=CC=C1)CC1=CC=CC=C1", {"ACH": 10 , "AC": 1, "ACCH2": 1, "CH2CO": 1}, "smiles"),
+    ("CC(=O)CC1=CC=CC=C1", {"CH3CO": 1, "ACH": 5, "ACCH2": 1}, "smiles"),
+    ("CC(C)(C)C(=O)CC1=CC=CC=C1", {"CH3": 3, "ACH": 5, "AC": 1, "CH2CO": 1, "C": 1}, "smiles"),
     # Cyclopropanone
     ("C1CC1=O", {"CH2": 1, "CH2CO": 1}, "smiles"),
     # (9Z)-Cycloheptadec-9-en-1-one
