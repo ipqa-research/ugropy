@@ -44,6 +44,8 @@ trials_unifac = [
     ("CCOC(=O)OC", {"CH3": 1, "CH2": 1, "COO": 1, "CH3O": 1}, "smiles"),
     # Dimethyl carbonate
     ("COC(=O)OC", {"CH3": 1, "COO": 1, "CH3O": 1}, "smiles"),
+    # Impossibles
+    ("C1COCON1", {}, "smiles"),
 ]
 
 @pytest.mark.CH2O

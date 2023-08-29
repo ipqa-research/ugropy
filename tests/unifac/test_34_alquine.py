@@ -9,6 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("CC#CC1=CC=CC=C1", {"ACH": 5, "AC": 1, "C=-C": 1, "CH3": 1}, "smiles"),
     ("1-hexyne", {"CH3": 1, "CH2": 3, "CH=-C": 1}, "name"),
     ("2-hexyne", {"CH3": 2, "CH2": 2, "C=-C": 1}, "name"),
 ]

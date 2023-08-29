@@ -9,13 +9,6 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    # ch2o
-    ("C1COCON1", {}, "smiles"),
-    # ceqc
-    # propa‐1,2‐diene
-    ("C=C=C", {}, "smiles"),
-    ("CC=CC(C)C(C)=C=C", {}, "smiles"),
-    # others
     ("hydrogen peroxide", {}, "name"),
     ("methane", {}, "name"),
     ("C1(=CC=CC=C1)OC(C)(C)C", {}, "smiles"),

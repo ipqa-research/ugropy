@@ -26,6 +26,9 @@ trials_unifac = [
     ("2-methyl-1-butene", {"CH2": 1, "CH2=C": 1, "CH3": 2}, "name"),
     ("2-hexene", {"CH2": 2, "CH=CH": 1, "CH3": 2}, "name"),
     ("1-hexene", {"CH2": 3, "CH2=CH": 1, "CH3": 1}, "name"),
+    # impossibles
+    ("C=C=C", {}, "smiles"),
+    ("CC=CC(C)C(C)=C=C", {}, "smiles"),
 ]
 
 @pytest.mark.CeqC

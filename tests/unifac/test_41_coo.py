@@ -9,7 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    #Ascorbic acid
+    # Ascorbic acid
     ("OCC(O)C1OC(=O)C(O)=C1O", {"COO": 1, "C=C": 1, "OH": 4, "CH": 2, "CH2": 1}, "smiles"),
     # Procaine
     ("CCN(CC)CCOC(=O)C1=CC=C(N)C=C1", {"ACNH2": 1, "ACH": 4, "AC": 1, "COO": 1, "CH2": 3, "CH3": 2, "CH2N": 1}, "smiles"),    

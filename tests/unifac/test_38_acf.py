@@ -10,6 +10,7 @@ import pytest
 # UNIFAC
 trials_unifac = [
     ("hexafluorobenzene", {"ACF": 6}, "name"),
+    ("FC1=CC=NC=C1", {}, "smiles"),
 ]
 
 @pytest.mark.ACF

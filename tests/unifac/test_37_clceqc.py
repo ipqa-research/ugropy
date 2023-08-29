@@ -9,7 +9,8 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("trichloroethylene ", {"CH=C": 1, "CL-(C=C)": 3}, "name"),
+    ("ClC(I)=C(Br)C=CC=C", {"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "I": 1, "BR": 1, "CL-(C=C)": 1}, "smiles"),
+    ("trichloroethylene", {"CH=C": 1, "CL-(C=C)": 3}, "name"),
 ]
 
 @pytest.mark.CLCeqC

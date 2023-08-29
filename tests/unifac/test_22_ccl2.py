@@ -9,6 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("OC(Cl)Cl", {"CHCL2": 1, "OH": 1}, "smiles"),
     ("dichloro methane", {"CH2CL2": 1}, "name"),
     ("1,1-dichloroethane", {"CH3": 1, "CHCL2": 1}, "name"),
     ("2,2-dichloropropane", {"CH3": 2, "CCL2": 1}, "name"),

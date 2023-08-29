@@ -10,6 +10,7 @@ import pytest
 # UNIFAC
 trials_unifac = [
     ("nitrobenzene", {"ACH": 5, "ACNO2": 1}, "name"),
+    ("[O-][N+](=O)C1=CC=NC=C1", {}, "smiles"),
 ]
 
 @pytest.mark.ACNO2

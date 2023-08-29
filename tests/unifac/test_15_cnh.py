@@ -9,6 +9,10 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    # (+)-Stepharine (ALMOST: 1 bond modified)
+    ("COC1=C(OC)C2=C3C(CC22CCC(=O)C=C2)NCCC3=C1", {"CH3O": 2, "ACH": 1, "ACCH2": 1, "ACCH": 1, "AC": 3, "CH2NH": 1, "CH2": 2, "C": 1, "CH2CO": 1, "CH=CH": 1}, "smiles"),
+    # Dihydro-beta-carboline
+    ("C1C2=C(C=CN1)C3=CC=CC=C3N2", {}, "smiles"),
     ("CC(C)N(CN)C(C)C", {}, "smiles"),
     ("CC(C)N(C)CN", {"CH3": 2, "CH": 1, "CH2NH2": 1, "CH3N": 1}, "smiles"),
     ("CC(C)NC(C)NC(C)(C)C", {"CHNH": 2, "CH3": 6, "C": 1}, "smiles"),

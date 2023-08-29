@@ -30,9 +30,6 @@ def get_groups(
     
     # Multiply each group row by the occurrences of that group.
     dff = dff.mul(groups_ocurrences, axis=0)
-    
-    #import ipdb
-    #ipdb.set_trace()
 
     # Correction of problematic structures in dff.
     dff_corrected = correct_problematics(
