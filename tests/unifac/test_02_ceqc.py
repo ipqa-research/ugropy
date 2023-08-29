@@ -9,6 +9,8 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("CC=C(C)C1=C(C=CC=C1C=C)C(C)=C(C)C", {"CH3": 5, "CH2=CH": 1, "CH=C": 1, "C=C": 1, "ACH": 3, "AC": 3}, "smiles"),
+    ("CC=CC(C)=C(C)C=C", {"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "CH3": 3}, "smiles"),
     # alpha-pinene
     ("CC1=CCC2CC1C2(C)C", {"CH3": 3, "CH2": 2, "CH": 2, "C": 1, "CH=C": 1}, "smiles"),
     # d-limonene

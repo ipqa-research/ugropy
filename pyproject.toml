@@ -25,7 +25,7 @@ markers = [
     "CHO: CHO",
     "CCOO: CH3COO, CH2COO",
     "HCOO: HCOO",
-    "CH2O: CH2O, CH-O, THF",
+    "CH2O: CH3O, CH2O, CH-O, THF",
     "CH3NH2: CH3NH2, CH2NH2, CHNH2",
     "CNH: CH3NH, CH2NH, CHNH",
     "C3N: CH3N, CH2N",

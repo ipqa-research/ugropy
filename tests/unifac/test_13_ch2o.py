@@ -4,11 +4,17 @@ import pytest
 
 
 # =============================================================================
-# 13- CH2O Main group: CH2O, CH-O, THF
+# 13- CH2O Main group: CH3O, CH2O, CH-O, THF
 # =============================================================================
 
 # UNIFAC
 trials_unifac = [
+    ("O[C@@H]1CO[C@H](O)[C@@H](O)[C@@H]1O", {"CH2O": 1, "CH": 4, "OH": 4}, "smiles"),
+    ("C1COCCOCCOCCOC1", {"CH2O": 4, "CH2": 5}, "smiles"),
+    ("C1COCCO1", {"CH2O": 2, "CH2": 2}, "smiles"),
+    ("CCOCOCC", {"CH3": 2, "CH2O": 2, "CH2": 1}, "smiles"),
+    ("C1COCO1", {"CH2O": 2, "CH2": 1}, "smiles"),
+    ("C1COCCOCCOCCOCCOCCO1", {"CH2O": 6, "CH2": 6}, "smiles"),
     ("tetrahydrofuran", {"THF": 1}, "name"),
     ("diisopropyl ether", {"CH3": 4, "CH": 1, "CH-O": 1}, "name"),
     ("diethyl ether", {"CH3": 2, "CH2": 1, "CH2O": 1}, "name"),

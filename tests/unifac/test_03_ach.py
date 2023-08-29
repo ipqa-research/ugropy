@@ -9,6 +9,9 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("C1=CC2=CC=CC=CC2=C1", {"ACH": 8, "AC": 2}, "smiles"),
+    ("C1=CC=CC=CC=CC=CC=CC=CC=CC=C1", {"ACH": 18}, "smiles"),
+    ("C1=CC=CC=CC=CC=CC=CC=C1", {"ACH": 14}, "smiles"),
     # phenanthrene
     ("C1=CC=C2C(=C1)C=CC3=CC=CC=C32", {"ACH": 10, "AC": 4}, "smiles"),
     # Anthracene
