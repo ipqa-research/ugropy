@@ -11,7 +11,7 @@ import pytest
 trials_unifac = [
     ("methylsilane", {"CH3": 1, "SIH3": 1}, "name"),
     ("CC[Si](CC)([H])[H]", {"CH3": 2, "CH2": 2, "SIH2": 1}, "smiles"),
-    ("C[Si](O[Si](C)(C)C)(O[Si](C)(C)C)[H]", {"CH3": 7, "SIO": 2, "SIH": 1}, "smiles"),
+    ("C[Si](O[Si](C)(C)C)(O[Si](C)(C)C)[H]", {"CH3": 7, "SIO": 1, "SIHO": 1, "SI": 1}, "smiles"),
     ("Hexamethyldisiloxane", {"CH3": 6, "SIO": 1, "SI": 1}, "name"),
 ]
 

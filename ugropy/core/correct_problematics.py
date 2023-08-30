@@ -50,7 +50,7 @@ def correct_problematics(
         structures. 
     """
     dff = filtered_subgroups.copy()
-    
+
     for smarts in problematic_structures.index:
         structure = Chem.MolFromSmarts(smarts)
         matches = chem_object.GetSubstructMatches(structure)

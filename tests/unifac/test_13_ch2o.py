@@ -44,6 +44,14 @@ trials_unifac = [
     ("CCOC(=O)OC", {"CH3": 1, "CH2": 1, "COO": 1, "CH3O": 1}, "smiles"),
     # Dimethyl carbonate
     ("COC(=O)OC", {"CH3": 1, "COO": 1, "CH3O": 1}, "smiles"),
+    # I hate ether group
+    ("COCOC(C)OCOC", {"CH3O": 2, "CH2O": 2, "CH": 1, "CH3": 1}, "smiles"),
+    ("CC(C)OCOC(C)OCOC(C)C", {"CH3": 5, "CH": 1, "CHO": 2, "CH2O": 2}, "smiles"),
+    ("CC(C)OCOCC(OCOC(C)C)OCOC(C)C", {"CH3": 6, "CH": 2, "CH2O": 4, "CHO": 2}, "smiles"),
+    ("CC(C)OCOC(OCOC(C)C)OCOC(C)C", {"CH3": 6, "CHO": 3, "CH2O": 3, "CH": 1}, "smiles"),
+    ("CC(C)OCOC(C)C", {"CH3": 4, "CHO": 1, "CH2O": 1, "CH": 1}, "smiles"),
+    ("CCOCOCC", {"CH3": 2, "CH2O": 2, "CH2": 1}, "smiles"),
+    ("COCOC", {"CH3O": 2, "CH2": 1}, "smiles"),
     # Impossibles
     ("C1COCON1", {}, "smiles"),
 ]

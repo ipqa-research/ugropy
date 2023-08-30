@@ -69,11 +69,7 @@ def check_has_hidden_ch2_ch(
     chem_object: Chem.rdchem.Mol, 
     chem_subgroups: dict, 
     subgroups: pd.DataFrame
-) -> bool:
-    
-    #import ipdb
-    #ipdb.set_trace()
-    
+) -> bool:    
     try:
         ch2_num = chem_subgroups["CH2"]
     except KeyError:

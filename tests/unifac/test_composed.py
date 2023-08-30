@@ -9,6 +9,7 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
+    ("CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C", {"CH3": 6, "CH": 1, "C": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CH-O": 1}, "smiles"),
     # two solutions
     ("CCCC1=CC=C(CC(=O)OC)C=C1", [{"CH3": 2, "CH2": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CH2COO": 1}, {"CH3": 2, "CH2": 1, "ACH": 4, "ACCH2": 2, "COO": 1}], "smiles"),
     ("C1=CC(=CC=C1COC(C)(C)C)CCC", {"ACH": 4, "ACCH2": 1, "AC": 1, "CH2O": 1, "CH3": 4, "CH2": 1, "C": 1}, "smiles"),
