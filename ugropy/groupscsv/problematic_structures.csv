@@ -11,7 +11,7 @@ smarts|contribute
 [CH2]OC(=O)O[CH0,c]|"{""COO"": -1}"
 [CH]OC(=O)O[CH]|"{""COO"": -1, ""CHO"": -1, ""CH"": 1}"
 [CH]OC(=O)O[CH0,c]|"{""COO"": -1}"
-[CH](=O)O[$([#6]);!$([CH](=O));!$(C(=O)[!O]);!$([CH3]);!$([CH2])]|"{""CH-O"": -1}"
+[CH](=O)O[$([#6,Si]);!$([CH](=O));!$(C(=O)[!O]);!$([CH3]);!$([CH2])]|"{""CH-O"": -1}"
 [CH]O[CH2]O[CH]|"{""CH2O"": -1, ""CH2"": 1, ""CHO"": 1, ""CH"": -1}"
 ? =============================================================================
 ? Aliphatic N
@@ -32,21 +32,31 @@ smarts|contribute
 [SiH0]OC(=O)O[SiH3]|"{""COO"": -1}"
 [SiH0]OC(=O)O[SiH0]|"{""COO"": -1, ""SIO"": -1, ""SI"": 1}"
 ? =============================================================================
+? Silicon-carbon eter
+? =============================================================================
+? triplets
+[CH]O[CH2]O[Si]|"{""CH2O"": -1, ""CH2"": 1, ""CH-O"": 1, ""CH"": -1}"
+[SiH2]O[CH2]O[SiH3,SiH2,SiH,SiH0,CH0]|"{""CH2O"": -1, ""CH2"": 1, ""SIH2O"": 1, ""SIH2"": -1}"
+[SiH]O[CH2]O[SiH3,SiH,SiH0,CH0]|"{""CH2O"": -1, ""CH2"": 1, ""SIHO"": 1, ""SIH"": -1}"
+[SiH0]O[CH2]O[SiH3,SiH0,CH0]|"{""CH2O"": -1, ""CH2"": 1, ""SIO"": 1, ""SI"": -1}"
+[SiH2]O[CH]O[SiH3,SiH2,SiH,SiH0,CH0]|"{""CH-O"": -1, ""CH"": 1, ""SIH2O"": 1, ""SIH2"": -1}"
+[SiH]O[CH]O[SiH3,SiH,SiH0,CH0]|"{""CH-O"": -1, ""CH"": 1, ""SIHO"": 1, ""SIH"": -1}"
+[SiH0]O[CH]O[SiH3,SiH0,CH0]|"{""CH-O"": -1, ""CH"": 1, ""SIO"": 1, ""SI"": -1}"
+? =============================================================================
 ? Silicon - carbon carbonate groups
 ? =============================================================================
-? [CH3]OC(=O)O[SIH3]|"{""COO"": -1}"
-? [CH3]OC(=O)O[SIH2]|"{""COO"": -1}"
-? [CH3]OC(=O)O[SIH]|"{""COO"": -1}"
-? [CH3]OC(=O)O[SIH0]|"{""COO"": -1}"
-? [CH2]OC(=O)O[SIH3]|"{""COO"": -1}"
-? [CH2]OC(=O)O[SIH2]|"{""COO"": -1}"
-? [CH2]OC(=O)O[SIH]|"{""COO"": -1}"
-? [CH2]OC(=O)O[SIH0]|"{""COO"": -1}"
-? [CH]OC(=O)O[SIH3]|"{""COO"": -1}"
-? [CH]OC(=O)O[SIH2]|"{""COO"": -1}"
-? [CH]OC(=O)O[SIH]|"{""COO"": -1}"
-? [CH]OC(=O)O[SIH0]|"{""COO"": -1}"
-? [CH0]OC(=O)O[SIH3]|"{""COO"": -1}"
-? [CH0]OC(=O)O[SIH2]|"{""COO"": -1}"
-? [CH0]OC(=O)O[SIH]|"{""COO"": -1}"
-? [CH0]OC(=O)O[SIH0]|"{""COO"": -1}"
+[CH3]OC(=O)O[SiH3]|"{""COO"": -1}"
+[CH3]OC(=O)O[SiH2]|"{""COO"": -1, ""SIH2O"": -1, ""SIH2"": 1}"
+[CH3]OC(=O)O[SiH]|"{""COO"": -1, ""SIHO"": -1, ""SIH"": 1}"
+[CH3]OC(=O)O[SiH0]|"{""COO"": -1, ""SIO"": -1, ""SI"": 1}"
+[CH2]OC(=O)O[SiH3]|"{""COO"": -1}"
+[CH2]OC(=O)O[SiH2]|"{""COO"": -1, ""SIH2O"": -1, ""SIH2"": 1}"
+[CH2]OC(=O)O[SiH]|"{""COO"": -1, ""SIHO"": -1, ""SIH"": 1}"
+[CH2]OC(=O)O[SiH0]|"{""COO"": -1, ""SIO"": -1, ""SI"": 1}"
+[CH]OC(=O)O[SiH3]|"{""COO"": -1}"
+[CH]OC(=O)O[SiH2]|"{""COO"": -1, ""SIH2O"": -1, ""SIH2"": 1}"
+[CH]OC(=O)O[SiH]|"{""COO"": -1, ""SIHO"": -1, ""SIH"": 1}"
+[CH]OC(=O)O[SiH0]|"{""COO"": -1, ""SIO"": -1, ""SI"": 1}"
+[CH0]OC(=O)O[SiH2]|"{""COO"": -1}"
+[CH0]OC(=O)O[SiH]|"{""COO"": -1}"
+[CH0]OC(=O)O[SiH0]|"{""COO"": -1}"
