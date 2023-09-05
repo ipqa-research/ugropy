@@ -26,6 +26,8 @@ trials_unifac = [
     ("diisopropylamine", {"CH3": 4, "CH": 1, "CHNH": 1}, "name"),
     # Problematics
     ("CC(C)NCN", {"CHNH": 1, "CH3": 2, "CH2NH2": 1}, "smiles"),
+    # concatenate amine
+    # TODO
 ]
 
 @pytest.mark.CNH
