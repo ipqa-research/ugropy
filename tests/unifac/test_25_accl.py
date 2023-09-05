@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -11,6 +11,7 @@ import pytest
 trials_unifac = [
     ("chlorobenzene ", {"ACCL": 1, "ACH": 5}, "name"),
 ]
+
 
 @pytest.mark.ACCL
 @pytest.mark.UNIFAC

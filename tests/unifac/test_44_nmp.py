@@ -1,7 +1,6 @@
-import ugropy as ug
-
 import pytest
 
+import ugropy as ug
 
 # =============================================================================
 # 44- NMP Main group: NMP
@@ -11,6 +10,7 @@ import pytest
 trials_unifac = [
     ("N-Methyl-2-pyrrolidone", {"NMP": 1}, "name"),
 ]
+
 
 @pytest.mark.NMP
 @pytest.mark.UNIFAC

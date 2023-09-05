@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -11,6 +11,7 @@ import pytest
 trials_unifac = [
     ("furfural", {"FURFURAL": 1}, "name"),
 ]
+
 
 @pytest.mark.FURFURAL
 @pytest.mark.UNIFAC

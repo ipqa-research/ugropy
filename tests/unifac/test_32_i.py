@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -12,6 +12,7 @@ trials_unifac = [
     ("1-iodoethane", {"CH3": 1, "CH2": 1, "I": 1}, "name"),
     ("Iodobenzene", {"ACH": 5, "AC": 1, "I": 1}, "name"),
 ]
+
 
 @pytest.mark.I
 @pytest.mark.UNIFAC

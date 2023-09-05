@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -10,8 +10,13 @@ import pytest
 # UNIFAC
 trials_unifac = [
     ("sulfolane", {"(CH2)2SU": 1, "CH2": 2}, "name"),
-    ("2,4-dimethylsulfolane", {"CH2CHSU": 1, "CH3": 2, "CH2": 1, "CH": 1}, "name"),
+    (
+        "2,4-dimethylsulfolane",
+        {"CH2CHSU": 1, "CH3": 2, "CH2": 1, "CH": 1},
+        "name",
+    ),
 ]
+
 
 @pytest.mark.sulfones
 @pytest.mark.UNIFAC

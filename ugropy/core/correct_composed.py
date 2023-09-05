@@ -1,22 +1,19 @@
 import json
-
 from itertools import combinations
-
-from rdkit import Chem
 
 import numpy as np
 
 import pandas as pd
 
-from .checks import check_has_molecular_weight_right, check_has_hidden_ch2_ch
+from rdkit import Chem
+
+from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right
 
 
 def correct_composed(
-    chem_object: Chem.rdchem.Mol, 
-    chem_subgroups: dict, 
-    subgroups: pd.DataFrame
+    chem_object: Chem.rdchem.Mol, chem_subgroups: dict, subgroups: pd.DataFrame
 ):
-    # Create list of composed structures present in molecule's func_g. If a 
+    # Create list of composed structures present in molecule's func_g. If a
     # composed structure has occurrence 2, will appear twice in the list
     composed_structures = subgroups[subgroups["composed"] == "y"].index
     comp_in_mol = np.array([])
@@ -25,14 +22,12 @@ def correct_composed(
         if stru in chem_subgroups.keys():
             comp_in_mol = np.append(comp_in_mol, [stru] * chem_subgroups[stru])
 
-
     # Create a combinatory list of the possible decomposition of the structures
     combinatory_list = []
     for i in range(1, len(comp_in_mol) + 1):
         # turn into set eliminates duplicated corrections combinations.
         for combinatory in set(combinations(comp_in_mol, i)):
             combinatory_list.append(combinatory)
-
 
     # Try by brute force all combinatories and store the successfull ones
     successfull_corrections = np.array([])
@@ -42,38 +37,37 @@ def correct_composed(
         correction = apply_decompose_correction(
             chem_subgroups=chem_subgroups,
             subgroups=subgroups,
-            groups_to_decompose=combination
+            groups_to_decompose=combination,
         )
 
         # Did the correction work?
         right_mw = check_has_molecular_weight_right(
             chem_object=chem_object,
             chem_subgroups=correction,
-            subgroups=subgroups
+            subgroups=subgroups,
         )
-        
+
         has_hidden = check_has_hidden_ch2_ch(
             chem_object=chem_object,
             chem_subgroups=correction,
-            subgroups=subgroups
+            subgroups=subgroups,
         )
-        
+
         if right_mw and not has_hidden:
             successfull_corrections = np.append(
-                successfull_corrections, 
-                correction
+                successfull_corrections, correction
             )
 
     # No posible correction found, can't represent molecule with func groups
     if len(successfull_corrections) == 0:
-        return {}    
-    
+        return {}
+
     # Get rid of duplicated successfull_corrections
     dict_strs = np.array([str(d) for d in successfull_corrections])
     unique_indices = np.unique(dict_strs, return_index=True)[1]
     unique_corrections = successfull_corrections[unique_indices]
 
-    # Return decomposed subgroups solutions 
+    # Return decomposed subgroups solutions
     if len(unique_corrections) == 1:
         # Unique solution found
         return unique_corrections[0]
@@ -91,12 +85,10 @@ def correct_composed(
 
 
 def apply_decompose_correction(
-        chem_subgroups: dict, 
-        subgroups: pd.DataFrame,
-        groups_to_decompose: tuple
-    ):
+    chem_subgroups: dict, subgroups: pd.DataFrame, groups_to_decompose: tuple
+):
     """
-    
+
     Parameters
     ----------
     chem_subgroups : dict

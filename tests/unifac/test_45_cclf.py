@@ -1,10 +1,10 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
-# 45- CCLF Main group: CCL3F, CCL2F, HCCL2F, HCCLF, CCLF2, HCCLF2, CCLF3, 
+# 45- CCLF Main group: CCL3F, CCL2F, HCCL2F, HCCLF, CCLF2, HCCLF2, CCLF3,
 #                      CCL2F2
 # =============================================================================
 
@@ -19,6 +19,7 @@ trials_unifac = [
     ("Chlorotrifluoromethane", {"CCLF3": 1}, "name"),
     ("Dichlorodifluoromethane", {"CCL2F2": 1}, "name"),
 ]
+
 
 @pytest.mark.CCLF
 @pytest.mark.UNIFAC

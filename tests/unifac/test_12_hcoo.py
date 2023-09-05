@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -15,6 +15,7 @@ trials_unifac = [
     ("COC=O", {"HCOO": 1, "CH3": 1}, "smiles"),
     ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1}, "name"),
 ]
+
 
 @pytest.mark.HCOO
 @pytest.mark.UNIFAC

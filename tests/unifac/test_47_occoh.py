@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -12,6 +12,7 @@ trials_unifac = [
     ("2-Ethoxyethanol", {"CH3": 1, "CH2": 1, "C2H5O2": 1}, "name"),
     ("2-Ethoxy-1-propanol", {"CH3": 2, "CH2": 1, "C2H4O2": 1}, "name"),
 ]
+
 
 @pytest.mark.OCCOH
 @pytest.mark.UNIFAC

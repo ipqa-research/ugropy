@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -12,6 +12,7 @@ trials_unifac = [
     ("hexafluorobenzene", {"ACF": 6}, "name"),
     ("FC1=CC=NC=C1", {}, "smiles"),
 ]
+
 
 @pytest.mark.ACF
 @pytest.mark.UNIFAC

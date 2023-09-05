@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -9,14 +9,23 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("CCCC1=CC=C(CS)C=C1", {"ACCH2": 1, "ACH": 4, "AC": 1, "CH2SH": 1, "CH2": 1, "CH3": 1}, "smiles"),
-    ("CC1=CC=C(CS)C=C1", {"ACCH3": 1, "ACH": 4, "AC": 1, "CH2SH": 1}, "smiles"),
+    (
+        "CCCC1=CC=C(CS)C=C1",
+        {"ACCH2": 1, "ACH": 4, "AC": 1, "CH2SH": 1, "CH2": 1, "CH3": 1},
+        "smiles",
+    ),
+    (
+        "CC1=CC=C(CS)C=C1",
+        {"ACCH3": 1, "ACH": 4, "AC": 1, "CH2SH": 1},
+        "smiles",
+    ),
     ("SCC1=CC=NC=C1", {"C5H4N": 1, "CH2SH": 1}, "smiles"),
     ("methanethiol", {"CH3SH": 1}, "name"),
     ("ethanethiol", {"CH2SH": 1, "CH3": 1}, "name"),
     # impossible
     ("CCCC1=CC=C(C=C1)C(C)S", {}, "smiles"),
 ]
+
 
 @pytest.mark.CH3SH
 @pytest.mark.UNIFAC

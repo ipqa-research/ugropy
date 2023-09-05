@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -13,6 +13,7 @@ trials_unifac = [
     ("1-hexyne", {"CH3": 1, "CH2": 3, "CH=-C": 1}, "name"),
     ("2-hexyne", {"CH3": 2, "CH2": 2, "C=-C": 1}, "name"),
 ]
+
 
 @pytest.mark.alquine
 @pytest.mark.UNIFAC

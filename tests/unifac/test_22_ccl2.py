@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -14,6 +14,7 @@ trials_unifac = [
     ("1,1-dichloroethane", {"CH3": 1, "CHCL2": 1}, "name"),
     ("2,2-dichloropropane", {"CH3": 2, "CCL2": 1}, "name"),
 ]
+
 
 @pytest.mark.CCL2
 @pytest.mark.UNIFAC

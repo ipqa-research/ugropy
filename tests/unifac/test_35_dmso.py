@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -11,6 +11,7 @@ import pytest
 trials_unifac = [
     ("dimethyl sulfoxide", {"DMSO": 1}, "name"),
 ]
+
 
 @pytest.mark.DMSO
 @pytest.mark.UNIFAC

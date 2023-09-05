@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -11,6 +11,7 @@ import pytest
 trials_unifac = [
     ("1,2-ethanediol", {"DOH": 1}, "name"),
 ]
+
 
 @pytest.mark.DOH
 @pytest.mark.UNIFAC

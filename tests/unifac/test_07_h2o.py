@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -8,9 +8,8 @@ import pytest
 # =============================================================================
 
 # UNIFAC
-trials_unifac = [
-    ("water", {"H2O": 1})
-]
+trials_unifac = [("water", {"H2O": 1})]
+
 
 @pytest.mark.H2O
 @pytest.mark.UNIFAC

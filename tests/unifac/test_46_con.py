@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -21,13 +21,29 @@ trials_unifac = [
     ("CCN(CC)C(=O)NC(C)C", {"AM(CH2)2": 1, "CHNH": 1, "CH3": 4}, "smiles"),
     ("CCN(C)C(=O)NC(C)C", {"AMCH3CH2": 1, "CHNH": 1, "CH3": 3}, "smiles"),
     ("CC(C)NC(=O)N(C)C", {"AM(CH3)2": 1, "CHNH": 1, "CH3": 2}, "smiles"),
-    ("CCNC(=O)N(CC)C(C)C", {"AMHCH2": 1, "CH2N": 1, "CH3": 4, "CH": 1}, "smiles"),
-    ("CCNC(=O)N(C)C(C)C", {"AMHCH2": 1, "CH3N": 1, "CH3": 3, "CH": 1}, "smiles"),
+    (
+        "CCNC(=O)N(CC)C(C)C",
+        {"AMHCH2": 1, "CH2N": 1, "CH3": 4, "CH": 1},
+        "smiles",
+    ),
+    (
+        "CCNC(=O)N(C)C(C)C",
+        {"AMHCH2": 1, "CH3N": 1, "CH3": 3, "CH": 1},
+        "smiles",
+    ),
     ("CCNC(=O)N(CC)CC", {"AM(CH2)2": 1, "CH2NH": 1, "CH3": 3}, "smiles"),
     ("CCNC(=O)N(C)CC", {"AMCH3CH2": 1, "CH2NH": 1, "CH3": 2}, "smiles"),
     ("CCNC(=O)N(C)C", {"AM(CH3)2": 1, "CH2NH": 1, "CH3": 1}, "smiles"),
-    ("CCN(C(C)C)C(=O)NC", {"AMHCH3": 1, "CH2N": 1, "CH": 1, "CH3": 3}, "smiles"),
-    ("CNC(=O)N(C)C(C)C", {"AMHCH3": 1, "CH3N": 1, "CH": 1, "CH3": 2}, "smiles"),
+    (
+        "CCN(C(C)C)C(=O)NC",
+        {"AMHCH3": 1, "CH2N": 1, "CH": 1, "CH3": 3},
+        "smiles",
+    ),
+    (
+        "CNC(=O)N(C)C(C)C",
+        {"AMHCH3": 1, "CH3N": 1, "CH": 1, "CH3": 2},
+        "smiles",
+    ),
     ("CCN(CC)C(=O)NC", {"AM(CH2)2": 1, "CH3NH": 1, "CH3": 2}, "smiles"),
     ("CCN(C)C(=O)NC", {"AMCH3CH2": 1, "CH3NH": 1, "CH3": 1}, "smiles"),
     ("CNC(=O)N(C)C", {"AM(CH3)2": 1, "CH3NH": 1}, "smiles"),
@@ -38,6 +54,7 @@ trials_unifac = [
     ("CCNC(=O)NC", {"AMHCH3": 1, "CH2NH": 1, "CH3": 1}, "smiles"),
     ("CNC(=O)NC", {"AMHCH3": 1, "CH3NH": 1}, "smiles"),
 ]
+
 
 @pytest.mark.CON
 @pytest.mark.UNIFAC

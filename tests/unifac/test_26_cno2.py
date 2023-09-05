@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -9,12 +9,17 @@ import pytest
 
 # UNIFAC
 trials_unifac = [
-    ("CCCC1=CC=C(C[N+]([O-])=O)C=C1", {"ACH": 4, "AC": 1, "CH2NO2": 1, "ACCH2": 1, "CH3": 1, "CH2": 1}, "smiles"),
+    (
+        "CCCC1=CC=C(C[N+]([O-])=O)C=C1",
+        {"ACH": 4, "AC": 1, "CH2NO2": 1, "ACCH2": 1, "CH3": 1, "CH2": 1},
+        "smiles",
+    ),
     ("[O-][N+](=O)CC1=CC=CC=C1", {"ACH": 5, "AC": 1, "CH2NO2": 1}, "smiles"),
     ("nitromethane", {"CH3NO2": 1}, "name"),
     ("1-nitropropane", {"CH3": 1, "CH2": 1, "CH2NO2": 1}, "name"),
     ("2-nitropropane", {"CH3": 2, "CHNO2": 1}, "name"),
 ]
+
 
 @pytest.mark.CNO2
 @pytest.mark.UNIFAC

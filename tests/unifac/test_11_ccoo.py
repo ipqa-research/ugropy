@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -10,14 +10,19 @@ import pytest
 # UNIFAC
 trials_unifac = [
     # Aspirin
-    ("CC(=O)OC1=CC=CC=C1C(=O)O", {"CH3COO": 1, "AC": 2, "ACH": 4, "COOH": 1}, "smiles"),    
+    (
+        "CC(=O)OC1=CC=CC=C1C(=O)O",
+        {"CH3COO": 1, "AC": 2, "ACH": 4, "COOH": 1},
+        "smiles",
+    ),
     # Tert-butyl acetate
     ("CC(=O)OC(C)(C)C", {"CH3COO": 1, "CH3": 3, "C": 1}, "smiles"),
     # triacetin
     ("CC(=O)OCC(COC(=O)C)OC(=O)C", {"CH3COO": 3, "CH2": 2, "CH": 1}, "smiles"),
     ("butyl propanoate", {"CH3": 2, "CH2": 3, "CH2COO": 1}, "name"),
-    ("butyl acetate", {"CH3": 1, "CH2": 3, "CH3COO": 1}, "name")
+    ("butyl acetate", {"CH3": 1, "CH2": 3, "CH3COO": 1}, "name"),
 ]
+
 
 @pytest.mark.CCOO
 @pytest.mark.UNIFAC

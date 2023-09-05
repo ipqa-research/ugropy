@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -11,8 +11,9 @@ import pytest
 trials_unifac = [
     ("methylamine", {"CH3NH2": 1}, "name"),
     ("isopropylamine", {"CH3": 2, "CHNH2": 1}, "name"),
-    ("propylamine", {"CH3": 1, "CH2": 1, "CH2NH2": 1}, "name")
+    ("propylamine", {"CH3": 1, "CH2": 1, "CH2NH2": 1}, "name"),
 ]
+
 
 @pytest.mark.CH3NH2
 @pytest.mark.UNIFAC

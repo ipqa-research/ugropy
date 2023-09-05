@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -13,6 +13,7 @@ trials_unifac = [
     ("methane", {}, "name"),
     ("C1(=CC=CC=C1)OC(C)(C)C", {}, "smiles"),
 ]
+
 
 @pytest.mark.impossibles
 @pytest.mark.UNIFAC

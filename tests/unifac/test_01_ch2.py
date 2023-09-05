@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -22,7 +22,7 @@ trials_unifac = [
     ("C1CCC1", {"CH2": 4}, "smiles"),
     ("C1C2CC1CCCC2", {"CH2": 6, "CH": 2}, "smiles"),
     # the space ship
-    ("CC12C3CCC4CCC1C234",{"CH3": 1, "CH2": 4, "CH": 3, "C": 2}, "smiles"),
+    ("CC12C3CCC4CCC1C234", {"CH3": 1, "CH2": 4, "CH": 3, "C": 2}, "smiles"),
     ("CCC(CC)C(C)(C)C", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}, "smiles"),
     ("C1CCC2CCCCC2C1", {"CH2": 8, "CH": 2}, "smiles"),
     ("C1CCC(CC1)CC2CCCCC2", {"CH2": 11, "CH": 2}, "smiles"),
@@ -32,6 +32,7 @@ trials_unifac = [
     ("2,2-dimethylpropane", {"CH3": 4, "C": 1}, "name"),
     ("cyclohexane", {"CH2": 6}, "name"),
 ]
+
 
 @pytest.mark.CH2
 @pytest.mark.UNIFAC

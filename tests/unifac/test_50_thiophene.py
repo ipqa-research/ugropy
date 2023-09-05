@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -18,6 +18,7 @@ trials_unifac = [
     ("OC1=CC(O)=CS1", {"C4H2S": 1, "OH": 2}, "smiles"),
     ("OC1=CC=C(O)S1", {"C4H2S": 1, "OH": 2}, "smiles"),
 ]
+
 
 @pytest.mark.thiophene
 @pytest.mark.UNIFAC

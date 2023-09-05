@@ -1,6 +1,6 @@
-import ugropy as ug
-
 import pytest
+
+import ugropy as ug
 
 
 # =============================================================================
@@ -8,9 +8,8 @@ import pytest
 # =============================================================================
 
 # UNIFAC
-trials_unifac = [
-    ("methanol", {"CH3OH": 1}, "name")
-]
+trials_unifac = [("methanol", {"CH3OH": 1}, "name")]
+
 
 @pytest.mark.CH3OH
 @pytest.mark.UNIFAC
