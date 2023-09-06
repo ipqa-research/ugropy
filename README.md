@@ -36,7 +36,7 @@ print(propanol.unifac_groups)
 At the moment ugropy is not uploaded in PyPI (will be soon).
 
 ```
-pip install +git
+pip install git+https://github.com/SalvadorBrandolin/ugropy.git
 ```
 ## Referece
 
