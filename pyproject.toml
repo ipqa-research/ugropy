@@ -64,7 +64,6 @@ markers = [
     "morpholine: MORPH",
     "thiophene: C4H4S, C4H3S, C4H2S",
     "sulfones: (CH2)2SU, CH2CHSU",
-    "mix: a mix of a lot of subgroupss",
     "composed: composed structures",
     "impossibles: impossible structures"
 ]
@@ -73,13 +72,14 @@ markers = [
 name = "ugropy"
 version = "0.0.1"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
-license = {text = "MIT licence"}
+license = {text = "The MIT License"}
 readme = "README.md"
 description = "Get UNIFAC functional groups of PubChem compounds or SMILES representation."
 keywords = ["UNIFAC", "functional group", "thermodynamics", "chemical engineering"]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Topic :: Scientific/Engineering",
