@@ -1,3 +1,4 @@
+"""ugropy library."""
 from . import constants, core
 from .groups import Groups
 

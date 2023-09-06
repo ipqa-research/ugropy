@@ -1,3 +1,7 @@
+"""get_groups module.
+
+Gets the UNIFAC's subgroups of an RDKit Mol object.
+"""
 import pandas as pd
 
 from rdkit import Chem
@@ -18,6 +22,26 @@ def get_groups(
     subgroups_matrix: pd.DataFrame,
     problematic_structures: pd.DataFrame,
 ):
+    """Obtain the UNIFAC's model subgroups of chem_object.
+
+    Parameters
+    ----------
+    chem_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    subgroups : pd.DataFrame
+        DataFrame that contains the subgroups, their SMARTS representation and
+        subgroup count contribution.
+    subgroups_matrix : pd.DataFrame
+        DataFrame that cotains the subgroups contribution matrix.
+    problematic_structures : pd.DataFrame
+        DataFrame that contains the SMARTS representation of the problematic
+        structures and their contribution correction.
+
+    Returns
+    -------
+    dict
+        UNIFAC's subgroups
+    """
     # Shorter names for DataFrames:
     df = subgroups.copy()
     dfm = subgroups_matrix.copy()
@@ -48,8 +72,8 @@ def get_groups(
     chem_subgroups = chem_subgroups.to_dict()
 
     if chem_subgroups == {}:
-        # No functional groups detected for the molecule. Example: hydrogen
-        # peroxide.
+        # No functional groups were detected for the molecule. Example:
+        # hydrogen peroxide.
         return chem_subgroups
 
     # Check for composed structures.

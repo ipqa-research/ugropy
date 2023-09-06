@@ -161,12 +161,12 @@ trials_unifac = [
         "smiles",
     ),
     (
-        "[SiH3][SiH]([SiH3])O[SiH2]O[SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]", # noqa
+        "[SiH3][SiH]([SiH3])O[SiH2]O[SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]",  # noqa
         {"SIH3": 6, "SIH": 1, "SIH2O": 3, "SIHO": 3},
         "smiles",
     ),
     (
-        "[SiH3][SiH]([SiH3])O[SiH2]O[SiH2][SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]", # noqa
+        "[SiH3][SiH]([SiH3])O[SiH2]O[SiH2][SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]",  # noqa
         {"SIH3": 6, "SIH": 2, "SIH2O": 4, "SIHO": 2},
         "smiles",
     ),
@@ -182,17 +182,17 @@ trials_unifac = [
         "smiles",
     ),
     (
-        "[SiH3][SiH](O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])(O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3]", # noqa
+        "[SiH3][SiH](O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])(O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3]",  # noqa
         {"SIH3": 13, "SI": 1, "SIHO": 3, "SIO": 3},
         "smiles",
     ),
     (
-        "[SiH3][SiH](O[SiH2][Si]([SiH3])(O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])([SiH3])[SiH3]", # noqa
+        "[SiH3][SiH](O[SiH2][Si]([SiH3])(O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])([SiH3])[SiH3]",  # noqa
         {"SIH3": 13, "SI": 2, "SIH2O": 1, "SIHO": 3, "SIO": 2},
         "smiles",
     ),
     (
-        "[SiH3][SiH](O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])([SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3]", # noqa
+        "[SiH3][SiH](O[Si]([SiH3])([SiH3])[SiH3])O[Si]([SiH3])([SiH3])O[SiH]([SiH3])O[Si]([SiH3])([SiH3])[SiH3]",  # noqa
         {"SIH3": 10, "SI": 1, "SIHO": 2, "SIO": 2},
         "smiles",
     ),

@@ -1,3 +1,4 @@
+"""correct_composed module."""
 import json
 from itertools import combinations
 
@@ -12,7 +13,37 @@ from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right
 
 def correct_composed(
     chem_object: Chem.rdchem.Mol, chem_subgroups: dict, subgroups: pd.DataFrame
-):
+) -> dict:
+    """Correct composed structures.
+
+    A priori is not easy to recognize what composed structures in
+    chem_subgroups need to be decomposed to correct the solution. By that, all
+    the combinations are tried. For example, a molecule that can't be solved
+    has one ACCH2 and two ACCH composed structures. The decomposition
+    combinatory will be:
+
+    [
+        [ACCH2],
+        [ACCH],
+        [ACCH2, ACCH],
+        [ACCH, ACCH],
+        [ACCH2, ACCH, ACCH]
+    ]
+
+    Parameters
+    ----------
+    chem_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    chem_subgroups : dict
+        Molecule's UNIFAC subgroups.
+    subgroups : pd.DataFrame
+        DataFrame of all UNIFAC's subgroups.
+
+    Returns
+    -------
+    dict or list[dict]
+        Corrected subgroups due to decomposing composed structures.
+    """
     # Create list of composed structures present in molecule's func_g. If a
     # composed structure has occurrence 2, will appear twice in the list
     composed_structures = subgroups[subgroups["composed"] == "y"].index
@@ -73,7 +104,6 @@ def correct_composed(
         return unique_corrections[0]
     else:
         # Find the solution/s that uses the minimun number of functional groups
-        # TODO: Check this...
         subgroups_used = np.array(
             [np.sum(list(d.values())) for d in unique_corrections]
         )
@@ -86,17 +116,22 @@ def correct_composed(
 
 def apply_decompose_correction(
     chem_subgroups: dict, subgroups: pd.DataFrame, groups_to_decompose: tuple
-):
-    """
+) -> dict:
+    """Decompose composed structures in chem_subgroups.
+
+    The function receives a tuple of groups to decompose and applies the
+    corresponding correction. For example, if the function receives the order
+    of decomposing an ACCH2, the function subtracts an ACCH2 group from
+    chem_subgroups, and then adds an AC and a CH2 group.
 
     Parameters
     ----------
     chem_subgroups : dict
-        _description_
+        Molecule's UNIFAC subgroups.
     subgroups : pd.DataFrame
-        _description_
+        DataFrame with the UNIFAC's model subgroups.
     groups_to_decompose : tuple[str]
-        _description_
+        Tuple with all the composed structures to decompose.
 
     Returns
     -------

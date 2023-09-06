@@ -1,50 +1,43 @@
 # ugropy
 
-TODO:
+ugropy is a `Python` library to obtain the UNIFAC's subgroups from 
+both the name or the SMILES representation of a molecule. If the name is 
+given, the library uses the
+[PubChemPy](https://github.com/mcs07/PubChemPy) library to obtain the SMILES
+representation from PubChem. In both cases, ugropy uses the 
+[RDKit](https://github.com/rdkit/rdkit) to search the functional groups in the
+molecule.
 
-- Test all the combinations of the pyridine groups
-- More complex algorithm to handle the composed structure problem. (test set as "composed")
-- pyridine problematic or composed structures problem? NEED TEST
-- Check amides and silanes problematic structures as ether+ester problematics
+ugropy is in an early development stage, leaving issues of examples of molecules that ugropy fails solving the UNIFAC's groups is very helpful.
 
-Remember:
-CHO it's for aldehyde
-CH-O ether
+## Example of use
+Get UNIFAC groups from the molecule's name:
 
-Diferencias entre UNIFAC y PSRK:
+```python
+from ugropy import Groups
 
-[CH2]=[CH2] not in UNIFAC but yes in PSRK
 
-https://opsin.ch.cam.ac.uk/
+hexane = Groups("hexane")
+print(hexane.unifac_groups)
+```
 
-https://pubchem.ncbi.nlm.nih.gov//edit3/index.html
+    {'CH3': 2, 'CH2': 4}
 
-Ambiguos
-test_13_ch2o.py  
-("Benzyl 2-hydroxyethyl carbonate", {"CH2": 1, "OH": 1, "ACCH2": 1, "ACH": 5, "COO": 1, "CH2O": 1})
+Get UNIFAC groups from molecule's SMILES:
 
-These problematic structures must be handled differently
-[cH0][CH2]O[CX4H0]|"{""ACCH2"": -1, ""AC"": 1, ""CH2"": 1}"
-[cH0][CH]O[CX4H0]|"{""ACCH"": -1, ""AC"": 1, ""CH"": 1}"
+```python
+propanol = Groups("CCCO", "smiles")
+print(propanol.unifac_groups)
+```
 
-The difference between a normal problematic structure is that the problem of 
-a normal problematic structure relies on the impossibility to construct short 
-and simple SMARTS that represent the functional groups and doesn't create an 
-impossible-to-handle false positive by the general logic of the algorithm.
+    {'CH3': 1, 'CH2': 2, 'OH': 1}
 
-On the other hand, the above structures "can be handled" by the algorithm, the
-problem in that specific case is that the ether group CH0-O doesn't exist in 
-the classical UNIFAC model. By that, the algorithm has to break its own rule
-of using the most specific functional groups always. The most specific group
-ACCH2 cannot be used and has to be separated into the less specific groups: AC 
-and CH2. Since the algorithm will also detect the other specific group CH2O
-the replacement of the ACCH2 by an AC CH2 (decomposing the functional group) 
-will do the thing.
+## Installation
+At the moment ugropy is not uploaded in PyPI (will be soon).
 
-The specific groups like ACCH2 will be called composed groups. Understanding
-a composed group as a functional group that can be represented by two less 
-specific groups, e.g:
+```
+pip install +git
+```
+## Referece
 
-- ACCH2 -> AC + CH2
-- ACOH -> AC + OH
-- CH3COO -> CH3 + COO
+[1] http://www.ddbst.com/published-parameters-unifac.html

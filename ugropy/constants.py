@@ -1,3 +1,19 @@
+"""constants module.
+
+Attributes
+----------
+unifac_subgroups : pandas.DataFrame
+    Classic LV-UNIFAC subgroups with it's SMARTS representation, contribution
+    and composed classification.
+unifac_matrix : pandas.DataFrame
+    Classic LV-UNIFAC contribution matrix.
+ch2_hideouts : pandas.DataFrame
+    Classic LV-UNIFAC CH2 hideouts.
+ch_hideouts : pandas.DataFrame
+    Classic LV-UNIFAC CH hideouts.
+problematic_structures : pandas.DataFrame
+    Problematic structures.
+"""
 from pathlib import Path
 
 import pandas as pd
