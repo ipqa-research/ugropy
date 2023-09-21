@@ -17,8 +17,6 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
-from ugropy.constants import ch2_hideouts, ch_hideouts
-
 from .detect_groups import group_matches
 
 
@@ -97,7 +95,11 @@ def check_has_composed(
 
 
 def check_has_hidden_ch2_ch(
-    chem_object: Chem.rdchem.Mol, chem_subgroups: dict, subgroups: pd.DataFrame
+    chem_object: Chem.rdchem.Mol,
+    chem_subgroups: dict,
+    subgroups: pd.DataFrame,
+    ch2_hideouts: pd.DataFrame,
+    ch_hideouts: pd.DataFrame,
 ) -> bool:
     """Check for hidden CH2 and CH subgroups in composed structures.
 
@@ -125,6 +127,10 @@ def check_has_hidden_ch2_ch(
         Subgroups of chem_object.
     subgroups : pd.DataFrame
         Complete DataFrame of UNIFAC's subgroups.
+    ch2_hideouts : pandas.DataFrame
+        DataFrame of all posible CH2 group hidings.
+    ch_hideouts : pandas.DataFrame
+        DataFrame of all posible CH group hidings.
 
     Returns
     -------

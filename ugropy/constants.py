@@ -7,12 +7,21 @@ unifac_subgroups : pandas.DataFrame
     and composed classification.
 unifac_matrix : pandas.DataFrame
     Classic LV-UNIFAC contribution matrix.
-ch2_hideouts : pandas.DataFrame
+unifac_ch2_hideouts : pandas.DataFrame
     Classic LV-UNIFAC CH2 hideouts.
-ch_hideouts : pandas.DataFrame
+unifac_ch_hideouts : pandas.DataFrame
     Classic LV-UNIFAC CH hideouts.
 problematic_structures : pandas.DataFrame
     Problematic structures.
+psrk_subgroups : pandas.DataFrame
+    Classic PSRK subgroups with it's SMARTS representation, contribution and
+    composed classification.
+psrk_matrix : pandas.DataFrame
+    Classic PSRK contribution matrix.
+psrk_ch2_hideouts : pandas.DataFrame
+    Classic PSRK CH2 hideouts.
+psrk_ch_hideouts : pandas.DataFrame
+    Classic PSRK CH hideouts.
 """
 from pathlib import Path
 
@@ -23,8 +32,9 @@ import pandas as pd
 here = Path(__file__).parent.resolve()
 
 # Dataframes
-
+# =============================================================================
 # UNIFAC
+# =============================================================================
 with open(f"{here}/groupscsv/unifac/unifac_subgroups.csv", mode="r") as f:
     unifac_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
 
@@ -32,10 +42,10 @@ with open(f"{here}/groupscsv/unifac/unifac_matrix.csv", mode="r") as f:
     unifac_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
 
 with open(f"{here}/groupscsv/unifac/ch2_hideouts.csv", mode="r") as f:
-    ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
+    unifac_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
 
 with open(f"{here}/groupscsv/unifac/ch_hideouts.csv", mode="r") as f:
-    ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
+    unifac_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
 
 # Problematics
 with open(f"{here}/groupscsv/problematic_structures.csv", mode="r") as f:
@@ -43,6 +53,18 @@ with open(f"{here}/groupscsv/problematic_structures.csv", mode="r") as f:
         f, sep="|", index_col="smarts", comment="?"
     )
 
+
+# =============================================================================
 # PSRK
+# =============================================================================
 with open(f"{here}/groupscsv/psrk/psrk_subgroups.csv", mode="r") as f:
     psrk_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
+
+with open(f"{here}/groupscsv/psrk/psrk_matrix.csv", mode="r") as f:
+    psrk_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
+
+with open(f"{here}/groupscsv/psrk/ch2_hideouts.csv", mode="r") as f:
+    psrk_ch2_hideouts = pd.read_csv(f, sep="|", index_col="group", comment="?")
+
+with open(f"{here}/groupscsv/psrk/ch_hideouts.csv", mode="r") as f:
+    psrk_ch_hideouts = pd.read_csv(f, sep="|", index_col="group", comment="?")

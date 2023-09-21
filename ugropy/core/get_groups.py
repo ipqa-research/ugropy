@@ -20,6 +20,8 @@ def get_groups(
     chem_object: Chem.rdchem.Mol,
     subgroups: pd.DataFrame,
     subgroups_matrix: pd.DataFrame,
+    ch2_hideouts: pd.DataFrame,
+    ch_hideouts: pd.DataFrame,
     problematic_structures: pd.DataFrame,
 ):
     """Obtain the UNIFAC's model subgroups of chem_object.
@@ -94,6 +96,8 @@ def get_groups(
             chem_object=chem_object,
             chem_subgroups=chem_subgroups,
             subgroups=df,
+            ch2_hideouts=ch2_hideouts,
+            ch_hideouts=ch_hideouts,
         )
         return chem_subgroups
     elif right_mw and has_composed:
@@ -101,12 +105,16 @@ def get_groups(
             chem_object=chem_object,
             chem_subgroups=chem_subgroups,
             subgroups=subgroups,
+            ch2_hideouts=ch2_hideouts,
+            ch_hideouts=ch_hideouts,
         )
         if has_hidden:
             chem_subgroups = correct_composed(
                 chem_object=chem_object,
                 chem_subgroups=chem_subgroups,
                 subgroups=df,
+                ch2_hideouts=ch2_hideouts,
+                ch_hideouts=ch_hideouts,
             )
             return chem_subgroups
         else:

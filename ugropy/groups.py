@@ -3,7 +3,13 @@ import pubchempy as pcp
 
 from rdkit import Chem
 
-from .constants import problematic_structures, unifac_matrix, unifac_subgroups
+from .constants import (
+    problematic_structures,
+    unifac_ch2_hideouts,
+    unifac_ch_hideouts,
+    unifac_matrix,
+    unifac_subgroups,
+)
 from .core.get_groups import get_groups
 
 
@@ -51,5 +57,7 @@ class Groups:
             self.chem_object,
             unifac_subgroups,
             unifac_matrix,
+            unifac_ch2_hideouts,
+            unifac_ch_hideouts,
             problematic_structures,
         )

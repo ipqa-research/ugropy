@@ -12,7 +12,11 @@ from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right
 
 
 def correct_composed(
-    chem_object: Chem.rdchem.Mol, chem_subgroups: dict, subgroups: pd.DataFrame
+    chem_object: Chem.rdchem.Mol,
+    chem_subgroups: dict,
+    subgroups: pd.DataFrame,
+    ch2_hideouts: pd.DataFrame,
+    ch_hideouts: pd.DataFrame,
 ) -> dict:
     """Correct composed structures.
 
@@ -22,13 +26,7 @@ def correct_composed(
     has one ACCH2 and two ACCH composed structures. The decomposition
     combinatory will be:
 
-    [
-        [ACCH2],
-        [ACCH],
-        [ACCH2, ACCH],
-        [ACCH, ACCH],
-        [ACCH2, ACCH, ACCH]
-    ]
+    [[ACCH2], [ACCH], [ACCH2, ACCH], [ACCH, ACCH], [ACCH2, ACCH, ACCH]]
 
     Parameters
     ----------
@@ -38,6 +36,10 @@ def correct_composed(
         Molecule's UNIFAC subgroups.
     subgroups : pd.DataFrame
         DataFrame of all UNIFAC's subgroups.
+    ch2_hideouts : pandas.DataFrame
+        DataFrame of all posible CH2 group hidings.
+    ch_hideouts : pandas.DataFrame
+        DataFrame of all posible CH group hidings.
 
     Returns
     -------
@@ -82,6 +84,8 @@ def correct_composed(
             chem_object=chem_object,
             chem_subgroups=correction,
             subgroups=subgroups,
+            ch2_hideouts=ch2_hideouts,
+            ch_hideouts=ch_hideouts,
         )
 
         if right_mw and not has_hidden:

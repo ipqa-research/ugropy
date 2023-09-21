@@ -1,10 +1,10 @@
 from ugropy import constants
 
-# this test check if the same subgroup appears in 2 models, both
-# xxx_subgroups.csv row are the same
-
 
 def test_unifac_psrk_equal():
+    """check if the same subgroup appears in 2 models, both xxx_subgroups.csv
+    rows must be the same.
+    """
     for group in constants.unifac_subgroups.index:
         if group in constants.psrk_subgroups.index:
             assert (
