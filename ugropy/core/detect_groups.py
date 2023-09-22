@@ -70,6 +70,9 @@ def group_matches(
     """
     smarts = subgroups.loc[group]["smarts"]
     func_group = Chem.MolFromSmarts(smarts)
-    matches = chem_object.GetSubstructMatches(func_group)
+    try:
+        matches = chem_object.GetSubstructMatches(func_group)
+    except ValueError:
+        print(f"Bad SMARTS representation of: {group}")
 
     return matches

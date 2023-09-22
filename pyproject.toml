@@ -13,6 +13,7 @@ testpaths = [
 [tool.pytest.ini_options]
 markers = [
     "UNIFAC: classic UNIFAC model tests",
+    "PSRK: predictive SRK model tests",
     "CH2: CH3, CH2, CH, C",
     "CeqC: CH2=CH, CH=CH, CH2=C, CH=C, C=C",
     "ACH: ACH, AC",
