@@ -64,7 +64,7 @@ with open(f"{here}/groupscsv/psrk/psrk_matrix.csv", mode="r") as f:
     psrk_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
 
 with open(f"{here}/groupscsv/psrk/ch2_hideouts.csv", mode="r") as f:
-    psrk_ch2_hideouts = pd.read_csv(f, sep="|", index_col="group", comment="?")
+    psrk_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
 
 with open(f"{here}/groupscsv/psrk/ch_hideouts.csv", mode="r") as f:
-    psrk_ch_hideouts = pd.read_csv(f, sep="|", index_col="group", comment="?")
+    psrk_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index

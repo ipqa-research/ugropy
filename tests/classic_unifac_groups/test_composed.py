@@ -75,6 +75,10 @@ def test_composed_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     try:
         assert groups.unifac_groups == result
+        assert groups.psrk_groups == result
     except ValueError:
-        for ugr, sol in zip(groups.unifac_groups, result):
-            assert ugr == sol
+        for uni, psrk, sol in zip(
+            groups.unifac_groups, groups.psrk_groups, result
+        ):
+            assert uni == sol
+            assert psrk == sol

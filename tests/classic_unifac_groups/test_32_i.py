@@ -20,3 +20,4 @@ trials_unifac = [
 def test_i_unifac(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
+    assert groups.psrk_groups == result

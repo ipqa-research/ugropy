@@ -17,3 +17,4 @@ trials_unifac = [("water", {"H2O": 1})]
 def test_h2o_unifac(name, result):
     groups = ug.Groups(name)
     assert groups.unifac_groups == result
+    assert groups.psrk_groups == result
