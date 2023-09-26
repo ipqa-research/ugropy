@@ -9,8 +9,10 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("2-Ethoxyethanol", {"CH3": 1, "CH2": 1, "C2H5O2": 1}, "name"),
-    ("2-Ethoxy-1-propanol", {"CH3": 2, "CH2": 1, "C2H4O2": 1}, "name"),
+    # 2-Ethoxyethanol
+    ("CCOCCO", {"CH3": 1, "CH2": 1, "C2H5O2": 1}, "smiles"),
+    # 2-Ethoxy-1-propanol
+    ("CCOC(C)CO", {"CH3": 2, "CH2": 1, "C2H4O2": 1}, "smiles"),
 ]
 
 

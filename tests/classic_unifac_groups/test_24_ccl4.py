@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("tetrachloromethane", {"CCL4": 1}, "name"),
+    # tetrachloromethane
+    ("C(Cl)(Cl)(Cl)Cl", {"CCL4": 1}, "smiles"),
 ]
 
 

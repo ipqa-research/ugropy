@@ -44,7 +44,8 @@ trials_unifac = [
         },
         "smiles",
     ),
-    ("Methyl acrylate", {"CH3": 1, "CH2=CH": 1, "COO": 1}, "name"),
+    # Methyl acrylate
+    ("COC(=O)C=C", {"CH3": 1, "CH2=CH": 1, "COO": 1}, "smiles"),
 ]
 
 

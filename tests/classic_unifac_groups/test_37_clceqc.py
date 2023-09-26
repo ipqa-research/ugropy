@@ -14,7 +14,8 @@ trials_unifac = [
         {"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "I": 1, "BR": 1, "CL-(C=C)": 1},
         "smiles",
     ),
-    ("trichloroethylene", {"CH=C": 1, "CL-(C=C)": 3}, "name"),
+    # trichloroethylene
+    ("C(=C(Cl)Cl)Cl", {"CH=C": 1, "CL-(C=C)": 3}, "smiles"),
 ]
 
 

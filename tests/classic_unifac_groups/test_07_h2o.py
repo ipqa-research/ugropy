@@ -8,13 +8,13 @@ import ugropy as ug
 # =============================================================================
 
 # UNIFAC
-trials_unifac = [("water", {"H2O": 1})]
+trials_unifac = [("O", {"H2O": 1}, "smiles")]
 
 
 @pytest.mark.H2O
 @pytest.mark.UNIFAC
-@pytest.mark.parametrize("name, result", trials_unifac)
-def test_h2o_unifac(name, result):
-    groups = ug.Groups(name)
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_h2o_unifac(identifier, result, identifier_type):
+    groups = ug.Groups(identifier, identifier_type)
     assert groups.unifac_groups == result
     assert groups.psrk_groups == result

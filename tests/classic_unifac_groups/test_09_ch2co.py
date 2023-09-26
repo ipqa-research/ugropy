@@ -41,9 +41,12 @@ trials_unifac = [
     ),
     # acetophenone
     ("CC(=O)C1=CC=CC=C1", {"ACH": 5, "AC": 1, "CH3CO": 1}, "smiles"),
-    ("acetone", {"CH3CO": 1, "CH3": 1}, "name"),
-    ("3-pentanone", {"CH3": 2, "CH2": 1, "CH2CO": 1}, "name"),
-    ("2-butanone", {"CH3": 1, "CH2": 1, "CH3CO": 1}, "name"),
+    # acetone
+    ("CC(=O)C", {"CH3CO": 1, "CH3": 1}, "smiles"),
+    # 3-pentanones
+    ("CCC(=O)CC", {"CH3": 2, "CH2": 1, "CH2CO": 1}, "smiles"),
+    # 2-butanone
+    ("CCC(=O)C", {"CH3": 1, "CH2": 1, "CH3CO": 1}, "smiles"),
 ]
 
 

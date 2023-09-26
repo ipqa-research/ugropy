@@ -40,11 +40,13 @@ trials_unifac = [
     ("CCCCC=O", {"CH3": 1, "CH2": 3, "CHO": 1}, "smiles"),
     # 3-methylbutanal
     ("CC(C)CC=O", {"CH3": 2, "CH2": 1, "CH": 1, "CHO": 1}, "smiles"),
-    ("acetaldehyde", {"CH3": 1, "CHO": 1}, "name"),
+    # acetaldehyde
+    ("CC=O", {"CH3": 1, "CHO": 1}, "smiles"),
+    # 2-Hexyl-3-Phenyl-2-Propenal
     (
-        "2-Hexyl-3-Phenyl-2-Propenal",
+        r"CCCCCC\C(C=O)=C/C1=CC=CC=C1",
         {"ACH": 5, "AC": 1, "CH=C": 1, "CH2": 5, "CH3": 1, "CHO": 1},
-        "name",
+        "smiles",
     ),
 ]
 

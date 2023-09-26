@@ -15,8 +15,10 @@ trials_unifac = [
         {"COOH": 1, "CHNH2": 1, "CH2": 1, "CH2NH2": 1},
         "smiles",
     ),
-    ("acetic acid", {"CH3": 1, "COOH": 1}, "name"),
-    ("formic acid", {"HCOOH": 1}, "name"),
+    # acetic acid
+    ("CC(=O)O", {"CH3": 1, "COOH": 1}, "smiles"),
+    # formic acid
+    ("C(=O)O", {"HCOOH": 1}, "smiles"),
 ]
 
 

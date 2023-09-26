@@ -18,8 +18,10 @@ trials_unifac = [
     ),
     ("CCN(C(C)C)C(C)C", {"CH2N": 1, "CH3": 5, "CH": 2}, "smiles"),
     ("CCN(C)CC", {"CH3N": 1, "CH2": 2, "CH3": 2}, "smiles"),
-    ("trimethylamine", {"CH3": 2, "CH3N": 1}, "name"),
-    ("triethylamine", {"CH3": 3, "CH2": 2, "CH2N": 1}, "name"),
+    # trimethylamine
+    ("CN(C)C", {"CH3": 2, "CH3N": 1}, "smiles"),
+    # triethylamine
+    ("CCN(CC)CC", {"CH3": 3, "CH2": 2, "CH2N": 1}, "smiles"),
 ]
 
 

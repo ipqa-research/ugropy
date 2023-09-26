@@ -40,9 +40,12 @@ trials_unifac = [
         {"CH3N": 2, "CH2": 7, "CH": 2, "CH2CO": 1},
         "smiles",
     ),
-    ("dimethylamine", {"CH3": 1, "CH3NH": 1}, "name"),
-    ("diethylamine", {"CH3": 2, "CH2": 1, "CH2NH": 1}, "name"),
-    ("diisopropylamine", {"CH3": 4, "CH": 1, "CHNH": 1}, "name"),
+    # dimethylamine
+    ("CNC", {"CH3": 1, "CH3NH": 1}, "smiles"),
+    # diethylamine
+    ("CCNCC", {"CH3": 2, "CH2": 1, "CH2NH": 1}, "smiles"),
+    # diisopropylamine
+    ("CC(C)NC(C)C", {"CH3": 4, "CH": 1, "CHNH": 1}, "smiles"),
     # Problematics
     ("CC(C)NCN", {"CHNH": 1, "CH3": 2, "CH2NH2": 1}, "smiles"),
     # concatenate amine

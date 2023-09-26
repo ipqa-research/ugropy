@@ -9,12 +9,17 @@ import ugropy as ug
 # PSRK
 # =============================================================================
 trials_psrk = [
-    ("propyleneoxide", {"H2COCH": 1, "CH3": 1}, "name"),
+    # propyleneoxide
+    ("CC1CO1", {"H2COCH": 1, "CH3": 1}, "smiles"),
     ("C1OC1C1=CC=CC=C1", {"ACH": 5, "AC": 1, "H2COCH": 1}, "smiles"),
-    ("2,3-epoxybutane", {"CH3": 2, "HCOCH": 1}, "name"),
-    ("2-methyl-2,3-epoxybutane", {"CH3": 3, "HCOC": 1}, "name"),
-    ("2-methyl-1,2-epoxypropane", {"CH3": 2, "H2COC": 1}, "name"),
-    ("2,3-dimethyl-2,3-epoxybutane", {"CH3": 4, "COC": 1}, "name"),
+    # 2,3-epoxybutane
+    ("CC1C(O1)C", {"CH3": 2, "HCOCH": 1}, "smiles"),
+    # 2-methyl-2,3-epoxybutane
+    ("CC1OC1(C)C", {"CH3": 3, "HCOC": 1}, "smiles"),
+    # 2-methyl-1,2-epoxypropane
+    ("CC1(CO1)C", {"CH3": 2, "H2COC": 1}, "smiles"),
+    # 2,3-dimethyl-2,3-epoxybutane
+    ("CC1(C(O1)(C)C)C", {"CH3": 4, "COC": 1}, "smiles"),
 ]
 
 

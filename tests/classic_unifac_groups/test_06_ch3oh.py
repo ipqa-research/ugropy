@@ -8,7 +8,8 @@ import ugropy as ug
 # =============================================================================
 
 # UNIFAC
-trials_unifac = [("methanol", {"CH3OH": 1}, "name")]
+# methanol
+trials_unifac = [("CO", {"CH3OH": 1}, "smiles")]
 
 
 @pytest.mark.CH3OH

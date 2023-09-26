@@ -9,8 +9,10 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("1-iodoethane", {"CH3": 1, "CH2": 1, "I": 1}, "name"),
-    ("Iodobenzene", {"ACH": 5, "AC": 1, "I": 1}, "name"),
+    # 1-iodoethane
+    ("CCI", {"CH3": 1, "CH2": 1, "I": 1}, "smiles"),
+    # Iodobenzene
+    ("C1=CC=C(C=C1)I", {"ACH": 5, "AC": 1, "I": 1}, "smiles"),
 ]
 
 

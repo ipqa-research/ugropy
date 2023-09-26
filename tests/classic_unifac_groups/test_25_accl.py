@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("chlorobenzene ", {"ACCL": 1, "ACH": 5}, "name"),
+    # chlorobenzene
+    ("C1=CC=C(C=C1)Cl", {"ACCL": 1, "ACH": 5}, "smiles"),
 ]
 
 

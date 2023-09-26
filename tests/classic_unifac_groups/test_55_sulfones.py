@@ -9,11 +9,13 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("sulfolane", {"(CH2)2SU": 1, "CH2": 2}, "name"),
+    # sulfolane
+    ("C1CCS(=O)(=O)C1", {"(CH2)2SU": 1, "CH2": 2}, "smiles"),
+    # 2,4-dimethylsulfolane
     (
-        "2,4-dimethylsulfolane",
+        "CC1CC(S(=O)(=O)C1)C",
         {"CH2CHSU": 1, "CH3": 2, "CH2": 1, "CH": 1},
-        "name",
+        "smiles",
     ),
 ]
 

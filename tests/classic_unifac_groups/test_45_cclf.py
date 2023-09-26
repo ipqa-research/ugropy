@@ -10,14 +10,22 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("Trichlorofluoromethane", {"CCL3F": 1}, "name"),
-    ("Tetrachloro-1,2-difluoroethane", {"CCL2F": 2}, "name"),
-    ("Dichlorofluoromethane", {"HCCL2F": 1}, "name"),
-    ("1-Chloro-1,2,2,2-tetrafluoroethane", {"CF3": 1, "HCCLF": 1}, "name"),
-    ("1,2-Dichlorotetrafluoroethane", {"CCLF2": 2}, "name"),
-    ("Chlorodifluoromethane", {"HCCLF2": 1}, "name"),
-    ("Chlorotrifluoromethane", {"CCLF3": 1}, "name"),
-    ("Dichlorodifluoromethane", {"CCL2F2": 1}, "name"),
+    # Trichlorofluoromethane
+    ("C(F)(Cl)(Cl)Cl", {"CCL3F": 1}, "smiles"),
+    # Tetrachloro-1,2-difluoroethane
+    ("C(C(F)(Cl)Cl)(F)(Cl)Cl", {"CCL2F": 2}, "smiles"),
+    # Dichlorofluoromethane
+    ("C(F)(Cl)Cl", {"HCCL2F": 1}, "smiles"),
+    # 1-Chloro-1,2,2,2-tetrafluoroethane
+    ("C(C(F)(F)F)(F)Cl", {"CF3": 1, "HCCLF": 1}, "smiles"),
+    # 1,2-Dichlorotetrafluoroethane
+    ("C(C(F)(F)Cl)(F)(F)Cl", {"CCLF2": 2}, "smiles"),
+    # Chlorodifluoromethane
+    ("C(F)(F)Cl", {"HCCLF2": 1}, "smiles"),
+    # Chlorotrifluoromethane
+    ("C(F)(F)(F)Cl", {"CCLF3": 1}, "smiles"),
+    # Dichlorodifluoromethane
+    ("C(F)(F)(Cl)Cl", {"CCL2F2": 1}, "smiles"),
 ]
 
 

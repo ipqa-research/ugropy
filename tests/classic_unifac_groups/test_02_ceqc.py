@@ -39,13 +39,13 @@ trials_unifac = [
         {"CH3": 1, "CH2": 9, "CH": 3, "CH=CH": 2},
         "smiles",
     ),
-    # cyclohexene
-    ("C1CCC=CC1", {"CH2": 4, "CH=CH": 1}, "smiles"),
-    ("2,3-dimethylbutene-2", {"C=C": 1, "CH3": 4}, "name"),
-    ("2-methyl-2-butene", {"CH=C": 1, "CH3": 3}, "name"),
-    ("2-methyl-1-butene", {"CH2": 1, "CH2=C": 1, "CH3": 2}, "name"),
-    ("2-hexene", {"CH2": 2, "CH=CH": 1, "CH3": 2}, "name"),
-    ("1-hexene", {"CH2": 3, "CH2=CH": 1, "CH3": 1}, "name"),
+    ("C1CCC=CC1", {"CH2": 4, "CH=CH": 1}, "smiles"),  # cyclohexene
+    ("CC(=C(C)C)C", {"C=C": 1, "CH3": 4}, "smiles"),  # 2,3-dimethylbutene-2
+    ("CC=C(C)C", {"CH=C": 1, "CH3": 3}, "smiles"),  # 2-methyl-2-butene
+    # 2-methyl-1-butene
+    ("CCC(=C)C", {"CH2": 1, "CH2=C": 1, "CH3": 2}, "smiles"),
+    ("CCCC=CC", {"CH2": 2, "CH=CH": 1, "CH3": 2}, "smiles"),  # 2-hexene
+    ("CCCCC=C", {"CH2": 3, "CH2=CH": 1, "CH3": 1}, "smiles"),  # 1-hexene
     # impossibles
     ("C=C=C", {}, "smiles"),
     ("CC=CC(C)C(C)=C=C", {}, "smiles"),

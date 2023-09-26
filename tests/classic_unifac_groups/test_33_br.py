@@ -9,8 +9,10 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("1-bromoethane", {"CH3": 1, "CH2": 1, "BR": 1}, "name"),
-    ("Bromobenzene", {"ACH": 5, "AC": 1, "BR": 1}, "name"),
+    # 1-bromoethane
+    ("CCBr", {"CH3": 1, "CH2": 1, "BR": 1}, "smiles"),
+    # Bromobenzene
+    ("C1=CC=C(C=C1)Br", {"ACH": 5, "AC": 1, "BR": 1}, "smiles"),
 ]
 
 

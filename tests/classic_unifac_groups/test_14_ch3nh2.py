@@ -9,9 +9,12 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("methylamine", {"CH3NH2": 1}, "name"),
-    ("isopropylamine", {"CH3": 2, "CHNH2": 1}, "name"),
-    ("propylamine", {"CH3": 1, "CH2": 1, "CH2NH2": 1}, "name"),
+    # methylamine
+    ("CN", {"CH3NH2": 1}, "smiles"),
+    # isopropylamine
+    ("CC(C)N", {"CH3": 2, "CHNH2": 1}, "smiles"),
+    # propylamine
+    ("CCCN", {"CH3": 1, "CH2": 1, "CH2NH2": 1}, "smiles"),
 ]
 
 

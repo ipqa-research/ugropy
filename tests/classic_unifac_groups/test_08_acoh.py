@@ -27,7 +27,7 @@ trials_unifac = [
         {"ACH": 7, "AC": 2, "ACOH": 3},
         "smiles",
     ),
-    ("phenol", {"ACH": 5, "ACOH": 1}, "name"),
+    ("C1=CC=C(C=C1)O", {"ACH": 5, "ACOH": 1}, "smiles"),
 ]
 
 

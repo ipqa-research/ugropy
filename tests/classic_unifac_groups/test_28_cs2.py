@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("carbon disulfide", {"CS2": 1}, "name"),
+    # carbon disulfide
+    ("C(=S)=S", {"CS2": 1}, "smiles"),
 ]
 
 

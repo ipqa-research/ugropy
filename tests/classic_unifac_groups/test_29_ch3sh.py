@@ -21,8 +21,10 @@ trials_unifac = [
         "smiles",
     ),
     ("SCC1=CC=NC=C1", {"C5H4N": 1, "CH2SH": 1}, "smiles"),
-    ("methanethiol", {"CH3SH": 1}, "name"),
-    ("ethanethiol", {"CH2SH": 1, "CH3": 1}, "name"),
+    # methanethiol
+    ("CS", {"CH3SH": 1}, "smiles"),
+    # ethanethiol
+    ("CCS", {"CH2SH": 1, "CH3": 1}, "smiles"),
     # impossible
     ("CCCC1=CC=C(C=C1)C(C)S", {}, "smiles"),
 ]

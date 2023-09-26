@@ -9,9 +9,12 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("Dimethylsulfide", {"CH3": 1, "CH3S": 1}, "name"),
-    ("Diethylsulfide", {"CH3": 2, "CH2": 1, "CH2S": 1}, "name"),
-    ("Isopropyl Sulfide", {"CH3": 4, "CH": 1, "CHS": 1}, "name"),
+    # Dimethylsulfide
+    ("CSC", {"CH3": 1, "CH3S": 1}, "smiles"),
+    # Diethylsulfide
+    ("CCSCC", {"CH3": 2, "CH2": 1, "CH2S": 1}, "smiles"),
+    # Isopropyl Sulfide
+    ("CC(C)SC(C)C", {"CH3": 4, "CH": 1, "CHS": 1}, "smiles"),
 ]
 
 

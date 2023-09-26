@@ -17,7 +17,8 @@ trials_unifac = [
     ),
     # (2S,3S)-2-Methyl-1,3-hexanediol
     ("CCCC(C(C)CO)O", {"CH3": 2, "CH2": 3, "CH": 2, "OH": 2}, "smiles"),
-    ("2-propanol", {"CH3": 2, "CH": 1, "OH": 1}, "name"),
+    # 2-propanol
+    ("CC(C)O", {"CH3": 2, "CH": 1, "OH": 1}, "smiles"),
 ]
 
 

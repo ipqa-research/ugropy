@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("dimethyl sulfoxide", {"DMSO": 1}, "name"),
+    # dimethyl sulfoxide
+    ("CS(=O)C", {"DMSO": 1}, "smiles"),
 ]
 
 

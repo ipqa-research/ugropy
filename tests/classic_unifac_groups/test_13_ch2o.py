@@ -25,19 +25,19 @@ trials_unifac = [
     ("CCOCOCC", {"CH3": 2, "CH2O": 2, "CH2": 1}, "smiles"),
     ("C1COCO1", {"CH2O": 2, "CH2": 1}, "smiles"),
     ("C1COCCOCCOCCOCCOCCO1", {"CH2O": 6, "CH2": 6}, "smiles"),
-    ("tetrahydrofuran", {"THF": 1}, "name"),
-    ("diisopropyl ether", {"CH3": 4, "CH": 1, "CH-O": 1}, "name"),
-    ("diethyl ether", {"CH3": 2, "CH2": 1, "CH2O": 1}, "name"),
-    ("dimethyl ether", {"CH3": 1, "CH3O": 1}, "name"),
+    # tetrahydrofuran
+    ("C1CCOC1", {"THF": 1}, "smiles"),
+    # diisopropyl ether
+    ("CC(C)OC(C)C", {"CH3": 4, "CH": 1, "CH-O": 1}, "smiles"),
+    # diethyl ether
+    ("CCOCC", {"CH3": 2, "CH2": 1, "CH2O": 1}, "smiles"),
+    # dimethyl ether
+    ("COC", {"CH3": 1, "CH3O": 1}, "smiles"),
+    # 2H-Pyran, 2-(cyclohexyloxy)tetrahydro-
     (
-        "SCHEMBL3938062",
-        {"CH2": 4, "CH": 2, "OH": 1, "COO": 1, "CH3O": 1},
-        "name",
-    ),
-    (
-        "2H-Pyran, 2-(cyclohexyloxy)tetrahydro-",
+        "C1CCC(CC1)OC2CCCCO2",
         {"CH2": 8, "CH": 1, "CH2O": 1, "CH-O": 1},
-        "name",
+        "smiles",
     ),
     # Problematic ones
     # Benzyl 2-hydroxyethyl carbonate

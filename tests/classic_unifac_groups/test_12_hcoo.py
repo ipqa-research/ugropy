@@ -13,7 +13,8 @@ trials_unifac = [
     ("C1=CC=C(C=C1)OC=O", {"ACH": 5, "AC": 1, "HCOO": 1}, "smiles"),
     # methyl formate
     ("COC=O", {"HCOO": 1, "CH3": 1}, "smiles"),
-    ("ethyl formate", {"HCOO": 1, "CH2": 1, "CH3": 1}, "name"),
+    # ethyl formate
+    ("CCOC=O", {"HCOO": 1, "CH2": 1, "CH3": 1}, "smiles"),
 ]
 
 

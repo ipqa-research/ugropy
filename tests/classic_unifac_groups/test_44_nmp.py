@@ -8,7 +8,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("N-Methyl-2-pyrrolidone", {"NMP": 1}, "name"),
+    # N-Methyl-2-pyrrolidone
+    ("CN1CCCC1=O", {"NMP": 1}, "smiles"),
 ]
 
 

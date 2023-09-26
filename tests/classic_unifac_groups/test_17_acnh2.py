@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("aniline", {"ACH": 5, "ACNH2": 1}, "name"),
+    # aniline
+    ("C1=CC=C(C=C1)N", {"ACH": 5, "ACNH2": 1}, "smiles"),
 ]
 
 

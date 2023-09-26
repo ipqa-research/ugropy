@@ -9,8 +9,10 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("acetonitrile", {"CH3CN": 1}, "name"),
-    ("propionitrile", {"CH3": 1, "CH2CN": 1}, "name"),
+    # acetonitrile
+    ("CC#N", {"CH3CN": 1}, "smiles"),
+    # propionitrile
+    ("CCC#N", {"CH3": 1, "CH2CN": 1}, "smiles"),
 ]
 
 

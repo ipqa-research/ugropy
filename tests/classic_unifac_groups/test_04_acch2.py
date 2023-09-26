@@ -61,10 +61,14 @@ trials_unifac = [
         {"ACH": 4, "ACCH": 1, "ACCH2": 1, "CH3": 3},
         "smiles",
     ),
-    ("Gastrodigenin", {"ACH": 4, "ACOH": 1, "ACCH2": 1, "OH": 1}, "name"),
-    ("cumene", {"CH3": 2, "ACH": 5, "ACCH": 1}, "name"),
-    ("ethylbenzene", {"CH3": 1, "ACH": 5, "ACCH2": 1}, "name"),
-    ("toluene", {"ACH": 5, "ACCH3": 1}, "name"),
+    # Gastrodigenin
+    ("C1=CC(=CC=C1CO)O", {"ACH": 4, "ACOH": 1, "ACCH2": 1, "OH": 1}, "smiles"),
+    # cumene
+    ("CC(C)C1=CC=CC=C1", {"CH3": 2, "ACH": 5, "ACCH": 1}, "smiles"),
+    # ethylbenzene
+    ("CCC1=CC=CC=C1", {"CH3": 1, "ACH": 5, "ACCH2": 1}, "smiles"),
+    # toluene
+    ("CC1=CC=CC=C1", {"ACH": 5, "ACCH3": 1}, "smiles"),
 ]
 
 

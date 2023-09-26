@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("morpholine", {"MORPH": 1}, "name"),
+    # morpholine
+    ("C1COCCN1", {"MORPH": 1}, "smiles"),
 ]
 
 

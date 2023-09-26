@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("furfural", {"FURFURAL": 1}, "name"),
+    # furfural
+    ("C1=COC(=C1)C=O", {"FURFURAL": 1}, "smiles"),
 ]
 
 

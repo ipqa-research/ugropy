@@ -10,9 +10,12 @@ import ugropy as ug
 # UNIFAC
 trials_unifac = [
     ("OC(Cl)Cl", {"CHCL2": 1, "OH": 1}, "smiles"),
-    ("dichloro methane", {"CH2CL2": 1}, "name"),
-    ("1,1-dichloroethane", {"CH3": 1, "CHCL2": 1}, "name"),
-    ("2,2-dichloropropane", {"CH3": 2, "CCL2": 1}, "name"),
+    # dichloro methane
+    ("C(Cl)Cl", {"CH2CL2": 1}, "smiles"),
+    # 1,1-dichloroethane
+    ("CC(Cl)Cl", {"CH3": 1, "CHCL2": 1}, "smiles"),
+    # 2,2-dichloropropane
+    ("CC(C)(Cl)Cl", {"CH3": 2, "CCL2": 1}, "smiles"),
 ]
 
 

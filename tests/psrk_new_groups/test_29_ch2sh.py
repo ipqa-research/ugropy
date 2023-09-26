@@ -7,9 +7,11 @@ import ugropy as ug
 #
 # =============================================================================
 trials_psrk = [
-    ("2-propanethiol", {"CH3": 2, "CHSH": 1}, "name"),
+    # 2-propanethiol
+    ("CC(C)S", {"CH3": 2, "CHSH": 1}, "smiles"),
     ("CC(S)C1=CC=CC=C1", {"CH3": 1, "CHSH": 1, "AC": 1, "ACH": 5}, "smiles"),
-    ("2-methyl-2-propanethiol", {"CH3": 3, "CSH": 1}, "name"),
+    # 2-methyl-2-propanethiol
+    ("CC(C)(C)S", {"CH3": 3, "CSH": 1}, "smiles"),
 ]
 
 

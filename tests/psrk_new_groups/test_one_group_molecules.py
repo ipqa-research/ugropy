@@ -7,16 +7,27 @@ import ugropy as ug
 # New one molecule groups of PSRK
 # =============================================================================
 trials_psrk = [
-    ("ozone", {"O3": 1}, "name"),
-    ("ethylene", {"H2C=CH2": 1}, "name"),
-    ("Acetylene", {"CH=-CH": 1}, "name"),
-    ("ammonia", {"NH3": 1}, "name"),
-    ("carbon monoxide", {"CO": 1}, "name"),
-    ("Hydrogen sulfide", {"H2S": 1}, "name"),
-    ("nitrogen", {"N2": 1}, "name"),
-    ("argon", {"AR": 1}, "name"),
-    ("carbon dioxide", {"CO2": 1}, "name"),
-    ("methane", {"CH4": 1}, "name"),
+    # ozone
+    ("[O-][O+]=O", {"O3": 1}, "name"),
+    # ethylene
+    ("C=C", {"H2C=CH2": 1}, "name"),
+    # Acetylene
+    ("C#C", {"CH=-CH": 1}, "name"),
+    # ammonia
+    ("N", {"NH3": 1}, "name"),
+    # carbon monoxide
+    ("[C-]#[O+]", {"CO": 1}, "name"),
+    # Hydrogen sulfide
+    ("S", {"H2S": 1}, "name"),
+    # nitrogen
+    ("N#N", {"N2": 1}, "name"),
+    # argon
+    ("[Ar]", {"AR": 1}, "name"),
+    # carbon dioxide
+    ("C(=O)=O", {"CO2": 1}, "name"),
+    # methane
+    ("C", {"CH4": 1}, "name"),
+    # oxygen
     ("oxygen", {"O2": 1}, "name"),
     ("sulfur dioxide", {"SO2": 1}, "name"),
     ("nitric oxide", {"NO": 1}, "name"),

@@ -9,12 +9,18 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("acetamide", {"CH3": 1, "AMH2": 1}, "name"),
-    ("N-Methylacetamide", {"CH3": 1, "AMHCH3": 1}, "name"),
-    ("N-Ethylacetamide", {"CH3": 2, "AMHCH2": 1}, "name"),
-    ("N,N-Dimethylacetamide", {"CH3": 1, "AM(CH3)2": 1}, "name"),
-    ("N-ethyl-N-methylacetamide", {"CH3": 2, "AMCH3CH2": 1}, "name"),
-    ("N,N-Diethylacetamide", {"CH3": 3, "AM(CH2)2": 1}, "name"),
+    # acetamide
+    ("CC(=O)N", {"CH3": 1, "AMH2": 1}, "smiles"),
+    # N-Methylacetamide
+    ("CC(=O)NC", {"CH3": 1, "AMHCH3": 1}, "smiles"),
+    # N-Ethylacetamide
+    ("CCNC(=O)C", {"CH3": 2, "AMHCH2": 1}, "smiles"),
+    # N,N-Dimethylacetamide
+    ("CC(=O)N(C)C", {"CH3": 1, "AM(CH3)2": 1}, "smiles"),
+    # N-ethyl-N-methylacetamide
+    ("CCN(C)C(=O)C", {"CH3": 2, "AMCH3CH2": 1}, "smiles"),
+    # N,N-Diethylacetamide
+    ("CCN(CC)C(=O)C", {"CH3": 3, "AM(CH2)2": 1}, "smiles"),
     # di amide + amine
     ("CCN(C(C)C)C(=O)NC(C)C", {}, "smiles"),
     ("CC(C)NC(=O)N(C)C(C)C", {}, "smiles"),

@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("nitrobenzene", {"ACH": 5, "ACNO2": 1}, "name"),
+    # nitrobenzene
+    ("C1=CC=C(C=C1)[N+](=O)[O-]", {"ACH": 5, "ACNO2": 1}, "smiles"),
     ("[O-][N+](=O)C1=CC=NC=C1", {}, "smiles"),
 ]
 

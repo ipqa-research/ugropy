@@ -21,16 +21,15 @@ trials_unifac = [
     ("C1CC1", {"CH2": 3}, "smiles"),
     ("C1CCC1", {"CH2": 4}, "smiles"),
     ("C1C2CC1CCCC2", {"CH2": 6, "CH": 2}, "smiles"),
-    # the space ship
     ("CC12C3CCC4CCC1C234", {"CH3": 1, "CH2": 4, "CH": 3, "C": 2}, "smiles"),
     ("CCC(CC)C(C)(C)C", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}, "smiles"),
     ("C1CCC2CCCCC2C1", {"CH2": 8, "CH": 2}, "smiles"),
     ("C1CCC(CC1)CC2CCCCC2", {"CH2": 11, "CH": 2}, "smiles"),
-    ("ethane", {"CH3": 2}, "name"),
-    ("hexane", {"CH3": 2, "CH2": 4}, "name"),
-    ("2-methylpropane", {"CH3": 3, "CH": 1}, "name"),
-    ("2,2-dimethylpropane", {"CH3": 4, "C": 1}, "name"),
-    ("cyclohexane", {"CH2": 6}, "name"),
+    ("CC", {"CH3": 2}, "smiles"),  # ethane
+    ("CCCCCC", {"CH3": 2, "CH2": 4}, "smiles"),  # hexane
+    ("CC(C)C", {"CH3": 3, "CH": 1}, "smiles"),  # 2-methylpropane
+    ("CC(C)(C)C", {"CH3": 4, "C": 1}, "smiles"),  # 2,2-dimethylpropane
+    ("C1CCCCC1", {"CH2": 6}, "smiles"),  # cyclohexane
 ]
 
 

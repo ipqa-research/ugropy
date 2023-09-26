@@ -24,7 +24,12 @@ trials_unifac = [
         "smiles",
     ),
     ("C[Si](C)(O[Si](C)(C)[H])[H]", {"CH3": 4, "SIHO": 1, "SIH": 1}, "smiles"),
-    ("Octamethylcyclotetrasiloxane", {"CH3": 8, "SIO": 4}, "name"),
+    # Octamethylcyclotetrasiloxane
+    (
+        "C[Si]1(O[Si](O[Si](O[Si](O1)(C)C)(C)C)(C)C)C",
+        {"CH3": 8, "SIO": 4},
+        "smiles",
+    ),
     # Esters + ether
     ("CC(=O)O[SiH3]", {"CH3COO": 1, "SIH3": 1}, "smiles"),
     ("CC(=O)O[SiH2][SiH3]", {"CH3COO": 1, "SIH3": 1, "SIH2": 1}, "smiles"),

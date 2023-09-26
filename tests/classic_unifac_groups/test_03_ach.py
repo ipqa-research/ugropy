@@ -24,10 +24,9 @@ trials_unifac = [
     ),
     # biphenyl
     ("C1=CC=C(C=C1)C2=CC=CC=C2", {"ACH": 10, "AC": 2}, "smiles"),
-    # Naphthalene
-    ("C1=CC=C2C=CC=CC2=C1", {"ACH": 8, "AC": 2}, "smiles"),
-    ("benzene", {"ACH": 6}, "name"),
-    ("styrene", {"AC": 1, "CH2=CH": 1, "ACH": 5}, "name"),
+    ("C1=CC=C2C=CC=CC2=C1", {"ACH": 8, "AC": 2}, "smiles"),  # Naphthalene
+    ("C1=CC=CC=C1", {"ACH": 6}, "smiles"),  # benzene
+    ("C=CC1=CC=CC=C1", {"AC": 1, "CH2=CH": 1, "ACH": 5}, "smiles"),  # styrene
 ]
 
 

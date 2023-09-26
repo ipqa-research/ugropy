@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("1,2-ethanediol", {"DOH": 1}, "name"),
+    # 1,2-ethanediol
+    ("C(CO)O", {"DOH": 1}, "smiles"),
 ]
 
 

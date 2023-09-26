@@ -9,7 +9,8 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    ("acrylonitrile", {"ACRY": 1}, "name"),
+    # acrylonitrile
+    ("C=CC#N", {"ACRY": 1}, "smiles"),
 ]
 
 
