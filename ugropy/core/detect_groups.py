@@ -68,7 +68,7 @@ def group_matches(
     tuple
         Return of the RDKit GetSubstructMatches function.
     """
-    smarts = subgroups.loc[group]["smarts"]
+    smarts = subgroups.loc[group, "smarts"]
     func_group = Chem.MolFromSmarts(smarts)
     try:
         matches = chem_object.GetSubstructMatches(func_group)
