@@ -35,11 +35,16 @@ def test_51_epoxy_psrk(identifier, result, identifier_type):
 # UNIFAC
 # =============================================================================
 trials_unifac = [
-    ("propyleneoxide", {"CH2O": 1, "CH": 1, "CH3": 1}, "name"),
-    ("2,3-epoxybutane", {"CH3": 2, "CH-O": 1, "CH": 1}, "name"),
-    ("2-methyl-2,3-epoxybutane", {"CH3": 3, "CH-O": 1, "C": 1}, "name"),
-    ("2-methyl-1,2-epoxypropane", {"CH3": 2, "CH2O": 1, "C": 1}, "name"),
-    ("2,3-dimethyl-2,3-epoxybutane", {}, "name"),
+    # propyleneoxide
+    ("CC1CO1", {"CH2O": 1, "CH": 1, "CH3": 1}, "smiles"),
+    # 2,3-epoxybutane
+    ("CC1C(O1)C", {"CH3": 2, "CH-O": 1, "CH": 1}, "smiles"),
+    # 2-methyl-2,3-epoxybutane
+    ("CC1OC1(C)C", {"CH3": 3, "CH-O": 1, "C": 1}, "smiles"),
+    # 2-methyl-1,2-epoxypropane
+    ("CC1(CO1)C", {"CH3": 2, "CH2O": 1, "C": 1}, "smiles"),
+    # 2,3-dimethyl-2,3-epoxybutane
+    ("CC1(C(O1)(C)C)C", {}, "smiles"),
 ]
 
 

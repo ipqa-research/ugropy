@@ -8,49 +8,72 @@ import ugropy as ug
 # =============================================================================
 trials_psrk = [
     # ozone
-    ("[O-][O+]=O", {"O3": 1}, "name"),
+    ("[O-][O+]=O", {"O3": 1}, "smiles"),
     # ethylene
-    ("C=C", {"H2C=CH2": 1}, "name"),
+    ("C=C", {"H2C=CH2": 1}, "smiles"),
     # Acetylene
-    ("C#C", {"CH=-CH": 1}, "name"),
+    ("C#C", {"CH=-CH": 1}, "smiles"),
     # ammonia
-    ("N", {"NH3": 1}, "name"),
+    ("N", {"NH3": 1}, "smiles"),
     # carbon monoxide
-    ("[C-]#[O+]", {"CO": 1}, "name"),
+    ("[C-]#[O+]", {"CO": 1}, "smiles"),
     # Hydrogen sulfide
-    ("S", {"H2S": 1}, "name"),
+    ("S", {"H2S": 1}, "smiles"),
     # nitrogen
-    ("N#N", {"N2": 1}, "name"),
+    ("N#N", {"N2": 1}, "smiles"),
     # argon
-    ("[Ar]", {"AR": 1}, "name"),
+    ("[Ar]", {"AR": 1}, "smiles"),
     # carbon dioxide
-    ("C(=O)=O", {"CO2": 1}, "name"),
+    ("C(=O)=O", {"CO2": 1}, "smiles"),
     # methane
-    ("C", {"CH4": 1}, "name"),
+    ("C", {"CH4": 1}, "smiles"),
     # oxygen
-    ("oxygen", {"O2": 1}, "name"),
-    ("sulfur dioxide", {"SO2": 1}, "name"),
-    ("nitric oxide", {"NO": 1}, "name"),
-    ("Nitrous oxide", {"N2O": 1}, "name"),
-    ("Sulfur hexafluoride", {"SF6": 1}, "name"),
-    ("helium", {"HE": 1}, "name"),
-    ("neon", {"NE": 1}, "name"),
-    ("krypton", {"KR": 1}, "name"),
-    ("xenon", {"XE": 1}, "name"),
-    ("Hydrogen fluoride", {"HF": 1}, "name"),
-    ("hydrogen chloride", {"HCL": 1}, "name"),
-    ("Hydrobromic acid", {"HBR": 1}, "name"),
-    ("Hydrogen iodide", {"HI": 1}, "name"),
-    ("Carbonyl sulfide", {"COS": 1}, "name"),
-    ("Ethylene oxide", {"H2COCH2": 1}, "name"),
-    ("Fluorine", {"F2": 1}, "name"),
-    ("Chlorine", {"CL2": 1}, "name"),
-    ("Bromine", {"BR2": 1}, "name"),
-    ("Hydrogen cyanide", {"HCN": 1}, "name"),
-    ("Nitrogen dioxide", {"NO2": 1}, "name"),
-    ("Carbon tetrafluoride", {"CF4": 1}, "name"),
-    ("ozone", {"O3": 1}, "name"),
-    ("Nitrosyl chloride", {"CLNO": 1}, "name"),
+    ("O=O", {"O2": 1}, "smiles"),
+    # sulfur dioxide
+    ("O=S=O", {"SO2": 1}, "smiles"),
+    # nitric oxide
+    ("[N]=O", {"NO": 1}, "smiles"),
+    # Nitrous oxide
+    ("[N-]=[N+]=O", {"N2O": 1}, "smiles"),
+    # Sulfur hexafluoride
+    ("FS(F)(F)(F)(F)F", {"SF6": 1}, "smiles"),
+    # helium
+    ("[He]", {"HE": 1}, "smiles"),
+    # neon
+    ("[Ne]", {"NE": 1}, "smiles"),
+    # krypton
+    ("[Kr]", {"KR": 1}, "smiles"),
+    # xenon
+    ("[Xe]", {"XE": 1}, "smiles"),
+    # Hydrogen fluoride
+    ("F", {"HF": 1}, "smiles"),
+    # hydrogen chloride
+    ("Cl", {"HCL": 1}, "smiles"),
+    # Hydrobromic acid
+    ("Br", {"HBR": 1}, "smiles"),
+    # Hydrogen iodide
+    ("I", {"HI": 1}, "smiles"),
+    # Carbonyl sulfide
+    ("C(=O)=S", {"COS": 1}, "smiles"),
+    # Ethylene oxide
+    ("C1CO1", {"H2COCH2": 1}, "smiles"),
+    # Fluorine
+    ("FF", {"F2": 1}, "smiles"),
+    # Chlorine
+    ("ClCl", {"CL2": 1}, "smiles"),
+    # Bromine
+    ("BrBr", {"BR2": 1}, "smiles"),
+    # Hydrogen cyanide
+    ("C#N", {"HCN": 1}, "smiles"),
+    # Nitrogen dioxide
+    ("N(=O)[O]", {"NO2": 1}, "smiles"),
+    # Carbon tetrafluoride
+    ("C(F)(F)(F)F", {"CF4": 1}, "smiles"),
+    # Ozone
+    ("[O-][O+]=O", {"O3": 1}, "smiles"),
+    # Nitrosyl chloride
+    ("N(=O)Cl", {"CLNO": 1}, "smiles"),
+    # tert-Butylamine
     ("CC(C)(C)N", {"CNH2": 1, "CH3": 3}, "smiles"),
     # TODO
     # ("hydrogen", {"H2": 1}, "name"),
@@ -63,3 +86,19 @@ trials_psrk = [
 def test_one_group_molecules(identifier, result, identifier_type):
     groups = ug.Groups(identifier, identifier_type, unifac=False)
     assert groups.psrk_groups == result
+
+
+# =============================================================================
+# UNIFAC
+# =============================================================================
+trials_unifac = [
+    # Ethylene oxide
+    ("C1CO1", {"CH2O": 1, "CH2": 1}, "smiles"),
+]
+
+
+@pytest.mark.UNIFAC
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_one_group_molecules_unifac(identifier, result, identifier_type):
+    groups = ug.Groups(identifier, identifier_type, psrk=False)
+    assert groups.unifac_groups == result
