@@ -66,7 +66,8 @@ markers = [
     "thiophene: C4H4S, C4H3S, C4H2S",
     "sulfones: (CH2)2SU, CH2CHSU",
     "composed: composed structures",
-    "impossibles: impossible structures"
+    "impossibles: impossible structures",
+    "epoxy: epoxides groups."
 ]
 
 [project]

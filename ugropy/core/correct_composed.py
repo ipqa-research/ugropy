@@ -115,7 +115,11 @@ def correct_composed(
         idx_min_lens = np.where(subgroups_used == min_subgroups_used)[0]
         dicts_with_min_len = unique_corrections[idx_min_lens]
 
-        return dicts_with_min_len
+        if len(dicts_with_min_len) == 1:
+            # Solutions number turn into one
+            return dicts_with_min_len[0]
+        else:
+            return dicts_with_min_len
 
 
 def apply_decompose_correction(
