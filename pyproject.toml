@@ -64,7 +64,10 @@ markers = [
     "CH2S: CH3S, CH2S, CHS",
     "morpholine: MORPH",
     "thiophene: C4H4S, C4H3S, C4H2S",
+    "NCO: NCO",
     "sulfones: (CH2)2SU, CH2CHSU",
+    "IMIDAZOL: IMIDAZOL",
+    "BTI: BTI",
     "composed: composed structures",
     "impossibles: impossible structures",
     "epoxy: epoxides groups."
