@@ -25,6 +25,9 @@ class Groups:
     psrk : bool, optional
         If True the algorithm will try to get the PSRK groups. If False this
         will be skiped, by default "True".
+    dortmund : bool, optional
+        If True the algorithm will try to get the Dortmund groups. If False 
+        this will be skiped, by default "True".
 
     Attributes
     ----------
@@ -47,12 +50,16 @@ class Groups:
         identifier_type: str = "name",
         unifac: bool = True,
         psrk: bool = True,
+        dortmund: bool = True,
     ) -> None:
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
         self.chem_object = instantiate_chem_object(identifier, identifier_type)
         self.molecular_weight = Descriptors.MolWt(self.chem_object)
 
+        # =====================================================================
+        # UNIFAC groups
+        # =====================================================================
         if unifac:
             self.unifac_groups = get_unifac_groups(
                 self.identifier, self.identifier_type
@@ -60,9 +67,27 @@ class Groups:
         else:
             self.unifac_groups = {}
 
+        # =====================================================================
+        # PSRK groups
+        # =====================================================================
         if psrk:
             self.psrk_groups = get_psrk_groups(
                 self.identifier, self.identifier_type
             )
         else:
             self.psrk_groups = {}
+
+        # =====================================================================
+        # Dortmund groups
+        # =====================================================================
+        if dortmund:
+            self.dortmund_groups = get_groups(
+                self.chem_object,
+                dortmund_subgroups,
+                dortmund_matrix,
+                psrk_ch2_hideouts,
+                psrk_ch_hideouts,
+                problematic_structures,
+            )
+        else:
+            self.dortmund_groups = {}
