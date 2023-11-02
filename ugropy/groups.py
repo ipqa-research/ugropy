@@ -4,6 +4,8 @@ import pubchempy as pcp
 from rdkit import Chem
 
 from .constants import (
+    dortmund_matrix,
+    dortmund_subgroups,
     problematic_structures,
     psrk_ch2_hideouts,
     psrk_ch_hideouts,
@@ -35,6 +37,9 @@ class Groups:
     psrk : bool, optional
         If True the algorithm will try to get the PSRK groups. If False this
         will be skiped, by default "True".
+    dortmund : bool, optional
+        If True the algorithm will try to get the Dortmund groups. If False 
+        this will be skiped, by default "True".
 
     Attributes
     ----------
@@ -55,6 +60,7 @@ class Groups:
         identifier_type: str = "name",
         unifac: bool = True,
         psrk: bool = True,
+        dortmund: bool = True,
     ) -> None:
         self.identifier = identifier.lower()
         self.identifier_type = identifier_type.lower()
@@ -69,6 +75,9 @@ class Groups:
             self.smiles = pcp_object.canonical_smiles
             self.chem_object = Chem.MolFromSmiles(self.smiles)
 
+        # =====================================================================
+        # UNIFAC groups
+        # =====================================================================
         if unifac:
             self.unifac_groups = get_groups(
                 self.chem_object,
@@ -81,6 +90,9 @@ class Groups:
         else:
             self.unifac_groups = {}
 
+        # =====================================================================
+        # PSRK groups
+        # =====================================================================
         if psrk:
             self.psrk_groups = get_groups(
                 self.chem_object,
@@ -92,3 +104,18 @@ class Groups:
             )
         else:
             self.psrk_groups = {}
+
+        # =====================================================================
+        # Dortmund groups
+        # =====================================================================
+        if dortmund:
+            self.dortmund_groups = get_groups(
+                self.chem_object,
+                dortmund_subgroups,
+                dortmund_matrix,
+                psrk_ch2_hideouts,
+                psrk_ch_hideouts,
+                problematic_structures,
+            )
+        else:
+            self.dortmund_groups = {}

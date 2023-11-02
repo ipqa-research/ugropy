@@ -78,8 +78,8 @@ with open(f"{here}/groupscsv/dortmund/dortmund_subgroups.csv", mode="r") as f:
         f, sep="|", index_col="group", comment="?"
     )
 
-# with open(f"{here}/groupscsv/dortmund/dortmund_matrix.csv", mode="r") as f:
-#     dortmund_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
+with open(f"{here}/groupscsv/dortmund/dortmund_matrix.csv", mode="r") as f:
+    dortmund_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
 
 # with open(f"{here}/groupscsv/dortmund/ch2_hideouts.csv", mode="r") as f:
 #     dortmund_ch2_hideouts = pd.read_csv(
