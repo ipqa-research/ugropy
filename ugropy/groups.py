@@ -1,10 +1,11 @@
 """Groups module."""
+from rdkit.Chem import Descriptors
+
 from ugropy.core.model_getters import (
-    instantiate_chem_object,
     get_psrk_groups,
     get_unifac_groups,
+    instantiate_chem_object,
 )
-from rdkit.Chem import Descriptors
 
 
 class Groups:
@@ -26,7 +27,7 @@ class Groups:
         If True the algorithm will try to get the PSRK groups. If False this
         will be skiped, by default "True".
     dortmund : bool, optional
-        If True the algorithm will try to get the Dortmund groups. If False 
+        If True the algorithm will try to get the Dortmund groups. If False
         this will be skiped, by default "True".
 
     Attributes
@@ -50,7 +51,7 @@ class Groups:
         identifier_type: str = "name",
         unifac: bool = True,
         psrk: bool = True,
-        dortmund: bool = True,
+        # dortmund: bool = True,
     ) -> None:
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
@@ -80,14 +81,14 @@ class Groups:
         # =====================================================================
         # Dortmund groups
         # =====================================================================
-        if dortmund:
-            self.dortmund_groups = get_groups(
-                self.chem_object,
-                dortmund_subgroups,
-                dortmund_matrix,
-                psrk_ch2_hideouts,
-                psrk_ch_hideouts,
-                problematic_structures,
-            )
-        else:
-            self.dortmund_groups = {}
+        # if dortmund:
+        #     self.dortmund_groups = get_groups(
+        #         self.chem_object,
+        #         dortmund_subgroups,
+        #         dortmund_matrix,
+        #         psrk_ch2_hideouts,
+        #         psrk_ch_hideouts,
+        #         problematic_structures,
+        #     )
+        # else:
+        #     self.dortmund_groups = {}

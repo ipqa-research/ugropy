@@ -89,3 +89,24 @@ with open(f"{here}/groupscsv/dortmund/dortmund_matrix.csv", mode="r") as f:
 # with open(f"{here}/groupscsv/dortmund/ch_hideouts.csv", mode="r") as f:
 #     dortmund_ch_hideouts = pd.read_csv(
 # f, index_col="group", comment="?").index
+
+
+# =============================================================================
+# Joback
+# =============================================================================
+with open(f"{here}/groupscsv/joback/joback_subgroups.csv", mode="r") as f:
+    joback_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
+
+with open(f"{here}/groupscsv/joback/joback_matrix.csv", mode="r") as f:
+    joback_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
+
+with open(f"{here}/groupscsv/joback/joback_ch2_hideouts.csv", mode="r") as f:
+    joback_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
+
+with open(f"{here}/groupscsv/joback/joback_ch_hideouts.csv", mode="r") as f:
+    joback_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
+
+with open(
+    f"{here}/groupscsv/joback/joback_problematic_structures.csv", mode="r"
+) as f:
+    joback_problematics = pd.Series([])

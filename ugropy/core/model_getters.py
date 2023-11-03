@@ -4,6 +4,11 @@ import pubchempy as pcp
 from rdkit import Chem
 
 from ugropy.constants import (
+    joback_ch2_hideouts,
+    joback_ch_hideouts,
+    joback_matrix,
+    joback_problematics,
+    joback_subgroups,
     problematic_structures,
     psrk_ch2_hideouts,
     psrk_ch_hideouts,
@@ -106,3 +111,33 @@ def get_psrk_groups(identifier: str, identifier_type: str = "name") -> dict:
     )
 
     return psrk_groups
+
+
+def get_joback_groups(identifier: str, identifier_type: str = "name") -> dict:
+    """Get Joback groups from molecule's name or SMILES.
+
+    Parameters
+    ----------
+    identifier : str
+        Identifier of a molecule. Example: hexane or CCCCCC.
+    identifier_type : str, optional
+        Use 'name' to search a molecule by name or 'smiles' to provide the
+        molecule SMILES representation, by default "name".
+
+    Returns
+    -------
+    dict
+        Joback subgroups.
+    """
+    chem_object = instantiate_chem_object(identifier, identifier_type)
+
+    joback_groups = get_groups(
+        chem_object,
+        joback_subgroups,
+        joback_matrix,
+        joback_ch2_hideouts,
+        joback_ch_hideouts,
+        joback_problematics,
+    )
+
+    return joback_groups

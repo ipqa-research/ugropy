@@ -30,17 +30,16 @@ trials_unifac = [
 ]
 
 
-@pytest.mark.CH3SH
 @pytest.mark.UNIFAC
+@pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ch3sh_unifac(identifier, result, identifier_type):
-    groups = ug.Groups(identifier, identifier_type)
-    assert groups.unifac_groups == result
+    assert ug.get_unifac_groups(identifier, identifier_type) == result
 
     if identifier != "CCCC1=CC=C(C=C1)C(C)S":
-        assert groups.psrk_groups == result
+        assert ug.get_psrk_groups(identifier, identifier_type) == result
     else:
-        assert groups.psrk_groups == {
+        ug.get_psrk_groups(identifier, identifier_type) == {
             "CH3": 2,
             "CH2": 1,
             "ACH": 4,

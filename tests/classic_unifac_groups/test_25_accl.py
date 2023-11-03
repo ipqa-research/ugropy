@@ -14,10 +14,9 @@ trials_unifac = [
 ]
 
 
-@pytest.mark.ACCL
 @pytest.mark.UNIFAC
+@pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_accl_unifac(identifier, result, identifier_type):
-    groups = ug.Groups(identifier, identifier_type)
-    assert groups.unifac_groups == result
-    assert groups.psrk_groups == result
+    assert ug.get_unifac_groups(identifier, identifier_type) == result
+    assert ug.get_psrk_groups(identifier, identifier_type) == result

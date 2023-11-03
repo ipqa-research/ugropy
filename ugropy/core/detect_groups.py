@@ -70,6 +70,7 @@ def group_matches(
     """
     smarts = subgroups.loc[group, "smarts"]
     func_group = Chem.MolFromSmarts(smarts)
+
     matches = chem_object.GetSubstructMatches(func_group)
 
     return matches
