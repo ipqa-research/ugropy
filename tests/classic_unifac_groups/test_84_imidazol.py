@@ -14,9 +14,7 @@ trials_unifac = [
 ]
 
 
-@pytest.mark.IMIDAZOL
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_thiophene_unifac(identifier, result, identifier_type):
-    groups = ug.Groups(identifier, identifier_type)
-    assert groups.unifac_groups == result
+    assert ug.get_unifac_groups(identifier, identifier_type) == result

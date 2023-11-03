@@ -25,7 +25,7 @@ from ugropy.core.get_groups import get_groups
 def instantiate_chem_object(
     identifier: str, identifier_type: str
 ) -> Chem.rdchem.Mol:
-    """Instantiates a rdkit Mol object from molecule's name or SMILES.
+    """Instantiate a rdkit Mol object from molecule's name or SMILES.
 
     Parameters
     ----------

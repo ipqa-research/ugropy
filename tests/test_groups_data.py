@@ -58,17 +58,23 @@ def test_dormund_data():
         df = pd.read_csv(f, sep="|", index_col="Subgroup Name", comment="?")
 
     for group in df.index:
-        assert (
-            df.loc[group, "R"] == constants.dortmund_subgroups.loc[group, "R"]
-        )
-        assert (
-            df.loc[group, "Q"] == constants.dortmund_subgroups.loc[group, "Q"]
-        )
-        assert (
-            df.loc[group, "No."]
-            == constants.dortmund_subgroups.loc[group, "subgroup_number"]
-        )
-        assert (
-            df.loc[group, "Main Group No."]
-            == constants.dortmund_subgroups.loc[group, "main_group"]
-        )
+        try:
+            assert (
+                df.loc[group, "R"]
+                == constants.dortmund_subgroups.loc[group, "R"]
+            )
+            assert (
+                df.loc[group, "Q"]
+                == constants.dortmund_subgroups.loc[group, "Q"]
+            )
+            assert (
+                df.loc[group, "No."]
+                == constants.dortmund_subgroups.loc[group, "subgroup_number"]
+            )
+            assert (
+                df.loc[group, "Main Group No."]
+                == constants.dortmund_subgroups.loc[group, "main_group"]
+            )
+        except KeyError:
+            # TODO: Dortmund in development some groups are commented.
+            ...

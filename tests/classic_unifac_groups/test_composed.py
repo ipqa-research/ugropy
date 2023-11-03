@@ -11,7 +11,7 @@ import ugropy as ug
 trials_unifac = [
     (
         "CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C",
-        {"CH3": 6, "CH": 1, "C": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CH-O": 1},
+        {"CH3": 6, "CH": 1, "C": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CHO": 1},
         "smiles",
     ),
     # two solutions
@@ -61,24 +61,23 @@ trials_unifac = [
     ),
     (
         "C1(=CC=CC=C1)C(OC(C)(C)C)C",
-        {"ACH": 5, "AC": 1, "CH-O": 1, "CH3": 4, "C": 1},
+        {"ACH": 5, "AC": 1, "CHO": 1, "CH3": 4, "C": 1},
         "smiles",
     ),
     ("C12=CC=CC=C1COC2", {"ACH": 4, "AC": 1, "CH2O": 1, "ACCH2": 1}, "smiles"),
 ]
 
 
-@pytest.mark.composed
+@pytest.mark.PSRK
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_composed_unifac(identifier, result, identifier_type):
-    groups = ug.Groups(identifier, identifier_type)
+    unifac_result = ug.get_unifac_groups(identifier, identifier_type)
+    psrk_result = ug.get_psrk_groups(identifier, identifier_type)
     try:
-        assert groups.unifac_groups == result
-        assert groups.psrk_groups == result
+        assert unifac_result == result
+        assert psrk_result == result
     except ValueError:
-        for uni, psrk, sol in zip(
-            groups.unifac_groups, groups.psrk_groups, result
-        ):
+        for uni, psrk, sol in zip(unifac_result, psrk_result, result):
             assert uni == sol
             assert psrk == sol
