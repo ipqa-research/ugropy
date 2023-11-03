@@ -14,6 +14,7 @@ testpaths = [
 markers = [
     "UNIFAC: classic UNIFAC model tests",
     "PSRK: predictive SRK model tests",
+    "Joback: Joback-Reid contribution model"
 ]
 
 [project]
