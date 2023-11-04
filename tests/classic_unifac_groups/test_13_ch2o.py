@@ -40,6 +40,22 @@ trials_unifac = [
         "smiles",
     ),
     # Problematic ones
+    (
+        "COC(=O)OC1=CC=CC=C1",
+        {"CH3O": 1, "COO": 1, "AC": 1, "ACH": 5},
+        "smiles",
+    ),
+    (
+        "CCOC(=O)OC1=CC=CC=C1",
+        {"CH3": 1, "CH2O": 1, "COO": 1, "AC": 1, "ACH": 5},
+        "smiles",
+    ),
+    (
+        "CC(C)OC(=O)OC1=CC=CC=C1",
+        {"CH3": 2, "CHO": 1, "COO": 1, "AC": 1, "ACH": 5},
+        "smiles",
+    ),
+    ("CC(C)(C)OC(=O)OC1=CC=CC=C1", {}, "smiles"),
     # Benzyl 2-hydroxyethyl carbonate
     (
         "C1=CC=C(C=C1)COC(=O)OCCO",
@@ -96,6 +112,12 @@ trials_unifac = [
     ("CC(C)OCOC(C)C", {"CH3": 4, "HCO": 1, "CH2O": 1, "CH": 1}, "smiles"),
     ("CCOCOCC", {"CH3": 2, "CH2O": 2, "CH2": 1}, "smiles"),
     ("COCOC", {"CH3O": 2, "CH2": 1}, "smiles"),
+    # Problematics with acids
+    ("COC(O)=O", {"COOH": 1, "CH3O": 1}, "smiles"),
+    ("CCOC(O)=O", {"COOH": 1, "CH2O": 1, "CH3": 1}, "smiles"),
+    ("CC(C)OC(O)=O", {"COOH": 1, "CHO": 1, "CH3": 2}, "smiles"),
+    ("CC(C)(C)OC(O)=O", {"OH": 1, "COO": 1, "C": 1, "CH3": 3}, "smiles"),
+    ("OC(=O)OC1=CC=CC=C1", {"OH": 1, "COO": 1, "AC": 1, "ACH": 5}, "smiles"),
     # Impossibles
     ("C1COCON1", {}, "smiles"),
 ]

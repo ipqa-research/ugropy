@@ -1,3 +1,3 @@
-- Check the acid groups smarts (try not necessarily are bound to a carbon) []
+- Check the acid groups smarts (try not necessarily are bound to a carbon) [X]
 
-- Check ester group also (related to up) []
+- Check ester group also (related to up) [X]

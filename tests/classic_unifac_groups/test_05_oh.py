@@ -19,6 +19,7 @@ trials_unifac = [
     ("CCCC(C(C)CO)O", {"CH3": 2, "CH2": 3, "CH": 2, "OH": 2}, "smiles"),
     # 2-propanol
     ("CC(C)O", {"CH3": 2, "CH": 1, "OH": 1}, "smiles"),
+    ("OC(O)=O", {"COOH": 1, "OH": 1}, "smiles"),
 ]
 
 
