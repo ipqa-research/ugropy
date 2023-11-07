@@ -7,7 +7,7 @@ import ugropy as ug
 # -CH3, -CH2-, >CH-, >C<, CH2=CH-, -CH=CH-, =C<, =C=, CH, C
 # =============================================================================
 # Joback
-trials_unifac = [
+trials = [
     (
         "CCC(CC)C(C)(C)C",
         {"-CH3": 5, "-CH2-": 2, ">CH-": 1, ">C<": 1},
@@ -35,6 +35,6 @@ trials_unifac = [
 
 
 @pytest.mark.Joback
-@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+@pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_no_cyclic_hydrocarbon(identifier, result, identifier_type):
     assert ug.get_joback_groups(identifier, identifier_type) == result

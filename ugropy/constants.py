@@ -109,4 +109,6 @@ with open(f"{here}/groupscsv/joback/joback_ch_hideouts.csv", mode="r") as f:
 with open(
     f"{here}/groupscsv/joback/joback_problematic_structures.csv", mode="r"
 ) as f:
-    joback_problematics = pd.Series([])
+    joback_problematics = pd.read_csv(
+        f, sep="|", index_col="smarts", comment="?"
+    )

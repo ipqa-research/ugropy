@@ -4,10 +4,10 @@ import ugropy as ug
 
 
 # =============================================================================
-#
+# ring=CH-, ring>CH-, ring=C<, ring>C<, ring-CH2-
 # =============================================================================
 # Joback
-trials_unifac = [
+trials = [
     # Atrolactic acid
     ("C1=CC2=CC=CC=CC2=C1", {"ring=CH-": 8, "ring=C<": 2}, "smiles"),
     ("C1CC2CCCC3CCCC1C23", {"ring-CH2-": 8, "ring>CH-": 4}, "smiles"),
@@ -23,6 +23,7 @@ trials_unifac = [
     ("C1CC1", {"ring-CH2-": 3}, "smiles"),
     ("C1CCC1", {"ring-CH2-": 4}, "smiles"),
     ("C1C2CC1CCCC2", {"ring-CH2-": 6, "ring>CH-": 2}, "smiles"),
+    ("CC1(C)CCCCC1", {"ring-CH2-": 5, "ring>C<": 1, "-CH3": 2}, "smiles"),
     (
         "CC12C3CCC4CCC1C234",
         {"-CH3": 1, "ring-CH2-": 4, "ring>CH-": 3, "ring>C<": 2},
@@ -149,6 +150,6 @@ trials_unifac = [
 
 
 @pytest.mark.Joback
-@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+@pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_cyclic_hydrocarbon(identifier, result, identifier_type):
     assert ug.get_joback_groups(identifier, identifier_type) == result

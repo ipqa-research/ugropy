@@ -1,1 +1,4 @@
 smarts|contribute
+? ester
+[CH0;R](*)(=O)[OH0][#6]|"{"">C=O (ring)"": -1, ""-O- (ring)"": -1}"
+[CH0;!R](*)(=O)[OH0][#6]|"{"">C=O (non-ring)"": -1, ""-O- (non-ring)"": -1}"

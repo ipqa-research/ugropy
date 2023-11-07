@@ -4,7 +4,7 @@ group|smarts|contribute|composed|subgroup_number|main_group|R|Q|molecular_weight
 >CH-|[CX4H;!R]|"{"">CH-"": 1}"|n|||||13.019
 >C<|[CX4H0;!R]|"{"">C<"": 1}"|n|||||12.011
 CH2=CH-|[CH2]=[CH]|"{""CH2=CH-"": 1}"|n|||||27.046
--CH=CH-|[CH]=[CH]|"{""-CH=CH-"": 1}"|n|||||26.038
+-CH=CH-|[CH;!R]=[CH;!R]|"{""-CH=CH-"": 1}"|n|||||26.038
 =C<|[CX3H0;!R](=[!O])(*)[*]|"{""=C<"": 1}"|n|||||12.011
 =C=|[CX2H0;!R](=*)(=*)|"{""=C="": 1}"|n|||||12.011
 CH|[CH]#[!N]|"{""CH"": 1}"|n|||||13.019
