@@ -9,6 +9,7 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
+    ("OC(O)=O", {"COOH": 1, "OH": 1}, "smiles"),
     ("CCOC(O)=O", {"COOH": 1, "CH2O": 1, "CH3": 1}, "smiles"),
     # 2,4-Diaminobutyric acid
     (

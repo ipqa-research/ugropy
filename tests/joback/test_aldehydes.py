@@ -23,13 +23,13 @@ trials = [
     # 2-Methyl-3-butenal
     (
         "CC(C=C)C=O",
-        {"-CH3": 1, ">CH-": 1, "CH2=CH-": 1, "O=CH- (aldehyde)": 1},
+        {"-CH3": 1, ">CH-": 1, "=CH2": 1, "=CH-": 1, "O=CH- (aldehyde)": 1},
         "smiles",
     ),
     # Cinnamaldehyde
     (
         "C1=CC=C(C=C1)C=CC=O",
-        {"ring=CH-": 5, "ring=C<": 1, "-CH=CH-": 1, "O=CH- (aldehyde)": 1},
+        {"ring=CH-": 5, "ring=C<": 1, "=CH-": 2, "O=CH- (aldehyde)": 1},
         "smiles",
     ),
     # benzaldehyde
@@ -60,7 +60,15 @@ trials = [
     ("CC=O", {"-CH3": 1, "O=CH- (aldehyde)": 1}, "smiles"),
     (
         r"CCCCCC\C(C=O)=C/C1=CC=CC=C1",
-        {},
+        {
+            "-CH3": 1,
+            "O=CH- (aldehyde)": 1,
+            "-CH2-": 5,
+            "=C<": 1,
+            "=CH-": 1,
+            "ring=CH-": 5,
+            "ring=C<": 1,
+        },
         "smiles",
     ),
 ]

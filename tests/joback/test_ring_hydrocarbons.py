@@ -50,7 +50,7 @@ trials = [
     # 1,1-Diphenylethylene
     (
         "C=C(C1=CC=CC=C1)C2=CC=CC=C2",
-        {},
+        {"ring=CH-": 10, "ring=C<": 2, "=CH2": 1, "=C<": 1},
         "smiles",
     ),
     # biphenyl
@@ -63,7 +63,7 @@ trials = [
     ("C1=CC=CC=C1", {"ring=CH-": 6}, "smiles"),  # benzene
     (
         "C=CC1=CC=CC=C1",
-        {"ring=C<": 1, "CH2=CH-": 1, "ring=CH-": 5},
+        {"ring=C<": 1, "=CH2": 1, "=CH-": 1, "ring=CH-": 5},
         "smiles",
     ),  # styrene
     # Atrolactic acid
@@ -81,13 +81,13 @@ trials = [
     ),
     (
         "C=CC=CC1=CC=CC=C1",
-        {"ring=CH-": 5, "ring=C<": 1, "-CH=CH-": 1, "CH2=CH-": 1},
+        {"ring=CH-": 5, "ring=C<": 1, "=CH-": 3, "=CH2": 1},
         "smiles",
     ),
     # 9-(3-Butenyl)anthracene
     (
         "C=CCCC1=C2C=CC=CC2=CC3=CC=CC=C31",
-        {"ring=CH-": 9, "ring=C<": 5, "-CH2-": 2, "CH2=CH-": 1},
+        {"ring=CH-": 9, "ring=C<": 5, "-CH2-": 2, "=CH2": 1, "=CH-": 1},
         "smiles",
     ),
     # 9-Methylanthracene

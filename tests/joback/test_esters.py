@@ -42,7 +42,11 @@ trials = [
         "smiles",
     ),
     # Methyl acrylate
-    ("COC(=O)C=C", {"-CH3": 1, "CH2=CH-": 1, "-COO- (ester)": 1}, "smiles"),
+    (
+        "COC(=O)C=C",
+        {"-CH3": 1, "=CH2": 1, "=CH-": 1, "-COO- (ester)": 1},
+        "smiles",
+    ),
     # Aspirin
     (
         "CC(=O)OC1=CC=CC=C1C(=O)O",

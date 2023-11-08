@@ -96,20 +96,20 @@ trials_unifac = [
     ("COCOC(C)OCOC", {"CH3O": 2, "CH2O": 2, "CH": 1, "CH3": 1}, "smiles"),
     (
         "CC(C)OCOC(C)OCOC(C)C",
-        {"CH3": 5, "CH": 1, "HCO": 2, "CH2O": 2},
+        {"CH3": 5, "CH": 1, "CHO": 2, "CH2O": 2},
         "smiles",
     ),
     (
         "CC(C)OCOCC(OCOC(C)C)OCOC(C)C",
-        {"CH3": 6, "CH": 2, "CH2O": 4, "HCO": 2},
+        {"CH3": 6, "CH": 2, "CH2O": 4, "CHO": 2},
         "smiles",
     ),
     (
         "CC(C)OCOC(OCOC(C)C)OCOC(C)C",
-        {"CH3": 6, "HCO": 3, "CH2O": 3, "CH": 1},
+        {"CH3": 6, "CHO": 3, "CH2O": 3, "CH": 1},
         "smiles",
     ),
-    ("CC(C)OCOC(C)C", {"CH3": 4, "HCO": 1, "CH2O": 1, "CH": 1}, "smiles"),
+    ("CC(C)OCOC(C)C", {"CH3": 4, "CHO": 1, "CH2O": 1, "CH": 1}, "smiles"),
     ("CCOCOCC", {"CH3": 2, "CH2O": 2, "CH2": 1}, "smiles"),
     ("COCOC", {"CH3O": 2, "CH2": 1}, "smiles"),
     # Problematics with acids

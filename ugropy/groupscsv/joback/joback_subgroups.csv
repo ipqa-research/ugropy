@@ -3,8 +3,8 @@ group|smarts|contribute|composed|subgroup_number|main_group|R|Q|molecular_weight
 -CH2-|[CX4H2;!R]|"{""-CH2-"": 1}"|n|||||14.027
 >CH-|[CX4H;!R]|"{"">CH-"": 1}"|n|||||13.019
 >C<|[CX4H0;!R]|"{"">C<"": 1}"|n|||||12.011
-CH2=CH-|[CH2]=[CH]|"{""CH2=CH-"": 1}"|n|||||27.046
--CH=CH-|[CH;!R]=[CH;!R]|"{""-CH=CH-"": 1}"|n|||||26.038
+=CH2|[CH2]=[*]|"{""=CH2"": 1}"|n|||||14.0266
+=CH-|[CHX3;!R]|"{""=CH-"": 1}"|n|||||13.0188
 =C<|[CX3H0;!R](=[!O])(*)[*]|"{""=C<"": 1}"|n|||||12.011
 =C=|[CX2H0;!R](=*)(=*)|"{""=C="": 1}"|n|||||12.011
 CH|[CH]#[!N]|"{""CH"": 1}"|n|||||13.019
@@ -24,7 +24,7 @@ ring=C<|[$([CH0;R](=[!O])(-*)-*),$([cH0])]|"{""ring=C<"": 1}"|n|||||12.011
 -O- (ring)|[OX2H0;R]|"{""-O- (ring)"": 1}"|n|||||15.999
 >C=O (non-ring)|[CX3H0;!R](=[O])(*)[*]|"{"">C=O (non-ring)"": 1}"|n|||||28.01
 >C=O (ring)|[CX3H0;R](=[O])(*)[*]|"{"">C=O (ring)"": 1}"|n|||||28.01
-O=CH- (aldehyde)|[CH](=O)([#6])|"{""O=CH- (aldehyde)"": 1}"|n|||||29.018
+O=CH- (aldehyde)|[CH](=O)([#6])|"{""O=CH- (aldehyde)"": 1, ""=CH-"": -1}"|n|||||29.018
 -COOH (acid)|[CH0](*)(=O)(-[OH])|"{""-COOH (acid)"": 1, ""-OH (alcohol)"": -1, "">C=O (non-ring)"": -1}"|n|||||45.017
 -COO- (ester)|[CH0](*)(=O)[OH0][#6]|"{""-COO- (ester)"": 1}"|n|||||44.009
 =O (other than above)|[$([OH0]=[!#6X3]);!$([O]=[NX3,NX3+]~[O-])]|"{""=O (other than above)"": 1}"|n|||||15.999
