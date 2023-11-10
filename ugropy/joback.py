@@ -11,9 +11,17 @@ class Joback:
         self,
         identifier: str,
         identifier_type: str = "name",
+        normal_boiling_temperature: float = None,
     ) -> None:
-        self.groups = get_joback_groups(identifier, identifier_type)
+        # Skip if instantiation from_groups is made.
+        if identifier != "__skip__":
+            self.groups = get_joback_groups(identifier, identifier_type)
+            self.exp_nbt = normal_boiling_temperature
+        else:
+            self.groups = {}
+            self.exp_nbt = None
 
+        # Original Joback properties
         self.critical_temperature = None
         self.critical_pressure = None
         self.critical_volume = None
@@ -28,6 +36,10 @@ class Joback:
         self.sum_nb = None
         self.molecular_weight = None
 
+        # Extra Joback properties
+        self.acentric_factor = None
+
+        # Fill the properties' values
         if self.groups != {}:
             self._calculate_properties()
 
@@ -45,6 +57,16 @@ class Joback:
             (self.sum_na - 597.82) / t + self.sum_nb - 11.202
         )
         return n_l
+
+    @classmethod
+    def from_groups(
+        cls, joback_groups: dict, normal_boiling_temperature: float = None
+    ) -> "Joback":
+        mol = cls("__skip__")
+        mol.groups = joback_groups
+        mol.exp_nbt = normal_boiling_temperature
+        mol._calculate_properties()
+        return mol
 
     def _calculate_properties(self):
         groups = list(self.groups.keys())
@@ -76,7 +98,13 @@ class Joback:
         self.fusion_temperature = 122.5 + np.dot(ocurr, tf_c)
 
         # Critical temperature (Tc)
-        self.critical_temperature = self.normal_boiling_temperature * (
+        # normal boiling temperature for calculations
+        if self.exp_nbt is not None:
+            tb = self.exp_nbt
+        else:
+            tb = self.normal_boiling_temperature
+
+        self.critical_temperature = tb * (
             0.584 + 0.965 * np.dot(ocurr, tc_c) - (np.dot(ocurr, tc_c)) ** 2
         ) ** (-1)
 
@@ -126,3 +154,22 @@ class Joback:
 
             self.sum_na = np.dot(ocurr, na_c)
             self.sum_nb = np.dot(ocurr, nb_c)
+
+        # =====================================================================
+        # Extra properties
+        # =====================================================================
+        # Lee and Kesler's equation
+        pc = self.critical_pressure
+        t_br = tb / self.critical_temperature
+        self.acentric_factor = (
+            -np.log(pc)
+            - 5.92714
+            + 6.09648 / t_br
+            + 1.28862 * np.log(t_br)
+            - 0.169347 * t_br**6
+        ) / (
+            15.2518
+            - 15.6875 / t_br
+            - 13.4721 * np.log(t_br)
+            + 0.43577 * t_br**6
+        )

@@ -24,3 +24,20 @@ def test_p_dichlorobenzene():
     assert np.allclose(mol.liquid_viscosity(374.4), 4.92e-4, atol=1e-6)
     assert np.allclose(mol.liquid_viscosity(403.1), 3.91e-4, atol=1e-6)
     assert np.allclose(mol.liquid_viscosity(423.3), 3.40e-4, atol=1e-6)
+
+
+def test_p_dichlorobenzene_real_nbt():
+    mol = Joback("C1=CC(=CC=C1Cl)Cl", "smiles", normal_boiling_temperature=447)
+
+    assert np.allclose(mol.critical_temperature, 681, atol=1)
+
+
+def test_acentric_factor():
+    # Perfluorohexane
+    mol = Joback(
+        "C(C(C(C(F)(F)F)(F)F)(F)F)(C(C(F)(F)F)(F)F)(F)F",
+        "smiles",
+        normal_boiling_temperature=329.8,
+    )
+
+    assert np.allclose(mol.acentric_factor, 0.525, atol=1e-2)
