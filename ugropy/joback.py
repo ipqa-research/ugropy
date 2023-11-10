@@ -36,12 +36,14 @@ class Joback:
         self.sum_nb = None
         self.molecular_weight = None
 
-        # Extra Joback properties
+        # Extra properties
         self.acentric_factor = None
+        self.vapor_pressure_params = {}
 
         # Fill the properties' values
         if self.groups != {}:
             self._calculate_properties()
+
 
     def heat_capacity(self, temperature):
         a, b, c, d = self.heat_capacity_params
@@ -50,6 +52,7 @@ class Joback:
 
         return a + b * t + c * t**2 + d * t**3
 
+
     def liquid_viscosity(self, temperature):
         t = temperature
 
@@ -57,6 +60,18 @@ class Joback:
             (self.sum_na - 597.82) / t + self.sum_nb - 11.202
         )
         return n_l
+
+    def vapor_pressure(self, temperature):
+        tr = temperature / self.critical_temperature
+
+        g = self.vapor_pressure_params["G"]
+        k = self.vapor_pressure_params["k"]
+
+        vp_r = np.exp(-g / tr * (1 - tr**2 + k * (3 + tr) * (1 - tr)**3))
+
+        vp = vp_r * self.critical_pressure
+
+        return vp
 
     @classmethod
     def from_groups(
@@ -158,9 +173,11 @@ class Joback:
         # =====================================================================
         # Extra properties
         # =====================================================================
-        # Lee and Kesler's equation
-        pc = self.critical_pressure
+        # Reduced normal boiling point temperature
         t_br = tb / self.critical_temperature
+
+        # Lee and Kesler's equation (acentric factor)
+        pc = self.critical_pressure
         self.acentric_factor = (
             -np.log(pc)
             - 5.92714
@@ -173,3 +190,12 @@ class Joback:
             - 13.4721 * np.log(t_br)
             + 0.43577 * t_br**6
         )
+
+        # Riedel-Plank-Miller equation (vapor pressure [bar])
+        h = t_br * np.log(self.critical_pressure / 1.01325) / (1 - t_br)
+
+        g = 0.4835 + 0.4605 * h
+
+        k = (h / g - (1 + t_br)) / ((3 + t_br) * (1 - t_br)**2)
+
+        self.vapor_pressure_params = {"G": g, "k": k}
