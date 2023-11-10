@@ -8,6 +8,7 @@ from .core import (
     instantiate_chem_object,
 )
 from .groups import Groups
+from .joback import Joback
 
 
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     "get_unifac_groups",
     "instantiate_chem_object",
     "Groups",
+    "Joback",
 ]

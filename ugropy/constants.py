@@ -112,3 +112,8 @@ with open(
     joback_problematics = pd.read_csv(
         f, sep="|", index_col="smarts", comment="?"
     )
+
+with open(
+    f"{here}/groupscsv/joback/properties_contributions.csv", mode="r"
+) as f:
+    joback_properties_contibutions = pd.read_csv(f, sep="|", index_col="group")
