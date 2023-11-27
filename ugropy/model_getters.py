@@ -1,4 +1,6 @@
 """Contribution model groups getter functions."""
+from typing import Union
+
 import pubchempy as pcp
 
 from rdkit import Chem
@@ -23,17 +25,19 @@ from ugropy.core.get_groups import get_groups
 
 
 def instantiate_chem_object(
-    identifier: str, identifier_type: str
+    identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
 ) -> Chem.rdchem.Mol:
     """Instantiate a rdkit Mol object from molecule's name or SMILES.
 
     Parameters
     ----------
-    identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
-    identifier_type : str
-        Use 'name' to search a molecule by name or 'smiles' to provide the
-        molecule SMILES representation.
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
+    identifier_type : str, optional
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
 
     Returns
     -------
@@ -42,27 +46,45 @@ def instantiate_chem_object(
     """
     if identifier_type.lower() == "smiles":
         smiles = identifier
+        chem_object = Chem.MolFromSmiles(smiles)
+
     elif identifier_type.lower() == "name":
         pcp_object = pcp.get_compounds(identifier, identifier_type)[0]
         smiles = pcp_object.canonical_smiles
-    else:
-        raise ValueError
+        chem_object = Chem.MolFromSmiles(smiles)
 
-    chem_object = Chem.MolFromSmiles(smiles)
+    elif identifier_type.lower() == "mol":
+        chem_object = identifier
+
+        if not isinstance(chem_object, Chem.Chem.rdchem.Mol):
+            raise ValueError(
+                "If 'mol' identifier type is used, the identifier must be a "
+                "rdkit.Chem.Chem.rdchem.Mol object."
+            )
+
+    else:
+        raise ValueError(
+            f"Identifier type: {identifier_type} not valid, use: 'name', "
+            "'smiles' or 'mol'"
+        )
 
     return chem_object
 
 
-def get_unifac_groups(identifier: str, identifier_type: str = "name") -> dict:
+def get_unifac_groups(
+    identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
+) -> dict:
     """Get Classic LV-UNIFAC groups from molecule's name or SMILES.
 
     Parameters
     ----------
-    identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
     identifier_type : str, optional
-        Use 'name' to search a molecule by name or 'smiles' to provide the
-        molecule SMILES representation, by default "name".
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
 
     Returns
     -------
@@ -83,16 +105,20 @@ def get_unifac_groups(identifier: str, identifier_type: str = "name") -> dict:
     return unifac_groups
 
 
-def get_psrk_groups(identifier: str, identifier_type: str = "name") -> dict:
+def get_psrk_groups(
+    identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
+) -> dict:
     """Get PSRK groups from molecule's name or SMILES.
 
     Parameters
     ----------
-    identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
     identifier_type : str, optional
-        Use 'name' to search a molecule by name or 'smiles' to provide the
-        molecule SMILES representation, by default "name".
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
 
     Returns
     -------
@@ -113,16 +139,20 @@ def get_psrk_groups(identifier: str, identifier_type: str = "name") -> dict:
     return psrk_groups
 
 
-def get_joback_groups(identifier: str, identifier_type: str = "name") -> dict:
+def get_joback_groups(
+    identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
+) -> dict:
     """Get Joback groups from molecule's name or SMILES.
 
     Parameters
     ----------
-    identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
     identifier_type : str, optional
-        Use 'name' to search a molecule by name or 'smiles' to provide the
-        molecule SMILES representation, by default "name".
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
 
     Returns
     -------

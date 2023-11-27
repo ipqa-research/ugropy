@@ -1,7 +1,8 @@
 """Groups module."""
 from rdkit.Chem import Descriptors
 
-from ugropy.core.model_getters import (
+from ugropy.joback import Joback
+from ugropy.model_getters import (
     get_psrk_groups,
     get_unifac_groups,
     instantiate_chem_object,
@@ -15,11 +16,17 @@ class Groups:
 
     Parameters
     ----------
-    identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
     identifier_type : str, optional
-        Use 'name' to search a molecule by name or 'smiles' to provide the
-        molecule SMILES representation, by default "name".
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
+    normal_boiling_temperature : float, optional
+        If provided, will be used to estimate critical temperature, acentric
+        factor, and vapor pressure instead of the estimated normal boiling
+        point in the Joback group contribution model, by default None.
 
     Attributes
     ----------
@@ -36,12 +43,16 @@ class Groups:
         Classic LV-UNIFAC subgroups.
     psrk_groups : dict
         Predictive Soave-Redlich-Kwong subgroups.
+    joback : Joback
+        Joback object that contains the Joback subgroups and the estimated
+        properties of the molecule.
     """
 
     def __init__(
         self,
         identifier: str,
         identifier_type: str = "name",
+        normal_boiling_temperature: float = None,
     ) -> None:
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
@@ -59,3 +70,6 @@ class Groups:
         )
 
         # Joback
+        self.joback = Joback(
+            self.identifier, self.identifier_type, normal_boiling_temperature
+        )

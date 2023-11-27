@@ -1,12 +1,30 @@
 import numpy as np
 
 from ugropy.constants import joback_properties_contibutions, joback_subgroups
-from ugropy.core.model_getters import (
+from ugropy.model_getters import (
     get_joback_groups,
 )
 
 
 class Joback:
+    """Joback group contribution properties estimator.
+
+    Parameters
+    ----------
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES, groups, or Chem.rdchem.Mol).
+        Example: you can use hexane, CCCCCC, {"-CH3": 2, "-CH2-": 4} for name,
+        SMILES and groups respectively.
+    identifier_type : str, optional
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation, 'groups' to provide Joback groups or
+        'mol' to provide a rdkit.Chem.rdchem.Mol object, by default "name".
+    normal_boiling_temperature : float, optional
+        If provided, will be used to estimate critical temperature, acentric
+        factor, and vapor pressure instead of the estimated normal boiling
+        point, by default None.
+    """
+
     def __init__(
         self,
         identifier: str,
@@ -14,12 +32,18 @@ class Joback:
         normal_boiling_temperature: float = None,
     ) -> None:
         # Skip if instantiation from_groups is made.
-        if identifier != "__skip__":
+        if identifier_type != "groups":
             self.groups = get_joback_groups(identifier, identifier_type)
-            self.exp_nbt = normal_boiling_temperature
+        elif identifier_type == "groups":
+            self.groups = identifier
         else:
-            self.groups = {}
-            self.exp_nbt = None
+            raise ValueError(
+                f"Identifier type ''{identifier_type}'' is incorrect. Use "
+                "'name', 'smiles', 'mol' or 'groups'."
+            )
+
+        # experimental boiling temperature
+        self.exp_nbt = normal_boiling_temperature
 
         # Original Joback properties
         self.critical_temperature = None
@@ -44,14 +68,12 @@ class Joback:
         if self.groups != {}:
             self._calculate_properties()
 
-
     def heat_capacity(self, temperature):
         a, b, c, d = self.heat_capacity_params
 
         t = temperature
 
         return a + b * t + c * t**2 + d * t**3
-
 
     def liquid_viscosity(self, temperature):
         t = temperature
@@ -67,21 +89,11 @@ class Joback:
         g = self.vapor_pressure_params["G"]
         k = self.vapor_pressure_params["k"]
 
-        vp_r = np.exp(-g / tr * (1 - tr**2 + k * (3 + tr) * (1 - tr)**3))
+        vp_r = np.exp(-g / tr * (1 - tr**2 + k * (3 + tr) * (1 - tr) ** 3))
 
         vp = vp_r * self.critical_pressure
 
         return vp
-
-    @classmethod
-    def from_groups(
-        cls, joback_groups: dict, normal_boiling_temperature: float = None
-    ) -> "Joback":
-        mol = cls("__skip__")
-        mol.groups = joback_groups
-        mol.exp_nbt = normal_boiling_temperature
-        mol._calculate_properties()
-        return mol
 
     def _calculate_properties(self):
         groups = list(self.groups.keys())
@@ -112,13 +124,13 @@ class Joback:
         # Fusion temperature (Tf)
         self.fusion_temperature = 122.5 + np.dot(ocurr, tf_c)
 
-        # Critical temperature (Tc)
-        # normal boiling temperature for calculations
+        # Used normal boiling point for calculations
         if self.exp_nbt is not None:
             tb = self.exp_nbt
         else:
             tb = self.normal_boiling_temperature
 
+        # Critical temperature (Tc) normal boiling temperature for calculations
         self.critical_temperature = tb * (
             0.584 + 0.965 * np.dot(ocurr, tc_c) - (np.dot(ocurr, tc_c)) ** 2
         ) ** (-1)
@@ -196,6 +208,6 @@ class Joback:
 
         g = 0.4835 + 0.4605 * h
 
-        k = (h / g - (1 + t_br)) / ((3 + t_br) * (1 - t_br)**2)
+        k = (h / g - (1 + t_br)) / ((3 + t_br) * (1 - t_br) ** 2)
 
         self.vapor_pressure_params = {"G": g, "k": k}

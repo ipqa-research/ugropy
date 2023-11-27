@@ -2,6 +2,8 @@
 from . import constants
 from .core import (
     get_groups,
+)
+from .model_getters import (
     get_joback_groups,
     get_psrk_groups,
     get_unifac_groups,
