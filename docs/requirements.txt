@@ -1,0 +1,11 @@
+Sphinx
+sphinx_rtd_theme
+
+nbsphinx
+sphinx_copybutton
+
+ipykernel
+ipython
+
+matplotlib
+sphinxcontrib-bibtex
