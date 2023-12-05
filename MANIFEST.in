@@ -9,6 +9,7 @@ exclude tox.ini
 exclude .readthedocs.yml
 exclude requirements-dev.txt
 exclude *.png
+exclude reminder.md
 
 recursive-exclude dist *
 recursive-exclude tests *

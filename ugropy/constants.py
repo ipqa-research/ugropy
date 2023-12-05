@@ -2,6 +2,8 @@
 
 Attributes
 ----------
+R : float
+    Gas constant [J/mol/K]
 unifac_subgroups : pandas.DataFrame
     Classic LV-UNIFAC subgroups with it's SMARTS representation, contribution
     and composed classification.
@@ -30,6 +32,8 @@ import pandas as pd
 
 # constants.py path
 here = Path(__file__).parent.resolve()
+
+R = 8.31446261815324
 
 # Dataframes
 # =============================================================================

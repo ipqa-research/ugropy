@@ -1,13 +1,21 @@
-import numpy as np
+"""Joback's module."""
+from typing import Union
 
-from ugropy.constants import joback_properties_contibutions, joback_subgroups
+import numpy as np
+from numpy.typing import NDArray
+
+from ugropy.constants import (
+    R,
+    joback_properties_contibutions,
+    joback_subgroups,
+)
 from ugropy.model_getters import (
     get_joback_groups,
 )
 
 
 class Joback:
-    """Joback group contribution properties estimator.
+    """Joback [1] group contribution properties estimator.
 
     Parameters
     ----------
@@ -19,20 +27,70 @@ class Joback:
         Use 'name' to search a molecule by name, 'smiles' to provide the
         molecule SMILES representation, 'groups' to provide Joback groups or
         'mol' to provide a rdkit.Chem.rdchem.Mol object, by default "name".
-    normal_boiling_temperature : float, optional
+    normal_boiling_point : float, optional
         If provided, will be used to estimate critical temperature, acentric
         factor, and vapor pressure instead of the estimated normal boiling
         point, by default None.
+
+    Attributes
+    ----------
+    groups : dict
+        Joback functional groups of the molecule.
+    exp_nbt : float
+        User provided experimental normal boiling point [K].
+    critical_temperature : float
+        Joback estimated critical temperature [K].
+    critical_pressure : float
+        Joback estimated critical pressure [bar].
+    critical_volume : float
+        Joback estimated critical volume [cm³/mol].
+    normal_boiling_point : float
+        Joback estimated normal boiling point [K].
+    fusion_temperature : float
+        Joback estimated fusion temperature [K].
+    h_formation : float
+        Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].
+    g_formation : float
+        Joback estimated Gibbs energy of formation ideal gas at 298 K [K].
+    heat_capacity_ideal_gas_params : dict
+        Joback estimated Reid's ideal gas heat capacity equation parameters
+        [J/mol/K].
+    h_fusion : float
+        Joback estimated fusion enthalpy [kJ/mol].
+    h_vaporization : float
+        Joback estimated vaporization enthalpy at the normal boiling point
+        [kJ/mol].
+    sum_na : float
+        Joback n_A contribution to liquid viscosity [N/s/m²].
+    sum_nb : float
+        Joback n_B contribution to liquid viscosity [N/s/m²].
+    molecular_weight : float
+        Molecular weight from Joback's subgroups [g/mol].
+    acentric_factor : float
+        Acentric factor from Lee and Kesler's equation [2].
+    vapor_pressure_params : dict
+        Vapor pressure G and k parameters for the Riedel-Plank-Miller [2]
+        equation [bar].
+
+    Bibliography
+    ------------
+    [1] Joback, K. G., & Reid, R. C. (1987). ESTIMATION OF PURE-COMPONENT
+    PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications,
+    57(1–6), 233–243. https://doi.org/10.1080/00986448708960487
+
+    [2] Joback, K. G. (1989). Designing molecules possessing desired physical
+    property values [Thesis (Ph. D.), Massachusetts Institute of Technology].
+    https://dspace.mit.edu/handle/1721.1/14191
     """
 
     def __init__(
         self,
         identifier: str,
         identifier_type: str = "name",
-        normal_boiling_temperature: float = None,
+        normal_boiling_point: float = None,
     ) -> None:
         # Skip if instantiation from_groups is made.
-        if identifier_type != "groups":
+        if identifier_type in ["name", "smiles", "mol"]:
             self.groups = get_joback_groups(identifier, identifier_type)
         elif identifier_type == "groups":
             self.groups = identifier
@@ -43,17 +101,17 @@ class Joback:
             )
 
         # experimental boiling temperature
-        self.exp_nbt = normal_boiling_temperature
+        self.exp_nbt = normal_boiling_point
 
         # Original Joback properties
         self.critical_temperature = None
         self.critical_pressure = None
         self.critical_volume = None
-        self.normal_boiling_temperature = None
+        self.normal_boiling_point = None
         self.fusion_temperature = None
         self.h_formation = None
         self.g_formation = None
-        self.heat_capacity_params = None
+        self.heat_capacity_ideal_gas_params = np.array([])
         self.h_fusion = None
         self.h_vaporization = None
         self.sum_na = None
@@ -68,14 +126,90 @@ class Joback:
         if self.groups != {}:
             self._calculate_properties()
 
-    def heat_capacity(self, temperature):
-        a, b, c, d = self.heat_capacity_params
+    def heat_capacity_ideal_gas(
+        self, temperature: Union[float, NDArray]
+    ) -> Union[float, NDArray]:
+        """Calculate the ideal gas heat capacity [J/mol/K].
+
+        Uses the Joback estimated Reid's ideal gas heat capacity equation
+        parameters [J/mol/K].
+
+        Parameters
+        ----------
+        temperature : Union[float, NDArray]
+            Temperature [K]
+
+        Returns
+        -------
+        Union[float, NDArray]
+            Ideal gas heat capacity [J/mol/K].
+        """
+        a, b, c, d = self.heat_capacity_ideal_gas_params
 
         t = temperature
 
         return a + b * t + c * t**2 + d * t**3
 
-    def liquid_viscosity(self, temperature):
+    def heat_capacity_liquid(
+        self, temperature: Union[float, NDArray]
+    ) -> Union[float, NDArray]:
+        """Calculate the liquid heat capacity [J/mol/K].
+
+        Uses the Rowlinson-Bondi [1-2] equation with the Joback estimated
+        properties.
+
+        Parameters
+        ----------
+        temperature : Union[float, NDArray]
+            Temperature [K]
+
+        Returns
+        -------
+        Union[float, NDArray]
+            Ideal gas heat capacity [J/mol/K].
+
+        Bibliography
+        ------------
+        [1] Bondi, A. (1966). Estimation of Heat Capacity of Liquids.
+        Industrial & Engineering Chemistry Fundamentals, 5(4), 442–449.
+        https://doi.org/10.1021/i160020a001
+
+        [2] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid
+        mixtures: Butterworths monographs in chemistry. Butterworth-Heinemann
+        """
+        tr = temperature / self.critical_temperature
+        w = self.acentric_factor
+
+        c_p0 = self.heat_capacity_ideal_gas(temperature)
+
+        c_pl = c_p0 + R * (
+            2.56
+            + 0.436 * (1 - tr) ** (-1)
+            + w
+            * (
+                2.91
+                + 4.28 * (1 - tr) ** (-1 / 3) * tr ** (-1)
+                + 0.296 * (1 - tr) ** (-1)
+            )
+        )
+
+        return c_pl
+
+    def viscosity_liquid(
+        self, temperature: Union[float, NDArray]
+    ) -> Union[float, NDArray]:
+        """Calculate the Joback estimated liquid viscosity [N/s/m²].
+
+        Parameters
+        ----------
+        temperature : Union[float, NDArray]
+            Temperature [K]
+
+        Returns
+        -------
+        Union[float, NDArray]
+            Liquid viscosity [N/s/m²].
+        """
         t = temperature
 
         n_l = self.molecular_weight * np.exp(
@@ -83,7 +217,30 @@ class Joback:
         )
         return n_l
 
-    def vapor_pressure(self, temperature):
+    def vapor_pressure(
+        self, temperature: Union[float, NDArray]
+    ) -> Union[float, NDArray]:
+        """Calculate the vapor pressure [bar].
+
+        Uses the Riedel-Plank-Miller [1] equation with the Joback estimated
+        properties.
+
+        Parameters
+        ----------
+        temperature : Union[float, NDArray]
+            Temperature [K]
+
+        Returns
+        -------
+        Union[float, NDArray]
+            Vapor pressure [bar]
+
+        Bibliography
+        ------------
+        [1] Joback, K. G. (1989). Designing molecules possessing desired
+        physical property values [Thesis (Ph. D.), Massachusetts Institute of
+        Technology]. https://dspace.mit.edu/handle/1721.1/14191
+        """
         tr = temperature / self.critical_temperature
 
         g = self.vapor_pressure_params["G"]
@@ -95,7 +252,8 @@ class Joback:
 
         return vp
 
-    def _calculate_properties(self):
+    def _calculate_properties(self) -> None:
+        """Obtain the molecule properties from Joback's groups."""
         groups = list(self.groups.keys())
         ocurr = list(self.groups.values())
 
@@ -119,7 +277,7 @@ class Joback:
         self.molecular_weight = np.dot(ocurr, mw_c)
 
         # Joback normal boiling point (Tb)
-        self.normal_boiling_temperature = 198.2 + np.dot(ocurr, tb_c)
+        self.normal_boiling_point = 198.2 + np.dot(ocurr, tb_c)
 
         # Fusion temperature (Tf)
         self.fusion_temperature = 122.5 + np.dot(ocurr, tf_c)
@@ -128,7 +286,7 @@ class Joback:
         if self.exp_nbt is not None:
             tb = self.exp_nbt
         else:
-            tb = self.normal_boiling_temperature
+            tb = self.normal_boiling_point
 
         # Critical temperature (Tc) normal boiling temperature for calculations
         self.critical_temperature = tb * (
@@ -167,7 +325,7 @@ class Joback:
             c = np.dot(ocurr, c_c) - 3.91e-4
             d = np.dot(ocurr, d_c) + 2.06e-7
 
-            self.heat_capacity_params = np.array([a, b, c, d])
+            self.heat_capacity_ideal_gas_params = np.array([a, b, c, d])
 
         # Enthalpy of fusion
         if all(df["Hfusion"].notnull()):

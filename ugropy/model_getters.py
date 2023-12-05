@@ -56,7 +56,7 @@ def instantiate_chem_object(
     elif identifier_type.lower() == "mol":
         chem_object = identifier
 
-        if not isinstance(chem_object, Chem.Chem.rdchem.Mol):
+        if not isinstance(chem_object, Chem.rdchem.Mol):
             raise ValueError(
                 "If 'mol' identifier type is used, the identifier must be a "
                 "rdkit.Chem.Chem.rdchem.Mol object."
