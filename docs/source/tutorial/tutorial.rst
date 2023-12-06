@@ -7,3 +7,4 @@ Tutorial
    installation.ipynb
    easy_way.ipynb
    hard_way.ipynb
+   ugropy_failing.ipynb
