@@ -67,7 +67,7 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
 At the moment ugropy is not uploaded in PyPI (will be soon).
 
 ```
-pip install git+https://github.com/SalvadorBrandolin/ugropy.git
+pip install git+https://github.com/ipqa-research/ugropy.git
 ```
 
 ## Refereces
