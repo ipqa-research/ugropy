@@ -2,12 +2,16 @@
   <img src="logo.png" alt="logo" width="300" height="350">
 </p>
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
+![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
+
 ugropy is a `Python` library to obtain the UNIFAC's subgroups from both the
 name or the SMILES representation of a molecule. If the name is given, the
 library uses the [PubChemPy](https://github.com/mcs07/PubChemPy) library to
 obtain the SMILES representation from PubChem. In both cases, ugropy uses the
-[RDKit](https://github.com/rdkit/rdkit) to search the functional groups in the
-molecule.
+[RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
+in the molecule.
 
 ugropy is in an early development stage, leaving issues of examples of
 molecules that ugropy fails solving the UNIFAC's groups is very helpful.
@@ -67,7 +71,7 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
 At the moment ugropy is not uploaded in PyPI (will be soon).
 
 ```
-pip install git+https://github.com/SalvadorBrandolin/ugropy.git
+pip install git+https://github.com/ipqa-research/ugropy.git
 ```
 
 ## Refereces
