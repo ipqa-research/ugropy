@@ -5,6 +5,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
+[![Documentation Status](https://readthedocs.org/projects/ugropy/badge/?version=latest)](https://ugropy.readthedocs.io/en/latest/?badge=latest)
 
 ugropy is a `Python` library to obtain the UNIFAC's subgroups from both the
 name or the SMILES representation of a molecule. If the name is given, the
@@ -22,6 +23,8 @@ molecules that ugropy fails solving the UNIFAC's groups is very helpful.
 - Joback
 
 ## Example of use
+You can check the full tutorial [here](https://ugropy.readthedocs.io/en/latest/tutorial/tutorial.html).
+
 Get UNIFAC groups from the molecule's name:
 
 ```python
