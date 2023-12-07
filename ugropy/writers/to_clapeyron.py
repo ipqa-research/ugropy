@@ -3,9 +3,9 @@ from io import StringIO
 from typing import List
 
 import numpy as np
-from numpy.typing import NDArray
 
-from ugropy import Joback
+from ugropy import constants
+from ugropy.joback import Joback
 
 import pandas as pd
 
@@ -68,7 +68,11 @@ def to_clapeyron(
         molecules_names, unifac_groups, psrk_groups, joback_objects
     )
 
-    molarmass_df.to_csv(f"{path}/molarmass.csv", index=False)
+    # Write .csv
+    if batch_name == "":
+        molarmass_df.to_csv(f"{path}/molarmass.csv", index=False)
+    else:
+        molarmass_df.to_csv(f"{path}/{batch_name}_molarmass.csv", index=False)
 
 
 def _get_molar_mass_df(
@@ -105,6 +109,18 @@ def _get_molar_mass_df(
     # =========================================================================
     if joback_objects:
         molecular_weigths = [j.molecular_weight for j in joback_objects]
+    elif unifac_groups:
+        df = constants.unifac_subgroups.copy()
+        molecular_weigths = []
+        for groups in unifac_groups:
+            contribution = df.loc[groups, "molecular_weight"].to_numpy()
+            molecular_weigths.append(np.dot(contribution, groups.values()))
+    elif psrk_groups:
+        df = constants.psrk_subgroups.copy()
+        molecular_weigths = []
+        for groups in psrk_groups:
+            contribution = df.loc[groups, "molecular_weight"].to_numpy()
+            molecular_weigths.append(np.dot(contribution, groups.values()))
 
     # =========================================================================
     # Build dataframe
@@ -119,7 +135,6 @@ def _get_molar_mass_df(
         }
         df.loc[len(df)] = new_row
 
-    # explicar linea
     df.columns = ["" if "Unnamed" in col else col for col in df.columns]
 
     return df
