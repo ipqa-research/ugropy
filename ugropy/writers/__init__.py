@@ -1,6 +1,6 @@
 """Writers module.
 
-The witers module contains functions to construct the neccesary inputs for 
+The witers module contains functions to construct the neccesary inputs for
 other thermodynamics libraries.
 
 Supported:

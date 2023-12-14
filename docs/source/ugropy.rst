@@ -36,3 +36,17 @@ Model getters
    :members:
    :undoc-members:
    :show-inheritance:
+
+Writers
+=======
+.. automodule:: ugropy.writers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Clapeyron writers
+=================
+.. automodule:: ugropy.writers.clapeyron_writers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,5 @@
+Clapeyron Database File,
+original UNIFAC Groups,[csvtype = groups,grouptype = originalUNIFAC]
+species,groups
+limonene,"[""CH3"" => 2, ""CH2"" => 3, ""CH"" => 1, ""CH2=C"" => 1, ""CH=C"" => 1]"
+ethanol,"[""CH3"" => 1, ""CH2"" => 1, ""OH"" => 1]"

@@ -1,13 +1,14 @@
 """to_clapeyron module."""
-from io import StringIO
 from typing import List
 
-import numpy as np
-
-from ugropy import constants
 from ugropy.joback import Joback
 
-import pandas as pd
+from .clapeyron_writers import (
+    write_critical,
+    write_molar_mass,
+    write_psrk,
+    write_unifac,
+)
 
 
 def to_clapeyron(
@@ -64,77 +65,23 @@ def to_clapeyron(
         )
 
     # Molar mass
-    molarmass_df = _get_molar_mass_df(
-        molecules_names, unifac_groups, psrk_groups, joback_objects
+    write_molar_mass(
+        path,
+        batch_name,
+        molecules_names,
+        unifac_groups,
+        psrk_groups,
+        joback_objects,
     )
 
-    # Write .csv
-    if batch_name == "":
-        molarmass_df.to_csv(f"{path}/molarmass.csv", index=False)
-    else:
-        molarmass_df.to_csv(f"{path}/{batch_name}_molarmass.csv", index=False)
+    # LV-UNIFAC
+    if unifac_groups:
+        write_unifac(path, batch_name, molecules_names, unifac_groups)
 
+    # PSRK
+    if psrk_groups:
+        write_psrk(path, batch_name, molecules_names, psrk_groups)
 
-def _get_molar_mass_df(
-    molecules_names: List[str],
-    unifac_groups: List[dict] = [],
-    psrk_groups: List[dict] = [],
-    joback_objects: List[Joback] = [],
-) -> pd.DataFrame:
-    """Create the DataFrame with the molecular weights for Clapeyron.jl.
-
-    Parameters
-    ----------
-    molecules_names : List[str]
-        List of names for each chemical to write in the .csv files.
-    unifac_groups : List[dict], optional
-        List of classic liquid-vapor UNIFAC groups, by default [].
-    psrk_groups : List[dict], optional
-        List of Predictive Soave-Redlich-Kwong groups, by default [].
-    joback_objects : List[Joback], optional
-        List of ugropy.Joback objects, by default [].
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with the molecular weights for Clapeyron.jl
-    """
-    data_str = (
-        "Clapeyron Database File,,\n"
-        "Molar Mases Single Params,,\n"
-        "species,CAS,Mw\n"
-    )
-    # =========================================================================
-    # Get molecular weights
-    # =========================================================================
+    # Critical
     if joback_objects:
-        molecular_weigths = [j.molecular_weight for j in joback_objects]
-    elif unifac_groups:
-        df = constants.unifac_subgroups.copy()
-        molecular_weigths = []
-        for groups in unifac_groups:
-            contribution = df.loc[groups, "molecular_weight"].to_numpy()
-            molecular_weigths.append(np.dot(contribution, groups.values()))
-    elif psrk_groups:
-        df = constants.psrk_subgroups.copy()
-        molecular_weigths = []
-        for groups in psrk_groups:
-            contribution = df.loc[groups, "molecular_weight"].to_numpy()
-            molecular_weigths.append(np.dot(contribution, groups.values()))
-
-    # =========================================================================
-    # Build dataframe
-    # =========================================================================
-    df = pd.read_csv(StringIO(data_str))
-
-    for idx, name in enumerate(molecules_names):
-        new_row = {
-            "Clapeyron Database File": name,
-            "Unnamed: 1": "",
-            "Unnamed: 2": molecular_weigths[idx],
-        }
-        df.loc[len(df)] = new_row
-
-    df.columns = ["" if "Unnamed" in col else col for col in df.columns]
-
-    return df
+        write_critical(path, batch_name, molecules_names, joback_objects)
