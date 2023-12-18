@@ -66,9 +66,11 @@ def write_molar_mass(
         molecular_weigths = []
         for groups in psrk_groups:
             contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()
-            molecular_weigths.append(np.dot(contribution, groups.values()))
+            molecular_weigths.append(
+                np.dot(contribution, list(groups.values()))
+            )
     else:
-        ...
+        raise ValueError("Joback, UNIFAC or PSRK groups must be provided.")
 
     # =========================================================================
     # Build dataframe
