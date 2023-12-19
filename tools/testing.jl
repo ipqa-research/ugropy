@@ -1,7 +1,8 @@
 using Clapeyron
 
-model = SRK(["limonene", "octanoic acid", "ethanol", "acetic acid"],
-    userlocations = ["./database/"],
+model = PSRK(["limonene"],
+    userlocations=["tools/database/"],
+    group_userlocations = ["tools"],
 )
 
-model.alpha.params.acentricfactor
+model.mixing.activity
