@@ -80,6 +80,25 @@ Estimate properties with the Joback model!
    657.4486692170663 K
    1.0254019428522743 bar
 
+Write down the Clapeyron.jl .csv input files.
+
+.. code:: python
+
+   from ugropy import writers
+
+   names = ["limonene", "adrenaline", "Trinitrotoluene"]
+
+   grps = [Groups(n) for n in names]
+
+   # Write the csv files into a database directory
+   writers.to_clapeyron(
+      molecules_names=names,
+      unifac_groups=[g.unifac_groups for g in grps],
+      psrk_groups=[g.psrk_groups for g in grps],
+      joback_objects=[g.joback for g in grps],
+      path="./database"
+   )
+
 Installation
 ============
 
