@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![Documentation Status](https://readthedocs.org/projects/ugropy/badge/?version=latest)](https://ugropy.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
 
 ugropy is a `Python` library to obtain the UNIFAC's subgroups from both the
 name or the SMILES representation of a molecule. If the name is given, the
