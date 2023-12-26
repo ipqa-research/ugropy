@@ -97,10 +97,8 @@ writers.to_clapeyron(
 ```
 
 ## Installation
-At the moment ugropy is not uploaded in PyPI (will be soon).
-
 ```
-pip install git+https://github.com/ipqa-research/ugropy.git
+pip install ugropy
 ```
 
 ## Refereces
