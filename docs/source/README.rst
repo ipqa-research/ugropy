@@ -1,6 +1,6 @@
 |Logo|
 
-|Binder| |License| |Python 3.10+| |Documentation Status|
+|Binder| |License| |Python 3.10+| |Documentation Status| |pypi|
 
 ugropy
 ======
@@ -131,3 +131,5 @@ Technology]. https://dspace.mit.edu/handle/1721.1/14191
    :target: https://ugropy.readthedocs.io/en/latest/?badge=latest
 .. |Logo| image:: https://github.com/ipqa-research/ugropy/blob/main/logo.png?raw=true
    :target: https://github.com/ipqa-research/ugropy
+.. |pypi| image:: https://badge.fury.io/py/ugropy.svg
+   :target: https://badge.fury.io/py/ugropy
