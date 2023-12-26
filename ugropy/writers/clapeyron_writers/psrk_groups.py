@@ -1,8 +1,6 @@
 """PSRK groups writer module."""
-from io import StringIO
+import os
 from typing import List
-
-import pandas as pd
 
 
 def write_psrk(
@@ -32,46 +30,36 @@ def write_psrk(
     pd.DataFrame
         DataFrame with the LV-UNIFAC groups for Clapeyron.jl
     """
-    data_str = (
-        "Clapeyron Database File|\n"
-        "PSRK Groups [csvtype = groups,grouptype = PSRK]\n"  # noqa
-        "species|groups"
-    )
-
-    df = pd.read_csv(StringIO(data_str), sep="|")
+    lines = [
+        "Clapeyron Database File,\n"
+        "PSRK Groups [csvtype = groups,grouptype = PSRK]\n"
+        "species,groups\n"
+    ]
 
     for name, groups in zip(molecules_names, psrk_groups):
-        groups_str = "["
+        groups_str = '"['
 
         for group in groups.keys():
-            groups_str += f'"{group}" => {groups[group]}, '
+            groups_str += f'""{group}"" => {groups[group]}, '
 
         groups_str = groups_str[: len(groups_str) - 2]
-        groups_str += "]"
+        groups_str += ']"\n'
 
-        new_row = {
-            "Clapeyron Database File": name,
-            "Unnamed: 1": f"{groups_str}",
-        }
+        new_line = [f"{name},{groups_str}"]
 
-        df.loc[len(df)] = new_row
+        lines.extend(new_line)
 
-    df.columns = ["" if "Unnamed" in col else col for col in df.columns]
+    # Create folder for PSRK groups
+    if not os.path.exists(f"{path}/PSRK"):
+        os.makedirs(f"{path}/PSRK")
+    else:
+        ...
 
     # Write .csv
     if batch_name == "":
-        write_path = f"{path}/PSRK_groups.csv"
+        write_path = f"{path}/PSRK/PSRK_groups.csv"
     else:
-        write_path = f"{path}/{batch_name}_PSRK_groups.csv"
+        write_path = f"{path}/PSRK/{batch_name}_PSRK_groups.csv"
 
-    with open(write_path, "w", newline="", encoding="utf-8") as file:
-        df.to_csv(file, index=False, sep=",")
-
-    with open(write_path, "r") as file:
-        unifac = file.read()
-
-    unifac_corrected = unifac.replace('"PSRK', "PSRK")
-    unifac_corrected = unifac_corrected.replace('PSRK]"', "PSRK]")
-
-    with open(write_path, "w") as file:
-        file.write(unifac_corrected)
+    with open(f"{write_path}", "w", encoding="utf-8", newline="\n") as file:
+        file.writelines(lines)

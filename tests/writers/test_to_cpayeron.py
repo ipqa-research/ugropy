@@ -43,10 +43,10 @@ def test_to_clapeyron():
     with open(f"{here}/database/molarmass.csv", mode="r") as f:
         df_molarmass_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
-    with open(f"{here}/database/ogUNIFAC_groups.csv", mode="r") as f:
+    with open(f"{here}/database/ogUNIFAC/ogUNIFAC_groups.csv", mode="r") as f:
         df_unifac_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
-    with open(f"{here}/database/PSRK_groups.csv", mode="r") as f:
+    with open(f"{here}/database/PSRK/PSRK_groups.csv", mode="r") as f:
         df_psrk_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
     assert df_unifac.equals(df_unifac_ugropy)
@@ -76,8 +76,10 @@ def test_to_clapeyron():
 
     os.remove(f"{here}/database/critical.csv")
     os.remove(f"{here}/database/molarmass.csv")
-    os.remove(f"{here}/database/ogUNIFAC_groups.csv")
-    os.remove(f"{here}/database/PSRK_groups.csv")
+    os.remove(f"{here}/database/ogUNIFAC/ogUNIFAC_groups.csv")
+    os.remove(f"{here}/database/PSRK/PSRK_groups.csv")
+    os.rmdir(f"{here}/database/ogUNIFAC")
+    os.rmdir(f"{here}/database/PSRK")
     os.rmdir(f"{here}/database")
 
 
@@ -111,10 +113,12 @@ def test_to_clapeyron_batch_name():
     with open(f"{here}/database/otacon_molarmass.csv", mode="r") as f:
         df_molarmass_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
-    with open(f"{here}/database/otacon_ogUNIFAC_groups.csv", mode="r") as f:
+    with open(
+        f"{here}/database/ogUNIFAC/otacon_ogUNIFAC_groups.csv", mode="r"
+    ) as f:
         df_unifac_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
-    with open(f"{here}/database/otacon_PSRK_groups.csv", mode="r") as f:
+    with open(f"{here}/database/PSRK/otacon_PSRK_groups.csv", mode="r") as f:
         df_psrk_ugropy = pd.read_csv(f, sep="|", index_col=None)
 
     assert df_unifac.equals(df_unifac_ugropy)
@@ -144,8 +148,10 @@ def test_to_clapeyron_batch_name():
 
     os.remove(f"{here}/database/otacon_critical.csv")
     os.remove(f"{here}/database/otacon_molarmass.csv")
-    os.remove(f"{here}/database/otacon_ogUNIFAC_groups.csv")
-    os.remove(f"{here}/database/otacon_PSRK_groups.csv")
+    os.remove(f"{here}/database/ogUNIFAC/otacon_ogUNIFAC_groups.csv")
+    os.remove(f"{here}/database/PSRK/otacon_PSRK_groups.csv")
+    os.rmdir(f"{here}/database/ogUNIFAC")
+    os.rmdir(f"{here}/database/PSRK")
     os.rmdir(f"{here}/database")
 
 
@@ -192,8 +198,10 @@ def test_molar_mass_csv():
     assert df_molarmass_unifac.equals(df_molarmass_psrk)
 
     os.remove(f"{here}/database/molarmass.csv")
-    os.remove(f"{here}/database/ogUNIFAC_groups.csv")
-    os.remove(f"{here}/database/PSRK_groups.csv")
+    os.remove(f"{here}/database/ogUNIFAC/ogUNIFAC_groups.csv")
+    os.remove(f"{here}/database/PSRK/PSRK_groups.csv")
+    os.rmdir(f"{here}/database/ogUNIFAC")
+    os.rmdir(f"{here}/database/PSRK")
     os.rmdir(f"{here}/database")
 
     # Making it fail
