@@ -17,13 +17,19 @@ in the molecule.
 ugropy is in an early development stage, leaving issues of examples of
 molecules that ugropy fails solving the UNIFAC's groups is very helpful.
 
+## Try ugropy now
+You can try ugropy from it's
+[Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
+binder.ipynb file to explore the basic features.
+
 ## Models supported v1.0.0
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
 - Joback
 
 ## Example of use
-You can check the full tutorial [here](https://ugropy.readthedocs.io/en/latest/tutorial/tutorial.html).
+You can check the full tutorial 
+[here](https://ugropy.readthedocs.io/en/latest/tutorial/tutorial.html).
 
 Get UNIFAC groups from the molecule's name:
 
@@ -69,6 +75,26 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
     657.4486692170663 K
     1.0254019428522743 bar
+
+Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
+.csv input files.
+
+```python
+from ugropy import writers
+
+names = ["limonene", "adrenaline", "Trinitrotoluene"]
+
+grps = [Groups(n) for n in names]
+
+# Write the csv files into a database directory
+writers.to_clapeyron(
+    molecules_names=names,
+    unifac_groups=[g.unifac_groups for g in grps],
+    psrk_groups=[g.psrk_groups for g in grps],
+    joback_objects=[g.joback for g in grps],
+    path="./database"
+)
+```
 
 ## Installation
 At the moment ugropy is not uploaded in PyPI (will be soon).

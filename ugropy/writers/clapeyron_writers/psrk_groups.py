@@ -52,8 +52,6 @@ def write_psrk(
     # Create folder for PSRK groups
     if not os.path.exists(f"{path}/PSRK"):
         os.makedirs(f"{path}/PSRK")
-    else:
-        ...
 
     # Write .csv
     if batch_name == "":

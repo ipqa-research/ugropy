@@ -47,8 +47,6 @@ def write_unifac(
     # Create folder for ogUNIFAC groups
     if not os.path.exists(f"{path}/ogUNIFAC"):
         os.makedirs(f"{path}/ogUNIFAC")
-    else:
-        ...
 
     # Write .csv
     if batch_name == "":

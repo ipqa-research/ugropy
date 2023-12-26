@@ -7,7 +7,7 @@ Supported:
 
 - Clapeyron.jl: https://github.com/ClapeyronThermo/Clapeyron.jl
 """
-from .to_clapeyron import to_clapeyron
+from .clapeyron import to_clapeyron
 
 
 __all__ = ["to_clapeyron"]
