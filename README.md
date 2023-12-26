@@ -22,10 +22,15 @@ You can try ugropy from it's
 [Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
 binder.ipynb file to explore the basic features.
 
-## Models supported v1.0.0
+## Models supported v1.0.1
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
 - Joback
+
+## Writers
+
+- Clapeyron.jl
+
 
 ## Example of use
 You can check the full tutorial 

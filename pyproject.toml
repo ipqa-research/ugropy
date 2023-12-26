@@ -19,7 +19,7 @@ markers = [
 
 [project]
 name = "ugropy"
-version = "1.0.0"
+version = "1.0.1"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
@@ -34,7 +34,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 
-urls = {Homepage = "https://github.com/SalvadorBrandolin/ugropy"}
+urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
 dependencies = [
     'numpy >= 1.25.1',
