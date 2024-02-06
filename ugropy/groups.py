@@ -1,4 +1,5 @@
 """Groups module."""
+
 from rdkit.Chem import Descriptors
 
 from ugropy.joback import Joback

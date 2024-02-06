@@ -20,6 +20,7 @@ that well behaves in these situations, but it's easier to make a list of these
 problematic structures and correct them with a function than generate a complex
 SMARTS representation of a functional group.
 """
+
 import json
 
 import pandas as pd

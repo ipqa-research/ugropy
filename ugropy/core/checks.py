@@ -10,6 +10,7 @@ check_has_composed: check if the molecule has composed structures.
 check_has_hidden_ch2_ch: check if the molecule has CH2 or CH hidden in composed
 structures.
 """
+
 import numpy as np
 
 import pandas as pd

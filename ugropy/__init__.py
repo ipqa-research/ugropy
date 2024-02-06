@@ -1,8 +1,7 @@
 """ugropy library."""
+
 from . import constants, writers
-from .core import (
-    get_groups,
-)
+from .core import get_groups
 from .groups import Groups
 from .joback import Joback
 from .model_getters import (
