@@ -9,5 +9,3 @@ ipython
 
 matplotlib
 sphinxcontrib-bibtex
-
-git+https://github.com/ipqa-research/ugropy
