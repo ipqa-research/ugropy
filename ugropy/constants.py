@@ -25,6 +25,7 @@ psrk_ch2_hideouts : pandas.DataFrame
 psrk_ch_hideouts : pandas.DataFrame
     Classic PSRK CH hideouts.
 """
+
 from pathlib import Path
 
 import pandas as pd

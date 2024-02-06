@@ -1,4 +1,5 @@
 """detect_groups module."""
+
 import numpy as np
 from numpy.typing import NDArray
 

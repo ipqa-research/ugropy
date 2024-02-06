@@ -1,4 +1,5 @@
 """Joback critical properties writer module."""
+
 from io import StringIO
 from typing import List
 

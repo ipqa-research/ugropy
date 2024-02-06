@@ -1,4 +1,5 @@
 """correct_composed module."""
+
 import json
 from itertools import combinations
 

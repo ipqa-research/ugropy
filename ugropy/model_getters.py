@@ -1,4 +1,5 @@
 """Contribution model groups getter functions."""
+
 from typing import Union
 
 import pubchempy as pcp

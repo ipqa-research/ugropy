@@ -1,4 +1,5 @@
 """UNIFAC groups writer module."""
+
 import os
 from typing import List
 
