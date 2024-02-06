@@ -16,7 +16,7 @@ jobs:
           pip install -r docs/requirements.txt
       - name: Sphinx build
         run: |
-          sphinx-build -b html /home/runner/work/ugropy/docs _build
+          sphinx-build -b html /home/runner/work/docs _build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
