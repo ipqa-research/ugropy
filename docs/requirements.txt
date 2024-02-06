@@ -9,3 +9,5 @@ ipython
 
 matplotlib
 sphinxcontrib-bibtex
+
+../
