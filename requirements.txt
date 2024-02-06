@@ -1,4 +1,4 @@
 numpy >= 1.25.1
 pandas >= 2.0.3
 pubchempy == 1.0.4
-rdkit == 2023.3.2
+rdkit == 2023.9.4
