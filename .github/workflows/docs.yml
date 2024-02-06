@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
+      - name: Install pandoc
+        run: |
+          sudo apt-get install pandoc
       - name: Install ugropy
         run: |
           pip install .
