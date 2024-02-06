@@ -22,7 +22,7 @@ from ugropy.constants import (
     unifac_matrix,
     unifac_subgroups,
 )
-from ugropy.core.get_groups import get_groups
+from ugropy.core.get_model_groups import get_groups
 
 
 def instantiate_chem_object(

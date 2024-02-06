@@ -18,7 +18,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
-from .detect_groups import group_matches
+from .detect_model_groups import group_matches
 
 
 def check_has_molecular_weight_right(
