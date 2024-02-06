@@ -27,7 +27,7 @@ Example of use
 ==============
 
 You can check the full tutorial
-`here <https://ugropy.readthedocs.io/en/latest/tutorial/tutorial.html>`__.
+`here <https://ipqa-research.github.io/ugropy/tutorial/tutorial.html>`__.
 
 Get UNIFAC groups from the molecule’s name:
 
@@ -121,6 +121,13 @@ https://doi.org/10.1080/00986448708960487
 [3] Joback, K. G. (1989). Designing molecules possessing desired
 physical property values [Thesis (Ph. D.), Massachusetts Institute of
 Technology]. https://dspace.mit.edu/handle/1721.1/14191
+
+[4] Bondi, A. (1966). Estimation of Heat Capacity of Liquids.
+Industrial & Engineering Chemistry Fundamentals, 5(4), 442–449.
+https://doi.org/10.1021/i160020a001
+
+[5] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid
+mixtures: Butterworths monographs in chemistry. Butterworth-Heinemann
 
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/ipqa-research/ugropy/main
