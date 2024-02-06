@@ -5,8 +5,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
-[![Docs](https://img.shields.io/badge/https%3A%2F%2Fsalvadorbrandolin.github.io%2Fugropy%2F-green?style=flat&label=docs&link=https%3A%2F%2Fsalvadorbrandolin.github.io%2Fugropy%2F
-)](https://salvadorbrandolin.github.io/ugropy/)
+[![Docs](https://img.shields.io/badge/docs%20-%20green?style=flat&label=Sphinx&link=https%3A%2F%2Fipqa-research.github.io%2Fugropy%2Findex.html)](https://salvadorbrandolin.github.io/ugropy/)
 [![PyPI version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
 
 ugropy is a `Python` library to obtain the UNIFAC's subgroups from both the
@@ -36,7 +35,7 @@ binder.ipynb file to explore the basic features.
 
 ## Example of use
 You can check the full tutorial 
-[here](https://ugropy.readthedocs.io/en/latest/tutorial/tutorial.html).
+[here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
 
 Get UNIFAC groups from the molecule's name:
 
