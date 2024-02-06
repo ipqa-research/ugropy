@@ -118,3 +118,10 @@ PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications,
 [3] Joback, K. G. (1989). Designing molecules possessing desired physical
 property values [Thesis (Ph. D.), Massachusetts Institute of Technology].
 https://dspace.mit.edu/handle/1721.1/14191
+
+[4] Bondi, A. (1966). Estimation of Heat Capacity of Liquids.
+Industrial & Engineering Chemistry Fundamentals, 5(4), 442–449.
+https://doi.org/10.1021/i160020a001
+
+[5] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid
+mixtures: Butterworths monographs in chemistry. Butterworth-Heinemann

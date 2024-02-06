@@ -72,16 +72,6 @@ class Joback:
     vapor_pressure_params : dict
         Vapor pressure G and k parameters for the Riedel-Plank-Miller [2]
         equation [bar].
-
-    Bibliography
-    ------------
-    [1] Joback, K. G., & Reid, R. C. (1987). ESTIMATION OF PURE-COMPONENT
-    PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications,
-    57(1–6), 233–243. https://doi.org/10.1080/00986448708960487
-
-    [2] Joback, K. G. (1989). Designing molecules possessing desired physical
-    property values [Thesis (Ph. D.), Massachusetts Institute of Technology].
-    https://dspace.mit.edu/handle/1721.1/14191
     """
 
     def __init__(
@@ -156,7 +146,7 @@ class Joback:
     ) -> Union[float, NDArray]:
         """Calculate the liquid heat capacity [J/mol/K].
 
-        Uses the Rowlinson-Bondi [1-2] equation with the Joback estimated
+        Uses the Rowlinson-Bondi [4-5] equation with the Joback estimated
         properties.
 
         Parameters
@@ -168,15 +158,6 @@ class Joback:
         -------
         Union[float, NDArray]
             Ideal gas heat capacity [J/mol/K].
-
-        Bibliography
-        ------------
-        [1] Bondi, A. (1966). Estimation of Heat Capacity of Liquids.
-        Industrial & Engineering Chemistry Fundamentals, 5(4), 442–449.
-        https://doi.org/10.1021/i160020a001
-
-        [2] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid
-        mixtures: Butterworths monographs in chemistry. Butterworth-Heinemann
         """
         tr = temperature / self.critical_temperature
         w = self.acentric_factor
@@ -223,7 +204,7 @@ class Joback:
     ) -> Union[float, NDArray]:
         """Calculate the vapor pressure [bar].
 
-        Uses the Riedel-Plank-Miller [1] equation with the Joback estimated
+        Uses the Riedel-Plank-Miller [3] equation with the Joback estimated
         properties.
 
         Parameters
@@ -235,12 +216,6 @@ class Joback:
         -------
         Union[float, NDArray]
             Vapor pressure [bar]
-
-        Bibliography
-        ------------
-        [1] Joback, K. G. (1989). Designing molecules possessing desired
-        physical property values [Thesis (Ph. D.), Massachusetts Institute of
-        Technology]. https://dspace.mit.edu/handle/1721.1/14191
         """
         tr = temperature / self.critical_temperature
 

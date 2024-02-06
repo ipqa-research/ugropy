@@ -12,9 +12,9 @@ from .checks import (
     check_has_hidden_ch2_ch,
     check_has_molecular_weight_right,
 )
-from .correct_composed import correct_composed
-from .correct_problematics import correct_problematics
-from .detect_groups import detect_groups
+from .composed import correct_composed
+from .detect_model_groups import detect_groups
+from .problematics import correct_problematics
 
 
 def get_groups(

@@ -6,10 +6,6 @@ requires = ["setuptools", "wheel"]
 line-length = 79
 target-version = ["py310"]
 
-testpaths = [
-    "tests"
-]
-
 [tool.pytest.ini_options]
 markers = [
     "UNIFAC: classic UNIFAC model tests",
