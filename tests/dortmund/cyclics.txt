@@ -92,3 +92,37 @@
     {"CH3": 4, "CH2": 2, "CH": 4, "COO": 1, "CH2O": 1},
     "smiles",
 ),
+
+# Amines
+# (+)-Stepharine (ALMOST: 1 bond modified)
+(
+    "COC1=C(OC)C2=C3C(CC22CCC(=O)C=C2)NCCC3=C1",
+    {
+        "CH3O": 2,
+        "ACH": 1,
+        "ACCH2": 1,
+        "ACCH": 1,
+        "AC": 3,
+        "CH2NH": 1,
+        "CH2": 2,
+        "C": 1,
+        "CH2CO": 1,
+        "CH=CH": 1,
+    },
+    "smiles",
+),
+(
+    "CN1CCCC1CC(=O)CC1CCCN1C",
+    {"CH3N": 2, "CH2": 7, "CH": 2, "CH2CO": 1},
+    "smiles",
+),
+# Quinuclidine
+("C1CN2CCC1CC2", {"CH2N": 1, "CH2": 5, "CH": 1}, "smiles"),
+# Nicotine
+(
+    "CN1CCCC1C2=CN=CC=C2",
+    {"C5H4N": 1, "CH3N": 1, "CH2": 3, "CH": 1},
+    "smiles",
+),
+# cyclic ester with pyridine
+("O=C1CCC2=C(O1)C=CN=C2", {"C5H3N": 1, "CH2COO": 1, "CH2": 1}, "smiles"),
