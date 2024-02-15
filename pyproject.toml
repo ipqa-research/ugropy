@@ -10,7 +10,8 @@ target-version = ["py310"]
 markers = [
     "UNIFAC: classic UNIFAC model tests",
     "PSRK: predictive SRK model tests",
-    "Joback: Joback-Reid contribution model"
+    "Joback: Joback-Reid contribution model tests",
+    "Dortmund: Dortmund-UNIFAC model tests"
 ]
 
 [project]

@@ -5,6 +5,7 @@ from .core import get_groups
 from .groups import Groups
 from .joback import Joback
 from .model_getters import (
+    get_dortmund_groups,
     get_joback_groups,
     get_psrk_groups,
     get_unifac_groups,
@@ -15,6 +16,7 @@ from .model_getters import (
 __all__ = [
     "constants",
     "get_groups",
+    "get_dortmund_groups",
     "get_joback_groups",
     "get_psrk_groups",
     "get_unifac_groups",

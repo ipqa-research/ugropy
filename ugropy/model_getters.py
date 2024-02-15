@@ -7,6 +7,11 @@ import pubchempy as pcp
 from rdkit import Chem
 
 from ugropy.constants import (
+    dortmund_ch2_hideouts,
+    dortmund_ch_hideouts,
+    dortmund_matrix,
+    dortmund_problematics,
+    dortmund_subgroups,
     joback_ch2_hideouts,
     joback_ch_hideouts,
     joback_matrix,
@@ -172,3 +177,37 @@ def get_joback_groups(
     )
 
     return joback_groups
+
+
+def get_dortmund_groups(
+    identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
+) -> dict:
+    """Get Dortmund-UNIFAC groups from molecule's name or SMILES.
+
+    Parameters
+    ----------
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+        hexane or CCCCCC.
+    identifier_type : str, optional
+        Use 'name' to search a molecule by name, 'smiles' to provide the
+        molecule SMILES representation or 'mol' to provide a
+        rdkit.Chem.rdchem.Mol object, by default "name".
+
+    Returns
+    -------
+    dict
+        Dortmund-UNIFAC subgroups.
+    """
+    chem_object = instantiate_chem_object(identifier, identifier_type)
+
+    dortmund_groups = get_groups(
+        chem_object,
+        dortmund_subgroups,
+        dortmund_matrix,
+        dortmund_ch2_hideouts,
+        dortmund_ch_hideouts,
+        dortmund_problematics,
+    )
+
+    return dortmund_groups

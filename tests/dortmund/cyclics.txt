@@ -1,0 +1,94 @@
+("C1CC2CCCC3CCCC1C23", {"CH2": 8, "CH": 4}, "smiles"),
+("C1C2CCCCC2C2CCCCC12", {"CH2": 9, "CH": 4}, "smiles"),
+("C1C2CC1CCCC2", {"CH2": 6, "CH": 2}, "smiles"),
+("C1CCCCCCCC1", {"CH2": 9}, "smiles"),
+("C1CCCCCCCC1", {"CH2": 9}, "smiles"),
+("C1C2CC3CC1CC(C2)C3", {"CH2": 6, "CH": 4}, "smiles"),
+("C12C3C1C1C2C31", {"CH": 6}, "smiles"),
+("C1CC2CC1CCC2", {"CH2": 6, "CH": 2}, "smiles"),
+("C1CC2CC3CCC2CC13", {"CH2": 6, "CH": 4}, "smiles"),
+("C12C3C4C1C1C2C3C41", {"CH": 8}, "smiles"),
+("C1CC1", {"CH2": 3}, "smiles"),
+("C1CCC1", {"CH2": 4}, "smiles"),
+("C1C2CC1CCCC2", {"CH2": 6, "CH": 2}, "smiles"),
+("CC12C3CCC4CCC1C234", {"CH3": 1, "CH2": 4, "CH": 3, "C": 2}, "smiles"),
+("CCC(CC)C(C)(C)C", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}, "smiles"),
+("C1CCC2CCCCC2C1", {"CH2": 8, "CH": 2}, "smiles"),
+("C1CCC(CC1)CC2CCCCC2", {"CH2": 11, "CH": 2}, "smiles"),
+("C1CCCCC1", {"CH2": 6}, "smiles"),  # cyclohexane
+# alpha-pinene
+(
+    "CC1=CCC2CC1C2(C)C",
+    {"CH3": 3, "CH2": 2, "CH": 2, "C": 1, "CH=C": 1},
+    "smiles",
+),
+# d-limonene
+(
+    "CC1=CCC(CC1)C(=C)C",
+    {"CH3": 2, "CH2": 3, "CH": 1, "CH2=C": 1, "CH=C": 1},
+    "smiles",
+),
+# 2,3-Dimethyl-1,3-cyclohexadiene
+("CC1=CCCC=C1C", {"CH2": 2, "CH=C": 2, "CH3": 2}, "smiles"),
+# 3,3'-(Pentane-1,3-diyl)dicyclohexene
+(
+    "CCC(CCC1CCCC=C1)C2CCCC=C2",
+    {"CH3": 1, "CH2": 9, "CH": 3, "CH=CH": 2},
+    "smiles",
+),
+("C1CCC=CC1", {"CH2": 4, "CH=CH": 1}, "smiles"),  # cyclohexene
+# 1,2-Cyclohexanediol, 4-tert-butyl-1-phenyl-, stereoisomer
+(
+    "CC(C)(C)C1CCC(C(C1)O)(C2=CC=CC=C2)O",
+    {"CH3": 3, "CH2": 3, "CH": 2, "C": 2, "OH (T)": 2, "AC": 1, "ACH": 5},
+    "smiles",
+),
+# Cyclopropanone
+("C1CC1=O", {"CH2": 1, "CH2CO": 1}, "smiles"),
+# (9Z)-Cycloheptadec-9-en-1-one
+(
+    "C1CCCC=CCCCCCCCC(=O)CCC1",
+    {"CH2": 13, "CH=CH": 1, "CH2CO": 1},
+    "smiles",
+),
+# cyclohexanecarbaldehyde
+(
+    "C1CCC(CC1)C=O",
+    {
+        "CH2": 5,
+        "CH": 1,
+        "HCO": 1,
+    },
+    "smiles",
+),
+# tetrahydrofuran
+("C1CCOC1", {"THF": 1}, "smiles"),
+
+# Eters
+# 4-flavanol
+(
+    "OC1CC(OC2=CC=CC=C12)C1=CC=CC=C1",
+    {"ACH": 9, "AC": 2, "ACCH": 1, "CHO": 1, "CH2": 1, "OH": 1},
+    "smiles",
+),
+(
+    "O[C@@H]1CO[C@H](O)[C@@H](O)[C@@H]1O",
+    {"CH2O": 1, "CH": 4, "OH": 4},
+    "smiles",
+),
+("C1COCCOCCOCCOC1", {"CH2O": 4, "CH2": 5}, "smiles"),
+("C1COCCO1", {"CH2O": 2, "CH2": 2}, "smiles"),
+("C1COCO1", {"CH2O": 2, "CH2": 1}, "smiles"),
+("C1COCCOCCOCCOCCOCCO1", {"CH2O": 6, "CH2": 6}, "smiles"),
+# 2H-Pyran, 2-(cyclohexyloxy)tetrahydro-
+(
+    "C1CCC(CC1)OC2CCCCO2",
+    {"CH2": 8, "CH": 1, "CH2O": 1, "CHO": 1},
+    "smiles",
+),
+# Carbonic acid, ethyl 2,3,6-trimethylcyclohexyl ester
+(
+    "CCOC(=O)OC1C(CCC(C1C)C)C",
+    {"CH3": 4, "CH2": 2, "CH": 4, "COO": 1, "CH2O": 1},
+    "smiles",
+),

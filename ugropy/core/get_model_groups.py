@@ -68,6 +68,8 @@ def get_groups(
         problematic_structures=dfp,
     )
 
+    # import ipdb; ipdb.set_trace()
+
     # Calculate the number of each functional group.
     dff_sum = dff_corrected.sum(axis=0)
     dff_sum.replace(0, pd.NA, inplace=True)
