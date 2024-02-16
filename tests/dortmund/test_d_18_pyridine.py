@@ -9,7 +9,10 @@ import ugropy as ug
 
 # Dortmund
 trials = [
-    ("CC1=CC=CC(O)=N1", {"AC2N": 1, "ACH": 3, "CH3": 1, "OH": 1}, "smiles"),
+    ("C1=CC2=CC3=CC=CC=C3N=C2C=C1", {"AC2N": 1, "ACH": 9, "AC": 2}, "smiles"),
+    ("CC(C)(C)C1=NC(O)=CC=C1", {"AC2N": 1, "ACH": 3, "OH (P)": 1, "C": 1, "CH3": 3}, "smiles"),
+    ("OC1=CC=CC(O)=N1", {"AC2N": 1, "ACH": 3, "OH (P)": 2}, "smiles"),
+    ("CC1=CC=CC(O)=N1", {"AC2N": 1, "ACH": 3, "CH3": 1, "OH (P)": 1}, "smiles"),
     ("CC1=CC=CC(C)=N1", {"AC2N": 1, "ACH": 3, "CH3": 2}, "smiles"),
     # pyridine sharing side with benzene ring
     (

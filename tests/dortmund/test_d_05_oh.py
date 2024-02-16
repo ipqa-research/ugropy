@@ -9,6 +9,10 @@ import ugropy as ug
 
 # Dortmund
 trials = [
+    ("CCC#CO", {"CH3": 1, "CH2": 1, "C=-C": 1, "OH (P)": 1}, "smiles"),
+    ("CCC=C(C)O", {"CH3": 2, "CH2": 1, "CH=C": 1, "OH (S)": 1}, "smiles"),
+    ("CC\C=C\O", {"CH3": 1, "CH2": 1, "CH=CH": 1, "OH (P)": 1}, "smiles"),
+    ("CC(O)(CO)C(O)C#CO", {"CH3": 1, "CH2": 1, "CH": 1, "C": 1, "OH (P)": 2, "OH (S)": 1, "OH (T)": 1, "C=-C": 1}, "smiles"),
     # (2S,3S)-2-Methyl-1,3-hexanediol
     (
         "CCCC(C(C)CO)O",
