@@ -9,8 +9,16 @@ import ugropy as ug
 
 # Dortmund
 trials = [
-    ("CC(O)C(O)[N+]([O-])=O", {"CH3": 1, "CH": 1, "OH (P)": 1, "OH (S)": 1, "CHNO2": 1}, "smiles"),
-    ("CCC(O)[N+]([O-])=O", {"CH3": 1, "CH2": 1, "OH (P)": 1, "CHNO2": 1}, "smiles"),
+    (
+        "CC(O)C(O)[N+]([O-])=O",
+        {"CH3": 1, "CH": 1, "OH (P)": 1, "OH (S)": 1, "CHNO2": 1},
+        "smiles",
+    ),
+    (
+        "CCC(O)[N+]([O-])=O",
+        {"CH3": 1, "CH2": 1, "OH (P)": 1, "CHNO2": 1},
+        "smiles",
+    ),
     (
         "CCCC1=CC=C(C[N+]([O-])=O)C=C1",
         {"ACH": 4, "AC": 1, "CH2NO2": 1, "ACCH2": 1, "CH3": 1, "CH2": 1},

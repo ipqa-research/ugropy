@@ -12,6 +12,7 @@ trials = [
     ("CCCCCC", {"CH3": 2, "CH2": 4}, "smiles"),  # hexane
     ("CC(C)C", {"CH3": 3, "CH": 1}, "smiles"),  # 2-methylpropane
     ("CC(C)(C)C", {"CH3": 4, "C": 1}, "smiles"),  # 2,2-dimethylpropane
+    ("CCC(CC)C(C)(C)C", {"CH3": 5, "CH2": 2, "CH": 1, "C": 1}, "smiles"),
 ]
 
 
