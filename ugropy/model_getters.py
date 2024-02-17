@@ -7,23 +7,24 @@ import pubchempy as pcp
 from rdkit import Chem
 
 from ugropy.constants import (
-    dortmund_ch2_hideouts,
-    dortmund_ch_hideouts,
+    dortmund_ch2_hide,
+    dortmund_ch_hide,
     dortmund_matrix,
-    dortmund_problematics,
+    dortmund_problem,
     dortmund_subgroups,
-    joback_ch2_hideouts,
-    joback_ch_hideouts,
+    joback_ch2_hide,
+    joback_ch_hide,
     joback_matrix,
-    joback_problematics,
+    joback_problem,
     joback_subgroups,
-    problematic_structures,
-    psrk_ch2_hideouts,
-    psrk_ch_hideouts,
+    psrk_problem,
+    psrk_ch2_hide,
+    psrk_ch_hide,
     psrk_matrix,
     psrk_subgroups,
-    unifac_ch2_hideouts,
-    unifac_ch_hideouts,
+    unifac_problem,
+    unifac_ch2_hide,
+    unifac_ch_hide,
     unifac_matrix,
     unifac_subgroups,
 )
@@ -103,9 +104,9 @@ def get_unifac_groups(
         chem_object,
         unifac_subgroups,
         unifac_matrix,
-        unifac_ch2_hideouts,
-        unifac_ch_hideouts,
-        problematic_structures,
+        unifac_ch2_hide,
+        unifac_ch_hide,
+        unifac_problem,
     )
 
     return unifac_groups
@@ -137,9 +138,9 @@ def get_psrk_groups(
         chem_object,
         psrk_subgroups,
         psrk_matrix,
-        psrk_ch2_hideouts,
-        psrk_ch_hideouts,
-        problematic_structures,
+        psrk_ch2_hide,
+        psrk_ch_hide,
+        psrk_problem,
     )
 
     return psrk_groups
@@ -171,9 +172,9 @@ def get_joback_groups(
         chem_object,
         joback_subgroups,
         joback_matrix,
-        joback_ch2_hideouts,
-        joback_ch_hideouts,
-        joback_problematics,
+        joback_ch2_hide,
+        joback_ch_hide,
+        joback_problem,
     )
 
     return joback_groups
@@ -205,9 +206,9 @@ def get_dortmund_groups(
         chem_object,
         dortmund_subgroups,
         dortmund_matrix,
-        dortmund_ch2_hideouts,
-        dortmund_ch_hideouts,
-        dortmund_problematics,
+        dortmund_ch2_hide,
+        dortmund_ch_hide,
+        dortmund_problem,
     )
 
     return dortmund_groups

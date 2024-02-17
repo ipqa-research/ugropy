@@ -31,100 +31,75 @@ from pathlib import Path
 import pandas as pd
 
 
-# constants.py path
-here = Path(__file__).parent.resolve()
+def _rd(file_path: str, index_col: str = None) -> pd.DataFrame:
+    """Read the models' csv.
 
+    Parameters
+    ----------
+    file_path : str
+        Path to csv file.
+    index_col : str, optional
+        Name of the index column, by default None.
+
+    Returns
+    -------
+    pd.DataFrame
+        Readed csv.
+    """
+    with open(file_path, mode="r") as f:
+        return pd.read_csv(f, sep="|", index_col=index_col, comment="?")
+
+
+# constants.py path
+_here = Path(__file__).parent.resolve()
+
+
+# CSVs path
+_csvs = f"{_here}/groupscsv"
+
+
+# Gas constant [J/mol/K]
 R = 8.31446261815324
 
-# Dataframes
+
+# Gibss Excess models dataframes
 # =============================================================================
 # UNIFAC
 # =============================================================================
-with open(f"{here}/groupscsv/unifac/unifac_subgroups.csv", mode="r") as f:
-    unifac_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/unifac/unifac_matrix.csv", mode="r") as f:
-    unifac_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/unifac/ch2_hideouts.csv", mode="r") as f:
-    unifac_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-with open(f"{here}/groupscsv/unifac/ch_hideouts.csv", mode="r") as f:
-    unifac_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-# Problematics
-with open(f"{here}/groupscsv/problematic_structures.csv", mode="r") as f:
-    problematic_structures = pd.read_csv(
-        f, sep="|", index_col="smarts", comment="?"
-    )
+unifac_subgroups = _rd(f"{_csvs}/unifac/unifac_subgroups.csv", "group")
+unifac_matrix = _rd(f"{_csvs}/unifac/unifac_matrix.csv", "group")
+unifac_ch2_hide = _rd(f"{_csvs}/unifac/ch2_hideouts.csv", "group").index
+unifac_ch_hide = _rd(f"{_csvs}/unifac/ch_hideouts.csv", "group").index
+unifac_problem = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
 
 
 # =============================================================================
 # PSRK
 # =============================================================================
-with open(f"{here}/groupscsv/psrk/psrk_subgroups.csv", mode="r") as f:
-    psrk_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/psrk/psrk_matrix.csv", mode="r") as f:
-    psrk_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/psrk/ch2_hideouts.csv", mode="r") as f:
-    psrk_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-with open(f"{here}/groupscsv/psrk/ch_hideouts.csv", mode="r") as f:
-    psrk_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
+psrk_subgroups = _rd(f"{_csvs}/psrk/psrk_subgroups.csv", "group")
+psrk_matrix = _rd(f"{_csvs}/psrk/psrk_matrix.csv", "group")
+psrk_ch2_hide = _rd(f"{_csvs}/psrk/ch2_hideouts.csv", "group").index
+psrk_ch_hide = _rd(f"{_csvs}/psrk/ch_hideouts.csv", "group").index
+psrk_problem = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
 
 
 # =============================================================================
 # Dortmund
 # =============================================================================
-with open(f"{here}/groupscsv/dortmund/dortmund_subgroups.csv", mode="r") as f:
-    dortmund_subgroups = pd.read_csv(
-        f, sep="|", index_col="group", comment="?"
-    )
-
-with open(f"{here}/groupscsv/dortmund/dortmund_matrix.csv", mode="r") as f:
-    dortmund_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/dortmund/ch2_hideouts.csv", mode="r") as f:
-    dortmund_ch2_hideouts = pd.read_csv(
-        f, index_col="group", comment="?"
-    ).index
-
-with open(f"{here}/groupscsv/dortmund/ch_hideouts.csv", mode="r") as f:
-    dortmund_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-with open(
-    f"{here}/groupscsv/dortmund/dortmund_problematics.csv", mode="r"
-) as f:
-    dortmund_problematics = pd.read_csv(
-        f, sep="|", index_col="smarts", comment="?"
-    )
+dortmund_subgroups = _rd(f"{_csvs}/dortmund/dortmund_subgroups.csv", "group")
+dortmund_matrix = _rd(f"{_csvs}/dortmund/dortmund_matrix.csv", "group")
+dortmund_ch2_hide = _rd(f"{_csvs}/dortmund/ch2_hideouts.csv", "group").index
+dortmund_ch_hide = _rd(f"{_csvs}/dortmund/ch_hideouts.csv", "group").index
+dortmund_problem = _rd(f"{_csvs}/dortmund/dortmund_problematics.csv", "smarts")
 
 
+# Properties estimators models dataframes
 # =============================================================================
 # Joback
 # =============================================================================
-with open(f"{here}/groupscsv/joback/joback_subgroups.csv", mode="r") as f:
-    joback_subgroups = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/joback/joback_matrix.csv", mode="r") as f:
-    joback_matrix = pd.read_csv(f, sep="|", index_col="group", comment="?")
-
-with open(f"{here}/groupscsv/joback/joback_ch2_hideouts.csv", mode="r") as f:
-    joback_ch2_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-with open(f"{here}/groupscsv/joback/joback_ch_hideouts.csv", mode="r") as f:
-    joback_ch_hideouts = pd.read_csv(f, index_col="group", comment="?").index
-
-with open(
-    f"{here}/groupscsv/joback/joback_problematic_structures.csv", mode="r"
-) as f:
-    joback_problematics = pd.read_csv(
-        f, sep="|", index_col="smarts", comment="?"
-    )
-
-with open(
-    f"{here}/groupscsv/joback/properties_contributions.csv", mode="r"
-) as f:
-    joback_properties_contibutions = pd.read_csv(f, sep="|", index_col="group")
+joback_subgroups = _rd(f"{_csvs}/joback/joback_subgroups.csv", "group")
+joback_matrix = _rd(f"{_csvs}/joback/joback_matrix.csv", "group")
+joback_ch2_hide = _rd(f"{_csvs}/joback/ch2_hideouts.csv", "group").index
+joback_ch_hide = _rd(f"{_csvs}/joback/ch_hideouts.csv", "group").index
+joback_problem = _rd(f"{_csvs}/joback/joback_problematics.csv", "smarts")
+joback_properties = _rd(f"{_csvs}/joback/properties_contrib.csv", "group")

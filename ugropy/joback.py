@@ -7,7 +7,7 @@ from numpy.typing import NDArray
 
 from ugropy.constants import (
     R,
-    joback_properties_contibutions,
+    joback_properties,
     joback_subgroups,
 )
 from ugropy.model_getters import (
@@ -233,7 +233,7 @@ class Joback:
         groups = list(self.groups.keys())
         ocurr = list(self.groups.values())
 
-        df = joback_properties_contibutions.loc[groups]
+        df = joback_properties.loc[groups]
 
         # =====================================================================
         # Calculate complete contribution properties (no contribution missing)
