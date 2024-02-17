@@ -26,7 +26,7 @@ class FragmentationModel:
             self.main_groups = main_groups
 
         # Empty problematic_structures template
-        if main_groups is None:
+        if problematic_structures is None:
             self.problematic_structures = pd.DataFrame(
                 [], columns=["smarts", "contribute"]
             ).set_index("smarts")

@@ -4,29 +4,8 @@ from typing import Union
 
 from rdkit import Chem
 
-from ugropy.constants import (
-    dort_ch2_hide,
-    dort_ch_hide,
-    dort_matrix,
-    dort_problem,
-    dort_subgroups,
-    joback_ch2_hide,
-    joback_ch_hide,
-    joback_matrix,
-    joback_problem,
-    joback_subgroups,
-    psrk_ch2_hide,
-    psrk_ch_hide,
-    psrk_matrix,
-    psrk_problem,
-    psrk_subgroups,
-    unifac_ch2_hide,
-    unifac_ch_hide,
-    unifac_matrix,
-    unifac_problem,
-    unifac_subgroups,
-)
 from ugropy.core.get_model_groups import get_groups
+from ugropy.fragmentation_models.models import dortmund, joback, unifac, psrk
 
 
 def get_unifac_groups(
@@ -50,15 +29,7 @@ def get_unifac_groups(
         Classic LV-UNIFAC subgroups.
     """
 
-    unifac_groups = get_groups(
-        unifac_subgroups,
-        unifac_matrix,
-        unifac_ch2_hide,
-        unifac_ch_hide,
-        unifac_problem,
-        identifier,
-        identifier_type,
-    )
+    unifac_groups = get_groups(unifac, identifier, identifier_type)
 
     return unifac_groups
 
@@ -83,15 +54,7 @@ def get_psrk_groups(
     dict
         PSRK subgroups.
     """
-    psrk_groups = get_groups(
-        psrk_subgroups,
-        psrk_matrix,
-        psrk_ch2_hide,
-        psrk_ch_hide,
-        psrk_problem,
-        identifier,
-        identifier_type,
-    )
+    psrk_groups = get_groups(psrk, identifier, identifier_type)
 
     return psrk_groups
 
@@ -117,15 +80,7 @@ def get_joback_groups(
         Joback subgroups.
     """
 
-    joback_groups = get_groups(
-        joback_subgroups,
-        joback_matrix,
-        joback_ch2_hide,
-        joback_ch_hide,
-        joback_problem,
-        identifier,
-        identifier_type,
-    )
+    joback_groups = get_groups(joback, identifier, identifier_type)
 
     return joback_groups
 
@@ -151,14 +106,6 @@ def get_dortmund_groups(
         Dortmund-UNIFAC subgroups.
     """
 
-    dortmund_groups = get_groups(
-        dort_subgroups,
-        dort_matrix,
-        dort_ch2_hide,
-        dort_ch_hide,
-        dort_problem,
-        identifier,
-        identifier_type,
-    )
+    dortmund_groups = get_groups(dortmund, identifier, identifier_type)
 
     return dortmund_groups

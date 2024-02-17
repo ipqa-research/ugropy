@@ -18,31 +18,20 @@ from .composed import correct_composed
 from .detect_model_groups import detect_groups
 from .get_rdkit_object import instantiate_mol_object
 from .problematics import correct_problematics
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
 def get_groups(
-    subgroups: pd.DataFrame,
-    subgroups_matrix: pd.DataFrame,
-    ch2_hideouts: pd.DataFrame,
-    ch_hideouts: pd.DataFrame,
-    problematic_structures: pd.DataFrame,
+    fragmentation_model: FragmentationModel,
     identifier: Union[str, Chem.rdchem.Mol],
     identifier_type: str = "name",
 ):
-    """Obtain the UNIFAC's model subgroups of chem_object.
+    """Obtain the FragmentationModel's subgroups of an RDkit Mol object.
 
     Parameters
     ----------
-    chem_object : Chem.rdchem.Mol
-        RDKit Mol object.
-    subgroups : pd.DataFrame
-        DataFrame that contains the subgroups, their SMARTS representation and
-        subgroup count contribution.
-    subgroups_matrix : pd.DataFrame
-        DataFrame that cotains the subgroups contribution matrix.
-    problematic_structures : pd.DataFrame
-        DataFrame that contains the SMARTS representation of the problematic
-        structures and their contribution correction.
+    fragmentation_model: FragmentationModel
+        FragmentationModel object.
     identifier : str or rdkit.Chem.rdchem.Mol
         Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
         hexane or CCCCCC.
@@ -60,13 +49,15 @@ def get_groups(
     mol_object = instantiate_mol_object(identifier, identifier_type)
 
     # Shorter names for DataFrames:
-    df = subgroups.copy()
-    dfm = subgroups_matrix.copy()
-    dfp = problematic_structures.copy()
+    dfs = fragmentation_model.subgroups.copy()
+    dfm = fragmentation_model.contribution_matrix.copy()
+    dfp = fragmentation_model.problematic_structures.copy()
+    ch2_hideouts = fragmentation_model.ch2_hideouts.copy()
+    ch_hideouts = fragmentation_model.ch_hideouts.copy()
 
     # Groups found and the occurrence number of each one in chem_object.
     groups, groups_ocurrences = detect_groups(
-        chem_object=mol_object, subgroups=df
+        chem_object=mol_object, subgroups=dfs
     )
 
     # Filters the subgroups matrix into the detected groups only.
@@ -82,8 +73,6 @@ def get_groups(
         problematic_structures=dfp,
     )
 
-    # import ipdb; ipdb.set_trace()
-
     # Calculate the number of each functional group.
     dff_sum = dff_corrected.sum(axis=0)
     dff_sum.replace(0, pd.NA, inplace=True)
@@ -97,11 +86,11 @@ def get_groups(
 
     # Check for composed structures.
     right_mw = check_has_molecular_weight_right(
-        chem_object=mol_object, chem_subgroups=chem_subgroups, subgroups=df
+        chem_object=mol_object, chem_subgroups=chem_subgroups, subgroups=dfs
     )
 
     has_composed = check_has_composed(
-        chem_subgroups=chem_subgroups, subgroups=subgroups
+        chem_subgroups=chem_subgroups, subgroups=dfs
     )
 
     if right_mw and not has_composed:
@@ -112,7 +101,7 @@ def get_groups(
         chem_subgroups = correct_composed(
             chem_object=mol_object,
             chem_subgroups=chem_subgroups,
-            subgroups=df,
+            subgroups=dfs,
             ch2_hideouts=ch2_hideouts,
             ch_hideouts=ch_hideouts,
         )
@@ -121,7 +110,7 @@ def get_groups(
         has_hidden = check_has_hidden_ch2_ch(
             chem_object=mol_object,
             chem_subgroups=chem_subgroups,
-            subgroups=subgroups,
+            subgroups=dfs,
             ch2_hideouts=ch2_hideouts,
             ch_hideouts=ch_hideouts,
         )
@@ -129,7 +118,7 @@ def get_groups(
             chem_subgroups = correct_composed(
                 chem_object=mol_object,
                 chem_subgroups=chem_subgroups,
-                subgroups=df,
+                subgroups=dfs,
                 ch2_hideouts=ch2_hideouts,
                 ch_hideouts=ch_hideouts,
             )
