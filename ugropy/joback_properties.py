@@ -10,7 +10,7 @@ from ugropy.constants import (
     joback_properties,
     joback_subgroups,
 )
-from ugropy.model_getters import (
+from ugropy.fragmentation_models.model_groups_getters import (
     get_joback_groups,
 )
 

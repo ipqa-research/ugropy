@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from ugropy import constants
-from ugropy.joback import Joback
+from ugropy.joback_properties import Joback
 
 
 def write_molar_mass(

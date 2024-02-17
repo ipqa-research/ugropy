@@ -7,25 +7,25 @@ import pubchempy as pcp
 from rdkit import Chem
 
 from ugropy.constants import (
-    dortmund_ch2_hide,
-    dortmund_ch_hide,
-    dortmund_matrix,
-    dortmund_problem,
-    dortmund_subgroups,
+    dort_ch2_hide,
+    dort_ch_hide,
+    dort_matrix,
+    dort_problem,
+    dort_subgroups,
     joback_ch2_hide,
     joback_ch_hide,
     joback_matrix,
     joback_problem,
     joback_subgroups,
-    psrk_problem,
     psrk_ch2_hide,
     psrk_ch_hide,
     psrk_matrix,
+    psrk_problem,
     psrk_subgroups,
-    unifac_problem,
     unifac_ch2_hide,
     unifac_ch_hide,
     unifac_matrix,
+    unifac_problem,
     unifac_subgroups,
 )
 from ugropy.core.get_model_groups import get_groups
@@ -204,11 +204,11 @@ def get_dortmund_groups(
 
     dortmund_groups = get_groups(
         chem_object,
-        dortmund_subgroups,
-        dortmund_matrix,
-        dortmund_ch2_hide,
-        dortmund_ch_hide,
-        dortmund_problem,
+        dort_subgroups,
+        dort_matrix,
+        dort_ch2_hide,
+        dort_ch_hide,
+        dort_problem,
     )
 
     return dortmund_groups

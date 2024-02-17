@@ -60,20 +60,18 @@ def test_dormund_data():
     for group in df.index:
         try:
             assert (
-                df.loc[group, "R"]
-                == constants.dortmund_subgroups.loc[group, "R"]
+                df.loc[group, "R"] == constants.dort_subgroups.loc[group, "R"]
             )
             assert (
-                df.loc[group, "Q"]
-                == constants.dortmund_subgroups.loc[group, "Q"]
+                df.loc[group, "Q"] == constants.dort_subgroups.loc[group, "Q"]
             )
             assert (
                 df.loc[group, "No."]
-                == constants.dortmund_subgroups.loc[group, "subgroup_number"]
+                == constants.dort_subgroups.loc[group, "subgroup_number"]
             )
             assert (
                 df.loc[group, "Main Group No."]
-                == constants.dortmund_subgroups.loc[group, "main_group"]
+                == constants.dort_subgroups.loc[group, "main_group"]
             )
         except KeyError:
             # TODO: Dortmund in development some groups are commented.

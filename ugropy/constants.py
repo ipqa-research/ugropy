@@ -67,6 +67,7 @@ R = 8.31446261815324
 # UNIFAC
 # =============================================================================
 unifac_subgroups = _rd(f"{_csvs}/unifac/unifac_subgroups.csv", "group")
+unifac_maingroups = _rd(f"{_csvs}/unifac/unifac_maingroups.csv", "no.")
 unifac_matrix = _rd(f"{_csvs}/unifac/unifac_matrix.csv", "group")
 unifac_ch2_hide = _rd(f"{_csvs}/unifac/ch2_hideouts.csv", "group").index
 unifac_ch_hide = _rd(f"{_csvs}/unifac/ch_hideouts.csv", "group").index
@@ -77,6 +78,7 @@ unifac_problem = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
 # PSRK
 # =============================================================================
 psrk_subgroups = _rd(f"{_csvs}/psrk/psrk_subgroups.csv", "group")
+psrk_maingroups = _rd(f"{_csvs}/psrk/psrk_maingroups.csv", "no.")
 psrk_matrix = _rd(f"{_csvs}/psrk/psrk_matrix.csv", "group")
 psrk_ch2_hide = _rd(f"{_csvs}/psrk/ch2_hideouts.csv", "group").index
 psrk_ch_hide = _rd(f"{_csvs}/psrk/ch_hideouts.csv", "group").index
@@ -86,11 +88,12 @@ psrk_problem = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
 # =============================================================================
 # Dortmund
 # =============================================================================
-dortmund_subgroups = _rd(f"{_csvs}/dortmund/dortmund_subgroups.csv", "group")
-dortmund_matrix = _rd(f"{_csvs}/dortmund/dortmund_matrix.csv", "group")
-dortmund_ch2_hide = _rd(f"{_csvs}/dortmund/ch2_hideouts.csv", "group").index
-dortmund_ch_hide = _rd(f"{_csvs}/dortmund/ch_hideouts.csv", "group").index
-dortmund_problem = _rd(f"{_csvs}/dortmund/dortmund_problematics.csv", "smarts")
+dort_subgroups = _rd(f"{_csvs}/dortmund/dortmund_subgroups.csv", "group")
+dort_maingroups = _rd(f"{_csvs}/dortmund/dortmund_maingroups.csv", "no.")
+dort_matrix = _rd(f"{_csvs}/dortmund/dortmund_matrix.csv", "group")
+dort_ch2_hide = _rd(f"{_csvs}/dortmund/ch2_hideouts.csv", "group").index
+dort_ch_hide = _rd(f"{_csvs}/dortmund/ch_hideouts.csv", "group").index
+dort_problem = _rd(f"{_csvs}/dortmund/dortmund_problematics.csv", "smarts")
 
 
 # Properties estimators models dataframes

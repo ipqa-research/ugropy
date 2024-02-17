@@ -2,7 +2,7 @@
 
 from typing import List
 
-from ugropy.joback import Joback
+from ugropy.joback_properties import Joback
 
 from .clapeyron_writers import (
     write_critical,

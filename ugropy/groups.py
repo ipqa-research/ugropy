@@ -2,12 +2,12 @@
 
 from rdkit.Chem import Descriptors
 
-from ugropy.joback import Joback
-from ugropy.model_getters import (
+from ugropy.fragmentation_models.model_groups_getters import (
     get_psrk_groups,
     get_unifac_groups,
     instantiate_chem_object,
 )
+from ugropy.joback_properties import Joback
 
 
 class Groups:
