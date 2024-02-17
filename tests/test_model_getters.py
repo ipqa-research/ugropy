@@ -1,11 +1,11 @@
 import pytest
 
-from ugropy import instantiate_chem_object
+from ugropy import instantiate_mol_object
 
 
 def test_making_it_explode():
     with pytest.raises(ValueError):
-        instantiate_chem_object("snake", "mol")
+        instantiate_mol_object("snake", "mol")
 
     with pytest.raises(ValueError):
-        instantiate_chem_object("acetone", "Argentina")
+        instantiate_mol_object("acetone", "Argentina")

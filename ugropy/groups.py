@@ -2,10 +2,10 @@
 
 from rdkit.Chem import Descriptors
 
+from ugropy.core.get_rdkit_object import instantiate_mol_object
 from ugropy.fragmentation_models.model_groups_getters import (
     get_psrk_groups,
     get_unifac_groups,
-    instantiate_chem_object,
 )
 from ugropy.joback_properties import Joback
 
@@ -57,7 +57,7 @@ class Groups:
     ) -> None:
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
-        self.chem_object = instantiate_chem_object(identifier, identifier_type)
+        self.chem_object = instantiate_mol_object(identifier, identifier_type)
         self.molecular_weight = Descriptors.MolWt(self.chem_object)
 
         # UNIFAC groups
