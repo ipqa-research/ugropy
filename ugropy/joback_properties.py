@@ -10,9 +10,8 @@ from ugropy.constants import (
     joback_properties,
     joback_subgroups,
 )
-from ugropy.fragmentation_models.model_groups_getters import (
-    get_joback_groups,
-)
+from ugropy.core.get_model_groups import get_groups
+from ugropy.fragmentation_models.models import joback
 
 
 class Joback:
@@ -82,7 +81,7 @@ class Joback:
     ) -> None:
         # Skip if instantiation from_groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
-            self.groups = get_joback_groups(identifier, identifier_type)
+            self.groups = get_groups(joback, identifier, identifier_type)
         elif identifier_type == "groups":
             self.groups = identifier
         else:

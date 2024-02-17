@@ -84,7 +84,7 @@ trials_psrk = [
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_one_group_molecules(identifier, result, identifier_type):
-    assert ug.get_psrk_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.psrk, identifier, identifier_type) == result
 
 
 # =============================================================================
@@ -99,4 +99,4 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_one_group_molecules_unifac(identifier, result, identifier_type):
-    assert ug.get_unifac_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.unifac, identifier, identifier_type) == result

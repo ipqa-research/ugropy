@@ -9,6 +9,8 @@ import pandas as pd
 
 from rdkit import Chem
 
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
+
 from .checks import (
     check_has_composed,
     check_has_hidden_ch2_ch,
@@ -18,7 +20,6 @@ from .composed import correct_composed
 from .detect_model_groups import detect_groups
 from .get_rdkit_object import instantiate_mol_object
 from .problematics import correct_problematics
-from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
 def get_groups(
