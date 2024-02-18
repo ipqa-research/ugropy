@@ -1,3 +1,9 @@
+"""FragmentationModel module.
+
+All ugropy models (dortmund, joback, unifac, psrk) are instances of the
+FragmentationModule class.
+"""
+
 import json
 from typing import List, Union
 
@@ -7,6 +13,25 @@ import pandas as pd
 
 
 class FragmentationModel:
+    """FragmentationModel class.
+
+    All ugropy FragmentationModels are an instance of this class. This class
+    can be used by the user to create their own FragmentationModels.
+
+    Parameters
+    ----------
+    subgroups : pd.DataFrame
+        Model's subgroups.
+    main_groups : Union[pd.DataFrame, None], optional
+        _description_, by default None
+    problematic_structures : Union[pd.DataFrame, None], optional
+        _description_, by default None
+    ch2_hideouts : List[str], optional
+        _description_, by default []
+    ch_hideouts : List[str], optional
+        _description_, by default []
+    """
+
     def __init__(
         self,
         subgroups: pd.DataFrame,

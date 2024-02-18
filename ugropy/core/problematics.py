@@ -23,47 +23,54 @@ SMARTS representation of a functional group.
 
 import json
 
-import pandas as pd
-
 from rdkit import Chem
+
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
 def correct_problematics(
-    chem_object: Chem.rdchem.Mol,
-    filtered_subgroups: pd.DataFrame,
-    problematic_structures: pd.DataFrame,
-) -> pd.DataFrame:
-    """Correct problematic structures in chem_object.
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
+) -> dict:
+    """Correct problematic structures in mol_object.
 
     Parameters
     ----------
-    chem_object : Chem.rdchem.Mol
+    mol_object : Chem.rdchem.Mol
         RDKit Chem object
-    filtered_subgroups : pd.DataFrame
-        Subgroups matrix DataFrame filtered for groups present in chem_object.
-    problematic_structures : pd.DataFrame
-        Problematic structures DataFrame.
+    mol_subgroups : dict
+        Dictionary with the subgroups not problematics corrected in mol_object.
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
-    pd.DataFrame
-        Subgroups matrix DataFrame filtered with corrected problematic
-        structures.
+    dict
+        Molecule's subrgoups corrected with the problematic structures list.
     """
-    dff = filtered_subgroups.copy()
+    corrected_subgroups = mol_subgroups.copy()
 
-    for smarts in problematic_structures.index:
+    for smarts in model.problematic_structures.index:
         structure = Chem.MolFromSmarts(smarts)
-        matches = chem_object.GetSubstructMatches(structure)
+        matches = mol_object.GetSubstructMatches(structure)
         how_many_problems = len(matches)
 
         if how_many_problems > 0:
-            p_dict = json.loads(problematic_structures.loc[smarts].contribute)
-            for grp in p_dict.keys():
-                try:
-                    dff.loc[grp, grp] += p_dict[grp] * how_many_problems
-                except KeyError:
-                    dff[grp] = 0
-                    dff.loc[grp] = 0
-                    dff.loc[grp, grp] += p_dict[grp] * how_many_problems
-    return dff
+            problematic_dict = json.loads(
+                model.problematic_structures.loc[smarts, "contribute"]
+            )
+
+            for subgroup, contribution in problematic_dict.items():
+                corrected_subgroups[subgroup] = (
+                    corrected_subgroups.get(subgroup, 0)
+                    + contribution * how_many_problems
+                )
+
+        # Eliminate occurrences == 0
+        corrected_subgroups = {
+            key: value
+            for key, value in corrected_subgroups.items()
+            if value != 0
+        }
+    return corrected_subgroups

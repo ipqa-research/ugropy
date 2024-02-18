@@ -12,56 +12,73 @@ joback: FragmentationModel
     Joback FragmentationModel
 """
 
-from ugropy.constants import (
-    dort_ch2_hide,
-    dort_ch_hide,
-    dort_maingroups,
-    dort_problem,
-    dort_subgroups,
-    joback_problem,
-    joback_subgroups,
-    psrk_ch2_hide,
-    psrk_ch_hide,
-    psrk_maingroups,
-    psrk_problem,
-    psrk_subgroups,
-    unifac_ch2_hide,
-    unifac_ch_hide,
-    unifac_maingroups,
-    unifac_problem,
-    unifac_subgroups,
-)
+import pandas as pd
+
+from ugropy.constants import _csvs
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
+def _rd(file_path: str, index_col: str = None) -> pd.DataFrame:
+    """Read the models' csv.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to csv file.
+    index_col : str, optional
+        Name of the index column, by default None.
+
+    Returns
+    -------
+    pd.DataFrame
+        Readed csv.
+    """
+    with open(file_path, mode="r") as f:
+        return pd.read_csv(f, sep="|", index_col=index_col, comment="?")
+
+
 # LV-UNIFAC
+_uni = f"{_csvs}/unifac"
+
 unifac = FragmentationModel(
-    subgroups=unifac_subgroups,
-    main_groups=unifac_maingroups,
-    problematic_structures=unifac_problem,
-    ch2_hideouts=unifac_ch2_hide.to_list(),
-    ch_hideouts=unifac_ch_hide.to_list(),
+    subgroups=_rd(f"{_uni}/unifac_subgroups.csv", "group"),
+    main_groups=_rd(f"{_uni}/unifac_maingroups.csv", "no."),
+    problematic_structures=_rd(
+        f"{_csvs}/problematic_structures.csv", "smarts"
+    ),
+    ch2_hideouts=_rd(f"{_uni}/ch2_hideouts.csv", "group").index.to_list(),
+    ch_hideouts=_rd(f"{_uni}/ch_hideouts.csv", "group").index.to_list(),
 )
 
+
 # PSRK
+_psrk = f"{_csvs}/psrk"
+
 psrk = FragmentationModel(
-    subgroups=psrk_subgroups,
-    main_groups=psrk_maingroups,
-    problematic_structures=psrk_problem,
-    ch2_hideouts=psrk_ch2_hide.to_list(),
-    ch_hideouts=psrk_ch_hide.to_list(),
+    subgroups=_rd(f"{_psrk}/psrk_subgroups.csv", "group"),
+    main_groups=_rd(f"{_psrk}/psrk_maingroups.csv", "no."),
+    problematic_structures=_rd(
+        f"{_csvs}/problematic_structures.csv", "smarts"
+    ),
+    ch2_hideouts=_rd(f"{_psrk}/ch2_hideouts.csv", "group").index.to_list(),
+    ch_hideouts=_rd(f"{_psrk}/ch_hideouts.csv", "group").index.to_list(),
 )
 
 # Dortmund
+_do = f"{_csvs}/dortmund"
+
 dortmund = FragmentationModel(
-    subgroups=dort_subgroups,
-    main_groups=dort_maingroups,
-    problematic_structures=dort_problem,
-    ch2_hideouts=dort_ch2_hide.to_list(),
-    ch_hideouts=dort_ch_hide.to_list(),
+    subgroups=_rd(f"{_do}/dortmund_subgroups.csv", "group"),
+    main_groups=_rd(f"{_do}/dortmund_maingroups.csv", "no."),
+    problematic_structures=_rd(f"{_do}/dortmund_problematics.csv", "smarts"),
+    ch2_hideouts=_rd(f"{_do}/ch2_hideouts.csv", "group").index.to_list(),
+    ch_hideouts=_rd(f"{_do}/ch_hideouts.csv", "group").index.to_list(),
 )
 
 # Joback
+_jo = f"{_csvs}/joback"
+
 joback = FragmentationModel(
-    subgroups=joback_subgroups, problematic_structures=joback_problem
+    subgroups=_rd(f"{_jo}/joback_subgroups.csv", "group"),
+    problematic_structures=_rd(f"{_jo}/joback_problematics.csv", "smarts"),
 )

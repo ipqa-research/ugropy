@@ -7,7 +7,7 @@ import numpy as np
 
 import pandas as pd
 
-from ugropy import constants
+from ugropy.fragmentation_models.models import psrk, unifac
 from ugropy.joback_properties import Joback
 
 
@@ -55,7 +55,7 @@ def write_molar_mass(
     if joback_objects:
         molecular_weigths = [j.molecular_weight for j in joback_objects]
     elif unifac_groups:
-        df = constants.unifac_subgroups.copy()
+        df = unifac.subgroups.copy()
         molecular_weigths = []
         for groups in unifac_groups:
             contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()
@@ -63,7 +63,7 @@ def write_molar_mass(
                 np.dot(contribution, list(groups.values()))
             )
     elif psrk_groups:
-        df = constants.psrk_subgroups.copy()
+        df = psrk.subgroups.copy()
         molecular_weigths = []
         for groups in psrk_groups:
             contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()

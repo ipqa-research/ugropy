@@ -3,7 +3,7 @@
 Get the groups from a FragmentationModel.
 """
 
-from typing import Union
+from typing import List, Union
 
 import pandas as pd
 
@@ -23,15 +23,15 @@ from .problematics import correct_problematics
 
 
 def get_groups(
-    fragmentation_model: FragmentationModel,
+    model: FragmentationModel,
     identifier: Union[str, Chem.rdchem.Mol],
     identifier_type: str = "name",
-):
+) -> Union[dict, List[dict]]:
     """Obtain the FragmentationModel's subgroups of an RDkit Mol object.
 
     Parameters
     ----------
-    fragmentation_model: FragmentationModel
+    model: FragmentationModel
         FragmentationModel object.
     identifier : str or rdkit.Chem.rdchem.Mol
         Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
@@ -43,86 +43,88 @@ def get_groups(
 
     Returns
     -------
-    dict
+    Union[dict, List[dict]]
         FragmentationModel's subgroups
     """
     # RDKit Mol object
     mol_object = instantiate_mol_object(identifier, identifier_type)
 
-    # Shorter names for DataFrames:
-    dfs = fragmentation_model.subgroups.copy()
-    dfm = fragmentation_model.contribution_matrix.copy()
-    dfp = fragmentation_model.problematic_structures.copy()
-    ch2_hideouts = fragmentation_model.ch2_hideouts.copy()
-    ch_hideouts = fragmentation_model.ch_hideouts.copy()
-
-    # Groups found and the occurrence number of each one in chem_object.
+    # =========================================================================
+    # Direct detection of groups presence and occurences
+    # =========================================================================
     groups, groups_ocurrences = detect_groups(
-        chem_object=mol_object, subgroups=dfs
+        mol_object=mol_object, model=model
     )
 
-    # Filters the subgroups matrix into the detected groups only.
-    dff = dfm.loc[groups][groups]
+    # =========================================================================
+    # Filter the contribution matrix and sum over row to cancel the contribs
+    # =========================================================================
+    group_contributions = model.contribution_matrix.loc[groups, groups]
+    group_contributions = group_contributions.mul(groups_ocurrences, axis=0)
+    group_total_contributions = group_contributions.sum(axis=0)
+    group_total_contributions.replace(0, pd.NA, inplace=True)
 
-    # Multiply each group row by the occurrences of that group.
-    dff = dff.mul(groups_ocurrences, axis=0)
+    mol_subgroups = group_total_contributions.dropna().to_dict()
 
-    # Correction of problematic structures in dff.
-    dff_corrected = correct_problematics(
-        chem_object=mol_object,
-        filtered_subgroups=dff,
-        problematic_structures=dfp,
+    # =========================================================================
+    # Check for the presence of problematic structures and correct.
+    # =========================================================================
+    mol_subgroups_corrected = correct_problematics(
+        mol_object=mol_object,
+        mol_subgroups=mol_subgroups,
+        model=model,
     )
 
-    # Calculate the number of each functional group.
-    dff_sum = dff_corrected.sum(axis=0)
-    dff_sum.replace(0, pd.NA, inplace=True)
-    chem_subgroups = dff_sum.dropna()
-    chem_subgroups = chem_subgroups.to_dict()
+    # First exit
+    if mol_subgroups_corrected == {}:
+        # No functional groups were detected for the molecule. Example: H2O2
+        return mol_subgroups_corrected
 
-    if chem_subgroups == {}:
-        # No functional groups were detected for the molecule. Example:
-        # hydrogen peroxide.
-        return chem_subgroups
-
-    # Check for composed structures.
+    # =========================================================================
+    # Check the presence of composed structures and check if the molecular
+    # weight of the molecule is equals than the RDKit molecular weight.
+    # =========================================================================
     right_mw = check_has_molecular_weight_right(
-        chem_object=mol_object, chem_subgroups=chem_subgroups, subgroups=dfs
+        mol_object=mol_object,
+        mol_subgroups=mol_subgroups_corrected,
+        model=model,
     )
 
     has_composed = check_has_composed(
-        chem_subgroups=chem_subgroups, subgroups=dfs
+        mol_subgroups=mol_subgroups_corrected,
+        model=model,
     )
 
+    # =========================================================================
+    # What to do according to the previous checks
+    # =========================================================================
     if right_mw and not has_composed:
-        return chem_subgroups
+        # No need to do more, the solution was obtained.
+        return mol_subgroups_corrected
     elif not right_mw and not has_composed:
+        # Nothing to do, the moelcule can't be modeled with FragmentationModel
         return {}
     elif not right_mw and has_composed:
-        chem_subgroups = correct_composed(
-            chem_object=mol_object,
-            chem_subgroups=chem_subgroups,
-            subgroups=dfs,
-            ch2_hideouts=ch2_hideouts,
-            ch_hideouts=ch_hideouts,
+        # Try fix the problem, the decomposition could still fail and return {}
+        mol_subgroups_decomposed = correct_composed(
+            mol_object=mol_object,
+            mol_subgroups=mol_subgroups_corrected,
+            model=model,
         )
-        return chem_subgroups
+        return mol_subgroups_decomposed
     elif right_mw and has_composed:
+        # Worst scenario, right mw and has composed, need check if has hidden
         has_hidden = check_has_hidden_ch2_ch(
-            chem_object=mol_object,
-            chem_subgroups=chem_subgroups,
-            subgroups=dfs,
-            ch2_hideouts=ch2_hideouts,
-            ch_hideouts=ch_hideouts,
+            mol_object=mol_object,
+            mol_subgroups=mol_subgroups_corrected,
+            model=model,
         )
         if has_hidden:
-            chem_subgroups = correct_composed(
-                chem_object=mol_object,
-                chem_subgroups=chem_subgroups,
-                subgroups=dfs,
-                ch2_hideouts=ch2_hideouts,
-                ch_hideouts=ch_hideouts,
+            mol_subgroups_decomposed = correct_composed(
+                mol_object=mol_object,
+                mol_subgroups=mol_subgroups_corrected,
+                model=model,
             )
-            return chem_subgroups
+            return mol_subgroups_decomposed
         else:
-            return chem_subgroups
+            return mol_subgroups_corrected

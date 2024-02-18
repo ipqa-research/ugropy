@@ -6,6 +6,17 @@ import ugropy as ug
 # Joback
 trials = [
     (
+        "CCCC1=CC=C(CC(=O)OC)C=C1",
+        {
+            "-CH3": 2,
+            "-CH2-": 3,
+            "ring=CH-": 4,
+            "ring=C<": 2,
+            "-COO- (ester)": 1,
+        },
+        "smiles",
+    ),
+    (
         "C1(=CC=CC=C1)OC(C)(C)C",
         {
             "-CH3": 3,
@@ -26,17 +37,6 @@ trials = [
             "-O- (non-ring)": 1,
             "ring=CH-": 4,
             "ring=C<": 2,
-        },
-        "smiles",
-    ),
-    (
-        "CCCC1=CC=C(CC(=O)OC)C=C1",
-        {
-            "-CH3": 2,
-            "-CH2-": 3,
-            "ring=CH-": 4,
-            "ring=C<": 2,
-            "-COO- (ester)": 1,
         },
         "smiles",
     ),

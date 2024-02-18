@@ -1,3 +1,5 @@
+"""get_rdkit_object module."""
+
 from typing import Union
 
 import pubchempy as pcp

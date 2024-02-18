@@ -8,7 +8,6 @@ from numpy.typing import NDArray
 from ugropy.constants import (
     R,
     joback_properties,
-    joback_subgroups,
 )
 from ugropy.core.get_model_groups import get_groups
 from ugropy.fragmentation_models.models import joback
@@ -246,7 +245,7 @@ class Joback:
         gform_c = df["Gform"].to_numpy()
         hvap_c = df["Hvap"].to_numpy()
         numa_c = df["num_of_atoms"].to_numpy()
-        mw_c = joback_subgroups.loc[groups, "molecular_weight"].to_numpy()
+        mw_c = joback.subgroups.loc[groups, "molecular_weight"].to_numpy()
 
         # Molecular weight
         self.molecular_weight = np.dot(ocurr, mw_c)
