@@ -18,4 +18,4 @@ trials_psrk = [
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_29_ch3sh(identifier, result, identifier_type):
-    assert ug.get_psrk_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.psrk, identifier, identifier_type) == result

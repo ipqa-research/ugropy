@@ -44,4 +44,4 @@ trials = [
 @pytest.mark.Dortmund
 @pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_hco_dortmund(identifier, result, identifier_type):
-    assert ug.get_dortmund_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.dortmund, identifier, identifier_type) == result

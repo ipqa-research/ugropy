@@ -7,12 +7,10 @@ from numpy.typing import NDArray
 
 from ugropy.constants import (
     R,
-    joback_properties_contibutions,
-    joback_subgroups,
+    joback_properties,
 )
-from ugropy.model_getters import (
-    get_joback_groups,
-)
+from ugropy.core.get_model_groups import get_groups
+from ugropy.fragmentation_models.models import joback
 
 
 class Joback:
@@ -82,7 +80,7 @@ class Joback:
     ) -> None:
         # Skip if instantiation from_groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
-            self.groups = get_joback_groups(identifier, identifier_type)
+            self.groups = get_groups(joback, identifier, identifier_type)
         elif identifier_type == "groups":
             self.groups = identifier
         else:
@@ -233,7 +231,7 @@ class Joback:
         groups = list(self.groups.keys())
         ocurr = list(self.groups.values())
 
-        df = joback_properties_contibutions.loc[groups]
+        df = joback_properties.loc[groups]
 
         # =====================================================================
         # Calculate complete contribution properties (no contribution missing)
@@ -247,7 +245,7 @@ class Joback:
         gform_c = df["Gform"].to_numpy()
         hvap_c = df["Hvap"].to_numpy()
         numa_c = df["num_of_atoms"].to_numpy()
-        mw_c = joback_subgroups.loc[groups, "molecular_weight"].to_numpy()
+        mw_c = joback.subgroups.loc[groups, "molecular_weight"].to_numpy()
 
         # Molecular weight
         self.molecular_weight = np.dot(ocurr, mw_c)

@@ -5,7 +5,7 @@ from typing import List
 
 import pandas as pd
 
-from ugropy.joback import Joback
+from ugropy.joback_properties import Joback
 
 
 def write_critical(

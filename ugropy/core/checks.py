@@ -13,18 +13,18 @@ structures.
 
 import numpy as np
 
-import pandas as pd
-
 from rdkit import Chem
 from rdkit.Chem import Descriptors
+
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 from .detect_model_groups import group_matches
 
 
 def check_has_molecular_weight_right(
-    chem_object: Chem.rdchem.Mol,
-    chem_subgroups: dict,
-    subgroups: pd.DataFrame,
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
 ) -> bool:
     """Check the molecular weight of the molecule using its functional groups.
 
@@ -36,14 +36,12 @@ def check_has_molecular_weight_right(
 
     Parameters
     ----------
-    chem_object : Chem.rdchem.Mol
+    mol_object : Chem.rdchem.Mol
         RDKit Chem object
-    chem_subgroups : dict
-        UNIFAC subgroups of the chem_object
-    subgroups : pd.DataFrame
-        DataFrame with the UNIFAC model's subgroups
-    tolerance : float
-        Allowed difference between RDKit and ugropy molecular weights
+    mol_subgroups : dict
+        FragmentationModel subgroups of the mol_object
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
@@ -51,60 +49,59 @@ def check_has_molecular_weight_right(
         True if RDKit and ugropy molecular weight are equal with a tolerance.
     """
     # check for negative occurrences
-    if not all(occurrence > 0 for occurrence in chem_subgroups.values()):
+    if not all(occurrence > 0 for occurrence in mol_subgroups.values()):
         return False
 
     # rdkit molecular weight
-    rdkit_mw = Descriptors.MolWt(chem_object)
+    rdkit_mw = Descriptors.MolWt(mol_object)
 
     # Molecular weight from functional groups
-    mws = subgroups.loc[chem_subgroups.keys()]["molecular_weight"].to_numpy()
-    func_group_mw = np.dot(mws, list(chem_subgroups.values()))
+    mws = model.subgroups.loc[
+        list(mol_subgroups.keys()), "molecular_weight"
+    ].to_numpy()
+
+    func_group_mw = np.dot(mws, list(mol_subgroups.values()))
 
     return np.allclose(rdkit_mw, func_group_mw, atol=0.5)
 
 
 def check_has_composed(
-    chem_subgroups: dict,
-    subgroups: pd.DataFrame,
+    mol_subgroups: dict,
+    model: FragmentationModel,
 ) -> bool:
     """Check if the molecule has composed structures.
 
-    A composed structure is a subgroup of UNIFAC that can be decomposed into
-    two or more UNIFAC subgroups. For example, ACCH2 can be decomposed in the
-    AC and CH2 groups.
+    A composed structure is a subgroup of FragmentationModel that can be
+    decomposed into two or more FragmentationModel subgroups. For example,
+    ACCH2 can be decomposed in the AC and CH2 groups.
 
     Parameters
     ----------
-    chem_subgroups : dict
+    mol_subgroups : dict
         Dictionary with the detected subgroups.
-    subgroups : pd.DataFrame
-        Complete DataFrame of UNIFAC's subgroups.
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
     bool
         True if the molecule has composed structures.
     """
-    composed_structures = subgroups[subgroups["composed"] == "y"].index
+    composed_structures = model.subgroups[
+        model.subgroups["composed"] == "y"
+    ].index
 
-    for composed in composed_structures:
-        if composed in chem_subgroups.keys():
-            return True
-
-    return False
+    return any(composed in mol_subgroups for composed in composed_structures)
 
 
 def check_has_hidden_ch2_ch(
-    chem_object: Chem.rdchem.Mol,
-    chem_subgroups: dict,
-    subgroups: pd.DataFrame,
-    ch2_hideouts: pd.DataFrame,
-    ch_hideouts: pd.DataFrame,
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
 ) -> bool:
     """Check for hidden CH2 and CH subgroups in composed structures.
 
-    The algorithm checks that the number of CH2 and CH groups in chem_subgroups
+    The algorithm checks that the number of CH2 and CH groups in mol_subgroups
     dictionary is equal to the number of free CH2 and CH. If these numbers are
     not equal reveals that the CH2 and CH are hidden in composed structures,
     eg: ACCH2, ACCH. This phenomenon occurs when two subgroups fight for the
@@ -117,54 +114,43 @@ def check_has_hidden_ch2_ch(
     CH2O groups without any free CH2 subgroup. This check searches for all CH2
     and counts all the CH2 that are participating in a CH2 hideout (ACCH2 and
     CH2O are examples of hideouts). The algorithm notices that there is one
-    free CH2 and there are zero free CH2 groups in the chem_subgroups
-    dictionary and returns 'True' (it has a hidden CH2 or CH).
+    free CH2 and there are zero free CH2 groups in the mol_subgroups dictionary
+    and returns 'True' (it has a hidden CH2 or CH).
 
     Parameters
     ----------
-    chem_object : Chem.rdchem.Mol
+    mol_object : Chem.rdchem.Mol
         RDKit Mol object.
-    chem_subgroups : dict
-        Subgroups of chem_object.
-    subgroups : pd.DataFrame
-        Complete DataFrame of UNIFAC's subgroups.
-    ch2_hideouts : pandas.DataFrame
-        DataFrame of all posible CH2 group hidings.
-    ch_hideouts : pandas.DataFrame
-        DataFrame of all posible CH group hidings.
+    mol_subgroups : dict
+        Subgroups of mol_object.
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
     bool
         True if has hidden CH2 or CH subgroups.
     """
-    try:
-        ch2_num = chem_subgroups["CH2"]
-    except KeyError:
-        ch2_num = 0
+    ch2_num = mol_subgroups.get("CH2", 0)
+    ch_num = mol_subgroups.get("CH", 0)
 
-    try:
-        ch_num = chem_subgroups["CH"]
-    except KeyError:
-        ch_num = 0
-
-    all_ch2_atoms = group_matches(chem_object, "CH2", subgroups)
+    all_ch2_atoms = group_matches(mol_object, "CH2", model)
     all_ch2_atoms = np.array(all_ch2_atoms).flatten()
 
-    all_ch_atoms = group_matches(chem_object, "CH", subgroups)
+    all_ch_atoms = group_matches(mol_object, "CH", model)
     all_ch_atoms = np.array(all_ch_atoms).flatten()
 
     ch2_hidings_atoms = np.array([])
-    for hideout in ch2_hideouts:
-        if hideout in chem_subgroups.keys():
-            hidings = group_matches(chem_object, hideout, subgroups)
+    for hideout in model.ch2_hideouts:
+        if hideout in mol_subgroups.keys():
+            hidings = group_matches(mol_object, hideout, model)
             hidings = np.array(hidings).flatten()
             ch2_hidings_atoms = np.append(ch2_hidings_atoms, hidings)
 
     ch_hidings_atoms = np.array([])
-    for hideout in ch_hideouts:
-        if hideout in chem_subgroups.keys():
-            hidings = group_matches(chem_object, hideout, subgroups)
+    for hideout in model.ch_hideouts:
+        if hideout in mol_subgroups.keys():
+            hidings = group_matches(mol_object, hideout, model)
             hidings = np.array(hidings).flatten()
             ch_hidings_atoms = np.append(ch_hidings_atoms, hidings)
 

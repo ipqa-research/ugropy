@@ -1,27 +1,23 @@
 """ugropy library."""
 
 from . import constants, writers
-from .core import get_groups
+from .core import get_groups, instantiate_mol_object
+from .fragmentation_models.fragmentation_model import FragmentationModel
+from .fragmentation_models.models import dortmund, joback, psrk, unifac
 from .groups import Groups
-from .joback import Joback
-from .model_getters import (
-    get_dortmund_groups,
-    get_joback_groups,
-    get_psrk_groups,
-    get_unifac_groups,
-    instantiate_chem_object,
-)
+from .joback_properties import Joback
 
 
 __all__ = [
     "constants",
-    "get_groups",
-    "get_dortmund_groups",
-    "get_joback_groups",
-    "get_psrk_groups",
-    "get_unifac_groups",
-    "Groups",
-    "instantiate_chem_object",
-    "Joback",
     "writers",
+    "get_groups",
+    "instantiate_mol_object",
+    "FragmentationModel",
+    "dortmund",
+    "joback",
+    "psrk",
+    "unifac",
+    "Groups",
+    "Joback",
 ]

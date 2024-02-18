@@ -22,4 +22,4 @@ trials_unifac = [
 @pytest.mark.Dortmund
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ch3nh2_dortmund(identifier, result, identifier_type):
-    assert ug.get_dortmund_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.dortmund, identifier, identifier_type) == result

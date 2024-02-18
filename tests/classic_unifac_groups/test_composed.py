@@ -72,8 +72,8 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_composed_unifac(identifier, result, identifier_type):
-    unifac_result = ug.get_unifac_groups(identifier, identifier_type)
-    psrk_result = ug.get_psrk_groups(identifier, identifier_type)
+    unifac_result = ug.get_groups(ug.unifac, identifier, identifier_type)
+    psrk_result = ug.get_groups(ug.psrk, identifier, identifier_type)
     try:
         assert unifac_result == result
         assert psrk_result == result

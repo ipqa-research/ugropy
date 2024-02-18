@@ -76,4 +76,4 @@ trials = [
 @pytest.mark.Joback
 @pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_alcohols(identifier, result, identifier_type):
-    assert ug.get_joback_groups(identifier, identifier_type) == result
+    assert ug.get_groups(ug.joback, identifier, identifier_type) == result
