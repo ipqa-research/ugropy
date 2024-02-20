@@ -54,7 +54,7 @@ unifac = FragmentationModel(
     problematic_structures=_uni_problems,
     ch2_hideouts=_uni_ch2,
     ch_hideouts=_uni_ch,
-    hidding_groups=["CH", "CH2"]
+    shared_groups=["CH", "CH2"],
 )
 
 
@@ -76,7 +76,7 @@ psrk = FragmentationModel(
     problematic_structures=_psrk_problems,
     ch2_hideouts=_psrk_ch2,
     ch_hideouts=_psrk_ch,
-    hidding_groups=["CH", "CH2"]
+    shared_groups=["CH", "CH2"],
 )
 
 # =============================================================================
@@ -84,7 +84,7 @@ psrk = FragmentationModel(
 # =============================================================================
 _do = f"{_csvs}/dortmund"
 
-_do_sg =_rd(f"{_do}/dortmund_subgroups.csv", "group")
+_do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
 _do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
 _do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
 _do_ch2 = _rd(f"{_do}/ch2_hideouts.csv", "group").index.to_list()
@@ -96,7 +96,7 @@ dortmund = FragmentationModel(
     problematic_structures=_do_problems,
     ch2_hideouts=_do_ch2,
     ch_hideouts=_do_ch,
-    hidding_groups=["CH", "CH2"]
+    shared_groups=["CH", "CH2"],
 )
 
 # =============================================================================
@@ -104,7 +104,7 @@ dortmund = FragmentationModel(
 # =============================================================================
 _jo = f"{_csvs}/joback"
 
-_do_sg =_rd(f"{_jo}/joback_subgroups.csv", "group")
+_do_sg = _rd(f"{_jo}/joback_subgroups.csv", "group")
 _do_problems = _rd(f"{_jo}/joback_problematics.csv", "smarts")
 
 joback = FragmentationModel(

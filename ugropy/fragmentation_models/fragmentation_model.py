@@ -46,7 +46,7 @@ class FragmentationModel:
         problematic_structures: Union[pd.DataFrame, None] = None,
         ch2_hideouts: List[str] = [],
         ch_hideouts: List[str] = [],
-        hidding_groups: List[str] = [],
+        shared_groups: List[str] = [],
     ):
         self.subgroups = subgroups
 
@@ -74,7 +74,7 @@ class FragmentationModel:
         self.contribution_matrix = self._build_contrib_matrix()
 
         # Shared hideouts
-        self.hidding_groups = hidding_groups
+        self.shared_groups = shared_groups
         self.shared_hideouts = self._build_shared_hideouts()
 
     def _build_contrib_matrix(self) -> pd.DataFrame:
@@ -125,13 +125,13 @@ class FragmentationModel:
         shared_hideouts = pd.DataFrame(columns=["shared_group", "hideout"])
         shared_hideouts.set_index("shared_group", inplace=True)
 
-        if len(self.hidding_groups) == 0:
+        if len(self.shared_groups) == 0:
             return shared_hideouts
 
         subgroups = self.subgroups.index
         contributes = self.subgroups["contribute"]
 
-        for shared in self.hidding_groups:
+        for shared in self.shared_groups:
             for group, contribute in zip(subgroups, contributes):
                 dict_contrib = json.loads(contribute)
 

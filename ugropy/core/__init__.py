@@ -7,6 +7,7 @@ from .checks import (
     check_has_composed,
     check_has_hidden_ch2_ch,
     check_has_molecular_weight_right,
+    check_has_hidden
 )
 from .composed import correct_composed
 from .get_model_groups import get_groups

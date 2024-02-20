@@ -9,7 +9,7 @@ from rdkit import Chem
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
-from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right
+from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right, check_has_hidden
 
 
 def correct_composed(
@@ -93,7 +93,7 @@ def correct_composed(
             model=model,
         )
 
-        has_hidden = check_has_hidden_ch2_ch(
+        has_hidden = check_has_hidden(
             mol_object=mol_object,
             mol_subgroups=correction,
             model=model,

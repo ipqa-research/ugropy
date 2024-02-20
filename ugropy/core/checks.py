@@ -163,3 +163,31 @@ def check_has_hidden_ch2_ch(
         return True
     else:
         return False
+
+
+def check_has_hidden(
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
+) -> bool:
+    hided_candidates = model.shared_groups
+
+    for candidate in hided_candidates:
+        exposed_candidates = mol_subgroups.get(candidate, 0)
+        
+        all_candidates_atoms = group_matches(mol_object, candidate, model)
+        all_candidates_atoms = np.array(all_candidates_atoms).flatten()
+        
+        hideouts_atoms = np.array([])
+        for hideout in model.shared_hideouts.loc[candidate].to_numpy().flatten():
+            if hideout in mol_subgroups.keys():
+                atoms = group_matches(mol_object, hideout, model)
+                atoms = np.array(atoms).flatten()
+                hideouts_atoms = np.append(hideouts_atoms, atoms)
+
+        candidate_diff = np.setdiff1d(all_candidates_atoms, hideouts_atoms)
+
+        if len(candidate_diff) != exposed_candidates:
+            return True
+    
+    return False
