@@ -136,6 +136,9 @@ def check_has_hiden(
     hiden_candidates = np.unique(model.hideouts.index.to_numpy())
 
     for candidate in hiden_candidates:
+        # import ipdb; ipdb.set_trace(cond=(candidate=="CH2"))
+        misscount = 0
+
         exposed_candidates = mol_subgroups.get(candidate, 0)
 
         all_candidates_atoms = group_matches(mol_object, candidate, model)
@@ -145,12 +148,17 @@ def check_has_hiden(
         for hideout in model.hideouts.loc[candidate].values.flatten():
             if hideout in mol_subgroups.keys():
                 atoms = group_matches(mol_object, hideout, model)
+
+                # TODO: make documentation about the next if
+                if len(atoms) > mol_subgroups[hideout] and model.subgroups.loc[hideout, "composed"] == "n":
+                    misscount += len(atoms) - mol_subgroups[hideout]
+
                 atoms = np.array(atoms).flatten()
                 hideouts_atoms = np.append(hideouts_atoms, atoms)
 
         candidate_diff = np.setdiff1d(all_candidates_atoms, hideouts_atoms)
 
-        if len(candidate_diff) != exposed_candidates:
+        if len(candidate_diff) + misscount != exposed_candidates:
             return True
 
     return False

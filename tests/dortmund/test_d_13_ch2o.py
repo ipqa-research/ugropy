@@ -33,7 +33,7 @@ trials = [
         "smiles",
     ),
     ("CC(C)(C)OC(=O)OC1=CC=CC=C1", {}, "smiles"),
-    # Benzyl 2-hydroxyethyl carbonate
+    # TODO Benzyl 2-hydroxyethyl carbonate
     (
         "C1=CC=C(C=C1)COC(=O)OCCO",
         {"CH2": 1, "ACH": 5, "ACCH2": 1, "OH (P)": 1, "CH2O": 1, "COO": 1},

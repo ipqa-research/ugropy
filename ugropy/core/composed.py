@@ -93,13 +93,13 @@ def correct_composed(
             model=model,
         )
 
-        has_hidden = check_has_hiden(
+        has_hiden = check_has_hiden(
             mol_object=mol_object,
             mol_subgroups=correction,
             model=model,
         )
 
-        if right_mw and not has_hidden:
+        if right_mw and not has_hiden:
             successfull_corrections.append(correction)
 
     successfull_corrections = np.array(successfull_corrections)
