@@ -5,7 +5,7 @@ FragmentationModule class.
 """
 
 import json
-from typing import List, Union
+from typing import Union
 
 import numpy as np
 
@@ -33,10 +33,31 @@ class FragmentationModel:
         Model's problematic/ambiguous structures. Index: 'smarts' (SMARTS of
         the problematic structure). Mandatory columns: 'contribute' (dictionary
         as a string with the structure contribution), by default None
-    ch2_hideouts : List[str], optional
-        _description_, by default []
-    ch_hideouts : List[str], optional
-        _description_, by default []
+    hideouts : Union[pd.DataFrame, None], optional
+        Hideouts for each group. Mandatory columns: 'group' (Group of the model
+        that can be hiden), 'hideout' (other subgroups to find the hiden
+        subgroup), by default []
+
+    Attributes
+    ----------
+    subgroups : pd.DataFrame
+        Model's subgroups. Index: 'group' (groups names). Mandatory columns:
+        'smarts' (SMARTS representations of the group), 'contribute'
+        (dictionary as a string with the group contribution), 'composed' (y or
+        n if it is or is not a composed structure), 'molecular_weight'
+        (molecular weight of the subgroups).
+    main_groups : Union[pd.DataFrame, None]
+        List of main groups, by now it is optional and does nothing
+    problematic_structures : Union[pd.DataFrame, None]
+        Model's problematic/ambiguous structures. Index: 'smarts' (SMARTS of
+        the problematic structure). Mandatory columns: 'contribute' (dictionary
+        as a string with the structure contribution)
+    hideouts : Union[pd.DataFrame, None]
+        Hideouts for each group. Mandatory columns: 'group' (Group of the model
+        that can be hiden), 'hideout' (other subgroups to find the hiden
+        subgroup)
+    contribution_matrix : pd.DataFrame
+        Model's contribution matrix built from subgroups contribute.
     """
 
     def __init__(
@@ -44,9 +65,7 @@ class FragmentationModel:
         subgroups: pd.DataFrame,
         main_groups: Union[pd.DataFrame, None] = None,
         problematic_structures: Union[pd.DataFrame, None] = None,
-        ch2_hideouts: List[str] = [],
-        ch_hideouts: List[str] = [],
-        shared_groups: List[str] = [],
+        hideouts: Union[pd.DataFrame, None] = None,
     ):
         self.subgroups = subgroups
 
@@ -67,15 +86,15 @@ class FragmentationModel:
             self.problematic_structures = problematic_structures
 
         # Hideouts
-        self.ch2_hideouts = ch2_hideouts
-        self.ch_hideouts = ch_hideouts
+        if hideouts is None:
+            self.hideouts = pd.DataFrame(
+                [], columns=["group", "hideout"]
+            ).set_index("group")
+        else:
+            self.hideouts = hideouts
 
         # Contribution matrix
         self.contribution_matrix = self._build_contrib_matrix()
-
-        # Shared hideouts
-        self.shared_groups = shared_groups
-        self.shared_hideouts = self._build_shared_hideouts()
 
     def _build_contrib_matrix(self) -> pd.DataFrame:
         """Build the contribution matrix of the model.
@@ -88,7 +107,7 @@ class FragmentationModel:
 
         Raises
         ------
-        json.JSONDecodeError
+        ValueError
             Bad contribution parsing of a group
         TypeError
             Bad contribution parsing of a group
@@ -108,37 +127,15 @@ class FragmentationModel:
             try:
                 contribution = json.loads(str_contribution)
             except json.JSONDecodeError:
-                raise json.JSONDecodeError(
-                    f"Bad contribution parsing of the group: {group}"
+                raise ValueError(
+                    f"Bad contribute parsing of the group: {group}"
                 )
             except TypeError:
                 raise TypeError(
-                    f"Bad contribution parsing of the group: {group}"
+                    f"Bad contribution parsing of the group: {group}."
                 )
 
             for k in contribution.keys():
                 dfm.loc[group, k] = contribution[k]
 
         return dfm
-
-    def _build_shared_hideouts(self) -> pd.DataFrame:
-        shared_hideouts = pd.DataFrame(columns=["shared_group", "hideout"])
-        shared_hideouts.set_index("shared_group", inplace=True)
-
-        if len(self.shared_groups) == 0:
-            return shared_hideouts
-
-        subgroups = self.subgroups.index
-        contributes = self.subgroups["contribute"]
-
-        for shared in self.shared_groups:
-            for group, contribute in zip(subgroups, contributes):
-                dict_contrib = json.loads(contribute)
-
-                if dict_contrib.get(shared, 0) < 0:
-                    new_row = pd.DataFrame([(shared, group)], columns=["shared_group", "hideout"])
-                    new_row.set_index("shared_group", inplace=True)
-
-                    shared_hideouts = pd.concat([shared_hideouts, new_row])
-
-        return shared_hideouts

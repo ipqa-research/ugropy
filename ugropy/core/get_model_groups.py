@@ -13,8 +13,7 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 from .checks import (
     check_has_composed,
-    check_has_hidden_ch2_ch,
-    check_has_hidden,
+    check_has_hiden,
     check_has_molecular_weight_right,
 )
 from .composed import correct_composed
@@ -115,12 +114,9 @@ def get_groups(
         return mol_subgroups_decomposed
     elif right_mw and has_composed:
         # Worst scenario, right mw and has composed, need check if has hidden
-        #has_hidden = check_has_hidden_ch2_ch(
-        #    mol_object=mol_object,
-        #    mol_subgroups=mol_subgroups_corrected,
-        #    model=model,
-        #)
-        has_hidden = check_has_hidden(mol_object, mol_subgroups_corrected, model)
+        has_hidden = check_has_hiden(
+            mol_object, mol_subgroups_corrected, model
+        )
 
         if has_hidden:
             mol_subgroups_decomposed = correct_composed(

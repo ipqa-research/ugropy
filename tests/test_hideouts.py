@@ -18,7 +18,7 @@ def test_unifac_ch2_hideouts():
 
         # Check if CH2 is being substracted in the contribution of the group
         if "CH2" in contribution.keys():
-            assert group in unifac.ch2_hideouts
+            assert group in unifac.hideouts.loc["CH2"].values
             continue
         else:
             # Check if CH2 is being substracted in the contribution of the
@@ -28,7 +28,7 @@ def test_unifac_ch2_hideouts():
                 contrib = json.loads(str_contribution)
 
                 if "CH2" in contrib.keys():
-                    assert group in unifac.ch2_hideouts
+                    assert group in unifac.hideouts.loc["CH2"].values
                     break
 
 
@@ -43,7 +43,7 @@ def test_unifac_ch_hideouts():
 
         # Check if CH is being substracted in the contribution of the group
         if "CH" in contribution.keys():
-            assert group in unifac.ch_hideouts
+            assert group in unifac.hideouts.loc["CH"].values
             continue
         else:
             # Check if CH is being substracted in the contribution of the
@@ -53,7 +53,7 @@ def test_unifac_ch_hideouts():
                 contrib = json.loads(str_contribution)
 
                 if "CH" in contrib.keys():
-                    assert group in unifac.ch_hideouts
+                    assert group in unifac.hideouts.loc["CH"].values
                     break
 
 
@@ -71,7 +71,7 @@ def test_psrk_ch2_hideouts():
 
         # Check if CH2 is being substracted in the contribution of the group
         if "CH2" in contribution.keys():
-            assert group in psrk.ch2_hideouts
+            assert group in psrk.hideouts.loc["CH2"].values
             continue
         else:
             # Check if CH2 is being substracted in the contribution of the
@@ -81,7 +81,7 @@ def test_psrk_ch2_hideouts():
                 contrib = json.loads(str_contribution)
 
                 if "CH2" in contrib.keys():
-                    assert group in psrk.ch2_hideouts
+                    assert group in psrk.hideouts.loc["CH2"].values
                     break
 
 
@@ -96,7 +96,7 @@ def test_psrk_ch_hideouts():
 
         # Check if CH is being substracted in the contribution of the group
         if "CH" in contribution.keys():
-            assert group in psrk.ch_hideouts
+            assert group in psrk.hideouts.loc["CH"].values
             continue
         else:
             # Check if CH is being substracted in the contribution of the
@@ -106,5 +106,5 @@ def test_psrk_ch_hideouts():
                 contrib = json.loads(str_contribution)
 
                 if "CH" in contrib.keys():
-                    assert group in psrk.ch_hideouts
+                    assert group in psrk.hideouts.loc["CH"].values
                     break

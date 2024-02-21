@@ -45,16 +45,13 @@ _uni = f"{_csvs}/unifac"
 _uni_sg = _rd(f"{_uni}/unifac_subgroups.csv", "group")
 _uni_mg = _rd(f"{_uni}/unifac_maingroups.csv", "no.")
 _uni_problems = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
-_uni_ch2 = _rd(f"{_uni}/ch2_hideouts.csv", "group").index.to_list()
-_uni_ch = _rd(f"{_uni}/ch_hideouts.csv", "group").index.to_list()
+_uni_hide = _rd(f"{_uni}/hideouts.csv", "group")
 
 unifac = FragmentationModel(
     subgroups=_uni_sg,
     main_groups=_uni_mg,
     problematic_structures=_uni_problems,
-    ch2_hideouts=_uni_ch2,
-    ch_hideouts=_uni_ch,
-    shared_groups=["CH", "CH2"],
+    hideouts=_uni_hide,
 )
 
 
@@ -66,17 +63,13 @@ _psrk = f"{_csvs}/psrk"
 _psrk_sg = _rd(f"{_psrk}/psrk_subgroups.csv", "group")
 _psrk_mg = _rd(f"{_psrk}/psrk_maingroups.csv", "no.")
 _psrk_problems = _rd(f"{_csvs}/problematic_structures.csv", "smarts")
-_psrk_ch2 = _rd(f"{_psrk}/ch2_hideouts.csv", "group").index.to_list()
-_psrk_ch = _rd(f"{_psrk}/ch_hideouts.csv", "group").index.to_list()
-
+_psrk_hide = _rd(f"{_psrk}/hideouts.csv", "group")
 
 psrk = FragmentationModel(
     subgroups=_psrk_sg,
     main_groups=_psrk_mg,
     problematic_structures=_psrk_problems,
-    ch2_hideouts=_psrk_ch2,
-    ch_hideouts=_psrk_ch,
-    shared_groups=["CH", "CH2"],
+    hideouts=_psrk_hide,
 )
 
 # =============================================================================
@@ -87,16 +80,13 @@ _do = f"{_csvs}/dortmund"
 _do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
 _do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
 _do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
-_do_ch2 = _rd(f"{_do}/ch2_hideouts.csv", "group").index.to_list()
-_do_ch = _rd(f"{_do}/ch_hideouts.csv", "group").index.to_list()
+_do_hide = _rd(f"{_do}/hideouts.csv", "group")
 
 dortmund = FragmentationModel(
     subgroups=_do_sg,
     main_groups=_do_mg,
     problematic_structures=_do_problems,
-    ch2_hideouts=_do_ch2,
-    ch_hideouts=_do_ch,
-    shared_groups=["CH", "CH2"],
+    hideouts=_do_hide,
 )
 
 # =============================================================================

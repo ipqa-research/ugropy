@@ -1,4 +1,4 @@
-"""Joback's module."""
+"""Joback's properties module."""
 
 from typing import Union
 

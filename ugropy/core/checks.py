@@ -73,7 +73,7 @@ def check_has_composed(
 
     A composed structure is a subgroup of FragmentationModel that can be
     decomposed into two or more FragmentationModel subgroups. For example,
-    ACCH2 can be decomposed in the AC and CH2 groups.
+    ACCH2 can be decomposed into the AC and CH2 groups.
 
     Parameters
     ----------
@@ -94,28 +94,30 @@ def check_has_composed(
     return any(composed in mol_subgroups for composed in composed_structures)
 
 
-def check_has_hidden_ch2_ch(
+def check_has_hiden(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,
     model: FragmentationModel,
 ) -> bool:
-    """Check for hidden CH2 and CH subgroups in composed structures.
+    """Check for hidden subgroups in composed structures.
 
-    The algorithm checks that the number of CH2 and CH groups in mol_subgroups
-    dictionary is equal to the number of free CH2 and CH. If these numbers are
-    not equal reveals that the CH2 and CH are hidden in composed structures,
-    eg: ACCH2, ACCH. This phenomenon occurs when two subgroups fight for the
-    same CH2 or CH. For example the molecule:
+    The principal subgroups that can be hidden in composed structures for the
+    models UNIFAC, PSRK and Dortmund are CH2 and CH2. The algorithm checks that
+    the number of CH2 and CH groups in mol_subgroups dictionary is equal to the
+    number of free CH2 and CH. If these numbers are not equal reveals that the
+    CH2 and CH are hidden in composed structures, eg: ACCH2, ACCH. This
+    phenomenon occurs when two subgroups fight for the same CH2 or CH. For
+    example the molecule:
 
     CCCC1=CC=C(COC(C)(C)C)C=C1
 
     Here an ACCH2 and a CH2O are fighting to have the same CH2. But since there
-    is a free CH2 in the molecule, the molecule prefers to keep both ACCH2 and
-    CH2O groups without any free CH2 subgroup. This check searches for all CH2
-    and counts all the CH2 that are participating in a CH2 hideout (ACCH2 and
-    CH2O are examples of hideouts). The algorithm notices that there is one
-    free CH2 and there are zero free CH2 groups in the mol_subgroups dictionary
-    and returns 'True' (it has a hidden CH2 or CH).
+    is a free CH2 in the molecule, the algorithm prefers to keep both ACCH2 and
+    CH2O groups without any free CH2 subgroup. This check counts all the CH2
+    that are participating in a CH2 hideout (ACCH2 and CH2O are examples of
+    hideouts). The algorithm notices that there is one free CH2 and there are
+    zero free CH2 groups in the mol_subgroups dictionary and returns 'True'
+    (mol_object has a hidden CH2).
 
     Parameters
     ----------
@@ -129,57 +131,18 @@ def check_has_hidden_ch2_ch(
     Returns
     -------
     bool
-        True if has hidden CH2 or CH subgroups.
+        True if has hidden subgroups.
     """
-    ch2_num = mol_subgroups.get("CH2", 0)
-    ch_num = mol_subgroups.get("CH", 0)
+    hiden_candidates = np.unique(model.hideouts.index.to_numpy())
 
-    all_ch2_atoms = group_matches(mol_object, "CH2", model)
-    all_ch2_atoms = np.array(all_ch2_atoms).flatten()
-
-    all_ch_atoms = group_matches(mol_object, "CH", model)
-    all_ch_atoms = np.array(all_ch_atoms).flatten()
-
-    ch2_hidings_atoms = np.array([])
-    for hideout in model.ch2_hideouts:
-        if hideout in mol_subgroups.keys():
-            hidings = group_matches(mol_object, hideout, model)
-            hidings = np.array(hidings).flatten()
-            ch2_hidings_atoms = np.append(ch2_hidings_atoms, hidings)
-
-    ch_hidings_atoms = np.array([])
-    for hideout in model.ch_hideouts:
-        if hideout in mol_subgroups.keys():
-            hidings = group_matches(mol_object, hideout, model)
-            hidings = np.array(hidings).flatten()
-            ch_hidings_atoms = np.append(ch_hidings_atoms, hidings)
-
-    ch2_diff = np.setdiff1d(all_ch2_atoms, ch2_hidings_atoms)
-    ch_diff = np.setdiff1d(all_ch_atoms, ch_hidings_atoms)
-
-    if len(ch2_diff) != ch2_num:
-        return True
-    elif len(ch_diff) != ch_num:
-        return True
-    else:
-        return False
-
-
-def check_has_hidden(
-    mol_object: Chem.rdchem.Mol,
-    mol_subgroups: dict,
-    model: FragmentationModel,
-) -> bool:
-    hided_candidates = model.shared_groups
-
-    for candidate in hided_candidates:
+    for candidate in hiden_candidates:
         exposed_candidates = mol_subgroups.get(candidate, 0)
-        
+
         all_candidates_atoms = group_matches(mol_object, candidate, model)
         all_candidates_atoms = np.array(all_candidates_atoms).flatten()
-        
+
         hideouts_atoms = np.array([])
-        for hideout in model.shared_hideouts.loc[candidate].to_numpy().flatten():
+        for hideout in model.hideouts.loc[candidate].values.flatten():
             if hideout in mol_subgroups.keys():
                 atoms = group_matches(mol_object, hideout, model)
                 atoms = np.array(atoms).flatten()
@@ -189,5 +152,5 @@ def check_has_hidden(
 
         if len(candidate_diff) != exposed_candidates:
             return True
-    
+
     return False

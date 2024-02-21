@@ -11,7 +11,7 @@ from ugropy.joback_properties import Joback
 class Groups:
     """Group class.
 
-    Stores the solved UNIFAC subgroups of a molecule.
+    Stores the solved FragmentationModels subgroups of a molecule.
 
     Parameters
     ----------
