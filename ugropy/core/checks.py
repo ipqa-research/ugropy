@@ -68,7 +68,7 @@ def check_has_molecular_weight_right(
 def check_has_composed(
     mol_subgroups: dict,
     model: FragmentationModel,
-) -> bool:
+) -> tuple[bool, np.ndarray]:
     """Check if the molecule has composed structures.
 
     A composed structure is a subgroup of FragmentationModel that can be
@@ -87,11 +87,9 @@ def check_has_composed(
     bool
         True if the molecule has composed structures.
     """
-    composed_structures = model.subgroups[
-        model.subgroups["composed"] == "y"
-    ].index
-
-    return any(composed in mol_subgroups for composed in composed_structures)
+    composed_stru = model.subgroups[model.subgroups["composed"] == "y"].index
+    composed_in_mol = np.intersect1d(composed_stru, list(mol_subgroups.keys()))
+    return len(composed_in_mol) > 0, composed_in_mol
 
 
 def check_has_hiden(
@@ -136,9 +134,6 @@ def check_has_hiden(
     hiden_candidates = np.unique(model.hideouts.index.to_numpy())
 
     for candidate in hiden_candidates:
-        # import ipdb; ipdb.set_trace(cond=(candidate=="CH2"))
-        misscount = 0
-
         exposed_candidates = mol_subgroups.get(candidate, 0)
 
         all_candidates_atoms = group_matches(mol_object, candidate, model)
@@ -149,16 +144,50 @@ def check_has_hiden(
             if hideout in mol_subgroups.keys():
                 atoms = group_matches(mol_object, hideout, model)
 
-                # TODO: make documentation about the next if
-                if len(atoms) > mol_subgroups[hideout] and model.subgroups.loc[hideout, "composed"] == "n":
-                    misscount += len(atoms) - mol_subgroups[hideout]
-
                 atoms = np.array(atoms).flatten()
                 hideouts_atoms = np.append(hideouts_atoms, atoms)
 
         candidate_diff = np.setdiff1d(all_candidates_atoms, hideouts_atoms)
 
-        if len(candidate_diff) + misscount != exposed_candidates:
+        if len(candidate_diff) != exposed_candidates:
             return True
 
     return False
+
+
+def check_has_composed_overlapping(
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
+):
+    import ipdb; ipdb.set_trace()    
+    # =========================================================================
+    # Count total number of composed in mol_subgroups
+    # =========================================================================
+    _, composed = check_has_composed(mol_subgroups=mol_subgroups, model=model)
+    composed_in_subgroups = np.sum([mol_subgroups[gr] for gr in composed])
+
+    # =========================================================================
+    # Get atoms of composed and check overlaps
+    # =========================================================================
+    composed_atoms = [group_matches(mol_object, c, model) for c in composed]
+    total_composed_matches = np.sum([len(c) for c in composed_atoms])
+
+    overlapping_count = 0
+    # Self overlapping
+    for c_atoms in composed_atoms:
+        atoms_array = np.array(c_atoms).flatten()
+        _, counts = np.unique(atoms_array, return_counts=True)
+        overlapping_count += np.sum(counts - 1)
+
+    # Cross overlapping
+    for i, i_atoms in enumerate(composed_atoms):
+        for j_atoms in composed_atoms[i + 1:]:
+            overlapping_count += np.sum(np.isin(i_atoms, j_atoms))
+
+    response = composed_in_subgroups > (total_composed_matches - overlapping_count)
+
+    return response
+
+    
+

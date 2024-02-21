@@ -90,7 +90,7 @@ def get_groups(
         model=model,
     )
 
-    has_composed = check_has_composed(
+    has_composed, _ = check_has_composed(
         mol_subgroups=mol_subgroups_corrected,
         model=model,
     )
