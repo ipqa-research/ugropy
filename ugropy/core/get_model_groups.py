@@ -46,6 +46,7 @@ def get_groups(
     Union[dict, List[dict]]
         FragmentationModel's subgroups
     """
+    # import ipdb; ipdb.set_trace()
     # RDKit Mol object
     mol_object = instantiate_mol_object(identifier, identifier_type)
 

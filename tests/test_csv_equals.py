@@ -26,3 +26,8 @@ def test_unifac_psrk_equal():
                 unifac.subgroups.loc[group, "molecular_weight"]
                 == psrk.subgroups.loc[group, "molecular_weight"]
             )
+
+            assert (
+                unifac.subgroups["true_smarts"].dropna().equals(psrk.subgroups["true_smarts"].dropna())
+            )
+
