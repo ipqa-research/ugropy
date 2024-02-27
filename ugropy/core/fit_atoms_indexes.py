@@ -10,6 +10,7 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 def fit_atoms(
     mol_object: Chem.rdchem.Mol, mol_subgroups: dict, model: FragmentationModel
 ):
+    # import ipdb; ipdb.set_trace()
     # =========================================================================
     # Number of atoms in mol_object
     # =========================================================================

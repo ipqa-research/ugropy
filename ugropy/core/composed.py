@@ -9,7 +9,7 @@ from rdkit import Chem
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
-from .checks import check_has_hiden, check_has_molecular_weight_right
+from .checks import check_has_hiden, check_has_molecular_weight_right, check_can_fit_atoms, check_has_composed_overlapping
 
 
 def correct_composed(
@@ -78,6 +78,8 @@ def correct_composed(
     # =========================================================================
     successfull_corrections = []
 
+    # import ipdb; ipdb.set_trace()
+
     for combination in combinatory_list:
         # Get subgroups with decomposed structures
         correction = apply_decompose_correction(
@@ -93,13 +95,28 @@ def correct_composed(
             model=model,
         )
 
-        has_hiden = check_has_hiden(
+        has_overlap = check_has_composed_overlapping(
             mol_object=mol_object,
             mol_subgroups=correction,
             model=model,
         )
 
-        if right_mw and not has_hiden:
+        has_hiden = check_has_hiden(
+            mol_object,
+            mol_subgroups,
+            model
+        )
+
+        if not right_mw or has_overlap or has_hiden:
+            continue
+
+        can_fit = check_can_fit_atoms(
+            mol_object=mol_object,
+            mol_subgroups=correction,
+            model=model,
+        )
+
+        if can_fit:
             successfull_corrections.append(correction)
 
     successfull_corrections = np.array(successfull_corrections)

@@ -82,6 +82,8 @@ def get_groups(
     if mol_subgroups_corrected == {}:
         # No functional groups were detected for the molecule. Example: H2O2
         return mol_subgroups_corrected
+    
+    # import ipdb; ipdb.set_trace()
 
     # =========================================================================
     # Check the presence of composed structures and check if the molecular
@@ -117,9 +119,9 @@ def get_groups(
         return mol_subgroups_decomposed
     elif right_mw and has_composed:
         # Worst scenario, right mw and has composed, need check if has hidden
-        has_hiden = check_has_hiden(mol_object, mol_subgroups_corrected, model)
-
-        if has_hiden:
+        has_overlap = check_has_composed_overlapping(mol_object, mol_subgroups_corrected, model)
+        
+        if has_overlap:
             mol_subgroups_decomposed = correct_composed(
                 mol_object=mol_object,
                 mol_subgroups=mol_subgroups_corrected,
@@ -127,4 +129,15 @@ def get_groups(
             )
             return mol_subgroups_decomposed
         else:
-            return mol_subgroups_corrected
+            can_fit = check_can_fit_atoms(mol_object, mol_subgroups_corrected, model)
+
+            if can_fit:
+                return mol_subgroups_corrected
+            else:
+                mol_subgroups_decomposed = correct_composed(
+                    mol_object=mol_object,
+                    mol_subgroups=mol_subgroups_corrected,
+                    model=model,
+                )
+                return mol_subgroups_decomposed
+

@@ -75,19 +75,19 @@ psrk = FragmentationModel(
 # =============================================================================
 # Dortmund
 # =============================================================================
-_do = f"{_csvs}/dortmund"
+#_do = f"{_csvs}/dortmund"
 
-_do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
-_do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
-_do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
-_do_hide = _rd(f"{_do}/hideouts.csv", "group")
-
-dortmund = FragmentationModel(
-    subgroups=_do_sg,
-    main_groups=_do_mg,
-    problematic_structures=_do_problems,
-    hideouts=_do_hide,
-)
+#_do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
+#_do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
+#_do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
+#_do_hide = _rd(f"{_do}/hideouts.csv", "group")
+#
+#dortmund = FragmentationModel(
+#    subgroups=_do_sg,
+#    main_groups=_do_mg,
+#    problematic_structures=_do_problems,
+#    hideouts=_do_hide,
+#)
 
 # =============================================================================
 # Joback

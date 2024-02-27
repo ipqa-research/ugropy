@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from ugropy import dortmund, psrk, unifac
+from ugropy import psrk, unifac
 
 
 def test_unifac_data():
@@ -46,24 +46,24 @@ def test_psrk_data():
         assert main_group_num == psrk.subgroups.loc[group, "main_group"]
 
 
-def test_dormund_data():
-    here = Path(__file__).parent.resolve()
-
-    with open(f"{here}/original_dortmund.csv", mode="r") as f:
-        df = pd.read_csv(f, sep="|", index_col="Subgroup Name", comment="?")
-
-    for group in df.index:
-        try:
-            assert df.loc[group, "R"] == dortmund.subgroups.loc[group, "R"]
-            assert df.loc[group, "Q"] == dortmund.subgroups.loc[group, "Q"]
-            assert (
-                df.loc[group, "No."]
-                == dortmund.subgroups.loc[group, "subgroup_number"]
-            )
-            assert (
-                df.loc[group, "Main Group No."]
-                == dortmund.subgroups.loc[group, "main_group"]
-            )
-        except KeyError:
-            # TODO: Dortmund in development some groups are commented.
-            ...
+# def test_dormund_data():
+#     here = Path(__file__).parent.resolve()
+# 
+#     with open(f"{here}/original_dortmund.csv", mode="r") as f:
+#         df = pd.read_csv(f, sep="|", index_col="Subgroup Name", comment="?")
+# 
+#     for group in df.index:
+#         try:
+#             assert df.loc[group, "R"] == dortmund.subgroups.loc[group, "R"]
+#             assert df.loc[group, "Q"] == dortmund.subgroups.loc[group, "Q"]
+#             assert (
+#                 df.loc[group, "No."]
+#                 == dortmund.subgroups.loc[group, "subgroup_number"]
+#             )
+#             assert (
+#                 df.loc[group, "Main Group No."]
+#                 == dortmund.subgroups.loc[group, "main_group"]
+#             )
+#         except KeyError:
+#             # TODO: Dortmund in development some groups are commented.
+#             ...
