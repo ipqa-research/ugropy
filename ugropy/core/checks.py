@@ -19,7 +19,7 @@ from rdkit.Chem import Descriptors
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 from .detect_model_groups import group_matches
-
+from .fit_atoms_indexes import fit_atoms
 
 def check_has_molecular_weight_right(
     mol_object: Chem.rdchem.Mol,
@@ -159,8 +159,7 @@ def check_has_composed_overlapping(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,
     model: FragmentationModel,
-):
-    import ipdb; ipdb.set_trace()    
+) -> bool:
     # =========================================================================
     # Count total number of composed in mol_subgroups
     # =========================================================================
@@ -182,12 +181,22 @@ def check_has_composed_overlapping(
 
     # Cross overlapping
     for i, i_atoms in enumerate(composed_atoms):
-        for j_atoms in composed_atoms[i + 1:]:
+        for j_atoms in composed_atoms[i + 1 :]:
             overlapping_count += np.sum(np.isin(i_atoms, j_atoms))
 
-    response = composed_in_subgroups > (total_composed_matches - overlapping_count)
+    response = composed_in_subgroups > (
+        total_composed_matches - overlapping_count
+    )
 
     return response
 
-    
 
+def check_can_fit_atoms(
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
+) -> bool:
+    if fit_atoms(mol_object, mol_subgroups, model):
+        return True
+    else:
+        return False
