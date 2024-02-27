@@ -48,10 +48,10 @@ def test_psrk_data():
 
 # def test_dormund_data():
 #     here = Path(__file__).parent.resolve()
-# 
+#
 #     with open(f"{here}/original_dortmund.csv", mode="r") as f:
 #         df = pd.read_csv(f, sep="|", index_col="Subgroup Name", comment="?")
-# 
+#
 #     for group in df.index:
 #         try:
 #             assert df.loc[group, "R"] == dortmund.subgroups.loc[group, "R"]

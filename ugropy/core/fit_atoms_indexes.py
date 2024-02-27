@@ -5,12 +5,12 @@ import numpy as np
 from rdkit import Chem
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
+from ugropy.core.detect_model_groups import group_matches
 
 
 def fit_atoms(
     mol_object: Chem.rdchem.Mol, mol_subgroups: dict, model: FragmentationModel
 ):
-    # import ipdb; ipdb.set_trace()
     # =========================================================================
     # Number of atoms in mol_object
     # =========================================================================
@@ -18,24 +18,12 @@ def fit_atoms(
     subgroups = list(mol_subgroups.keys())
 
     # =========================================================================
-    # Getting true smarts, this will not be necessary later
-    # =========================================================================
-    smarts = {}
-    for group in mol_subgroups.keys():
-        s = model.subgroups.loc[group, "true_smarts"]
-
-        if s is np.nan:
-            s = model.subgroups.loc[group, "smarts"]
-
-        smarts.update({group: s})
-
-    # =========================================================================
     # Getting atoms candidates for each group
     # =========================================================================
     groups_atoms = {}
-    for group, smt in smarts.items():
-        atom = mol_object.GetSubstructMatches(Chem.MolFromSmarts(smt))
-        groups_atoms[group] = atom
+    for group in mol_subgroups.keys():
+        atoms = group_matches(mol_object, group, model, "fit")
+        groups_atoms[group] = atoms
 
     # =========================================================================
     # Getting combinations for each subgroup according to the number of the
@@ -48,7 +36,7 @@ def fit_atoms(
 
     # =========================================================================
     # Check all possible combinations of solutions
-    # TODO: can be optimized? Probably no, but with an algorithm change yes
+    # TODO: can be optimized? Probably not, but with an algorithm change maybe
     # =========================================================================
     for comb in product(*atoms_combinations.values()):
         plain_tuple = chain(*chain(*comb))

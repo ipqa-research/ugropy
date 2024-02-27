@@ -21,6 +21,7 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 from .detect_model_groups import group_matches
 from .fit_atoms_indexes import fit_atoms
 
+
 def check_has_molecular_weight_right(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,

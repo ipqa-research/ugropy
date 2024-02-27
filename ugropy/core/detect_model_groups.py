@@ -46,6 +46,7 @@ def group_matches(
     mol_object: Chem.rdchem.Mol,
     group: str,
     model: FragmentationModel,
+    action: str = "detection",
 ) -> tuple:
     """Obtain the group matches in mol_object.
 
@@ -64,14 +65,22 @@ def group_matches(
         String of the subgroup. E.g: 'CH3'
     model: FragmentationModel
         FragmentationModel object.
+    action: str, optional
+        Two options are possible: 'detection' or 'fit'. Choose the SMARTS 
+        representation according to the task.
 
     Returns
     -------
     tuple
         Return of the RDKit GetSubstructMatches function.
     """
-    smarts = model.subgroups.loc[group, "smarts"]
-    func_group = Chem.MolFromSmarts(smarts)
-    matches = mol_object.GetSubstructMatches(func_group)
+    if action == "detection":
+        mol = model.detection_mols[group]
+    elif action == "fit":
+        mol = model.fit_mols[group]
+    else:
+        raise ValueError(f"{action} not valid, use 'detection' or 'fit'")
+
+    matches = mol_object.GetSubstructMatches(mol)
 
     return matches

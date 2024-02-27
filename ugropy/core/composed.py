@@ -9,7 +9,12 @@ from rdkit import Chem
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
-from .checks import check_has_hiden, check_has_molecular_weight_right, check_can_fit_atoms, check_has_composed_overlapping
+from .checks import (
+    check_has_hiden,
+    check_has_molecular_weight_right,
+    check_can_fit_atoms,
+    check_has_composed_overlapping,
+)
 
 
 def correct_composed(
@@ -101,11 +106,7 @@ def correct_composed(
             model=model,
         )
 
-        has_hiden = check_has_hiden(
-            mol_object,
-            mol_subgroups,
-            model
-        )
+        has_hiden = check_has_hiden(mol_object, mol_subgroups, model)
 
         if not right_mw or has_overlap or has_hiden:
             continue

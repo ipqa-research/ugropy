@@ -11,6 +11,8 @@ import numpy as np
 
 import pandas as pd
 
+from rdkit import Chem
+
 
 class FragmentationModel:
     """FragmentationModel class.
@@ -63,21 +65,14 @@ class FragmentationModel:
     def __init__(
         self,
         subgroups: pd.DataFrame,
-        main_groups: Union[pd.DataFrame, None] = None,
         problematic_structures: Union[pd.DataFrame, None] = None,
         hideouts: Union[pd.DataFrame, None] = None,
     ):
         self.subgroups = subgroups
 
-        # Empty main_groups template
-        if main_groups is None:
-            self.main_groups = pd.DataFrame(
-                [], columns=["no.", "main group name", "subgroups"]
-            ).set_index("no.")
-        else:
-            self.main_groups = main_groups
-
-        # Empty problematic_structures template
+        # =====================================================================
+        # Empty problematics template
+        # =====================================================================
         if problematic_structures is None:
             self.problematic_structures = pd.DataFrame(
                 [], columns=["smarts", "contribute"]
@@ -93,8 +88,16 @@ class FragmentationModel:
         else:
             self.hideouts = hideouts
 
-        # Contribution matrix
+        # =====================================================================
+        # Contribution matrix build
+        # =====================================================================
         self.contribution_matrix = self._build_contrib_matrix()
+
+        # =====================================================================
+        # Instantiate all de mol object from their smarts
+        # =====================================================================
+        self.detection_mols = self._instantiate_detection_mol()
+        self.fit_mols = self._instantiate_fit_mols()
 
     def _build_contrib_matrix(self) -> pd.DataFrame:
         """Build the contribution matrix of the model.
@@ -115,12 +118,12 @@ class FragmentationModel:
         index = self.subgroups.index.to_numpy()
         matrix = np.zeros((len(index), len(index)), dtype=int)
 
-        # build the matrix
+        # Build the matrix
         dfm = pd.DataFrame(matrix, index=index, columns=index).rename_axis(
             "group"
         )
 
-        # fill the matrix
+        # Fill the matrix
         for group in index:
             str_contribution = self.subgroups.loc[group, "contribute"]
 
@@ -139,3 +142,26 @@ class FragmentationModel:
                 dfm.loc[group, k] = contribution[k]
 
         return dfm
+
+    def _instantiate_detection_mol(self) -> dict:
+        mols = {}
+
+        for group in self.subgroups.index:
+            mols[group] = Chem.MolFromSmarts(
+                self.subgroups.loc[group, "detection_smarts"]
+            )
+
+        return mols
+    
+    def _instantiate_fit_mols(self) -> dict:        
+        mols = {}
+
+        for group in self.subgroups.index:
+            smarts = self.subgroups.loc[group, "smarts"]
+            
+            if isinstance(smarts, str):
+                mols[group] = Chem.MolFromSmarts(smarts)
+            else:
+                mols[group] = self.detection_mols[group]
+
+        return mols

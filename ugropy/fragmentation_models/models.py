@@ -49,7 +49,7 @@ _uni_hide = _rd(f"{_uni}/hideouts.csv", "group")
 
 unifac = FragmentationModel(
     subgroups=_uni_sg,
-    main_groups=_uni_mg,
+    # main_groups=_uni_mg,
     problematic_structures=_uni_problems,
     hideouts=_uni_hide,
 )
@@ -67,7 +67,7 @@ _psrk_hide = _rd(f"{_psrk}/hideouts.csv", "group")
 
 psrk = FragmentationModel(
     subgroups=_psrk_sg,
-    main_groups=_psrk_mg,
+    # main_groups=_psrk_mg,
     problematic_structures=_psrk_problems,
     hideouts=_psrk_hide,
 )
@@ -75,19 +75,19 @@ psrk = FragmentationModel(
 # =============================================================================
 # Dortmund
 # =============================================================================
-#_do = f"{_csvs}/dortmund"
+# _do = f"{_csvs}/dortmund"
 
-#_do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
-#_do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
-#_do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
-#_do_hide = _rd(f"{_do}/hideouts.csv", "group")
+# _do_sg = _rd(f"{_do}/dortmund_subgroups.csv", "group")
+# _do_mg = _rd(f"{_do}/dortmund_maingroups.csv", "no.")
+# _do_problems = _rd(f"{_do}/dortmund_problematics.csv", "smarts")
+# _do_hide = _rd(f"{_do}/hideouts.csv", "group")
 #
-#dortmund = FragmentationModel(
+# dortmund = FragmentationModel(
 #    subgroups=_do_sg,
 #    main_groups=_do_mg,
 #    problematic_structures=_do_problems,
 #    hideouts=_do_hide,
-#)
+# )
 
 # =============================================================================
 # Joback
