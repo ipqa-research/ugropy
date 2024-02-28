@@ -74,13 +74,19 @@ def group_matches(
     tuple
         Return of the RDKit GetSubstructMatches function.
     """
+    # import ipdb; ipdb.set_trace()
+
     if action == "detection":
-        mol = model.detection_mols[group]
+        mols = model.detection_mols[group]
     elif action == "fit":
-        mol = model.fit_mols[group]
+        mols = model.fit_mols[group]
     else:
         raise ValueError(f"{action} not valid, use 'detection' or 'fit'")
 
-    matches = mol_object.GetSubstructMatches(mol)
+    for mol in mols:
+        matches = mol_object.GetSubstructMatches(mol)
+
+        if len(matches) != 0:
+            return matches
 
     return matches

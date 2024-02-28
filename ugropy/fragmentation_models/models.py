@@ -49,7 +49,7 @@ _uni_hide = _rd(f"{_uni}/hideouts.csv", "group")
 
 unifac = FragmentationModel(
     subgroups=_uni_sg,
-    # main_groups=_uni_mg,
+    split_detection_smarts=["C5H4N", "C5H3N", "C4H3S", "C4H2S"],
     problematic_structures=_uni_problems,
     hideouts=_uni_hide,
 )
@@ -67,7 +67,7 @@ _psrk_hide = _rd(f"{_psrk}/hideouts.csv", "group")
 
 psrk = FragmentationModel(
     subgroups=_psrk_sg,
-    # main_groups=_psrk_mg,
+    split_detection_smarts=["C5H4N", "C5H3N", "C4H3S", "C4H2S"],
     problematic_structures=_psrk_problems,
     hideouts=_psrk_hide,
 )

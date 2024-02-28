@@ -83,8 +83,6 @@ def get_groups(
         # No functional groups were detected for the molecule. Example: H2O2
         return mol_subgroups_corrected
 
-    # import ipdb; ipdb.set_trace()
-
     # =========================================================================
     # Check the presence of composed structures and check if the molecular
     # weight of the molecule is equals than the RDKit molecular weight.

@@ -8,8 +8,8 @@ def test_unifac_psrk_equal():
     for group in unifac.subgroups.index:
         if group in psrk.subgroups.index:
             assert (
-                unifac.subgroups.loc[group, "smarts"]
-                == psrk.subgroups.loc[group, "smarts"]
+                unifac.subgroups.loc[group, "detection_smarts"]
+                == psrk.subgroups.loc[group, "detection_smarts"]
             )
 
             assert (

@@ -5,7 +5,7 @@ FragmentationModule class.
 """
 
 import json
-from typing import Union
+from typing import List, Union
 
 import numpy as np
 
@@ -65,10 +65,12 @@ class FragmentationModel:
     def __init__(
         self,
         subgroups: pd.DataFrame,
+        split_detection_smarts: List[str] = [],
         problematic_structures: Union[pd.DataFrame, None] = None,
         hideouts: Union[pd.DataFrame, None] = None,
     ):
         self.subgroups = subgroups
+        self.split_detection_smarts = split_detection_smarts
 
         # =====================================================================
         # Empty problematics template
@@ -147,10 +149,18 @@ class FragmentationModel:
         mols = {}
 
         for group in self.subgroups.index:
-            mols[group] = Chem.MolFromSmarts(
-                self.subgroups.loc[group, "detection_smarts"]
-            )
+            if group not in self.split_detection_smarts:
+                mols[group] = [Chem.MolFromSmarts(
+                    self.subgroups.loc[group, "detection_smarts"]
+                )]
+            else:
+                smarts = self.subgroups.loc[group, "detection_smarts"].split(",")
 
+                mol_smarts = []
+                for sms in smarts:
+                    mol_smarts.append(Chem.MolFromSmarts(sms))
+
+                mols[group] = mol_smarts
         return mols
     
     def _instantiate_fit_mols(self) -> dict:        
@@ -160,7 +170,7 @@ class FragmentationModel:
             smarts = self.subgroups.loc[group, "smarts"]
             
             if isinstance(smarts, str):
-                mols[group] = Chem.MolFromSmarts(smarts)
+                mols[group] = [Chem.MolFromSmarts(smarts)]
             else:
                 mols[group] = self.detection_mols[group]
 

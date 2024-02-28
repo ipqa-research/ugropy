@@ -1,7 +1,5 @@
 from itertools import combinations, product, chain
 
-import numpy as np
-
 from rdkit import Chem
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
@@ -12,7 +10,7 @@ def fit_atoms(
     mol_object: Chem.rdchem.Mol, mol_subgroups: dict, model: FragmentationModel
 ):
     # =========================================================================
-    # Number of atoms in mol_object
+    # Number of atoms in mol_object and subgroups
     # =========================================================================
     total_atom_num = mol_object.GetNumAtoms()
     subgroups = list(mol_subgroups.keys())
