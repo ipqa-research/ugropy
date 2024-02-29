@@ -15,7 +15,6 @@ from .checks import (
     check_has_composed,
     check_has_hiden,
     check_has_molecular_weight_right,
-    check_has_composed_overlapping,
     check_can_fit_atoms,
 )
 from .composed import correct_composed
@@ -117,11 +116,9 @@ def get_groups(
         return mol_subgroups_decomposed
     elif right_mw and has_composed:
         # Worst scenario, right mw and has composed, need check if has hidden
-        has_overlap = check_has_composed_overlapping(
-            mol_object, mol_subgroups_corrected, model
-        )
+        has_hiden = check_has_hiden(mol_object, mol_subgroups_corrected, model)
 
-        if has_overlap:
+        if has_hiden:
             mol_subgroups_decomposed = correct_composed(
                 mol_object=mol_object,
                 mol_subgroups=mol_subgroups_corrected,

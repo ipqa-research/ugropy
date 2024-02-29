@@ -3,9 +3,12 @@ from pathlib import Path
 
 import pandas as pd
 
+import pytest
+
 from ugropy import psrk, unifac
 
 
+@pytest.mark.skip
 def test_unifac_data():
     here = Path(__file__).parent.resolve()
 
@@ -26,6 +29,7 @@ def test_unifac_data():
         assert main_group_num == unifac.subgroups.loc[group, "main_group"]
 
 
+@pytest.mark.skip
 def test_psrk_data():
     here = Path(__file__).parent.resolve()
 

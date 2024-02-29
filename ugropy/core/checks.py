@@ -148,6 +148,13 @@ def check_has_hiden(
                 atoms = np.array(atoms).flatten()
                 hideouts_atoms = np.append(hideouts_atoms, atoms)
 
+                much_matches = len(atoms) > mol_subgroups[hideout]
+                no_comp = model.subgroups.loc[hideout, "composed"] == "n"
+
+                # TODO: document this
+                if much_matches and no_comp:
+                    return False
+
         candidate_diff = np.setdiff1d(all_candidates_atoms, hideouts_atoms)
 
         if len(candidate_diff) != exposed_candidates:
@@ -156,20 +163,31 @@ def check_has_hiden(
     return False
 
 
+def check_can_fit_atoms(
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
+) -> bool:
+    if fit_atoms(mol_object, mol_subgroups, model):
+        return True
+    else:
+        return False
+
+
 def check_has_composed_overlapping(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,
     model: FragmentationModel,
 ) -> bool:
-    # =========================================================================
+    # =======================================================================
     # Count total number of composed in mol_subgroups
-    # =========================================================================
+    # =======================================================================
     _, composed = check_has_composed(mol_subgroups=mol_subgroups, model=model)
     composed_in_subgroups = np.sum([mol_subgroups[gr] for gr in composed])
 
-    # =========================================================================
+    # =======================================================================
     # Get atoms of composed and check overlaps
-    # =========================================================================
+    # =======================================================================
     composed_atoms = [group_matches(mol_object, c, model) for c in composed]
     total_composed_matches = np.sum([len(c) for c in composed_atoms])
 
@@ -190,14 +208,3 @@ def check_has_composed_overlapping(
     )
 
     return response
-
-
-def check_can_fit_atoms(
-    mol_object: Chem.rdchem.Mol,
-    mol_subgroups: dict,
-    model: FragmentationModel,
-) -> bool:
-    if fit_atoms(mol_object, mol_subgroups, model):
-        return True
-    else:
-        return False

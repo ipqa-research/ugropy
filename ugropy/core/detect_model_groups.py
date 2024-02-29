@@ -66,7 +66,7 @@ def group_matches(
     model: FragmentationModel
         FragmentationModel object.
     action: str, optional
-        Two options are possible: 'detection' or 'fit'. Choose the SMARTS 
+        Two options are possible: 'detection' or 'fit'. Choose the SMARTS
         representation according to the task.
 
     Returns
@@ -74,8 +74,6 @@ def group_matches(
     tuple
         Return of the RDKit GetSubstructMatches function.
     """
-    # import ipdb; ipdb.set_trace()
-
     if action == "detection":
         mols = model.detection_mols[group]
     elif action == "fit":

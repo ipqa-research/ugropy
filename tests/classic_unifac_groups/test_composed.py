@@ -10,7 +10,20 @@ import ugropy as ug
 # UNIFAC
 trials_unifac = [
     # TODO Thanos explore and test more this kind of monsters
-    # ("CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1", {}, "smiles"),
+    (
+        "CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1",
+        {
+            "CH3": 4,
+            "C": 1,
+            "ACH": 8,
+            "ACCH2": 2,
+            "CH2O": 2,
+            "COO": 1,
+            "CH2": 2,
+            "AC": 2,
+        },
+        "smiles",
+    ),
     (
         "CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C",
         {"CH3": 6, "CH": 1, "C": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CHO": 1},

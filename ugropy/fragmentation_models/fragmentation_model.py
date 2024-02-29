@@ -150,11 +150,15 @@ class FragmentationModel:
 
         for group in self.subgroups.index:
             if group not in self.split_detection_smarts:
-                mols[group] = [Chem.MolFromSmarts(
-                    self.subgroups.loc[group, "detection_smarts"]
-                )]
+                mols[group] = [
+                    Chem.MolFromSmarts(
+                        self.subgroups.loc[group, "detection_smarts"]
+                    )
+                ]
             else:
-                smarts = self.subgroups.loc[group, "detection_smarts"].split(",")
+                smarts = self.subgroups.loc[group, "detection_smarts"].split(
+                    ","
+                )
 
                 mol_smarts = []
                 for sms in smarts:
@@ -162,13 +166,13 @@ class FragmentationModel:
 
                 mols[group] = mol_smarts
         return mols
-    
-    def _instantiate_fit_mols(self) -> dict:        
+
+    def _instantiate_fit_mols(self) -> dict:
         mols = {}
 
         for group in self.subgroups.index:
             smarts = self.subgroups.loc[group, "smarts"]
-            
+
             if isinstance(smarts, str):
                 mols[group] = [Chem.MolFromSmarts(smarts)]
             else:

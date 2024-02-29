@@ -9,8 +9,6 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    # N,N-Dimethylformamide
-    ("CN(C)C=O", {"DMF": 1}, "smiles"),
     (
         "BrCN(CC1=CC=NC=C1)C=O",
         {"HCON(CH2)2": 1, "BR": 1, "C5H4N": 1},
@@ -21,6 +19,8 @@ trials_unifac = [
         {"HCON(CH2)2": 1, "BR": 1, "AC": 1, "ACH": 5},
         "smiles",
     ),
+    # N,N-Dimethylformamide
+    ("CN(C)C=O", {"DMF": 1}, "smiles"),
     # N,N-Diethylformamide
     ("CCN(CC)C=O", {"CH3": 2, "HCON(CH2)2": 1}, "smiles"),
 ]
