@@ -1,6 +1,6 @@
 """FragmentationModel module.
 
-All ugropy models (dortmund, joback, unifac, psrk) are instances of the
+All ugropy models (joback, unifac, psrk) are instances of the
 FragmentationModule class.
 """
 
@@ -24,42 +24,53 @@ class FragmentationModel:
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (groups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group), 'contribute'
-        (dictionary as a string with the group contribution), 'composed' (y or
-        n if it is or is not a composed structure), 'molecular_weight'
-        (molecular weight of the subgroups).
-    main_groups : Union[pd.DataFrame, None], optional
-        List of main groups, by now it is optional and does nothing, by default
-        None
+        'detection_smarts' (SMARTS representations of the group to detect its
+        precense in the molecule), 'smarts' (true SMARTS of the group witouht
+        additional atom detections), 'contribute' (dictionary as a string with
+        the group contribution), 'composed' (y or n if it is or is not a
+        composed structure), 'molecular_weight' (molecular weight of the
+        subgroups).
+    split_detection_smarts : List[str], optional
+        List of subgroups that have different SMARTS representations. by
+        default []
     problematic_structures : Union[pd.DataFrame, None], optional
         Model's problematic/ambiguous structures. Index: 'smarts' (SMARTS of
         the problematic structure). Mandatory columns: 'contribute' (dictionary
         as a string with the structure contribution), by default None
     hideouts : Union[pd.DataFrame, None], optional
-        Hideouts for each group. Mandatory columns: 'group' (Group of the model
-        that can be hiden), 'hideout' (other subgroups to find the hiden
-        subgroup), by default []
+        Hideouts for each group. Index: 'group' (Group of the model that can be
+        hiden). Mandatory columns: 'hideout' (other subgroups to find the hiden
+        subgroup), by defautl None
 
     Attributes
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (groups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group), 'contribute'
-        (dictionary as a string with the group contribution), 'composed' (y or
-        n if it is or is not a composed structure), 'molecular_weight'
-        (molecular weight of the subgroups).
-    main_groups : Union[pd.DataFrame, None]
-        List of main groups, by now it is optional and does nothing
-    problematic_structures : Union[pd.DataFrame, None]
+        'detection_smarts' (SMARTS representations of the group to detect its
+        precense in the molecule), 'smarts' (true SMARTS of the group witouht
+        additional atom detections. If a value is missing uses the
+        corresponding detection_smarts), 'contribute' (dictionary as a string
+        with the group contribution), 'composed' (y or n if it is or is not a
+        composed structure), 'molecular_weight' (molecular weight of the
+        subgroups).
+    split_detection_smarts : List[str]
+        List of subgroups that have different SMARTS representations.
+    problematic_structures : pd.Dataframe
         Model's problematic/ambiguous structures. Index: 'smarts' (SMARTS of
         the problematic structure). Mandatory columns: 'contribute' (dictionary
         as a string with the structure contribution)
-    hideouts : Union[pd.DataFrame, None]
-        Hideouts for each group. Mandatory columns: 'group' (Group of the model
-        that can be hiden), 'hideout' (other subgroups to find the hiden
+    hideouts : pd.DataFrame
+        Hideouts for each group. Index: 'group' (Group of the model that can be
+        hiden). Mandatory columns: 'hideout' (other subgroups to find the hiden
         subgroup)
-    contribution_matrix : pd.DataFrame
-        Model's contribution matrix built from subgroups contribute.
+    detection_mols : dict
+        Dictionary cotaining all the rdkit Mol object from the detection_smarts
+        subgroups column.
+    fit_mols : dict
+        Dictionary cotaining all the rdkit Mol object from the smarts subgroups
+        column.
+    contribution_matrix : pd.Dataframe
+        Contribution matrix of the model built from the subgroups contribute.
     """
 
     def __init__(
@@ -82,7 +93,9 @@ class FragmentationModel:
         else:
             self.problematic_structures = problematic_structures
 
+        # =====================================================================
         # Hideouts
+        # =====================================================================
         if hideouts is None:
             self.hideouts = pd.DataFrame(
                 [], columns=["group", "hideout"]
@@ -146,6 +159,13 @@ class FragmentationModel:
         return dfm
 
     def _instantiate_detection_mol(self) -> dict:
+        """Instantiate all the rdkit Mol object from the detection_smarts.
+
+        Returns
+        -------
+        dict
+            Mol objects.
+        """
         mols = {}
 
         for group in self.subgroups.index:
@@ -168,6 +188,13 @@ class FragmentationModel:
         return mols
 
     def _instantiate_fit_mols(self) -> dict:
+        """Instantiate all the rdkit Mol object from the smarts.
+
+        Returns
+        -------
+        dict
+            Mol object to fit the subgroups in the molecule's atoms.
+        """
         mols = {}
 
         for group in self.subgroups.index:
