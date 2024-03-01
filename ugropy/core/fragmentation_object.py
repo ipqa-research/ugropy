@@ -6,7 +6,7 @@ from rdkit.Chem import Descriptors
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
-class Solution:
+class Fragmentation:
     def __init__(
         self,
         mol_subgroups: Union[dict, List[dict]],

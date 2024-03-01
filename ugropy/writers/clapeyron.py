@@ -2,7 +2,7 @@
 
 from typing import List
 
-from ugropy.joback_properties import Joback
+from ugropy.properties.joback_properties import JobackProperties
 
 from .clapeyron_writers import (
     write_critical,
@@ -16,7 +16,7 @@ def to_clapeyron(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
-    joback_objects: List[Joback] = [],
+    joback_objects: List[JobackProperties] = [],
     path: str = "./database",
     batch_name: str = "",
 ) -> None:
@@ -33,8 +33,8 @@ def to_clapeyron(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
-    joback_objects : List[Joback], optional
-        List of ugropy.Joback objects, by default [].
+    joback_objects : List[JobackProperties], optional
+        List of ugropy.properties.JobackProperties objects, by default [].
     path : str, optional
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional

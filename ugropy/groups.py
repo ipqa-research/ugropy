@@ -5,7 +5,7 @@ from rdkit.Chem import Descriptors
 from ugropy.core.get_model_groups import get_groups
 from ugropy.core.get_rdkit_object import instantiate_mol_object
 from ugropy.fragmentation_models.models import psrk, unifac
-from ugropy.joback_properties import Joback
+from ugropy.properties.joback_properties import JobackProperties
 
 
 class Groups:
@@ -34,17 +34,17 @@ class Groups:
     identifier_type : str, optional
         Use 'name' to search a molecule by name or 'smiles' to provide the
         molecule SMILES representation, by default "name".
-    chem_object : rdkit.Chem.rdchem.Mol
+    mol_object : rdkit.Chem.rdchem.Mol
         RDKit Mol object.
     molecular_weight : float
         Molecule's molecular weight from rdkit.Chem.Descriptors.MolWt [g/mol].
-    unifac_groups : dict
+    unifac : Fragmentation
         Classic LV-UNIFAC subgroups.
-    psrk_groups : dict
+    psrk : Fragmentation
         Predictive Soave-Redlich-Kwong subgroups.
-    joback : Joback
-        Joback object that contains the Joback subgroups and the estimated
-        properties of the molecule.
+    joback : JobackProperties
+        JobackProperties object that contains the Joback subgroups and the
+        estimated properties of the molecule.
     """
 
     def __init__(
@@ -55,20 +55,16 @@ class Groups:
     ) -> None:
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
-        self.chem_object = instantiate_mol_object(identifier, identifier_type)
-        self.molecular_weight = Descriptors.MolWt(self.chem_object)
+        self.mol_object = instantiate_mol_object(identifier, identifier_type)
+        self.molecular_weight = Descriptors.MolWt(self.mol_object)
 
-        # UNIFAC groups
-        self.unifac_groups = get_groups(
-            unifac, self.identifier, self.identifier_type
-        )
+        # UNIFAC
+        self.unifac = get_groups(unifac, self.identifier, self.identifier_type)
 
-        # PSRK groups
-        self.psrk_groups = get_groups(
-            psrk, self.identifier, self.identifier_type
-        )
+        # PSRK
+        self.psrk = get_groups(psrk, self.identifier, self.identifier_type)
 
         # Joback
-        self.joback = Joback(
+        self.joback = JobackProperties(
             self.identifier, self.identifier_type, normal_boiling_temperature
         )

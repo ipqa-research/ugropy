@@ -1,6 +1,6 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
 
 
 # =============================================================================
@@ -26,7 +26,7 @@ trials_psrk = [
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_51_epoxy_psrk(identifier, result, identifier_type):
-    assert ug.get_groups(ug.psrk, identifier, identifier_type) == result
+    assert get_groups(psrk, identifier, identifier_type).subgroups == result
 
 
 # =============================================================================
@@ -49,4 +49,4 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_51_epoxy_unfiac(identifier, result, identifier_type):
-    assert ug.get_groups(ug.unifac, identifier, identifier_type) == result
+    assert get_groups(unifac, identifier, identifier_type).subgroups == result

@@ -13,7 +13,7 @@ from ugropy.core.get_model_groups import get_groups
 from ugropy.fragmentation_models.models import joback
 
 
-class Joback:
+class JobackProperties:
     """Joback [1] group contribution properties estimator.
 
     Parameters
@@ -80,7 +80,9 @@ class Joback:
     ) -> None:
         # Skip if instantiation from_groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
-            self.groups = get_groups(joback, identifier, identifier_type)
+            self.groups = get_groups(
+                joback, identifier, identifier_type
+            ).subgroups
         elif identifier_type == "groups":
             self.groups = identifier
         else:

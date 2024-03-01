@@ -19,6 +19,7 @@ from .checks import (
 )
 from .composed import correct_composed
 from .detect_model_groups import detect_groups
+from .fragmentation_object import Fragmentation
 from .get_rdkit_object import instantiate_mol_object
 from .problematics import correct_problematics
 
@@ -27,7 +28,7 @@ def get_groups(
     model: FragmentationModel,
     identifier: Union[str, Chem.rdchem.Mol],
     identifier_type: str = "name",
-) -> Union[dict, List[dict]]:
+) -> Fragmentation:
     """Obtain the FragmentationModel's subgroups of an RDkit Mol object.
 
     Parameters
@@ -44,10 +45,9 @@ def get_groups(
 
     Returns
     -------
-    Union[dict, List[dict]]
+    Fragmentation
         FragmentationModel's subgroups
     """
-    # import ipdb; ipdb.set_trace()
     # RDKit Mol object
     mol_object = instantiate_mol_object(identifier, identifier_type)
 
@@ -80,7 +80,7 @@ def get_groups(
     # First exit
     if mol_subgroups_corrected == {}:
         # No functional groups were detected for the molecule. Example: H2O2
-        return mol_subgroups_corrected
+        return Fragmentation({}, mol_object, model)
 
     # =========================================================================
     # Check the presence of composed structures and check if the molecular
@@ -102,10 +102,10 @@ def get_groups(
     # =========================================================================
     if right_mw and not has_composed:
         # No need to do more, the solution was obtained.
-        return mol_subgroups_corrected
+        return Fragmentation(mol_subgroups_corrected, mol_object, model)
     elif not right_mw and not has_composed:
         # Nothing to do, the moelcule can't be modeled with FragmentationModel
-        return {}
+        return Fragmentation({}, mol_object, model)
     elif not right_mw and has_composed:
         # Try fix the problem, the decomposition could still fail and return {}
         mol_subgroups_decomposed = correct_composed(
@@ -113,7 +113,7 @@ def get_groups(
             mol_subgroups=mol_subgroups_corrected,
             model=model,
         )
-        return mol_subgroups_decomposed
+        return Fragmentation(mol_subgroups_decomposed, mol_object, model)
     elif right_mw and has_composed:
         # Worst scenario, right mw and has composed, need check if has hidden
         has_hiden = check_has_hiden(mol_object, mol_subgroups_corrected, model)
@@ -124,18 +124,23 @@ def get_groups(
                 mol_subgroups=mol_subgroups_corrected,
                 model=model,
             )
-            return mol_subgroups_decomposed
+
+            fr = Fragmentation(mol_subgroups_decomposed, mol_object, model)
+
+            return fr
         else:
             can_fit = check_can_fit_atoms(
                 mol_object, mol_subgroups_corrected, model
             )
 
             if can_fit:
-                return mol_subgroups_corrected
+                fr = Fragmentation(mol_subgroups_corrected, mol_object, model)
+                return fr
             else:
                 mol_subgroups_decomposed = correct_composed(
                     mol_object=mol_object,
                     mol_subgroups=mol_subgroups_corrected,
                     model=model,
                 )
-                return mol_subgroups_decomposed
+                fr = Fragmentation(mol_subgroups_decomposed, mol_object, model)
+                return fr

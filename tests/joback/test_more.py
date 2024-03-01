@@ -1,6 +1,6 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, joback
 
 
 # Joback
@@ -119,4 +119,4 @@ trials = [
 @pytest.mark.Joback
 @pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_more(identifier, result, identifier_type):
-    assert ug.get_groups(ug.joback, identifier, identifier_type) == result
+    assert get_groups(joback, identifier, identifier_type).subgroups == result

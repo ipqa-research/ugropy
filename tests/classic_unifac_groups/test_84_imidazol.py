@@ -1,6 +1,6 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
 
 
 # =============================================================================
@@ -17,4 +17,4 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_thiophene_unifac(identifier, result, identifier_type):
-    assert ug.get_groups(ug.unifac, identifier, identifier_type) == result
+    assert get_groups(unifac, identifier, identifier_type).subgroups == result

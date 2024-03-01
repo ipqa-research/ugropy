@@ -1,6 +1,6 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
 
 
 # =============================================================================
@@ -83,16 +83,23 @@ trials_unifac = [
 ]
 
 
-@pytest.mark.PSRK
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_composed_unifac(identifier, result, identifier_type):
-    unifac_result = ug.get_groups(ug.unifac, identifier, identifier_type)
-    psrk_result = ug.get_groups(ug.psrk, identifier, identifier_type)
+    unifac_result = get_groups(unifac, identifier, identifier_type)
     try:
-        assert unifac_result == result
-        assert psrk_result == result
+        assert unifac_result.subgroups == result
     except ValueError:
-        for uni, psrk, sol in zip(unifac_result, psrk_result, result):
-            assert uni == sol
-            assert psrk == sol
+        for uni_r, sol in zip(unifac_result.subgroups, result):
+            assert uni_r == sol
+
+
+@pytest.mark.PSRK
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_composed_psrk(identifier, result, identifier_type):
+    psrk_result = get_groups(psrk, identifier, identifier_type)
+    try:
+        assert psrk_result.subgroups == result
+    except ValueError:
+        for psrk_r, sol in zip(psrk_result.subgroups, result):
+            assert psrk_r == sol

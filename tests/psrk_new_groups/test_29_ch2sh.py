@@ -1,6 +1,6 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk
 
 
 # =============================================================================
@@ -18,4 +18,4 @@ trials_psrk = [
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_29_ch3sh(identifier, result, identifier_type):
-    assert ug.get_groups(ug.psrk, identifier, identifier_type) == result
+    assert get_groups(psrk, identifier, identifier_type).subgroups == result
