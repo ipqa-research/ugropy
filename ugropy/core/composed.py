@@ -11,9 +11,9 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 from .checks import (
     check_can_fit_atoms,
+    check_has_composed_overlapping,
     check_has_hiden,
     check_has_molecular_weight_right,
-    check_has_composed_overlapping,
 )
 
 

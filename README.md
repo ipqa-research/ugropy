@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="logo.png" alt="logo" width="300" height="350">
-</p>
+![logo](logo.svg)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)

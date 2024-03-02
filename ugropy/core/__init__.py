@@ -6,9 +6,9 @@ FragmentationModel subgroups detection functions.
 from .checks import (
     check_can_fit_atoms,
     check_has_composed,
+    check_has_composed_overlapping,
     check_has_hiden,
     check_has_molecular_weight_right,
-    check_has_composed_overlapping,
 )
 from .composed import correct_composed
 from .fit_atoms_indexes import fit_atoms

@@ -1,9 +1,9 @@
-from itertools import combinations, product, chain
+from itertools import chain, combinations, product
 
 from rdkit import Chem
 
-from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 from ugropy.core.detect_model_groups import group_matches
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
 def fit_atoms(

@@ -3,7 +3,7 @@
 Get the groups from a FragmentationModel.
 """
 
-from typing import List, Union
+from typing import Union
 
 import pandas as pd
 
@@ -12,10 +12,10 @@ from rdkit import Chem
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 from .checks import (
+    check_can_fit_atoms,
     check_has_composed,
     check_has_hiden,
     check_has_molecular_weight_right,
-    check_can_fit_atoms,
 )
 from .composed import correct_composed
 from .detect_model_groups import detect_groups

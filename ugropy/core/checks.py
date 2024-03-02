@@ -200,7 +200,7 @@ def check_has_composed_overlapping(
 
     # Cross overlapping
     for i, i_atoms in enumerate(composed_atoms):
-        for j_atoms in composed_atoms[i + 1 :]:
+        for j_atoms in composed_atoms[i + 1 :]: # noqa
             overlapping_count += np.sum(np.isin(i_atoms, j_atoms))
 
     response = composed_in_subgroups > (
