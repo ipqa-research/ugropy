@@ -1,4 +1,3 @@
-import io
 from pathlib import Path
 
 import pandas as pd
@@ -7,8 +6,6 @@ import pytest
 
 from ugropy import FragmentationModel, get_groups, unifac
 from ugropy.fragmentation_models import models
-
-import xml.etree.ElementTree as ET
 
 
 def test_no_problem_model():
