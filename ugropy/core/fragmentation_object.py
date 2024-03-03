@@ -1,3 +1,5 @@
+"""Fragmentation module."""
+
 from typing import List, Union
 
 import numpy as np
@@ -10,6 +12,25 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
 class Fragmentation:
+    """Fragmentation object. Is the return of the get_groups function.
+
+    Parameters
+    ----------
+    mol_subgroups : Union[dict, List[dict]]
+        Subgroups of mol_object.
+    mol_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    model: FragmentationModel
+        FragmentationModel object.
+
+    Attributes
+    ----------
+    subgroups : dict
+        Subgroups of the molecule.
+    mol_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    """
+
     def __init__(
         self,
         mol_subgroups: Union[dict, List[dict]],
@@ -22,12 +43,12 @@ class Fragmentation:
 
     def draw(
         self,
-        title="",
-        width=400,
-        height=200,
-        title_font_size=12,
-        legend_font_size=12,
-        font="Helvetica",
+        title: str = "",
+        width: float = 400,
+        height: float = 200,
+        title_font_size: float = 12,
+        legend_font_size: float = 12,
+        font: str = "Helvetica",
     ) -> str:
         """Create a svg representation of the fragmentation result.
 
@@ -111,7 +132,19 @@ class Fragmentation:
         return svg_with_legend
 
 
-def _generate_distinct_colors(n):
+def _generate_distinct_colors(n: int) -> List[tuple]:
+    """Return distinguishable colors in (r,g,b,a) format (10 different max).
+
+    Parameters
+    ----------
+    n : int
+        Number of colors desired.
+
+    Returns
+    -------
+    List[tuple]
+        Colors.
+    """
     base_colors = np.array(
         [
             [0.12156863, 0.46666667, 0.70588235],  # blue

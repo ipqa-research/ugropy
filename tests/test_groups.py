@@ -19,7 +19,7 @@ def test_smiles():
         == get_groups(psrk, "CCO", identifier_type="smiles").subgroups
     )
     assert (
-        mol.joback.groups
+        mol.joback.subgroups
         == get_groups(joback, "CCO", identifier_type="smiles").subgroups
     )
 
@@ -36,7 +36,7 @@ def test_name():
         == get_groups(psrk, "ethanol", identifier_type="name").subgroups
     )
     assert (
-        mol.joback.groups
+        mol.joback.subgroups
         == get_groups(joback, "ethanol", identifier_type="name").subgroups
     )
 
@@ -54,6 +54,6 @@ def test_mol():
         == get_groups(psrk, chm, identifier_type="mol").subgroups
     )
     assert (
-        mol.joback.groups
+        mol.joback.subgroups
         == get_groups(joback, chm, identifier_type="mol").subgroups
     )

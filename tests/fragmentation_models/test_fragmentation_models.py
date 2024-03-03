@@ -1,9 +1,14 @@
+import io
+from pathlib import Path
+
 import pandas as pd
 
 import pytest
 
-from ugropy import FragmentationModel, unifac
+from ugropy import FragmentationModel, get_groups, unifac
 from ugropy.fragmentation_models import models
+
+import xml.etree.ElementTree as ET
 
 
 def test_no_problem_model():
@@ -37,3 +42,18 @@ def test_making_it_explode():
 
     with pytest.raises(ValueError):
         FragmentationModel(subgroups=subgroups)
+
+
+def test_draw():
+    here = Path(__file__).parent.resolve()
+
+    with open(f"{here}/../../logo.svg") as f:
+        expected = f.read()
+
+    mol = get_groups(
+        unifac, "CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1", "smiles"
+    )
+
+    svg = mol.draw("ugropy", 800, 450, 50, 14)
+
+    assert expected == svg

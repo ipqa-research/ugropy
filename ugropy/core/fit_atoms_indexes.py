@@ -1,3 +1,5 @@
+"""fit_atoms_indexes module."""
+
 from itertools import chain, combinations, product
 
 from rdkit import Chem
@@ -8,15 +10,31 @@ from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 def fit_atoms(
     mol_object: Chem.rdchem.Mol, mol_subgroups: dict, model: FragmentationModel
-):
+) -> dict:
+    """Assign the atoms indexes for each mol_subgroup.
+
+    Parameters
+    ----------
+    mol_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    mol_subgroups : dict
+        Subgroups of mol_object.
+    model: FragmentationModel
+        FragmentationModel object.
+
+    Returns
+    -------
+    dict
+        Atom indexes in mol_object of each subgroup.
+    """
     # =========================================================================
-    # Number of atoms in mol_object and subgroups
+    # Number of atoms in mol_object and subgroups.
     # =========================================================================
     total_atom_num = mol_object.GetNumAtoms()
     subgroups = list(mol_subgroups.keys())
 
     # =========================================================================
-    # Getting atoms candidates for each group
+    # Getting atoms candidates for each group.
     # =========================================================================
     groups_atoms = {}
     for group in mol_subgroups.keys():

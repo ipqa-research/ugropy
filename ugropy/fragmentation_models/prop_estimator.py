@@ -1,5 +1,4 @@
-"""GibbsModel module."""
-
+"""PropertiesEstimator module."""
 from typing import List, Union
 
 import pandas as pd
@@ -7,10 +6,10 @@ import pandas as pd
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
 
-class GibbsModel(FragmentationModel):
-    """GibbsModel it's a fragmentation model dedicated to Gibbs excess models.
+class PropertiesEstimator(FragmentationModel):
+    """Fragmentation model dedicated to properties estimation models.
 
-    unifac, psrk, dortmund are instances of this class.
+    joback is a instance of this class.
 
     Parameters
     ----------
@@ -33,12 +32,8 @@ class GibbsModel(FragmentationModel):
         Hideouts for each group. Index: 'group' (Group of the model that can be
         hiden). Mandatory columns: 'hideout' (other subgroups to find the hiden
         subgroup), by defautl None
-    subgroups_info : Union[pd.DataFrame, None], optional
-        Information of the model's subgroups (R, Q, subgroup_number,
-        main_group), by default None
-    main_groups : Union[pd.DataFrame, None], optional
-        Main groups information (no., maingroup_name, subgroups), by default
-        None
+    properties_contributions : pd.DataFrame, optional
+        Group's properties contributions, by default None
 
     Attributes
     ----------
@@ -69,11 +64,8 @@ class GibbsModel(FragmentationModel):
         column.
     contribution_matrix : pd.Dataframe
         Contribution matrix of the model built from the subgroups contribute.
-    subgroups_info : pd.DataFrame
-        Information of the model's subgroups (R, Q, subgroup_number,
-        main_group).
-    main_groups : pd.DataFrame
-        Main groups information (no., maingroup_name, subgroups).
+    properties_contributions : pd.DataFrame
+        Group's properties contributions.
     """
 
     def __init__(
@@ -82,30 +74,13 @@ class GibbsModel(FragmentationModel):
         split_detection_smarts: List[str] = [],
         problematic_structures: Union[pd.DataFrame, None] = None,
         hideouts: Union[pd.DataFrame, None] = None,
-        subgroups_info: Union[pd.DataFrame, None] = None,
-        main_groups: Union[pd.DataFrame, None] = None,
-    ) -> None:
+        properties_contributions: Union[pd.DataFrame, None] = None,
+    ):
         super().__init__(
             subgroups, split_detection_smarts, problematic_structures, hideouts
         )
 
         # =====================================================================
-        # Empty main_groups DataFrame template
+        # Properties contributions
         # =====================================================================
-        if main_groups is None:
-            self.main_groups = pd.DataFrame(
-                [], columns=["no.", "main group name", "subgroups"]
-            ).set_index("no.")
-        else:
-            self.main_groups = main_groups
-
-        # =====================================================================
-        # subgroups info
-        # =====================================================================
-        if subgroups_info is None:
-            self.subgroups_info = pd.DataFrame(
-                [],
-                columns=["group", "subgroup_number", "main_group", "R", "Q"],
-            ).set_index("group")
-        else:
-            self.subgroups_info = subgroups_info
+        self.properties_contributions = properties_contributions

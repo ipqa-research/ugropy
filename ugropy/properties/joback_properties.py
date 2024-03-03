@@ -5,10 +5,7 @@ from typing import Union
 import numpy as np
 from numpy.typing import NDArray
 
-from ugropy.constants import (
-    R,
-    joback_properties,
-)
+from ugropy.constants import R
 from ugropy.core.get_model_groups import get_groups
 from ugropy.fragmentation_models.models import joback
 
@@ -33,7 +30,7 @@ class JobackProperties:
 
     Attributes
     ----------
-    groups : dict
+    subgroups : dict
         Joback functional groups of the molecule.
     exp_nbt : float
         User provided experimental normal boiling point [K].
@@ -80,11 +77,11 @@ class JobackProperties:
     ) -> None:
         # Skip if instantiation from_groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
-            self.groups = get_groups(
+            self.subgroups = get_groups(
                 joback, identifier, identifier_type
             ).subgroups
         elif identifier_type == "groups":
-            self.groups = identifier
+            self.subgroups = identifier
         else:
             raise ValueError(
                 f"Identifier type ''{identifier_type}'' is incorrect. Use "
@@ -114,7 +111,7 @@ class JobackProperties:
         self.vapor_pressure_params = {}
 
         # Fill the properties' values
-        if self.groups != {}:
+        if self.subgroups != {}:
             self._calculate_properties()
 
     def heat_capacity_ideal_gas(
@@ -230,10 +227,10 @@ class JobackProperties:
 
     def _calculate_properties(self) -> None:
         """Obtain the molecule properties from Joback's groups."""
-        groups = list(self.groups.keys())
-        ocurr = list(self.groups.values())
+        groups = list(self.subgroups.keys())
+        ocurr = list(self.subgroups.values())
 
-        df = joback_properties.loc[groups]
+        df = joback.properties_contributions.loc[groups]
 
         # =====================================================================
         # Calculate complete contribution properties (no contribution missing)

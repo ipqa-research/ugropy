@@ -9,7 +9,7 @@ from ugropy.properties import JobackProperties
 
 def test_p_dichlorobenzene():
     mol = JobackProperties("C1=CC(=CC=C1Cl)Cl", "smiles")
-    assert mol.groups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
+    assert mol.subgroups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
     assert np.allclose(mol.normal_boiling_point, 443.4, atol=1e-2)
     assert np.allclose(mol.fusion_temperature, 256, atol=1)
     assert np.allclose(mol.critical_temperature, 675, atol=1)
@@ -71,7 +71,7 @@ def test_giving_groups():
     chm = Chem.MolFromInchi("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
     mol2 = JobackProperties(chm, identifier_type="mol")
 
-    assert mol1.groups == mol2.groups
+    assert mol1.subgroups == mol2.subgroups
     assert mol1.exp_nbt == mol2.exp_nbt
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure
@@ -102,9 +102,9 @@ def test_giving_groups():
 
 def test_giving_rdkit_mol():
     mol1 = JobackProperties("CCO", identifier_type="smiles")
-    mol2 = JobackProperties(mol1.groups, identifier_type="groups")
+    mol2 = JobackProperties(mol1.subgroups, identifier_type="groups")
 
-    assert mol1.groups == mol2.groups
+    assert mol1.subgroups == mol2.subgroups
     assert mol1.exp_nbt == mol2.exp_nbt
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure

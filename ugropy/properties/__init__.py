@@ -1,3 +1,5 @@
+"""Properties module."""
+
 from .joback_properties import JobackProperties
 
 

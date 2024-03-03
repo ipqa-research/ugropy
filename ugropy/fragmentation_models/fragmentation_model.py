@@ -79,7 +79,7 @@ class FragmentationModel:
         split_detection_smarts: List[str] = [],
         problematic_structures: Union[pd.DataFrame, None] = None,
         hideouts: Union[pd.DataFrame, None] = None,
-    ):
+    ) -> None:
         self.subgroups = subgroups
         self.split_detection_smarts = split_detection_smarts
 

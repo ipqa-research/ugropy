@@ -1,14 +1,7 @@
 """check module.
 
 The module contains the necessary checks to corroborate the success of the
-algorithm to obtain the molecule's UNIFAC subgroups.
-
-check_has_molecular_weight_right: check the molecular weight of the molecule.
-
-check_has_composed: check if the molecule has composed structures.
-
-check_has_hidden_ch2_ch: check if the molecule has CH2 or CH hidden in composed
-structures.
+algorithm to obtain the molecule's FragmentationModel subgroups.
 """
 
 import numpy as np
@@ -101,7 +94,7 @@ def check_has_hiden(
     """Check for hidden subgroups in composed structures.
 
     The principal subgroups that can be hidden in composed structures for the
-    models UNIFAC, PSRK and Dortmund are CH2 and CH2. The algorithm checks that
+    models UNIFAC, PSRK and Dortmund are CH2 and CH. The algorithm checks that
     the number of CH2 and CH groups in mol_subgroups dictionary is equal to the
     number of free CH2 and CH. If these numbers are not equal reveals that the
     CH2 and CH are hidden in composed structures, eg: ACCH2, ACCH. This
@@ -168,6 +161,22 @@ def check_can_fit_atoms(
     mol_subgroups: dict,
     model: FragmentationModel,
 ) -> bool:
+    """Check if a solution can be fitted in the mol_object atoms.
+
+    Parameters
+    ----------
+    mol_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    mol_subgroups : dict
+        Subgroups of mol_object.
+    model: FragmentationModel
+        FragmentationModel object.
+
+    Returns
+    -------
+    bool
+        True if the solution can be fitted.
+    """
     if fit_atoms(mol_object, mol_subgroups, model):
         return True
     else:
@@ -179,19 +188,36 @@ def check_has_composed_overlapping(
     mol_subgroups: dict,
     model: FragmentationModel,
 ) -> bool:
-    # =======================================================================
+    """Check if in the solution are composed structures overlapping.
+
+    Parameters
+    ----------
+    mol_object : Chem.rdchem.Mol
+        RDKit Mol object.
+    mol_subgroups : dict
+        Subgroups of mol_object.
+    model: FragmentationModel
+        FragmentationModel object.
+
+    Returns
+    -------
+    bool
+        Treu if the solution has overlapping composed structures.
+    """
+    # =========================================================================
     # Count total number of composed in mol_subgroups
-    # =======================================================================
+    # =========================================================================
     _, composed = check_has_composed(mol_subgroups=mol_subgroups, model=model)
     composed_in_subgroups = np.sum([mol_subgroups[gr] for gr in composed])
 
-    # =======================================================================
+    # =========================================================================
     # Get atoms of composed and check overlaps
-    # =======================================================================
+    # =========================================================================
     composed_atoms = [group_matches(mol_object, c, model) for c in composed]
     total_composed_matches = np.sum([len(c) for c in composed_atoms])
 
     overlapping_count = 0
+
     # Self overlapping
     for c_atoms in composed_atoms:
         atoms_array = np.array(c_atoms).flatten()
@@ -200,7 +226,7 @@ def check_has_composed_overlapping(
 
     # Cross overlapping
     for i, i_atoms in enumerate(composed_atoms):
-        for j_atoms in composed_atoms[i + 1 :]: # noqa
+        for j_atoms in composed_atoms[i + 1 :]:  # noqa
             overlapping_count += np.sum(np.isin(i_atoms, j_atoms))
 
     response = composed_in_subgroups > (
