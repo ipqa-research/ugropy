@@ -54,3 +54,16 @@ def test_draw():
     svg = mol.draw("ugropy", 800, 450, 50, 14)
 
     assert expected == svg
+
+
+def test_draw2():
+    here = Path(__file__).parent.resolve()
+
+    with open(f"{here}/result.svg", "r") as f:
+        expected = f.read()
+
+    mol = get_groups(unifac, "CCCC1=CC=C(CC(=O)OC)C=C1", "smiles")
+
+    svg = mol.draw(width=800)[0]
+
+    assert expected == svg

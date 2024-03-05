@@ -22,4 +22,3 @@ def test_29_ch3sh(identifier, result, identifier_type):
     mol = get_groups(psrk, identifier, identifier_type)
     assert mol.subgroups == result
     assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
-

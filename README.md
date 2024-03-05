@@ -21,21 +21,22 @@ You can try ugropy from it's
 [Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
 binder.ipynb file to explore the basic features.
 
-## Models supported v1.0.1
+## Models supported v2.0.0
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
 - Joback
 
 ## Writers
 
-- Clapeyron.jl
+- [Clapeyron.jl](github.com/ClapeyronThermo/Clapeyron.jl)
+- [Caleb Bell's Thermo](https://github.com/CalebBell/thermo)
 
 
 ## Example of use
 You can check the full tutorial 
 [here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
 
-Get UNIFAC groups from the molecule's name:
+Get groups from the molecule's name:
 
 ```python
 from ugropy import Groups
@@ -43,23 +44,23 @@ from ugropy import Groups
 
 hexane = Groups("hexane")
 
-print(hexane.unifac_groups)
-print(hexane.psrk_groups)
-print(hexane.joback.groups)
+print(hexane.unifac.subgroups)
+print(hexane.psrk.subgroups)
+print(hexane.joback.subgroups)
 ```
 
     {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'-CH3': 2, '-CH2-': 4}
 
-Get UNIFAC groups from molecule's SMILES:
+Get groups from molecule's SMILES:
 
 ```python
 propanol = Groups("CCCO", "smiles")
 
-print(propanol.unifac_groups)
-print(propanol.psrk_groups)
-print(propanol.joback.groups)
+print(propanol.unifac.subgroups)
+print(propanol.psrk.subgroups)
+print(propanol.joback.subgroups)
 ```
 
     {'CH3': 1, 'CH2': 2, 'OH': 1}
@@ -71,7 +72,7 @@ Estimate properties with the Joback model!
 ```python
 limonene = Groups("limonene")
 
-print(limonene.joback.groups)
+print(limonene.joback.subgroups)
 print(f"{limonene.joback.critical_temperature} K")
 print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
 ```
@@ -79,6 +80,25 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
     657.4486692170663 K
     1.0254019428522743 bar
+
+Visualize your results! (The next code creates the `ugropy` logo)
+
+```Python
+from IPython.display import SVG
+
+mol = Groups("CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1", "smiles")
+
+svg = mol.unifac.draw(
+    title="ugropy",
+    width=800,
+    height=450,
+    title_font_size=50,
+    legend_font_size=14
+)
+
+SVG(svg)
+```
+
 
 Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 .csv input files.
@@ -93,12 +113,28 @@ grps = [Groups(n) for n in names]
 # Write the csv files into a database directory
 writers.to_clapeyron(
     molecules_names=names,
-    unifac_groups=[g.unifac_groups for g in grps],
-    psrk_groups=[g.psrk_groups for g in grps],
+    unifac_groups=[g.unifac.subgroups for g in grps],
+    psrk_groups=[g.psrk.subgroups for g in grps],
     joback_objects=[g.joback for g in grps],
     path="./database"
 )
 ```
+Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) subgroups
+
+```python
+from ugropy import unifac
+
+names = ["hexane", "2-butanone"]
+
+grps = [Groups(n) for n in names]
+
+[writers.to_thermo(g.unifac.subgroups, unifac) for g in grps]
+```
+
+```
+[{1: 2, 2: 4}, {1: 1, 2: 1, 18: 1}]
+```
+
 
 ## Installation
 ```
