@@ -1,6 +1,7 @@
 import pytest
 
 from ugropy import get_groups, psrk
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -18,4 +19,7 @@ trials_psrk = [
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_29_ch3sh(identifier, result, identifier_type):
-    assert get_groups(psrk, identifier, identifier_type).subgroups == result
+    mol = get_groups(psrk, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+

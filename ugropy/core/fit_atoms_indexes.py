@@ -33,6 +33,8 @@ def fit_atoms(
     total_atom_num = mol_object.GetNumAtoms()
     subgroups = list(mol_subgroups.keys())
 
+    # import ipdb; ipdb.set_trace()
+
     # =========================================================================
     # Getting atoms candidates for each group.
     # =========================================================================
