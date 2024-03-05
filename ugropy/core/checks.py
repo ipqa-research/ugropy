@@ -136,7 +136,7 @@ def check_has_hiden(
         hideouts_atoms = np.array([])
         for hideout in model.hideouts.loc[candidate].values.flatten():
             if hideout in mol_subgroups.keys():
-                atoms = group_matches(mol_object, hideout, model)
+                atoms = group_matches(mol_object, hideout, model, "fit")
 
                 atoms = np.array(atoms).flatten()
                 hideouts_atoms = np.append(hideouts_atoms, atoms)

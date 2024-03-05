@@ -1,6 +1,7 @@
 import pytest
 
 from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -9,6 +10,12 @@ from ugropy import get_groups, psrk, unifac
 
 # UNIFAC
 trials_unifac = [
+    # Dilaurin
+    (
+        "CCCCCCCCCCCC(=O)OCC(CO)OC(=O)CCCCCCCCCCC",
+        {"CH3": 2, "CH2": 20, "CH2COO": 2, "OH": 1, "CH": 1},
+        "smiles",
+    ),
     # Aspirin
     (
         "CC(=O)OC1=CC=CC=C1C(=O)O",
@@ -29,10 +36,14 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ccoo_unifac(identifier, result, identifier_type):
-    assert get_groups(unifac, identifier, identifier_type).subgroups == result
+    mol = get_groups(unifac, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
 
 
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ccoo_psrk(identifier, result, identifier_type):
-    assert get_groups(psrk, identifier, identifier_type).subgroups == result
+    mol = get_groups(psrk, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}

@@ -1,6 +1,7 @@
 import pytest
 
 from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -88,10 +89,13 @@ trials_unifac = [
 def test_composed_unifac(identifier, result, identifier_type):
     unifac_result = get_groups(unifac, identifier, identifier_type)
     try:
-        assert unifac_result.subgroups == result
+        mol = get_groups(unifac, identifier, identifier_type)
+        assert mol.subgroups == result
+        assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
     except ValueError:
         for uni_r, sol in zip(unifac_result.subgroups, result):
             assert uni_r == sol
+            assert fit_atoms(mol.mol_object, uni_r, unifac) != {}
 
 
 @pytest.mark.PSRK
@@ -99,7 +103,10 @@ def test_composed_unifac(identifier, result, identifier_type):
 def test_composed_psrk(identifier, result, identifier_type):
     psrk_result = get_groups(psrk, identifier, identifier_type)
     try:
-        assert psrk_result.subgroups == result
+        mol = get_groups(psrk, identifier, identifier_type)
+        assert mol.subgroups == result
+        assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
     except ValueError:
         for psrk_r, sol in zip(psrk_result.subgroups, result):
             assert psrk_r == sol
+            assert fit_atoms(mol.mol_object, psrk_r, psrk) != {}

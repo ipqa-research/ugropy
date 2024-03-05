@@ -1,6 +1,7 @@
 import pytest
 
 from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -33,18 +34,25 @@ trials_unifac = [
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ch3sh_unifac(identifier, result, identifier_type):
-    assert get_groups(unifac, identifier, identifier_type).subgroups == result
+    mol = get_groups(unifac, identifier, identifier_type)
+    assert mol.subgroups == result
+
+    if mol.subgroups != {}:
+        assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
 
 
 @pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ch3sh_psrk(identifier, result, identifier_type):
     if identifier != "CCCC1=CC=C(C=C1)C(C)S":
-        assert (
-            get_groups(psrk, identifier, identifier_type).subgroups == result
-        )
+        mol = get_groups(psrk, identifier, identifier_type)
+        assert mol.subgroups == result
+
+        if mol.subgroups != {}:
+            assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
     else:
-        get_groups(psrk, identifier, identifier_type).subgroups == {
+        mol = get_groups(psrk, identifier, identifier_type)
+        assert mol.subgroups == {
             "CH3": 2,
             "CH2": 1,
             "ACH": 4,
@@ -52,3 +60,4 @@ def test_ch3sh_psrk(identifier, result, identifier_type):
             "CHSH": 1,
             "AC": 1,
         }
+        assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
