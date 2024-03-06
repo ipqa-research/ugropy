@@ -40,6 +40,7 @@ You can check the full tutorial
 
 Get groups from the molecule's name:
 
+
 ```python
 from ugropy import Groups
 
