@@ -22,20 +22,21 @@ Groups
    :show-inheritance:
 
 
-Joback
-======
-.. automodule:: ugropy.joback
+Properties
+==========
+.. automodule:: ugropy.properties
    :members:
    :undoc-members:
    :show-inheritance:
 
 
-Model getters
-=============
-.. automodule:: ugropy.model_getters
+Fragmentation Models
+====================
+.. automodule:: ugropy.fragmentation_models
    :members:
    :undoc-members:
    :show-inheritance:
+
 
 Writers
 =======

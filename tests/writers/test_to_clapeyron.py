@@ -31,8 +31,8 @@ def test_to_clapeyron():
 
     to_clapeyron(
         ["limonene", "ethanol"],
-        [limonene.unifac_groups, ethanol.unifac_groups],
-        [limonene.psrk_groups, ethanol.psrk_groups],
+        [limonene.unifac.subgroups, ethanol.unifac.subgroups],
+        [limonene.psrk.subgroups, ethanol.psrk.subgroups],
         [limonene.joback, ethanol.joback],
         f"{here}/database",
     )
@@ -100,8 +100,8 @@ def test_to_clapeyron_batch_name():
 
     to_clapeyron(
         ["limonene", "ethanol"],
-        [limonene.unifac_groups, ethanol.unifac_groups],
-        [limonene.psrk_groups, ethanol.psrk_groups],
+        [limonene.unifac.subgroups, ethanol.unifac.subgroups],
+        [limonene.psrk.subgroups, ethanol.psrk.subgroups],
         [limonene.joback, ethanol.joback],
         f"{here}/database",
         "otacon",
@@ -164,8 +164,8 @@ def test_molar_mass_csv():
     # UNIFAC molar mass
     to_clapeyron(
         ["limonene", "ethanol"],
-        unifac_groups=[limonene.unifac_groups, ethanol.unifac_groups],
-        psrk_groups=[limonene.psrk_groups, ethanol.psrk_groups],
+        unifac_groups=[limonene.unifac.subgroups, ethanol.unifac.subgroups],
+        psrk_groups=[limonene.psrk.subgroups, ethanol.psrk.subgroups],
         path=f"{here}/database",
     )
 
@@ -177,7 +177,7 @@ def test_molar_mass_csv():
     # PSRK molar mass
     to_clapeyron(
         ["limonene", "ethanol"],
-        psrk_groups=[limonene.psrk_groups, ethanol.psrk_groups],
+        psrk_groups=[limonene.psrk.subgroups, ethanol.psrk.subgroups],
         path=f"{here}/database",
     )
 

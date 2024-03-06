@@ -1,6 +1,7 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -9,8 +10,6 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
-    # N,N-Dimethylformamide
-    ("CN(C)C=O", {"DMF": 1}, "smiles"),
     (
         "BrCN(CC1=CC=NC=C1)C=O",
         {"HCON(CH2)2": 1, "BR": 1, "C5H4N": 1},
@@ -21,14 +20,24 @@ trials_unifac = [
         {"HCON(CH2)2": 1, "BR": 1, "AC": 1, "ACH": 5},
         "smiles",
     ),
+    # N,N-Dimethylformamide
+    ("CN(C)C=O", {"DMF": 1}, "smiles"),
     # N,N-Diethylformamide
     ("CCN(CC)C=O", {"CH3": 2, "HCON(CH2)2": 1}, "smiles"),
 ]
 
 
 @pytest.mark.UNIFAC
-@pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_dmf_unifac(identifier, result, identifier_type):
-    assert ug.get_unifac_groups(identifier, identifier_type) == result
-    assert ug.get_psrk_groups(identifier, identifier_type) == result
+    mol = get_groups(unifac, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
+
+
+@pytest.mark.PSRK
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_dmf_psrk(identifier, result, identifier_type):
+    mol = get_groups(psrk, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}

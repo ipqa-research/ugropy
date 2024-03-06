@@ -1,6 +1,7 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, joback
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -49,4 +50,6 @@ trials = [
 @pytest.mark.Joback
 @pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_no_cyclic_hydrocarbon(identifier, result, identifier_type):
-    assert ug.get_joback_groups(identifier, identifier_type) == result
+    mol = get_groups(joback, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, joback) != {}

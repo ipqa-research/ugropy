@@ -1,6 +1,7 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -9,6 +10,21 @@ import ugropy as ug
 
 # UNIFAC
 trials_unifac = [
+    # TODO Thanos explore and test more this kind of monsters
+    (
+        "CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1",
+        {
+            "CH3": 4,
+            "C": 1,
+            "ACH": 8,
+            "ACCH2": 2,
+            "CH2O": 2,
+            "COO": 1,
+            "CH2": 2,
+            "AC": 2,
+        },
+        "smiles",
+    ),
     (
         "CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C",
         {"CH3": 6, "CH": 1, "C": 1, "ACH": 4, "ACCH2": 1, "AC": 1, "CHO": 1},
@@ -68,16 +84,29 @@ trials_unifac = [
 ]
 
 
-@pytest.mark.PSRK
 @pytest.mark.UNIFAC
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_composed_unifac(identifier, result, identifier_type):
-    unifac_result = ug.get_unifac_groups(identifier, identifier_type)
-    psrk_result = ug.get_psrk_groups(identifier, identifier_type)
+    unifac_result = get_groups(unifac, identifier, identifier_type)
     try:
-        assert unifac_result == result
-        assert psrk_result == result
+        mol = get_groups(unifac, identifier, identifier_type)
+        assert mol.subgroups == result
+        assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
     except ValueError:
-        for uni, psrk, sol in zip(unifac_result, psrk_result, result):
-            assert uni == sol
-            assert psrk == sol
+        for uni_r, sol in zip(unifac_result.subgroups, result):
+            assert uni_r == sol
+            assert fit_atoms(mol.mol_object, uni_r, unifac) != {}
+
+
+@pytest.mark.PSRK
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_composed_psrk(identifier, result, identifier_type):
+    psrk_result = get_groups(psrk, identifier, identifier_type)
+    try:
+        mol = get_groups(psrk, identifier, identifier_type)
+        assert mol.subgroups == result
+        assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+    except ValueError:
+        for psrk_r, sol in zip(psrk_result.subgroups, result):
+            assert psrk_r == sol
+            assert fit_atoms(mol.mol_object, psrk_r, psrk) != {}

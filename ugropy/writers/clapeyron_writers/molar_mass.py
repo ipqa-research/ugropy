@@ -7,8 +7,8 @@ import numpy as np
 
 import pandas as pd
 
-from ugropy import constants
-from ugropy.joback import Joback
+from ugropy.fragmentation_models.models import psrk, unifac
+from ugropy.properties.joback_properties import JobackProperties
 
 
 def write_molar_mass(
@@ -17,7 +17,7 @@ def write_molar_mass(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
-    joback_objects: List[Joback] = [],
+    joback_objects: List[JobackProperties] = [],
 ) -> None:
     """Create the DataFrame with the molecular weights for Clapeyron.jl.
 
@@ -37,7 +37,7 @@ def write_molar_mass(
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
     joback_objects : List[Joback], optional
-        List of ugropy.Joback objects, by default [].
+        List of ugropy.properties.JobackProperties objects, by default [].
 
     Returns
     -------
@@ -55,7 +55,7 @@ def write_molar_mass(
     if joback_objects:
         molecular_weigths = [j.molecular_weight for j in joback_objects]
     elif unifac_groups:
-        df = constants.unifac_subgroups.copy()
+        df = unifac.subgroups.copy()
         molecular_weigths = []
         for groups in unifac_groups:
             contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()
@@ -63,7 +63,7 @@ def write_molar_mass(
                 np.dot(contribution, list(groups.values()))
             )
     elif psrk_groups:
-        df = constants.psrk_subgroups.copy()
+        df = psrk.subgroups.copy()
         molecular_weigths = []
         for groups in psrk_groups:
             contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()

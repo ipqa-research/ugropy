@@ -1,21 +1,16 @@
-"""Joback's module."""
+"""Joback's properties module."""
 
 from typing import Union
 
 import numpy as np
 from numpy.typing import NDArray
 
-from ugropy.constants import (
-    R,
-    joback_properties_contibutions,
-    joback_subgroups,
-)
-from ugropy.model_getters import (
-    get_joback_groups,
-)
+from ugropy.constants import R
+from ugropy.core.get_model_groups import get_groups
+from ugropy.fragmentation_models.models import joback
 
 
-class Joback:
+class JobackProperties:
     """Joback [1] group contribution properties estimator.
 
     Parameters
@@ -35,7 +30,7 @@ class Joback:
 
     Attributes
     ----------
-    groups : dict
+    subgroups : dict
         Joback functional groups of the molecule.
     exp_nbt : float
         User provided experimental normal boiling point [K].
@@ -82,9 +77,11 @@ class Joback:
     ) -> None:
         # Skip if instantiation from_groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
-            self.groups = get_joback_groups(identifier, identifier_type)
+            self.subgroups = get_groups(
+                joback, identifier, identifier_type
+            ).subgroups
         elif identifier_type == "groups":
-            self.groups = identifier
+            self.subgroups = identifier
         else:
             raise ValueError(
                 f"Identifier type ''{identifier_type}'' is incorrect. Use "
@@ -114,7 +111,7 @@ class Joback:
         self.vapor_pressure_params = {}
 
         # Fill the properties' values
-        if self.groups != {}:
+        if self.subgroups != {}:
             self._calculate_properties()
 
     def heat_capacity_ideal_gas(
@@ -230,10 +227,10 @@ class Joback:
 
     def _calculate_properties(self) -> None:
         """Obtain the molecule properties from Joback's groups."""
-        groups = list(self.groups.keys())
-        ocurr = list(self.groups.values())
+        groups = list(self.subgroups.keys())
+        ocurr = list(self.subgroups.values())
 
-        df = joback_properties_contibutions.loc[groups]
+        df = joback.properties_contributions.loc[groups]
 
         # =====================================================================
         # Calculate complete contribution properties (no contribution missing)
@@ -247,7 +244,7 @@ class Joback:
         gform_c = df["Gform"].to_numpy()
         hvap_c = df["Hvap"].to_numpy()
         numa_c = df["num_of_atoms"].to_numpy()
-        mw_c = joback_subgroups.loc[groups, "molecular_weight"].to_numpy()
+        mw_c = joback.subgroups.loc[groups, "molecular_weight"].to_numpy()
 
         # Molecular weight
         self.molecular_weight = np.dot(ocurr, mw_c)

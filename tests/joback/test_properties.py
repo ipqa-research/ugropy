@@ -4,12 +4,12 @@ import pytest
 
 from rdkit import Chem
 
-from ugropy import Joback
+from ugropy.properties import JobackProperties
 
 
 def test_p_dichlorobenzene():
-    mol = Joback("C1=CC(=CC=C1Cl)Cl", "smiles")
-    assert mol.groups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
+    mol = JobackProperties("C1=CC(=CC=C1Cl)Cl", "smiles")
+    assert mol.subgroups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
     assert np.allclose(mol.normal_boiling_point, 443.4, atol=1e-2)
     assert np.allclose(mol.fusion_temperature, 256, atol=1)
     assert np.allclose(mol.critical_temperature, 675, atol=1)
@@ -30,13 +30,15 @@ def test_p_dichlorobenzene():
 
 
 def test_p_dichlorobenzene_real_nbt():
-    mol = Joback("C1=CC(=CC=C1Cl)Cl", "smiles", normal_boiling_point=447)
+    mol = JobackProperties(
+        "C1=CC(=CC=C1Cl)Cl", "smiles", normal_boiling_point=447
+    )
     assert np.allclose(mol.critical_temperature, 681, atol=1)
 
 
 def test_acentric_factor():
     # Perfluorohexane
-    mol = Joback(
+    mol = JobackProperties(
         "C(C(C(C(F)(F)F)(F)F)(F)F)(C(C(F)(F)F)(F)F)(F)F",
         "smiles",
         normal_boiling_point=329.8,
@@ -45,14 +47,14 @@ def test_acentric_factor():
 
 
 def test_vapor_pressure():
-    mol = Joback(
+    mol = JobackProperties(
         "CC(C)O", identifier_type="smiles", normal_boiling_point=355.4
     )
     assert np.allclose(mol.vapor_pressure(450), 15.09, atol=2)
 
 
 def test_liquid_heat_capacity():
-    mol = Joback("CC(=O)C", identifier_type="smiles")
+    mol = JobackProperties("CC(=O)C", identifier_type="smiles")
     assert np.allclose(28.0, mol.heat_capacity_liquid(180) * 0.239, atol=4e-1)
     assert np.allclose(28.2, mol.heat_capacity_liquid(209) * 0.239, atol=1)
     assert np.allclose(29.8, mol.heat_capacity_liquid(297) * 0.239, atol=3)
@@ -60,16 +62,16 @@ def test_liquid_heat_capacity():
 
 def test_making_it_explode():
     with pytest.raises(ValueError):
-        Joback("acetone", identifier_type="Messi")
+        JobackProperties("acetone", identifier_type="Messi")
 
 
 def test_giving_groups():
-    mol1 = Joback("CCO", identifier_type="smiles")
+    mol1 = JobackProperties("CCO", identifier_type="smiles")
 
     chm = Chem.MolFromInchi("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
-    mol2 = Joback(chm, identifier_type="mol")
+    mol2 = JobackProperties(chm, identifier_type="mol")
 
-    assert mol1.groups == mol2.groups
+    assert mol1.subgroups == mol2.subgroups
     assert mol1.exp_nbt == mol2.exp_nbt
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure
@@ -99,10 +101,10 @@ def test_giving_groups():
 
 
 def test_giving_rdkit_mol():
-    mol1 = Joback("CCO", identifier_type="smiles")
-    mol2 = Joback(mol1.groups, identifier_type="groups")
+    mol1 = JobackProperties("CCO", identifier_type="smiles")
+    mol2 = JobackProperties(mol1.subgroups, identifier_type="groups")
 
-    assert mol1.groups == mol2.groups
+    assert mol1.subgroups == mol2.subgroups
     assert mol1.exp_nbt == mol2.exp_nbt
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure

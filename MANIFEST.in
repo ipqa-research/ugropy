@@ -1,18 +1,17 @@
 include LICENCE
 include README.md
+include CONTRIBUTING.md
 include requirements.txt
 include pyproject.toml
 
 recursive-include ugropy *.py *.csv
 
 exclude tox.ini
-exclude .readthedocs.yml
 exclude requirements-dev.txt
-exclude *.png
+exclude *.svg
 exclude binder.ipynb
 exclude reminder.md
 
 recursive-exclude dist *
 recursive-exclude tests *
 recursive-exclude docs *
-recursive-exclude tools *

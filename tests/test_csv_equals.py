@@ -1,28 +1,34 @@
-from ugropy import constants
+from ugropy import psrk, unifac
 
 
 def test_unifac_psrk_equal():
     """check if the same subgroup appears in 2 models, both xxx_subgroups.csv
     rows must be the same.
     """
-    for group in constants.unifac_subgroups.index:
-        if group in constants.psrk_subgroups.index:
+    for group in unifac.subgroups.index:
+        if group in psrk.subgroups.index:
             assert (
-                constants.unifac_subgroups.loc[group, "smarts"]
-                == constants.psrk_subgroups.loc[group, "smarts"]
+                unifac.subgroups.loc[group, "detection_smarts"]
+                == psrk.subgroups.loc[group, "detection_smarts"]
             )
 
             assert (
-                constants.unifac_subgroups.loc[group, "contribute"]
-                == constants.psrk_subgroups.loc[group, "contribute"]
+                unifac.subgroups.loc[group, "contribute"]
+                == psrk.subgroups.loc[group, "contribute"]
             )
 
             assert (
-                constants.unifac_subgroups.loc[group, "composed"]
-                == constants.psrk_subgroups.loc[group, "composed"]
+                unifac.subgroups.loc[group, "composed"]
+                == psrk.subgroups.loc[group, "composed"]
             )
 
             assert (
-                constants.unifac_subgroups.loc[group, "molecular_weight"]
-                == constants.psrk_subgroups.loc[group, "molecular_weight"]
+                unifac.subgroups.loc[group, "molecular_weight"]
+                == psrk.subgroups.loc[group, "molecular_weight"]
             )
+
+            # assert (
+            #     unifac.subgroups["true_smarts"]
+            #     .dropna()
+            #     .equals(psrk.subgroups["true_smarts"].dropna())
+            # )

@@ -5,24 +5,27 @@ from itertools import combinations
 
 import numpy as np
 
-import pandas as pd
-
 from rdkit import Chem
 
-from .checks import check_has_hidden_ch2_ch, check_has_molecular_weight_right
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
+
+from .checks import (
+    check_can_fit_atoms,
+    check_has_composed_overlapping,
+    check_has_hiden,
+    check_has_molecular_weight_right,
+)
 
 
 def correct_composed(
-    chem_object: Chem.rdchem.Mol,
-    chem_subgroups: dict,
-    subgroups: pd.DataFrame,
-    ch2_hideouts: pd.DataFrame,
-    ch_hideouts: pd.DataFrame,
+    mol_object: Chem.rdchem.Mol,
+    mol_subgroups: dict,
+    model: FragmentationModel,
 ) -> dict:
     """Correct composed structures.
 
     A priori is not easy to recognize what composed structures in
-    chem_subgroups need to be decomposed to correct the solution. By that, all
+    mol_subgroups need to be decomposed to correct the solution. By that, all
     the combinations are tried. For example, a molecule that can't be solved
     has one ACCH2 and two ACCH composed structures. The decomposition
     combinatory will be:
@@ -31,79 +34,110 @@ def correct_composed(
 
     Parameters
     ----------
-    chem_object : Chem.rdchem.Mol
+    mol_object : Chem.rdchem.Mol
         RDKit Mol object.
-    chem_subgroups : dict
-        Molecule's UNIFAC subgroups.
-    subgroups : pd.DataFrame
-        DataFrame of all UNIFAC's subgroups.
-    ch2_hideouts : pandas.DataFrame
-        DataFrame of all posible CH2 group hidings.
-    ch_hideouts : pandas.DataFrame
-        DataFrame of all posible CH group hidings.
+    mol_subgroups : dict
+        Molecule's FragmentationModel subgroups.
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
     dict or list[dict]
         Corrected subgroups due to decomposing composed structures.
     """
-    # Create list of composed structures present in molecule's func_g. If a
-    # composed structure has occurrence 2, will appear twice in the list
-    composed_structures = subgroups[subgroups["composed"] == "y"].index
-    comp_in_mol = np.array([])
+    # =========================================================================
+    # A list with all the composed structures present in mol_subgroups
+    # =========================================================================
+    composed_structures = [
+        stru
+        for stru in mol_subgroups.keys()
+        if model.subgroups.loc[stru, "composed"] == "y"
+    ]
 
-    for stru in composed_structures:
-        if stru in chem_subgroups.keys():
-            comp_in_mol = np.append(comp_in_mol, [stru] * chem_subgroups[stru])
+    # =========================================================================
+    # Creates a list with the composed structures in mol_subgroups but each
+    # composed structure is repetead a number of times equals to the occurences
+    # In te molecule. For example in UNIFAC {"ACCH2": 3, "CH3": 1, "ACCH": 1}
+    # should generate:
+    #
+    # ["ACCH2", "ACCH2", "ACCH2", "ACCH"]
+    # =========================================================================
+    composed_in_mol = np.array(
+        [
+            stru
+            for stru in composed_structures
+            for _ in range(mol_subgroups[stru])
+        ]
+    )
 
-    # Create a combinatory list of the possible decomposition of the structures
+    # =========================================================================
+    # Create the combinatory list as explainde in the funcion documentation.
+    # =========================================================================
     combinatory_list = []
-    for i in range(1, len(comp_in_mol) + 1):
-        # turn into set eliminates duplicated corrections combinations.
-        for combinatory in set(combinations(comp_in_mol, i)):
-            combinatory_list.append(combinatory)
+    for i in range(1, len(composed_in_mol) + 1):
+        combinatory_list.extend(set(combinations(composed_in_mol, i)))
 
+    # =========================================================================
     # Try by brute force all combinatories and store the successfull ones
-    successfull_corrections = np.array([])
+    # =========================================================================
+    successfull_corrections = []
 
     for combination in combinatory_list:
         # Get subgroups with decomposed structures
         correction = apply_decompose_correction(
-            chem_subgroups=chem_subgroups,
-            subgroups=subgroups,
+            mol_subgroups=mol_subgroups,
             groups_to_decompose=combination,
+            model=model,
         )
 
         # Did the correction work?
         right_mw = check_has_molecular_weight_right(
-            chem_object=chem_object,
-            chem_subgroups=correction,
-            subgroups=subgroups,
+            mol_object=mol_object,
+            mol_subgroups=correction,
+            model=model,
         )
 
-        has_hidden = check_has_hidden_ch2_ch(
-            chem_object=chem_object,
-            chem_subgroups=correction,
-            subgroups=subgroups,
-            ch2_hideouts=ch2_hideouts,
-            ch_hideouts=ch_hideouts,
+        if not right_mw:
+            continue
+
+        has_overlap = check_has_composed_overlapping(
+            mol_object, correction, model
         )
 
-        if right_mw and not has_hidden:
-            successfull_corrections = np.append(
-                successfull_corrections, correction
-            )
+        if has_overlap:
+            continue
+
+        has_hiden = check_has_hiden(mol_object, correction, model)
+
+        if has_hiden:
+            continue
+
+        can_fit = check_can_fit_atoms(
+            mol_object=mol_object,
+            mol_subgroups=correction,
+            model=model,
+        )
+
+        if can_fit:
+            successfull_corrections.append(correction)
+
+    successfull_corrections = np.array(successfull_corrections)
 
     # No posible correction found, can't represent molecule with func groups
     if len(successfull_corrections) == 0:
         return {}
 
+    # =========================================================================
     # Get rid of duplicated successfull_corrections
+    # =========================================================================
     dict_strs = np.array([str(d) for d in successfull_corrections])
     unique_indices = np.unique(dict_strs, return_index=True)[1]
     unique_corrections = successfull_corrections[unique_indices]
 
-    # Return decomposed subgroups solutions
+    # =========================================================================
+    # Return decomposed subgroup solution
+    # =========================================================================
     if len(unique_corrections) == 1:
         # Unique solution found
         return unique_corrections[0]
@@ -124,38 +158,37 @@ def correct_composed(
 
 
 def apply_decompose_correction(
-    chem_subgroups: dict, subgroups: pd.DataFrame, groups_to_decompose: tuple
+    mol_subgroups: dict,
+    groups_to_decompose: tuple,
+    model: FragmentationModel,
 ) -> dict:
-    """Decompose composed structures in chem_subgroups.
+    """Decompose composed structures in mol_subgroups.
 
     The function receives a tuple of groups to decompose and applies the
     corresponding correction. For example, if the function receives the order
     of decomposing an ACCH2, the function subtracts an ACCH2 group from
-    chem_subgroups, and then adds an AC and a CH2 group.
+    mol_subgroups, and then adds an AC and a CH2 group.
 
     Parameters
     ----------
-    chem_subgroups : dict
-        Molecule's UNIFAC subgroups.
-    subgroups : pd.DataFrame
-        DataFrame with the UNIFAC's model subgroups.
+    mol_subgroups : dict
+        Molecule's FragmentationModel subgroups.
     groups_to_decompose : tuple[str]
         Tuple with all the composed structures to decompose.
+    model: FragmentationModel
+        FragmentationModel object.
 
     Returns
     -------
     dict
         Functional groups dictionary with decomposed structures.
     """
-    chm_grps = chem_subgroups.copy()
+    chm_grps = mol_subgroups.copy()
 
     for group in groups_to_decompose:
-        contribute_dict = json.loads(subgroups.loc[group].contribute)
-        for grp in contribute_dict.keys():
-            try:
-                chm_grps[grp] += -1 * contribute_dict[grp]
-            except KeyError:
-                chm_grps[grp] = -1 * contribute_dict[grp]
+        contribute_dict = json.loads(model.subgroups.loc[group, "contribute"])
+        for grp, contribution in contribute_dict.items():
+            chm_grps[grp] = chm_grps.get(grp, 0) - 1 * contribution
 
     # Eliminate occurrences == 0
     groups_corrected = {

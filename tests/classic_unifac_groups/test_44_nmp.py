@@ -1,6 +1,7 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, psrk, unifac
+from ugropy.core import fit_atoms
 
 # =============================================================================
 # 44- NMP Main group: NMP
@@ -14,8 +15,16 @@ trials_unifac = [
 
 
 @pytest.mark.UNIFAC
-@pytest.mark.PSRK
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_npm_unifac(identifier, result, identifier_type):
-    assert ug.get_unifac_groups(identifier, identifier_type) == result
-    assert ug.get_psrk_groups(identifier, identifier_type) == result
+    mol = get_groups(unifac, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, unifac) != {}
+
+
+@pytest.mark.PSRK
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_npm_psrk(identifier, result, identifier_type):
+    mol = get_groups(psrk, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}

@@ -1,6 +1,7 @@
 import pytest
 
-import ugropy as ug
+from ugropy import get_groups, joback
+from ugropy.core import fit_atoms
 
 
 # =============================================================================
@@ -8,6 +9,12 @@ import ugropy as ug
 # =============================================================================
 # Joback
 trials = [
+    # 2-Methyl-3-butenal
+    (
+        "CC(C=C)C=O",
+        {"-CH3": 1, ">CH-": 1, "=CH2": 1, "=CH-": 1, "O=CH- (aldehyde)": 1},
+        "smiles",
+    ),
     ("C(=O)C=O", {"O=CH- (aldehyde)": 2}, "smiles"),
     # salicylaldehyde
     (
@@ -18,12 +25,6 @@ trials = [
             "ring=C<": 2,
             "O=CH- (aldehyde)": 1,
         },
-        "smiles",
-    ),
-    # 2-Methyl-3-butenal
-    (
-        "CC(C=C)C=O",
-        {"-CH3": 1, ">CH-": 1, "=CH2": 1, "=CH-": 1, "O=CH- (aldehyde)": 1},
         "smiles",
     ),
     # Cinnamaldehyde
@@ -77,4 +78,6 @@ trials = [
 @pytest.mark.Joback
 @pytest.mark.parametrize("identifier, result, identifier_type", trials)
 def test_joback_aldehydes(identifier, result, identifier_type):
-    assert ug.get_joback_groups(identifier, identifier_type) == result
+    mol = get_groups(joback, identifier, identifier_type)
+    assert mol.subgroups == result
+    assert fit_atoms(mol.mol_object, mol.subgroups, joback) != {}
