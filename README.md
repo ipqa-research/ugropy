@@ -4,20 +4,22 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![Docs](https://img.shields.io/badge/docs%20-%20green?style=flat&label=Sphinx&link=https%3A%2F%2Fipqa-research.github.io%2Fugropy%2Findex.html)](https://salvadorbrandolin.github.io/ugropy/)
-[![PyPI version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
+[![PyPI
+version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
 
-ugropy is a `Python` library to obtain the UNIFAC's subgroups from both the
-name or the SMILES representation of a molecule. If the name is given, the
-library uses the [PubChemPy](https://github.com/mcs07/PubChemPy) library tov
-obtain the SMILES representation from PubChem. In both cases, ugropy uses the
+`ugropy` is a `Python` library to obtain subgroups from different
+thermodynamic group contribution models using both the name or the SMILES
+representation of a molecule. If the name is given, the library uses the
+[PubChemPy](https://github.com/mcs07/PubChemPy) library to obtain the SMILES
+representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
 in the molecule.
 
-ugropy is in an early development stage, leaving issues of examples of
-molecules that ugropy fails solving the UNIFAC's groups is very helpful.
+`ugropy` is in an early development stage, leaving issues of examples of
+molecules that `ugropy` fails solving the subgroups of a model is very helpful.
 
 ## Try ugropy now
-You can try ugropy from it's
+You can try ugropy from its
 [Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
 binder.ipynb file to explore the basic features.
 
@@ -29,11 +31,11 @@ binder.ipynb file to explore the basic features.
 ## Writers
 
 - [Clapeyron.jl](github.com/ClapeyronThermo/Clapeyron.jl)
-- [Caleb Bell's Thermo](https://github.com/CalebBell/thermo)
+- [Thermo](https://github.com/CalebBell/thermo)
 
 
 ## Example of use
-You can check the full tutorial 
+You can check the full tutorial
 [here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
 
 Get groups from the molecule's name:
@@ -99,7 +101,6 @@ svg = mol.unifac.draw(
 SVG(svg)
 ```
 
-
 Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 .csv input files.
 
@@ -135,7 +136,6 @@ grps = [Groups(n) for n in names]
 [{1: 2, 2: 4}, {1: 1, 2: 1, 18: 1}]
 ```
 
-
 ## Installation
 ```
 pip install ugropy
@@ -153,9 +153,9 @@ PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications,
 property values [Thesis (Ph. D.), Massachusetts Institute of Technology].
 https://dspace.mit.edu/handle/1721.1/14191
 
-[4] Bondi, A. (1966). Estimation of Heat Capacity of Liquids.
-Industrial & Engineering Chemistry Fundamentals, 5(4), 442–449.
+[4] Bondi, A. (1966). Estimation of Heat Capacity of Liquids. Industrial &
+Engineering Chemistry Fundamentals, 5(4), 442–449.
 https://doi.org/10.1021/i160020a001
 
-[5] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid
-mixtures: Butterworths monographs in chemistry. Butterworth-Heinemann
+[5] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid mixtures:
+Butterworths monographs in chemistry. Butterworth-Heinemann
