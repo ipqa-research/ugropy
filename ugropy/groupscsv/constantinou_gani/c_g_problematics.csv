@@ -1,0 +1,8 @@
+smarts|contribute
+? ester
+[CH0;R]([*;!O])(=O)[OH0]|"{"">C=O (ring)"": -1, ""-O- (ring)"": -1}"
+[CH0;!R]([*;!O])(=O)[OH0]|"{"">C=O (non-ring)"": -1, ""-O- (non-ring)"": -1}"
+[CH0;!R]([OH0;!R])(=O)[OH0;!R]|"{""-COO- (ester)"": -1, "">C=O (non-ring)"": -1, ""-O- (non-ring)"": -1}"
+[CH0;R]([OH0;R])(=O)[OH0;R]|"{""-COO- (ester)"": -1, "">C=O (ring)"": -1, ""-O- (ring)"": -1}"
+? ester with acid
+[CH0]([OH0])(=O)(-[OH])|"{""-COO- (ester)"": -1}"
