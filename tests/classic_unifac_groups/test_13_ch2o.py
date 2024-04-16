@@ -27,7 +27,8 @@ trials_unifac = [
     ("C1COCO1", {"CH2O": 2, "CH2": 1}, "smiles"),
     ("C1COCCOCCOCCOCCOCCO1", {"CH2O": 6, "CH2": 6}, "smiles"),
     # tetrahydrofuran
-    ("C1CCOC1", {"THF": 1}, "smiles"),
+    ("C1CCOC1", {"THF": 1, "CH2": 3}, "smiles"),
+    ("CC1COCC1C", {"THF": 1, "CH2": 1, "CH": 2, "CH3": 2}, "smiles"),
     # diisopropyl ether
     ("CC(C)OC(C)C", {"CH3": 4, "CH": 1, "CHO": 1}, "smiles"),
     # diethyl ether
