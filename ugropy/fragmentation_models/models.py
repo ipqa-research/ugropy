@@ -118,12 +118,13 @@ _cg = f"{_csvs}/constantinou_gani"
 
 _cg_sg = _rd(f"{_cg}/c_g_prymary_subgroups.csv", "group")
 _cg_problems = _rd(f"{_cg}/../problematic_structures.csv", "smarts")
+_cg_hide = _rd(f"{_cg}/hideouts.csv", "group")
 _cg_props = _rd(f"{_cg}/properties_prymary_contrib.csv", "group")
 
 constantinou_gani_primary = PropertiesEstimator(
-    subgroups = _cg_sg,
-    split_detection_smarts = ["C5H4N", "C5H3N", "C4H3S", "C4H2S"],
-    problematic_structures = _cg_problems,
-    hideouts = None,
-    properties_contributions = _cg_props,
+    subgroups=_cg_sg,
+    split_detection_smarts=["C5H4N", "C5H3N", "C4H3S", "C4H2S"],
+    problematic_structures=_cg_problems,
+    hideouts=_cg_hide,
+    properties_contributions=_cg_props,
 )

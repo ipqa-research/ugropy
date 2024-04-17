@@ -67,10 +67,8 @@ def correct_problematics(
                     + contribution * how_many_problems
                 )
 
-        # Eliminate occurrences == 0
-        corrected_subgroups = {
-            key: value
-            for key, value in corrected_subgroups.items()
-            if value != 0
-        }
+    # Eliminate occurrences == 0
+    corrected_subgroups = {
+        key: value for key, value in corrected_subgroups.items() if value != 0
+    }
     return corrected_subgroups

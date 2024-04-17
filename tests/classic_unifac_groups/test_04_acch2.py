@@ -94,4 +94,7 @@ def test_acch2_psrk(identifier, result, identifier_type):
 def test_acch2_gc(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
     assert mol.subgroups == result
-    assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+    assert (
+        fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+        != {}
+    )
