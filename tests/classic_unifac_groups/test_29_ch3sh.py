@@ -1,6 +1,6 @@
 import pytest
 
-from ugropy import get_groups, psrk, unifac
+from ugropy import constantinou_gani_primary, get_groups, psrk, unifac
 from ugropy.core import fit_atoms
 
 
@@ -61,3 +61,4 @@ def test_ch3sh_psrk(identifier, result, identifier_type):
             "AC": 1,
         }
         assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+
