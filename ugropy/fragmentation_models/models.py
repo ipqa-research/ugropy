@@ -116,10 +116,10 @@ joback = PropertiesEstimator(
 # Primary structures
 _cg = f"{_csvs}/constantinou_gani"
 
-_cg_sg = _rd(f"{_cg}/c_g_prymary_subgroups.csv", "group")
-_cg_problems = _rd(f"{_cg}/cg_problematics.csv", "smarts")
-_cg_hide = _rd(f"{_cg}/hideouts.csv", "group")
-_cg_props = _rd(f"{_cg}/properties_prymary_contrib.csv", "group")
+_cg_sg = _rd(f"{_cg}/primary/c_g_prymary_subgroups.csv", "group")
+_cg_problems = _rd(f"{_cg}/primary/cg_problematics.csv", "smarts")
+_cg_hide = _rd(f"{_cg}/primary/hideouts.csv", "group")
+_cg_props = _rd(f"{_cg}/primary/properties_prymary_contrib.csv", "group")
 
 constantinou_gani_primary = PropertiesEstimator(
     subgroups=_cg_sg,
