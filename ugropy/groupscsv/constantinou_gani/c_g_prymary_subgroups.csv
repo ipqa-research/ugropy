@@ -64,12 +64,12 @@ CCL2F|[CH0](Cl)(Cl)(F)([!Cl&!F])|[CH0](Cl)(Cl)(F)|"{""CCL2F"": 1, ""CCL2"": -1, 
 HCCLF|[CH](Cl)(F)([!Cl&!F])|[CH](Cl)(F)|"{""HCCLF"": 1, ""CHCL"": -1, ""F"": -1}"|n|67.4698
 CCLF2|[CH0](Cl)(F)(F)([!Cl&!F])|[CH0](Cl)(F)(F)|"{""CCLF2"": 1, ""CCL"": -1, ""CF2"": -1, ""C"": 1}"|n|85.46
 F|[F][#6]|[F]|"{""F"": 1}"|n|18.998
-CONH2|[NH2][CH0]=O||"{""CONH2"": 1}"|n|44.0326
-CONHCH3|[CH3][NH][CH0]=O||"{""CONH2"": 1}"|n|
-CONHCH2|[CH2][NH][CH0]=O||"{""CONH2"": 1}"|n|
-CON(CH3)2|[CH3][NH0]([CH3])[CH0]=O||"{""CONH2"": 1}"|n|
-CONCH3CH2|[CH3][NH0]([CH2])[CH0]=O||"{""CONH2"": 1}"|n|
-CON(CH2)2|[CH2][NH0]([CH2])[CH0]=O||"{""CONH2"": 1}"|n|
+CONH2|[CH0](=O)([NH2])([!O])|[CH0](=O)([NH2])|"{""CONH2"": 1}"|n|44.0326
+CONHCH3|[CH0](=O)([NH][CH3])([!O])|[CH0](=O)([NH][CH3])|"{""CONHCH3"": 1, ""CH3"": -1}"|n|58.0592
+CONHCH2|[CH0](=O)([NH][CH2])([!O])|[CH0](=O)([NH][CH2])|"{""CONHCH2"": 1, ""CH2"": -1}"|n|57.0514
+CON(CH3)2|[CH0](=O)([N]([CH3])[CH3])([!O])|[CH0](=O)([N]([CH3])[CH3])|"{""CON(CH3)2"": 1, ""CH3"": -2}"|n|72.0858
+CONCH3CH2|[CH0](=O)([N]([CH3])[CH2])([!O])|[CH0](=O)([N]([CH3])[CH2])|"{""CONCH3CH2"": 1, ""CH3"": -1, ""CH2"": -1}"|n|71.078
+CON(CH2)2|[CH0](=O)([N]([CH2])[CH2])([!O])|[CH0](=O)([N]([CH2])[CH2])|"{""CON(CH2)2"": 1, ""CH2"": -2}"|n|70.0702
 C2H5O2|[OH][CH2][CH2]O[#6,Si]|[OH][CH2][CH2]O|"{""C2H5O2"": 1, ""OH"": -1, ""CH2"": -1, ""CH2O"": -1}"|y|61.059
 C2H4O2|[OH][CH2][CH]O[#6,Si]|[OH][CH2][CH]O|"{""C2H4O2"": 1, ""OH"": -1, ""CHO"": -1, ""CH2"": -1}"|y|60.0512
 CH3S|[CH3][S][#6,Si]|[CH3][S]|"{""CH3S"": 1, ""CH3"": -1}"|n|47.0994

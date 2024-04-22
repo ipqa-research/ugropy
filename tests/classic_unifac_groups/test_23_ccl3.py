@@ -37,9 +37,12 @@ def test_ccl3_psrk(identifier, result, identifier_type):
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_ccl3_cg(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
-    
+
     if identifier != "C(Cl)(Cl)Cl":
         assert mol.subgroups == result
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
     else:
         assert mol.subgroups == {}

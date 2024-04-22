@@ -36,9 +36,12 @@ def test_cleqc_psrk(identifier, result, identifier_type):
     assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
 
 
-@pytest.mark.ConstantinougGani
+@pytest.mark.ConstantinouGani
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_cleqc_cg(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
     assert mol.subgroups == result
-    assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+    assert (
+        fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+        != {}
+    )

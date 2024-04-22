@@ -45,9 +45,12 @@ def test_cno2_psrk(identifier, result, identifier_type):
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_cno2_cg(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
-    
+
     if identifier != "C[N+](=O)[O-]":
         assert mol.subgroups == result
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
-    else: 
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
+    else:
         assert mol.subgroups == {}

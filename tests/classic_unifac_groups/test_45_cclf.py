@@ -55,10 +55,19 @@ def test_cclf_cg(identifier, result, identifier_type):
         assert mol.subgroups == {}
     elif identifier == "C(F)(Cl)Cl":
         assert mol.subgroups == {"CHCL2": 1, "F": 1}
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
     elif identifier == "C(F)(F)Cl":
         assert mol.subgroups == {"CHCL": 1, "F": 2}
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
     else:
         assert mol.subgroups == result
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )

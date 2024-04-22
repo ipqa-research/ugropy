@@ -72,7 +72,11 @@ def test_ch3sh_cg(identifier, result, identifier_type):
         assert mol.subgroups == result
 
         if mol.subgroups != {}:
-            assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+            assert (
+                fit_atoms(
+                    mol.mol_object, mol.subgroups, constantinou_gani_primary
+                )
+                != {}
+            )
     else:
         assert mol.subgroups == {}
-

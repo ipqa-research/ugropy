@@ -115,12 +115,22 @@ def test_composed_psrk(identifier, result, identifier_type):
 @pytest.mark.ConstantinouGani
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_composed_cg(identifier, result, identifier_type):
-    cg_result = get_groups(constantinou_gani_primary, identifier, identifier_type)
+    cg_result = get_groups(
+        constantinou_gani_primary, identifier, identifier_type
+    )
     try:
-        mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
+        mol = get_groups(
+            constantinou_gani_primary, identifier, identifier_type
+        )
         assert mol.subgroups == result
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
     except ValueError:
         for psrk_r, sol in zip(cg_result.subgroups, result):
             assert psrk_r == sol
-            assert fit_atoms(mol.mol_object, psrk_r, constantinou_gani_primary) != {}
+            assert (
+                fit_atoms(mol.mol_object, psrk_r, constantinou_gani_primary)
+                != {}
+            )

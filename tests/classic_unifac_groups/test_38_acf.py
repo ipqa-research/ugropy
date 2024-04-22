@@ -40,12 +40,20 @@ def test_acf_psrk(identifier, result, identifier_type):
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
 def test_acf_cg(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
-    
+
     if identifier != "FC1=CC=NC=C1":
         assert mol.subgroups == result
 
         if mol.subgroups != {}:
-            assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+            assert (
+                fit_atoms(
+                    mol.mol_object, mol.subgroups, constantinou_gani_primary
+                )
+                != {}
+            )
     else:
         mol.subgroups == {"C5H4N": 1, "F": 1}
-        assert fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary) != {}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
