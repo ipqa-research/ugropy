@@ -11,7 +11,8 @@ markers = [
     "UNIFAC: classic UNIFAC model tests",
     "PSRK: predictive SRK model tests",
     "Joback: Joback-Reid contribution model tests",
-    "Dortmund: Dortmund-UNIFAC model tests"
+    "Dortmund: Dortmund-UNIFAC model tests",
+    "ConstantinouGani: Constantinou and Gani contribution model tests"
 ]
 
 [project]

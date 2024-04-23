@@ -1,6 +1,6 @@
 import pytest
 
-from ugropy import get_groups, psrk, unifac
+from ugropy import constantinou_gani_primary, get_groups, psrk, unifac
 from ugropy.core import fit_atoms
 
 
@@ -72,3 +72,16 @@ def test_ch3nh2_psrk(identifier, result, identifier_type):
 
     if mol.subgroups != {}:
         assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+
+
+@pytest.mark.ConstantinouGani
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_ch3nh2_cg(identifier, result, identifier_type):
+    mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
+    assert mol.subgroups == result
+
+    if mol.subgroups != {}:
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
