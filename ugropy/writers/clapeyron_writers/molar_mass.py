@@ -1,5 +1,6 @@
 """Molar mass writer module."""
 
+import pathlib
 from io import StringIO
 from typing import List
 
@@ -12,7 +13,7 @@ from ugropy.properties.joback_properties import JobackProperties
 
 
 def write_molar_mass(
-    path: str,
+    path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
@@ -23,7 +24,7 @@ def write_molar_mass(
 
     Parameters
     ----------
-    path : str, optional
+    path : pathlib.Path
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
         Name of the writing batch. For example, if you name the batch with
@@ -49,6 +50,7 @@ def write_molar_mass(
         "Molar Mases Single Params,,\n"
         "species,CAS,Mw\n"
     )
+    path_molar_mass = pathlib.Path(path)
     # =========================================================================
     # Get molecular weights
     # =========================================================================
@@ -90,13 +92,16 @@ def write_molar_mass(
 
     if batch_name == "":
         with open(
-            f"{path}/molarmass.csv", "w", newline="", encoding="utf-8"
+            path_molar_mass / "molarmass.csv",
+            "w",
+            newline="",
+            encoding="utf-8",
         ) as file:
             df.to_csv(file, index=False)
 
     else:
         with open(
-            f"{path}/{batch_name}_molarmass.csv",
+            path_molar_mass / f"{batch_name}_molarmass.csv",
             "w",
             newline="",
             encoding="utf-8",

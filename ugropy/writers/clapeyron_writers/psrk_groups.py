@@ -1,11 +1,11 @@
 """PSRK groups writer module."""
 
-import os
+import pathlib
 from typing import List
 
 
 def write_psrk(
-    path: str,
+    path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
     psrk_groups: List[dict],
@@ -14,7 +14,7 @@ def write_psrk(
 
     Parameters
     ----------
-    path : str, optional
+    path : pathlib.Path
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
         Name of the writing batch. For example, if you name the batch with
@@ -37,6 +37,8 @@ def write_psrk(
         "species,groups\n"
     ]
 
+    path_psrk = path / "PSRK"
+
     for name, groups in zip(molecules_names, psrk_groups):
         groups_str = '"['
 
@@ -51,14 +53,14 @@ def write_psrk(
         lines.extend(new_line)
 
     # Create folder for PSRK groups
-    if not os.path.exists(f"{path}/PSRK"):
-        os.makedirs(f"{path}/PSRK")
+    if not path_psrk.is_dir():
+        path_psrk.mkdir(parents=True)
 
     # Write .csv
     if batch_name == "":
-        write_path = f"{path}/PSRK/PSRK_groups.csv"
+        write_path = path_psrk / "PSRK_groups.csv"
     else:
-        write_path = f"{path}/PSRK/{batch_name}_PSRK_groups.csv"
+        write_path = path_psrk / f"{batch_name}_PSRK_groups.csv"
 
-    with open(f"{write_path}", "w", encoding="utf-8", newline="\n") as file:
+    with open(write_path, "w", encoding="utf-8", newline="\n") as file:
         file.writelines(lines)

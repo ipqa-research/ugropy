@@ -1,5 +1,6 @@
 """Joback critical properties writer module."""
 
+import pathlib
 from io import StringIO
 from typing import List
 
@@ -9,7 +10,7 @@ from ugropy.properties.joback_properties import JobackProperties
 
 
 def write_critical(
-    path: str,
+    path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
     joback_objects: List[JobackProperties] = [],
@@ -20,7 +21,7 @@ def write_critical(
 
     Parameters
     ----------
-    path : str, optional
+    path : pathlib.Path, optional
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
         Name of the writing batch. For example, if you name the batch with
@@ -42,6 +43,7 @@ def write_critical(
         "Critical Single Parameters,,,,,\n"
         "species,CAS,Tc,Pc,Vc,acentricfactor\n"
     )
+    path_critical = pathlib.Path(path)
     # =========================================================================
     # Build dataframe
     # =========================================================================
@@ -62,13 +64,13 @@ def write_critical(
 
     if batch_name == "":
         with open(
-            f"{path}/critical.csv", "w", newline="", encoding="utf-8"
+            path_critical / "critical.csv", "w", newline="", encoding="utf-8"
         ) as file:
             df.to_csv(file, index=False)
 
     else:
         with open(
-            f"{path}/{batch_name}_critical.csv",
+            path_critical / f"{batch_name}_critical.csv",
             "w",
             newline="",
             encoding="utf-8",

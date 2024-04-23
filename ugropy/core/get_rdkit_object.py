@@ -1,5 +1,6 @@
 """get_rdkit_object module."""
 
+from functools import cache
 from typing import Union
 
 import pubchempy as pcp
@@ -7,6 +8,7 @@ import pubchempy as pcp
 from rdkit import Chem
 
 
+@cache
 def instantiate_mol_object(
     identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
 ) -> Chem.rdchem.Mol:

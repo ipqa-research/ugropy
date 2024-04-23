@@ -1,11 +1,11 @@
 """UNIFAC groups writer module."""
 
-import os
+import pathlib
 from typing import List
 
 
 def write_unifac(
-    path: str,
+    path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
     unifac_groups: List[dict],
@@ -14,7 +14,7 @@ def write_unifac(
 
     Parameters
     ----------
-    path : str, optional
+    path : pathlib.Path
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
         Name of the writing batch. For example, if you name the batch with
@@ -32,6 +32,8 @@ def write_unifac(
         "species,groups\n"
     ]
 
+    path_ogunifac = path / "ogUNIFAC"
+
     for name, groups in zip(molecules_names, unifac_groups):
         groups_str = '"['
 
@@ -46,14 +48,14 @@ def write_unifac(
         lines.extend(new_line)
 
     # Create folder for ogUNIFAC groups
-    if not os.path.exists(f"{path}/ogUNIFAC"):
-        os.makedirs(f"{path}/ogUNIFAC")
+    if not path_ogunifac.is_dir():
+        path_ogunifac.mkdir(parents=True)
 
     # Write .csv
     if batch_name == "":
-        write_path = f"{path}/ogUNIFAC/ogUNIFAC_groups.csv"
+        write_path = path_ogunifac / "ogUNIFAC_groups.csv"
     else:
-        write_path = f"{path}/ogUNIFAC/{batch_name}_ogUNIFAC_groups.csv"
+        write_path = path_ogunifac / f"{batch_name}_ogUNIFAC_groups.csv"
 
-    with open(f"{write_path}", "w", encoding="utf-8", newline="\n") as file:
+    with open(write_path, "w", encoding="utf-8", newline="\n") as file:
         file.writelines(lines)

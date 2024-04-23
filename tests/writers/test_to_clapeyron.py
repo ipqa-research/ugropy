@@ -24,8 +24,6 @@ def test_to_clapeyron():
     with open(f"{path_db}/PSRK_groups.csv", mode="r") as f:
         df_psrk = pd.read_csv(f, sep="|", index_col=None)
 
-    os.mkdir(f"{here}/database")
-
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
     ethanol = Groups("CCO", "smiles", normal_boiling_temperature=78 + 273.15)
 
@@ -93,8 +91,6 @@ def test_to_clapeyron_batch_name():
     with open(f"{path_db}/PSRK_groups.csv", mode="r") as f:
         df_psrk = pd.read_csv(f, sep="|", index_col=None)
 
-    os.mkdir(f"{here}/database")
-
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
     ethanol = Groups("CCO", "smiles", normal_boiling_temperature=78 + 273.15)
 
@@ -156,7 +152,6 @@ def test_to_clapeyron_batch_name():
 
 
 def test_molar_mass_csv():
-    os.mkdir(f"{here}/database")
 
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
     ethanol = Groups("CCO", "smiles", normal_boiling_temperature=78 + 273.15)
