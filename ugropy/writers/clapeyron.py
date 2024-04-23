@@ -18,7 +18,7 @@ def to_clapeyron(
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
     joback_objects: List[JobackProperties] = [],
-    path: str = "./database",
+    path: str = "database",
     batch_name: str = "",
 ) -> None:
     """Write the .csv input files for Clapeyron.jl.
@@ -51,9 +51,6 @@ def to_clapeyron(
     if len(molecules_names) == 0:
         raise ValueError("No names provided for the molecules.")
 
-    if not path_pathlib.is_dir():
-        path_pathlib.mkdir(parents=True)
-
     if unifac_groups and len(unifac_groups) != len(molecules_names):
         raise ValueError(
             "UNIFAC groups list must have the same amount of elements than"
@@ -71,6 +68,10 @@ def to_clapeyron(
             "Joback objects list must have the same amount of elements than"
             "the molecules name list."
         )
+
+    # Create dir if not created
+    if not path_pathlib.is_dir():
+        path_pathlib.mkdir(parents=True)
 
     # Molar mass
     write_molar_mass(
