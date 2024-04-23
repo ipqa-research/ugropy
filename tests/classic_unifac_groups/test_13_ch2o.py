@@ -1,6 +1,6 @@
 import pytest
 
-from ugropy import get_groups, psrk, unifac
+from ugropy import constantinou_gani_primary, get_groups, psrk, unifac
 from ugropy.core import fit_atoms
 
 
@@ -27,7 +27,9 @@ trials_unifac = [
     ("C1COCO1", {"CH2O": 2, "CH2": 1}, "smiles"),
     ("C1COCCOCCOCCOCCOCCO1", {"CH2O": 6, "CH2": 6}, "smiles"),
     # tetrahydrofuran
-    ("C1CCOC1", {"THF": 1}, "smiles"),
+    ("C1CCOC1", {"THF": 1, "CH2": 3}, "smiles"),
+    ("CC1COCC1C", {"THF": 1, "CH2": 1, "CH": 2, "CH3": 2}, "smiles"),
+    ("CC1COCC1O", {"THF": 1, "CH2": 1, "CH": 2, "CH3": 1, "OH": 1}, "smiles"),
     # diisopropyl ether
     ("CC(C)OC(C)C", {"CH3": 4, "CH": 1, "CHO": 1}, "smiles"),
     # diethyl ether
@@ -142,3 +144,19 @@ def test_ch2o_psrk(identifier, result, identifier_type):
 
     if mol.subgroups != {}:
         assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+
+
+@pytest.mark.ConstantinouGani
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_ch2o_cg(identifier, result, identifier_type):
+    if result.get("THF") is not None:
+        result["FCH2O"] = result.pop("THF")
+
+    mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
+    assert mol.subgroups == result
+
+    if mol.subgroups != {}:
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )

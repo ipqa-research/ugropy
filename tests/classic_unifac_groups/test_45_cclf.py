@@ -1,6 +1,6 @@
 import pytest
 
-from ugropy import get_groups, psrk, unifac
+from ugropy import constantinou_gani_primary, get_groups, psrk, unifac
 from ugropy.core import fit_atoms
 
 
@@ -44,3 +44,30 @@ def test_cclf_psrk(identifier, result, identifier_type):
     mol = get_groups(psrk, identifier, identifier_type)
     assert mol.subgroups == result
     assert fit_atoms(mol.mol_object, mol.subgroups, psrk) != {}
+
+
+@pytest.mark.ConstantinouGani
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_cclf_cg(identifier, result, identifier_type):
+    mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
+
+    if identifier in ["C(F)(Cl)(Cl)Cl", "C(F)(F)(F)Cl", "C(F)(F)(Cl)Cl"]:
+        assert mol.subgroups == {}
+    elif identifier == "C(F)(Cl)Cl":
+        assert mol.subgroups == {"CHCL2": 1, "F": 1}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
+    elif identifier == "C(F)(F)Cl":
+        assert mol.subgroups == {"CHCL": 1, "F": 2}
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )
+    else:
+        assert mol.subgroups == result
+        assert (
+            fit_atoms(mol.mol_object, mol.subgroups, constantinou_gani_primary)
+            != {}
+        )

@@ -1,6 +1,6 @@
 import pytest
 
-from ugropy import get_groups, psrk, unifac
+from ugropy import constantinou_gani_primary, get_groups, psrk, unifac
 
 
 # =============================================================================
@@ -32,3 +32,14 @@ trials_psrk = [
 @pytest.mark.parametrize("identifier, result, identifier_type", trials_psrk)
 def test_impossibles_psrk(identifier, result, identifier_type):
     assert get_groups(psrk, identifier, identifier_type).subgroups == result
+
+
+@pytest.mark.ConstantinouGani
+@pytest.mark.parametrize("identifier, result, identifier_type", trials_unifac)
+def test_impossibles_cg(identifier, result, identifier_type):
+    assert (
+        get_groups(
+            constantinou_gani_primary, identifier, identifier_type
+        ).subgroups
+        == result
+    )

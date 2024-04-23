@@ -10,7 +10,7 @@ from ugropy import psrk, unifac
 def test_unifac_ch2_hideouts():
     for group in unifac.subgroups.index:
         # exceptions (full molecules gropus and well ch2...)
-        if group in ["CH2", "THF", "DOH", "NMP", "MORPH"]:
+        if group in ["CH2CL2", "CH2", "THF", "DOH", "NMP", "MORPH"]:
             continue
 
         string_contribution = unifac.subgroups.loc[group, "contribute"]
@@ -35,7 +35,7 @@ def test_unifac_ch2_hideouts():
 def test_unifac_ch_hideouts():
     for group in unifac.subgroups.index:
         # exceptions (full molecules gropus and well ch...)
-        if group in ["CH", "FURFURAL"]:
+        if group in ["HCCL2F", "CHCL3", "CH", "FURFURAL"]:
             continue
 
         string_contribution = unifac.subgroups.loc[group, "contribute"]
@@ -63,7 +63,7 @@ def test_unifac_ch_hideouts():
 def test_psrk_ch2_hideouts():
     for group in psrk.subgroups.index:
         # exceptions (full molecules gropus and well ch2...)
-        if group in ["CH2", "THF", "DOH", "NMP", "MORPH", "H2COCH2"]:
+        if group in ["CH2CL2", "CH2", "THF", "DOH", "NMP", "MORPH", "H2COCH2"]:
             continue
 
         string_contribution = psrk.subgroups.loc[group, "contribute"]
@@ -88,7 +88,7 @@ def test_psrk_ch2_hideouts():
 def test_psrk_ch_hideouts():
     for group in psrk.subgroups.index:
         # exceptions (full molecules gropus and well ch...)
-        if group in ["CH", "FURFURAL"]:
+        if group in ["HCCL2F", "CHCL3", "CH", "FURFURAL"]:
             continue
 
         string_contribution = psrk.subgroups.loc[group, "contribute"]
