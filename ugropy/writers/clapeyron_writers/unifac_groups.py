@@ -14,7 +14,7 @@ def write_unifac(
 
     Parameters
     ----------
-    path : str, optional
+    path : pathlib.Path
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
         Name of the writing batch. For example, if you name the batch with

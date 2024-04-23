@@ -44,7 +44,6 @@ def to_clapeyron(
         "batch1_ogUNIFAC_groups.csv". With the default value will be
         "ogUNIFAC_groups.csv", by default "".
     """
-
     # Use pathlib's Path internally
     path_pathlib = pathlib.Path(path)
 
