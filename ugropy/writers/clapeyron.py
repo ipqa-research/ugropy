@@ -1,5 +1,6 @@
 """to_clapeyron module."""
 
+import pathlib
 from typing import List
 
 from ugropy.properties.joback_properties import JobackProperties
@@ -43,9 +44,16 @@ def to_clapeyron(
         "batch1_ogUNIFAC_groups.csv". With the default value will be
         "ogUNIFAC_groups.csv", by default "".
     """
+
+    # Use pathlib's Path internally
+    path_pathlib = pathlib.Path(path)
+
     # Check if all list have correct data:
     if len(molecules_names) == 0:
         raise ValueError("No names provided for the molecules.")
+
+    if not path_pathlib.is_dir():
+        path_pathlib.mkdir(parents=True)
 
     if unifac_groups and len(unifac_groups) != len(molecules_names):
         raise ValueError(
@@ -67,7 +75,7 @@ def to_clapeyron(
 
     # Molar mass
     write_molar_mass(
-        path,
+        path_pathlib,
         batch_name,
         molecules_names,
         unifac_groups,
@@ -77,12 +85,14 @@ def to_clapeyron(
 
     # LV-UNIFAC
     if unifac_groups:
-        write_unifac(path, batch_name, molecules_names, unifac_groups)
+        write_unifac(path_pathlib, batch_name, molecules_names, unifac_groups)
 
     # PSRK
     if psrk_groups:
-        write_psrk(path, batch_name, molecules_names, psrk_groups)
+        write_psrk(path_pathlib, batch_name, molecules_names, psrk_groups)
 
     # Critical
     if joback_objects:
-        write_critical(path, batch_name, molecules_names, joback_objects)
+        write_critical(
+            path_pathlib, batch_name, molecules_names, joback_objects
+        )

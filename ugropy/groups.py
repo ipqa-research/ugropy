@@ -53,6 +53,7 @@ class Groups:
         identifier_type: str = "name",
         normal_boiling_temperature: float = None,
     ) -> None:
+
         self.identifier_type = identifier_type.lower()
         self.identifier = identifier
         self.mol_object = instantiate_mol_object(identifier, identifier_type)
