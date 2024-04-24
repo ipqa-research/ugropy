@@ -11,6 +11,7 @@ exclude requirements-dev.txt
 exclude *.svg
 exclude binder.ipynb
 exclude reminder.md
+exclude _build
 
 recursive-exclude dist *
 recursive-exclude tests *
