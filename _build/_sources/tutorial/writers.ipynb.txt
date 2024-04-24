@@ -1,0 +1,169 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Writers\n",
+    "\n",
+    "#### Clapeyron (https://github.com/ClapeyronThermo/Clapeyron.jl)\n",
+    "`ugropy` provides a writers module for constructing input files for various\n",
+    "thermodynamic libraries.\n",
+    "\n",
+    "To utilize this function, you must import the module as follows:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from ugropy import Groups, writers"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To utilize the function, you need to provide a list of dictionaries for the\n",
+    "functional groups of UNIFAC and PSRK, where each dictionary contains the\n",
+    "functional groups of the molecules.\n",
+    "\n",
+    "If the user wishes to write critical properties .csv files, they must provide a\n",
+    "list of Joback objects. Let's illustrate this with a simple example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "names = [\"limonene\", \"adrenaline\", \"Trinitrotoluene\"]\n",
+    "\n",
+    "grps = [Groups(n) for n in names]\n",
+    "\n",
+    "# Write the csv files into a database directory\n",
+    "writers.to_clapeyron(\n",
+    "    molecules_names=names,\n",
+    "    unifac_groups=[g.unifac.subgroups for g in grps],\n",
+    "    psrk_groups=[g.psrk.subgroups for g in grps],\n",
+    "    joback_objects=[g.joback for g in grps],\n",
+    "    path=\"database\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In the example provided, we create a Groups object to obtain all the\n",
+    "information of the molecules. Then, we use list comprehension to create the\n",
+    "lists for the to_clapeyron function.\n",
+    "\n",
+    "The molecules_name argument in this case receives the names used to create the\n",
+    "Groups objects, but it can be different if desired. These names will be set as\n",
+    "the molecule names in the .csv files.\n",
+    "\n",
+    "You can omit certain arguments if desired:\n",
+    "\n",
+    "- If you omit the psrk_groups argument: the PSRK_groups.csv file will not be created.\n",
+    "- If you omit the unifac_groups argument: the ogUNIFAC_groups.csv file will not be created.\n",
+    "- If you omit the joback_objects argument: the critical.csv file will not be created."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Thermo (https://github.com/CalebBell/thermo)\n",
+    "\n",
+    "`ugropy` also provides a translator of its subgroups dictionaries to the\n",
+    "`Thermo` library dictionaries.\n",
+    "\n",
+    "Let's recreate the simple example of the `Thermo` documentation:\n",
+    "\n",
+    "https://thermo.readthedocs.io/activity_coefficients.html#unifac-example"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[{1: 2, 2: 4}, {1: 1, 2: 1, 18: 1}]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from thermo.unifac import UFIP, UFSG, UNIFAC\n",
+    "\n",
+    "from ugropy import Groups, unifac, writers\n",
+    "\n",
+    "\n",
+    "names = [\"hexane\", \"2-butanone\"]\n",
+    "\n",
+    "grps = [Groups(n) for n in names]\n",
+    "\n",
+    "thermo_groups = [writers.to_thermo(g.unifac.subgroups, unifac) for g in grps]\n",
+    "\n",
+    "print(thermo_groups)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1.4276025835624184, 1.3646545010104223]"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "GE = UNIFAC.from_subgroups(\n",
+    "    chemgroups=thermo_groups,\n",
+    "    T=60+273.15,\n",
+    "    xs=[0.5, 0.5],\n",
+    "    version=0,\n",
+    "    interaction_data=UFIP,\n",
+    "    subgroups=UFSG\n",
+    ")\n",
+    "\n",
+    "GE.gammas()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "ugropy",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
