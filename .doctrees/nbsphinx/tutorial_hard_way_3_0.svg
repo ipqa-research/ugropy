@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:rdkit="http://www.rdkit.org/xml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" xml:space="preserve" width="400px" height="200px" viewBox="0 0 400 200">
+<!-- END OF HEADER -->
+<rect style="opacity:1.0;fill:#FFFFFF;stroke:none" width="400.0" height="200.0" x="0.0" y="0.0"> </rect>
+<ellipse cx="35.2" cy="110.6" rx="15.2" ry="15.2" class="atom-0" style="fill:#1F77B4A5;fill-rule:evenodd;stroke:#1F77B4A5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<ellipse cx="102.6" cy="76.1" rx="15.2" ry="15.2" class="atom-1" style="fill:#FF7F0EA5;fill-rule:evenodd;stroke:#FF7F0EA5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<ellipse cx="166.3" cy="117.3" rx="15.2" ry="15.2" class="atom-2" style="fill:#FF7F0EA5;fill-rule:evenodd;stroke:#FF7F0EA5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<ellipse cx="233.7" cy="82.7" rx="15.2" ry="15.2" class="atom-3" style="fill:#FF7F0EA5;fill-rule:evenodd;stroke:#FF7F0EA5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<ellipse cx="297.4" cy="123.9" rx="15.2" ry="15.2" class="atom-4" style="fill:#FF7F0EA5;fill-rule:evenodd;stroke:#FF7F0EA5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<ellipse cx="364.8" cy="89.4" rx="15.2" ry="15.2" class="atom-5" style="fill:#1F77B4A5;fill-rule:evenodd;stroke:#1F77B4A5;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path class="bond-0 atom-0 atom-1" d="M 35.2,110.6 L 102.6,76.1" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path class="bond-1 atom-1 atom-2" d="M 102.6,76.1 L 166.3,117.3" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path class="bond-2 atom-2 atom-3" d="M 166.3,117.3 L 233.7,82.7" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path class="bond-3 atom-3 atom-4" d="M 233.7,82.7 L 297.4,123.9" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path class="bond-4 atom-4 atom-5" d="M 297.4,123.9 L 364.8,89.4" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+<path d="M 99.3,77.8 L 102.6,76.1 L 105.8,78.1" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"/>
+<path d="M 163.1,115.2 L 166.3,117.3 L 169.6,115.5" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"/>
+<path d="M 230.4,84.5 L 233.7,82.7 L 236.9,84.8" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"/>
+<path d="M 294.2,121.9 L 297.4,123.9 L 300.7,122.2" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"/>
+<rect x="1" y="5" width="18.0" height="18.0" fill="rgb(31, 119, 179)"/><text x="19.200000000000003" y="20" font-family="Helvetica" font-size="12" fill="black">CH3</text><rect x="1" y="30" width="18.0" height="18.0" fill="rgb(255, 127, 13)"/><text x="19.200000000000003" y="45" font-family="Helvetica" font-size="12" fill="black">CH2</text><text x="200.0" y="40" font-family="Helvetica" font-size="12" font-weight="bold" fill="black" text-anchor="middle"/></svg>
