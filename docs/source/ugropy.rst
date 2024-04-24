@@ -1,3 +1,11 @@
+Available Models
+================
+.. automodule:: ugropy.fragmentation_models.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
 Core
 ====
 .. automodule:: ugropy.core
@@ -32,7 +40,23 @@ Properties
 
 Fragmentation Models
 ====================
-.. automodule:: ugropy.fragmentation_models
+.. automodule:: ugropy.fragmentation_models.fragmentation_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Gibbs Models
+============
+.. automodule:: ugropy.fragmentation_models.gibbs_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Properties Estimators
+=====================
+.. automodule:: ugropy.fragmentation_models.prop_estimator
    :members:
    :undoc-members:
    :show-inheritance:

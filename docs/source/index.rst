@@ -12,6 +12,12 @@
    tutorial/tutorial
    modules
 
+References
+==========
+
+.. bibliography::
+   :style: unsrt
+   :cited:
 
 
 Indices and tables

@@ -1,13 +1,16 @@
+setuptools
+
 Sphinx
 sphinx_rtd_theme
 
 nbsphinx
 sphinx_copybutton
+sphinxcontrib-bibtex
 
 ipykernel
 ipython
 
 matplotlib
-sphinxcontrib-bibtex
 
 thermo >= 0.2.27
+toml

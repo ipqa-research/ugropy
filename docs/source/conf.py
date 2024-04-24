@@ -8,17 +8,24 @@
 import os
 import pathlib
 import sys
+import toml
 
 CURRENT_PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 UGROPY_PATH = CURRENT_PATH.parent.parent
 
 sys.path.insert(0, str(UGROPY_PATH))
 
+# Get release from pyproject
+pyproject_path = UGROPY_PATH / "pyproject.toml"
+with open(pyproject_path, "r") as f:
+    pyproject_toml = toml.load(f)
+
+project_version = pyproject_toml["project"]["version"]
 
 project = "ugropy"
 copyright = "2023, Salvador Eduardo Brandolín"
 author = "Salvador Eduardo Brandolín"
-release = "2.0.0"
+release = project_version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -33,7 +40,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "nbsphinx",
     "sphinx_copybutton",
-    #    "sphinxcontrib.bibtex",
+    "sphinxcontrib.bibtex",
 ]
 
 templates_path = ["_templates"]
@@ -43,6 +50,8 @@ exclude_patterns = ["_build", "**.ipynb_checkpoints"]
 # EXTRA CONF
 # =============================================================================
 autodoc_member_order = "bysource"
+
+bibtex_bibfiles = ["refs.bib"]
 
 # =============================================================================
 # NUMPY DOC

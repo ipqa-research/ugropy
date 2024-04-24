@@ -156,7 +156,6 @@ def test_to_clapeyron_batch_name():
 
 
 def test_molar_mass_csv():
-
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
     ethanol = Groups("CCO", "smiles", normal_boiling_temperature=78 + 273.15)
 
