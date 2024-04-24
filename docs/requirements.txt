@@ -11,3 +11,4 @@ matplotlib
 sphinxcontrib-bibtex
 
 thermo >= 0.2.27
+toml

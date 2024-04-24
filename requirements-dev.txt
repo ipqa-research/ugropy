@@ -15,6 +15,8 @@ nbsphinx
 sphinx
 sphinx_copybutton
 sphinx_rtd_theme
+sphinxcontrib.bibtex
+toml
 
 # Testing
 check-manifest

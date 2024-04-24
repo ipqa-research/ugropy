@@ -11,7 +11,11 @@ from ugropy.fragmentation_models.models import joback
 
 
 class JobackProperties:
-    """Joback [1] group contribution properties estimator.
+    """Joback group contribution properties estimator.
+
+    The class recieves either the Joback and Reid model's :cite:p:`joback1,
+    joback2` groups, name or smiles of a molecule and estimates the its
+    properties.
 
     Parameters
     ----------
@@ -32,7 +36,7 @@ class JobackProperties:
     ----------
     subgroups : dict
         Joback functional groups of the molecule.
-    exp_nbt : float
+    experimental_boiling_temperature : float
         User provided experimental normal boiling point [K].
     critical_temperature : float
         Joback estimated critical temperature [K].
@@ -63,10 +67,10 @@ class JobackProperties:
     molecular_weight : float
         Molecular weight from Joback's subgroups [g/mol].
     acentric_factor : float
-        Acentric factor from Lee and Kesler's equation [2].
+        Acentric factor from Lee and Kesler's equation :cite:p:`joback1`.
     vapor_pressure_params : dict
-        Vapor pressure G and k parameters for the Riedel-Plank-Miller [2]
-        equation [bar].
+        Vapor pressure G and k parameters for the Riedel-Plank-Miller
+        :cite:p:`joback1` equation [bar].
     """
 
     def __init__(
@@ -75,7 +79,7 @@ class JobackProperties:
         identifier_type: str = "name",
         normal_boiling_point: float = None,
     ) -> None:
-        # Skip if instantiation from_groups is made.
+        # Skip if instantiation from groups is made.
         if identifier_type in ["name", "smiles", "mol"]:
             self.subgroups = get_groups(
                 joback, identifier, identifier_type
@@ -89,7 +93,7 @@ class JobackProperties:
             )
 
         # experimental boiling temperature
-        self.exp_nbt = normal_boiling_point
+        self.experimental_boiling_temperature = normal_boiling_point
 
         # Original Joback properties
         self.critical_temperature = None
@@ -143,8 +147,8 @@ class JobackProperties:
     ) -> Union[float, NDArray]:
         """Calculate the liquid heat capacity [J/mol/K].
 
-        Uses the Rowlinson-Bondi [4-5] equation with the Joback estimated
-        properties.
+        Uses the Rowlinson-Bondi :cite:p:`joback1` equation with the Joback
+        estimated properties.
 
         Parameters
         ----------
@@ -201,8 +205,8 @@ class JobackProperties:
     ) -> Union[float, NDArray]:
         """Calculate the vapor pressure [bar].
 
-        Uses the Riedel-Plank-Miller [3] equation with the Joback estimated
-        properties.
+        Uses the Riedel-Plank-Miller :cite:p:`joback1` equation with the Joback
+        estimated properties.
 
         Parameters
         ----------
@@ -256,8 +260,8 @@ class JobackProperties:
         self.fusion_temperature = 122.5 + np.dot(ocurr, tf_c)
 
         # Used normal boiling point for calculations
-        if self.exp_nbt is not None:
-            tb = self.exp_nbt
+        if self.experimental_boiling_temperature is not None:
+            tb = self.experimental_boiling_temperature
         else:
             tb = self.normal_boiling_point
 

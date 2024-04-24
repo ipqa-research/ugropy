@@ -7,9 +7,9 @@
 [![PyPI
 version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
 
-`ugropy` is a `Python` library to obtain subgroups from different
-thermodynamic group contribution models using both the name or the SMILES
-representation of a molecule. If the name is given, the library uses the
+`ugropy` is a `Python` library to obtain subgroups from different thermodynamic
+group contribution models using both the name or the SMILES representation of a
+molecule. If the name is given, the library uses the
 [PubChemPy](https://github.com/mcs07/PubChemPy) library to obtain the SMILES
 representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
@@ -18,17 +18,23 @@ in the molecule.
 `ugropy` is in an early development stage, leaving issues of examples of
 molecules that `ugropy` fails solving the subgroups of a model is very helpful.
 
+`ugropy` is tested for `Python` 3.10, 3.11 and 3.12 on Linux, Windows and Mac
+OS.
+
 ## Try ugropy now
 You can try ugropy from its
 [Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
 binder.ipynb file to explore the basic features.
 
-## Models supported v2.0.0
+## Models supported v2.0.5
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
 - Joback
 
 ## Writers
+`ugropy` allows you to convert the obtained functional groups or estimated
+properties to the input format required by the following thermodynamic
+libraries:
 
 - [Clapeyron.jl](github.com/ClapeyronThermo/Clapeyron.jl)
 - [Thermo](https://github.com/CalebBell/thermo)
@@ -118,7 +124,7 @@ writers.to_clapeyron(
     unifac_groups=[g.unifac.subgroups for g in grps],
     psrk_groups=[g.psrk.subgroups for g in grps],
     joback_objects=[g.joback for g in grps],
-    path="./database"
+    path="database"
 )
 ```
 Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) subgroups
@@ -141,22 +147,3 @@ grps = [Groups(n) for n in names]
 ```
 pip install ugropy
 ```
-
-## Refereces
-
-[1] http://www.ddbst.com/published-parameters-unifac.html
-
-[2] Joback, K. G., & Reid, R. C. (1987). ESTIMATION OF PURE-COMPONENT
-PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications,
-57(1–6), 233–243. https://doi.org/10.1080/00986448708960487
-
-[3] Joback, K. G. (1989). Designing molecules possessing desired physical
-property values [Thesis (Ph. D.), Massachusetts Institute of Technology].
-https://dspace.mit.edu/handle/1721.1/14191
-
-[4] Bondi, A. (1966). Estimation of Heat Capacity of Liquids. Industrial &
-Engineering Chemistry Fundamentals, 5(4), 442–449.
-https://doi.org/10.1021/i160020a001
-
-[5] Rowlinson, J. S., & Swinton, F. (2013). Liquids and liquid mixtures:
-Butterworths monographs in chemistry. Butterworth-Heinemann
