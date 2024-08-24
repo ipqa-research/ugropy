@@ -8,7 +8,7 @@ recursive-include ugropy *.py *.csv
 
 exclude tox.ini
 exclude requirements-dev.txt
-exclude *.svg
+exclude *.svg *.png
 exclude binder.ipynb
 exclude reminder.md
 exclude _build
