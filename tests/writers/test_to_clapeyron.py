@@ -15,9 +15,6 @@ path_db = here / "test_expected_result"
 # TODO: Compare differently on MACOS
 
 
-@pytest.mark.skipif(
-    sys.platform == "darwin", reason="Test work but have to compare diffently"
-)
 def test_to_clapeyron():
     with open(path_db / "molarmass.csv", mode="r") as f:
         df_molarmass = f.read()
@@ -56,10 +53,14 @@ def test_to_clapeyron():
     with open(here / "database" / "PSRK/PSRK_groups.csv", mode="r") as f:
         df_psrk_ugropy = f.read()
 
-    assert df_molarmass == df_molarmass_ugropy
+    if sys.platform != "darwin":
+        assert df_molarmass == df_molarmass_ugropy
+
     assert df_psrk == df_psrk_ugropy
     assert df_unifac == df_unifac_ugropy
-    assert df_critical == df_critical_ugropy
+
+    if sys.platform != "darwin":
+        assert df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "critical.csv")
     os.remove(here / "database" / "molarmass.csv")
@@ -70,9 +71,6 @@ def test_to_clapeyron():
     os.rmdir(here / "database")
 
 
-@pytest.mark.skipif(
-    sys.platform == "darwin", reason="Test work but have to compare diffently"
-)
 def test_to_clapeyron_batch_name():
     with open(path_db / "molarmass.csv", mode="r") as f:
         df_molarmass = f.read()
@@ -114,10 +112,14 @@ def test_to_clapeyron_batch_name():
     ) as f:
         df_psrk_ugropy = f.read()
 
-    assert df_molarmass == df_molarmass_ugropy
+    if sys.platform != "darwin":
+        assert df_molarmass == df_molarmass_ugropy
+
     assert df_psrk == df_psrk_ugropy
     assert df_unifac == df_unifac_ugropy
-    assert df_critical == df_critical_ugropy
+
+    if sys.platform != "darwin":
+        assert df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "otacon_critical.csv")
     os.remove(here / "database" / "otacon_molarmass.csv")
@@ -128,9 +130,6 @@ def test_to_clapeyron_batch_name():
     os.rmdir(here / "database")
 
 
-@pytest.mark.skipif(
-    sys.platform == "darwin", reason="Test work but have to compare diffently"
-)
 def test_molar_mass_csv():
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
     ethanol = Groups("CCO", "smiles", normal_boiling_temperature=78 + 273.15)
@@ -158,7 +157,8 @@ def test_molar_mass_csv():
     with open(here / "database" / "molarmass.csv", mode="r") as f:
         df_molarmass_psrk = f.read()
 
-    assert df_molarmass_unifac == df_molarmass_psrk
+    if sys.platform != "darwin":
+        assert df_molarmass_unifac == df_molarmass_psrk
 
     os.remove(here / "database" / "molarmass.csv")
     os.remove(here / "database" / "ogUNIFAC" / "ogUNIFAC_groups.csv")
