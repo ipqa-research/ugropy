@@ -1,16 +1,13 @@
-# commit
-commitizen
-
 # Style
 flake8-nb
 flake8-black
 flake8-builtins
 flake8-import-order
-commitizen
 pep8-naming
 pydocstyle
 
 # documentation (also pandoc must be installed)
+myst-parser
 nbsphinx
 sphinx
 sphinx_copybutton
@@ -33,5 +30,5 @@ matplotlib
 # ugropy dependecies
 numpy >= 1.25.1
 pandas >= 2.0.3
-pubchempy == 1.0.4
-rdkit == 2023.9.5
+pubchempy >= 1.0.4
+rdkit >= 2023.9.5

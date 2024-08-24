@@ -1,14 +1,8 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# For the full list of built-in configuration values, see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import pathlib
 import sys
 import toml
+
 
 CURRENT_PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 UGROPY_PATH = CURRENT_PATH.parent.parent
@@ -31,6 +25,7 @@ release = project_version
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
@@ -53,6 +48,7 @@ autodoc_member_order = "bysource"
 
 bibtex_bibfiles = ["refs.bib"]
 
+add_module_names = False
 # =============================================================================
 # NUMPY DOC
 # =============================================================================
@@ -65,7 +61,10 @@ templates_path = ["_templates"]
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = ".rst"
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".md": "markdown",
+}
 
 # The master toctree document.
 master_doc = "index"

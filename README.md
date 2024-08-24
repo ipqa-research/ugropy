@@ -1,4 +1,4 @@
-![logo](logo.svg)
+![logo](logo.png)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
@@ -21,26 +21,26 @@ molecules that `ugropy` fails solving the subgroups of a model is very helpful.
 `ugropy` is tested for `Python` 3.10, 3.11 and 3.12 on Linux, Windows and Mac
 OS.
 
-## Try ugropy now
+# Try ugropy now
 You can try ugropy from its
 [Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
 binder.ipynb file to explore the basic features.
 
-## Models supported v2.0.5
+# Models supported v2.0.5
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
 - Joback
 
-## Writers
+# Writers
 `ugropy` allows you to convert the obtained functional groups or estimated
 properties to the input format required by the following thermodynamic
 libraries:
 
-- [Clapeyron.jl](github.com/ClapeyronThermo/Clapeyron.jl)
+- [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 - [Thermo](https://github.com/CalebBell/thermo)
 
 
-## Example of use
+# Example of use
 You can check the full tutorial
 [here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
 
