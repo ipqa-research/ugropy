@@ -1,6 +1,6 @@
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -14,9 +14,9 @@ path_db = here / "test_expected_result"
 
 # TODO: Compare differently on MACOS
 
+
 @pytest.mark.skipif(
-        sys.platform == "darwin", 
-        reason="Test work but have to compare diffently"
+    sys.platform == "darwin", reason="Test work but have to compare diffently"
 )
 def test_to_clapeyron():
     with open(path_db / "molarmass.csv", mode="r") as f:
@@ -71,8 +71,7 @@ def test_to_clapeyron():
 
 
 @pytest.mark.skipif(
-        sys.platform == "darwin", 
-        reason="Test work but have to compare diffently"
+    sys.platform == "darwin", reason="Test work but have to compare diffently"
 )
 def test_to_clapeyron_batch_name():
     with open(path_db / "molarmass.csv", mode="r") as f:
@@ -130,8 +129,7 @@ def test_to_clapeyron_batch_name():
 
 
 @pytest.mark.skipif(
-        sys.platform == "darwin", 
-        reason="Test work but have to compare diffently"
+    sys.platform == "darwin", reason="Test work but have to compare diffently"
 )
 def test_molar_mass_csv():
     limonene = Groups("CC1=CCC(CC1)C(=C)C", "smiles")
