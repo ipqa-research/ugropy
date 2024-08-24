@@ -17,7 +17,7 @@ markers = [
 
 [project]
 name = "ugropy"
-version = "2.0.6"
+version = "2.0.7"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
