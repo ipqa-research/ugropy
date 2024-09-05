@@ -26,9 +26,3 @@ ipdb
 ipython
 jupyter
 matplotlib
-
-# ugropy dependecies
-numpy >= 1.25.1, <2.0.0
-pandas >= 2.0.3
-pubchempy >= 1.0.4
-rdkit >= 2023.9.5
