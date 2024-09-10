@@ -24,9 +24,10 @@ class FragmentationModel:
             if match:
                 batch.add_fragment(fragment.name, match)
         return batch
-    
+
+
 class DetectionBatch:
-    def __init__(self, molecule: Chem.rdchem.Mol):     
+    def __init__(self, molecule: Chem.rdchem.Mol):
         self.n = molecule.GetNumAtoms()
         self.fragments = {}
         self.overlaped_fragments = {}
@@ -37,7 +38,6 @@ class DetectionBatch:
         self.solution = {}
 
         self.has_overlap = False
-        
 
     def get_groups(self):
         self.build_overlap_matrix()
@@ -58,7 +58,6 @@ class DetectionBatch:
 
         for frag in self.solution_atoms.keys():
             self.solution[frag] = len(self.solution_atoms[frag])
-
 
     def add_fragment(self, fragment_name: str, fragments: tuple):
         for i, f in enumerate(fragments):
@@ -81,7 +80,9 @@ class DetectionBatch:
     def solve_overlap(self):
         universe = set(self.overlaped_atoms)
 
-        all_elements = set(itertools.chain.from_iterable(self.overlaped_fragments.values()))
+        all_elements = set(
+            itertools.chain.from_iterable(self.overlaped_fragments.values())
+        )
 
         universe.update(all_elements)
 
@@ -98,21 +99,18 @@ class DetectionBatch:
             for i, subset in enumerate(self.overlaped_fragments.values()):
                 if elem in subset:
                     sum_list.append(x[i])
-            
+
             # print(f"Restricción para el elemento {elem}: {sum_list} == 1")
             problem += pulp.lpSum(sum_list) == 1
 
-        solver = pulp.getSolver('PULP_CBC_CMD', msg=False)
+        solver = pulp.getSolver("PULP_CBC_CMD", msg=False)
 
         problem.solve(solver)
 
-        selected_subsets = [name for i, name in enumerate(self.overlaped_fragments.keys()) if pulp.value(x[i]) == 1]
+        selected_subsets = [
+            name
+            for i, name in enumerate(self.overlaped_fragments.keys())
+            if pulp.value(x[i]) == 1
+        ]
 
         self.selected_fragments = selected_subsets
-
-                
-                
-
-
-        
-        
