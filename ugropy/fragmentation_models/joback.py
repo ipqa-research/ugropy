@@ -1,16 +1,74 @@
-"""Joback's properties module."""
+"""PropertiesEstimator module."""
 
 from typing import Union
 
+import pandas as pd
+
+from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
+from ugropy.fragmentation_models.frag_result import FragmentationResult
+
+from rdkit import Chem
+
 import numpy as np
-from numpy.typing import NDArray
-
-from ugropy.constants import R
-from ugropy.core.get_model_groups import get_groups
-from ugropy.fragmentation_models.models import joback
 
 
-class JobackProperties:
+class Joback(FragmentationModel):
+    """Joback Fragmentation model dedicated to properties estimation models.
+
+    Parameters
+    ----------
+    subgroups : pd.DataFrame
+        Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
+        'smarts' (SMARTS representations of the group to detect its precense in
+        the molecule), 'molecular_weight' (molecular weight of the subgroups
+        used to check that the result is correct).
+    properties_contributions : pd.DataFrame, optional
+        Group's properties contributions, by default None
+
+    Attributes
+    ----------
+    subgroups : pd.DataFrame
+        Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
+        'smarts' (SMARTS representations of the group to detect its precense in
+        the molecule), 'molecular_weight' (molecular weight of the subgroups
+        used to check that the result is correct).
+    detection_mols : dict
+        Dictionary cotaining all the rdkit Mol object from the detection_smarts
+        subgroups column
+    properties_contributions : pd.DataFrame
+        Group's properties contributions.
+    """
+
+    def __init__(
+        self,
+        subgroups: pd.DataFrame,
+        properties_contributions: Union[pd.DataFrame, None] = None,
+    ):
+        super().__init__(subgroups)
+
+        # Properties contributions
+        self.properties_contributions = properties_contributions
+
+    def set_fragmentation_result(
+        self,
+        molecule: Chem.rdchem.Mol,
+        subgroups_occurrences: dict,
+        subgroups_atoms_indexes: dict,
+        **kwargs,
+    ) -> "JobackFragmentationResult":
+
+        result = JobackFragmentationResult(
+            self,
+            molecule,
+            subgroups_occurrences,
+            subgroups_atoms_indexes,
+            **kwargs,
+        )
+
+        return result
+
+
+class JobackFragmentationResult(FragmentationResult):
     """Joback group contribution properties estimator.
 
     The class recieves either the Joback and Reid model's :cite:p:`joback1,
@@ -75,22 +133,14 @@ class JobackProperties:
 
     def __init__(
         self,
-        identifier: str,
-        identifier_type: str = "name",
+        model: Joback,
+        molecule: Chem.rdchem.Mol,
+        subgroups: dict,
+        subgroups_atoms_indexes: dict,
         normal_boiling_point: float = None,
     ) -> None:
-        # Skip if instantiation from groups is made.
-        if identifier_type in ["name", "smiles", "mol"]:
-            self.subgroups = get_groups(
-                joback, identifier, identifier_type
-            ).subgroups
-        elif identifier_type == "groups":
-            self.subgroups = identifier
-        else:
-            raise ValueError(
-                f"Identifier type ''{identifier_type}'' is incorrect. Use "
-                "'name', 'smiles', 'mol' or 'groups'."
-            )
+        # Initialize the FragmentationResult attributes
+        super().__init__(molecule, subgroups, subgroups_atoms_indexes)
 
         # experimental boiling temperature
         self.experimental_boiling_temperature = normal_boiling_point
@@ -116,11 +166,11 @@ class JobackProperties:
 
         # Fill the properties' values
         if self.subgroups != {}:
-            self._calculate_properties()
+            self._calculate_properties(model)
 
     def heat_capacity_ideal_gas(
-        self, temperature: Union[float, NDArray]
-    ) -> Union[float, NDArray]:
+        self, temperature: Union[float, np.ndarray]
+    ) -> Union[float, np.ndarray]:
         """Calculate the ideal gas heat capacity [J/mol/K].
 
         Uses the Joback estimated Reid's ideal gas heat capacity equation
@@ -128,12 +178,12 @@ class JobackProperties:
 
         Parameters
         ----------
-        temperature : Union[float, NDArray]
+        temperature : Union[float, np.ndarray]
             Temperature [K]
 
         Returns
         -------
-        Union[float, NDArray]
+        Union[float, np.ndarray]
             Ideal gas heat capacity [J/mol/K].
         """
         a, b, c, d = self.heat_capacity_ideal_gas_params
@@ -143,8 +193,8 @@ class JobackProperties:
         return a + b * t + c * t**2 + d * t**3
 
     def heat_capacity_liquid(
-        self, temperature: Union[float, NDArray]
-    ) -> Union[float, NDArray]:
+        self, temperature: Union[float, np.ndarray]
+    ) -> Union[float, np.ndarray]:
         """Calculate the liquid heat capacity [J/mol/K].
 
         Uses the Rowlinson-Bondi :cite:p:`joback1` equation with the Joback
@@ -152,12 +202,12 @@ class JobackProperties:
 
         Parameters
         ----------
-        temperature : Union[float, NDArray]
+        temperature : Union[float, np.ndarray]
             Temperature [K]
 
         Returns
         -------
-        Union[float, NDArray]
+        Union[float, np.ndarray]
             Ideal gas heat capacity [J/mol/K].
         """
         tr = temperature / self.critical_temperature
@@ -179,18 +229,18 @@ class JobackProperties:
         return c_pl
 
     def viscosity_liquid(
-        self, temperature: Union[float, NDArray]
-    ) -> Union[float, NDArray]:
+        self, temperature: Union[float, np.ndarray]
+    ) -> Union[float, np.ndarray]:
         """Calculate the Joback estimated liquid viscosity [N/s/m²].
 
         Parameters
         ----------
-        temperature : Union[float, NDArray]
+        temperature : Union[float, np.ndarray]
             Temperature [K]
 
         Returns
         -------
-        Union[float, NDArray]
+        Union[float, np.ndarray]
             Liquid viscosity [N/s/m²].
         """
         t = temperature
@@ -201,8 +251,8 @@ class JobackProperties:
         return n_l
 
     def vapor_pressure(
-        self, temperature: Union[float, NDArray]
-    ) -> Union[float, NDArray]:
+        self, temperature: Union[float, np.ndarray]
+    ) -> Union[float, np.ndarray]:
         """Calculate the vapor pressure [bar].
 
         Uses the Riedel-Plank-Miller :cite:p:`joback1` equation with the Joback
@@ -210,12 +260,12 @@ class JobackProperties:
 
         Parameters
         ----------
-        temperature : Union[float, NDArray]
+        temperature : Union[float, np.ndarray]
             Temperature [K]
 
         Returns
         -------
-        Union[float, NDArray]
+        Union[float, np.ndarray]
             Vapor pressure [bar]
         """
         tr = temperature / self.critical_temperature
@@ -229,12 +279,12 @@ class JobackProperties:
 
         return vp
 
-    def _calculate_properties(self) -> None:
+    def _calculate_properties(self, model: Joback) -> None:
         """Obtain the molecule properties from Joback's groups."""
         groups = list(self.subgroups.keys())
         ocurr = list(self.subgroups.values())
 
-        df = joback.properties_contributions.loc[groups]
+        df = model.properties_contributions.loc[groups]
 
         # =====================================================================
         # Calculate complete contribution properties (no contribution missing)
@@ -248,7 +298,7 @@ class JobackProperties:
         gform_c = df["Gform"].to_numpy()
         hvap_c = df["Hvap"].to_numpy()
         numa_c = df["num_of_atoms"].to_numpy()
-        mw_c = joback.subgroups.loc[groups, "molecular_weight"].to_numpy()
+        mw_c = model.subgroups.loc[groups, "molecular_weight"].to_numpy()
 
         # Molecular weight
         self.molecular_weight = np.dot(ocurr, mw_c)

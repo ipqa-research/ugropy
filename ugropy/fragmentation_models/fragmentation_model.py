@@ -4,17 +4,20 @@ All ugropy models (joback, unifac, psrk) are instances of the
 FragmentationModule class.
 """
 
-from abc import ABC, abstractmethod
+from typing import Union
 
 import pandas as pd
 
 from rdkit import Chem
-from rdkit.Chem import Draw
-from PIL import Image, ImageDraw, ImageFont
+from rdkit.Chem.Draw import rdMolDraw2D
+
 import numpy as np
 
+from ugropy.core.checks import check_has_overlapping_groups
+from ugropy.core.get_rdkit_object import instantiate_mol_object
 
-class FragmentationModel(ABC):
+
+class FragmentationModel:
     """FragmentationModel class.
 
     All ugropy supported models are an instance of this class. This class must
@@ -49,7 +52,43 @@ class FragmentationModel(ABC):
         for group, row in self.subgroups.iterrows():
             detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
 
-    def detect_groups(self, molecule: Chem.rdchem.Mol) -> pd.DataFrame:
+    def get_groups(
+        self,
+        identifier: Union[str, Chem.rdchem.Mol],
+        identifier_type: str = "name",
+        ilp_solver: str = "cbc",
+    ) -> "FragmentationResult":
+        
+        # RDKit Mol object
+        mol_object = instantiate_mol_object(identifier, identifier_type)
+
+        # Direct detection of groups presence and occurences
+        detections = self._detect_groups(mol_object)
+
+        # First return
+        if detections == {}:  # No groups detected
+            return self.set_fragmentation_result(mol_object, {}, {})
+        
+        # Check overlapping groups
+        has_overlap, overlapping_atoms = check_has_overlapping_groups(
+            mol_object, detections
+        )
+
+    def set_fragmentation_result(
+        self,
+        molecule: Chem.rdchem.Mol,
+        subgroups_occurrences: dict,
+        subgroups_atoms_indexes: dict,
+    ) -> "FragmentationResult":
+
+        result = FragmentationResult(
+            molecule, subgroups_occurrences, subgroups_atoms_indexes
+        )
+
+        return result
+
+
+    def _detect_groups(self, molecule: Chem.rdchem.Mol) -> dict:
         """Detect all the groups in the molecule.
 
         Return a dictionary with the detected groups as keys and a tuple of
@@ -75,115 +114,123 @@ class FragmentationModel(ABC):
 
         return detected_groups
 
-    @abstractmethod
-    def set_fragmentation_result(
-        self,
-        molecule: Chem.rdchem.Mol,
-        subgroups_occurrences: dict,
-        subgroups_atoms_indexes: dict,
-    ) -> "FragmentationResult":
-
-        raise NotImplementedError("Abstract Method not implemented.")
-
 
 class FragmentationResult:
-    def __init__(self, molecule: Chem.rdchem.Mol, subgroups: dict):
+    def __init__(
+        self,
+        molecule: Chem.rdchem.Mol,
+        subgroups: dict,
+        subgroups_atoms_indexes: dict,
+    ):
         self.mol_object = molecule
         self.subgroups = subgroups
+        self.subgroups_atoms = subgroups_atoms_indexes
 
     def draw(
-        mol_object: Chem.rdchem.Mol,
-        subgroups: dict,
-        model,  # El tipo de model depende de tu implementación
+        self,
         title: str = "",
-        width: int = 400,
-        height: int = 200,
-        title_font_size: int = 12,
-        legend_font_size: int = 12,
+        width: float = 400,
+        height: float = 200,
+        title_font_size: float = 12,
+        legend_font_size: float = 12,
         font: str = "Helvetica",
-    ) -> Image.Image:
-        """Create a PIL image of the fragmentation result with a legend."""
+    ) -> str:
+        """Create a svg representation of the fragmentation result.
 
-        # Ajustar los subgrupos a los átomos de la molécula
-        fit = fit_atoms(mol_object, subgroups, model)
+        Parameters
+        ----------
+        mol_object : Chem.rdchem.Mol
+            RDKit Mol object.
+        mol_subgroups : Union[dict, List[dict]]
+            Subgroups of mol_object.
+        model: FragmentationModel
+            FragmentationModel object.
+        title : str, optional
+            Graph title, by default ""
+        width : int, optional
+            Graph width, by default 400
+        height : int, optional
+            Graph height, by default 200
+        title_font_size : int, optional
+            Font size of graph's title, by default 12
+        legend_font_size : int, optional
+            Legend font size, by default 12
+        font : str, optional
+            Text font, by default "Helvetica"
 
-        # Generar los colores para cada subgrupo
-        how_many_subgroups = len(fit.keys())
-        colors_rgb = _generate_distinct_colors(how_many_subgroups)
+        Returns
+        -------
+        str
+            SVG string.
+        """
+        # =====================================================================
+        # Generate the colors for each subgroup (max 10 TODO)
+        # =====================================================================
+        how_many_subgroups = len(self.subgroups_atoms.keys())
+
+        colors_rgb = self._generate_distinct_colors(how_many_subgroups)
 
         highlight = []
         atoms_colors = {}
+        subgroups_colors = {}
 
-        for idx, (subgroup, atoms) in enumerate(fit.items()):
+        for idx, (subgroup, atoms) in enumerate(self.subgroups_atoms.items()):
             atms = np.array(atoms).flatten()
+
+            subgroups_colors[subgroup] = colors_rgb[idx]
             highlight.extend(atms.tolist())
 
             for at in atms:
                 atoms_colors[int(at)] = colors_rgb[idx]
 
-        # Crear la imagen de la molécula usando MolToImage
-        img = Draw.MolToImage(
-            mol_object,
-            size=(width, height),
+        drawer = rdMolDraw2D.MolDraw2DSVG(width, height)
+        drawer.DrawMolecule(
+            self.mol_object,
             highlightAtoms=highlight,
-            highlightAtomColors={i: tuple(c[:3]) for i, c in atoms_colors.items()}  # RGB sin el canal alpha
+            highlightBonds=[],
+            highlightAtomColors=atoms_colors,
         )
+        drawer.FinishDrawing()
+        svg = drawer.GetDrawingText().replace("svg:", "")
 
-        # Crear una imagen más grande para añadir la leyenda y el título
-        new_height = height + (legend_font_size + 5) * how_many_subgroups + 50  # Espacio para la leyenda y título
-        final_img = Image.new("RGB", (width, new_height), "white")
-        
-        # Pegar la imagen de la molécula en la parte superior
-        final_img.paste(img, (0, 0))
+        # =====================================================================
+        # Create legend
+        # =====================================================================
+        legend = ""
+        i = 0
+        for i, (name, color) in enumerate(subgroups_colors.items()):
+            r, g, b, _ = color
+            rect_color = f"rgb({int(r * 255)}, {int(g * 255)}, {int(b * 255)})"
+            name = name.replace("<", "&lt;").replace(">", "&gt;")
+            legend += f'<rect x="1" y="{5 + i * 25}" width="{legend_font_size * 1.5}" height="{legend_font_size * 1.5}" fill="{rect_color}" />'  # noqa
+            legend += f'<text x="{legend_font_size * 1.6}" y="{20 + i * 25}" font-family="{font}" font-size="{legend_font_size}" fill="black">{name}</text>'  # noqa
 
-        # Crear un objeto ImageDraw para dibujar la leyenda y el título
-        draw = ImageDraw.Draw(final_img)
+        # =====================================================================
+        # Create title
+        # =====================================================================
+        title = f'<text x="{width/2}" y="40" font-family="{font}" font-size="{title_font_size}" font-weight="bold" fill="black" text-anchor="middle">{title}</text>'  # noqa
 
-        # Cargar la fuente o usar la predeterminada si no está disponible
-        try:
-            font_title = ImageFont.truetype("arial.ttf", title_font_size)
-            font_legend = ImageFont.truetype("arial.ttf", legend_font_size)
-        except IOError:
-            font_title = ImageFont.load_default()
-            font_legend = ImageFont.load_default()
+        # =====================================================================
+        # Set title and legend to figure
+        # =====================================================================
+        svg_with_legend = svg.replace("</svg>", f"{legend}{title}</svg>")
 
-        # Dibujar el título
-        draw.text((width / 2, height + 10), title, fill="black", font=font_title, anchor="ms")
+        return svg_with_legend
 
-        # Dibujar la leyenda
-        for i, (subgroup, color) in enumerate(atoms_colors.items()):
-            r, g, b = [int(255 * c) for c in color[:3]]  # Convertir a RGB 0-255
-            rect_color = (r, g, b)
-
-            # Dibujar un cuadro de color para cada subgrupo
-            draw.rectangle([10, height + 50 + i * (legend_font_size + 5), 30, height + 50 + (i + 1) * (legend_font_size + 5)], fill=rect_color)
-            
-            # Dibujar el nombre del subgrupo
-            draw.text((40, height + 50 + i * (legend_font_size + 5)), f"Subgrupo {i + 1}", fill="black", font=font_legend)
-
-        return final_img
-
-# Generar colores distintos (como antes)
-def _generate_distinct_colors(n: int) -> list:
-    base_colors = np.array(
-        [
-            [0.12156863, 0.46666667, 0.70588235],  # azul
-            [1.0, 0.49803922, 0.05490196],  # naranja
-            [0.17254902, 0.62745098, 0.17254902],  # verde
-            [0.83921569, 0.15294118, 0.15686275],  # rojo
-            [0.58039216, 0.40392157, 0.74117647],  # púrpura
-            [0.54901961, 0.3372549, 0.29411765],  # marrón
-            [0.89019608, 0.46666667, 0.76078431],  # rosa
-            [0.49803922, 0.49803922, 0.49803922],  # gris
-            [0.7372549, 0.74117647, 0.13333333],  # amarillo
-            [0.09019608, 0.74509804, 0.81176471],  # cian
-        ]
-    )
-    colors = [base_colors[i % len(base_colors)] for i in range(n)]
-    return [(color[0], color[1], color[2], 0.65) for color in colors]
-
-# Función de prueba
-mol = Chem.MolFromSmiles('CCO')
-subgroups = {'Grupo 1': [0, 1], 'Grupo 2': [2]}  # Ejemplo
-img_with_legend = draw(mol, subgroups, model=None, title="Molécula con subgrupos")
-img_with_legend.show()
+    def _generate_distinct_colors(self, n: int) -> list:
+        base_colors = np.array(
+            [
+                [0.12156863, 0.46666667, 0.70588235],  # blue
+                [1.0, 0.49803922, 0.05490196],  # orange
+                [0.17254902, 0.62745098, 0.17254902],  # green
+                [0.83921569, 0.15294118, 0.15686275],  # red
+                [0.58039216, 0.40392157, 0.74117647],  # purple
+                [0.54901961, 0.3372549, 0.29411765],  # brown
+                [0.89019608, 0.46666667, 0.76078431],  # pink
+                [0.49803922, 0.49803922, 0.49803922],  # gray
+                [0.7372549, 0.74117647, 0.13333333],  # yellow
+                [0.09019608, 0.74509804, 0.81176471],  # cian
+            ]
+        )
+        colors = [base_colors[i % len(base_colors)] for i in range(n)]
+        return [(color[0], color[1], color[2], 0.65) for color in colors]

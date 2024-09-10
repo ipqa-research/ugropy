@@ -11,7 +11,6 @@ from rdkit.Chem import Descriptors
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
 
-from .detect_model_groups import group_matches
 from .fit_atoms_indexes import fit_atoms
 
 
@@ -59,103 +58,6 @@ def check_has_molecular_weight_right(
     return np.allclose(rdkit_mw, func_group_mw, atol=0.5)
 
 
-def check_has_composed(
-    mol_subgroups: dict,
-    model: FragmentationModel,
-) -> tuple[bool, np.ndarray]:
-    """Check if the molecule has composed structures.
-
-    A composed structure is a subgroup of FragmentationModel that can be
-    decomposed into two or more FragmentationModel subgroups. For example,
-    ACCH2 can be decomposed into the AC and CH2 groups.
-
-    Parameters
-    ----------
-    mol_subgroups : dict
-        Dictionary with the detected subgroups.
-    model: FragmentationModel
-        FragmentationModel object.
-
-    Returns
-    -------
-    bool
-        True if the molecule has composed structures.
-    """
-    composed_stru = model.subgroups[model.subgroups["composed"] == "y"].index
-    composed_in_mol = np.intersect1d(composed_stru, list(mol_subgroups.keys()))
-    return len(composed_in_mol) > 0, composed_in_mol
-
-
-def check_has_hiden(
-    mol_object: Chem.rdchem.Mol,
-    mol_subgroups: dict,
-    model: FragmentationModel,
-) -> bool:
-    """Check for hidden subgroups in composed structures.
-
-    The principal subgroups that can be hidden in composed structures for the
-    models UNIFAC, PSRK and Dortmund are CH2 and CH. The algorithm checks that
-    the number of CH2 and CH groups in mol_subgroups dictionary is equal to the
-    number of free CH2 and CH. If these numbers are not equal reveals that the
-    CH2 and CH are hidden in composed structures, eg: ACCH2, ACCH. This
-    phenomenon occurs when two subgroups fight for the same CH2 or CH. For
-    example the molecule:
-
-    CCCC1=CC=C(COC(C)(C)C)C=C1
-
-    Here an ACCH2 and a CH2O are fighting to have the same CH2. But since there
-    is a free CH2 in the molecule, the algorithm prefers to keep both ACCH2 and
-    CH2O groups without any free CH2 subgroup. This check counts all the CH2
-    that are participating in a CH2 hideout (ACCH2 and CH2O are examples of
-    hideouts). The algorithm notices that there is one free CH2 and there are
-    zero free CH2 groups in the mol_subgroups dictionary and returns 'True'
-    (mol_object has a hidden CH2).
-
-    Parameters
-    ----------
-    mol_object : Chem.rdchem.Mol
-        RDKit Mol object.
-    mol_subgroups : dict
-        Subgroups of mol_object.
-    model: FragmentationModel
-        FragmentationModel object.
-
-    Returns
-    -------
-    bool
-        True if has hidden subgroups.
-    """
-    hiden_candidates = np.unique(model.hideouts.index.to_numpy())
-
-    for candidate in hiden_candidates:
-        exposed_candidates = mol_subgroups.get(candidate, 0)
-
-        all_candidates_atoms = group_matches(mol_object, candidate, model)
-        all_candidates_atoms = np.array(all_candidates_atoms).flatten()
-
-        hideouts_atoms = np.array([])
-        for hideout in model.hideouts.loc[candidate].values.flatten():
-            if hideout in mol_subgroups.keys():
-                atoms = group_matches(mol_object, hideout, model, "fit")
-
-                atoms = np.array(atoms).flatten()
-                hideouts_atoms = np.append(hideouts_atoms, atoms)
-
-                much_matches = len(atoms) > mol_subgroups[hideout]
-                no_comp = model.subgroups.loc[hideout, "composed"] == "n"
-
-                # TODO: document this
-                if much_matches and no_comp:
-                    return False
-
-        candidate_diff = np.setdiff1d(all_candidates_atoms, hideouts_atoms)
-
-        if len(candidate_diff) != exposed_candidates:
-            return True
-
-    return False
-
-
 def check_can_fit_atoms(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,
@@ -183,54 +85,38 @@ def check_can_fit_atoms(
         return False
 
 
-def check_has_composed_overlapping(
+def check_has_overlapping_groups(
     mol_object: Chem.rdchem.Mol,
     mol_subgroups: dict,
-    model: FragmentationModel,
-) -> bool:
-    """Check if in the solution are composed structures overlapping.
+) -> tuple:
+    """Check if the groups detection overlapping groups.
 
     Parameters
     ----------
     mol_object : Chem.rdchem.Mol
         RDKit Mol object.
     mol_subgroups : dict
-        Subgroups of mol_object.
+        Subgroups of mol_object with the atoms indexes of each detection.
     model: FragmentationModel
         FragmentationModel object.
 
     Returns
     -------
-    bool
-        Treu if the solution has overlapping composed structures.
+    tuple
+        True if the molecule has overlapping groups.
     """
-    # =========================================================================
-    # Count total number of composed in mol_subgroups
-    # =========================================================================
-    _, composed = check_has_composed(mol_subgroups=mol_subgroups, model=model)
-    composed_in_subgroups = np.sum([mol_subgroups[gr] for gr in composed])
+    n_atoms = mol_object.GetNumAtoms()
 
-    # =========================================================================
-    # Get atoms of composed and check overlaps
-    # =========================================================================
-    composed_atoms = [group_matches(mol_object, c, model) for c in composed]
-    total_composed_matches = np.sum([len(c) for c in composed_atoms])
+    atoms = np.zeros(n_atoms)
 
-    overlapping_count = 0
+    for indexes in mol_subgroups.values():
+        idx = np.array(indexes).flatten()
+        for i in idx:
+            atoms[i] += 1
 
-    # Self overlapping
-    for c_atoms in composed_atoms:
-        atoms_array = np.array(c_atoms).flatten()
-        _, counts = np.unique(atoms_array, return_counts=True)
-        overlapping_count += np.sum(counts - 1)
+    overlapped_atoms = np.argwhere(atoms > 1).flatten()
 
-    # Cross overlapping
-    for i, i_atoms in enumerate(composed_atoms):
-        for j_atoms in composed_atoms[i + 1 :]:  # noqa
-            overlapping_count += np.sum(np.isin(i_atoms, j_atoms))
-
-    response = composed_in_subgroups > (
-        total_composed_matches - overlapping_count
-    )
-
-    return response
+    if np.size(overlapped_atoms) > 0:
+        return True, overlapped_atoms
+    else:
+        return False, np.array([])
