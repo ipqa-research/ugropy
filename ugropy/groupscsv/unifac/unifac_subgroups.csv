@@ -36,8 +36,8 @@ CH3N|[CH3][NH0]|29.042
 CH2N|[CH2][NH0]|28.034
 ACNH2|[cH0][NH2]|28.034
 C5H5N|[n](:[cH]:[cH]1):[cH]:[cH]:[cH]:1|79.102
-C5H4N|[n](:[cH0]:[cH]1):[cH]:[cH]:[cH]:1,[n](:[cH]:[cH0]1):[cH]:[cH]:[cH]:1,[n](:[cH]:[cH]1):[cH0]:[cH]:[cH]:1,[n](:[cH]:[cH]1):[cH]:[cH]:[cH0]:1|78.094
-C5H3N|[n](:[cH]:[cH]1):[cH0]:[cH0]:[cH]:1,[n](:[cH]:[cH]1):[cH0]:[cH]:[cH0]:1,[n](:[cH]:[cH0]1):[cH0]:[cH]:[cH]:1,[n](:[cH0]:[cH]1):[cH0]:[cH]:[cH]:1,[n](:[cH]:[cH]1):[cH]:[cH0]:[cH0]:1|77.086
+C5H4N|[n](:[cH0]:[cH]1):[cH]:[cH]:[cH]:1    [n](:[cH]:[cH0]1):[cH]:[cH]:[cH]:1    [n](:[cH]:[cH]1):[cH0]:[cH]:[cH]:1    [n](:[cH]:[cH]1):[cH]:[cH]:[cH0]:1|78.094
+C5H3N|[n](:[cH]:[cH]1):[cH0]:[cH0]:[cH]:1    [n](:[cH]:[cH]1):[cH0]:[cH]:[cH0]:1    [n](:[cH]:[cH0]1):[cH0]:[cH]:[cH]:1    [n](:[cH0]:[cH]1):[cH0]:[cH]:[cH]:1    [n](:[cH]:[cH]1):[cH]:[cH0]:[cH0]:1|77.086
 CH3CN|[CH3][C]#[N]|41.053
 CH2CN|[CH2][C]#[N]|40.045
 COOH|[CH0](=O)[OH]|45.017
@@ -105,8 +105,8 @@ CH2S|[CH2][SH0]|46.0916
 CHS|[CH][SH0]|45.0838
 MORPH|[CH2]1O[CH2][CH2][NH][CH2]1|87.1202
 C4H4S|[s](:[cH]:[cH]1):[cH]:[cH]:1|84.1402
-C4H3S|[s](:[cH0]:[cH]1):[cH]:[cH]:1,[s](:[cH]:[cH0]1):[cH]:[cH]:1|83.1324
-C4H2S|[s](:[cH]:[cH]1):[cH0]:[cH0]:1,[s](:[cH]:[cH0]1):[cH0]:[cH]:1,[s](:[cH0]:[cH]1):[cH0]:[cH]:1,[s](:[cH]:[cH0]1):[cH]:[cH0]:1|82.1246
+C4H3S|[s](:[cH0]:[cH]1):[cH]:[cH]:1    [s](:[cH]:[cH0]1):[cH]:[cH]:1|83.1324
+C4H2S|[s](:[cH]:[cH]1):[cH0]:[cH0]:1    [s](:[cH]:[cH0]1):[cH0]:[cH]:1    [s](:[cH0]:[cH]1):[cH0]:[cH]:1    [s](:[cH]:[cH0]1):[cH]:[cH0]:1|82.1246
 NCO|[NX2H0]=[CX2H0]=[OX1H0]|42.017
 (CH2)2SU|[CH2]S(=O)(=O)[CH2]|92.1162
 CH2CHSU|[CH2]S(=O)(=O)[CH]|91.1084

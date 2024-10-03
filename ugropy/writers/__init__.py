@@ -8,8 +8,8 @@ Supported:
 - Clapeyron.jl: https://github.com/ClapeyronThermo/Clapeyron.jl
 """
 
-from .clapeyron import to_clapeyron
+# from .clapeyron import to_clapeyron
 from .thermo import to_thermo
 
 
-__all__ = ["to_clapeyron", "to_thermo"]
+__all__ = ["to_thermo"]

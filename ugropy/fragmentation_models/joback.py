@@ -5,7 +5,7 @@ from typing import Union
 import pandas as pd
 
 from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
-from ugropy.fragmentation_models.frag_result import FragmentationResult
+from ugropy.fragmentation_models.fragmentation_model import FragmentationResult
 
 from rdkit import Chem
 

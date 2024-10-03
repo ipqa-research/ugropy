@@ -43,14 +43,21 @@ class FragmentationModel:
         subgroups column.
     """
 
-    def __init__(self, subgroups: pd.DataFrame) -> None:
+    def __init__(
+        self,
+        subgroups: pd.DataFrame,
+        allow_overlapping: bool = False,
+        check_molecular_weight: bool = False,
+    ) -> None:
         self.subgroups = subgroups
+        self.allow_overlapping = allow_overlapping
+        self.check_molecular_weight = check_molecular_weight
 
         # Instantiate all de mol object from their smarts representation
-        detection_mols = {}
+        self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
+            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
 
     def get_groups(
         self,
@@ -58,17 +65,17 @@ class FragmentationModel:
         identifier_type: str = "name",
         ilp_solver: str = "cbc",
     ) -> "FragmentationResult":
-        
+
         # RDKit Mol object
         mol_object = instantiate_mol_object(identifier, identifier_type)
 
         # Direct detection of groups presence and occurences
-        detections = self._detect_groups(mol_object)
+        detections = self.detect_fragments(mol_object)
 
         # First return
         if detections == {}:  # No groups detected
             return self.set_fragmentation_result(mol_object, {}, {})
-        
+
         # Check overlapping groups
         has_overlap, overlapping_atoms = check_has_overlapping_groups(
             mol_object, detections
@@ -87,32 +94,46 @@ class FragmentationModel:
 
         return result
 
+    def detect_fragments(self, molecule: Chem.rdchem.Mol) -> dict:
+        """Detect all the fragments in the molecule.
 
-    def _detect_groups(self, molecule: Chem.rdchem.Mol) -> dict:
-        """Detect all the groups in the molecule.
+        Return a dictionary with the detected fragments as keys and a tuple
+        with the atoms indexes of the fragment as values. For example, n-hexane
+        for the UNIFAC model will return:
+        
+        {
+            'CH3_0': (0,),
+            'CH3_1': (5,),
+            'CH2_0': (1,),
+            'CH2_1': (2,),
+            'CH2_2': (3,),
+            'CH2_3': (4,)
+        }
 
-        Return a dictionary with the detected groups as keys and a tuple of
-        tuples containing the molecule's atoms that participate in the group
-        occurrences.
+        You may note that multiple occurrence of a fragment name will be 
+        indexed. The convention is always: <fragment_name>_i where `i` is the
+        index of the occurrence.
 
         Parameters
         ----------
         mol : Chem.rdchem.Mol
-            Molecule to detect the groups.
+            Molecule to detect the fragments.
 
         Returns
         -------
         dict
-            Detected groups in the molecule.
+            Detected fragments in the molecule.
         """
-        detected_groups = {}
-        for group, mol in self.detection_mols.items():
+        detected_fragments = {}
+        
+        for fragment_name, mol in self.detection_mols.items():
             matches = molecule.GetSubstructMatches(mol)
 
             if matches:
-                detected_groups[group] = matches
+                for i, atoms_tuple in enumerate(matches):
+                    detected_fragments[f"{fragment_name}_{i}"] = atoms_tuple
 
-        return detected_groups
+        return detected_fragments
 
 
 class FragmentationResult:
