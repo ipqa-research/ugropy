@@ -57,7 +57,7 @@ class FragmentationModel:
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
+            self.detection_mols[group] = (Chem.MolFromSmarts(row["smarts"]))
 
     def get_groups(
         self,
@@ -69,7 +69,7 @@ class FragmentationModel:
         # RDKit Mol object
         mol_object = instantiate_mol_object(identifier, identifier_type)
 
-        # Direct detection of groups presence and occurences
+        # Direct detection of fragments presence and its atoms indexes
         detections = self.detect_fragments(mol_object)
 
         # First return
@@ -80,6 +80,11 @@ class FragmentationModel:
         has_overlap, overlapping_atoms = check_has_overlapping_groups(
             mol_object, detections
         )
+
+        # Second return
+        if not has_overlap:
+            return self.set_fragmentation_result(mol_object, detections, overlapping_atoms)
+
 
     def set_fragmentation_result(
         self,
