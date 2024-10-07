@@ -4,7 +4,7 @@ All ugropy models (joback, unifac, psrk) are instances of the
 FragmentationModule class.
 """
 
-from typing import Union
+from typing import List, Union
 
 import pandas as pd
 
@@ -13,11 +13,11 @@ from rdkit.Chem.Draw import rdMolDraw2D
 
 import numpy as np
 
-from ugropy.core.checks import check_has_overlapping_groups
+from ugropy.core.checks import FragmentationSolutionChecker
 from ugropy.core.get_rdkit_object import instantiate_mol_object
 
 
-class FragmentationModel:
+class FragmentationModel(FragmentationSolutionChecker):
     """FragmentationModel class.
 
     All ugropy supported models are an instance of this class. This class must
@@ -57,7 +57,7 @@ class FragmentationModel:
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = (Chem.MolFromSmarts(row["smarts"]))
+            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
 
     def get_groups(
         self,
@@ -66,38 +66,40 @@ class FragmentationModel:
         ilp_solver: str = "cbc",
     ) -> "FragmentationResult":
 
-        # RDKit Mol object
+        # Instantiate a RDKit Mol object
         mol_object = instantiate_mol_object(identifier, identifier_type)
 
         # Direct detection of fragments presence and its atoms indexes
         detections = self.detect_fragments(mol_object)
 
         # First return
-        if detections == {}:  # No groups detected
-            return self.set_fragmentation_result(mol_object, {}, {})
+        # No groups have been detected, a strange but possible case. We have
+        # a fast path to return the result and avoid the rest of the code.
+        if detections == {}:
+            return self.set_fragmentation_result(mol_object, [{}])
 
-        # Check overlapping groups
-        has_overlap, overlapping_atoms = check_has_overlapping_groups(
+        # Check overlapping atoms and free atoms
+        overlapping_atoms, free_atoms = self.check_atoms_fragments_presence(
             mol_object, detections
         )
 
         # Second return
-        if not has_overlap:
-            return self.set_fragmentation_result(mol_object, detections, overlapping_atoms)
-
+        # If there is free atoms in the molecule, we can't fragment it with the
+        # current model.
+        if np.size(free_atoms) > 0:
+            return self.set_fragmentation_result(mol_object, [{}])
 
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
-        subgroups_occurrences: dict,
-        subgroups_atoms_indexes: dict,
+        solutions_fragments: List[dict],
     ) -> "FragmentationResult":
 
-        result = FragmentationResult(
-            molecule, subgroups_occurrences, subgroups_atoms_indexes
-        )
+        # result = FragmentationResult(
+        #     molecule, subgroups_occurrences, subgroups_atoms_indexes
+        # )
 
-        return result
+        return []
 
     def detect_fragments(self, molecule: Chem.rdchem.Mol) -> dict:
         """Detect all the fragments in the molecule.
@@ -105,7 +107,7 @@ class FragmentationModel:
         Return a dictionary with the detected fragments as keys and a tuple
         with the atoms indexes of the fragment as values. For example, n-hexane
         for the UNIFAC model will return:
-        
+
         {
             'CH3_0': (0,),
             'CH3_1': (5,),
@@ -115,7 +117,7 @@ class FragmentationModel:
             'CH2_3': (4,)
         }
 
-        You may note that multiple occurrence of a fragment name will be 
+        You may note that multiple occurrence of a fragment name will be
         indexed. The convention is always: <fragment_name>_i where `i` is the
         index of the occurrence.
 
@@ -130,7 +132,7 @@ class FragmentationModel:
             Detected fragments in the molecule.
         """
         detected_fragments = {}
-        
+
         for fragment_name, mol in self.detection_mols.items():
             matches = molecule.GetSubstructMatches(mol)
 

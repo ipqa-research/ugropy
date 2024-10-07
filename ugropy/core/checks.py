@@ -4,123 +4,100 @@ The module contains the necessary checks to corroborate the success of the
 algorithm to obtain the molecule's FragmentationModel subgroups.
 """
 
+from abc import ABC
+
 import numpy as np
 
+import pandas as pd
+
 from rdkit import Chem
-
-# from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
-
-
-# def check_has_molecular_weight_right(
-#     mol_object: Chem.rdchem.Mol,
-#     mol_subgroups: dict,
-#     model: FragmentationModel,
-# ) -> bool:
-#     """Check the molecular weight of the molecule using its functional groups.
-
-#     Compares the RDKit molecular weight of the molecule to the computed
-#     molecular weight from the functional groups. Returns True if both molecular
-#     weights are equal with 0.5 u (half hydrogen atom) as atol of
-#     numpy.allclose(). Also, the method will check if the molecule has negative
-#     occurrences on its functional groups, also returning False in that case.
-
-#     Parameters
-#     ----------
-#     mol_object : Chem.rdchem.Mol
-#         RDKit Chem object
-#     mol_subgroups : dict
-#         FragmentationModel subgroups of the mol_object
-#     model: FragmentationModel
-#         FragmentationModel object.
-
-#     Returns
-#     -------
-#     bool
-#         True if RDKit and ugropy molecular weight are equal with a tolerance.
-#     """
-#     # check for negative occurrences
-#     if not all(occurrence > 0 for occurrence in mol_subgroups.values()):
-#         return False
-
-#     # rdkit molecular weight
-#     rdkit_mw = Descriptors.MolWt(mol_object)
-
-#     # Molecular weight from functional groups
-#     mws = model.subgroups.loc[
-#         list(mol_subgroups.keys()), "molecular_weight"
-#     ].to_numpy()
-
-#     func_group_mw = np.dot(mws, list(mol_subgroups.values()))
-
-#     return np.allclose(rdkit_mw, func_group_mw, atol=0.5)
+from rdkit.Chem import Descriptors
 
 
-# def check_can_fit_atoms(
-#     mol_object: Chem.rdchem.Mol,
-#     mol_subgroups: dict,
-#     model: FragmentationModel,
-# ) -> bool:
-#     """Check if a solution can be fitted in the mol_object atoms.
+class FragmentationSolutionChecker(ABC):
+    def __init__(self, mol_subgroups: pd.DataFrame) -> None:
+        self.mol_subgroups = mol_subgroups
 
-#     Parameters
-#     ----------
-#     mol_object : Chem.rdchem.Mol
-#         RDKit Mol object.
-#     mol_subgroups : dict
-#         Subgroups of mol_object.
-#     model: FragmentationModel
-#         FragmentationModel object.
+    def check_atoms_fragments_presence(
+        self, molecule: Chem.rdchem.Mol, fragments: dict
+    ) -> tuple[bool, np.ndarray]:
+        """Find overlapped atoms and free atoms.
 
-#     Returns
-#     -------
-#     bool
-#         True if the solution can be fitted.
-#     """
-#     if fit_atoms(mol_object, mol_subgroups, model):
-#         return True
-#     else:
-#         return False
+        Check the detected fragments to find the atoms that appears in more
+        than one fragment (overlapping), and the atoms that are not present in
+        any fragment (free atoms). Returning two np.ndarray with the indexes of
+        the overlapping and free atoms.
 
+        Example of a `fragments` dictionary that not presents overlapping
+        atoms:
 
-def check_has_overlapping_groups(
-    mol_object: Chem.rdchem.Mol,
-    mol_subgroups: dict,
-) -> tuple[bool, np.ndarray]:
-    """Check if the groups detection overlapping groups.
+        N-hexane:
 
-    Parameters
-    ----------
-    mol_object : Chem.rdchem.Mol
-        RDKit Mol object.
-    mol_subgroups : dict
-        Subgroups of mol_object with the atoms indexes of each detection.
-    model: FragmentationModel
-        FragmentationModel object.
+        {
+            'CH3_0': (0,),
+            'CH3_1': (5,),
+            'CH2_0': (1,),
+            'CH2_1': (2,),
+            'CH2_2': (3,),
+            'CH2_3': (4,)
+        }
 
-    Returns
-    -------
-    tuple[bool, np.ndarray]
-        True if the groups detection has overlapping groups and the indexes of
-        the overlapped atoms.
-    """
-    n_atoms = mol_object.GetNumAtoms()
+        Example of a `fragments` dictionary that presents overlapping atoms:
 
-    # Count the number of times an atom is in a group
-    atoms = np.zeros(n_atoms)
+        Toluene:
 
-    for indexes in mol_subgroups.values():
-        np.add.at(atoms, np.array(indexes).flatten(), 1)
+        {
+            'CH3_0': (0,),
+            'ACH_0': (2,),
+            'ACH_1': (3,),
+            'ACH_2': (4,),
+            'ACH_3': (5,),
+            'ACH_4': (6,),
+            'AC_0': (1,),
+            'ACCH3_0': (1, 0)
+        }
 
-    overlapped_atoms = np.argwhere(atoms > 1).flatten()
+        Parameters
+        ----------
+        molecule : Chem.rdchem.Mol
+            RDKit molecule object.
+        fragments : dict
+            Dictionary containing the fragments detected in the molecule. The
+            keys are the group names and the values are the indexes of the
+            atoms in the group.
 
-    # Separate the fragments that participate in the overlapped atoms
-    fragments = {}
+        Returns
+        -------
+        tuple[np.ndarray, np.ndarray]
+            Overlapping atoms indexes and free atoms indexes.
+        """
+        n_atoms = molecule.GetNumAtoms()
 
-    for oatom in overlapped_atoms:
-        ...
+        # Count the number of times an atom is in a group. Also find the atoms
+        # that are not present in any fragment.
+        atoms = np.zeros(n_atoms, dtype=int)
 
+        for indexes in fragments.values():
+            np.add.at(atoms, np.array(indexes).flatten(), 1)
 
-    if np.size(overlapped_atoms) > 0:
-        return True, overlapped_atoms
-    else:
-        return False, np.array([])
+        overlapped_atoms = np.argwhere(atoms > 1).flatten()
+        free_atoms = np.argwhere(atoms == 0).flatten()
+
+        return overlapped_atoms, free_atoms
+    
+
+    # def check_has_molecular_weight_right(
+    #     self, mol_object: Chem.rdchem.Mol, fragments: dict
+    # ) -> bool:
+        
+    #     # rdkit molecular weight
+    #     rdkit_mw = Descriptors.MolWt(mol_object)
+
+    #     # Molecular weight from functional groups
+    #     mws = self.mol_subgroups.loc[
+    #         list(fragments.keys()), "molecular_weight"
+    #     ].to_numpy()
+
+    #     func_group_mw = np.dot(mws, list(mol_subgroups.values()))
+
+    #     return np.allclose(rdkit_mw, func_group_mw, atol=0.5)
