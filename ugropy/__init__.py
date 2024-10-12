@@ -1,9 +1,11 @@
 """ugropy library."""
 
-from . import constants, writers
+# from . import constants, writers
 from .core import instantiate_mol_object
-from .fragmentation_models.fragmentation_model import FragmentationModel
-from .fragmentation_models.implementations.unifac import unifac
+from .core.frag_classes.base.fragmentation_model import (
+    FragmentationModel,
+)
+from .models.unifac import unifac
 
 # from .groups import Groups
 

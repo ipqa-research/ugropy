@@ -1,6 +1,6 @@
 from ugropy.constants import _csvs
-from ugropy.fragmentation_models.joback import Joback
-from ugropy.fragmentation_models.implementations.read_csv import _rd
+from ugropy.models.joback import Joback
+from ugropy.models.read_csv import _rd
 
 # =============================================================================
 # Joback

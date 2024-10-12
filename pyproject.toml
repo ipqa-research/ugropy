@@ -35,8 +35,8 @@ classifiers = [
 urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
 dependencies = [
-    'numpy >= 1.25.1',
+    'rdkit >= 2023.9.5',
     'pandas >= 2.0.3',
     'pubchempy >= 1.0.4',
-    'rdkit >= 2023.9.5'
+    'pulp >= 2.9.0'
 ]

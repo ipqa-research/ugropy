@@ -4,8 +4,12 @@ from typing import Union
 
 import pandas as pd
 
-from ugropy.fragmentation_models.fragmentation_model import FragmentationModel
-from ugropy.fragmentation_models.fragmentation_model import FragmentationResult
+from ugropy.core.frag_classes.base_class.fragmentation_model import (
+    FragmentationModel,
+)
+from ugropy.core.frag_classes.base_class.fragmentation_model import (
+    FragmentationResult,
+)
 
 from rdkit import Chem
 

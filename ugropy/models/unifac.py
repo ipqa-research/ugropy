@@ -32,8 +32,8 @@ joback: PropertiesEstimator
 """
 
 from ugropy.constants import _csvs
-from ugropy.fragmentation_models.gibbs_model import GibbsModel
-from ugropy.fragmentation_models.implementations.read_csv import _rd
+from ugropy.core.frag_classes.gibss_model.gibbs_model import GibbsModel
+from ugropy.models.read_csv import _rd
 
 
 # =============================================================================
