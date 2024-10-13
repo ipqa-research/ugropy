@@ -35,11 +35,11 @@ class ILPSolver(ABC):
         self.universe.update(all_elements)
 
     @abstractmethod
-    def solve_one_problem(self, not_valid_solutions: List):
+    def solve_one_problem(self, not_valid_solutions: List) -> List[int]:
         raise NotImplementedError(
             "Abstract method `solve_one_problem` not implemented"
         )
 
     @abstractmethod
-    def solve(self):
+    def solve(self) -> None:
         raise NotImplementedError("Abstract method `solve` not implemented")

@@ -71,7 +71,7 @@ class FragmentationModel:
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
-    ) -> FragmentationResult:
+    ) -> Union[FragmentationResult, List[FragmentationResult]]:
         # =====================================================================
         # Direct fragments detection
         # =====================================================================
@@ -127,6 +127,7 @@ class FragmentationModel:
     ) -> List[FragmentationResult]:
 
         sols = []
+        occurs = []
 
         for solution in solutions_fragments:
             occurrences = defaultdict(int)
@@ -137,11 +138,13 @@ class FragmentationModel:
                 occurrences[name] += 1
                 groups_atoms[name].append(atoms)
 
-            sols.append(
-                FragmentationResult(
-                    molecule, dict(occurrences), dict(groups_atoms)
+            if occurrences not in occurs:
+                sols.append(
+                    FragmentationResult(
+                        molecule, dict(occurrences), dict(groups_atoms)
+                    )
                 )
-            )
+                occurs.append(occurrences)
 
         return sols
 
