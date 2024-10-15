@@ -1,14 +1,14 @@
 # =============================================================================
-# Description: This file contains the test cases for Aromathics.
+# Description: This file contains the test cases for Aromatics.
 # =============================================================================
 from .case import Case
 
 
-aromathics_cases = [
+aromatics_cases = [
     Case(
         "C1=CC2=CC=CC=CC2=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         r=None,
         q=None,
         unifac_result={"ACH": 8, "AC": 2},
@@ -18,7 +18,7 @@ aromathics_cases = [
     Case(
         "C1=CC=CC=CC=CC=CC=CC=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         r=None,
         q=None,
         unifac_result={"ACH": 18},
@@ -28,7 +28,7 @@ aromathics_cases = [
     Case(
         "C1=CC=CC=CC=CC=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         r=None,
         q=None,
         unifac_result={"ACH": 14},
@@ -38,7 +38,7 @@ aromathics_cases = [
     Case(
         "C1=CC=C2C(=C1)C=CC3=CC=CC=C32",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="phenanthrene",
         r=None,
         q=None,
@@ -49,7 +49,7 @@ aromathics_cases = [
     Case(
         "C1=CC=C2C=C3C=CC=CC3=CC2=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="anthracene",
         r=None,
         q=None,
@@ -60,7 +60,7 @@ aromathics_cases = [
     Case(
         "C=C(C1=CC=CC=C1)C2=CC=CC=C2",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1,1-Diphenylethylene",
         r=None,
         q=None,
@@ -71,7 +71,7 @@ aromathics_cases = [
     Case(
         "C1=CC=C(C=C1)C2=CC=CC=C2",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="biphenyl",
         r=None,
         q=None,
@@ -82,7 +82,7 @@ aromathics_cases = [
     Case(
         "C1=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="benzene",
         r=None,
         q=None,
@@ -93,7 +93,7 @@ aromathics_cases = [
     Case(
         "C=CC1=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="styrene",
         r=None,
         q=None,
@@ -104,7 +104,7 @@ aromathics_cases = [
     Case(
         "CC(C1=CC=CC=C1)(C(=O)O)O",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="Atrolactic acid",
         r=None,
         q=None,
@@ -129,7 +129,7 @@ aromathics_cases = [
     Case(
         "CC(=CC1=CC=CC=C1)C=C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1-Phenyl-2-methyl-1,3-butadiene",
         r=None,
         q=None,
@@ -147,7 +147,7 @@ aromathics_cases = [
     Case(
         "C=CCCC1=C2C=CC=CC2=CC3=CC=CC=C31",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="9-(3-Butenyl)anthracene",
         r=None,
         q=None,
@@ -164,7 +164,7 @@ aromathics_cases = [
     Case(
         "CC1=C2C=CC=CC2=CC3=CC=CC=C13",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="9-Methylanthracene",
         r=None,
         q=None,
@@ -175,7 +175,7 @@ aromathics_cases = [
     Case(
         "CC1=CC(=CC=C1)C2=CC=CC=C2",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="3-Methylbiphenyl",
         r=None,
         q=None,
@@ -186,7 +186,7 @@ aromathics_cases = [
     Case(
         "CCC1=C(C=CC(=C1C)C)C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1,2,4-Trimethyl-3-Ethylbenzene",
         r=None,
         q=None,
@@ -197,7 +197,7 @@ aromathics_cases = [
     Case(
         "CCC1=CC(=CC=C1)C(C)(C)C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1-t-Butyl-3-ethylbenzene",
         r=None,
         q=None,
@@ -214,7 +214,7 @@ aromathics_cases = [
     Case(
         "CCC1=CC=CC(=C1C)C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1-Ethyl-2,3-dimethylbenzene",
         r=None,
         q=None,
@@ -225,7 +225,7 @@ aromathics_cases = [
     Case(
         "CCC1=CC=CC=C1C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="1-Ethyl-2-methylbenzene",
         r=None,
         q=None,
@@ -236,7 +236,7 @@ aromathics_cases = [
     Case(
         "CCC1=CC=C(C=C1)C(C)C",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="Benzene, 1-ethyl-4-(1-methylethyl)-",
         r=None,
         q=None,
@@ -253,7 +253,7 @@ aromathics_cases = [
     Case(
         "C1=CC(=CC=C1CO)O",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="Gastrodigenin",
         r=None,
         q=None,
@@ -270,7 +270,7 @@ aromathics_cases = [
     Case(
         "CC(C)C1=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="cumene",
         r=None,
         q=None,
@@ -281,7 +281,7 @@ aromathics_cases = [
     Case(
         "CCC1=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="ethylbenzene",
         r=None,
         q=None,
@@ -292,7 +292,7 @@ aromathics_cases = [
     Case(
         "CC1=CC=CC=C1",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="toluene",
         r=None,
         q=None,
@@ -303,7 +303,7 @@ aromathics_cases = [
     Case(
         "C1=CC=C(C=C1)O",
         "smiles",
-        "aromathics",
+        "aromatics",
         commentary="phenol",
         r=None,
         q=None,

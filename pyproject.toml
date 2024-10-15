@@ -8,11 +8,27 @@ target-version = ["py310"]
 
 [tool.pytest.ini_options]
 markers = [
+    # Models markers
     "UNIFAC: classic UNIFAC model tests",
     "PSRK: predictive SRK model tests",
     "Joback: Joback-Reid contribution model tests",
-    "Dortmund: Dortmund-UNIFAC model tests",
-    "ConstantinouGani: Constantinou and Gani contribution model tests"
+    # Tests cases markers
+    "acids: tests cases for acids",
+    "alcohols: tests cases for alcohols",
+    "aldehydes: tests cases for aldehydes",
+    "aromatics: tests cases for aromatics",
+    "complex: tests cases for complex compounds",
+    "epoxides: tests cases for epoxides",
+    "esters: tests cases for esters",
+    "ethers: tests cases for ethers",
+    "halogens: tests cases for halogens",
+    "hydrocarbons: tests cases for hydrocarbons",
+    "insaturated_hydrocarbons: tests cases for insaturated hydrocarbons",
+    "ketones: tests cases for ketones",
+    "nitrogen: tests cases for nitrogen compounds",
+    "particulars: tests cases for particular compounds",
+    "silicon: tests cases for silicon compounds",
+    "sulfur: tests cases for sulfur compounds",
 ]
 
 [project]

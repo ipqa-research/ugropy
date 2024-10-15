@@ -1,7 +1,8 @@
 from .case import Case
+from .tcase import TCase
 
 from .alcohols import alcohols_cases
-from .aromathics import aromathics_cases
+from .aromatics import aromatics_cases
 from .hydrocarbons import hydrocarbons_cases
 from .insaturated_hydrocarbons import insaturated_hydrocarbons_cases
 from .ketones import ketones_cases
@@ -18,8 +19,10 @@ from .complex import complex_cases
 from .epoxides import epoxides_cases
 
 __all__ = [
+    "Case",
+    "TCase",
     "alcohols_cases",
-    "aromathics_cases",
+    "aromatics_cases",
     "hydrocarbons_cases",
     "insaturated_hydrocarbons_cases",
     "ketones_cases",

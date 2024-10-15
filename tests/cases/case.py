@@ -1,6 +1,7 @@
 from typing import Union
 
 
+# Class to define the test cases.
 class Case:
     """Case class.
 
