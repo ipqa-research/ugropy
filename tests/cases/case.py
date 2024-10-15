@@ -53,6 +53,3 @@ class Case:
         self.unifac_result = unifac_result
         self.psrk_result = psrk_result
         self.joback_result = joback_result
-
-    def __eq__(self, other: "Case") -> bool:
-        return self.identifier == other.identifier
