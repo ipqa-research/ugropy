@@ -5,8 +5,16 @@ from cases import (
     insaturated_hydrocarbons_cases,
     ketones_cases,
     particulars_cases,
-    esthers_cases,
+    esters_cases,
     aldehydes_cases,
+    ethers_cases,
+    nitrogen_cases,
+    acids_cases,
+    halogens_cases,
+    silicon_cases,
+    sulfur_cases,
+    complex_cases,
+    epoxides_cases,
 )
 
 import numpy as np
@@ -21,8 +29,16 @@ def test_no_duplicate_cases():
         + insaturated_hydrocarbons_cases
         + ketones_cases
         + particulars_cases
-        + esthers_cases
+        + esters_cases
         + aldehydes_cases
+        + ethers_cases
+        + nitrogen_cases
+        + acids_cases
+        + halogens_cases
+        + silicon_cases
+        + sulfur_cases
+        + complex_cases
+        + epoxides_cases
     )
 
     for i, case in enumerate(all_cases):
