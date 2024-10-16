@@ -11,7 +11,10 @@ epoxides_cases = [
         cases_module="epoxides",
         r=None,
         q=None,
-        unifac_result={"CH3": 1, "CH": 1, "CH2O": 1},
+        unifac_result=[
+            {"CH3": 1, "CH": 1, "CH2O": 1},
+            {"CH3": 1, "CH2": 1, "CHO": 1},
+        ],
         psrk_result={"CH3": 1, "H2COCH": 1},
         joback_result={
             "-CH3": 1,

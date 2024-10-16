@@ -1,6 +1,6 @@
 from cases import (
     alcohols_cases,
-    aromathics_cases,
+    aromatics_cases,
     hydrocarbons_cases,
     insaturated_hydrocarbons_cases,
     ketones_cases,
@@ -23,7 +23,7 @@ import numpy as np
 def test_no_duplicate_cases():
     # Combine all the lists into a single list
     all_cases = (
-        aromathics_cases
+        aromatics_cases
         + alcohols_cases
         + hydrocarbons_cases
         + insaturated_hydrocarbons_cases

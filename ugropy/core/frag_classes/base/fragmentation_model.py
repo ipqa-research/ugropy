@@ -107,6 +107,11 @@ class FragmentationModel:
 
         problem.solve()
 
+        if not problem.selected_fragments:
+            # This could happend, no solution found. Example:
+            # "CC(C)(C)OC(=O)OC1=CC=CC=C1" on UNIFAC.
+            return self.set_fragmentation_result(mol, [{}])
+
         solutions = []
 
         for selection in problem.selected_fragments:

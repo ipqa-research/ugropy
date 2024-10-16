@@ -1,46 +1,50 @@
-from cases import (
-    acids_cases,
-    alcohols_cases,
-    aldehydes_cases,
-    aromatics_cases,
-    Case,
-    TCase,
-    complex_cases,
-    epoxides_cases,
-    esters_cases,
-    ethers_cases,
-    halogens_cases,
-    hydrocarbons_cases,
-    insaturated_hydrocarbons_cases,
-    ketones_cases,
-    nitrogen_cases,
-    particulars_cases,
-    silicon_cases,
-    sulfur_cases,
-)
+from cases import TCase
 
 import pytest
 
 from ugropy import unifac
 
 
-class TestUNIFAC:
-    @pytest.mark.parametrize("case", hydrocarbons_cases)
-    def test_unifac_hydrocarbons(self, case: Case):
+@pytest.mark.unifac
+class TestUNIFAC(TCase):
+    def asserts(self, case, solver):
         if case.unifac_result is None:
             pytest.skip(
-                f"No UNIFAC result for {case.identifier}, {case.cases_module}"
+                f"No UNIFAC result defined for {case.identifier}, "
+                f"{case.cases_module}"
             )
+
+        result = unifac.get_groups(
+            identifier=case.identifier,
+            identifier_type=case.identifier_type,
+            solver=solver,
+            search_multiple_solutions=True,
+        )
+
+        if len(result) > 1:
+            for r in result:
+                comp = r.subgroups in case.unifac_result
+
+                if not comp:
+                    message = (
+                        "\n"
+                        f"Case: {case.identifier}\n"
+                        f"Test module: {case.cases_module}\n"
+                        f"Expected: {case.unifac_result}\n"
+                        f"Obtained: {[r.subgroups for r in result]}"
+                    )
+
+                    assert False, message
         else:
-            result = unifac.get_groups(
-                case.identifier,
-                case.identifier_type,
-                search_multiple_solutions=True,
-            )
+            comp = result[0].subgroups == case.unifac_result
 
-            if len(result) > 1:
-                assert (
-                    False
-                ), f"Fijate este tiene multiples: {case.identifier}, {case.cases_module}"
+            if not comp:
+                message = (
+                    "\n"
+                    f"Case: {case.identifier}\n"
+                    f"Test module: {case.cases_module}\n"
+                    f"Expected: {case.unifac_result}\n"
+                    f"Obtained: {result[0].subgroups}"
+                )
 
-            same_groups = result[0].subgroups == case.unifac_result
+                assert False, message

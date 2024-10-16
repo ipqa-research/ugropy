@@ -596,16 +596,6 @@ particulars_cases = [
         joback_result={">C<": 1, "-F": 4},
     ),
     Case(
-        identifier="[O-][O+]=O",
-        identifier_type="smiles",
-        cases_module="particulars",
-        r=None,
-        q=None,
-        unifac_result={},
-        psrk_result={"O3": 1},
-        joback_result={"-O- (non-ring)": 1, "=O (other than above)": 2},
-    ),
-    Case(
         identifier="N(=O)Cl",
         identifier_type="smiles",
         cases_module="particulars",

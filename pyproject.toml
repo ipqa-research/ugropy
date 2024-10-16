@@ -9,9 +9,9 @@ target-version = ["py310"]
 [tool.pytest.ini_options]
 markers = [
     # Models markers
-    "UNIFAC: classic UNIFAC model tests",
-    "PSRK: predictive SRK model tests",
-    "Joback: Joback-Reid contribution model tests",
+    "unifac: classic UNIFAC model tests",
+    "psrk: predictive SRK model tests",
+    "joback: Joback-Reid contribution model tests",
     # Tests cases markers
     "acids: tests cases for acids",
     "alcohols: tests cases for alcohols",
