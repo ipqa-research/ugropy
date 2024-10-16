@@ -498,7 +498,7 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result={},
+        unifac_result={'CH2O': 2, 'CH2NH': 1},
         psrk_result={},
         joback_result={"ring-CH2-": 3, "-O- (ring)": 2, ">NH (ring)": 1},
     ),
