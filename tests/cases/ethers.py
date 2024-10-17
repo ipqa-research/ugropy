@@ -45,7 +45,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH2': 1, 'CH': 3, 'OH': 4, 'CHO': 1}, {'CH': 4, 'OH': 4, 'CH2O': 1}],
+        unifac_result=[
+            {"CH2": 1, "CH": 3, "OH": 4, "CHO": 1},
+            {"CH": 4, "OH": 4, "CH2O": 1},
+        ],
         psrk_result={"CH2O": 1, "CH": 4, "OH": 4},
         joback_result={
             "ring-CH2-": 1,
@@ -171,7 +174,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH2': 8, 'CH': 1, 'CH2O': 1, 'CHO': 1}, {'CH2': 9, 'CHO': 2}],
+        unifac_result=[
+            {"CH2": 8, "CH": 1, "CH2O": 1, "CHO": 1},
+            {"CH2": 9, "CHO": 2},
+        ],
         psrk_result={"CH2": 8, "CH": 1, "CH2O": 1, "CHO": 1},
         joback_result={
             "ring-CH2-": 9,
@@ -270,7 +276,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH3': 4, 'CH2': 2, 'CH': 4, 'CH2O': 1, 'COO': 1}, {'CH3': 4, 'CH2': 3, 'CH': 3, 'CHO': 1, 'COO': 1}],
+        unifac_result=[
+            {"CH3": 4, "CH2": 2, "CH": 4, "CH2O": 1, "COO": 1},
+            {"CH3": 4, "CH2": 3, "CH": 3, "CHO": 1, "COO": 1},
+        ],
         psrk_result={"CH3": 4, "CH2": 2, "CH": 4, "COO": 1, "CH2O": 1},
         joback_result={
             "-CH3": 4,
@@ -333,7 +342,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH3': 3, 'CHO': 1, 'COO': 1}, {'CH3': 2, 'CH': 1, 'CH3O': 1, 'COO': 1}],
+        unifac_result=[
+            {"CH3": 3, "CHO": 1, "COO": 1},
+            {"CH3": 2, "CH": 1, "CH3O": 1, "COO": 1},
+        ],
         psrk_result={"CH3": 2, "CH": 1, "COO": 1, "CH3O": 1},
         joback_result={
             "-CH3": 3,
@@ -348,7 +360,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH3': 2, 'CH2O': 1, 'COO': 1}, {'CH3': 1, 'CH2': 1, 'CH3O': 1, 'COO': 1}],
+        unifac_result=[
+            {"CH3": 2, "CH2O": 1, "COO": 1},
+            {"CH3": 1, "CH2": 1, "CH3O": 1, "COO": 1},
+        ],
         psrk_result={"CH3": 1, "CH2": 1, "COO": 1, "CH3O": 1},
         joback_result={
             "-CH3": 2,
@@ -373,7 +388,11 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{'CH3': 1, 'CH': 1, 'CH3O': 2, 'CH2O': 2}, {'CH3': 2, 'CH3O': 1, 'CH2O': 2, 'CHO': 1}, {'CH3': 1, 'CH2': 1, 'CH3O': 2, 'CH2O': 1, 'CHO': 1}],
+        unifac_result=[
+            {"CH3": 1, "CH": 1, "CH3O": 2, "CH2O": 2},
+            {"CH3": 2, "CH3O": 1, "CH2O": 2, "CHO": 1},
+            {"CH3": 1, "CH2": 1, "CH3O": 2, "CH2O": 1, "CHO": 1},
+        ],
         psrk_result={"CH3O": 2, "CH2O": 2, "CH": 1, "CH3": 1},
         joback_result={"-CH3": 3, "-CH2-": 2, ">CH-": 1, "-O- (non-ring)": 4},
     ),
@@ -383,7 +402,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{"CH3": 5, "CH": 1, "CHO": 2, "CH2O": 2}, {'CH3': 5, 'CH2': 1, 'CH2O': 1, 'CHO': 3}],
+        unifac_result=[
+            {"CH3": 5, "CH": 1, "CHO": 2, "CH2O": 2},
+            {"CH3": 5, "CH2": 1, "CH2O": 1, "CHO": 3},
+        ],
         psrk_result={"CH3": 5, "CH": 1, "CHO": 2, "CH2O": 2},
         joback_result={"-CH3": 5, "-CH2-": 2, ">CH-": 3, "-O- (non-ring)": 4},
     ),
@@ -393,7 +415,11 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{"CH3": 6, "CH": 2, "CH2O": 4, "CHO": 2}, {'CH3': 6, 'CH2': 1, 'CH': 1, 'CH2O': 3, 'CHO': 3}, {'CH3': 6, 'CH2': 2, 'CH2O': 2, 'CHO': 4}],
+        unifac_result=[
+            {"CH3": 6, "CH": 2, "CH2O": 4, "CHO": 2},
+            {"CH3": 6, "CH2": 1, "CH": 1, "CH2O": 3, "CHO": 3},
+            {"CH3": 6, "CH2": 2, "CH2O": 2, "CHO": 4},
+        ],
         psrk_result={"CH3": 6, "CH": 2, "CH2O": 4, "CHO": 2},
         joback_result={"-CH3": 6, "-CH2-": 4, ">CH-": 4, "-O- (non-ring)": 6},
     ),
@@ -403,7 +429,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{"CH3": 6, "CHO": 3, "CH2O": 3, "CH": 1}, {'CH3': 6, 'CH2': 1, 'CH2O': 2, 'CHO': 4}],
+        unifac_result=[
+            {"CH3": 6, "CHO": 3, "CH2O": 3, "CH": 1},
+            {"CH3": 6, "CH2": 1, "CH2O": 2, "CHO": 4},
+        ],
         psrk_result={"CH3": 6, "CHO": 3, "CH2O": 3, "CH": 1},
         joback_result={"-CH3": 6, "-CH2-": 3, ">CH-": 4, "-O- (non-ring)": 6},
     ),
@@ -413,7 +442,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{"CH3": 4, "CHO": 1, "CH2O": 1, "CH": 1}, {'CH3': 4, 'CH2': 1, 'CHO': 2}],
+        unifac_result=[
+            {"CH3": 4, "CHO": 1, "CH2O": 1, "CH": 1},
+            {"CH3": 4, "CH2": 1, "CHO": 2},
+        ],
         psrk_result={"CH3": 4, "CHO": 1, "CH2O": 1, "CH": 1},
         joback_result={"-CH3": 4, "-CH2-": 1, ">CH-": 2, "-O- (non-ring)": 2},
     ),
@@ -433,7 +465,10 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result=[{"CH3O": 2, "CH2": 1}, {'CH3': 1, 'CH3O': 1, 'CH2O': 1}],
+        unifac_result=[
+            {"CH3O": 2, "CH2": 1},
+            {"CH3": 1, "CH3O": 1, "CH2O": 1},
+        ],
         psrk_result={"CH3O": 2, "CH2": 1},
         joback_result={"-CH3": 2, "-CH2-": 1, "-O- (non-ring)": 2},
     ),
@@ -498,7 +533,7 @@ ethers_cases = [
         cases_module="ethers",
         r=None,
         q=None,
-        unifac_result={'CH2O': 2, 'CH2NH': 1},
+        unifac_result={"CH2O": 2, "CH2NH": 1},
         psrk_result={},
         joback_result={"ring-CH2-": 3, "-O- (ring)": 2, ">NH (ring)": 1},
     ),

@@ -5,8 +5,12 @@ import pytest
 from ugropy import unifac
 
 
+@pytest.mark.dependency(name="unifac")
 @pytest.mark.unifac
 class TestUNIFAC(TCase):
+    # Store al the groups detected in all the cases here:
+    tested_groups = set()
+
     def asserts(self, case, solver):
         if case.unifac_result is None:
             pytest.skip(
@@ -35,8 +39,12 @@ class TestUNIFAC(TCase):
                     )
 
                     assert False, message
+
+                self.tested_groups.update(r.subgroups.keys())
         else:
             comp = result[0].subgroups == case.unifac_result
+
+            self.tested_groups.update(result[0].subgroups.keys())
 
             if not comp:
                 message = (
@@ -48,3 +56,11 @@ class TestUNIFAC(TCase):
                 )
 
                 assert False, message
+
+
+@pytest.mark.dependency(depends=["unifac"])
+@pytest.mark.unifac
+def test_unifac_groups_coverage():
+    # Check if all the groups were detected on at least one case
+    for group in TestUNIFAC.tested_groups:
+        assert group in unifac.subgroups.index, f"Group {group} not tested"

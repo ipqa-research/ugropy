@@ -172,7 +172,10 @@ ketones_cases = [
         commentary="2-butanone",
         r=None,
         q=None,
-        unifac_result={"CH3": 1, "CH2": 1, "CH3CO": 1},
+        unifac_result=[
+            {"CH3": 1, "CH2": 1, "CH3CO": 1},
+            {"CH3": 2, "CH2CO": 1},
+        ],
         psrk_result={"CH3": 1, "CH2": 1, "CH3CO": 1},
         joback_result={"-CH3": 2, "-CH2-": 1, ">C=O (non-ring)": 1},
     ),
