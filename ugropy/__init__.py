@@ -8,6 +8,7 @@ from .core.frag_classes.base.fragmentation_model import (
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .models.unifac import unifac
+from .models.psrk import psrk
 
 # from .groups import Groups
 
@@ -18,6 +19,7 @@ __all__ = [
     "instantiate_mol_object",
     "FragmentationModel",
     "unifac",
+    "psrk",
     "ILPSolver",
     "DefaultSolver",
 ]

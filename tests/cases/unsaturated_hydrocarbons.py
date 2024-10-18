@@ -7,7 +7,7 @@
 from .case import Case
 
 
-insaturated_hydrocarbons_cases = [
+unsaturated_hydrocarbons_cases = [
     Case(
         "CC=C(C)C1=C(C=CC=C1C=C)C(C)=C(C)C",
         "smiles",

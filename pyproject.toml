@@ -23,7 +23,7 @@ markers = [
     "ethers: tests cases for ethers",
     "halogens: tests cases for halogens",
     "hydrocarbons: tests cases for hydrocarbons",
-    "insaturated_hydrocarbons: tests cases for insaturated hydrocarbons",
+    "unsaturated_hydrocarbons: tests cases for insaturated hydrocarbons",
     "ketones: tests cases for ketones",
     "nitrogen: tests cases for nitrogen compounds",
     "particulars: tests cases for particular compounds",

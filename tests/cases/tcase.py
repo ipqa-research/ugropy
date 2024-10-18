@@ -11,7 +11,7 @@ from .esters import esters_cases
 from .ethers import ethers_cases
 from .halogens import halogens_cases
 from .hydrocarbons import hydrocarbons_cases
-from .insaturated_hydrocarbons import insaturated_hydrocarbons_cases
+from .unsaturated_hydrocarbons import unsaturated_hydrocarbons_cases
 from .ketones import ketones_cases
 from .nitrogen import nitrogen_cases
 from .particulars import particulars_cases
@@ -123,12 +123,12 @@ class TCase(ABC):
     def test_hydrocarbons(self, case: Case, solver: ILPSolver) -> None:
         self.asserts(case, solver)
 
-    @pytest.mark.insaturated_hydrocarbons
+    @pytest.mark.unsaturated_hydrocarbons
     @pytest.mark.parametrize("solver", solvers)
     @pytest.mark.parametrize(
         "case",
-        insaturated_hydrocarbons_cases,
-        ids=[c.identifier for c in insaturated_hydrocarbons_cases],
+        unsaturated_hydrocarbons_cases,
+        ids=[c.identifier for c in unsaturated_hydrocarbons_cases],
     )
     def test_insaturated_hydrocarbons(
         self, case: Case, solver: ILPSolver

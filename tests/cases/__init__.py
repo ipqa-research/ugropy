@@ -4,7 +4,7 @@ from .tcase import TCase
 from .alcohols import alcohols_cases
 from .aromatics import aromatics_cases
 from .hydrocarbons import hydrocarbons_cases
-from .insaturated_hydrocarbons import insaturated_hydrocarbons_cases
+from .unsaturated_hydrocarbons import unsaturated_hydrocarbons_cases
 from .ketones import ketones_cases
 from .particulars import particulars_cases
 from .aldehydes import aldehydes_cases
@@ -24,7 +24,7 @@ __all__ = [
     "alcohols_cases",
     "aromatics_cases",
     "hydrocarbons_cases",
-    "insaturated_hydrocarbons_cases",
+    "unsaturated_hydrocarbons_cases",
     "ketones_cases",
     "particulars_cases",
     "aldehydes_cases",

@@ -16,6 +16,11 @@
 .. toctree::
    :maxdepth: 1
 
+   tests_book/index
+
+.. toctree::
+   :maxdepth: 1
+
    references.rst
 
 
