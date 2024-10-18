@@ -11,10 +11,11 @@ from ugropy.core.get_rdkit_object import instantiate_mol_object
 
 # path tests
 project_root = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../../tests/')
+    os.path.join(os.path.dirname(__file__), "../../../tests/")
 )
 
 sys.path.append(project_root)
+
 
 # Display function
 def display_case_module(cases: list):
@@ -24,9 +25,9 @@ def display_case_module(cases: list):
         drawer = rdMolDraw2D.MolDraw2DSVG(400, 200)
         drawer.DrawMolecule(mol)
         drawer.FinishDrawing()
-        
+
         svg = drawer.GetDrawingText().replace("svg:", "")
-        
+
         # HTML block
         case_html = f"""
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; border-radius: 5px;">

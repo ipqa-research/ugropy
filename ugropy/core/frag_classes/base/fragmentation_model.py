@@ -71,6 +71,7 @@ class FragmentationModel:
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        **kwargs,
     ) -> Union[FragmentationResult, List[FragmentationResult]]:
         # =====================================================================
         # Direct fragments detection
@@ -81,7 +82,7 @@ class FragmentationModel:
 
         # No groups detected
         if detections == {}:
-            return self.set_fragmentation_result(mol, [{}])
+            return self.set_fragmentation_result(mol, [{}], **kwargs)
 
         # =====================================================================
         # Search for overlapping atoms and free atoms
@@ -92,11 +93,11 @@ class FragmentationModel:
 
         # If there is free atoms in the molecule can't fragment with the model
         if np.size(free_atoms) > 0:
-            return self.set_fragmentation_result(mol, [{}])
+            return self.set_fragmentation_result(mol, [{}], **kwargs)
 
         # If no overlapping or the model allows overlapping we are done
         if np.size(overlapping_atoms) == 0 or self.allow_overlapping:
-            return self.set_fragmentation_result(mol, [detections])
+            return self.set_fragmentation_result(mol, [detections], **kwargs)
 
         # =====================================================================
         # Solve overlapping atoms
@@ -110,7 +111,7 @@ class FragmentationModel:
         if not problem.selected_fragments:
             # This could happend, no solution found. Example:
             # "CC(C)(C)OC(=O)OC1=CC=CC=C1" on UNIFAC.
-            return self.set_fragmentation_result(mol, [{}])
+            return self.set_fragmentation_result(mol, [{}], **kwargs)
 
         solutions = []
 
@@ -123,7 +124,7 @@ class FragmentationModel:
 
             solutions.append(solution)
 
-        return self.set_fragmentation_result(mol, solutions)
+        return self.set_fragmentation_result(mol, solutions, **kwargs)
 
     def set_fragmentation_result(
         self,

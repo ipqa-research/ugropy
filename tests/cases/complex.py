@@ -9,8 +9,6 @@ complex_cases = [
         identifier="CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={
             "CH3": 4,
             "C": 1,
@@ -45,8 +43,6 @@ complex_cases = [
         identifier="CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={
             "CH3": 6,
             "C": 1,
@@ -79,8 +75,6 @@ complex_cases = [
         identifier="CCCC1=CC=C(CC(=O)OC)C=C1",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result=[
             {"CH3": 2, "ACH": 4, "ACCH2": 1, "CH2COO": 1, "CH2": 1, "AC": 1},
             {"CH3": 2, "ACH": 4, "ACCH2": 2, "CH2": 1, "COO": 1},
@@ -101,8 +95,6 @@ complex_cases = [
         identifier="C1=CC(=CC=C1COC(C)(C)C)CCC",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={
             "CH3": 4,
             "C": 1,
@@ -134,8 +126,6 @@ complex_cases = [
         identifier="C13=C(C=C(C=C1)CC2=CC=CC(=C2)CC)CCCC3",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={"CH3": 1, "CH2": 2, "ACH": 7, "ACCH2": 4, "AC": 1},
         psrk_result={"CH3": 1, "CH2": 2, "ACH": 7, "ACCH2": 4, "AC": 1},
         joback_result={
@@ -150,8 +140,6 @@ complex_cases = [
         identifier="C13=C(C(=C(C(=C1C)C)CC2=C(C(=C(C(=C2C)CC)O[H])N([H])[H])C)C)CCCC3",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={
             "CH3": 1,
             "CH2": 2,
@@ -183,8 +171,6 @@ complex_cases = [
         identifier="C1(=CC=CC=C1)COC(C)(C)C",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={"CH3": 3, "C": 1, "ACH": 5, "CH2O": 1, "AC": 1},
         psrk_result={"CH3": 3, "C": 1, "ACH": 5, "CH2O": 1, "AC": 1},
         joback_result={
@@ -200,8 +186,6 @@ complex_cases = [
         identifier="C1=CC=C(C=C1)CC2=CC=CC=C2",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={"ACH": 10, "ACCH2": 1, "AC": 1},
         psrk_result={"ACH": 10, "ACCH2": 1, "AC": 1},
         joback_result={"-CH2-": 1, "ring=CH-": 10, "ring=C<": 2},
@@ -210,8 +194,6 @@ complex_cases = [
         identifier="C1(=CC=CC=C1)C(OC(C)(C)C)C",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={"CH3": 4, "C": 1, "ACH": 5, "CHO": 1, "AC": 1},
         psrk_result={"CH3": 4, "C": 1, "ACH": 5, "CHO": 1, "AC": 1},
         joback_result={
@@ -227,8 +209,6 @@ complex_cases = [
         identifier="C12=CC=CC=C1COC2",
         identifier_type="smiles",
         cases_module="complex",
-        r=None,
-        q=None,
         unifac_result={"ACH": 4, "ACCH2": 1, "CH2O": 1, "AC": 1},
         psrk_result={"ACH": 4, "ACCH2": 1, "CH2O": 1, "AC": 1},
         joback_result={

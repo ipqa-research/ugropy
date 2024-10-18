@@ -7,6 +7,7 @@ from .core.frag_classes.base.fragmentation_model import (
 )
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .core.ilp_solvers.default_solver import DefaultSolver
+from .models.joback import joback
 from .models.unifac import unifac
 from .models.psrk import psrk
 
@@ -18,6 +19,7 @@ __all__ = [
     "writers",
     "instantiate_mol_object",
     "FragmentationModel",
+    "joback",
     "unifac",
     "psrk",
     "ILPSolver",

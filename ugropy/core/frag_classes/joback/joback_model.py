@@ -2,24 +2,24 @@
 
 from collections import defaultdict
 
-from rdkit import Chem
-
-from typing import Union, List
+from typing import List, Union
 
 import pandas as pd
+
+from rdkit import Chem
 
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
 )
-from ugropy.core.frag_classes.gibss_model.gibbs_result import (
-    GibbsFragmentationResult,
+from ugropy.core.frag_classes.joback.joback_result import (
+    JobackFragmentationResult,
 )
+from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
+from ugropy.core.ilp_solvers.default_solver import DefaultSolver
 
 
-class GibbsModel(FragmentationModel):
-    """GibbsModel it's a fragmentation model dedicated to Gibbs excess models.
-
-    unifac, psrk, dortmund are instances of this class.
+class JobackModel(FragmentationModel):
+    """Joback Fragmentation model dedicated to properties estimation models.
 
     Parameters
     ----------
@@ -27,10 +27,9 @@ class GibbsModel(FragmentationModel):
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
         the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct)
-    subgroups_info : Union[pd.DataFrame, None], optional
-        Information of the model's subgroups (R, Q, subgroup_number,
-        main_group), by default None
+        used to check that the result is correct).
+    properties_contributions : pd.DataFrame, optional
+        Group's properties contributions, by default None
 
     Attributes
     ----------
@@ -38,36 +37,50 @@ class GibbsModel(FragmentationModel):
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
         the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct)
+        used to check that the result is correct).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column
-    subgroups_info : pd.DataFrame
-        Information of the model's subgroups. Columns: R, Q, subgroup_number,
-        main_group. Index: 'group' (subgroups names)
+    properties_contributions : pd.DataFrame
+        Group's properties contributions.
     """
 
     def __init__(
         self,
         subgroups: pd.DataFrame,
-        subgroups_info: Union[pd.DataFrame, None] = None,
+        properties_contributions: Union[pd.DataFrame, None],
     ) -> None:
+
         super().__init__(subgroups)
 
-        # subgroups info
-        if subgroups_info is None:
-            self.subgroups_info = pd.DataFrame(
-                [],
-                columns=["group", "subgroup_number", "main_group", "R", "Q"],
-            ).set_index("group")
-        else:
-            self.subgroups_info = subgroups_info
+        # Properties
+        self.properties_contributions = properties_contributions
+
+    def get_groups(
+        self,
+        identifier: Union[str, Chem.rdchem.Mol],
+        identifier_type: str = "name",
+        solver: ILPSolver = DefaultSolver,
+        search_multiple_solutions: bool = False,
+        normal_boiling_point: float = None,
+    ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
+
+        sol = super().get_groups(
+            identifier=identifier,
+            identifier_type=identifier_type,
+            solver=solver,
+            search_multiple_solutions=search_multiple_solutions,
+            normal_boiling_point=normal_boiling_point,
+        )
+
+        return sol
 
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
-    ) -> List[GibbsFragmentationResult]:
+        normal_boiling_point: float,
+    ) -> List[JobackFragmentationResult]:
 
         sols = []
         occurs = []
@@ -83,11 +96,12 @@ class GibbsModel(FragmentationModel):
 
             if occurrences not in occurs:
                 sols.append(
-                    GibbsFragmentationResult(
+                    JobackFragmentationResult(
                         molecule,
                         dict(occurrences),
                         dict(groups_atoms),
-                        self.subgroups_info,
+                        self.properties_contributions,
+                        normal_boiling_point=normal_boiling_point,
                     )
                 )
                 occurs.append(occurrences)
