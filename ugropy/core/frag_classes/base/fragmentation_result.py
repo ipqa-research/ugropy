@@ -129,7 +129,7 @@ class FragmentationResult:
         title_font_size: float = 12,
         legend_font_size: float = 12,
         font: str = "Helvetica",
-    ) -> "IPython.display.SVG":
+    ):
         """Create a IPython SVG object of the fragmentation result.
 
         This function is meant to be used in Jupyter notebooks to directly

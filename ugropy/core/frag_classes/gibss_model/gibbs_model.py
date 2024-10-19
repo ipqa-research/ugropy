@@ -1,12 +1,11 @@
 """GibbsModel fragmentation module."""
 
 from collections import defaultdict
-
-from rdkit import Chem
-
-from typing import Union, List
+from typing import List, Union
 
 import pandas as pd
+
+from rdkit import Chem
 
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,

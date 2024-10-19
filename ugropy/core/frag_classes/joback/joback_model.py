@@ -1,7 +1,6 @@
 """GibbsModel fragmentation module."""
 
 from collections import defaultdict
-
 from typing import List, Union
 
 import pandas as pd
@@ -14,8 +13,8 @@ from ugropy.core.frag_classes.base.fragmentation_model import (
 from ugropy.core.frag_classes.joback.joback_result import (
     JobackFragmentationResult,
 )
-from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 from ugropy.core.ilp_solvers.default_solver import DefaultSolver
+from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class JobackModel(FragmentationModel):

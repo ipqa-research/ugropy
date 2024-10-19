@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
 
+import pytest
+
+from ugropy import DefaultSolver, ILPSolver
+
 from .acids import acids_cases
 from .alcohols import alcohols_cases
 from .aldehydes import aldehydes_cases
@@ -11,16 +15,12 @@ from .esters import esters_cases
 from .ethers import ethers_cases
 from .halogens import halogens_cases
 from .hydrocarbons import hydrocarbons_cases
-from .unsaturated_hydrocarbons import unsaturated_hydrocarbons_cases
 from .ketones import ketones_cases
 from .nitrogen import nitrogen_cases
 from .particulars import particulars_cases
 from .silicon import silicon_cases
 from .sulfur import sulfur_cases
-
-import pytest
-
-from ugropy import DefaultSolver, ILPSolver
+from .unsaturated_hydrocarbons import unsaturated_hydrocarbons_cases
 
 
 # Having multiple solvers in the future we can check them all here.

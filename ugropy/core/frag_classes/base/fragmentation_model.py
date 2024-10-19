@@ -5,20 +5,19 @@ FragmentationModule class.
 """
 
 from collections import defaultdict
-
 from typing import List, Union
+
+import numpy as np
 
 import pandas as pd
 
 from rdkit import Chem
 
-import numpy as np
-
 from ugropy.core.checks import check_atoms_fragments_presence
-from ugropy.core.get_rdkit_object import instantiate_mol_object
 from ugropy.core.frag_classes.base.fragmentation_result import (
     FragmentationResult,
 )
+from ugropy.core.get_rdkit_object import instantiate_mol_object
 from ugropy.core.ilp_solvers.default_solver import DefaultSolver
 from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 

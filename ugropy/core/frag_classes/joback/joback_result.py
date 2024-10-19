@@ -1,16 +1,16 @@
 from typing import Union
 
+import numpy as np
+
 import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
+from ugropy.constants import R
 from ugropy.core.frag_classes.base.fragmentation_result import (
     FragmentationResult,
 )
-
-
-import numpy as np
 
 
 class JobackFragmentationResult(FragmentationResult):

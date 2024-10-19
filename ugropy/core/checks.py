@@ -4,14 +4,9 @@ The module contains the necessary checks to corroborate the success of the
 algorithm to obtain the molecule's FragmentationModel subgroups.
 """
 
-from abc import ABC
-
 import numpy as np
 
-import pandas as pd
-
 from rdkit import Chem
-from rdkit.Chem import Descriptors
 
 
 def check_atoms_fragments_presence(

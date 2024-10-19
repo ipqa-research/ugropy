@@ -1,3 +1,5 @@
+"""Read csv file with models' data auxiliar function."""
+
 import pandas as pd
 
 

@@ -1,20 +1,20 @@
 from cases import (
-    alcohols_cases,
-    aromatics_cases,
-    hydrocarbons_cases,
-    insaturated_hydrocarbons_cases,
-    ketones_cases,
-    particulars_cases,
-    esters_cases,
-    aldehydes_cases,
-    ethers_cases,
-    nitrogen_cases,
     acids_cases,
-    halogens_cases,
-    silicon_cases,
-    sulfur_cases,
+    alcohols_cases,
+    aldehydes_cases,
+    aromatics_cases,
     complex_cases,
     epoxides_cases,
+    esters_cases,
+    ethers_cases,
+    halogens_cases,
+    hydrocarbons_cases,
+    ketones_cases,
+    nitrogen_cases,
+    particulars_cases,
+    silicon_cases,
+    sulfur_cases,
+    unsaturated_hydrocarbons_cases,
 )
 
 import numpy as np
@@ -26,7 +26,7 @@ def test_no_duplicate_cases():
         aromatics_cases
         + alcohols_cases
         + hydrocarbons_cases
-        + insaturated_hydrocarbons_cases
+        + unsaturated_hydrocarbons_cases
         + ketones_cases
         + particulars_cases
         + esters_cases

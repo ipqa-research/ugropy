@@ -1,34 +1,26 @@
-"""Fragmentation models implemented.
+"""Classic Liquid Vapor UNIFAC FragmentationModel implementation.
 
-All models can be imported directly with:
-
-.. code-block:: python
-
-   from ugropy import joback, psrk, unifac
-
-You can check the group list and their SMARTS representation with:
+Import and use the UNIFAC FragmentationModel with:
 
 .. code-block:: python
 
-   joback.subgroups psrk.subgroups unifac.subgroups
+    from ugropy import unifac
 
-In the case of a PropertiesEstimator like joback, you can check the
-contribution of each group to the properties with:
+    # Get groups from molecule's name
+    tol = unifac.get_groups("toluene")
 
-.. code-block:: python
+    print(tol.subgroups)
 
-    joback.properties_contributions
+    # Get groups from molecule's SMILES
+    eth = unifac.get_groups("CCO", "smiles")
+
+    print(eth.subgroups)
 
 Attributes
 ----------
 unifac : GibbsModel
     Classic LV-UNIFAC FragmentationModel :cite:p:`ddbst, unifac1, unifac2,
     unifac3, unifac4, unifac5, unifac6`
-psrk: GibbsModel
-    Predictive Soave-Redlich-Kwong FragmentationModel :cite:p:`ddbst, psrk1,
-    psrk2`
-joback: PropertiesEstimator
-    Joback FragmentationModel :cite:p:`joback1, joback2`
 """
 
 from ugropy.constants import _csvs

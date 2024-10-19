@@ -1,14 +1,33 @@
+"""Default ILP solver for the set cover problem.
+
+The DefaultSolver uses the Pulp library to solve the set cover problem.
+"""
+
 from typing import List
 
-import pulp
-
 import numpy as np
+
+import pulp
 
 from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class DefaultSolver(ILPSolver):
+    """Default ILP solver for the set cover problem."""
+
     def solve_one_problem(self, not_valid_solutions: List = []) -> List[int]:
+        """Solve one problem with the Pulp library.
+
+        Parameters
+        ----------
+        not_valid_solutions : List, optional
+            Already got solutions, by default []
+
+        Returns
+        -------
+        List[int]
+            List of binary values representing the selected fragments.
+        """
         # =====================================================================
         # ILP formulation (Pulp)
         # =====================================================================
@@ -39,7 +58,7 @@ class DefaultSolver(ILPSolver):
 
             problem += pulp.lpSum([x[i] for i in range(n_frag)]) == opt
 
-        # Constaints 3: not already get solution
+        # Constaints 3: already get solutions not allowed
         for solution in not_valid_solutions:
             problem += (
                 pulp.lpSum([x[i] * solution[i] for i in range(n_frag)])
@@ -67,9 +86,9 @@ class DefaultSolver(ILPSolver):
             return None
 
     def solve(self) -> None:
-        # =====================================================================
+        """Run multiple times the solve_one_problem method."""
+
         # Multiple solutions
-        # =====================================================================
         if self.search_multiple_solutions:
             not_valid_solutions = []
             while True:
@@ -79,4 +98,3 @@ class DefaultSolver(ILPSolver):
                 not_valid_solutions.append(solution)
         else:
             self.solve_one_problem()
-        return self.selected_fragments
