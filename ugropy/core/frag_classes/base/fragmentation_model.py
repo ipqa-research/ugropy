@@ -1,6 +1,6 @@
 """FragmentationModel module.
 
-All ugropy models (joback, unifac, psrk) are instances of the
+All ugropy models (joback, unifac, psrk, etc) are instances of the
 FragmentationModule class.
 """
 
@@ -33,8 +33,7 @@ class FragmentationModel:
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
 
     Attributes
     ----------
@@ -72,6 +71,31 @@ class FragmentationModel:
         search_multiple_solutions: bool = False,
         **kwargs,
     ) -> Union[FragmentationResult, List[FragmentationResult]]:
+        """Get the groups of a molecule.
+
+        Parameters
+        ----------
+        identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        identifier_type : str, optional
+            Identifier type of the molecule. Use "name" if you are providing
+            the molecules' name, "smiles" if you are providing the SMILES
+            or "mol" if you are providing a rdkir mol object, by default "name"
+        solver : ILPSolver, optional
+            ILP solver class, by default DefaultSolver
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+            If False the return will be a FragmentationResult object, if True
+            the return will be a list of FragmentationResult objects.
+
+        Returns
+        -------
+        Union[FragmentationResult, List[FragmentationResult]]
+            Fragmentation result. If search_multiple_solutions is False the
+            return will be a FragmentationResult object, if True the return
+            will be a list of FragmentationResult objects.
+        """
         # =====================================================================
         # Direct fragments detection
         # =====================================================================
@@ -81,7 +105,9 @@ class FragmentationModel:
 
         # No groups detected
         if detections == {}:
-            return self.set_fragmentation_result(mol, [{}], **kwargs)
+            return self.set_fragmentation_result(
+                mol, [{}], search_multiple_solutions, **kwargs
+            )
 
         # =====================================================================
         # Search for overlapping atoms and free atoms
@@ -92,11 +118,15 @@ class FragmentationModel:
 
         # If there is free atoms in the molecule can't fragment with the model
         if np.size(free_atoms) > 0:
-            return self.set_fragmentation_result(mol, [{}], **kwargs)
+            return self.set_fragmentation_result(
+                mol, [{}], search_multiple_solutions, **kwargs
+            )
 
         # If no overlapping or the model allows overlapping we are done
         if np.size(overlapping_atoms) == 0 or self.allow_overlapping:
-            return self.set_fragmentation_result(mol, [detections], **kwargs)
+            return self.set_fragmentation_result(
+                mol, [detections], search_multiple_solutions, **kwargs
+            )
 
         # =====================================================================
         # Solve overlapping atoms
@@ -110,7 +140,9 @@ class FragmentationModel:
         if not problem.selected_fragments:
             # This could happend, no solution found. Example:
             # "CC(C)(C)OC(=O)OC1=CC=CC=C1" on UNIFAC.
-            return self.set_fragmentation_result(mol, [{}], **kwargs)
+            return self.set_fragmentation_result(
+                mol, [{}], search_multiple_solutions, **kwargs
+            )
 
         solutions = []
 
@@ -123,13 +155,32 @@ class FragmentationModel:
 
             solutions.append(solution)
 
-        return self.set_fragmentation_result(mol, solutions, **kwargs)
+        return self.set_fragmentation_result(
+            mol, solutions, search_multiple_solutions, **kwargs
+        )
 
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
-    ) -> List[FragmentationResult]:
+        search_multiple_solutions: bool = False,
+    ) -> Union[FragmentationResult, List[FragmentationResult]]:
+        """Process the solutions and return the FragmentationResult objects.
+
+        Parameters
+        ----------
+        molecule : Chem.rdchem.Mol
+            Rdkit mol object.
+        solutions_fragments : List[dict]
+            Fragments detected in the molecule.
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+
+        Returns
+        -------
+        Union[FragmentationResult, List[FragmentationResult]]
+            List of FragmentationResult objects.
+        """
 
         sols = []
         occurs = []
@@ -151,7 +202,10 @@ class FragmentationModel:
                 )
                 occurs.append(occurrences)
 
-        return sols
+        if search_multiple_solutions:
+            return sols
+        else:
+            return sols[0]
 
     def detect_fragments(self, molecule: Chem.rdchem.Mol) -> dict:
         """Detect all the fragments in the molecule.

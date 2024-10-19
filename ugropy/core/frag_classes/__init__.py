@@ -1,3 +1,5 @@
+"""FragmentationModel classes module."""
+
 from . import base, gibss_model, joback
 
 

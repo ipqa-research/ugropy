@@ -1,3 +1,9 @@
+"""FragmentationResult class.
+
+Base class to set fragmentation results. implements the drawing methods of the
+solutions.
+"""
+
 import importlib
 
 import numpy as np
@@ -7,6 +13,34 @@ from rdkit.Chem.Draw import rdMolDraw2D
 
 
 class FragmentationResult:
+    """Fragmentation result class.
+
+    This class is used to store the fragmentation results and provide methods
+    to visualize them.
+
+    Parameters
+    ----------
+    molecule : Chem.rdchem.Mol
+        Molecule to fragment.
+    subgroups : dict
+        Dictionary with the subgroups and the number of times they appear in
+        the molecule.
+    subgroups_atoms_indexes : dict
+        Dictionary with the subgroups and the atoms indexes that belong to
+        each subgroup.
+
+    Attributes
+    ----------
+    molecule : Chem.rdchem.Mol
+        Molecule to fragment.
+    subgroups : dict
+        Dictionary with the subgroups and the number of times they appear in
+        the molecule.
+    subgroups_atoms : dict
+        Dictionary with the subgroups and the atoms indexes that belong to
+        each subgroup.
+    """
+
     def __init__(
         self,
         molecule: Chem.rdchem.Mol,

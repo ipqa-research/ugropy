@@ -66,7 +66,24 @@ class GibbsModel(FragmentationModel):
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
-    ) -> List[GibbsFragmentationResult]:
+        search_multiple_solutions: bool,
+    ) -> Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]:
+        """Get the solutions and return the GibbsFragmentationResult objects.
+
+        Parameters
+        ----------
+        molecule : Chem.rdchem.Mol
+            Rdkit mol object.
+        solutions_fragments : List[dict]
+            Fragments detected in the molecule.
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+
+        Returns
+        -------
+        Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
+            List of GibbsFragmentationResult objects.
+        """
 
         sols = []
         occurs = []
@@ -91,4 +108,7 @@ class GibbsModel(FragmentationModel):
                 )
                 occurs.append(occurrences)
 
-        return sols
+        if search_multiple_solutions:
+            return sols
+        else:
+            return sols[0]

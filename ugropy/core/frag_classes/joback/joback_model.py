@@ -1,4 +1,4 @@
-"""GibbsModel fragmentation module."""
+"""Joback fragmentation module."""
 
 from collections import defaultdict
 from typing import List, Union
@@ -63,6 +63,35 @@ class JobackModel(FragmentationModel):
         search_multiple_solutions: bool = False,
         normal_boiling_point: float = None,
     ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
+        """Get Jobacks groups from a molecule.
+
+        Parameters
+        ----------
+        identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        identifier_type : str, optional
+            Identifier type of the molecule. Use "name" if you are providing
+            the molecules' name, "smiles" if you are providing the SMILES
+            or "mol" if you are providing a rdkir mol object, by default "name"
+        solver : ILPSolver, optional
+            ILP solver class, by default DefaultSolver
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+            If False the return will be a FragmentationResult object, if True
+            the return will be a list of FragmentationResult objects.
+        normal_boiling_point : float, optional
+            Experimental normal boiling point of the molecule on Kelvin. Its
+            used to improve the properties calculations. Joback uses the
+            estimated normal boiling point if no provided, by default None
+
+        Returns
+        -------
+        Union[JobackFragmentationResult, List[JobackFragmentationResult]]
+            Fragmentation result. If search_multiple_solutions is False the
+            return will be a FragmentationResult object, if True the return
+            will be a list of FragmentationResult objects.
+        """
 
         sol = super().get_groups(
             identifier=identifier,
@@ -78,8 +107,29 @@ class JobackModel(FragmentationModel):
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
+        search_multiple_solutions: bool,
         normal_boiling_point: float,
-    ) -> List[JobackFragmentationResult]:
+    ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
+        """Get the solutions and return the JobackFragmentationResult objects.
+
+        Parameters
+        ----------
+        molecule : Chem.rdchem.Mol
+            Rdkit mol object.
+        solutions_fragments : List[dict]
+            Fragments detected in the molecule.
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+        normal_boiling_point : float
+            Experimental normal boiling point of the molecule on Kelvin.
+
+        Returns
+        -------
+        Union[JobackFragmentationResult, List[JobackFragmentationResult]]
+            Fragmentation result. If search_multiple_solutions is False the
+            return will be a FragmentationResult object, if True the return
+            will be a list of FragmentationResult objects.
+        """
 
         sols = []
         occurs = []
@@ -105,4 +155,7 @@ class JobackModel(FragmentationModel):
                 )
                 occurs.append(occurrences)
 
-        return sols
+        if search_multiple_solutions:
+            return sols
+        else:
+            return sols[0]

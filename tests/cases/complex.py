@@ -137,7 +137,7 @@ complex_cases = [
         },
     ),
     Case(
-        identifier="C13=C(C(=C(C(=C1C)C)CC2=C(C(=C(C(=C2C)CC)O[H])N([H])[H])C)C)CCCC3", # noqa
+        identifier="C13=C(C(=C(C(=C1C)C)CC2=C(C(=C(C(=C2C)CC)O[H])N([H])[H])C)C)CCCC3",  # noqa
         identifier_type="smiles",
         cases_module="complex",
         unifac_result={

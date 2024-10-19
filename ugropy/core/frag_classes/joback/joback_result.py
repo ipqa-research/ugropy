@@ -1,3 +1,5 @@
+"""JobackFragmentationResult module."""
+
 from typing import Union
 
 import numpy as np
@@ -22,18 +24,16 @@ class JobackFragmentationResult(FragmentationResult):
 
     Parameters
     ----------
-    identifier : str or rdkit.Chem.rdchem.Mol
-        Identifier of a molecule (name, SMILES, groups, or Chem.rdchem.Mol).
-        Example: you can use hexane, CCCCCC, {"-CH3": 2, "-CH2-": 4} for name,
-        SMILES and groups respectively.
-    identifier_type : str, optional
-        Use 'name' to search a molecule by name, 'smiles' to provide the
-        molecule SMILES representation, 'groups' to provide Joback groups or
-        'mol' to provide a rdkit.Chem.rdchem.Mol object, by default "name".
+    molecule : Chem.rdchem.Mol
+        RDKit molecule object.
+    subgroups : dict
+        Dictionary of subgroups.
+    subgroups_atoms_indexes : dict
+        Dictionary of subgroups atoms indexes.
+    properties_contributions : pd.DataFrame
+        DataFrame with Joback's properties contributions.
     normal_boiling_point : float, optional
-        If provided, will be used to estimate critical temperature, acentric
-        factor, and vapor pressure instead of the estimated normal boiling
-        point, by default None.
+        User provided experimental normal boiling point [K].
 
     Attributes
     ----------

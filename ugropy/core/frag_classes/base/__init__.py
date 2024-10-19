@@ -1,3 +1,5 @@
+"""FragmentantionModel module."""
+
 from .fragmentation_model import FragmentationModel
 from .fragmentation_result import FragmentationResult
 

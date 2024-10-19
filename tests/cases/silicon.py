@@ -318,7 +318,7 @@ silicon_cases = [
         joback_result={},
     ),
     Case(
-        identifier="[SiH3][Si]([SiH3])([SiH3])OC(=O)O[Si]([SiH3])([SiH3])[SiH3]", # noqa
+        identifier="[SiH3][Si]([SiH3])([SiH3])OC(=O)O[Si]([SiH3])([SiH3])[SiH3]",  # noqa
         identifier_type="smiles",
         cases_module="silicon",
         unifac_result={"COO": 1, "SIH3": 6, "SIO": 1, "SI": 1},
@@ -554,7 +554,7 @@ silicon_cases = [
         joback_result={},
     ),
     Case(
-        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]", # noqa
+        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]",  # noqa
         identifier_type="smiles",
         cases_module="silicon",
         unifac_result=[
@@ -568,7 +568,7 @@ silicon_cases = [
         joback_result={},
     ),
     Case(
-        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH2][SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]", # noqa
+        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH2][SiH](O[SiH2]O[SiH]([SiH3])[SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]",  # noqa
         identifier_type="smiles",
         cases_module="silicon",
         unifac_result=[
@@ -584,7 +584,7 @@ silicon_cases = [
         joback_result={},
     ),
     Case(
-        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH]([SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]", # noqa
+        identifier="[SiH3][SiH]([SiH3])O[SiH2]O[SiH]([SiH3])O[SiH2]O[SiH]([SiH3])[SiH3]",  # noqa
         identifier_type="smiles",
         cases_module="silicon",
         unifac_result=[
