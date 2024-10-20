@@ -8,8 +8,11 @@ import numpy as np
 
 import pandas as pd
 
-from ugropy.fragmentation_models.models import psrk, unifac
-from ugropy.properties.joback_properties import JobackProperties
+from ugropy.core.frag_classes.joback.joback_result import (
+    JobackFragmentationResult,
+)
+from ugropy.models.psrkmod import psrk
+from ugropy.models.unifacmod import unifac
 
 
 def write_molar_mass(
@@ -18,7 +21,7 @@ def write_molar_mass(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
-    joback_objects: List[JobackProperties] = [],
+    joback_objects: List[JobackFragmentationResult] = [],
 ) -> None:
     """Create the DataFrame with the molecular weights for Clapeyron.jl.
 
@@ -37,8 +40,8 @@ def write_molar_mass(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
-    joback_objects : List[Joback], optional
-        List of ugropy.properties.JobackProperties objects, by default [].
+    joback_objects : List[JobackFragmentationResult], optional
+        List of JobackFragmentationResult objects, by default [].
 
     Returns
     -------

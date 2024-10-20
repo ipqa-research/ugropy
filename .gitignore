@@ -1,4 +1,6 @@
 .vscode
+docs/source/tutorial/database
+docs/source/tutorial/figure.svg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

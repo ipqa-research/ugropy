@@ -1,6 +1,6 @@
 """to_thermo module."""
 
-from ugropy.fragmentation_models.gibbs_model import GibbsModel
+from ugropy.core.frag_classes.gibbs_model.gibbs_model import GibbsModel
 
 
 def to_thermo(mol_subgroups: dict, model: GibbsModel) -> dict:
