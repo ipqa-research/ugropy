@@ -32,10 +32,7 @@ joback: JobackModel
     Joback FragmentationModel :cite:p:`joback1, joback2`
 """
 
-from ugropy.models.joback import joback
-from ugropy.models.psrk import psrk
-from ugropy.models.read_csv import _rd
-from ugropy.models.unifac import unifac
+from . import jobackmod, psrkmod, read_csv, unifacmod
 
 
-__all__ = ["_rd", "joback", "psrk", "unifac"]
+__all__ = ["read_csv", "jobackmod", "psrkmod", "unifacmod"]

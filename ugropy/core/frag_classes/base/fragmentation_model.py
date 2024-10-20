@@ -181,7 +181,6 @@ class FragmentationModel:
         Union[FragmentationResult, List[FragmentationResult]]
             List of FragmentationResult objects.
         """
-
         sols = []
         occurs = []
 
@@ -214,14 +213,16 @@ class FragmentationModel:
         with the atoms indexes of the fragment as values. For example, n-hexane
         for the UNIFAC model will return:
 
-        {
-            'CH3_0': (0,),
-            'CH3_1': (5,),
-            'CH2_0': (1,),
-            'CH2_1': (2,),
-            'CH2_2': (3,),
-            'CH2_3': (4,)
-        }
+        .. code-block:: python
+
+            {
+                'CH3_0': (0,),
+                'CH3_1': (5,),
+                'CH2_0': (1,),
+                'CH2_1': (2,),
+                'CH2_2': (3,),
+                'CH2_3': (4,)
+            }
 
         You may note that multiple occurrence of a fragment name will be
         indexed. The convention is always: <fragment_name>_i where `i` is the

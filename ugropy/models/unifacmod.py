@@ -24,7 +24,7 @@ unifac : GibbsModel
 """
 
 from ugropy.constants import _csvs
-from ugropy.core.frag_classes.gibss_model.gibbs_model import GibbsModel
+from ugropy.core.frag_classes.gibbs_model.gibbs_model import GibbsModel
 from ugropy.models.read_csv import _rd
 
 

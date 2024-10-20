@@ -1,7 +1,6 @@
 """Joback Fragmentation Model module."""
 
-from .joback_model import JobackModel
-from .joback_result import JobackFragmentationResult
+from . import joback_model, joback_result
 
 
-__all__ = ["JobackModel", "JobackFragmentationResult"]
+__all__ = ["joback_model", "joback_result"]

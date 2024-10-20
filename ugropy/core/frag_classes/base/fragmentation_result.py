@@ -122,7 +122,7 @@ class FragmentationResult:
             r, g, b, _ = color
             rect_color = f"rgb({int(r * 255)}, {int(g * 255)}, {int(b * 255)})"
 
-            name = name.replace("<", "&lt;").replace(">", "&gt;")
+            legend_name = name.replace("<", "&lt;").replace(">", "&gt;")
 
             # Color rectangle for the legend of the group
             legend += (
@@ -135,7 +135,7 @@ class FragmentationResult:
             legend += (
                 f'<text x="{legend_font_size * 1.6}" y="{20 + i * 25}" '
                 f'font-family="{font}" font-size="{legend_font_size}" '
-                f'fill="black">{name}: {self.subgroups[name]}</text>'
+                f'fill="black">{legend_name}: {self.subgroups[name]}</text>'
             )
 
         # =====================================================================

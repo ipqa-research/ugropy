@@ -1,13 +1,19 @@
 """Groups module."""
 
+from typing import List, Union
+
 from rdkit.Chem import Descriptors
 
+from .core.frag_classes.gibbs_model.gibbs_result import (
+    GibbsFragmentationResult,
+)
+from .core.frag_classes.joback.joback_result import JobackFragmentationResult
 from .core.get_rdkit_object import instantiate_mol_object
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
-from .models.joback import joback
-from .models.psrk import psrk
-from .models.unifac import unifac
+from .models.jobackmod import joback
+from .models.psrkmod import psrk
+from .models.unifacmod import unifac
 
 
 class Groups:
@@ -69,7 +75,9 @@ class Groups:
         self.molecular_weight = Descriptors.MolWt(self.mol_object)
 
         # UNIFAC
-        self.unifac = unifac.get_groups(
+        self.unifac: Union[
+            GibbsFragmentationResult, List[GibbsFragmentationResult]
+        ] = unifac.get_groups(
             self.identifier,
             self.identifier_type,
             solver=solver,
@@ -77,7 +85,9 @@ class Groups:
         )
 
         # PSRK
-        self.psrk = psrk.get_groups(
+        self.psrk: Union[
+            GibbsFragmentationResult, List[GibbsFragmentationResult]
+        ] = psrk.get_groups(
             self.identifier,
             self.identifier_type,
             solver=solver,
@@ -85,7 +95,9 @@ class Groups:
         )
 
         # Joback
-        self.joback = joback.get_groups(
+        self.joback: Union[
+            JobackFragmentationResult, List[JobackFragmentationResult]
+        ] = joback.get_groups(
             self.identifier,
             self.identifier_type,
             solver=solver,

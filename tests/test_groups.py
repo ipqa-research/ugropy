@@ -2,7 +2,7 @@ import numpy as np
 
 from rdkit import Chem
 
-from ugropy import Groups, get_groups, joback, psrk, unifac
+from ugropy import Groups, joback, psrk, unifac
 
 
 def test_smiles():
@@ -12,15 +12,15 @@ def test_smiles():
 
     assert (
         mol.unifac.subgroups
-        == get_groups(unifac, "CCO", identifier_type="smiles").subgroups
+        == unifac.get_groups("CCO", identifier_type="smiles").subgroups
     )
     assert (
         mol.psrk.subgroups
-        == get_groups(psrk, "CCO", identifier_type="smiles").subgroups
+        == psrk.get_groups("CCO", identifier_type="smiles").subgroups
     )
     assert (
         mol.joback.subgroups
-        == get_groups(joback, "CCO", identifier_type="smiles").subgroups
+        == joback.get_groups("CCO", identifier_type="smiles").subgroups
     )
 
 
@@ -29,15 +29,15 @@ def test_name():
 
     assert (
         mol.unifac.subgroups
-        == get_groups(unifac, "ethanol", identifier_type="name").subgroups
+        == unifac.get_groups("ethanol", identifier_type="name").subgroups
     )
     assert (
         mol.psrk.subgroups
-        == get_groups(psrk, "ethanol", identifier_type="name").subgroups
+        == psrk.get_groups("ethanol", identifier_type="name").subgroups
     )
     assert (
         mol.joback.subgroups
-        == get_groups(joback, "ethanol", identifier_type="name").subgroups
+        == joback.get_groups("ethanol", identifier_type="name").subgroups
     )
 
 
@@ -47,13 +47,13 @@ def test_mol():
 
     assert (
         mol.unifac.subgroups
-        == get_groups(unifac, chm, identifier_type="mol").subgroups
+        == unifac.get_groups(chm, identifier_type="mol").subgroups
     )
     assert (
         mol.psrk.subgroups
-        == get_groups(psrk, chm, identifier_type="mol").subgroups
+        == psrk.get_groups(chm, identifier_type="mol").subgroups
     )
     assert (
         mol.joback.subgroups
-        == get_groups(joback, chm, identifier_type="mol").subgroups
+        == joback.get_groups(chm, identifier_type="mol").subgroups
     )

@@ -1,7 +1,6 @@
 """FragmentantionModel module."""
 
-from .fragmentation_model import FragmentationModel
-from .fragmentation_result import FragmentationResult
+from . import fragmentation_model, fragmentation_result
 
 
-__all__ = ["FragmentationModel", "FragmentationResult"]
+__all__ = ["fragmentation_model", "fragmentation_result"]

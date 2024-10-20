@@ -119,7 +119,7 @@ class ILPSolver(ABC):
 
     @abstractmethod
     def solve(self) -> None:
-        """Method called by fragmentations models.
+        """Solve method called by fragmentations models.
 
         Ath the end of this method's execution, the `selected_fragments` must
         contain the selected fragments (solutions) as a list of dictionaries.

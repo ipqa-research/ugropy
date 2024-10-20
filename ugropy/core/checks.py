@@ -2,6 +2,7 @@
 
 The module contains the necessary checks to corroborate the success of the
 algorithm to obtain the molecule's FragmentationModel subgroups.
+
 """
 
 import numpy as np
@@ -20,33 +21,34 @@ def check_atoms_fragments_presence(
     the overlapping and free atoms.
 
     Example of a `fragments` dictionary that not presents overlapping
-    atoms:
+    atoms. For example N-hexane:
 
-    N-hexane:
+    .. code-block:: python
 
-    {
-        'CH3_0': (0,),
-        'CH3_1': (5,),
-        'CH2_0': (1,),
-        'CH2_1': (2,),
-        'CH2_2': (3,),
-        'CH2_3': (4,)
-    }
+        {
+            'CH3_0': (0,),
+            'CH3_1': (5,),
+            'CH2_0': (1,),
+            'CH2_1': (2,),
+            'CH2_2': (3,),
+            'CH2_3': (4,)
+        }
 
-    Example of a `fragments` dictionary that presents overlapping atoms:
+    Example of a `fragments` dictionary that presents overlapping atoms. For
+    exmple toluene:
 
-    Toluene:
+    .. code-block:: python
 
-    {
-        'CH3_0': (0,),
-        'ACH_0': (2,),
-        'ACH_1': (3,),
-        'ACH_2': (4,),
-        'ACH_3': (5,),
-        'ACH_4': (6,),
-        'AC_0': (1,),
-        'ACCH3_0': (1, 0)
-    }
+        {
+            'CH3_0': (0,),
+            'ACH_0': (2,),
+            'ACH_1': (3,),
+            'ACH_2': (4,),
+            'ACH_3': (5,),
+            'ACH_4': (6,),
+            'AC_0': (1,),
+            'ACCH3_0': (1, 0)
+        }
 
     Parameters
     ----------

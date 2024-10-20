@@ -1,6 +1,6 @@
 """FragmentationModel classes module."""
 
-from . import base, gibss_model, joback
+from . import base, gibbs_model, joback
 
 
-__all__ = ["base", "joback", "gibss_model"]
+__all__ = ["base", "joback", "gibbs_model"]

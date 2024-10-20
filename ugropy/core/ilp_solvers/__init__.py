@@ -6,8 +6,7 @@ to select the optimal set of fragments (groups) to cover the overlapping atoms
 on a molecule.
 """
 
-from .default_solver import DefaultSolver
-from .ilp_solver import ILPSolver
+from . import default_solver, ilp_solver
 
 
-__all__ = ["ILPSolver", "DefaultSolver"]
+__all__ = ["ilp_solver", "default_solver"]

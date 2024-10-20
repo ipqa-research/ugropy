@@ -10,9 +10,11 @@ from rdkit import Chem
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
 )
-from ugropy.core.frag_classes.gibss_model.gibbs_result import (
+from ugropy.core.frag_classes.gibbs_model.gibbs_result import (
     GibbsFragmentationResult,
 )
+from ugropy.core.ilp_solvers.default_solver import DefaultSolver
+from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class GibbsModel(FragmentationModel):
@@ -62,6 +64,49 @@ class GibbsModel(FragmentationModel):
         else:
             self.subgroups_info = subgroups_info
 
+    def get_groups(
+        self,
+        identifier: Union[str, Chem.rdchem.Mol],
+        identifier_type: str = "name",
+        solver: ILPSolver = DefaultSolver,
+        search_multiple_solutions: bool = False,
+        **kwargs,
+    ) -> Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]:
+        """Get the groups of a molecule.
+
+        Parameters
+        ----------
+        identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        identifier_type : str, optional
+            Identifier type of the molecule. Use "name" if you are providing
+            the molecules' name, "smiles" if you are providing the SMILES
+            or "mol" if you are providing a rdkir mol object, by default "name"
+        solver : ILPSolver, optional
+            ILP solver class, by default DefaultSolver
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+            If False the return will be a FragmentationResult object, if True
+            the return will be a list of FragmentationResult objects.
+
+        Returns
+        -------
+        Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
+            Fragmentation result. If search_multiple_solutions is False the
+            return will be a FragmentationResult object, if True the return
+            will be a list of FragmentationResult objects.
+        """
+        sol = super().get_groups(
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions,
+            **kwargs,
+        )
+
+        return sol
+
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
@@ -84,7 +129,6 @@ class GibbsModel(FragmentationModel):
         Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
             List of GibbsFragmentationResult objects.
         """
-
         sols = []
         occurs = []
 

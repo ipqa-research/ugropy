@@ -87,7 +87,6 @@ class DefaultSolver(ILPSolver):
 
     def solve(self) -> None:
         """Run multiple times the solve_one_problem method."""
-
         # Multiple solutions
         if self.search_multiple_solutions:
             not_valid_solutions = []

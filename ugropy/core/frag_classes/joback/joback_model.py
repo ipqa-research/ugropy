@@ -92,7 +92,6 @@ class JobackModel(FragmentationModel):
             return will be a FragmentationResult object, if True the return
             will be a list of FragmentationResult objects.
         """
-
         sol = super().get_groups(
             identifier=identifier,
             identifier_type=identifier_type,
@@ -130,7 +129,6 @@ class JobackModel(FragmentationModel):
             return will be a FragmentationResult object, if True the return
             will be a list of FragmentationResult objects.
         """
-
         sols = []
         occurs = []
 
