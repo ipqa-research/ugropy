@@ -17,7 +17,7 @@ markers = [
 
 [project]
 name = "ugropy"
-version = "2.0.0"
+version = "2.0.7"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
@@ -35,8 +35,8 @@ classifiers = [
 urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
 dependencies = [
-    'numpy >= 1.25.1',
+    'numpy >= 1.25.1, <2.0.0',
     'pandas >= 2.0.3',
-    'pubchempy == 1.0.4',
-    'rdkit == 2023.9.5'
+    'pubchempy >= 1.0.4',
+    'rdkit >= 2023.9.5'
 ]

@@ -72,7 +72,10 @@ def test_giving_groups():
     mol2 = JobackProperties(chm, identifier_type="mol")
 
     assert mol1.subgroups == mol2.subgroups
-    assert mol1.exp_nbt == mol2.exp_nbt
+    assert (
+        mol1.experimental_boiling_temperature
+        == mol2.experimental_boiling_temperature
+    )
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure
     assert mol1.critical_volume == mol2.critical_volume
@@ -105,7 +108,10 @@ def test_giving_rdkit_mol():
     mol2 = JobackProperties(mol1.subgroups, identifier_type="groups")
 
     assert mol1.subgroups == mol2.subgroups
-    assert mol1.exp_nbt == mol2.exp_nbt
+    assert (
+        mol1.experimental_boiling_temperature
+        == mol2.experimental_boiling_temperature
+    )
     assert mol1.critical_temperature == mol2.critical_temperature
     assert mol1.critical_pressure == mol2.critical_pressure
     assert mol1.critical_volume == mol2.critical_volume

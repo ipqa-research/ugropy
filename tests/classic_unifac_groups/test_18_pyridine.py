@@ -70,7 +70,6 @@ def test_ch3nh2_cg(identifier, result, identifier_type):
     mol = get_groups(constantinou_gani_primary, identifier, identifier_type)
 
     if identifier != "C1=CC=NC=C1":
-
         assert mol.subgroups == result
 
         if mol.subgroups != {}:
