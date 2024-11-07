@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.get_model_groups &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.get_model_groups</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.get_model_groups</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;get_groups module.</span>
+
+<span class="sd">Get the groups from a FragmentationModel.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span> <span class="nn">ugropy.fragmentation_models.fragmentation_model</span> <span class="kn">import</span> <span class="n">FragmentationModel</span>
+
+<span class="kn">from</span> <span class="nn">.checks</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">check_can_fit_atoms</span><span class="p">,</span>
+    <span class="n">check_has_composed</span><span class="p">,</span>
+    <span class="n">check_has_hiden</span><span class="p">,</span>
+    <span class="n">check_has_molecular_weight_right</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.composed</span> <span class="kn">import</span> <span class="n">correct_composed</span>
+<span class="kn">from</span> <span class="nn">.detect_model_groups</span> <span class="kn">import</span> <span class="n">detect_groups</span>
+<span class="kn">from</span> <span class="nn">.fragmentation_object</span> <span class="kn">import</span> <span class="n">Fragmentation</span>
+<span class="kn">from</span> <span class="nn">.get_rdkit_object</span> <span class="kn">import</span> <span class="n">instantiate_mol_object</span>
+<span class="kn">from</span> <span class="nn">.problematics</span> <span class="kn">import</span> <span class="n">correct_problematics</span>
+
+
+<div class="viewcode-block" id="get_groups">
+<a class="viewcode-back" href="../../../ugropy.html#ugropy.core.get_groups">[docs]</a>
+<span class="k">def</span> <span class="nf">get_groups</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">FragmentationModel</span><span class="p">,</span>
+    <span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">identifier_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fragmentation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Obtain the FragmentationModel&#39;s subgroups of an RDkit Mol object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model: FragmentationModel</span>
+<span class="sd">        FragmentationModel object.</span>
+<span class="sd">    identifier : str or rdkit.Chem.rdchem.Mol</span>
+<span class="sd">        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:</span>
+<span class="sd">        hexane or CCCCCC.</span>
+<span class="sd">    identifier_type : str, optional</span>
+<span class="sd">        Use &#39;name&#39; to search a molecule by name, &#39;smiles&#39; to provide the</span>
+<span class="sd">        molecule SMILES representation or &#39;mol&#39; to provide a</span>
+<span class="sd">        rdkit.Chem.rdchem.Mol object, by default &quot;name&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Fragmentation</span>
+<span class="sd">        FragmentationModel&#39;s subgroups</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># RDKit Mol object</span>
+    <span class="n">mol_object</span> <span class="o">=</span> <span class="n">instantiate_mol_object</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">identifier_type</span><span class="p">)</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Direct detection of groups presence and occurences</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">groups</span><span class="p">,</span> <span class="n">groups_ocurrences</span> <span class="o">=</span> <span class="n">detect_groups</span><span class="p">(</span>
+        <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span>
+    <span class="p">)</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Filter the contribution matrix and sum over row to cancel the contribs</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">group_contributions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">contribution_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">groups</span><span class="p">,</span> <span class="n">groups</span><span class="p">]</span>
+    <span class="n">group_contributions</span> <span class="o">=</span> <span class="n">group_contributions</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">groups_ocurrences</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">group_total_contributions</span> <span class="o">=</span> <span class="n">group_contributions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">group_total_contributions</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">mol_subgroups</span> <span class="o">=</span> <span class="n">group_total_contributions</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Check for the presence of problematic structures and correct.</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">mol_subgroups_corrected</span> <span class="o">=</span> <span class="n">correct_problematics</span><span class="p">(</span>
+        <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+        <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># First exit</span>
+    <span class="k">if</span> <span class="n">mol_subgroups_corrected</span> <span class="o">==</span> <span class="p">{}:</span>
+        <span class="c1"># No functional groups were detected for the molecule. Example: H2O2</span>
+        <span class="k">return</span> <span class="n">Fragmentation</span><span class="p">({},</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Check the presence of composed structures and check if the molecular</span>
+    <span class="c1"># weight of the molecule is equals than the RDKit molecular weight.</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">right_mw</span> <span class="o">=</span> <span class="n">check_has_molecular_weight_right</span><span class="p">(</span>
+        <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+        <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">has_composed</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">check_has_composed</span><span class="p">(</span>
+        <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># What to do according to the previous checks</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="k">if</span> <span class="n">right_mw</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_composed</span><span class="p">:</span>
+        <span class="c1"># No need to do more, the solution was obtained.</span>
+        <span class="k">return</span> <span class="n">Fragmentation</span><span class="p">(</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">right_mw</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_composed</span><span class="p">:</span>
+        <span class="c1"># Nothing to do, the moelcule can&#39;t be modeled with FragmentationModel</span>
+        <span class="k">return</span> <span class="n">Fragmentation</span><span class="p">({},</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">right_mw</span> <span class="ow">and</span> <span class="n">has_composed</span><span class="p">:</span>
+        <span class="c1"># Try fix the problem, the decomposition could still fail and return {}</span>
+        <span class="n">mol_subgroups_decomposed</span> <span class="o">=</span> <span class="n">correct_composed</span><span class="p">(</span>
+            <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+            <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Fragmentation</span><span class="p">(</span><span class="n">mol_subgroups_decomposed</span><span class="p">,</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">right_mw</span> <span class="ow">and</span> <span class="n">has_composed</span><span class="p">:</span>
+        <span class="c1"># Worst scenario, right mw and has composed, need check if has hidden</span>
+        <span class="n">has_hiden</span> <span class="o">=</span> <span class="n">check_has_hiden</span><span class="p">(</span><span class="n">mol_object</span><span class="p">,</span> <span class="n">mol_subgroups_corrected</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">has_hiden</span><span class="p">:</span>
+            <span class="n">mol_subgroups_decomposed</span> <span class="o">=</span> <span class="n">correct_composed</span><span class="p">(</span>
+                <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+                <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">fr</span> <span class="o">=</span> <span class="n">Fragmentation</span><span class="p">(</span><span class="n">mol_subgroups_decomposed</span><span class="p">,</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">fr</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">can_fit</span> <span class="o">=</span> <span class="n">check_can_fit_atoms</span><span class="p">(</span>
+                <span class="n">mol_object</span><span class="p">,</span> <span class="n">mol_subgroups_corrected</span><span class="p">,</span> <span class="n">model</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">can_fit</span><span class="p">:</span>
+                <span class="n">fr</span> <span class="o">=</span> <span class="n">Fragmentation</span><span class="p">(</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">fr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mol_subgroups_decomposed</span> <span class="o">=</span> <span class="n">correct_composed</span><span class="p">(</span>
+                    <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+                    <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups_corrected</span><span class="p">,</span>
+                    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fr</span> <span class="o">=</span> <span class="n">Fragmentation</span><span class="p">(</span><span class="n">mol_subgroups_decomposed</span><span class="p">,</span> <span class="n">mol_object</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">fr</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

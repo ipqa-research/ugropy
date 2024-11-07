@@ -1,0 +1,1536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Models &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="API" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Available Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.models.unifac"><code class="docutils literal notranslate"><span class="pre">unifac</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.models.psrk"><code class="docutils literal notranslate"><span class="pre">psrk</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.models.joback"><code class="docutils literal notranslate"><span class="pre">joback</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.core">Core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.check_can_fit_atoms"><code class="docutils literal notranslate"><span class="pre">check_can_fit_atoms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.check_has_composed"><code class="docutils literal notranslate"><span class="pre">check_has_composed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.draw"><code class="docutils literal notranslate"><span class="pre">draw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.check_has_hiden"><code class="docutils literal notranslate"><span class="pre">check_has_hiden()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.check_has_molecular_weight_right"><code class="docutils literal notranslate"><span class="pre">check_has_molecular_weight_right()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.check_has_composed_overlapping"><code class="docutils literal notranslate"><span class="pre">check_has_composed_overlapping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.correct_composed"><code class="docutils literal notranslate"><span class="pre">correct_composed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.fit_atoms"><code class="docutils literal notranslate"><span class="pre">fit_atoms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.get_groups"><code class="docutils literal notranslate"><span class="pre">get_groups()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.instantiate_mol_object"><code class="docutils literal notranslate"><span class="pre">instantiate_mol_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.core.correct_problematics"><code class="docutils literal notranslate"><span class="pre">correct_problematics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.constants">Constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.constants.R"><code class="docutils literal notranslate"><span class="pre">R</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.groups">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups"><code class="docutils literal notranslate"><span class="pre">Groups</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.identifier"><code class="docutils literal notranslate"><span class="pre">Groups.identifier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.identifier_type"><code class="docutils literal notranslate"><span class="pre">Groups.identifier_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.mol_object"><code class="docutils literal notranslate"><span class="pre">Groups.mol_object</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.molecular_weight"><code class="docutils literal notranslate"><span class="pre">Groups.molecular_weight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.unifac"><code class="docutils literal notranslate"><span class="pre">Groups.unifac</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.psrk"><code class="docutils literal notranslate"><span class="pre">Groups.psrk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.groups.Groups.joback"><code class="docutils literal notranslate"><span class="pre">Groups.joback</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.properties">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.properties.JobackProperties"><code class="docutils literal notranslate"><span class="pre">JobackProperties</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.subgroups"><code class="docutils literal notranslate"><span class="pre">JobackProperties.subgroups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.experimental_boiling_temperature"><code class="docutils literal notranslate"><span class="pre">JobackProperties.experimental_boiling_temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.critical_temperature"><code class="docutils literal notranslate"><span class="pre">JobackProperties.critical_temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.critical_pressure"><code class="docutils literal notranslate"><span class="pre">JobackProperties.critical_pressure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.critical_volume"><code class="docutils literal notranslate"><span class="pre">JobackProperties.critical_volume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.normal_boiling_point"><code class="docutils literal notranslate"><span class="pre">JobackProperties.normal_boiling_point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.fusion_temperature"><code class="docutils literal notranslate"><span class="pre">JobackProperties.fusion_temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.h_formation"><code class="docutils literal notranslate"><span class="pre">JobackProperties.h_formation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.g_formation"><code class="docutils literal notranslate"><span class="pre">JobackProperties.g_formation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.heat_capacity_ideal_gas_params"><code class="docutils literal notranslate"><span class="pre">JobackProperties.heat_capacity_ideal_gas_params</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.h_fusion"><code class="docutils literal notranslate"><span class="pre">JobackProperties.h_fusion</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.h_vaporization"><code class="docutils literal notranslate"><span class="pre">JobackProperties.h_vaporization</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.sum_na"><code class="docutils literal notranslate"><span class="pre">JobackProperties.sum_na</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.sum_nb"><code class="docutils literal notranslate"><span class="pre">JobackProperties.sum_nb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.molecular_weight"><code class="docutils literal notranslate"><span class="pre">JobackProperties.molecular_weight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.acentric_factor"><code class="docutils literal notranslate"><span class="pre">JobackProperties.acentric_factor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.vapor_pressure_params"><code class="docutils literal notranslate"><span class="pre">JobackProperties.vapor_pressure_params</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.heat_capacity_ideal_gas"><code class="docutils literal notranslate"><span class="pre">JobackProperties.heat_capacity_ideal_gas()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.heat_capacity_liquid"><code class="docutils literal notranslate"><span class="pre">JobackProperties.heat_capacity_liquid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.viscosity_liquid"><code class="docutils literal notranslate"><span class="pre">JobackProperties.viscosity_liquid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.properties.JobackProperties.vapor_pressure"><code class="docutils literal notranslate"><span class="pre">JobackProperties.vapor_pressure()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.fragmentation_models.fragmentation_model">Fragmentation Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.subgroups"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.subgroups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.split_detection_smarts"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.split_detection_smarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.problematic_structures"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.problematic_structures</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.hideouts"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.hideouts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.detection_mols"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.detection_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.fit_mols"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.fit_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.contribution_matrix"><code class="docutils literal notranslate"><span class="pre">FragmentationModel.contribution_matrix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.fragmentation_models.gibbs_model">Gibbs Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel"><code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups"><code class="docutils literal notranslate"><span class="pre">GibbsModel.subgroups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.split_detection_smarts"><code class="docutils literal notranslate"><span class="pre">GibbsModel.split_detection_smarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.problematic_structures"><code class="docutils literal notranslate"><span class="pre">GibbsModel.problematic_structures</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.hideouts"><code class="docutils literal notranslate"><span class="pre">GibbsModel.hideouts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.detection_mols"><code class="docutils literal notranslate"><span class="pre">GibbsModel.detection_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.fit_mols"><code class="docutils literal notranslate"><span class="pre">GibbsModel.fit_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.contribution_matrix"><code class="docutils literal notranslate"><span class="pre">GibbsModel.contribution_matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups_info"><code class="docutils literal notranslate"><span class="pre">GibbsModel.subgroups_info</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.main_groups"><code class="docutils literal notranslate"><span class="pre">GibbsModel.main_groups</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.fragmentation_models.prop_estimator">Properties Estimators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.subgroups"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.subgroups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.split_detection_smarts"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.split_detection_smarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.problematic_structures"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.problematic_structures</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.hideouts"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.hideouts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.detection_mols"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.detection_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.fit_mols"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.fit_mols</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.contribution_matrix"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.contribution_matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.properties_contributions"><code class="docutils literal notranslate"><span class="pre">PropertiesEstimator.properties_contributions</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.writers">Writers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.to_clapeyron"><code class="docutils literal notranslate"><span class="pre">to_clapeyron()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.to_thermo"><code class="docutils literal notranslate"><span class="pre">to_thermo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ugropy.writers.clapeyron_writers">Clapeyron writers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.clapeyron_writers.write_critical"><code class="docutils literal notranslate"><span class="pre">write_critical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.clapeyron_writers.write_molar_mass"><code class="docutils literal notranslate"><span class="pre">write_molar_mass()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.clapeyron_writers.write_psrk"><code class="docutils literal notranslate"><span class="pre">write_psrk()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.writers.clapeyron_writers.write_unifac"><code class="docutils literal notranslate"><span class="pre">write_unifac()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API</a></li>
+      <li class="breadcrumb-item active">Available Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ugropy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.fragmentation_models.models">
+<span id="available-models"></span><h1>Available Models<a class="headerlink" href="#module-ugropy.fragmentation_models.models" title="Link to this heading">¶</a></h1>
+<p>Fragmentation models implemented.</p>
+<p>All models can be imported directly with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">joback</span><span class="p">,</span> <span class="n">psrk</span><span class="p">,</span> <span class="n">unifac</span>
+</pre></div>
+</div>
+<p>You can check the group list and their SMARTS representation with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joback</span><span class="o">.</span><span class="n">subgroups</span> <span class="n">psrk</span><span class="o">.</span><span class="n">subgroups</span> <span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+<p>In the case of a PropertiesEstimator like joback, you can check the
+contribution of each group to the properties with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joback</span><span class="o">.</span><span class="n">properties_contributions</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.models.unifac">
+<span class="sig-name descname"><span class="pre">unifac</span></span><a class="headerlink" href="#ugropy.fragmentation_models.models.unifac" title="Link to this definition">¶</a></dt>
+<dd><p>Classic LV-UNIFAC FragmentationModel <span id="id1">[<a class="reference internal" href="references.html#id2" title="Published Parameters UNIFAC - DDBST GmbH — ddbst.com. http://www.ddbst.com/published-parameters-unifac.html. [Accessed 23-04-2024].">1</a>, <a class="reference internal" href="references.html#id5" title="Juergen Gmehling, Peter Rasmussen, and Aage Fredenslund. Vapor-liquid equilibriums by UNIFAC group contribution. Revision and extension. 2. Industrial &amp; Engineering Chemistry Process Design and Development, 21(1):118–127, January 1982. doi:10.1021/i200016a021.">2</a>, <a class="reference internal" href="references.html#id6" title="Henrik K. Hansen, Peter Rasmussen, Aage Fredenslund, Martin Schiller, and Juergen Gmehling. Vapor-liquid equilibria by UNIFAC group contribution. 5. Revision and extension. Industrial &amp; Engineering Chemistry Research, 30(10):2352–2355, October 1991. doi:10.1021/ie00058a017.">3</a>, <a class="reference internal" href="references.html#id7" title="Eugenia Almeida Macedo, Ulrich Weidlich, Juergen Gmehling, and Peter Rasmussen. Vapor-liquid equilibriums by UNIFAC group contribution. Revision and extension. 3. Industrial &amp; Engineering Chemistry Process Design and Development, 22(4):676–678, October 1983. doi:10.1021/i200023a023.">4</a>, <a class="reference internal" href="references.html#id8" title="Steen Skjold-Jorgensen, Barbel Kolbe, Jurgen Gmehling, and Peter Rasmussen. Vapor-Liquid Equilibria by UNIFAC Group Contribution. Revision and Extension. Industrial &amp; Engineering Chemistry Process Design and Development, 18(4):714–722, October 1979. doi:10.1021/i260072a024.">5</a>, <a class="reference internal" href="references.html#id9" title="Detlef Tiegs, Peter Rasmussen, Juergen Gmehling, and Aage Fredenslund. Vapor-liquid equilibria by UNIFAC group contribution. 4. Revision and extension. Industrial &amp; Engineering Chemistry Research, 26(1):159–161, January 1987. doi:10.1021/ie00061a030.">6</a>, <a class="reference internal" href="references.html#id10" title="Roland Wittig, Jürgen Lohmann, and Jürgen Gmehling. Vapor-Liquid Equilibria by UNIFAC Group Contribution. 6. Revision and Extension. Industrial &amp; Engineering Chemistry Research, 42(1):183–188, January 2003. doi:10.1021/ie020506l.">7</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel" title="ugropy.fragmentation_models.gibbs_model.GibbsModel">GibbsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.models.psrk">
+<span class="sig-name descname"><span class="pre">psrk</span></span><a class="headerlink" href="#ugropy.fragmentation_models.models.psrk" title="Link to this definition">¶</a></dt>
+<dd><p>Predictive Soave-Redlich-Kwong FragmentationModel <span id="id2">[<a class="reference internal" href="references.html#id2" title="Published Parameters UNIFAC - DDBST GmbH — ddbst.com. http://www.ddbst.com/published-parameters-unifac.html. [Accessed 23-04-2024].">1</a>, <a class="reference internal" href="references.html#id11" title="T. Holderbaum and J. Gmehling. PSRK: A Group Contribution Equation of State Based on UNIFAC. Fluid Phase Equilibria, 70(2-3):251–265, December 1991. doi:10.1016/0378-3812(91)85038-V.">8</a>, <a class="reference internal" href="references.html#id12" title="Sven Horstmann, Anna Jabłoniec, Jörg Krafczyk, Kai Fischer, and Jürgen Gmehling. PSRK group contribution equation of state: comprehensive revision and extension IV, including critical constants and α-function parameters for 1000 components. Fluid Phase Equilibria, 227(2):157–164, January 2005. doi:10.1016/j.fluid.2004.11.002.">9</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel" title="ugropy.fragmentation_models.gibbs_model.GibbsModel">GibbsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.models.joback">
+<span class="sig-name descname"><span class="pre">joback</span></span><a class="headerlink" href="#ugropy.fragmentation_models.models.joback" title="Link to this definition">¶</a></dt>
+<dd><p>Joback FragmentationModel <span id="id3">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>, <a class="reference internal" href="references.html#id4" title="K.G. Joback and R.C. Reid. ESTIMATION OF PURE-COMPONENT PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications, 57(1-6):233–243, July 1987. doi:10.1080/00986448708960487.">11</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator" title="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator">PropertiesEstimator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ugropy.core">
+<span id="core"></span><h1>Core<a class="headerlink" href="#module-ugropy.core" title="Link to this heading">¶</a></h1>
+<p>Core module.</p>
+<p>FragmentationModel subgroups detection functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.check_can_fit_atoms">
+<span class="sig-name descname"><span class="pre">check_can_fit_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ugropy/core/checks.html#check_can_fit_atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.check_can_fit_atoms" title="Link to this definition">¶</a></dt>
+<dd><p>Check if a solution can be fitted in the mol_object atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Subgroups of mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the solution can be fitted.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.check_has_composed">
+<span class="sig-name descname"><span class="pre">check_has_composed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ugropy/core/checks.html#check_has_composed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.check_has_composed" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the molecule has composed structures.</p>
+<p>A composed structure is a subgroup of FragmentationModel that can be
+decomposed into two or more FragmentationModel subgroups. For example,
+ACCH2 can be decomposed into the AC and CH2 groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Dictionary with the detected subgroups.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the molecule has composed structures.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Helvetica'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/ugropy/core/draw_molecule.html#draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.draw" title="Link to this definition">¶</a></dt>
+<dd><p>Create a svg representation of the fragmentation result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>List</em><em>[</em><em>dict</em><em>]</em><em>]</em>) – Subgroups of mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Graph title, by default “”</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – Graph width, by default 400</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – Graph height, by default 200</p></li>
+<li><p><strong>title_font_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Font size of graph’s title, by default 12</p></li>
+<li><p><strong>legend_font_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Legend font size, by default 12</p></li>
+<li><p><strong>font</strong> (<em>str</em><em>, </em><em>optional</em>) – Text font, by default “Helvetica”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SVG string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.check_has_hiden">
+<span class="sig-name descname"><span class="pre">check_has_hiden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ugropy/core/checks.html#check_has_hiden"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.check_has_hiden" title="Link to this definition">¶</a></dt>
+<dd><p>Check for hidden subgroups in composed structures.</p>
+<p>The principal subgroups that can be hidden in composed structures for the
+models UNIFAC, PSRK and Dortmund are CH2 and CH. The algorithm checks that
+the number of CH2 and CH groups in mol_subgroups dictionary is equal to the
+number of free CH2 and CH. If these numbers are not equal reveals that the
+CH2 and CH are hidden in composed structures, eg: ACCH2, ACCH. This
+phenomenon occurs when two subgroups fight for the same CH2 or CH. For
+example the molecule:</p>
+<p>CCCC1=CC=C(COC(C)(C)C)C=C1</p>
+<p>Here an ACCH2 and a CH2O are fighting to have the same CH2. But since there
+is a free CH2 in the molecule, the algorithm prefers to keep both ACCH2 and
+CH2O groups without any free CH2 subgroup. This check counts all the CH2
+that are participating in a CH2 hideout (ACCH2 and CH2O are examples of
+hideouts). The algorithm notices that there is one free CH2 and there are
+zero free CH2 groups in the mol_subgroups dictionary and returns ‘True’
+(mol_object has a hidden CH2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Subgroups of mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if has hidden subgroups.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.check_has_molecular_weight_right">
+<span class="sig-name descname"><span class="pre">check_has_molecular_weight_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ugropy/core/checks.html#check_has_molecular_weight_right"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.check_has_molecular_weight_right" title="Link to this definition">¶</a></dt>
+<dd><p>Check the molecular weight of the molecule using its functional groups.</p>
+<p>Compares the RDKit molecular weight of the molecule to the computed
+molecular weight from the functional groups. Returns True if both molecular
+weights are equal with 0.5 u (half hydrogen atom) as atol of
+numpy.allclose(). Also, the method will check if the molecule has negative
+occurrences on its functional groups, also returning False in that case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Chem object</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – FragmentationModel subgroups of the mol_object</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if RDKit and ugropy molecular weight are equal with a tolerance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.check_has_composed_overlapping">
+<span class="sig-name descname"><span class="pre">check_has_composed_overlapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ugropy/core/checks.html#check_has_composed_overlapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.check_has_composed_overlapping" title="Link to this definition">¶</a></dt>
+<dd><p>Check if in the solution are composed structures overlapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Subgroups of mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Treu if the solution has overlapping composed structures.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.correct_composed">
+<span class="sig-name descname"><span class="pre">correct_composed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/ugropy/core/composed.html#correct_composed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.correct_composed" title="Link to this definition">¶</a></dt>
+<dd><p>Correct composed structures.</p>
+<p>A priori is not easy to recognize what composed structures in
+mol_subgroups need to be decomposed to correct the solution. By that, all
+the combinations are tried. For example, a molecule that can’t be solved
+has one ACCH2 and two ACCH composed structures. The decomposition
+combinatory will be:</p>
+<p>[[ACCH2], [ACCH], [ACCH2, ACCH], [ACCH, ACCH], [ACCH2, ACCH, ACCH]]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Molecule’s FragmentationModel subgroups.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Corrected subgroups due to decomposing composed structures.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.fit_atoms">
+<span class="sig-name descname"><span class="pre">fit_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/ugropy/core/fit_atoms_indexes.html#fit_atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.fit_atoms" title="Link to this definition">¶</a></dt>
+<dd><p>Assign the atoms indexes for each mol_subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Mol object.</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Subgroups of mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Atom indexes in mol_object of each subgroup.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.get_groups">
+<span class="sig-name descname"><span class="pre">get_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Fragmentation</span></span></span><a class="reference internal" href="_modules/ugropy/core/get_model_groups.html#get_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.get_groups" title="Link to this definition">¶</a></dt>
+<dd><p>Obtain the FragmentationModel’s subgroups of an RDkit Mol object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+<li><p><strong>identifier</strong> (<em>str</em><em> or </em><em>rdkit.Chem.rdchem.Mol</em>) – Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+hexane or CCCCCC.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Use ‘name’ to search a molecule by name, ‘smiles’ to provide the
+molecule SMILES representation or ‘mol’ to provide a
+rdkit.Chem.rdchem.Mol object, by default “name”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>FragmentationModel’s subgroups</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Fragmentation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.instantiate_mol_object">
+<span class="sig-name descname"><span class="pre">instantiate_mol_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mol</span></span></span><a class="reference internal" href="_modules/ugropy/core/get_rdkit_object.html#instantiate_mol_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.instantiate_mol_object" title="Link to this definition">¶</a></dt>
+<dd><p>Instantiate a RDKit Mol object from molecule’s name or SMILES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>str</em><em> or </em><em>rdkit.Chem.rdchem.Mol</em>) – Identifier of a molecule (name, SMILES or rdkit.Chem.rdchem.Mol).
+Example: hexane or CCCCCC for name or SMILES respectively.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Use ‘name’ to search a molecule by name, ‘smiles’ to provide the
+molecule SMILES representation or ‘mol’ to provide a
+rdkit.Chem.rdchem.Mol object, by default “name”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>RDKit Mol object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rdkit.Chem.rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.core.correct_problematics">
+<span class="sig-name descname"><span class="pre">correct_problematics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><span class="pre">FragmentationModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/ugropy/core/problematics.html#correct_problematics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.correct_problematics" title="Link to this definition">¶</a></dt>
+<dd><p>Correct problematic structures in mol_object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_object</strong> (<em>Chem.rdchem.Mol</em>) – RDKit Chem object</p></li>
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – Dictionary with the subgroups not problematics corrected in mol_object.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><em>FragmentationModel</em></a>) – FragmentationModel object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Molecule’s subrgoups corrected with the problematic structures list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ugropy.constants">
+<span id="constants"></span><h1>Constants<a class="headerlink" href="#module-ugropy.constants" title="Link to this heading">¶</a></h1>
+<p>constants module.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.constants.R">
+<span class="sig-name descname"><span class="pre">R</span></span><a class="headerlink" href="#ugropy.constants.R" title="Link to this definition">¶</a></dt>
+<dd><p>Gas constant [J/mol/K]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ugropy.groups">
+<span id="groups"></span><h1>Groups<a class="headerlink" href="#module-ugropy.groups" title="Link to this heading">¶</a></h1>
+<p>Groups module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.groups.Groups">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_boiling_temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/groups.html#Groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.groups.Groups" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Group class.</p>
+<p>Stores the solved FragmentationModels subgroups of a molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>str</em><em> or </em><em>rdkit.Chem.rdchem.Mol</em>) – Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
+hexane or CCCCCC.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Use ‘name’ to search a molecule by name, ‘smiles’ to provide the
+molecule SMILES representation or ‘mol’ to provide a
+rdkit.Chem.rdchem.Mol object, by default “name”.</p></li>
+<li><p><strong>normal_boiling_temperature</strong> (<em>float</em><em>, </em><em>optional</em>) – If provided, will be used to estimate critical temperature, acentric
+factor, and vapor pressure instead of the estimated normal boiling
+point in the Joback group contribution model, by default None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.identifier">
+<span class="sig-name descname"><span class="pre">identifier</span></span><a class="headerlink" href="#ugropy.groups.Groups.identifier" title="Link to this definition">¶</a></dt>
+<dd><p>Identifier of a molecule. Example: hexane or CCCCCC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.identifier_type">
+<span class="sig-name descname"><span class="pre">identifier_type</span></span><a class="headerlink" href="#ugropy.groups.Groups.identifier_type" title="Link to this definition">¶</a></dt>
+<dd><p>Use ‘name’ to search a molecule by name or ‘smiles’ to provide the
+molecule SMILES representation, by default “name”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.mol_object">
+<span class="sig-name descname"><span class="pre">mol_object</span></span><a class="headerlink" href="#ugropy.groups.Groups.mol_object" title="Link to this definition">¶</a></dt>
+<dd><p>RDKit Mol object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rdkit.Chem.rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#ugropy.groups.Groups.molecular_weight" title="Link to this definition">¶</a></dt>
+<dd><p>Molecule’s molecular weight from rdkit.Chem.Descriptors.MolWt [g/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.unifac">
+<span class="sig-name descname"><span class="pre">unifac</span></span><a class="headerlink" href="#ugropy.groups.Groups.unifac" title="Link to this definition">¶</a></dt>
+<dd><p>Classic LV-UNIFAC subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Fragmentation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.psrk">
+<span class="sig-name descname"><span class="pre">psrk</span></span><a class="headerlink" href="#ugropy.groups.Groups.psrk" title="Link to this definition">¶</a></dt>
+<dd><p>Predictive Soave-Redlich-Kwong subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Fragmentation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.joback">
+<span class="sig-name descname"><span class="pre">joback</span></span><a class="headerlink" href="#ugropy.groups.Groups.joback" title="Link to this definition">¶</a></dt>
+<dd><p>JobackProperties object that contains the Joback subgroups and the
+estimated properties of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ugropy.properties.JobackProperties" title="ugropy.properties.JobackProperties">JobackProperties</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ugropy.properties">
+<span id="properties"></span><h1>Properties<a class="headerlink" href="#module-ugropy.properties" title="Link to this heading">¶</a></h1>
+<p>Properties module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JobackProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_boiling_point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/properties/joback_properties.html#JobackProperties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.properties.JobackProperties" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Joback group contribution properties estimator.</p>
+<p>The class recieves either the Joback and Reid model’s <span id="id4">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>, <a class="reference internal" href="references.html#id4" title="K.G. Joback and R.C. Reid. ESTIMATION OF PURE-COMPONENT PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications, 57(1-6):233–243, July 1987. doi:10.1080/00986448708960487.">11</a>]</span> groups, name or smiles of a molecule and estimates the its
+properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>str</em><em> or </em><em>rdkit.Chem.rdchem.Mol</em>) – Identifier of a molecule (name, SMILES, groups, or Chem.rdchem.Mol).
+Example: you can use hexane, CCCCCC, {“-CH3”: 2, “-CH2-”: 4} for name,
+SMILES and groups respectively.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Use ‘name’ to search a molecule by name, ‘smiles’ to provide the
+molecule SMILES representation, ‘groups’ to provide Joback groups or
+‘mol’ to provide a rdkit.Chem.rdchem.Mol object, by default “name”.</p></li>
+<li><p><strong>normal_boiling_point</strong> (<em>float</em><em>, </em><em>optional</em>) – If provided, will be used to estimate critical temperature, acentric
+factor, and vapor pressure instead of the estimated normal boiling
+point, by default None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.subgroups" title="Link to this definition">¶</a></dt>
+<dd><p>Joback functional groups of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.experimental_boiling_temperature">
+<span class="sig-name descname"><span class="pre">experimental_boiling_temperature</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.experimental_boiling_temperature" title="Link to this definition">¶</a></dt>
+<dd><p>User provided experimental normal boiling point [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.critical_temperature">
+<span class="sig-name descname"><span class="pre">critical_temperature</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.critical_temperature" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated critical temperature [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.critical_pressure">
+<span class="sig-name descname"><span class="pre">critical_pressure</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.critical_pressure" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated critical pressure [bar].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.critical_volume">
+<span class="sig-name descname"><span class="pre">critical_volume</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.critical_volume" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated critical volume [cm³/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.normal_boiling_point">
+<span class="sig-name descname"><span class="pre">normal_boiling_point</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.normal_boiling_point" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated normal boiling point [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.fusion_temperature">
+<span class="sig-name descname"><span class="pre">fusion_temperature</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.fusion_temperature" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated fusion temperature [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.h_formation">
+<span class="sig-name descname"><span class="pre">h_formation</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.h_formation" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.g_formation">
+<span class="sig-name descname"><span class="pre">g_formation</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.g_formation" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated Gibbs energy of formation ideal gas at 298 K [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.heat_capacity_ideal_gas_params">
+<span class="sig-name descname"><span class="pre">heat_capacity_ideal_gas_params</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.heat_capacity_ideal_gas_params" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated Reid’s ideal gas heat capacity equation parameters
+[J/mol/K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.h_fusion">
+<span class="sig-name descname"><span class="pre">h_fusion</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.h_fusion" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated fusion enthalpy [kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.h_vaporization">
+<span class="sig-name descname"><span class="pre">h_vaporization</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.h_vaporization" title="Link to this definition">¶</a></dt>
+<dd><p>Joback estimated vaporization enthalpy at the normal boiling point
+[kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.sum_na">
+<span class="sig-name descname"><span class="pre">sum_na</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.sum_na" title="Link to this definition">¶</a></dt>
+<dd><p>Joback n_A contribution to liquid viscosity [N/s/m²].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.sum_nb">
+<span class="sig-name descname"><span class="pre">sum_nb</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.sum_nb" title="Link to this definition">¶</a></dt>
+<dd><p>Joback n_B contribution to liquid viscosity [N/s/m²].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.molecular_weight" title="Link to this definition">¶</a></dt>
+<dd><p>Molecular weight from Joback’s subgroups [g/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.acentric_factor">
+<span class="sig-name descname"><span class="pre">acentric_factor</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.acentric_factor" title="Link to this definition">¶</a></dt>
+<dd><p>Acentric factor from Lee and Kesler’s equation <span id="id5">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.vapor_pressure_params">
+<span class="sig-name descname"><span class="pre">vapor_pressure_params</span></span><a class="headerlink" href="#ugropy.properties.JobackProperties.vapor_pressure_params" title="Link to this definition">¶</a></dt>
+<dd><p>Vapor pressure G and k parameters for the Riedel-Plank-Miller
+<span id="id6">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>]</span> equation [bar].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.heat_capacity_ideal_gas">
+<span class="sig-name descname"><span class="pre">heat_capacity_ideal_gas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ugropy/properties/joback_properties.html#JobackProperties.heat_capacity_ideal_gas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.properties.JobackProperties.heat_capacity_ideal_gas" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the ideal gas heat capacity [J/mol/K].</p>
+<p>Uses the Joback estimated Reid’s ideal gas heat capacity equation
+parameters [J/mol/K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>NDArray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ideal gas heat capacity [J/mol/K].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, NDArray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.heat_capacity_liquid">
+<span class="sig-name descname"><span class="pre">heat_capacity_liquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ugropy/properties/joback_properties.html#JobackProperties.heat_capacity_liquid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.properties.JobackProperties.heat_capacity_liquid" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the liquid heat capacity [J/mol/K].</p>
+<p>Uses the Rowlinson-Bondi <span id="id7">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>]</span> equation with the Joback
+estimated properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>NDArray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ideal gas heat capacity [J/mol/K].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, NDArray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.viscosity_liquid">
+<span class="sig-name descname"><span class="pre">viscosity_liquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ugropy/properties/joback_properties.html#JobackProperties.viscosity_liquid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.properties.JobackProperties.viscosity_liquid" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the Joback estimated liquid viscosity [N/s/m²].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>NDArray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Liquid viscosity [N/s/m²].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, NDArray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.properties.JobackProperties.vapor_pressure">
+<span class="sig-name descname"><span class="pre">vapor_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ugropy/properties/joback_properties.html#JobackProperties.vapor_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.properties.JobackProperties.vapor_pressure" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the vapor pressure [bar].</p>
+<p>Uses the Riedel-Plank-Miller <span id="id8">[<a class="reference internal" href="references.html#id3" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">10</a>]</span> equation with the Joback
+estimated properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>NDArray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vapor pressure [bar]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, NDArray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ugropy.fragmentation_models.fragmentation_model">
+<span id="fragmentation-models"></span><h1>Fragmentation Models<a class="headerlink" href="#module-ugropy.fragmentation_models.fragmentation_model" title="Link to this heading">¶</a></h1>
+<p>FragmentationModel module.</p>
+<p>All ugropy models (joback, unifac, psrk) are instances of the
+FragmentationModule class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FragmentationModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_detection_smarts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problematic_structures</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hideouts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/fragmentation_models/fragmentation_model.html#FragmentationModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>FragmentationModel class.</p>
+<p>All ugropy supported models are an instance of this class. This class can
+be used by the user to create their own FragmentationModels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subgroups</strong> (<em>pd.DataFrame</em>) – Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections), ‘contribute’ (dictionary as a string with
+the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p></li>
+<li><p><strong>split_detection_smarts</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of subgroups that have different SMARTS representations. by
+default []</p></li>
+<li><p><strong>problematic_structures</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution), by default None</p></li>
+<li><p><strong>hideouts</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup), by defautl None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.subgroups" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections. If a value is missing uses the
+corresponding detection_smarts), ‘contribute’ (dictionary as a string
+with the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.split_detection_smarts">
+<span class="sig-name descname"><span class="pre">split_detection_smarts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.split_detection_smarts" title="Link to this definition">¶</a></dt>
+<dd><p>List of subgroups that have different SMARTS representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.problematic_structures">
+<span class="sig-name descname"><span class="pre">problematic_structures</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.problematic_structures" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.hideouts">
+<span class="sig-name descname"><span class="pre">hideouts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.hideouts" title="Link to this definition">¶</a></dt>
+<dd><p>Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.detection_mols">
+<span class="sig-name descname"><span class="pre">detection_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.detection_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the detection_smarts
+subgroups column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.fit_mols">
+<span class="sig-name descname"><span class="pre">fit_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.fit_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the smarts subgroups
+column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.fragmentation_model.FragmentationModel.contribution_matrix">
+<span class="sig-name descname"><span class="pre">contribution_matrix</span></span><a class="headerlink" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel.contribution_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Contribution matrix of the model built from the subgroups contribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ugropy.fragmentation_models.gibbs_model">
+<span id="gibbs-models"></span><h1>Gibbs Models<a class="headerlink" href="#module-ugropy.fragmentation_models.gibbs_model" title="Link to this heading">¶</a></h1>
+<p>GibbsModel module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GibbsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_detection_smarts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problematic_structures</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hideouts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/fragmentation_models/gibbs_model.html#GibbsModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">FragmentationModel</span></code></a></p>
+<p>GibbsModel it’s a fragmentation model dedicated to Gibbs excess models.</p>
+<p>unifac, psrk, dortmund are instances of this class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subgroups</strong> (<em>pd.DataFrame</em>) – Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections), ‘contribute’ (dictionary as a string with
+the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p></li>
+<li><p><strong>split_detection_smarts</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of subgroups that have different SMARTS representations. by
+default []</p></li>
+<li><p><strong>problematic_structures</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution), by default None</p></li>
+<li><p><strong>hideouts</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup), by defautl None</p></li>
+<li><p><strong>subgroups_info</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Information of the model’s subgroups (R, Q, subgroup_number,
+main_group), by default None</p></li>
+<li><p><strong>main_groups</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Main groups information (no., maingroup_name, subgroups), by default
+None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections. If a value is missing uses the
+corresponding detection_smarts), ‘contribute’ (dictionary as a string
+with the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.split_detection_smarts">
+<span class="sig-name descname"><span class="pre">split_detection_smarts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.split_detection_smarts" title="Link to this definition">¶</a></dt>
+<dd><p>List of subgroups that have different SMARTS representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.problematic_structures">
+<span class="sig-name descname"><span class="pre">problematic_structures</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.problematic_structures" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.hideouts">
+<span class="sig-name descname"><span class="pre">hideouts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.hideouts" title="Link to this definition">¶</a></dt>
+<dd><p>Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.detection_mols">
+<span class="sig-name descname"><span class="pre">detection_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.detection_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the detection_smarts
+subgroups column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.fit_mols">
+<span class="sig-name descname"><span class="pre">fit_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.fit_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the smarts subgroups
+column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.contribution_matrix">
+<span class="sig-name descname"><span class="pre">contribution_matrix</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.contribution_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Contribution matrix of the model built from the subgroups contribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups_info">
+<span class="sig-name descname"><span class="pre">subgroups_info</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.subgroups_info" title="Link to this definition">¶</a></dt>
+<dd><p>Information of the model’s subgroups (R, Q, subgroup_number,
+main_group).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.gibbs_model.GibbsModel.main_groups">
+<span class="sig-name descname"><span class="pre">main_groups</span></span><a class="headerlink" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel.main_groups" title="Link to this definition">¶</a></dt>
+<dd><p>Main groups information (no., maingroup_name, subgroups).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ugropy.fragmentation_models.prop_estimator">
+<span id="properties-estimators"></span><h1>Properties Estimators<a class="headerlink" href="#module-ugropy.fragmentation_models.prop_estimator" title="Link to this heading">¶</a></h1>
+<p>PropertiesEstimator module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PropertiesEstimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_detection_smarts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problematic_structures</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hideouts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/fragmentation_models/prop_estimator.html#PropertiesEstimator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ugropy.fragmentation_models.fragmentation_model.FragmentationModel" title="ugropy.fragmentation_models.fragmentation_model.FragmentationModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">FragmentationModel</span></code></a></p>
+<p>Fragmentation model dedicated to properties estimation models.</p>
+<p>joback is a instance of this class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subgroups</strong> (<em>pd.DataFrame</em>) – Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections), ‘contribute’ (dictionary as a string with
+the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p></li>
+<li><p><strong>split_detection_smarts</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of subgroups that have different SMARTS representations. by
+default []</p></li>
+<li><p><strong>problematic_structures</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution), by default None</p></li>
+<li><p><strong>hideouts</strong> (<em>Union</em><em>[</em><em>pd.DataFrame</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup), by defautl None</p></li>
+<li><p><strong>properties_contributions</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – Group’s properties contributions, by default None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.subgroups" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s subgroups. Index: ‘group’ (groups names). Mandatory columns:
+‘detection_smarts’ (SMARTS representations of the group to detect its
+precense in the molecule), ‘smarts’ (true SMARTS of the group witouht
+additional atom detections. If a value is missing uses the
+corresponding detection_smarts), ‘contribute’ (dictionary as a string
+with the group contribution), ‘composed’ (y or n if it is or is not a
+composed structure), ‘molecular_weight’ (molecular weight of the
+subgroups).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.split_detection_smarts">
+<span class="sig-name descname"><span class="pre">split_detection_smarts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.split_detection_smarts" title="Link to this definition">¶</a></dt>
+<dd><p>List of subgroups that have different SMARTS representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.problematic_structures">
+<span class="sig-name descname"><span class="pre">problematic_structures</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.problematic_structures" title="Link to this definition">¶</a></dt>
+<dd><p>Model’s problematic/ambiguous structures. Index: ‘smarts’ (SMARTS of
+the problematic structure). Mandatory columns: ‘contribute’ (dictionary
+as a string with the structure contribution)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.hideouts">
+<span class="sig-name descname"><span class="pre">hideouts</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.hideouts" title="Link to this definition">¶</a></dt>
+<dd><p>Hideouts for each group. Index: ‘group’ (Group of the model that can be
+hiden). Mandatory columns: ‘hideout’ (other subgroups to find the hiden
+subgroup)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.detection_mols">
+<span class="sig-name descname"><span class="pre">detection_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.detection_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the detection_smarts
+subgroups column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.fit_mols">
+<span class="sig-name descname"><span class="pre">fit_mols</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.fit_mols" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary cotaining all the rdkit Mol object from the smarts subgroups
+column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.contribution_matrix">
+<span class="sig-name descname"><span class="pre">contribution_matrix</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.contribution_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Contribution matrix of the model built from the subgroups contribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.properties_contributions">
+<span class="sig-name descname"><span class="pre">properties_contributions</span></span><a class="headerlink" href="#ugropy.fragmentation_models.prop_estimator.PropertiesEstimator.properties_contributions" title="Link to this definition">¶</a></dt>
+<dd><p>Group’s properties contributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ugropy.writers">
+<span id="writers"></span><h1>Writers<a class="headerlink" href="#module-ugropy.writers" title="Link to this heading">¶</a></h1>
+<p>Writers module.</p>
+<p>The witers module contains functions to construct the neccesary inputs for
+other thermodynamics libraries.</p>
+<p>Supported:</p>
+<ul class="simple">
+<li><p>Clapeyron.jl: <a class="reference external" href="https://github.com/ClapeyronThermo/Clapeyron.jl">https://github.com/ClapeyronThermo/Clapeyron.jl</a></p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.to_clapeyron">
+<span class="sig-name descname"><span class="pre">to_clapeyron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecules_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unifac_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psrk_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joback_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ugropy.properties.JobackProperties" title="ugropy.properties.joback_properties.JobackProperties"><span class="pre">JobackProperties</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'database'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ugropy/writers/clapeyron.html#to_clapeyron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.to_clapeyron" title="Link to this definition">¶</a></dt>
+<dd><p>Write the .csv input files for Clapeyron.jl.</p>
+<p>The provided lists must have the same length. If one of the model lists is
+left empty, that model will not be writen in the .csv.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecules_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of names for each chemical to write in the .csv files.</p></li>
+<li><p><strong>unifac_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of classic liquid-vapor UNIFAC groups, by default [].</p></li>
+<li><p><strong>psrk_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of Predictive Soave-Redlich-Kwong groups, by default [].</p></li>
+<li><p><strong>joback_objects</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ugropy.properties.JobackProperties" title="ugropy.properties.JobackProperties"><em>JobackProperties</em></a><em>]</em><em>, </em><em>optional</em>) – List of ugropy.properties.JobackProperties objects, by default [].</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the directory to store de .csv files, by default “./database”.</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the writing batch. For example, if you name the batch with
+“batch1”, the output of the UNIFAC groups will be:
+“batch1_ogUNIFAC_groups.csv”. With the default value will be
+“ogUNIFAC_groups.csv”, by default “”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.to_thermo">
+<span class="sig-name descname"><span class="pre">to_thermo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel" title="ugropy.fragmentation_models.gibbs_model.GibbsModel"><span class="pre">GibbsModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/ugropy/writers/thermo.html#to_thermo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.to_thermo" title="Link to this definition">¶</a></dt>
+<dd><p>Obtain the subgroups dictionary to the Caleb Bell’s Thermo library.</p>
+<p>Thermo: <a class="reference external" href="https://github.com/CalebBell/thermo">https://github.com/CalebBell/thermo</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_subgroups</strong> (<em>dict</em>) – ugropy subgroups.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#ugropy.fragmentation_models.gibbs_model.GibbsModel" title="ugropy.fragmentation_models.gibbs_model.GibbsModel"><em>GibbsModel</em></a>) – Gibbs excess FragmentationModel (unifac or psrk).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Thermo fragmentation subgroups.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ugropy.writers.clapeyron_writers">
+<span id="clapeyron-writers"></span><h1>Clapeyron writers<a class="headerlink" href="#module-ugropy.writers.clapeyron_writers" title="Link to this heading">¶</a></h1>
+<p>Clapeyron writers functions module.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.clapeyron_writers.write_critical">
+<span class="sig-name descname"><span class="pre">write_critical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joback_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ugropy.properties.JobackProperties" title="ugropy.properties.joback_properties.JobackProperties"><span class="pre">JobackProperties</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ugropy/writers/clapeyron_writers/critical.html#write_critical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.clapeyron_writers.write_critical" title="Link to this definition">¶</a></dt>
+<dd><p>Create the DataFrame with the critical properties for Clapeyron.jl.</p>
+<p>Uses the Joback to estimate the critical properties of the molecules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Path to the directory to store de .csv files, by default “./database”.</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the writing batch. For example, if you name the batch with
+“batch1”, the output of the UNIFAC groups will be:
+“batch1_ogUNIFAC_groups.csv”. With the default value will be
+“ogUNIFAC_groups.csv”, by default “”.</p></li>
+<li><p><strong>molecules_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of names for each chemical to write in the .csv files.</p></li>
+<li><p><strong>joback_objects</strong> (<em>List</em><em>[</em><em>Joback</em><em>]</em><em>, </em><em>optional</em>) – List of ugropy.properties.JobackProperties objects, by default [].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with the molecular weights for Clapeyron.jl</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.clapeyron_writers.write_molar_mass">
+<span class="sig-name descname"><span class="pre">write_molar_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unifac_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psrk_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joback_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ugropy.properties.JobackProperties" title="ugropy.properties.joback_properties.JobackProperties"><span class="pre">JobackProperties</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ugropy/writers/clapeyron_writers/molar_mass.html#write_molar_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.clapeyron_writers.write_molar_mass" title="Link to this definition">¶</a></dt>
+<dd><p>Create the DataFrame with the molecular weights for Clapeyron.jl.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path to the directory to store de .csv files, by default “./database”.</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the writing batch. For example, if you name the batch with
+“batch1”, the output of the UNIFAC groups will be:
+“batch1_ogUNIFAC_groups.csv”. With the default value will be
+“ogUNIFAC_groups.csv”, by default “”.</p></li>
+<li><p><strong>molecules_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of names for each chemical to write in the .csv files.</p></li>
+<li><p><strong>unifac_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of classic liquid-vapor UNIFAC groups, by default [].</p></li>
+<li><p><strong>psrk_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of Predictive Soave-Redlich-Kwong groups, by default [].</p></li>
+<li><p><strong>joback_objects</strong> (<em>List</em><em>[</em><em>Joback</em><em>]</em><em>, </em><em>optional</em>) – List of ugropy.properties.JobackProperties objects, by default [].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with the molecular weights for Clapeyron.jl</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.clapeyron_writers.write_psrk">
+<span class="sig-name descname"><span class="pre">write_psrk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psrk_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ugropy/writers/clapeyron_writers/psrk_groups.html#write_psrk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.clapeyron_writers.write_psrk" title="Link to this definition">¶</a></dt>
+<dd><p>Create the DataFrame with the PSRK groups for Clapeyron.jl.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path to the directory to store de .csv files, by default “./database”.</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the writing batch. For example, if you name the batch with
+“batch1”, the output of the UNIFAC groups will be:
+“batch1_ogUNIFAC_groups.csv”. With the default value will be
+“ogUNIFAC_groups.csv”, by default “”.</p></li>
+<li><p><strong>molecules_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of names for each chemical to write in the .csv files.</p></li>
+<li><p><strong>psrk_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of Predictive Soave-Redlich-Kwong groups.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with the LV-UNIFAC groups for Clapeyron.jl</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ugropy.writers.clapeyron_writers.write_unifac">
+<span class="sig-name descname"><span class="pre">write_unifac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unifac_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ugropy/writers/clapeyron_writers/unifac_groups.html#write_unifac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.writers.clapeyron_writers.write_unifac" title="Link to this definition">¶</a></dt>
+<dd><p>Create the DataFrame with the classic LV-UNIFAC groups for Clapeyron.jl.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path to the directory to store de .csv files, by default “./database”.</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the writing batch. For example, if you name the batch with
+“batch1”, the output of the UNIFAC groups will be:
+“batch1_ogUNIFAC_groups.csv”. With the default value will be
+“ogUNIFAC_groups.csv”, by default “”.</p></li>
+<li><p><strong>molecules_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of names for each chemical to write in the .csv files.</p></li>
+<li><p><strong>unifac_groups</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – List of classic liquid-vapor UNIFAC groups.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

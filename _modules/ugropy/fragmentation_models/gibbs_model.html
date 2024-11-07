@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.fragmentation_models.gibbs_model &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.fragmentation_models.gibbs_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.fragmentation_models.gibbs_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;GibbsModel module.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">ugropy.fragmentation_models.fragmentation_model</span> <span class="kn">import</span> <span class="n">FragmentationModel</span>
+
+
+<div class="viewcode-block" id="GibbsModel">
+<a class="viewcode-back" href="../../../ugropy.html#ugropy.fragmentation_models.models.GibbsModel">[docs]</a>
+<span class="k">class</span> <span class="nc">GibbsModel</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GibbsModel it&#39;s a fragmentation model dedicated to Gibbs excess models.</span>
+
+<span class="sd">    unifac, psrk, dortmund are instances of this class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (groups names). Mandatory columns:</span>
+<span class="sd">        &#39;detection_smarts&#39; (SMARTS representations of the group to detect its</span>
+<span class="sd">        precense in the molecule), &#39;smarts&#39; (true SMARTS of the group witouht</span>
+<span class="sd">        additional atom detections), &#39;contribute&#39; (dictionary as a string with</span>
+<span class="sd">        the group contribution), &#39;composed&#39; (y or n if it is or is not a</span>
+<span class="sd">        composed structure), &#39;molecular_weight&#39; (molecular weight of the</span>
+<span class="sd">        subgroups).</span>
+<span class="sd">    split_detection_smarts : List[str], optional</span>
+<span class="sd">        List of subgroups that have different SMARTS representations. by</span>
+<span class="sd">        default []</span>
+<span class="sd">    problematic_structures : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Model&#39;s problematic/ambiguous structures. Index: &#39;smarts&#39; (SMARTS of</span>
+<span class="sd">        the problematic structure). Mandatory columns: &#39;contribute&#39; (dictionary</span>
+<span class="sd">        as a string with the structure contribution), by default None</span>
+<span class="sd">    hideouts : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Hideouts for each group. Index: &#39;group&#39; (Group of the model that can be</span>
+<span class="sd">        hiden). Mandatory columns: &#39;hideout&#39; (other subgroups to find the hiden</span>
+<span class="sd">        subgroup), by defautl None</span>
+<span class="sd">    subgroups_info : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Information of the model&#39;s subgroups (R, Q, subgroup_number,</span>
+<span class="sd">        main_group), by default None</span>
+<span class="sd">    main_groups : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Main groups information (no., maingroup_name, subgroups), by default</span>
+<span class="sd">        None</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (groups names). Mandatory columns:</span>
+<span class="sd">        &#39;detection_smarts&#39; (SMARTS representations of the group to detect its</span>
+<span class="sd">        precense in the molecule), &#39;smarts&#39; (true SMARTS of the group witouht</span>
+<span class="sd">        additional atom detections. If a value is missing uses the</span>
+<span class="sd">        corresponding detection_smarts), &#39;contribute&#39; (dictionary as a string</span>
+<span class="sd">        with the group contribution), &#39;composed&#39; (y or n if it is or is not a</span>
+<span class="sd">        composed structure), &#39;molecular_weight&#39; (molecular weight of the</span>
+<span class="sd">        subgroups).</span>
+<span class="sd">    split_detection_smarts : List[str]</span>
+<span class="sd">        List of subgroups that have different SMARTS representations.</span>
+<span class="sd">    problematic_structures : pd.Dataframe</span>
+<span class="sd">        Model&#39;s problematic/ambiguous structures. Index: &#39;smarts&#39; (SMARTS of</span>
+<span class="sd">        the problematic structure). Mandatory columns: &#39;contribute&#39; (dictionary</span>
+<span class="sd">        as a string with the structure contribution)</span>
+<span class="sd">    hideouts : pd.DataFrame</span>
+<span class="sd">        Hideouts for each group. Index: &#39;group&#39; (Group of the model that can be</span>
+<span class="sd">        hiden). Mandatory columns: &#39;hideout&#39; (other subgroups to find the hiden</span>
+<span class="sd">        subgroup)</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the detection_smarts</span>
+<span class="sd">        subgroups column.</span>
+<span class="sd">    fit_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the smarts subgroups</span>
+<span class="sd">        column.</span>
+<span class="sd">    contribution_matrix : pd.Dataframe</span>
+<span class="sd">        Contribution matrix of the model built from the subgroups contribute.</span>
+<span class="sd">    subgroups_info : pd.DataFrame</span>
+<span class="sd">        Information of the model&#39;s subgroups (R, Q, subgroup_number,</span>
+<span class="sd">        main_group).</span>
+<span class="sd">    main_groups : pd.DataFrame</span>
+<span class="sd">        Main groups information (no., maingroup_name, subgroups).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">split_detection_smarts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">problematic_structures</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hideouts</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subgroups_info</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">main_groups</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">subgroups</span><span class="p">,</span> <span class="n">split_detection_smarts</span><span class="p">,</span> <span class="n">problematic_structures</span><span class="p">,</span> <span class="n">hideouts</span>
+        <span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Empty main_groups DataFrame template</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="k">if</span> <span class="n">main_groups</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main_groups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;no.&quot;</span><span class="p">,</span> <span class="s2">&quot;main group name&quot;</span><span class="p">,</span> <span class="s2">&quot;subgroups&quot;</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;no.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main_groups</span> <span class="o">=</span> <span class="n">main_groups</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># subgroups info</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="k">if</span> <span class="n">subgroups_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;subgroup_number&quot;</span><span class="p">,</span> <span class="s2">&quot;main_group&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">],</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">subgroups_info</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

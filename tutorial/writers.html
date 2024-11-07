@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writers &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API" href="../modules.html" />
+    <link rel="prev" title="Failing" href="ugropy_failing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The easy way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hard_way.html">The Hard? way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ugropy_failing.html">Failing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Clapeyron-(https://github.com/ClapeyronThermo/Clapeyron.jl)">Clapeyron (https://github.com/ClapeyronThermo/Clapeyron.jl)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Thermo-(https://github.com/CalebBell/thermo)">Thermo (https://github.com/CalebBell/thermo)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Writers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/writers.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Writers">
+<h1>Writers<a class="headerlink" href="#Writers" title="Link to this heading">¶</a></h1>
+<section id="Clapeyron-(https://github.com/ClapeyronThermo/Clapeyron.jl)">
+<h2>Clapeyron (<a class="reference external" href="https://github.com/ClapeyronThermo/Clapeyron.jl">https://github.com/ClapeyronThermo/Clapeyron.jl</a>)<a class="headerlink" href="#Clapeyron-(https://github.com/ClapeyronThermo/Clapeyron.jl)" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> provides a writers module for constructing input files for various thermodynamic libraries.</p>
+<p>To utilize this function, you must import the module as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">Groups</span><span class="p">,</span> <span class="n">writers</span>
+</pre></div>
+</div>
+</div>
+<p>To utilize the function, you need to provide a list of dictionaries for the functional groups of UNIFAC and PSRK, where each dictionary contains the functional groups of the molecules.</p>
+<p>If the user wishes to write critical properties .csv files, they must provide a list of Joback objects. Let’s illustrate this with a simple example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;limonene&quot;</span><span class="p">,</span> <span class="s2">&quot;adrenaline&quot;</span><span class="p">,</span> <span class="s2">&quot;Trinitrotoluene&quot;</span><span class="p">]</span>
+
+<span class="n">grps</span> <span class="o">=</span> <span class="p">[</span><span class="n">Groups</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+
+<span class="c1"># Write the csv files into a database directory</span>
+<span class="n">writers</span><span class="o">.</span><span class="n">to_clapeyron</span><span class="p">(</span>
+    <span class="n">molecules_names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span>
+    <span class="n">unifac_groups</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grps</span><span class="p">],</span>
+    <span class="n">psrk_groups</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">subgroups</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grps</span><span class="p">],</span>
+    <span class="n">joback_objects</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">joback</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grps</span><span class="p">],</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;database&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In the example provided, we create a Groups object to obtain all the information of the molecules. Then, we use list comprehension to create the lists for the to_clapeyron function.</p>
+<p>The molecules_name argument in this case receives the names used to create the Groups objects, but it can be different if desired. These names will be set as the molecule names in the .csv files.</p>
+<p>You can omit certain arguments if desired:</p>
+<ul class="simple">
+<li><p>If you omit the psrk_groups argument: the PSRK_groups.csv file will not be created.</p></li>
+<li><p>If you omit the unifac_groups argument: the ogUNIFAC_groups.csv file will not be created.</p></li>
+<li><p>If you omit the joback_objects argument: the critical.csv file will not be created.</p></li>
+</ul>
+</section>
+<section id="Thermo-(https://github.com/CalebBell/thermo)">
+<h2>Thermo (<a class="reference external" href="https://github.com/CalebBell/thermo">https://github.com/CalebBell/thermo</a>)<a class="headerlink" href="#Thermo-(https://github.com/CalebBell/thermo)" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> also provides a translator of its subgroups dictionaries to the <code class="docutils literal notranslate"><span class="pre">Thermo</span></code> library dictionaries.</p>
+<p>Let’s recreate the simple example of the <code class="docutils literal notranslate"><span class="pre">Thermo</span></code> documentation:</p>
+<p><a class="reference external" href="https://thermo.readthedocs.io/activity_coefficients.html#unifac-example">https://thermo.readthedocs.io/activity_coefficients.html#unifac-example</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thermo.unifac</span> <span class="kn">import</span> <span class="n">UFIP</span><span class="p">,</span> <span class="n">UFSG</span><span class="p">,</span> <span class="n">UNIFAC</span>
+
+<span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">Groups</span><span class="p">,</span> <span class="n">unifac</span><span class="p">,</span> <span class="n">writers</span>
+
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hexane&quot;</span><span class="p">,</span> <span class="s2">&quot;2-butanone&quot;</span><span class="p">]</span>
+
+<span class="n">grps</span> <span class="o">=</span> <span class="p">[</span><span class="n">Groups</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+
+<span class="n">thermo_groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">writers</span><span class="o">.</span><span class="n">to_thermo</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="p">,</span> <span class="n">unifac</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grps</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">thermo_groups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[{1: 2, 2: 4}, {1: 1, 2: 1, 18: 1}]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GE</span> <span class="o">=</span> <span class="n">UNIFAC</span><span class="o">.</span><span class="n">from_subgroups</span><span class="p">(</span>
+    <span class="n">chemgroups</span><span class="o">=</span><span class="n">thermo_groups</span><span class="p">,</span>
+    <span class="n">T</span><span class="o">=</span><span class="mi">60</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span>
+    <span class="n">xs</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">interaction_data</span><span class="o">=</span><span class="n">UFIP</span><span class="p">,</span>
+    <span class="n">subgroups</span><span class="o">=</span><span class="n">UFSG</span>
+<span class="p">)</span>
+
+<span class="n">GE</span><span class="o">.</span><span class="n">gammas</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[1.4276025835624184, 1.3646545010104223]
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ugropy_failing.html" class="btn btn-neutral float-left" title="Failing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../modules.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

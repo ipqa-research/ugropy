@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.composed &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.composed</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.composed</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;correct_composed module.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span> <span class="nn">ugropy.fragmentation_models.fragmentation_model</span> <span class="kn">import</span> <span class="n">FragmentationModel</span>
+
+<span class="kn">from</span> <span class="nn">.checks</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">check_can_fit_atoms</span><span class="p">,</span>
+    <span class="n">check_has_composed_overlapping</span><span class="p">,</span>
+    <span class="n">check_has_hiden</span><span class="p">,</span>
+    <span class="n">check_has_molecular_weight_right</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="correct_composed">
+<a class="viewcode-back" href="../../../ugropy.html#ugropy.core.correct_composed">[docs]</a>
+<span class="k">def</span> <span class="nf">correct_composed</span><span class="p">(</span>
+    <span class="n">mol_object</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol_subgroups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">FragmentationModel</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Correct composed structures.</span>
+
+<span class="sd">    A priori is not easy to recognize what composed structures in</span>
+<span class="sd">    mol_subgroups need to be decomposed to correct the solution. By that, all</span>
+<span class="sd">    the combinations are tried. For example, a molecule that can&#39;t be solved</span>
+<span class="sd">    has one ACCH2 and two ACCH composed structures. The decomposition</span>
+<span class="sd">    combinatory will be:</span>
+
+<span class="sd">    [[ACCH2], [ACCH], [ACCH2, ACCH], [ACCH, ACCH], [ACCH2, ACCH, ACCH]]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol_object : Chem.rdchem.Mol</span>
+<span class="sd">        RDKit Mol object.</span>
+<span class="sd">    mol_subgroups : dict</span>
+<span class="sd">        Molecule&#39;s FragmentationModel subgroups.</span>
+<span class="sd">    model: FragmentationModel</span>
+<span class="sd">        FragmentationModel object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict or list[dict]</span>
+<span class="sd">        Corrected subgroups due to decomposing composed structures.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># A list with all the composed structures present in mol_subgroups</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">composed_structures</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">stru</span>
+        <span class="k">for</span> <span class="n">stru</span> <span class="ow">in</span> <span class="n">mol_subgroups</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stru</span><span class="p">,</span> <span class="s2">&quot;composed&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span>
+    <span class="p">]</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Creates a list with the composed structures in mol_subgroups but each</span>
+    <span class="c1"># composed structure is repetead a number of times equals to the occurences</span>
+    <span class="c1"># In te molecule. For example in UNIFAC {&quot;ACCH2&quot;: 3, &quot;CH3&quot;: 1, &quot;ACCH&quot;: 1}</span>
+    <span class="c1"># should generate:</span>
+    <span class="c1">#</span>
+    <span class="c1"># [&quot;ACCH2&quot;, &quot;ACCH2&quot;, &quot;ACCH2&quot;, &quot;ACCH&quot;]</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">composed_in_mol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">stru</span>
+            <span class="k">for</span> <span class="n">stru</span> <span class="ow">in</span> <span class="n">composed_structures</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mol_subgroups</span><span class="p">[</span><span class="n">stru</span><span class="p">])</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Create the combinatory list as explainde in the funcion documentation.</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">combinatory_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">composed_in_mol</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">combinatory_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">composed_in_mol</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Try by brute force all combinatories and store the successfull ones</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">successfull_corrections</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">combinatory_list</span><span class="p">:</span>
+        <span class="c1"># Get subgroups with decomposed structures</span>
+        <span class="n">correction</span> <span class="o">=</span> <span class="n">apply_decompose_correction</span><span class="p">(</span>
+            <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">mol_subgroups</span><span class="p">,</span>
+            <span class="n">groups_to_decompose</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Did the correction work?</span>
+        <span class="n">right_mw</span> <span class="o">=</span> <span class="n">check_has_molecular_weight_right</span><span class="p">(</span>
+            <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+            <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">correction</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">right_mw</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">has_overlap</span> <span class="o">=</span> <span class="n">check_has_composed_overlapping</span><span class="p">(</span>
+            <span class="n">mol_object</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">model</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">has_overlap</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">has_hiden</span> <span class="o">=</span> <span class="n">check_has_hiden</span><span class="p">(</span><span class="n">mol_object</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">has_hiden</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">can_fit</span> <span class="o">=</span> <span class="n">check_can_fit_atoms</span><span class="p">(</span>
+            <span class="n">mol_object</span><span class="o">=</span><span class="n">mol_object</span><span class="p">,</span>
+            <span class="n">mol_subgroups</span><span class="o">=</span><span class="n">correction</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">can_fit</span><span class="p">:</span>
+            <span class="n">successfull_corrections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">correction</span><span class="p">)</span>
+
+    <span class="n">successfull_corrections</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">successfull_corrections</span><span class="p">)</span>
+
+    <span class="c1"># No posible correction found, can&#39;t represent molecule with func groups</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">successfull_corrections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Get rid of duplicated successfull_corrections</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="n">dict_strs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">successfull_corrections</span><span class="p">])</span>
+    <span class="n">unique_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">dict_strs</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">unique_corrections</span> <span class="o">=</span> <span class="n">successfull_corrections</span><span class="p">[</span><span class="n">unique_indices</span><span class="p">]</span>
+
+    <span class="c1"># =========================================================================</span>
+    <span class="c1"># Return decomposed subgroup solution</span>
+    <span class="c1"># =========================================================================</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_corrections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Unique solution found</span>
+        <span class="k">return</span> <span class="n">unique_corrections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Find the solution/s that uses the minimun number of functional groups</span>
+        <span class="n">subgroups_used</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">unique_corrections</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">min_subgroups_used</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">subgroups_used</span><span class="p">)</span>
+        <span class="n">idx_min_lens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">subgroups_used</span> <span class="o">==</span> <span class="n">min_subgroups_used</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dicts_with_min_len</span> <span class="o">=</span> <span class="n">unique_corrections</span><span class="p">[</span><span class="n">idx_min_lens</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dicts_with_min_len</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Solutions number turn into one</span>
+            <span class="k">return</span> <span class="n">dicts_with_min_len</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dicts_with_min_len</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">apply_decompose_correction</span><span class="p">(</span>
+    <span class="n">mol_subgroups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">groups_to_decompose</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">FragmentationModel</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decompose composed structures in mol_subgroups.</span>
+
+<span class="sd">    The function receives a tuple of groups to decompose and applies the</span>
+<span class="sd">    corresponding correction. For example, if the function receives the order</span>
+<span class="sd">    of decomposing an ACCH2, the function subtracts an ACCH2 group from</span>
+<span class="sd">    mol_subgroups, and then adds an AC and a CH2 group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol_subgroups : dict</span>
+<span class="sd">        Molecule&#39;s FragmentationModel subgroups.</span>
+<span class="sd">    groups_to_decompose : tuple[str]</span>
+<span class="sd">        Tuple with all the composed structures to decompose.</span>
+<span class="sd">    model: FragmentationModel</span>
+<span class="sd">        FragmentationModel object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Functional groups dictionary with decomposed structures.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chm_grps</span> <span class="o">=</span> <span class="n">mol_subgroups</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups_to_decompose</span><span class="p">:</span>
+        <span class="n">contribute_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="s2">&quot;contribute&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">grp</span><span class="p">,</span> <span class="n">contribution</span> <span class="ow">in</span> <span class="n">contribute_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">chm_grps</span><span class="p">[</span><span class="n">grp</span><span class="p">]</span> <span class="o">=</span> <span class="n">chm_grps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">contribution</span>
+
+    <span class="c1"># Eliminate occurrences == 0</span>
+    <span class="n">groups_corrected</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">chm_grps</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">groups_corrected</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

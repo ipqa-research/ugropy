@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Failing &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Writers" href="writers.html" />
+    <link rel="prev" title="The Hard? way" href="hard_way.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The easy way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hard_way.html">The Hard? way</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Failing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#More-than-one-solution">More than one solution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Writers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Failing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/ugropy_failing.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Failing">
+<h1>Failing<a class="headerlink" href="#Failing" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> may fail to obtain the subgroups of a molecule for a certain model for two reasons: either there is a bug in the code, or the molecule cannot be represented by the subgroups of the failing model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> utilizes SMARTS for the representation of functional groups to inquire whether the molecule contains those structures. Let’s examine the functional group list for the classic liquid-vapor UNIFAC model.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>detection_smarts</th>
+      <th>smarts</th>
+      <th>contribute</th>
+      <th>composed</th>
+      <th>molecular_weight</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH3</th>
+      <td>[CX4H3]</td>
+      <td>NaN</td>
+      <td>{"CH3": 1}</td>
+      <td>n</td>
+      <td>15.03500</td>
+    </tr>
+    <tr>
+      <th>CH2</th>
+      <td>[CX4H2]</td>
+      <td>NaN</td>
+      <td>{"CH2": 1}</td>
+      <td>n</td>
+      <td>14.02700</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>[CX4H]</td>
+      <td>NaN</td>
+      <td>{"CH": 1}</td>
+      <td>n</td>
+      <td>13.01900</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>[CX4H0]</td>
+      <td>NaN</td>
+      <td>{"C": 1}</td>
+      <td>n</td>
+      <td>12.01100</td>
+    </tr>
+    <tr>
+      <th>CH2=CH</th>
+      <td>[CH2]=[CH]</td>
+      <td>NaN</td>
+      <td>{"CH2=CH": 1}</td>
+      <td>n</td>
+      <td>27.04600</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>NCO</th>
+      <td>[NX2H0]=[CX2H0]=[OX1H0]</td>
+      <td>NaN</td>
+      <td>{"NCO": 1}</td>
+      <td>n</td>
+      <td>42.01700</td>
+    </tr>
+    <tr>
+      <th>(CH2)2SU</th>
+      <td>[CH2]S(=O)(=O)[CH2]</td>
+      <td>NaN</td>
+      <td>{"(CH2)2SU": 1, "CH2": -1, "CH2S": -1}</td>
+      <td>n</td>
+      <td>92.11620</td>
+    </tr>
+    <tr>
+      <th>CH2CHSU</th>
+      <td>[CH2]S(=O)(=O)[CH]</td>
+      <td>NaN</td>
+      <td>{"CH2CHSU": 1, "CH": -1, "CH2S": -1}</td>
+      <td>n</td>
+      <td>91.10840</td>
+    </tr>
+    <tr>
+      <th>IMIDAZOL</th>
+      <td>[c]1:[c]:[n]:[c]:[n]:1</td>
+      <td>NaN</td>
+      <td>{"IMIDAZOL": 1, "ACH": -3}</td>
+      <td>n</td>
+      <td>68.07820</td>
+    </tr>
+    <tr>
+      <th>BTI</th>
+      <td>C(F)(F)(F)S(=O)(=O)[N-]S(=O)(=O)C(F)(F)F</td>
+      <td>NaN</td>
+      <td>{"BTI": 1, "CF3": -2}</td>
+      <td>n</td>
+      <td>279.91784</td>
+    </tr>
+  </tbody>
+</table>
+<p>113 rows × 5 columns</p>
+</div></div>
+</div>
+<p>For example, let’s check the SMARTS representation of the alcohol group ACOH:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;ACOH&quot;</span><span class="p">,</span> <span class="s2">&quot;detection_smarts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;[cH0][OH]&#39;
+</pre></div></div>
+</div>
+<p>The SMARTS representation it’s telling us that the OH group it’s, of course, a hydroxyl group bounded by a single bound to an aromatic carbon atom.</p>
+<p>An example of a molecule that cannot be represented by UNIFAC groups:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">get_groups</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">get_groups</span><span class="p">(</span><span class="n">unifac</span><span class="p">,</span> <span class="s2">&quot;C1(=CC=CC=C1)OC(C)(C)C&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">mol_object</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_ugropy_failing_5_0.png" src="../_images/tutorial_ugropy_failing_5_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{}
+</pre></div></div>
+</div>
+<p>The library “fails” to obtain any functional groups to accurately represent the molecule. This failure is represented by an empty dictionary. In this case, the “fail” is correct, but it could fail due to errors in the groups SMARTS representations or the algorithm, resulting in an empty dictionary as well. Currently, the supported models are tested against the following numbers of molecules:</p>
+<ul class="simple">
+<li><p>Classic liquid-vapor UNIFAC: 408</p></li>
+<li><p>Predictive Soave-Redlich-Kwong (PSRK): 442</p></li>
+<li><p>Joback: 285</p></li>
+</ul>
+<p>If you encounter a failing representation, you can examine the structure of the molecule and the list of functional groups of the failing model. If you determine that the molecule can indeed be modeled, you may have discovered a bug. Feel free to report the issue on the repository along with the failing molecule’s SMILES/name, the failing model and the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> version.</p>
+<section id="More-than-one-solution">
+<h2>More than one solution<a class="headerlink" href="#More-than-one-solution" title="Link to this heading">¶</a></h2>
+<p>Models like UNIFAC or PSRK can have multiple solutions to represent a molecule, and ugropy tries its best to find them all. In such cases, you will receive a list of dictionaries, each containing one of the solutions found. Let’s take a look.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">Groups</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Draw</span>
+
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span><span class="s2">&quot;CCCC1=CC=C(CC(=O)OC)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">mol_object</span><span class="p">,</span> <span class="n">highlightAtoms</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_ugropy_failing_8_0.png" src="../_images/tutorial_ugropy_failing_8_0.png" />
+</div>
+</div>
+<p>This molecule can be modeled in two ways depending on how we treat the CH2 attached to the ring and the ester carbon (highlighted in red). We can either form an ACCH2 group and model the ester group with COO, or we can use an AC group and model the ester group with CH2COO.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UNIFAC:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PSRK:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+UNIFAC:
+[{&#39;CH3&#39;: 2, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 1, &#39;CH2COO&#39;: 1, &#39;CH2&#39;: 1, &#39;AC&#39;: 1}
+ {&#39;CH3&#39;: 2, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 2, &#39;CH2&#39;: 1, &#39;COO&#39;: 1}]
+PSRK:
+[{&#39;CH3&#39;: 2, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 1, &#39;CH2COO&#39;: 1, &#39;CH2&#39;: 1, &#39;AC&#39;: 1}
+ {&#39;CH3&#39;: 2, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 2, &#39;CH2&#39;: 1, &#39;COO&#39;: 1}]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svg1</span><span class="p">,</span> <span class="n">svg2</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+
+<span class="n">SVG</span><span class="p">(</span><span class="n">svg1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_ugropy_failing_12_0.svg" src="../_images/tutorial_ugropy_failing_12_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">svg2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_ugropy_failing_13_0.svg" src="../_images/tutorial_ugropy_failing_13_0.svg" />
+</div>
+</div>
+<p>This could be useful in cases where some groups have more interaction parameters than others in the mixture that you want to model with UNIFAC. Alternatively, you can try both approaches and compare if there are any differences.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hard_way.html" class="btn btn-neutral float-left" title="The Hard? way" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="writers.html" class="btn btn-neutral float-right" title="Writers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

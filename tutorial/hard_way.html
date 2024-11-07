@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hard? way &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Failing" href="ugropy_failing.html" />
+    <link rel="prev" title="The easy way" href="easy_way.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The easy way</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Hard? way</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#The-get_groups-function">The get_groups function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Joback">Joback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ugropy_failing.html">Failing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Writers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">The Hard? way</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/hard_way.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="The-Hard?-way">
+<h1>The Hard? way<a class="headerlink" href="#The-Hard?-way" title="Link to this heading">¶</a></h1>
+<section id="The-get_groups-function">
+<h2>The get_groups function<a class="headerlink" href="#The-get_groups-function" title="Link to this heading">¶</a></h2>
+<p>In some situation you may not require to instantiate all the models supported by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>, for that, you can search the model’s groups individually.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">joback</span><span class="p">,</span> <span class="n">psrk</span><span class="p">,</span> <span class="n">unifac</span><span class="p">,</span> <span class="n">get_groups</span>
+
+<span class="n">hexane</span> <span class="o">=</span> <span class="n">get_groups</span><span class="p">(</span><span class="n">unifac</span><span class="p">,</span> <span class="s2">&quot;hexane&quot;</span><span class="p">)</span>
+<span class="n">nicotine</span> <span class="o">=</span> <span class="n">get_groups</span><span class="p">(</span><span class="n">psrk</span><span class="p">,</span> <span class="s2">&quot;nicotine&quot;</span><span class="p">)</span>
+<span class="n">limonene</span> <span class="o">=</span> <span class="n">get_groups</span><span class="p">(</span><span class="n">joback</span><span class="p">,</span> <span class="s2">&quot;limonene&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hexane</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nicotine</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">limonene</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 4}
+{&#39;CH2&#39;: 3, &#39;CH3N&#39;: 1, &#39;C5H4N&#39;: 1, &#39;CH&#39;: 1}
+{&#39;-CH3&#39;: 2, &#39;=CH2&#39;: 1, &#39;=C&lt;&#39;: 1, &#39;ring-CH2-&#39;: 3, &#39;ring&gt;CH-&#39;: 1, &#39;ring=CH-&#39;: 1, &#39;ring=C&lt;&#39;: 1}
+</pre></div></div>
+</div>
+<p>Also, you can visualize the fragmentation results as in the “easy way” tutorial</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+
+<span class="n">SVG</span><span class="p">(</span><span class="n">hexane</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_hard_way_3_0.svg" src="../_images/tutorial_hard_way_3_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">nicotine</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_hard_way_4_0.svg" src="../_images/tutorial_hard_way_4_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">limonene</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_hard_way_5_0.svg" src="../_images/tutorial_hard_way_5_0.svg" />
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> function have the signature:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_groups</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">psrk</span><span class="p">,</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;nicotine&quot;</span><span class="p">,</span>
+    <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;name&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>As in the <code class="docutils literal notranslate"><span class="pre">Groups</span></code> class you can use “name”, “smiles” or “mol” as identifier type. This can be useful for whatever you are doing and skip the overhead of setting models that you don’t want. The <code class="docutils literal notranslate"><span class="pre">Groups</span></code> class is pretended to be used when you think: “I want all of this molecule”. The fragmentation_model parameters represents an ugropy fragmentation model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">FragmentationModel</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Joback">
+<h2>Joback<a class="headerlink" href="#Joback" title="Link to this heading">¶</a></h2>
+<p>For context, check the Joback’s article: <a class="reference external" href="https://doi.org/10.1080/00986448708960487">https://doi.org/10.1080/00986448708960487</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">JobackProperties</span></code> object is instantiated by the Group object, as we saw in the previous tutorial. However, a <code class="docutils literal notranslate"><span class="pre">JobackProperties</span></code> object can also be instantiated individually:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy.properties</span> <span class="kn">import</span> <span class="n">JobackProperties</span>
+
+<span class="n">joback_carvone</span> <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span><span class="s2">&quot;carvone&quot;</span><span class="p">)</span>
+
+<span class="n">joback_carvone</span><span class="o">.</span><span class="n">g_formation</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+34.800000000000004
+</pre></div></div>
+</div>
+<p>As with a <code class="docutils literal notranslate"><span class="pre">Groups</span></code> object, the signature of a <code class="docutils literal notranslate"><span class="pre">Joback</span></code> object is as follows similarly, in the <code class="docutils literal notranslate"><span class="pre">Groups</span></code> class, you can use “name,” “smiles,” or “mol” as the identifier type with the addition that you can provide the Joback’s functional groups as a dictionary directly:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span>  <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;carvone&quot;</span><span class="p">,</span>
+    <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+    <span class="n">normal_boiling_point</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hex_g</span> <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;-CH3&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;-CH2-&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span> <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;groups&quot;</span><span class="p">)</span>
+
+<span class="n">hex_n</span> <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;hexane&quot;</span><span class="p">,</span> <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hex_g</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hex_n</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+31.070992245923176
+31.070992245923176
+</pre></div></div>
+</div>
+<p>The normal_boiling_temperature parameter, if provided, is used in the Joback properties calculations instead of the Joback-estimated normal boiling temperature. Let’s examine an example from the original Joback’s article:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span><span class="s2">&quot;p-dichlorobenzene&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated normal boiling point: </span><span class="si">{</span><span class="n">mol</span><span class="o">.</span><span class="n">normal_boiling_point</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical temperature: </span><span class="si">{</span><span class="n">mol</span><span class="o">.</span><span class="n">critical_temperature</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Estimated normal boiling point: 443.4 K
+Critical temperature: 675.1671746814928 K
+</pre></div></div>
+</div>
+<p>The critical temperature necessitates the estimation of the normal boiling point. Joback recommends that if the experimental value of the normal boiling point is known, it should be used instead of the estimated value.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">JobackProperties</span><span class="p">(</span><span class="s2">&quot;p-dichlorobenzene&quot;</span><span class="p">,</span> <span class="n">normal_boiling_point</span><span class="o">=</span><span class="mf">447.3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experimental normal boiling point: </span><span class="si">{</span><span class="n">mol</span><span class="o">.</span><span class="n">exp_nbt</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated normal boiling point: </span><span class="si">{</span><span class="n">mol</span><span class="o">.</span><span class="n">normal_boiling_point</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical temperature: </span><span class="si">{</span><span class="n">mol</span><span class="o">.</span><span class="n">critical_temperature</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Experimental normal boiling point: 447.3 K
+Estimated normal boiling point: 443.4 K
+Critical temperature: 681.1057222260526 K
+</pre></div></div>
+</div>
+<p>The experimental value of the critical temperature for p-dichlorobenzene is 685 K. In this example, the error is not significant, but Joback warns that errors could be more significant in other cases.</p>
+<p>Refer to the full documentation of the Joback object for information on units and further explanation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>JobackProperties<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Init signature:</span>
+JobackProperties<span class="ansi-blue-fg">(</span>
+    identifier<span class="ansi-blue-fg">:</span> str<span class="ansi-blue-fg">,</span>
+    identifier_type<span class="ansi-blue-fg">:</span> str <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;name&#39;</span><span class="ansi-blue-fg">,</span>
+    normal_boiling_point<span class="ansi-blue-fg">:</span> float <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-red-fg">Docstring:</span>
+Joback [1] group contribution properties estimator.
+
+Parameters
+----------
+identifier : str or rdkit.Chem.rdchem.Mol
+    Identifier of a molecule (name, SMILES, groups, or Chem.rdchem.Mol).
+    Example: you can use hexane, CCCCCC, {&#34;-CH3&#34;: 2, &#34;-CH2-&#34;: 4} for name,
+    SMILES and groups respectively.
+identifier_type : str, optional
+    Use &#39;name&#39; to search a molecule by name, &#39;smiles&#39; to provide the
+    molecule SMILES representation, &#39;groups&#39; to provide Joback groups or
+    &#39;mol&#39; to provide a rdkit.Chem.rdchem.Mol object, by default &#34;name&#34;.
+normal_boiling_point : float, optional
+    If provided, will be used to estimate critical temperature, acentric
+    factor, and vapor pressure instead of the estimated normal boiling
+    point, by default None.
+
+Attributes
+----------
+subgroups : dict
+    Joback functional groups of the molecule.
+exp_nbt : float
+    User provided experimental normal boiling point [K].
+critical_temperature : float
+    Joback estimated critical temperature [K].
+critical_pressure : float
+    Joback estimated critical pressure [bar].
+critical_volume : float
+    Joback estimated critical volume [cm³/mol].
+normal_boiling_point : float
+    Joback estimated normal boiling point [K].
+fusion_temperature : float
+    Joback estimated fusion temperature [K].
+h_formation : float
+    Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].
+g_formation : float
+    Joback estimated Gibbs energy of formation ideal gas at 298 K [K].
+heat_capacity_ideal_gas_params : dict
+    Joback estimated Reid&#39;s ideal gas heat capacity equation parameters
+    [J/mol/K].
+h_fusion : float
+    Joback estimated fusion enthalpy [kJ/mol].
+h_vaporization : float
+    Joback estimated vaporization enthalpy at the normal boiling point
+    [kJ/mol].
+sum_na : float
+    Joback n_A contribution to liquid viscosity [N/s/m²].
+sum_nb : float
+    Joback n_B contribution to liquid viscosity [N/s/m²].
+molecular_weight : float
+    Molecular weight from Joback&#39;s subgroups [g/mol].
+acentric_factor : float
+    Acentric factor from Lee and Kesler&#39;s equation [2].
+vapor_pressure_params : dict
+    Vapor pressure G and k parameters for the Riedel-Plank-Miller [2]
+    equation [bar].
+<span class="ansi-red-fg">File:</span>           ~/code/ugropy/ugropy/properties/joback_properties.py
+<span class="ansi-red-fg">Type:</span>           type
+<span class="ansi-red-fg">Subclasses:</span>
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="easy_way.html" class="btn btn-neutral float-left" title="The easy way" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ugropy_failing.html" class="btn btn-neutral float-right" title="Failing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

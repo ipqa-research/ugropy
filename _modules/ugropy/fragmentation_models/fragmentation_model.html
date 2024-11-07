@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.fragmentation_models.fragmentation_model &mdash; ugropy 2.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=9a3ee07e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.fragmentation_models.fragmentation_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.fragmentation_models.fragmentation_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;FragmentationModel module.</span>
+
+<span class="sd">All ugropy models (joback, unifac, psrk) are instances of the</span>
+<span class="sd">FragmentationModule class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+
+<div class="viewcode-block" id="FragmentationModel">
+<a class="viewcode-back" href="../../../ugropy.html#ugropy.fragmentation_models.fragmentation_model.FragmentationModel">[docs]</a>
+<span class="k">class</span> <span class="nc">FragmentationModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FragmentationModel class.</span>
+
+<span class="sd">    All ugropy supported models are an instance of this class. This class can</span>
+<span class="sd">    be used by the user to create their own FragmentationModels.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (groups names). Mandatory columns:</span>
+<span class="sd">        &#39;detection_smarts&#39; (SMARTS representations of the group to detect its</span>
+<span class="sd">        precense in the molecule), &#39;smarts&#39; (true SMARTS of the group witouht</span>
+<span class="sd">        additional atom detections), &#39;contribute&#39; (dictionary as a string with</span>
+<span class="sd">        the group contribution), &#39;composed&#39; (y or n if it is or is not a</span>
+<span class="sd">        composed structure), &#39;molecular_weight&#39; (molecular weight of the</span>
+<span class="sd">        subgroups).</span>
+<span class="sd">    split_detection_smarts : List[str], optional</span>
+<span class="sd">        List of subgroups that have different SMARTS representations. by</span>
+<span class="sd">        default []</span>
+<span class="sd">    problematic_structures : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Model&#39;s problematic/ambiguous structures. Index: &#39;smarts&#39; (SMARTS of</span>
+<span class="sd">        the problematic structure). Mandatory columns: &#39;contribute&#39; (dictionary</span>
+<span class="sd">        as a string with the structure contribution), by default None</span>
+<span class="sd">    hideouts : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Hideouts for each group. Index: &#39;group&#39; (Group of the model that can be</span>
+<span class="sd">        hiden). Mandatory columns: &#39;hideout&#39; (other subgroups to find the hiden</span>
+<span class="sd">        subgroup), by defautl None</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (groups names). Mandatory columns:</span>
+<span class="sd">        &#39;detection_smarts&#39; (SMARTS representations of the group to detect its</span>
+<span class="sd">        precense in the molecule), &#39;smarts&#39; (true SMARTS of the group witouht</span>
+<span class="sd">        additional atom detections. If a value is missing uses the</span>
+<span class="sd">        corresponding detection_smarts), &#39;contribute&#39; (dictionary as a string</span>
+<span class="sd">        with the group contribution), &#39;composed&#39; (y or n if it is or is not a</span>
+<span class="sd">        composed structure), &#39;molecular_weight&#39; (molecular weight of the</span>
+<span class="sd">        subgroups).</span>
+<span class="sd">    split_detection_smarts : List[str]</span>
+<span class="sd">        List of subgroups that have different SMARTS representations.</span>
+<span class="sd">    problematic_structures : pd.Dataframe</span>
+<span class="sd">        Model&#39;s problematic/ambiguous structures. Index: &#39;smarts&#39; (SMARTS of</span>
+<span class="sd">        the problematic structure). Mandatory columns: &#39;contribute&#39; (dictionary</span>
+<span class="sd">        as a string with the structure contribution)</span>
+<span class="sd">    hideouts : pd.DataFrame</span>
+<span class="sd">        Hideouts for each group. Index: &#39;group&#39; (Group of the model that can be</span>
+<span class="sd">        hiden). Mandatory columns: &#39;hideout&#39; (other subgroups to find the hiden</span>
+<span class="sd">        subgroup)</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the detection_smarts</span>
+<span class="sd">        subgroups column.</span>
+<span class="sd">    fit_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the smarts subgroups</span>
+<span class="sd">        column.</span>
+<span class="sd">    contribution_matrix : pd.Dataframe</span>
+<span class="sd">        Contribution matrix of the model built from the subgroups contribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">split_detection_smarts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">problematic_structures</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hideouts</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span> <span class="o">=</span> <span class="n">subgroups</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">split_detection_smarts</span> <span class="o">=</span> <span class="n">split_detection_smarts</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Empty problematics template</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="k">if</span> <span class="n">problematic_structures</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">problematic_structures</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;smarts&quot;</span><span class="p">,</span> <span class="s2">&quot;contribute&quot;</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;smarts&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">problematic_structures</span> <span class="o">=</span> <span class="n">problematic_structures</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Hideouts</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="k">if</span> <span class="n">hideouts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hideouts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;hideout&quot;</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hideouts</span> <span class="o">=</span> <span class="n">hideouts</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Contribution matrix build</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contribution_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_contrib_matrix</span><span class="p">()</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Instantiate all de mol object from their smarts</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_detection_mol</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_fit_mols</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_build_contrib_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the contribution matrix of the model.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            The contribution matrix of the model built from the contribute</span>
+<span class="sd">            column of the subgroups DataFrame.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Bad contribution parsing of a group</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            Bad contribution parsing of a group</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1"># Build the matrix</span>
+        <span class="n">dfm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span>
+            <span class="s2">&quot;group&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Fill the matrix</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+            <span class="n">str_contribution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="s2">&quot;contribute&quot;</span><span class="p">]</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">contribution</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">str_contribution</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Bad contribute parsing of the group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Bad contribution parsing of the group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">contribution</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">dfm</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">contribution</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">dfm</span>
+
+    <span class="k">def</span> <span class="nf">_instantiate_detection_mol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate all the rdkit Mol object from the detection_smarts.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Mol objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_detection_smarts</span><span class="p">:</span>
+                <span class="n">mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="s2">&quot;detection_smarts&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">smarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="s2">&quot;detection_smarts&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                    <span class="s2">&quot;,&quot;</span>
+                <span class="p">)</span>
+
+                <span class="n">mol_smarts</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">sms</span> <span class="ow">in</span> <span class="n">smarts</span><span class="p">:</span>
+                    <span class="n">mol_smarts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">sms</span><span class="p">))</span>
+
+                <span class="n">mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">mol_smarts</span>
+        <span class="k">return</span> <span class="n">mols</span>
+
+    <span class="k">def</span> <span class="nf">_instantiate_fit_mols</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate all the rdkit Mol object from the smarts.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Mol object to fit the subgroups in the molecule&#39;s atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="n">smarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">smarts</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">mols</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
