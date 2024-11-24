@@ -34,9 +34,15 @@ def instantiate_mol_object(
         chem_object = Chem.MolFromSmiles(smiles)
 
     elif identifier_type.lower() == "name":
-        pcp_object = pcp.get_compounds(identifier, identifier_type)[0]
-        smiles = pcp_object.canonical_smiles
-        chem_object = Chem.MolFromSmiles(smiles)
+        try:
+            pcp_object = pcp.get_compounds(identifier, identifier_type)[0]
+            smiles = pcp_object.canonical_smiles
+            chem_object = Chem.MolFromSmiles(smiles)
+        except IndexError:
+            raise ValueError(
+                f"Could not find a molecule with the name '{identifier}' on "
+                "PubChem"
+            )
 
     elif identifier_type.lower() == "mol":
         chem_object = identifier
