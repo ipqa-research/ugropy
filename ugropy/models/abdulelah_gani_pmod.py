@@ -1,10 +1,10 @@
-"""Joback FragmentationModel implementation.
+"""AbdulelahGani Primary Structures FragmentationModel implementation.
 
-Import and use the Joback FragmentationModel with:
+Import and use the AbdulelahGani Primary Structures FragmentationModel with:
 
 .. code-block:: python
 
-    from ugropy import joback
+    from ugropy import abdulelah_gani_p
 
     # Get groups from molecule's name
     tol = joback.get_groups("toluene")
@@ -18,7 +18,7 @@ Import and use the Joback FragmentationModel with:
 
 Attributes
 ----------
-joback: JobackModel
+joback: PropertiesEstimator
     Joback FragmentationModel :cite:p:`joback1, joback2`
 """
 
