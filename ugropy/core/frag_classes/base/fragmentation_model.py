@@ -134,7 +134,7 @@ class FragmentationModel:
         # =====================================================================
         # Solve overlapping atoms
         # =====================================================================
-        problem = solver(
+        problem: ILPSolver = solver(
             overlapping_atoms, detections, search_multiple_solutions
         )
 

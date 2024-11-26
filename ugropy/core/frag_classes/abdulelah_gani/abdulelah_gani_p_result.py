@@ -9,7 +9,7 @@ from ugropy.core.frag_classes.base.fragmentation_result import (
 )
 
 
-class AGaniFragmentationResult(FragmentationResult):
+class AGaniPFragmentationResult(FragmentationResult):
     """Abdulelah-Gani primary group contribution properties estimator.
 
     Parameters
@@ -20,7 +20,7 @@ class AGaniFragmentationResult(FragmentationResult):
         Dictionary of subgroups.
     subgroups_atoms_indexes : dict
         Dictionary of subgroups atoms indexes.
-    info : pd.DataFrame
+    subgroups_info : pd.DataFrame
         Group's subgroups numbers.
 
     Attributes
@@ -38,5 +38,14 @@ class AGaniFragmentationResult(FragmentationResult):
         molecule: Chem.rdchem.Mol,
         subgroups: dict,
         subgroups_atoms_indexes: dict,
-        info: pd.DataFrame,
-    ) -> None: ...
+        subgroups_info: pd.DataFrame,
+    ) -> None:
+
+        super().__init__(molecule, subgroups, subgroups_atoms_indexes)
+
+        self.subgroups_numbers = {}
+
+        if self.subgroups != {}:
+            for group, n in self.subgroups.items():
+                group_number = int(subgroups_info.loc[group, "group_number"])
+                self.subgroups_numbers[group_number] = n
