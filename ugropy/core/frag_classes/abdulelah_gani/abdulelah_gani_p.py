@@ -7,19 +7,17 @@ import pandas as pd
 
 from rdkit import Chem
 
+from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_p_result import (
+    AGaniFragmentationResult,
+)
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
 )
-from ugropy.core.frag_classes.joback.joback_result import (
-    JobackFragmentationResult,
-)
-from ugropy.core.ilp_solvers.default_solver import DefaultSolver
-from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class AbdulelahGaniPrimaryModel(FragmentationModel):
     """Abdulelah-Gani model dedicated to properties estimation models.
-    
+
     Class to construct the primary structures detector for the Abdulelah-Gani
     properties estimation model :cite:p:`gani`.
 
@@ -28,8 +26,7 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
     info : pd.DataFrame
         Group's subgroups numbers.
 
@@ -55,59 +52,13 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         super().__init__(subgroups)
         self.info = info
 
-    def get_groups(
-        self,
-        identifier: Union[str, Chem.rdchem.Mol],
-        identifier_type: str = "name",
-        solver: ILPSolver = DefaultSolver,
-        search_multiple_solutions: bool = False,
-    ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
-        """Get Abdulelah Gani primary groups from a molecule.
-
-        Parameters
-        ----------
-        identifier : Union[str, Chem.rdchem.Mol]
-            Identifier of the molecule. You can use either the name of the
-            molecule, the SMILEs of the molecule or a rdkit Mol object.
-        identifier_type : str, optional
-            Identifier type of the molecule. Use "name" if you are providing
-            the molecules' name, "smiles" if you are providing the SMILES
-            or "mol" if you are providing a rdkir mol object, by default "name"
-        solver : ILPSolver, optional
-            ILP solver class, by default DefaultSolver
-        search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
-            If False the return will be a FragmentationResult object, if True
-            the return will be a list of FragmentationResult objects.
-        normal_boiling_point : float, optional
-            Experimental normal boiling point of the molecule on Kelvin. Its
-            used to improve the properties calculations. Joback uses the
-            estimated normal boiling point if no provided, by default None
-
-        Returns
-        -------
-        Union[JobackFragmentationResult, List[JobackFragmentationResult]]
-            Fragmentation result. If search_multiple_solutions is False the
-            return will be a FragmentationResult object, if True the return
-            will be a list of FragmentationResult objects.
-        """
-        sol = super().get_groups(
-            identifier=identifier,
-            identifier_type=identifier_type,
-            solver=solver,
-            search_multiple_solutions=search_multiple_solutions,
-        )
-
-        return sol
-
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
         search_multiple_solutions: bool,
-        normal_boiling_point: float,
-    ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
-        """Get the solutions and return the JobackFragmentationResult objects.
+    ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
+        """Get the solutions and return the AGaniFragmentationResult objects.
 
         Parameters
         ----------
@@ -117,12 +68,10 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
             Fragments detected in the molecule.
         search_multiple_solutions : bool, optional
             Weather search for multiple solutions or not, by default False
-        normal_boiling_point : float
-            Experimental normal boiling point of the molecule on Kelvin.
 
         Returns
         -------
-        Union[JobackFragmentationResult, List[JobackFragmentationResult]]
+        Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]
             Fragmentation result. If search_multiple_solutions is False the
             return will be a FragmentationResult object, if True the return
             will be a list of FragmentationResult objects.
@@ -141,12 +90,11 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
 
             if occurrences not in occurs:
                 sols.append(
-                    JobackFragmentationResult(
+                    AGaniFragmentationResult(
                         molecule,
                         dict(occurrences),
                         dict(groups_atoms),
-                        self.properties_contributions,
-                        normal_boiling_point=normal_boiling_point,
+                        self.info,
                     )
                 )
                 occurs.append(occurrences)
