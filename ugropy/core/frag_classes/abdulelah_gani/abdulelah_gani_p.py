@@ -1,6 +1,5 @@
 """Joback fragmentation module."""
 
-from collections import defaultdict
 from typing import List, Union
 
 import pandas as pd
@@ -8,11 +7,13 @@ import pandas as pd
 from rdkit import Chem
 
 from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_p_result import (
-    AGaniFragmentationResult,
+    AGaniPFragmentationResult,
 )
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
 )
+from ugropy.core.ilp_solvers.default_solver import DefaultSolver
+from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class AbdulelahGaniPrimaryModel(FragmentationModel):
@@ -27,7 +28,7 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
         the molecule).
-    info : pd.DataFrame
+    subgroups_info : pd.DataFrame
         Group's subgroups numbers.
 
     Attributes
@@ -46,60 +47,54 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
     def __init__(
         self,
         subgroups: pd.DataFrame,
-        info: pd.DataFrame,
+        subgroups_info: pd.DataFrame,
     ) -> None:
 
-        super().__init__(subgroups)
-        self.info = info
+        super().__init__(
+            subgroups=subgroups,
+            allow_overlapping=False,
+            fragmentation_result=AGaniPFragmentationResult,
+        )
+        self.subgroups_info = subgroups_info
 
-    def set_fragmentation_result(
+    def get_groups(
         self,
-        molecule: Chem.rdchem.Mol,
-        solutions_fragments: List[dict],
-        search_multiple_solutions: bool,
-    ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
-        """Get the solutions and return the AGaniFragmentationResult objects.
+        identifier: Union[str, Chem.rdchem.Mol],
+        identifier_type: str = "name",
+        solver: ILPSolver = DefaultSolver,
+        search_multiple_solutions: bool = False,
+    ) -> Union[AGaniPFragmentationResult, List[AGaniPFragmentationResult]]:
+        """Get the groups of a molecule.
 
         Parameters
         ----------
-        molecule : Chem.rdchem.Mol
-            Rdkit mol object.
-        solutions_fragments : List[dict]
-            Fragments detected in the molecule.
+        identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        identifier_type : str, optional
+            Identifier type of the molecule. Use "name" if you are providing
+            the molecules' name, "smiles" if you are providing the SMILES
+            or "mol" if you are providing a rdkir mol object, by default "name"
+        solver : ILPSolver, optional
+            ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
             Weather search for multiple solutions or not, by default False
+            If False the return will be a FragmentationResult object, if True
+            the return will be a list of FragmentationResult objects.
 
         Returns
         -------
-        Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]
+        Union[AGaniPFragmentationResult, List[AGaniPFragmentationResult]]
             Fragmentation result. If search_multiple_solutions is False the
             return will be a FragmentationResult object, if True the return
             will be a list of FragmentationResult objects.
         """
-        sols = []
-        occurs = []
+        sol = super().get_groups(
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions,
+            subgroups_info=self.subgroups_info,
+        )
 
-        for solution in solutions_fragments:
-            occurrences = defaultdict(int)
-            groups_atoms = defaultdict(list)
-
-            for frag, atoms in solution.items():
-                name = frag.split("_")[0]
-                occurrences[name] += 1
-                groups_atoms[name].append(atoms)
-
-            if occurrences not in occurs:
-                sols.append(
-                    AGaniFragmentationResult(
-                        molecule,
-                        dict(occurrences),
-                        dict(groups_atoms),
-                        self.info,
-                    )
-                )
-                occurs.append(occurrences)
-
-        if search_multiple_solutions:
-            return sols
-        else:
-            return sols[0]
+        return sol

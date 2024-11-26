@@ -30,9 +30,25 @@ unifac : GibbsModel
     unifac3, unifac4, unifac5, unifac6`
 joback: JobackModel
     Joback FragmentationModel :cite:p:`joback1, joback2`
+abdulelah_gani_p: AbdulelahGaniPrimaryModel
+    Abdulelah-Gani Primary Structures FragmentationModel :cite:p:`gani`
 """
 
-from . import jobackmod, psrkmod, read_csv, unifacmod, gceosmod
+from . import (
+    abdulelah_gani_pmod,
+    gceosmod,
+    jobackmod,
+    psrkmod,
+    read_csv,
+    unifacmod
+)
 
 
-__all__ = ["read_csv", "jobackmod", "psrkmod", "unifacmod", "gceosmod"]
+__all__ = [
+    "abdulelah_gani_pmod",
+    "gceosmod",
+    "read_csv",
+    "jobackmod",
+    "psrkmod",
+    "unifacmod",
+]
