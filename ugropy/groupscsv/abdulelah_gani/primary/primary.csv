@@ -14,9 +14,9 @@ C=C=C|[CH0;!R]=[CH0;!R]=[CH0;!R]|36.033
 CH≡C|[CH]#[CH0]|25.0298
 C≡C|[CH0]#[CH0]|24.022
 aCH|[cH]|13.019
-aC fused with aromatic ring|[cH0;$([cH0]([a])([a])[a])]|12.011
-aC fused with non-aromatic ring|[cH0;$([cH0]([a])([a])[A;R])]|12.011
-aC except as above|[cH0;!$([cH0]([a])([a])[a]);!$([cH0]([a])([a])[A;R])]|12.011
+aC fused with aromatic ring|[cH0;$([cH0]([a][a])([a])[a])]|12.011
+aC fused with non-aromatic ring|[cH0;$([cH0]([a][A;R])([a])[A;R])]|12.011
+aC except as above|[cH0;!$([cH0]([a][a])([a])[a]);!$([cH0]([a][A;R])([a])[A;R])]|12.011
 aN in aromatic ring|[n;R]|14.007
 aC-CH3|[cH0][CX4H3]|27.046
 aC-CH2|[cH0][CX4H2;!R]|26.038
@@ -33,9 +33,9 @@ COOH|[CH0](=O)[OH]|45.017
 aC-COOH|[cH0][CH0](=O)[OH]|57.028
 CH3CO|[CH3][CH0;$(C([CH3])-[#6]),$(C([CH3])-[Si])]=O|43.045
 CH2CO|[CH2][CH0;$(C([CH2])-[#6]),$(C([CH2])-[Si])]=O|42.037
-CHCO|[CH][CH0;$(C([CH])-[#6]),$(C([CH])-[Si])]=O|41.028841
-CCO|[CH0][CH0;$(C([CH0])-[#6]),$(C([CH0])-[Si])]=O|40.021
-aC-CO|[cH0][CH0;$(C([cH0])-[#6]),$(C([cH0])-[Si])]=O|40.021
+CHCO|[CH;!R][CH0;!R;$(C([CH])-[#6]),$(C([CH])-[Si])]=O|41.028841
+CCO|[CH0;!R][CH0;!R;$(C([CH0])-[#6]),$(C([CH0])-[Si])]=O|40.021
+aC-CO|[cH0][CH0;!R;$(C([cH0])-[#6]),$(C([cH0])-[Si])]=O|40.021
 CHO|[CH;$([CH][#6,Si])](=O)|29.018
 aC-CHO|[cH0][CH](=O)|41.029
 CH3COO|[CH3;!R][C](=O)[OH0]|59.044
@@ -79,7 +79,7 @@ CH2NO2|[CH2]N(=O)(=O)|60.032
 CHNO2|[CH]N(=O)(=O)|59.024
 CNO2|[CH0]N(=O)(=O)|58.016
 aC-NO2|[cH0]N(=O)(=O)|58.016
-NO2 except as above|N(=O)(=O)|46.005
+NO2 except as above|[NX3H0](=O)(-O)|46.005
 ONO|[NH](O)=O|30.006
 ONO2|[O][NH0](=O)=O|62.004
 HCON(CH2)2|[CH2]N([CH2])[CH]=O|71.078
@@ -121,10 +121,10 @@ CF3|[CH0]([F])([F])[F]|70.0128
 CCl2F|[CH0](Cl)(Cl)[F]|101.915
 HCClF|[CH](Cl)[F]|67.4698
 CClF2|[CH0](Cl)(F)[F]|85.46
-aC-Cl|[cH0][Cl]|47.464
-aC-F|[cH0][F]|31.009
-aC-I|[cH0][I]|138.911
-aC-Br|[cH0][Br]|91.915
+aC-Cl|[cH0;$([cH0]1ccccc1)][Cl]|47.464
+aC-F|[cH0;$([cH0]1ccccc1)][F]|31.009
+aC-I|[cH0;$([cH0]1ccccc1)][I]|138.911
+aC-Br|[cH0;$([cH0]1ccccc1)][Br]|91.915
 -I except as above|[I]|126.9
 -Br except as above|[Br]|79.904
 -F except as above|[F]|18.998
@@ -169,17 +169,17 @@ C2HO|[CH0]([O]1)[CH]1|41.0288
 CH2 (cyclic)|[CX4H2;R]|14.027
 CH (cyclic)|[CX4H;R]|13.019
 C (cyclic)|[CX4H0;R]|12.011
-CH=CH (cyclic)|[CH;R]=[CH;R]|26.038
-CH=C (cyclic)|[CH;R]=[CH0;R]|25.03
-C=C (cyclic)|[CH0;R]=[CH0;R]|24.022
-CH2=C (cyclic)|[CH2]=[CH0;R]|26.038
-NH (cyclic)|[NX2H;R]|15.0148
-N (cyclic)|[NH0;R]|14.007
-CH=N (cyclic)|[CH;R]=[NH0;R]|27.0258
-C=N (cyclic)|[CH0;R]=[NH0;R]|26.018
-O (cyclic)|[OH0;R]|15.999
+CH=CH (cyclic)|[CX3H,cH;R;!$([cH]1ccccc1)]@[CX3H,cH;R;!$([cH]1ccccc1)]|26.038
+CH=C (cyclic)|[CX3H,cH;R;!$([cH]1ccccc1)]@[CX3H0,cH0;R;!$([cH0]1ccccc1)]|25.03
+C=C (cyclic)|[CX3H0,cH0;R;!$([cH0]1ccccc1)]@[CX3H0,cH0;R;!$([cH0]1ccccc1)]|24.022
+CH2=C (cyclic)|[CH2]=[CX3H0,cH0;R;!$([cH0]1ccccc1)]|26.038
+NH (cyclic)|[NX2H,nH;R]|15.0148
+N (cyclic)|[NH0,nH0;R]|14.007
+CH=N (cyclic)|[CX3H,cH;R;!$([cH]1ccccc1)]@[NH0,nH0;R]|27.0258
+C=N (cyclic)|[CX3H0,cH0;R;!$([cH0]1ccccc1)]@[NH0,nH0;R]|26.018
+O (cyclic)|[OH0,oH0;R]|15.999
 CO (cyclic)|[CH0;R]=O|28.01
-S (cyclic)|[SX2H0;R]|32.065
+S (cyclic)|[#16H0;R]|32.065
 SO2 (cyclic)|[SH0;R](=O)(=O)|64.063
 >NH|[NX2H;!R]|15.0148
 -O-|[OX2H0;!R]|15.999
@@ -205,7 +205,7 @@ C=NH|[CH0]=[NH]|27.0258
 >C=S|[CX3H0]=[SH0]|44.076
 aC-CON|[cH0][CH0](=O)[NH0]|54.028
 aC=O|[CH0;R]=O|28.01
-aN-|[NX3H0;R]|14.007
+aN-|[NX3H0;!R]|14.007
 -Na|[Na]|22.99
 -K|[K]|39.098
 HCONH|[CH](=O)[NH]|44.0326
