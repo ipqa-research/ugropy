@@ -73,7 +73,7 @@ class JobackFragmentationResult(FragmentationResult):
         Acentric factor from Lee and Kesler's equation :cite:p:`joback1`.
     vapor_pressure_params : dict
         Vapor pressure G and k parameters for the Riedel-Plank-Miller
-        :cite:p:`joback1` equation [bar].
+        equation [bar] :cite:p:`joback1`.
     """
 
     def __init__(

@@ -18,7 +18,10 @@ from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class AbdulelahGaniPrimaryModel(FragmentationModel):
-    """Abdulelah Gani model dedicated to properties estimation models.
+    """Abdulelah-Gani model dedicated to properties estimation models.
+    
+    Class to construct the primary structures detector for the Abdulelah-Gani
+    properties estimation model :cite:p:`gani`.
 
     Parameters
     ----------
@@ -35,8 +38,7 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column

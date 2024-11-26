@@ -25,18 +25,16 @@ class JobackModel(FragmentationModel):
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
     properties_contributions : pd.DataFrame, optional
-        Group's properties contributions, by default None
+        Group's properties contributions, by default None.
 
     Attributes
     ----------
     subgroups : pd.DataFrame
-        Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        Model's subgroups. Index: 'group' (subgroups names). Columns: 'smarts'
+        (SMARTS representations of the group to detect its precense in the
+        molecule).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column
