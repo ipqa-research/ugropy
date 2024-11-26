@@ -15,13 +15,13 @@ def check_atoms_fragments_presence(
 ) -> tuple[bool, np.ndarray]:
     """Find overlapped atoms and free atoms.
 
-    Check the detected fragments to find the atoms that appears in more
-    than one fragment (overlapping), and the atoms that are not present in
-    any fragment (free atoms). Returning two np.ndarray with the indexes of
-    the overlapping and free atoms.
+    Check the detected fragments to find the atoms that appears in more than
+    one fragment (overlapping), and the atoms that are not present in any
+    fragment (free atoms). Returning two np.ndarray with the indexes of the
+    overlapping and free atoms.
 
-    Example of a `fragments` dictionary that not presents overlapping
-    atoms. For example N-hexane:
+    Example of a `fragments` dictionary that not presents overlapping atoms.
+    For example N-hexane:
 
     .. code-block:: python
 
@@ -35,7 +35,7 @@ def check_atoms_fragments_presence(
         }
 
     Example of a `fragments` dictionary that presents overlapping atoms. For
-    exmple toluene:
+    example toluene:
 
     .. code-block:: python
 
@@ -55,9 +55,9 @@ def check_atoms_fragments_presence(
     molecule : Chem.rdchem.Mol
         RDKit molecule object.
     fragments : dict
-        Dictionary containing the fragments detected in the molecule. The
-        keys are the group names and the values are the indexes of the
-        atoms in the group.
+        Dictionary containing the fragments detected in the molecule. The keys
+        are the group names and the values are the indexes of the atoms in the
+        group.
 
     Returns
     -------

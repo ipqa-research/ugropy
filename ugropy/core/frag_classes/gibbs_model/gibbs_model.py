@@ -27,8 +27,7 @@ class GibbsModel(FragmentationModel):
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct)
+        the molecule).
     subgroups_info : Union[pd.DataFrame, None], optional
         Information of the model's subgroups (R, Q, subgroup_number,
         main_group), by default None
@@ -36,10 +35,9 @@ class GibbsModel(FragmentationModel):
     Attributes
     ----------
     subgroups : pd.DataFrame
-        Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct)
+        Model's subgroups. Index: 'group' (subgroups names). Columns: 'smarts'
+        (SMARTS representations of the group to detect its precense in the
+        molecule).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column

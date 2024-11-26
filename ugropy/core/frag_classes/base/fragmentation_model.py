@@ -40,8 +40,7 @@ class FragmentationModel:
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column.
