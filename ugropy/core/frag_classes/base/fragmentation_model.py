@@ -34,6 +34,10 @@ class FragmentationModel:
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
         the molecule).
+    allow_overlapping : bool, optional
+        Weather allow overlapping or not, by default False
+    fragmentation_result : FragmentationResult, optional
+        Fragmentation result class, by default FragmentationResult
 
     Attributes
     ----------
@@ -50,11 +54,11 @@ class FragmentationModel:
         self,
         subgroups: pd.DataFrame,
         allow_overlapping: bool = False,
-        check_molecular_weight: bool = False,
+        fragmentation_result: FragmentationResult = FragmentationResult,
     ) -> None:
         self.subgroups = subgroups
         self.allow_overlapping = allow_overlapping
-        self.check_molecular_weight = check_molecular_weight
+        self.fragmentation_result = fragmentation_result
 
         # Instantiate all de mol object from their smarts representation
         self.detection_mols = {}
@@ -163,6 +167,7 @@ class FragmentationModel:
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
         search_multiple_solutions: bool = False,
+        **kwargs,
     ) -> Union[FragmentationResult, List[FragmentationResult]]:
         """Process the solutions and return the FragmentationResult objects.
 
@@ -194,8 +199,11 @@ class FragmentationModel:
 
             if occurrences not in occurs:
                 sols.append(
-                    FragmentationResult(
-                        molecule, dict(occurrences), dict(groups_atoms)
+                    self.fragmentation_result(
+                        molecule,
+                        dict(occurrences),
+                        dict(groups_atoms),
+                        **kwargs,
                     )
                 )
                 occurs.append(occurrences)
