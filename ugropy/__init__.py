@@ -8,10 +8,10 @@ implemented.
 
 from .core import instantiate_mol_object
 from .core.frag_classes.abdulelah_gani.abdulelah_gani_p import (
-    AbdulelahGaniPrimaryModel
+    AbdulelahGaniPrimaryModel,
 )
 from .core.frag_classes.abdulelah_gani.abdulelah_gani_p_result import (
-    AGaniPFragmentationResult
+    AGaniPFragmentationResult,
 )
 from .core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
