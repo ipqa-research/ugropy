@@ -60,11 +60,13 @@ class FragmentationModel:
         self.allow_overlapping = allow_overlapping
         self.fragmentation_result = fragmentation_result
 
-        # Instantiate all de mol object from their smarts representation
+        # Instantiate all de mol object from their SMARTS representation
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
+            self.detection_mols[group] = []
+            for repr in row["smarts"].split("   "):
+                self.detection_mols[group].append(Chem.MolFromSmarts(repr))
 
     def get_groups(
         self,
@@ -245,10 +247,18 @@ class FragmentationModel:
         dict
             Detected fragments in the molecule.
         """
-        detected_fragments = {
-            f"{fragment_name}_{i}": atoms_tuple
-            for fragment_name, mol in self.detection_mols.items()
-            for i, atoms_tuple in enumerate(molecule.GetSubstructMatches(mol))
-        }
+        detected_fragments = {}
+        
+        for name, reprs in self.detection_mols.items():
+            reprs_matches = []
+            
+            for mol in reprs:
+                reprs_matches.append(molecule.GetSubstructMatches(mol))
+                
+            i = 0
+            for matches in reprs_matches:
+                for m in matches:
+                    detected_fragments[f"{name}_{i}"] = m
+                    i += 1
 
         return detected_fragments
