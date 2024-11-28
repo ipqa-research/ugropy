@@ -64,9 +64,7 @@ class FragmentationModel:
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = []
-            for repr in row["smarts"].split("   "):
-                self.detection_mols[group].append(Chem.MolFromSmarts(repr))
+            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
 
     def get_groups(
         self,
@@ -104,7 +102,9 @@ class FragmentationModel:
         # =====================================================================
         # Direct fragments detection
         # =====================================================================
-        mol = instantiate_mol_object(identifier, identifier_type)
+        mol = self.mol_preprocess(
+            instantiate_mol_object(identifier, identifier_type)
+        )
 
         detections = self.detect_fragments(mol)
 
@@ -163,6 +163,28 @@ class FragmentationModel:
         return self.set_fragmentation_result(
             mol, solutions, search_multiple_solutions, **kwargs
         )
+
+    def mol_preprocess(self, mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
+        """Preprocess the molecule.
+
+        This method is called before the detection of the fragments. It can be
+        used to preprocess the molecule before the detection of the fragments.
+        This allow to use RDKit functions to preprocess the molecule and make
+        your SMARTS detection easier. The default implementation does nothing
+        and leave the mol object as it is. You can inherit this class and
+        override this method to preprocess the molecule.
+
+        Parameters
+        ----------
+        mol : Chem.rdchem.Mol
+            Molecule to preprocess.
+
+        Returns
+        -------
+        Chem.rdchem.Mol
+            Preprocessed molecule.
+        """
+        return mol
 
     def set_fragmentation_result(
         self,
@@ -247,18 +269,10 @@ class FragmentationModel:
         dict
             Detected fragments in the molecule.
         """
-        detected_fragments = {}
-        
-        for name, reprs in self.detection_mols.items():
-            reprs_matches = []
-            
-            for mol in reprs:
-                reprs_matches.append(molecule.GetSubstructMatches(mol))
-                
-            i = 0
-            for matches in reprs_matches:
-                for m in matches:
-                    detected_fragments[f"{name}_{i}"] = m
-                    i += 1
+        detected_fragments = {
+            f"{fragment_name}_{i}": atoms_tuple
+            for fragment_name, mol in self.detection_mols.items()
+            for i, atoms_tuple in enumerate(molecule.GetSubstructMatches(mol))
+        }
 
         return detected_fragments
