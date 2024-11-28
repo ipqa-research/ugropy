@@ -98,3 +98,73 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         )
 
         return sol
+
+    def mol_preprocess(self, mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
+        """
+
+        Parameters
+        ----------
+        mol : Chem.rdchem.Mol
+            _description_
+
+        Returns
+        -------
+        Chem.rdchem.Mol
+            _description_
+        """
+
+        # Clone of the molecule to kekulize
+        kekulized_mol = Chem.Mol(mol)
+        Chem.Kekulize(kekulized_mol, clearAromaticFlags=True)
+
+        # Step 1: Identify all ring on the molecule
+        ring_info = mol.GetRingInfo()
+        atom_rings = ring_info.AtomRings()
+
+        # Step 2: Get only the aromatic rings
+        aromatic_rings = [
+            ring
+            for ring in atom_rings
+            if all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring)
+        ]
+        
+        # Step 3: Preprocess all rings that are not exclusively carbon atoms
+        for ring in aromatic_rings:
+            # All ring's atoms are carbon?
+            if not all(
+                mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring
+            ):
+                if len(ring) == 6:
+                    continue
+                
+                # If not, set all atoms in the ring as non-aromatic
+                for idx in ring:
+                    mol.GetAtomWithIdx(idx).SetIsAromatic(False)
+
+                # Make bonds of the ring non-aromatic
+                for i in range(len(ring)):
+                    atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
+                    bond = mol.GetBondBetweenAtoms(atom1, atom2)
+
+                    # Set bond type to the kekulized bond type
+                    kekulized_bond = kekulized_mol.GetBondBetweenAtoms(
+                        atom1, atom2
+                    )
+                    bond.SetBondType(kekulized_bond.GetBondType())
+
+        # Step 4: Revisit all the Carbon-only aromatic rings and set them as
+        #         aromatic. This is done because the previous step may have
+        #         marked some atoms as non-aromatic when two rings share atoms.
+        for ring in aromatic_rings:
+            if all(mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring):
+                # Restore atoms aromaticity
+                for idx in ring:
+                    mol.GetAtomWithIdx(idx).SetIsAromatic(True)
+
+                # Restore bonds aromaticity
+                for i in range(len(ring)):
+                    atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
+                    bond = mol.GetBondBetweenAtoms(atom1, atom2)
+                    bond.SetBondType(Chem.rdchem.BondType.AROMATIC)
+
+        return mol
