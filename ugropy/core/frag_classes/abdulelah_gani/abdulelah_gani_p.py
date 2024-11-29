@@ -129,15 +129,17 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         ]
         
         # Step 3: Preprocess all rings that are not exclusively carbon atoms
+        #         to make them aliphatic.
         for ring in aromatic_rings:
             # All ring's atoms are carbon?
             if not all(
                 mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring
-            ):
-                if len(ring) == 6:
+            ):  
+                # Specific rings adhocs that should be kept aromatic  
+                if is_aromatic(mol, ring):
                     continue
                 
-                # If not, set all atoms in the ring as non-aromatic
+                # Make atoms of the ring non-aromatic
                 for idx in ring:
                     mol.GetAtomWithIdx(idx).SetIsAromatic(False)
 
@@ -168,3 +170,42 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
                     bond.SetBondType(Chem.rdchem.BondType.AROMATIC)
 
         return mol
+
+def is_aromatic(mol, ring):
+    """
+    Verifica si un anillo coincide con un patrón SMARTS en la molécula original.
+
+    Parameters
+    ----------
+    mol : Chem.Mol
+        Molécula original.
+    ring : list[int]
+        Lista de índices de los átomos del anillo.
+
+    Returns
+    -------
+    bool
+        True si el anillo coincide con algún patrón SMARTS, False en caso contrario.
+    """
+    # Lista de patrones SMARTS
+    smarts_patterns = [
+        "c1ncncn1",  # Ejemplo: patrón para un anillo específico
+        # Agrega más patrones si es necesario
+    ]
+
+    # Convertir la lista de índices del anillo en un set para comparación eficiente
+    ring_set = set(ring)
+
+    for smarts in smarts_patterns:
+        pattern = Chem.MolFromSmarts(smarts)
+        if pattern is None:
+            raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+        
+        # Buscar coincidencias del patrón en la molécula
+        for match in mol.GetSubstructMatches(pattern):
+            # Convertir la coincidencia a set para comparación
+            match_set = set(match)
+            if match_set == ring_set:
+                return True  # El patrón coincide exactamente con el anillo
+        
+    return False  # Ningún patrón coincide
