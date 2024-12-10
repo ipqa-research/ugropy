@@ -128,6 +128,8 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
             if all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring)
         ]
         
+        true_aromatic_rings = []
+        
         # Step 3: Preprocess all rings that are not exclusively carbon atoms
         #         to make them aliphatic.
         for ring in aromatic_rings:
@@ -137,6 +139,7 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
             ):  
                 # Specific rings adhocs that should be kept aromatic  
                 if is_aromatic(mol, ring):
+                    true_aromatic_rings.append(ring)
                     continue
                 
                 # Make atoms of the ring non-aromatic
@@ -153,21 +156,22 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
                         atom1, atom2
                     )
                     bond.SetBondType(kekulized_bond.GetBondType())
+            else:
+                true_aromatic_rings.append(ring)
 
         # Step 4: Revisit all the Carbon-only aromatic rings and set them as
         #         aromatic. This is done because the previous step may have
         #         marked some atoms as non-aromatic when two rings share atoms.
-        for ring in aromatic_rings:
-            if all(mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring):
-                # Restore atoms aromaticity
-                for idx in ring:
-                    mol.GetAtomWithIdx(idx).SetIsAromatic(True)
+        for ring in true_aromatic_rings:
+            # Restore atoms aromaticity
+            for idx in ring:
+                mol.GetAtomWithIdx(idx).SetIsAromatic(True)
 
-                # Restore bonds aromaticity
-                for i in range(len(ring)):
-                    atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
-                    bond = mol.GetBondBetweenAtoms(atom1, atom2)
-                    bond.SetBondType(Chem.rdchem.BondType.AROMATIC)
+            # Restore bonds aromaticity
+            for i in range(len(ring)):
+                atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
+                bond = mol.GetBondBetweenAtoms(atom1, atom2)
+                bond.SetBondType(Chem.rdchem.BondType.AROMATIC)
 
         return mol
 
@@ -187,16 +191,36 @@ def is_aromatic(mol, ring):
     bool
         True si el anillo coincide con algún patrón SMARTS, False en caso contrario.
     """
+    non_aromatic_patterns = [
+        "[nH0]1[cH0][nH0][cH0][cH0][cH0]1"
+    ]
+    
     # Lista de patrones SMARTS
-    smarts_patterns = [
-        "c1ncncn1",  # Ejemplo: patrón para un anillo específico
-        # Agrega más patrones si es necesario
+    aromatic_patterns = [
+        "c1ncncn1",
+        "n1ccccc1",
+        "n1ccncc1",
+        "[nH0]1c[nH0]ccc1",
+        "[nH0]1[nH0]cccc1",
+        "n1ccccc1"
     ]
 
     # Convertir la lista de índices del anillo en un set para comparación eficiente
     ring_set = set(ring)
+    
+    for smarts in non_aromatic_patterns:
+        pattern = Chem.MolFromSmarts(smarts)
+        if pattern is None:
+            raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+        
+        # Buscar coincidencias del patrón en la molécula
+        for match in mol.GetSubstructMatches(pattern):
+            # Convertir la coincidencia a set para comparación
+            match_set = set(match)
+            if match_set == ring_set:
+                return False  # El patrón coincide exactamente con el anillo
 
-    for smarts in smarts_patterns:
+    for smarts in aromatic_patterns:
         pattern = Chem.MolFromSmarts(smarts)
         if pattern is None:
             raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
