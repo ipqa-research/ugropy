@@ -1,0 +1,6 @@
+group|smarts
+CH3|[CX4H3]
+CH2|[CX4H2]
+CHCH3|[CX4H]-[CX4H3]
+CHCH2|[CX4H]-[CX4H2]
+(B)CH3|[CX4H3;$([CX4H3][CX4]([#6])([#6])[#6])]

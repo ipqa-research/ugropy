@@ -10,7 +10,7 @@ You can check the group list and their SMARTS representation with:
 
 .. code-block:: python
 
-    joback.subgroups psrk.subgroups unifac.subgroups
+    joback.subgroups psrk.subgroups unifac.subgroups gceos.subgroups
 
 Obtain the contribution of each group to the properties with:
 
@@ -32,7 +32,7 @@ joback: JobackModel
     Joback FragmentationModel :cite:p:`joback1, joback2`
 """
 
-from . import jobackmod, psrkmod, read_csv, unifacmod
+from . import jobackmod, psrkmod, read_csv, unifacmod, gceosmod
 
 
-__all__ = ["read_csv", "jobackmod", "psrkmod", "unifacmod"]
+__all__ = ["read_csv", "jobackmod", "psrkmod", "unifacmod", "gceosmod"]
