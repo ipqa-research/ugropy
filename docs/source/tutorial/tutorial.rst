@@ -6,6 +6,7 @@ Tutorial
 
    installation.ipynb
    easy_way.ipynb
-   hard_way.ipynb
+   gibbs_models
+   properties_estimators
    ugropy_failing.ipynb
    writers.ipynb

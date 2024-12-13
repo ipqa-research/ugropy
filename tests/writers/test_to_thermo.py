@@ -1,15 +1,20 @@
-from ugropy import get_groups, unifac, writers
+from ugropy import unifac, writers
 
 
 def test_to_thermo():
     smiles = ["CCCCCC", "CCC(=O)C"]
 
-    hexa = get_groups(unifac, smiles[0], "smiles")
+    hexa = unifac.get_groups(smiles[0], "smiles")
     thermo_hexa = writers.to_thermo(hexa.subgroups, unifac)
 
     assert thermo_hexa == {1: 2, 2: 4}
 
-    buta = get_groups(unifac, smiles[1], "smiles")
-    thermo_buta = writers.to_thermo(buta.subgroups, unifac)
+    buta = unifac.get_groups(
+        smiles[1], "smiles", search_multiple_solutions=True
+    )
+    thermo_buta = [writers.to_thermo(b.subgroups, unifac) for b in buta]
 
-    assert thermo_buta == {1: 1, 2: 1, 18: 1}
+    sols = [{1: 1, 2: 1, 18: 1}, {1: 2, 19: 1}]
+
+    assert thermo_buta[0] in sols
+    assert thermo_buta[1] in sols

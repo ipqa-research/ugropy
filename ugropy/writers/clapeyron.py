@@ -3,21 +3,20 @@
 import pathlib
 from typing import List
 
-from ugropy.properties.joback_properties import JobackProperties
-
-from .clapeyron_writers import (
-    write_critical,
-    write_molar_mass,
-    write_psrk,
-    write_unifac,
+from ugropy.core.frag_classes.joback.joback_result import (
+    JobackFragmentationResult,
 )
+from ugropy.writers.clapeyron_writers.critical import write_critical
+from ugropy.writers.clapeyron_writers.molar_mass import write_molar_mass
+from ugropy.writers.clapeyron_writers.psrk_groups import write_psrk
+from ugropy.writers.clapeyron_writers.unifac_groups import write_unifac
 
 
 def to_clapeyron(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
-    joback_objects: List[JobackProperties] = [],
+    joback_objects: List[JobackFragmentationResult] = [],
     path: str = "database",
     batch_name: str = "",
 ) -> None:
@@ -34,8 +33,8 @@ def to_clapeyron(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
-    joback_objects : List[JobackProperties], optional
-        List of ugropy.properties.JobackProperties objects, by default [].
+    joback_objects : List[JobackFragmentationResult], optional
+        List of JobackFragmentationResult objects, by default [].
     path : str, optional
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional

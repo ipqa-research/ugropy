@@ -6,14 +6,16 @@ from typing import List
 
 import pandas as pd
 
-from ugropy.properties.joback_properties import JobackProperties
+from ugropy.core.frag_classes.joback.joback_result import (
+    JobackFragmentationResult,
+)
 
 
 def write_critical(
     path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
-    joback_objects: List[JobackProperties] = [],
+    joback_objects: List[JobackFragmentationResult] = [],
 ) -> None:
     """Create the DataFrame with the critical properties for Clapeyron.jl.
 
@@ -30,8 +32,8 @@ def write_critical(
         "ogUNIFAC_groups.csv", by default "".
     molecules_names : List[str]
         List of names for each chemical to write in the .csv files.
-    joback_objects : List[Joback], optional
-        List of ugropy.properties.JobackProperties objects, by default [].
+    joback_objects : List[JobackFragmentationResult], optional
+        List of JobackFragmentationResult objects, by default [].
 
     Returns
     -------
