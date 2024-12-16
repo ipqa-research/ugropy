@@ -1,130 +1,131 @@
-(CH3)2CH
-(CH3)3C
-CH(CH3)CH(CH3)
-CH(CH3)C(CH3)2
-C(CH3)2C(CH3)2
-CHn=CHm-CHp=CHk (k,m,n,p in 0..2)
-CH3-CHm=CHn (m,n in 0..2)
-CH2-CHm=CHn (m,n in 0..2)
-CHp-CHm=CHn (m,n in 0..2; p in 0..1)
-CHCHO or CCHO
-CH3COCH2
-CH3COCH or CH3COC
-CHCOOH or CCOOH
-CH3COOCH or CH3COOC
-CO-O-CO
-CHOH
-COH
-CH3COCHnOH (n in 0..2)
-NCCHOH or NCCOH
-OH-CHn-COO (n in 0..2)
-CHm(OH)CHn(OH) (m,n in 0..2)
-CHm(OH)CHn(NHp) (m,n,p in 0..2)
-CHm(NH2)CHn(NH2) (m,n in 0..2)
-CHm(NH)CHn(NH2) (m,n in 1..2)
-H2NCOCHnCHmCONH2 (m,n in 1..2)
-CHm(NHn)-COOH (m,n in 0..2)
-HOOC-CHn-COOH (n in 1..2)
-HOOC-CHn-CHm-COOH (n, m in 1..2)
-HO-CHn-COOH (n in 1..2)
-NH2-CHn-CHm-COOH (n, m in 1..2)
-CH3-O-CHn-COOH (n in 1..2)
-HS-CH-COOH
-HS-CHn-CHm-COOH (n, m in 1..2)
-NC-CHn-CHm-CN (n, m in 1..2)
-OH-CHn-CHm-CN (n, m in 1..2)
-HS-CHn-CHm-SH (n, m in 1..2)
-COO-CHn-CHm-OOC (n, m in 1..2)
-OOC-CHm-CHm-COO (n, m in 1..2)
-NC-CHn-COO (n in 1..2)
-COCHnCOO (n in 1..2)
-CHm-O-CHn=CHp (m,n,p in 0..3)
-CHm=CHn-F (m,n in 0..2)
-CHm=CHn-Br (m,n in 0..2)
-CHm=CHn-I (m,n in 0..2)
-CHm=CHn-Cl (m,n in 0..2)
-CHm=CHn-CN (m,n in 0..2)
-CHn=CHm-COO-CHp (m,n,p in 0..3)
-CHm=CHn-CHO (m,n in 0..2)
-CHm=CHn-COOH (m,n in 0..2)
-aC-CHn-X (n in 1..2) X: Halogen
-aC-CHn-NHm (n in 1..2; m in 0..2))
-aC-CHn-O- (n in 1..2)
-aC-CHn-OH (n in 1..2)
-aC-CHn-CN (n in 1..2)
-aC-CHn-CHO (n in 1..2)
-aC-CHn-SH (n in 1..2)
-aC-CHn-COOH (n in 1..2)
-aC-CHn-CO- (n in 1..2)
-aC-CHn-S- (n in 1..2)
-aC-CHn-OOC-H (n in 1..2)
-aC-CHm-NO2 (n in 1..2)
-aC-CHn-CONH2 (n in 1..2)
-aC-CHn-OOC (n in 1..2)
-aC-CHn-COO (n in 1..2)
-aC-SO2-OH
-aC-CH(CH3)2
-aC-C(CH3)3
-aC-CF3
-(CHn=C)(cyc)-CHO (n in 0..2)
-(CHn=C)cyc-COO-CHm (n,m in 0..3)
-(CHn=C)cyc-CO- (n in 0..2)
-(CHn=C)cyc-CH3 (n in 0..2)
-(CHn=C)cyc-CH2 (n in 0..2)
-(CHn=C)cyc-CN (n in 0..2)
-(CHn=C)cyc-Cl (n in 0..2)
-CHcyc-CH3
-CHcyc-CH2
-CHcyc-CH
-CHcyc-C
-CHcyc-CH=CHn (n in 1..2)
-CHcyc-C=CHn (n in 1..2)
-CHcyc-Cl
-CHcyc-F
-CHcyc-OH
-CHcyc-NH2
-CHcyc-NH-CHn (n in 0..3)
-CHcyc-N-CHn (n in 0..3)
-CHcyc-SH
-CHcyc-CN
-CHcyc-COOH
-CHcyc-CO
-CHcyc-NO2
-CHcyc-S-
-CHcyc-CHO
-CHcyc-O-
-CHcyc-OOCH
-CHcyc-COO
-CHcyc-OOC
-Ccyc-CH3
-Ccyc-CH2
-Ccyc-OH
->Ncyc-CH3
->Ncyc-CH2
-AROMRINGs1s2
-AROMRINGs1s3
-AROMRINGs1s4
-AROMRINGs1s2s3
-AROMRINGs1s2s4
-AROMRINGs1s3s5
-AROMRINGs1s2s3s4
-AROMRINGs1s2s3s5
-AROMRINGs1s2s4s5
-PYRIDINEs2
-PYRIDINEs3
-PYRIDINEs4
-PYRIDINEs2s3
-PYRIDINEs2s4
-PYRIDINEs2s5
-PYRIDINEs2s6
-PYRIDINEs3s4
-PYRIDINEs3s5
-PYRIDINEs2s3s6
-(CHn=CHm)cyc-COOH
-AROMRINGs1s2s3s4s5
-aC-NHCOCH2N
-(N=C)cyc-CH3
-aC-CONH(CH2)2N
-aC-SO2NHn (n>=0;n<3)
-aC-SO2NHn (n>=0;n<3)
-aC-SO2NHn (n>=0;n<3)
+group|smarts
+(CH3)2CH|[CH;!R]([CH3])[CH3]
+?(CH3)3C|
+?CH(CH3)CH(CH3)|
+?CH(CH3)C(CH3)2|
+????C(CH3)2C(CH3)2|
+?CHn=CHm-CHp=CHk (k,m,n,p in 0..2)|
+?CH3-CHm=CHn (m,n in 0..2)|
+?CH2-CHm=CHn (m,n in 0..2)|
+?CHp-CHm=CHn (m,n in 0..2; p in 0..1)|
+?CHCHO or CCHO|
+?CH3COCH2|
+?CH3COCH or CH3COC|
+?CHCOOH or CCOOH|
+?CH3COOCH or CH3COOC|
+?CO-O-CO|
+?CHOH|
+?COH|
+????CH3COCHnOH (n in 0..2)|
+?NCCHOH or NCCOH|
+?OH-CHn-COO (n in 0..2)|
+?CHm(OH)CHn(OH) (m,n in 0..2)|
+?CHm(OH)CHn(NHp) (m,n,p in 0..2)|
+?CHm(NH2)CHn(NH2) (m,n in 0..2)|
+?CHm(NH)CHn(NH2) (m,n in 1..2)|
+?H2NCOCHnCHmCONH2 (m,n in 1..2)|
+?CHm(NHn)-COOH (m,n in 0..2)|
+?HOOC-CHn-COOH (n in 1..2)|
+?HOOC-CHn-CHm-COOH (n, m in 1..2)|
+?HO-CHn-COOH (n in 1..2)|
+?NH2-CHn-CHm-COOH (n, m in 1..2)|
+?CH3-O-CHn-COOH (n in 1..2)|
+?HS-CH-COOH|
+?HS-CHn-CHm-COOH (n, m in 1..2)|
+?NC-CHn-CHm-CN (n, m in 1..2)|
+?OH-CHn-CHm-CN (n, m in 1..2)|
+????HS-CHn-CHm-SH (n, m in 1..2)|
+?COO-CHn-CHm-OOC (n, m in 1..2)|
+?OOC-CHm-CHm-COO (n, m in 1..2)|
+?NC-CHn-COO (n in 1..2)|
+?COCHnCOO (n in 1..2)|
+?CHm-O-CHn=CHp (m,n,p in 0..3)|
+?CHm=CHn-F (m,n in 0..2)|
+CHm=CHn-Br (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][Br]
+????CHm=CHn-I (m,n in 0..2)|
+?CHm=CHn-Cl (m,n in 0..2)|
+?CHm=CHn-CN (m,n in 0..2)|
+?CHn=CHm-COO-CHp (m,n,p in 0..3)|
+?CHm=CHn-CHO (m,n in 0..2)|
+?CHm=CHn-COOH (m,n in 0..2)|
+?aC-CHn-X (n in 1..2) X: Halogen|
+?aC-CHn-NHm (n in 1..2; m in 0..2))|
+?aC-CHn-O- (n in 1..2)|
+?aC-CHn-OH (n in 1..2)|
+?aC-CHn-CN (n in 1..2)|
+?aC-CHn-CHO (n in 1..2)|
+????aC-CHn-SH (n in 1..2)|
+?aC-CHn-COOH (n in 1..2)|
+?aC-CHn-CO- (n in 1..2)|
+?aC-CHn-S- (n in 1..2)|
+????aC-CHn-OOC-H (n in 1..2)|
+?aC-CHm-NO2 (n in 1..2)|
+?aC-CHn-CONH2 (n in 1..2)|
+?aC-CHn-OOC (n in 1..2)|
+?aC-CHn-COO (n in 1..2)|
+?aC-SO2-OH|
+?aC-CH(CH3)2|
+?aC-C(CH3)3|
+?aC-CF3|
+?(CHn=C)(cyc)-CHO (n in 0..2)|
+?(CHn=C)cyc-COO-CHm (n,m in 0..3)|
+?(CHn=C)cyc-CO- (n in 0..2)|
+?(CHn=C)cyc-CH3 (n in 0..2)|
+?(CHn=C)cyc-CH2 (n in 0..2)|
+?(CHn=C)cyc-CN (n in 0..2)|
+?(CHn=C)cyc-Cl (n in 0..2)|
+?CHcyc-CH3|
+?CHcyc-CH2|
+?CHcyc-CH|
+?CHcyc-C|
+CHcyc-CH=CHn (n in 1..2)|[CH;R][CH]=[CH1,CH2;!R]
+?CHcyc-C=CHn (n in 1..2)|
+?CHcyc-Cl|
+?CHcyc-F|
+?CHcyc-OH|
+?CHcyc-NH2|
+?CHcyc-NH-CHn (n in 0..3)|
+?CHcyc-N-CHn (n in 0..3)|
+????CHcyc-SH|
+?CHcyc-CN|
+?CHcyc-COOH|
+?CHcyc-CO|
+CHcyc-NO2|[CH;R][N+](=O)[O-]
+?CHcyc-S-|
+????CHcyc-CHO|
+?CHcyc-O-|
+?CHcyc-OOCH|
+?CHcyc-COO|
+?CHcyc-OOC|
+?Ccyc-CH3|
+?Ccyc-CH2|
+?Ccyc-OH|
+?>Ncyc-CH3|
+?>Ncyc-CH2|
+?AROMRINGs1s2|
+?AROMRINGs1s3|
+?AROMRINGs1s4|
+?AROMRINGs1s2s3|
+?AROMRINGs1s2s4|
+?AROMRINGs1s3s5|
+?AROMRINGs1s2s3s4|
+?AROMRINGs1s2s3s5|
+?AROMRINGs1s2s4s5|
+?PYRIDINEs2|
+?PYRIDINEs3|
+?PYRIDINEs4|
+?PYRIDINEs2s3|
+?PYRIDINEs2s4|
+?PYRIDINEs2s5|
+?PYRIDINEs2s6|
+?PYRIDINEs3s4|
+?PYRIDINEs3s5|
+????PYRIDINEs2s3s6|
+?(CHn=CHm)cyc-COOH|
+?AROMRINGs1s2s3s4s5|
+?aC-NHCOCH2N|
+(N=C)cyc-CH3|[#7;R]@[#6;R][CH3]
+?aC-CONH(CH2)2N|
+?aC-SO2NHn (n>=0;n<3)|
+?aC-SO2NHn (n>=0;n<3)|
+?aC-SO2NHn (n>=0;n<3)|
