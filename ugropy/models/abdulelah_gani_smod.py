@@ -1,6 +1,6 @@
-"""AbdulelahGani Primary Structures FragmentationModel implementation.
+"""AbdulelahGani Secondary Structures FragmentationModel implementation.
 
-Import and use the AbdulelahGani Primary Structures FragmentationModel with:
+Import and use the AbdulelahGani Secondary Structures FragmentationModel with:
 
 .. code-block:: python
 
@@ -30,11 +30,11 @@ from ugropy.models.read_csv import _rd
 
 
 # =============================================================================
-# Abdulelah Gani Primary Structures FragmentationModel
+# Abdulelah Gani Secondary Structures FragmentationModel
 # =============================================================================
-_ag = _csvs / "abdulelah_gani" / "primary"
+_ag = _csvs / "abdulelah_gani" / "secondary"
 
-_ag_sg = _rd(_ag / "primary.csv", "group")
+_ag_sg = _rd(_ag / "secondary.csv", "group")
 _ag_info = _rd(_ag / "info.csv", "group")
 
-abdulelah_gani_p = AbdulelahGaniPSTModel(_ag_sg, _ag_info, False, False)
+abdulelah_gani_s = AbdulelahGaniPSTModel(_ag_sg, _ag_info, True, True)

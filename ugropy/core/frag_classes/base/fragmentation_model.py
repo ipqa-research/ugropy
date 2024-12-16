@@ -54,10 +54,12 @@ class FragmentationModel:
         self,
         subgroups: pd.DataFrame,
         allow_overlapping: bool = False,
+        allow_free_atoms: bool = False,
         fragmentation_result: FragmentationResult = FragmentationResult,
     ) -> None:
         self.subgroups = subgroups
         self.allow_overlapping = allow_overlapping
+        self.allow_free_atoms = allow_free_atoms
         self.fragmentation_result = fragmentation_result
 
         # Instantiate all de mol object from their SMARTS representation
@@ -122,7 +124,7 @@ class FragmentationModel:
         )
 
         # If there is free atoms in the molecule can't fragment with the model
-        if np.size(free_atoms) > 0:
+        if np.size(free_atoms) > 0 and not self.allow_free_atoms:
             return self.set_fragmentation_result(
                 mol, [{}], search_multiple_solutions, **kwargs
             )

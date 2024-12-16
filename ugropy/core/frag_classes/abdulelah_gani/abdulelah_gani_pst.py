@@ -6,8 +6,8 @@ import pandas as pd
 
 from rdkit import Chem
 
-from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_p_result import (
-    AGaniPFragmentationResult,
+from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result import (
+    AGaniPSTFragmentationResult,
 )
 from ugropy.core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
@@ -16,7 +16,7 @@ from ugropy.core.ilp_solvers.default_solver import DefaultSolver
 from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
-class AbdulelahGaniPrimaryModel(FragmentationModel):
+class AbdulelahGaniPSTModel(FragmentationModel):
     """Abdulelah-Gani model dedicated to properties estimation models.
 
     Class to construct the primary structures detector for the Abdulelah-Gani
@@ -48,13 +48,17 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         self,
         subgroups: pd.DataFrame,
         subgroups_info: pd.DataFrame,
+        allow_overlapping: bool = False,
+        allow_free_atoms: bool = False,
     ) -> None:
 
         super().__init__(
             subgroups=subgroups,
-            allow_overlapping=False,
-            fragmentation_result=AGaniPFragmentationResult,
+            allow_overlapping=allow_overlapping,
+            allow_free_atoms=allow_free_atoms,
+            fragmentation_result=AGaniPSTFragmentationResult,
         )
+
         self.subgroups_info = subgroups_info
 
     def get_groups(
@@ -63,7 +67,7 @@ class AbdulelahGaniPrimaryModel(FragmentationModel):
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
-    ) -> Union[AGaniPFragmentationResult, List[AGaniPFragmentationResult]]:
+    ) -> Union[AGaniPSTFragmentationResult, List[AGaniPSTFragmentationResult]]:
         """Get the groups of a molecule.
 
         Parameters

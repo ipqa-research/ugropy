@@ -7,11 +7,11 @@ implemented.
 """
 
 from .core import instantiate_mol_object
-from .core.frag_classes.abdulelah_gani.abdulelah_gani_p import (
-    AbdulelahGaniPrimaryModel,
+from .core.frag_classes.abdulelah_gani.abdulelah_gani_pst import (
+    AbdulelahGaniPSTModel,
 )
-from .core.frag_classes.abdulelah_gani.abdulelah_gani_p_result import (
-    AGaniPFragmentationResult,
+from .core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result import (
+    AGaniPSTFragmentationResult,
 )
 from .core.frag_classes.base.fragmentation_model import (
     FragmentationModel,
@@ -29,6 +29,7 @@ from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .groups import Groups
 from .models.abdulelah_gani_pmod import abdulelah_gani_p
+from .models.abdulelah_gani_smod import abdulelah_gani_s
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
@@ -38,8 +39,8 @@ __all__ = [
     "constants",
     "writers",
     "instantiate_mol_object",
-    "AbdulelahGaniPrimaryModel",
-    "AGaniPFragmentationResult",
+    "AbdulelahGaniPSTModel",
+    "AGaniPSTFragmentationResult",
     "FragmentationModel",
     "FragmentationResult",
     "GibbsModel",
@@ -48,6 +49,7 @@ __all__ = [
     "JobackFragmentationResult",
     "Groups",
     "abdulelah_gani_p",
+    "abdulelah_gani_s",
     "joback",
     "unifac",
     "psrk",

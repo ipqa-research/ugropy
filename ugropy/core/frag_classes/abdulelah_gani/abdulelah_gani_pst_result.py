@@ -9,7 +9,7 @@ from ugropy.core.frag_classes.base.fragmentation_result import (
 )
 
 
-class AGaniPFragmentationResult(FragmentationResult):
+class AGaniPSTFragmentationResult(FragmentationResult):
     """Abdulelah-Gani primary group contribution properties estimator.
 
     Parameters
