@@ -192,7 +192,19 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         """
         # Non-aromatic patterns
         non_aromatic_patterns = [
-            "[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
+            #"[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
+            #"[nH0]1[cH0][nH0][cH0][nH0][cH0]1",
+            "[nH0]1[cH0;$([cH0]=O)][nH0]cn[cH0;$([cH0]=O)]1",
+            "c1ccco1",
+            "n1[nH0][cH0;$([cH0]=O)]ccc1",
+            "[cH0]1[cH0]cc[cH0]cc1",
+            "[nH0;R2]1ccccc1",
+            "n1[cH0;$([cH0]=*)]cccc1",
+            "n1c[cH0;$([cH0]=*)]ccc1",
+            "n1cc[cH0;$([cH0]=*)]cc1",
+            "n1ccc[cH0;$([cH0]=*)]c1",
+            "n1cccc[cH0;$([cH0]=*)]1",
+            "n1cn[cH0;$([cH0]=O)]cc1",
         ]
         
         # Aromatic patterns
@@ -201,9 +213,11 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             "c1ncncn1",
             "n1ccccc1",
             "n1ccncc1",
-            "[nH0]1c[nH0]ccc1",
+            "[nH0;R1]1[c;R1][nH0]ccc1",
             "[nH0]1[nH0]cccc1",
             "n1ccccc1",
+            "[nX2]1[nX2]c[nX2]cc1",
+            "[nH0]1c[nH0]ccc1",
         ]
 
         # Ring as set to compare

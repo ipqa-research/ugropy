@@ -27,7 +27,7 @@ H2NCOCHnCHmCONH2 (m,n in 1..2)|245
 CHm(NHn)-COOH (m,n in 0..2)|246
 HOOC-CHn-COOH (n in 1..2)|247
 HOOC-CHn-CHm-COOH (n, m in 1..2)|248
-HO-CHn-COOH (n in 1..2)|249
+HO-CHn-COOH (n in 0..2)|249
 NH2-CHn-CHm-COOH (n, m in 1..2)|250
 CH3-O-CHn-COOH (n in 1..2)|251
 HS-CH-COOH|252
@@ -51,7 +51,7 @@ CHm=CHn-COOH (m,n in 0..2)|269
 aC-CHn-X (n in 1..2) X: Halogen|270
 aC-CHn-NHm (n in 1..2; m in 0..2))|271
 aC-CHn-O- (n in 1..2)|272
-aC-CHn-OH (n in 0..2)|273
+aC-CHn-OH (n in 1..2)|273
 aC-CHn-CN (n in 1..2)|274
 aC-CHn-CHO (n in 1..2)|275
 aC-CHn-SH (n in 1..2)|276
