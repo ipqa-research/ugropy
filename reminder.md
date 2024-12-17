@@ -37,3 +37,47 @@ C=CCN1CCC23C4Oc5c(O)ccc(CC1C3(O)CCC4=O)c25 : logp
 C#CCOc1ccccc1OCC(O)CNC(C)(C)C : logp
 C=CCc1ccccc1OCC(O)CNC(C)C : logp
 C=CCOc1ccccc1OCC(O)CNC(C)C : logp
+
+CC(C)(C)C : logp just a bug, don't know how to fix it
+CC(C)C : logp just a bug, don't know how to fix it
+CC(C)C(C)C : logp just a bug, don't know how to fix it
+CC(C)C(C)P(=O)(C)C : logp just a bug, don't know how to fix it
+CC=C(C)C(=O)OC1CCN2CC=C(COC(=O)C(O)(C(C)OC)C(O)(C)C)C12 : logp just a bug, don't know how to fix it
+Cc1nc2ccccc2c(n1)c3ccccc3 : logp just a bug, don't know how to fix it
+CCC(C)N(CC(O)COc1ccccc1)CC(O)COc2ccccc2 : logp just a bug, don't know how to fix it
+CCC1(CC(C)C(C)C)C(=O)NC(=O)NC1=O : logp just a bug, don't know how to fix it
+CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)C(O)C(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1(O)C : logp just a bug, don't know how to fix it
+CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1(O)C
+CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1C
+CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(OC(=O)C)C1(O)C
+CCCN(CCC)C1CCOc2c(O)cccc12
+CCCN(CCC)C1CCOc2ccc(O)cc12
+CCCN(CCC)C1COc2c(O)cccc2C1
+CCCN(CCC)C1COc2ccc(O)cc2C1
+CCCN1CC(C=C2C1CCc3ccc(O)cc23)NS(=O)(=O)N(CC)CC
+CCN(C(=O)SCc1ccccc1)C(C)C(C)C
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(cc12)N3CCN(C)CC3
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(cc12)N3CCNC(C)C3
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(cc12)N3CCNCC3
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNC(C)C3)c(F)c12
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)c(F)c12
+CCn1cc(C(=O)O)c(=O)c2cc(F)c(nc12)N3CCNCC3
+CCn1cc(C(=O)O)c(=O)c2cc3OCOc3cc12
+CCn1cc(C(=O)O)c(=O)c2ccc(C)nc12
+CCn1cc(C(=O)O)c(=O)c2cnc(nc12)N3CCNCC3
+CCn1cc(C(=O)OCOC(=O)C)c(=O)c2ccc(C)nc12
+CCNc1nc(SC)nc(n1)NC(C)C(C)C
+CCOC(=O)C1=C2CN(C)C(=O)c3cc(F)ccc3N2C=N1
+CCN(CC)CCCN(c1ccccc1)C2Cc3ccccc3C2
+Clc1ccc(Cl)c(Cl)n1
+Clc1ccc(Cl)c(n1)C(=O)O
+CN(C)c1ccc(O)c2C(=O)C3=C(O)C4(O)C(=O)C(C(=O)N)=C(O)C(N(C)C)C4CC3Cc12
+CN(C)c1ccc2CC3CC4C(N(C)C)C(O)=C(C(=O)N)C(=O)C4(O)C(O)=C3C(=O)c2c1O
+CN1CCN(CC1)c2c(F)cc3c(=O)c(cn4C(C)COc2c34)C(=O)O
+COC1CC(OC(C)C1O)OC2C(C)C(=O)OC(C)C(C)C(O)C(C)C(=O)C3(OC3)CC(C)C(OC4OC(C)CC(N(C)C)C4O)C2C
+COc1ccc(Cc2cnc(N)nc2N)c(OC)n1
+COC2(NC(=O)C(C(=O)O)c1ccc(O)cc1)C(=O)N3C2OCC(CSC4=NN=NN4C)=C3C(=O)O
+CSC(C)=NOC(=O)N(C)SN(C1CC1)C(=O)N(C)C
+CSC1=CC=C2C(=CC1=O)C(CCc3c(C)cc(OC)c(OC)c23)NC4OCC(O)C(O)C4O
+(CHn=CHm)cyc-COOH
+FCCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCN(C)CC3)c(F)c12
