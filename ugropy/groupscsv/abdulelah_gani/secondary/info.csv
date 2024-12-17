@@ -51,7 +51,7 @@ CHm=CHn-COOH (m,n in 0..2)|269
 aC-CHn-X (n in 1..2) X: Halogen|270
 aC-CHn-NHm (n in 1..2; m in 0..2))|271
 aC-CHn-O- (n in 1..2)|272
-aC-CHn-OH (n in 1..2)|273
+aC-CHn-OH (n in 0..2)|273
 aC-CHn-CN (n in 1..2)|274
 aC-CHn-CHO (n in 1..2)|275
 aC-CHn-SH (n in 1..2)|276
@@ -78,7 +78,7 @@ CHcyc-CH3|296
 CHcyc-CH2|297
 CHcyc-CH|298
 CHcyc-C|299
-CHcyc-CH=CHn (n in 1..2)|300
+CHcyc-CH=CHn (n in 0..2)|300
 CHcyc-C=CHn (n in 1..2)|301
 CHcyc-Cl|302
 CHcyc-F|303
@@ -126,6 +126,6 @@ AROMRINGs1s2s3s4s5|344
 aC-NHCOCH2N|345
 (N=C)cyc-CH3|346
 aC-CONH(CH2)2N|347
-aC-SO2NHn (n>=0;n<3)|348
-aC-SO2NHn (n>=0;n<3)|349
-aC-SO2NHn (n>=0;n<3)|350
+aC-SO2NH|348
+aC-SO2N|349
+aC-SO2NH2|350
