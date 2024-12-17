@@ -27,3 +27,13 @@ C1=Cc2ccc3c4c(ccc(c24)C1)-c1ccccc1-3 : very complex bug
 c1ccc2c(c1)c3cccc4cccc2c34 : very complex bug
 c1ccc2c(c1)cc3c4ccccc4c5cccc2c35 : very complex bug
 c1ccc2cc3c4cccc5cccc(c3cc2c1)c45
+
+
+# Secondary strange
+C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(O)C1O : logp
+C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(OC(=O)C(=C)C)C1 : logp
+C=CCN1CCC23C4Oc5c(O)ccc(CC1C3(O)CCC4=O)c25 : logp
+
+C#CCOc1ccccc1OCC(O)CNC(C)(C)C : logp
+C=CCc1ccccc1OCC(O)CNC(C)C : logp
+C=CCOc1ccccc1OCC(O)CNC(C)C : logp

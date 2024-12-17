@@ -116,7 +116,6 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         Chem.rdchem.Mol
             _description_
         """
-
         # Clone of the molecule to kekulize
         kekulized_mol = Chem.Mol(mol)
         Chem.Kekulize(kekulized_mol, clearAromaticFlags=True)
@@ -126,47 +125,43 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         atom_rings = ring_info.AtomRings()
 
         # Step 2: Get only the aromatic rings
-        aromatic_rings = [
+        rdkit_aromatic_rings = [
             ring
             for ring in atom_rings
             if all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring)
         ]
         
-        true_aromatic_rings = []
+        # Lists to store the AGani aromatic rings and not aromatic rings
+        aromatic_rings = []
+        non_aromatic_rings = []
         
-        # Step 3: Preprocess all rings that are not exclusively carbon atoms
-        #         to make them aliphatic.
-        for ring in aromatic_rings:
-            # All ring's atoms are carbon?
-            if not all(
-                mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring
-            ):  
-                # Specific rings adhocs that should be kept aromatic  
-                if is_aromatic(mol, ring):
-                    true_aromatic_rings.append(ring)
-                    continue
-                
-                # Make atoms of the ring non-aromatic
-                for idx in ring:
-                    mol.GetAtomWithIdx(idx).SetIsAromatic(False)
-
-                # Make bonds of the ring non-aromatic
-                for i in range(len(ring)):
-                    atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
-                    bond = mol.GetBondBetweenAtoms(atom1, atom2)
-
-                    # Set bond type to the kekulized bond type
-                    kekulized_bond = kekulized_mol.GetBondBetweenAtoms(
-                        atom1, atom2
-                    )
-                    bond.SetBondType(kekulized_bond.GetBondType())
+        # Step 3: Check which rings are aromatic
+        for ring in rdkit_aromatic_rings:
+            if self.check_ring_aromaticity(mol, ring):
+                aromatic_rings.append(ring)
             else:
-                true_aromatic_rings.append(ring)
+                non_aromatic_rings.append(ring)
+        
+        
+        # Step 4: Preprocess the non aromatic rings
+        for ring in non_aromatic_rings:           
+            # Make atoms of the ring non-aromatic
+            for idx in ring:
+                mol.GetAtomWithIdx(idx).SetIsAromatic(False)
 
-        # Step 4: Revisit all the Carbon-only aromatic rings and set them as
-        #         aromatic. This is done because the previous step may have
-        #         marked some atoms as non-aromatic when two rings share atoms.
-        for ring in true_aromatic_rings:
+            # Make bonds of the ring non-aromatic
+            for i in range(len(ring)):
+                atom1, atom2 = ring[i], ring[(i + 1) % len(ring)]
+                bond = mol.GetBondBetweenAtoms(atom1, atom2)
+
+                # Set bond type to the kekulized bond type
+                kekulized_bond = kekulized_mol.GetBondBetweenAtoms(
+                    atom1, atom2
+                )
+                bond.SetBondType(kekulized_bond.GetBondType())
+
+        # Step 5: Revisit aromatic rings to make sure they are aromatic
+        for ring in aromatic_rings:
             # Restore atoms aromaticity
             for idx in ring:
                 mol.GetAtomWithIdx(idx).SetIsAromatic(True)
@@ -179,61 +174,66 @@ class AbdulelahGaniPSTModel(FragmentationModel):
 
         return mol
 
-def is_aromatic(mol, ring):
-    """
-    Verifica si un anillo coincide con un patrón SMARTS en la molécula original.
+    def check_ring_aromaticity(self, mol, ring) -> bool:
+        """
+        Verifica si un anillo coincide con un patrón SMARTS en la molécula original.
 
-    Parameters
-    ----------
-    mol : Chem.Mol
-        Molécula original.
-    ring : list[int]
-        Lista de índices de los átomos del anillo.
+        Parameters
+        ----------
+        mol : Chem.Mol
+            Molécula original.
+        ring : list[int]
+            Lista de índices de los átomos del anillo.
 
-    Returns
-    -------
-    bool
-        True si el anillo coincide con algún patrón SMARTS, False en caso contrario.
-    """
-    non_aromatic_patterns = [
-        "[nH0]1[cH0][nH0][cH0][cH0][cH0]1"
-    ]
-    
-    # Lista de patrones SMARTS
-    aromatic_patterns = [
-        "c1ncncn1",
-        "n1ccccc1",
-        "n1ccncc1",
-        "[nH0]1c[nH0]ccc1",
-        "[nH0]1[nH0]cccc1",
-        "n1ccccc1"
-    ]
-
-    # Convertir la lista de índices del anillo en un set para comparación eficiente
-    ring_set = set(ring)
-    
-    for smarts in non_aromatic_patterns:
-        pattern = Chem.MolFromSmarts(smarts)
-        if pattern is None:
-            raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+        Returns
+        -------
+        bool
+            True si el anillo coincide con algún patrón SMARTS, False en caso contrario.
+        """
+        # Non-aromatic patterns
+        non_aromatic_patterns = [
+            "[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
+        ]
         
-        # Buscar coincidencias del patrón en la molécula
-        for match in mol.GetSubstructMatches(pattern):
-            # Convertir la coincidencia a set para comparación
-            match_set = set(match)
-            if match_set == ring_set:
-                return False  # El patrón coincide exactamente con el anillo
+        # Aromatic patterns
+        aromatic_patterns = [
+            "c1ccccc1",
+            "c1ncncn1",
+            "n1ccccc1",
+            "n1ccncc1",
+            "[nH0]1c[nH0]ccc1",
+            "[nH0]1[nH0]cccc1",
+            "n1ccccc1",
+        ]
 
-    for smarts in aromatic_patterns:
-        pattern = Chem.MolFromSmarts(smarts)
-        if pattern is None:
-            raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+        # Ring as set to compare
+        ring_set = set(ring)
         
-        # Buscar coincidencias del patrón en la molécula
-        for match in mol.GetSubstructMatches(pattern):
-            # Convertir la coincidencia a set para comparación
-            match_set = set(match)
-            if match_set == ring_set:
-                return True  # El patrón coincide exactamente con el anillo
+        # Check if the ring matches any non aromatic pattern
+        for smarts in non_aromatic_patterns:
+            pattern = Chem.MolFromSmarts(smarts)
+            if pattern is None:
+                raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+            
+            for match in mol.GetSubstructMatches(pattern):
+                match_set = set(match)
+                if match_set == ring_set:
+                    return False
+
+        # Check if the ring matches any aromatic pattern
+        for smarts in aromatic_patterns:
+            pattern = Chem.MolFromSmarts(smarts)
+            if pattern is None:
+                raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
+            
+            for match in mol.GetSubstructMatches(pattern):
+                match_set = set(match)
+                if match_set == ring_set:
+                    return True
         
-    return False  # Ningún patrón coincide
+        # Special case: all are carbon atoms 
+        if all(mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring):
+            return True
+        
+        # Default case, we consider the ring as non aromatic
+        return False
