@@ -194,6 +194,10 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         non_aromatic_patterns = [
             #"[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
             #"[nH0]1[cH0][nH0][cH0][nH0][cH0]1",
+            "n1[c;R2][c;R2]n[c;R2][c;R2]1",
+            "n1[cH0;$([cH0]=O)]nccc1",
+            "n1ccnc[cH0;$([cH0]=O)]1",
+            "n1ccn[cH0;$([cH0]=O)][cH0;$([cH0]=O)]1",
             "[nH0]1[cH0;$([cH0]=O)][nH0]cn[cH0;$([cH0]=O)]1",
             "c1ccco1",
             "n1[nH0][cH0;$([cH0]=O)]ccc1",
