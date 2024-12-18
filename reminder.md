@@ -30,23 +30,23 @@ c1ccc2cc3c4cccc5cccc(c3cc2c1)c45
 
 
 # Secondary strange
-C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(O)C1O : logp
-C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(OC(=O)C(=C)C)C1 : logp
-C=CCN1CCC23C4Oc5c(O)ccc(CC1C3(O)CCC4=O)c25 : logp
+C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(O)C1O
+C=CC12COC(=O)C(=C)C2C3OC(=O)C(=C)C3C(OC(=O)C(=C)C)C1
+C=CCN1CCC23C4Oc5c(O)ccc(CC1C3(O)CCC4=O)c25
 
-C#CCOc1ccccc1OCC(O)CNC(C)(C)C : logp
-C=CCc1ccccc1OCC(O)CNC(C)C : logp
-C=CCOc1ccccc1OCC(O)CNC(C)C : logp
+C#CCOc1ccccc1OCC(O)CNC(C)(C)C
+C=CCc1ccccc1OCC(O)CNC(C)C
+C=CCOc1ccccc1OCC(O)CNC(C)C
 
-CC(C)(C)C : logp just a bug, don't know how to fix it
-CC(C)C : logp just a bug, don't know how to fix it
-CC(C)C(C)C : logp just a bug, don't know how to fix it
-CC(C)C(C)P(=O)(C)C : logp just a bug, don't know how to fix it
-CC=C(C)C(=O)OC1CCN2CC=C(COC(=O)C(O)(C(C)OC)C(O)(C)C)C12 : logp just a bug, don't know how to fix it
-Cc1nc2ccccc2c(n1)c3ccccc3 : logp just a bug, don't know how to fix it
-CCC(C)N(CC(O)COc1ccccc1)CC(O)COc2ccccc2 : logp just a bug, don't know how to fix it
-CCC1(CC(C)C(C)C)C(=O)NC(=O)NC1=O : logp just a bug, don't know how to fix it
-CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)C(O)C(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1(O)C : logp just a bug, don't know how to fix it
+CC(C)(C)C
+CC(C)C
+CC(C)C(C)C
+CC(C)C(C)P(=O)(C)C
+CC=C(C)C(=O)OC1CCN2CC=C(COC(=O)C(O)(C(C)OC)C(O)(C)C)C12
+Cc1nc2ccccc2c(n1)c3ccccc3
+CCC(C)N(CC(O)COc1ccccc1)CC(O)COc2ccccc2
+CCC1(CC(C)C(C)C)C(=O)NC(=O)NC1=O
+CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)C(O)C(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1(O)C
 CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1(O)C
 CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(O)C1C
 CCC1OC(=O)C(C)C(OC2OC(C)C(O)C(C)(OC)C2)C(C)C(OC3OC(C)CC(N(C)C)C3O)C(O)(C)CC(C)C(=O)C(C)C(OC(=O)C)C1(O)C
@@ -81,3 +81,56 @@ CSC(C)=NOC(=O)N(C)SN(C1CC1)C(=O)N(C)C
 CSC1=CC=C2C(=CC1=O)C(CCc3c(C)cc(OC)c(OC)c23)NC4OCC(O)C(O)C4O
 (CHn=CHm)cyc-COOH
 FCCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCN(C)CC3)c(F)c12
+N#Cc1cc(c(C)nc1NCC(O)C)c2ccccc2
+N#Cc1cc(cnc1NCC(O)C)c2ccncc2
+N#CCN(CC(=O)O)C1CC(OC(C)C1O)OC2CC(O)(Cc3c(O)c4C(=O)c5cccc(OC)c5C(=O)c4c(O)c23)C(=O)C
+NCC(O)C
+O=C(C)C(C(=O)ON=C(C)C12CC3CC(CC(C3)C1)C2)c4ccccc4
+O=C(C)OC1C(=O)C2(C)C(O)CC3OCC3(OC(=O)C)C2C(OC(=O)c4ccccc4)C(O)(C)C5(C)CC(OC(=O)C(O)C)C(C)=C15
+O=C(C)OC1C(=O)C2(C)C(O)CC3OCC3(OC(=O)C)C2C(OC(=O)c4ccccc4)C5(O)CC(OC(=O)C(O)C)C(C)=C1C5(C)C
+O=C(C)OC1C(=O)C2(C)C(O)CC3OCC3(OC(=O)C)C2C(OC(=O)c4ccccc4)C5(O)CC(OC(=O)C(O)Cc6ccccc6)C(C)=C1C5(C)C
+O=C(C)OCCNc1ccc(c(C)n1)c2ccncc2
+O=C(N)C1=C(O)C(N(C)C)C2C(O)C3C(C(=O)c4c(O)cccc4C3(O)C)=C(O)C2(O)C1=O
+O=C(N)C1=C(O)C(N(C)C)C2C(O)C3C(C)c4cccc(O)c4C(=O)C3=C(O)C2(O)C1=O
+O=C(N)C1=C(O)C(N(C)C)C2CC3C(C(=O)c4c(O)ccc(Cl)c4C3(O)C)=C(O)C2(O)C1=O
+O=C(N)C1=C(O)C(N(C)C)C2CC3C(C(=O)c4c(O)cccc4C3(O)C)=C(O)C2(O)C1=O
+O=C(N)NC(=O)Cc1ccccc1
+O=C(O)C(C(=O)NC1C(=O)N2C1SC(C)(C)C2C(=O)O)c3ccccc3
+O=C(O)C(N)C(O)C
+O=C(O)C(O)(C)C
+O=C(O)C1N2C(=O)C(NC(=O)C(C(=O)Oc3ccc4CCCc4c3)c5ccccc5)C2SC1(C)C
+O=C(O)CC(O)(CC(=O)O)C(=O)O
+O=c1c(Cl)c(Nc2ccccc2)c(=O)c3ccccc13
+C1=CC=C(C=C1)CC2C3=CC=CC=C3C(=O)C4=CC=CC=C24
+O=CCC1CC(C)C(=O)C=CC(C)=CC(C)C(CC)OC(=O)CC(O)C(C)C1OC2OC(C)CC(N(C)C)C2O
+O=CCC1CC(C)C(=O)C=CC(C)=CC(CO)C(CC)OC(=O)CC(O)C(C)C1OC2OC(C)C(O)C(N(C)C)C2O
+O=CCC1CC(C)C(=O)C=CC(C)=CC(COC2OC(C)C(O)C(OC)C2OC)C(CC)OC(=O)CC(O)C(C)C1OC3OC(C)C(OC4OC(C)C(O)C(O)(C)C4)C(N(C)C)C3O
+O=CCC1CC(C)C(=O)C=CC(C)=CC(OCC2OC(C)C(O)C(OC)C2OC)C(CC)OC(=O)CC(O)C(C)C1OC3OC(C)C(O)C(N(C)C)C3O
+O=CCC1CC(C)C(=O)C=CC=CCC(C)OC(=O)CC(OC(=O)C)C(OC)C1OC2OC(C)C(OC3OC(C)C(OC(=O)CC(C)C)C(O)(C)C3)C(N(C)C)C2O
+O=CCC1CC(C)C(=O)C=CC2(C)OC2C(C)C(CC)OC(=O)CC(O)C(C)C1OC3OC(C)CC(N(C)C)C3O
+O=CCC1CC(C)C(O)C=CC=CCC(C)OC(=O)CC(OC(=O)C)C(OC)C1OC2OC(C)C(OC3OC(C)C(OC(=O)CC(C)C)C(O)(C)C3)C(N(C)C)C2O
+O=COC1C(C)OC(OC2C(C)C(=O)OC(CC)C(C)C(O)C(C)C(=O)C(C)CC(O)(C)C(OC3OC(C)CC(N(C)C)C3O)C2C)CC1(C)OC
+O=COC1C(C)OC(OC2C(C)C(=O)OC(CC)C(O)(C)C(O)C(C)C(=O)C(C)CC(O)(C)C(OC3OC(C)CC(N(C)C)C3O)C2C)CC1(C)OC
+OC(C)C(C)C
+OC(C)CNc1ccccc1C(=O)N
+OCC(CC)Nc1ncc(cc1C#N)c2ccncc2
+OCC(O)C(CO)Nc1ncc(nc1)N(=O)=O
+OCC(O)CNc1ccccc1C(=O)N
+OCC(O)CNc1cnc(N(=O)=O)c(n1)C(=O)OC
+OCC(O)CNc1nc(N)c(nc1Cl)N(=O)=O
+OCC(O)CNc1nc(NC(=O)C)c(nc1Cl)N(=O)=O
+OCC(O)CNc1nccnc1N(=O)=O
+OCCNc1ccc(Cl)cc1C(=O)N
+OCCNc1ccccc1
+OCCNc1ccccc1C(=O)C
+OCCNc1ccccc1C(=O)N
+OCCNc1ccccc1C(=O)O
+OCCNc1ccccc1OC
+OCCNc1nc(Cl)nc(NC(C)C)n1
+OCCNc1nc(N)c(nc1Cl)N(=O)=O
+OCCNc1ncc(cc1C#N)c2ccncc2
+OCCNc1nccc(c1)C2=NNC(N)=N2
+
+
+True error
+O=N(=O)c1cc(N(=O)=O)c(ONC2CCCCC2)c(c1)N(=O)=O
