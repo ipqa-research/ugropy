@@ -55,7 +55,7 @@ def instantiate_mol_object(
 @cache
 def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
     """Instantiate a RDKit Mol object from molecule's name.
-    
+
     The funcion uses `pubchempy` to get the molecule's SMILES representation
     from the molecule's name and then instantiate a RDKit Mol object.
 
@@ -69,15 +69,14 @@ def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
     rdkit.Chem.rdchem.Mol
         RDKit Mol object.
     """
-    
+
     try:
         pcp_object = pcp.get_compounds(name, "name")[0]
         smiles = pcp_object.canonical_smiles
         chem_object = Chem.MolFromSmiles(smiles)
     except IndexError:
         raise ValueError(
-            f"Could not find a molecule with the name '{name}' on "
-            "PubChem"
+            f"Could not find a molecule with the name '{name}' on " "PubChem"
         )
-    
+
     return chem_object

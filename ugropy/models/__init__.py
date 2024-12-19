@@ -36,16 +36,20 @@ abdulelah_gani_p: AbdulelahGaniPrimaryModel
 
 from . import (
     abdulelah_gani_pmod,
+    abdulelah_gani_smod,
+    abdulelah_gani_tmod,
     gceosmod,
     jobackmod,
     psrkmod,
     read_csv,
-    unifacmod
+    unifacmod,
 )
 
 
 __all__ = [
     "abdulelah_gani_pmod",
+    "abdulelah_gani_smod",
+    "abdulelah_gani_tmod",
     "gceosmod",
     "read_csv",
     "jobackmod",

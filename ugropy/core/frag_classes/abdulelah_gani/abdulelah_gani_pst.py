@@ -130,21 +130,20 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             for ring in atom_rings
             if all(mol.GetAtomWithIdx(idx).GetIsAromatic() for idx in ring)
         ]
-        
+
         # Lists to store the AGani aromatic rings and not aromatic rings
         aromatic_rings = []
         non_aromatic_rings = []
-        
+
         # Step 3: Check which rings are aromatic
         for ring in rdkit_aromatic_rings:
             if self.check_ring_aromaticity(mol, ring):
                 aromatic_rings.append(ring)
             else:
                 non_aromatic_rings.append(ring)
-        
-        
+
         # Step 4: Preprocess the non aromatic rings
-        for ring in non_aromatic_rings:           
+        for ring in non_aromatic_rings:
             # Make atoms of the ring non-aromatic
             for idx in ring:
                 mol.GetAtomWithIdx(idx).SetIsAromatic(False)
@@ -192,9 +191,9 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         """
         # Non-aromatic patterns
         non_aromatic_patterns = [
-            #"[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
-            #"[nH0]1[cH0][nH0][cH0][nH0][cH0]1",
-            "n1[c;R2][c;R2]n[c;R2][c;R2]1",
+            # "[nH0]1[cH0][nH0][cH0][cH0][cH0]1",
+            # "[nH0]1[cH0][nH0][cH0][nH0][cH0]1",
+            # "[nH0X2]1[c;R2][c;R2][nH0X3][c;R2][c;R2]1",
             "n1[cH0;$([cH0]=O)]nccc1",
             "n1ccnc[cH0;$([cH0]=O)]1",
             "n1ccn[cH0;$([cH0]=O)][cH0;$([cH0]=O)]1",
@@ -210,7 +209,7 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             "n1cccc[cH0;$([cH0]=*)]1",
             "n1cn[cH0;$([cH0]=O)]cc1",
         ]
-        
+
         # Aromatic patterns
         aromatic_patterns = [
             "c1ccccc1",
@@ -226,13 +225,13 @@ class AbdulelahGaniPSTModel(FragmentationModel):
 
         # Ring as set to compare
         ring_set = set(ring)
-        
+
         # Check if the ring matches any non aromatic pattern
         for smarts in non_aromatic_patterns:
             pattern = Chem.MolFromSmarts(smarts)
             if pattern is None:
                 raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
-            
+
             for match in mol.GetSubstructMatches(pattern):
                 match_set = set(match)
                 if match_set == ring_set:
@@ -243,15 +242,15 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             pattern = Chem.MolFromSmarts(smarts)
             if pattern is None:
                 raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
-            
+
             for match in mol.GetSubstructMatches(pattern):
                 match_set = set(match)
                 if match_set == ring_set:
                     return True
-        
-        # Special case: all are carbon atoms 
+
+        # Special case: all are carbon atoms
         if all(mol.GetAtomWithIdx(idx).GetSymbol() == "C" for idx in ring):
             return True
-        
+
         # Default case, we consider the ring as non aromatic
         return False

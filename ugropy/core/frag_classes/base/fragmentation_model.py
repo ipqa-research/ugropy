@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from rdkit import Chem
+from rdkit.Chem import rdMolEnumerator
 
 from ugropy.core.checks import check_atoms_fragments_presence
 from ugropy.core.frag_classes.base.fragmentation_result import (
@@ -66,7 +67,16 @@ class FragmentationModel:
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
+            smarts = row["smarts"]
+
+            if "LN:" in smarts:
+                # Linknode expression from Chemaxon SMARTS
+                smarts = smarts.replace("LN:", "|LN:") + "|"
+                query = Chem.MolFromSmarts(smarts)
+                enumerated_smarts = rdMolEnumerator.Enumerate(query)
+                self.detection_mols[group] = enumerated_smarts
+            else:
+                self.detection_mols[group] = Chem.MolFromSmarts(smarts)
 
     def get_groups(
         self,
