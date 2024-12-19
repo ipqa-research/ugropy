@@ -28,31 +28,50 @@ from .core.frag_classes.joback.joback_result import JobackFragmentationResult
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .groups import Groups
+from .models.abdulelah_gani_mod import abdulelah_gani
 from .models.abdulelah_gani_pmod import abdulelah_gani_p
 from .models.abdulelah_gani_smod import abdulelah_gani_s
+from .models.abdulelah_gani_tmod import abdulelah_gani_t
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
 
 
 __all__ = [
+    # =========================================================================
+    # Misc
+    # -------------------------------------------------------------------------
     "constants",
     "writers",
     "instantiate_mol_object",
-    "AbdulelahGaniPSTModel",
-    "AGaniPSTFragmentationResult",
-    "FragmentationModel",
-    "FragmentationResult",
-    "GibbsModel",
-    "GibbsFragmentationResult",
-    "JobackModel",
-    "JobackFragmentationResult",
     "Groups",
+    # =========================================================================
+    # Fragmentation models classes
+    # -------------------------------------------------------------------------
+    "FragmentationModel",  # Base class
+    "AbdulelahGaniPSTModel",
+    "GibbsModel",
+    "JobackModel",
+    # =========================================================================
+    # Fragmentation results classes
+    # -------------------------------------------------------------------------
+    "FragmentationResult",  # Base class
+    "AGaniPSTFragmentationResult",
+    "GibbsFragmentationResult",
+    "JobackFragmentationResult",
+    # =========================================================================
+    # ILP Solvers
+    # -------------------------------------------------------------------------
+    "ILPSolver",  # Base class
+    "DefaultSolver",
+    # =========================================================================
+    # Models instances
+    # -------------------------------------------------------------------------
+    "abdulelah_gani",
     "abdulelah_gani_p",
     "abdulelah_gani_s",
+    "abdulelah_gani_t",
     "joback",
     "unifac",
     "psrk",
-    "ILPSolver",
-    "DefaultSolver",
 ]

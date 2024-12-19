@@ -34,11 +34,21 @@ abdulelah_gani_p: AbdulelahGaniPrimaryModel
     Abdulelah-Gani Primary Structures FragmentationModel :cite:p:`gani`
 """
 
-from . import abdulelah_gani_pmod, jobackmod, psrkmod, read_csv, unifacmod
+from . import (
+    abdulelah_gani_pmod,
+    abdulelah_gani_smod,
+    abdulelah_gani_tmod,
+    jobackmod,
+    psrkmod,
+    read_csv,
+    unifacmod,
+)
 
 
 __all__ = [
     "abdulelah_gani_pmod",
+    "abdulelah_gani_smod",
+    "abdulelah_gani_tmod",
     "read_csv",
     "jobackmod",
     "psrkmod",
