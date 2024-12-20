@@ -22,11 +22,15 @@ class AbdulelahGaniModel:
         abdulelah_gani_p: AbdulelahGaniPSTModel,
         abdulelah_gani_s: AbdulelahGaniPSTModel,
         abdulelah_gani_t: AbdulelahGaniPSTModel,
+        properties_contributions: pd.DataFrame,
+        properties_biases: pd.DataFrame,
     ) -> None:
 
         self.primary_model = abdulelah_gani_p
         self.secondary_model = abdulelah_gani_s
         self.tertiary_model = abdulelah_gani_t
+        self.properties_contributions = properties_contributions
+        self.properties_biases = properties_biases
 
     def get_groups(
         self,
@@ -47,11 +51,14 @@ class AbdulelahGaniModel:
         tertiary_groups = self.tertiary_model.get_groups(
             identifier, identifier_type, solver, search_multiple_solutions
         )
-        
+
         result = AGaniFragmentationResult(
+            primary_groups.molecule,
             primary_groups,
             secondary_groups,
             tertiary_groups,
+            self.properties_contributions,
+            self.properties_biases,
         )
 
         return result
