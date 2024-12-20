@@ -8,6 +8,12 @@ R : float
 
 from pathlib import Path
 
+from pint import UnitRegistry
+
+
+# Unit registry
+ureg = UnitRegistry()
+
 
 # constants.py path
 _here = Path(__file__).parent

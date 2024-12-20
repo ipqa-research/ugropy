@@ -6,6 +6,7 @@ inputs for thermodynamic libraries. UNIFAC, PSRK, and Joback models are
 implemented.
 """
 
+from .constants import ureg
 from .core import instantiate_mol_object
 from .core.frag_classes.abdulelah_gani.abdulelah_gani_pst import (
     AbdulelahGaniPSTModel,
@@ -41,7 +42,7 @@ __all__ = [
     # =========================================================================
     # Misc
     # -------------------------------------------------------------------------
-    "constants",
+    "ureg",
     "writers",
     "instantiate_mol_object",
     "Groups",
