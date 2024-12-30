@@ -1,16 +1,16 @@
 group|smarts
-?HOOC-(CHn)m-COOH (m>2, n in 0..2)|
+HOOC-(CHn)m-COOH (m>2, n in 0..2)|[CH0;$([CH0]([OH])=O)][CX4H2;!R][CH0;$([CH0]([OH])=O)] LN:1:3.50:2
 ?NHn-(CHn)m-COOH (m>2, n in 0..2)|
-?NH2-(CHn)m-OH (m>2, n in 0..2)|
-?OH-(CHn)m-OH (m>2, n in 0..2)|
+NH2-(CHn)m-OH (m>2, n in 0..2)|[NH2][CX4H2;!R][OH] LN:1:3.50:2
+OH-(CHn)m-OH (m>2, n in 0..2)|[OH][CX4H2;!R][OH] LN:1:3.50:2
 ???OH-(CHp)k-O-(CHn)m-OH (m,k>0; p,n in 0..2)|
 ???OH-(CHp)k-S-(CHn)m-OH (m,k>0; p,n in 0..2)|
 ???OH-(CHp)k-NHx-(CHn)m-OH (m,k>0; p,n,x in 0..2)|
 ???CHp-O-(CHn)m-OH (m>2; n,p in 0..2)|
-?NH2-(CHn)m-NH2 (m>2; n in 0..2))|
+NH2-(CHn)m-NH2 (m>2; n in 0..2))|[NH2][CX4H2;!R][NH2] LN:1:3.50:2
 ???NHk-(CHn)m-NH2 (m>2; k in 0..1; n in 0..2)|
 ???SH-(CHn)m-SH (m>2; n in 0..2)|
-?NC-(CHn)m-CN (m>2)|
+NC-(CHn)m-CN (m>2)|[NX1H0]#[CH0][CX4H2;!R][CH0]#[NX1H0] LN:2:3.50:4
 ???COO-(CHn)m-OOC (m>2; n in 0..2)|
 aC-(CHn=CHm)cyc (fused rings) (n,m in 0..1)|[cH0;R;!R1]@[CH0,CH1;R]=;@[CH0,CH1;R]
 aC-aC (different rings)|[cH0]!:[cH0]
