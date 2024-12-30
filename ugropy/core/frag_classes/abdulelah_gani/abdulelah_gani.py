@@ -45,20 +45,41 @@ class AbdulelahGaniModel:
         )
 
         secondary_groups = self.secondary_model.get_groups(
-            identifier, identifier_type, solver, search_multiple_solutions
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions=False,
         )
 
         tertiary_groups = self.tertiary_model.get_groups(
-            identifier, identifier_type, solver, search_multiple_solutions
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions=False,
         )
 
-        result = AGaniFragmentationResult(
-            primary_groups.molecule,
-            primary_groups,
-            secondary_groups,
-            tertiary_groups,
-            self.properties_contributions,
-            self.properties_biases,
-        )
+        if not search_multiple_solutions:
+            result = AGaniFragmentationResult(
+                primary_groups.molecule,
+                primary_groups,
+                secondary_groups,
+                tertiary_groups,
+                self.properties_contributions,
+                self.properties_biases,
+            )
+        else:
+            result = []
+
+            for psol in primary_groups:
+                result.append(
+                    AGaniFragmentationResult(
+                        psol.molecule,
+                        psol,
+                        secondary_groups,
+                        tertiary_groups,
+                        self.properties_contributions,
+                        self.properties_biases,
+                    )
+                )
 
         return result

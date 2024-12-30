@@ -12,6 +12,7 @@ markers = [
     "unifac: classic UNIFAC model tests",
     "psrk: predictive SRK model tests",
     "joback: Joback-Reid contribution model tests",
+    "agani: Abdulelah-Gani contribution model tests",
     # Tests cases markers
     "acids: tests cases for acids",
     "alcohols: tests cases for alcohols",
