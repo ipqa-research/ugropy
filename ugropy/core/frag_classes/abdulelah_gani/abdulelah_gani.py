@@ -1,4 +1,4 @@
-"""Joback fragmentation module."""
+"""Abdulelah-Gani fragmentation module :cite:p:`gani`."""
 
 from typing import List, Union
 
@@ -17,6 +17,37 @@ from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class AbdulelahGaniModel:
+    """Abdulelah-Gani fragmentation model :cite:p:`gani`.
+
+    Parameters
+    ----------
+    abdulelah_gani_p : AbdulelahGaniPSTModel
+        The primary Abdulelah-Gani fragmentation model.
+    abdulelah_gani_s : AbdulelahGaniPSTModel
+        The secondary Abdulelah-Gani fragmentation model.
+    abdulelah_gani_t : AbdulelahGaniPSTModel
+        The tertiary Abdulelah-Gani fragmentation model.
+    properties_contributions : pd.DataFrame
+        The contributions parameters of each group for each property of the
+        model.
+    properties_biases : pd.DataFrame
+        The biases parameters of each property of the model.
+
+    Attributes
+    ----------
+    primary_model : AbdulelahGaniPSTModel
+        The primary Abdulelah-Gani fragmentation model.
+    secondary_model : AbdulelahGaniPSTModel
+        The secondary Abdulelah-Gani fragmentation model.
+    tertiary_model : AbdulelahGaniPSTModel
+        The tertiary Abdulelah-Gani fragmentation model.
+    properties_contributions : pd.DataFrame
+        The contributions parameters of each group for each property of the
+        model.
+    properties_biases : pd.DataFrame
+        The biases parameters of each property of the model
+    """
+
     def __init__(
         self,
         abdulelah_gani_p: AbdulelahGaniPSTModel,
@@ -39,7 +70,31 @@ class AbdulelahGaniModel:
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
     ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
+        """Get the groups of the molecule.
 
+        Parameters
+        ----------
+        identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        identifier_type : str, optional
+            Identifier type of the molecule. Use "name" if you are providing
+            the molecules' name, "smiles" if you are providing the SMILES
+            or "mol" if you are providing a rdkir mol object, by default "name"
+        solver : ILPSolver, optional
+            ILP solver class, by default DefaultSolver
+        search_multiple_solutions : bool, optional
+            Weather search for multiple solutions or not, by default False
+            If False the return will be a FragmentationResult object, if True
+            the return will be a list of FragmentationResult objects.
+
+        Returns
+        -------
+        Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]
+            Fragmentation result. If search_multiple_solutions is False the
+            return will be a FragmentationResult object, if True the return
+            will be a list of FragmentationResult objects.
+        """
         primary_groups = self.primary_model.get_groups(
             identifier, identifier_type, solver, search_multiple_solutions
         )

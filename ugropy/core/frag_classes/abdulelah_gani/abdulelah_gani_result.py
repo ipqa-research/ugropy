@@ -1,3 +1,5 @@
+"""Abdulelah-Gani fragmentation model result module :cite:p:`gani`."""
+
 import numpy as np
 
 import pandas as pd
@@ -5,6 +7,7 @@ import pandas as pd
 import pint
 
 from rdkit import Chem
+from rdkit.Chem import Descriptors
 
 from ugropy.constants import ureg
 from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result import (
@@ -13,6 +16,55 @@ from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result import (
 
 
 class AGaniFragmentationResult:
+    """Abdulelah-Gani fragmentation model result :cite:p:`gani`.
+
+    Class to store the results of the Abdulelah-Gani fragmentation model.
+
+    Parameters
+    ----------
+    molecule : Chem.rdchem.Mol
+        RDKit molecule object.
+    primary_fragmentation : AGaniPSTFragmentationResult
+        Primary fragmentation model result.
+    secondary_fragmentation : AGaniPSTFragmentationResult
+        Secondary fragmentation model result.
+    tertiary_fragmentation : AGaniPSTFragmentationResult
+        Tertiary fragmentation model result.
+    properties_contributions : pd.DataFrame
+        Contribution parameters of each group for each property of the model.
+    properties_biases : pd.DataFrame
+        Biases parameters of each property of the model.
+
+    Attributes
+    ----------
+    molecule : Chem.rdchem.Mol
+        RDKit molecule object.
+    primary : AGaniPSTFragmentationResult
+        Primary fragmentation model result.
+    secondary : AGaniPSTFragmentationResult
+        Secondary fragmentation model result.
+    tertiary : AGaniPSTFragmentationResult
+        Tertiary fragmentation model result.
+    ml_vector : np.ndarray
+        Vector of groups occurrences to evaluate ML model.
+    molecular_weight : pint.Quantity
+        Molecular weight [g/mol].
+    critical_temperature : pint.Quantity
+        Critical temperature [K] GC-Simple method.
+    critical_pressure : pint.Quantity
+        Critical pressure [bar] GC-Simple method.
+    critical_volume : pint.Quantity
+        Critical volume [cm³/mol] GC-Simple method.
+    acentric_factor : pint.Quantity
+        Acentric factor [-] GC-Simple method.
+    liquid_molar_volume : pint.Quantity
+        Liquid molar volume [L/mol] GC-Simple method.
+    ig_formation_enthalpy : pint.Quantity
+        Ideal gas formation enthalpy [kJ/mol] GC-Simple method.
+    ig_formation_gibbs : pint.Quantity
+        Ideal gas formation Gibbs [kJ/mol] GC-Simple method.
+    """
+
     def __init__(
         self,
         molecule: Chem.rdchem.Mol,
@@ -50,6 +102,9 @@ class AGaniFragmentationResult:
         # =====================================================================
         # Properties
         # =====================================================================
+        self.molecular_weight: pint.Quantity = (
+            Descriptors.MolWt(self.molecule) * ureg.g / ureg.mol
+        )
         self.critical_temperature: pint.Quantity = None
         self.critical_pressure: pint.Quantity = None
         self.critical_volume: pint.Quantity = None
@@ -57,8 +112,6 @@ class AGaniFragmentationResult:
         self.liquid_molar_volume: pint.Quantity = None
         self.ig_formation_enthalpy: pint.Quantity = None
         self.ig_formation_gibbs: pint.Quantity = None
-        self.normal_melting_point: pint.Quantity = None
-        self.normal_boiling_point: pint.Quantity = None
 
         if self.primary.subgroups != {}:
             self.properties_calculation(
@@ -66,8 +119,22 @@ class AGaniFragmentationResult:
             )
 
     def properties_calculation(
-        self, properties_contributions, properties_biases
+        self,
+        properties_contributions: pd.DataFrame,
+        properties_biases: pd.DataFrame,
     ) -> None:
+        """Calculate the properties with the fragmentation results.
+
+        Properties are calculated with the GC-Simple method.
+
+        Parameters
+        ----------
+        properties_contributions : pd.DataFrame
+            Contribution parameters of each group for each property of the
+            model.
+        properties_biases : pd.DataFrame
+            Biases parameters of each property of the model.
+        """
         # Critical temperature
         tc_c = properties_contributions["Tc"].values
         tc_b = properties_biases["Tc"].loc["b1"]
@@ -130,19 +197,3 @@ class AGaniFragmentationResult:
         g_f_sum = np.dot(g_f_c, self.ml_vector.T)[0]
 
         self.ig_formation_gibbs = (g_f_sum + g_f_c_b1) * ureg.kJ / ureg.mol
-
-        # Normal melting point
-        tm_c = properties_contributions["Tm"].values
-        tm_b1 = properties_biases["Tm"].loc["b1"]
-
-        tm_sum = np.dot(tm_c, self.ml_vector.T)[0]
-
-        self.normal_melting_point = np.log(tm_sum) * tm_b1 * ureg.K
-
-        # Normal boiling point
-        tb_c = properties_contributions["Tb"].values
-        tb_b1 = properties_biases["Tb"].loc["b1"]
-
-        tb_sum = np.dot(tb_c, self.ml_vector.T)[0]
-
-        self.normal_boiling_point = np.log(tb_sum) * tb_b1 * ureg.K

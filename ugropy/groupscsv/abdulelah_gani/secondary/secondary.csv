@@ -7,7 +7,7 @@ C(CH3)2C(CH3)2|[CH0;!R](*)([CH3])([CH3])[CH0;!R](*)([CH3])[CH3]
 CHn=CHm-CHp=CHk (k,m,n,p in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
 CH3-CHm=CHn (m,n in 0..2)|[CH3][CH0,CH1;!R]=[CX3H0,CX3H1,CX3H2;!R]
 CH2-CHm=CHn (m,n in 0..2)|[CH2;!R][CH0,CH1;!R]=[CX3H0,CX3H1,CX3H2;!R]
-CHp-CHm=CHn (m,n in 0..2; p in 0..1)|[CX4H0,CX4H1;!R][CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R]
+CHp-CHm=CHn (m,n in 0..2; p in 0..1)|[CX4H0,CX4H1;!R][CH0,CH1,CH2;!R]=[CX3H0,CX3H1,CX3H2;!R]
 CHCHO or CCHO|[CX4H,CX4H0;!R][CH;!R]=[OH0]
 CH3COCH2|[CX4H3][CH0;!R](=[OH0])[CX4H2;!R;!$([CH2][OH])]
 CH3COCH or CH3COC|[CX4H3][CH0;!R](=[OH0])[CX4H,CX4H0;!R]
@@ -42,7 +42,7 @@ COCHnCOO (n in 1..2)|[CH0;!R;!$([CH0][OH0]);$([CH0]([CX4;!R])[CX4;!R])](=[OH0])[
 CHm-O-CHn=CHp (m,n,p in 0..3)|[CX4H0,CX4H1,CX4H2,CX4H3;!R;!$([CH0,CH1,CH2,CH3;!R]=[OH0])][OH0;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
 CHm=CHn-F (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][F]
 CHm=CHn-Br (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][Br]
-????CHm=CHn-I (m,n in 0..2)|
+CHm=CHn-I (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][I]
 CHm=CHn-Cl (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][Cl]
 CHm=CHn-CN (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH0;!R]#N
 CHn=CHm-COO-CHp (m,n,p in 0..3)|[CH0,CH1,CH2;!R]=[CH0,CH1][CH0](=[OH0])[OH0][CH0,CH1,CH2,CH3;!R,R1]

@@ -1,8 +1,8 @@
 import numpy as np
 
-import pytest
+from pint import Quantity
 
-from pint import Quantity as q
+import pytest
 
 from rdkit import Chem
 
@@ -15,31 +15,35 @@ def test_p_dichlorobenzene():
 
     assert mol.subgroups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
 
-    assert np.allclose(mol.normal_boiling_point, q(443.4, "K"), atol=1e-2)
+    assert np.allclose(
+        mol.normal_boiling_point, Quantity(443.4, "K"), atol=1e-2
+    )
     assert mol.normal_boiling_point.units == ureg.kelvin
 
-    assert np.allclose(mol.fusion_temperature, q(256, "K"), atol=1)
+    assert np.allclose(mol.fusion_temperature, Quantity(256, "K"), atol=1)
     assert mol.fusion_temperature.units == ureg.kelvin
 
-    assert np.allclose(mol.critical_temperature, q(675, "K"), atol=1)
+    assert np.allclose(mol.critical_temperature, Quantity(675, "K"), atol=1)
     assert mol.critical_temperature.units == ureg.kelvin
 
-    assert np.allclose(mol.critical_pressure, q(41.5, "bar"), atol=1e-1)
+    assert np.allclose(mol.critical_pressure, Quantity(41.5, "bar"), atol=1e-1)
     assert mol.critical_pressure.units == ureg.bar
 
-    assert np.allclose(mol.critical_volume, q(362, "cm^3/mol"), atol=1)
+    assert np.allclose(mol.critical_volume, Quantity(362, "cm^3/mol"), atol=1)
     assert mol.critical_volume.units == ureg.centimeter**3 / ureg.mole
 
     assert np.allclose(
-        mol.ig_enthalpy_formation, q(26.41, "kJ/mol"), atol=1e-2
+        mol.ig_enthalpy_formation, Quantity(26.41, "kJ/mol"), atol=1e-2
     )
     assert mol.ig_enthalpy_formation.units == ureg.kilojoule / ureg.mole
 
-    assert np.allclose(mol.ig_gibbs_formation, q(78.56, "kJ/mol"), atol=1e-2)
+    assert np.allclose(
+        mol.ig_gibbs_formation, Quantity(78.56, "kJ/mol"), atol=1e-2
+    )
     assert mol.ig_gibbs_formation.units == ureg.kilojoule / ureg.mole
 
     assert np.allclose(
-        mol.heat_capacity_ideal_gas(298), q(112.3, "J/mol/K"), atol=1
+        mol.heat_capacity_ideal_gas(298), Quantity(112.3, "J/mol/K"), atol=1
     )
     assert (
         mol.heat_capacity_ideal_gas(298).units
@@ -47,7 +51,7 @@ def test_p_dichlorobenzene():
     )
 
     assert np.allclose(
-        mol.heat_capacity_ideal_gas(400), q(139.2, "J/mol/K"), atol=1
+        mol.heat_capacity_ideal_gas(400), Quantity(139.2, "J/mol/K"), atol=1
     )
     assert (
         mol.heat_capacity_ideal_gas(400).units
@@ -55,7 +59,7 @@ def test_p_dichlorobenzene():
     )
 
     assert np.allclose(
-        mol.heat_capacity_ideal_gas(800), q(206.8, "J/mol/K"), atol=1
+        mol.heat_capacity_ideal_gas(800), Quantity(206.8, "J/mol/K"), atol=1
     )
     assert (
         mol.heat_capacity_ideal_gas(800).units
@@ -63,7 +67,7 @@ def test_p_dichlorobenzene():
     )
 
     assert np.allclose(
-        mol.heat_capacity_ideal_gas(1000), q(224.6, "J/mol/K"), atol=1
+        mol.heat_capacity_ideal_gas(1000), Quantity(224.6, "J/mol/K"), atol=1
     )
     assert (
         mol.heat_capacity_ideal_gas(1000).units
@@ -71,30 +75,32 @@ def test_p_dichlorobenzene():
     )
 
     assert np.allclose(
-        mol.vaporization_enthalpy, q(40.66, "kJ/mol"), atol=1e-2
+        mol.vaporization_enthalpy, Quantity(40.66, "kJ/mol"), atol=1e-2
     )
     assert mol.vaporization_enthalpy.units == ureg.kilojoule / ureg.mole
 
-    assert np.allclose(mol.fusion_enthalpy, q(13.3, "kJ/mol"), atol=1e-1)
+    assert np.allclose(
+        mol.fusion_enthalpy, Quantity(13.3, "kJ/mol"), atol=1e-1
+    )
     assert mol.fusion_enthalpy.units == ureg.kilojoule / ureg.mole
 
     assert np.allclose(
-        mol.viscosity_liquid(333.8), q(7.26e-4, "Pa s"), atol=1e-6
+        mol.viscosity_liquid(333.8), Quantity(7.26e-4, "Pa s"), atol=1e-6
     )
     assert mol.viscosity_liquid(333.8).units == ureg.pascal * ureg.second
 
     assert np.allclose(
-        mol.viscosity_liquid(374.4), q(4.92e-4, "Pa s"), atol=1e-6
+        mol.viscosity_liquid(374.4), Quantity(4.92e-4, "Pa s"), atol=1e-6
     )
     assert mol.viscosity_liquid(374.4).units == ureg.pascal * ureg.second
 
     assert np.allclose(
-        mol.viscosity_liquid(403.1), q(3.91e-4, "Pa s"), atol=1e-6
+        mol.viscosity_liquid(403.1), Quantity(3.91e-4, "Pa s"), atol=1e-6
     )
     assert mol.viscosity_liquid(403.1).units == ureg.pascal * ureg.second
 
     assert np.allclose(
-        mol.viscosity_liquid(423.3), q(3.40e-4, "Pa s"), atol=1e-6
+        mol.viscosity_liquid(423.3), Quantity(3.40e-4, "Pa s"), atol=1e-6
     )
     assert mol.viscosity_liquid(423.3).units == ureg.pascal * ureg.second
 
