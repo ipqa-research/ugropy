@@ -10,7 +10,10 @@ from ugropy.core.frag_classes.base.fragmentation_result import (
 
 
 class AGaniPSTFragmentationResult(FragmentationResult):
-    """Abdulelah-Gani primary group contribution properties estimator.
+    """Abdulelah-Gani group contribution properties estimator.
+
+    This class is to instantiate the Abdulelah-Gani primary, secondary and
+    tertiary models.
 
     Parameters
     ----------
@@ -26,11 +29,11 @@ class AGaniPSTFragmentationResult(FragmentationResult):
     Attributes
     ----------
     subgroups : dict
-        Abdulelah-Gani primary functional groups of the molecule.
+        Abdulelah-Gani groups of the molecule.
     subgroups_atoms_indexes : dict
-        Abdulelah-Gani primary functional groups atoms indexes.
+        Abdulelah-Gani groups atoms indexes.
     subgroups_numbers : dict
-        Abdulelah-Gani primary functional groups numbers.
+        Abdulelah-Gani groups numbers.
     """
 
     def __init__(

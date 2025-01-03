@@ -17,10 +17,10 @@ from ugropy.core.ilp_solvers.ilp_solver import ILPSolver
 
 
 class AbdulelahGaniPSTModel(FragmentationModel):
-    """Abdulelah-Gani model dedicated to properties estimation models.
+    """Abdulelah-Gani model dedicated to properties estimation.
 
-    Class to construct the primary structures detector for the Abdulelah-Gani
-    properties estimation model :cite:p:`gani`.
+    Class to construct the primary, secondary and tertiary structures detector
+    for the Abdulelah-Gani properties estimation model :cite:p:`gani`.
 
     Parameters
     ----------
@@ -112,8 +112,7 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         1. Kekulize the molecule.
         2. Identify the aromatic rings.
         3. Check the aromaticity of the rings.
-        4. Make the rings aromatic or non-aromatic based on the aromaticity
-        check.
+        4. Make the rings aromatic or non-aromatic based on the setp 3 check.
 
         The criteria to check the aromaticity of the rings are based on the
         criteria proposed by Abdulelah-Gani in the original paper datase

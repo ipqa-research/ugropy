@@ -12,3 +12,4 @@ Fragmentation Classes
    base/init
    gibbs_model/init
    joback_model/init
+   abdulelah_gani/init

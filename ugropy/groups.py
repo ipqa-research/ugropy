@@ -4,6 +4,9 @@ from typing import List, Union
 
 from rdkit.Chem import Descriptors
 
+from .core.frag_classes.abdulelah_gani.abdulelah_gani_result import (
+    AGaniFragmentationResult,
+)
 from .core.frag_classes.gibbs_model.gibbs_result import (
     GibbsFragmentationResult,
 )
@@ -11,31 +14,37 @@ from .core.frag_classes.joback.joback_result import JobackFragmentationResult
 from .core.get_rdkit_object import instantiate_mol_object
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
+from .models.abdulelah_gani_mod import abdulelah_gani
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
 
 
 class Groups:
-    """Group class.
+    """Groups class.
 
-    Stores the solved FragmentationModels subgroups of a molecule.
+    Stores the solved FragmentationModels subgroups of a molecule. This class
+    was implemented on an early version of the `ugropy` library. Is not really
+    meant to be used, instead is recommended to use directly the corresponding
+    FragmentationModel independently since it provides more flexibility and
+    control over the results. The class is kept since in most cases is very
+    comfortable to have all the results in a single object.
 
     Parameters
     ----------
-    identifier : str or rdkit.Chem.rdchem.Mol
-        Identifier of a molecule (name, SMILES or Chem.rdchem.Mol). Example:
-        hexane or CCCCCC.
+    identifier : Union[str, Chem.rdchem.Mol]
+            Identifier of the molecule. You can use either the name of the
+            molecule, the SMILEs of the molecule or a rdkit Mol object.
     identifier_type : str, optional
-        Use 'name' to search a molecule by name, 'smiles' to provide the
-        molecule SMILES representation or 'mol' to provide a
-        rdkit.Chem.rdchem.Mol object, by default "name".
+        Identifier type of the molecule. Use "name" if you are providing
+        the molecules' name, "smiles" if you are providing the SMILES
+        or "mol" if you are providing a rdkir mol object, by default "name"
     solver : ILPSolver, optional
-        ILP solver to use, by default DefaultSolver.
+        ILP solver class, by default DefaultSolver
     search_multiple_solutions : bool, optional
-        If True, the solver will search for multiple solutions. If set to true,
-        the model's results will be lists of FragmentationResults objects, by
-        default False.
+        Weather search for multiple solutions or not, by default False
+        If False the return will be a FragmentationResult object, if True
+        the return will be a list of FragmentationResult objects.
     normal_boiling_temperature : float, optional
         If provided, will be used to estimate critical temperature, acentric
         factor, and vapor pressure instead of the estimated normal boiling
@@ -59,6 +68,9 @@ class Groups:
     joback : Union[JobackFragmentationResult, List[JobackFragmentationResult]]
         JobackFragmentationResult object that contains the Joback subgroups and
         the estimated properties of the molecule.
+    agani : Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]
+        AGaniFragmentationResult object that contains the Abdulelah-Gani
+        subgroups and the estimated properties of the molecule.
     """
 
     def __init__(
@@ -103,4 +115,14 @@ class Groups:
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
             normal_boiling_point=normal_boiling_temperature,
+        )
+
+        # Abdulelah-Gani
+        self.agani: Union[
+            AGaniFragmentationResult, List[AGaniFragmentationResult]
+        ] = abdulelah_gani.get_groups(
+            self.identifier,
+            self.identifier_type,
+            solver=solver,
+            search_multiple_solutions=search_multiple_solutions,
         )

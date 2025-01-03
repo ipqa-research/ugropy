@@ -4,22 +4,22 @@ Import and use the AbdulelahGani Secondary Structures FragmentationModel with:
 
 .. code-block:: python
 
-    from ugropy import abdulelah_gani_p
+    from ugropy import abdulelah_gani_s
 
     # Get groups from molecule's name
-    tol = abdulelah_gani_p.get_groups("toluene")
+    tol = abdulelah_gani_s.get_groups("toluene")
 
     print(tol.subgroups)
 
     # Get groups from molecule's SMILES
-    eth = abdulelah_gani_p.get_groups("CCO", "smiles")
+    eth = abdulelah_gani_s.get_groups("CCO", "smiles")
 
     print(eth.subgroups)
 
 Attributes
 ----------
-abdulelah_gani_p: AbdulelahGaniPrimaryModel
-    AbdulelahGaniPrimaryModel FragmentationModel :cite:p:`gani`
+abdulelah_gani_s: AbdulelahGaniPSTModel
+    AbdulelahGaniPSTModel FragmentationModel :cite:p:`gani`
 """
 
 from ugropy.constants import _csvs
