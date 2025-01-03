@@ -210,14 +210,12 @@ def test_abdulelah_gani_vc(smiles):
                 f"Expected: {agani_vc}\n"
                 f"Obtained: {sol.critical_volume.magnitude}"
             )
-            
-            
+
+
 # =============================================================================
 # Acentric factor
 # =============================================================================
-df_w = pd.read_csv(
-    dfs_dir / "w.csv", index_col="SMILES", sep="|", comment="?"
-)
+df_w = pd.read_csv(dfs_dir / "w.csv", index_col="SMILES", sep="|", comment="?")
 df_w.dropna(inplace=True)
 
 
@@ -264,3 +262,162 @@ def test_abdulelah_gani_w(smiles):
     #             f"Expected: {agani_w}\n"
     #             f"Obtained: {sol.acentric_factor.magnitude}"
     #         )
+
+
+# =============================================================================
+# Liquid molar volume 298 K
+# =============================================================================
+df_lmv = pd.read_csv(
+    dfs_dir / "lmv.csv", index_col="SMILES", sep="|", comment="?"
+)
+df_lmv.dropna(inplace=True)
+
+
+@pytest.mark.agani
+@pytest.mark.parametrize("smiles", df_lmv.index)
+def test_abdulelah_gani_lmv(smiles):
+    sols = abdulelah_gani.get_groups(
+        smiles, "smiles", search_multiple_solutions=True
+    )
+
+    ag_sol = df_lmv.loc[smiles, groups].values.astype(int)
+
+    if not any([np.allclose(sol.ml_vector.ravel(), ag_sol) for sol in sols]):
+        # Expected solutions
+        ep, es, et = pretty_sol(ag_sol)
+
+        # Obtained solutions
+        op = [s.primary.subgroups for s in sols]
+        obtained_primary = "\n".join(str(o) for o in op)
+
+        error_message = (
+            "Liquid molar volume Abdulelah-Gani model failed for\n"
+            f"SMILES: {smiles}\n"
+            f"Expected primary:\n {str(ep)}\n"
+            f"Expected secondary:\n {str(es)}\n"
+            f"Expected tertiary:\n {str(et)}\n"
+            "------------------------------------\n"
+            "obtained primary:\n" + obtained_primary + "\n"
+            f"obtained secondary:\n {str(sols[0].secondary.subgroups)}\n"
+            f"obtained tertiary:\n {str(sols[0].tertiary.subgroups)}\n"
+        )
+
+        assert False, error_message
+
+    for sol in sols:
+        if np.allclose(sol.ml_vector.ravel(), ag_sol):
+            agani_lmv = df_lmv.loc[smiles, "GC-Simple Prediction"]
+            assert np.isclose(
+                sol.liquid_molar_volume.to("L/mol").magnitude, agani_lmv
+            ), (
+                f"Liquid molar volume Abdulelah-Gani model failed for\n"
+                f"SMILES: {smiles}\n"
+                f"Expected: {agani_lmv}\n"
+                f"Obtained: {sol.liquid_molar_volume.magnitude}"
+            )
+
+
+# =============================================================================
+# Ideal gas enthalpy of formation
+# =============================================================================
+df_hf = pd.read_csv(
+    dfs_dir / "hf.csv", index_col="SMILES", sep="|", comment="?"
+)
+df_hf.dropna(inplace=True)
+
+
+@pytest.mark.agani
+@pytest.mark.parametrize("smiles", df_hf.index)
+def test_abdulelah_gani_hf(smiles):
+    sols = abdulelah_gani.get_groups(
+        smiles, "smiles", search_multiple_solutions=True
+    )
+
+    ag_sol = df_hf.loc[smiles, groups].values.astype(int)
+
+    if not any([np.allclose(sol.ml_vector.ravel(), ag_sol) for sol in sols]):
+        # Expected solutions
+        ep, es, et = pretty_sol(ag_sol)
+
+        # Obtained solutions
+        op = [s.primary.subgroups for s in sols]
+        obtained_primary = "\n".join(str(o) for o in op)
+
+        error_message = (
+            "Ig formation enthalpy Abdulelah-Gani model failed for\n"
+            f"SMILES: {smiles}\n"
+            f"Expected primary:\n {str(ep)}\n"
+            f"Expected secondary:\n {str(es)}\n"
+            f"Expected tertiary:\n {str(et)}\n"
+            "------------------------------------\n"
+            "obtained primary:\n" + obtained_primary + "\n"
+            f"obtained secondary:\n {str(sols[0].secondary.subgroups)}\n"
+            f"obtained tertiary:\n {str(sols[0].tertiary.subgroups)}\n"
+        )
+
+        assert False, error_message
+
+    for sol in sols:
+        if np.allclose(sol.ml_vector.ravel(), ag_sol):
+            agani_hf = df_hf.loc[smiles, "GC-Simple Prediction"]
+            assert np.isclose(
+                sol.ig_formation_enthalpy.to("kJ/mol").magnitude, agani_hf
+            ), (
+                f"Ig formation enthalpy Abdulelah-Gani model failed for\n"
+                f"SMILES: {smiles}\n"
+                f"Expected: {agani_hf}\n"
+                f"Obtained: {sol.ig_formation_enthalpy.magnitude}"
+            )
+
+
+# =============================================================================
+# Ideal gas Gibbs energy of formation
+# =============================================================================
+df_gf = pd.read_csv(
+    dfs_dir / "gf.csv", index_col="SMILES", sep="|", comment="?"
+)
+df_gf.dropna(inplace=True)
+
+
+@pytest.mark.agani
+@pytest.mark.parametrize("smiles", df_gf.index)
+def test_abdulelah_gani_gf(smiles):
+    sols = abdulelah_gani.get_groups(
+        smiles, "smiles", search_multiple_solutions=True
+    )
+
+    ag_sol = df_gf.loc[smiles, groups].values.astype(int)
+
+    if not any([np.allclose(sol.ml_vector.ravel(), ag_sol) for sol in sols]):
+        # Expected solutions
+        ep, es, et = pretty_sol(ag_sol)
+
+        # Obtained solutions
+        op = [s.primary.subgroups for s in sols]
+        obtained_primary = "\n".join(str(o) for o in op)
+
+        error_message = (
+            "Ig formation Gibbs energy Abdulelah-Gani model failed for\n"
+            f"SMILES: {smiles}\n"
+            f"Expected primary:\n {str(ep)}\n"
+            f"Expected secondary:\n {str(es)}\n"
+            f"Expected tertiary:\n {str(et)}\n"
+            "------------------------------------\n"
+            "obtained primary:\n" + obtained_primary + "\n"
+            f"obtained secondary:\n {str(sols[0].secondary.subgroups)}\n"
+            f"obtained tertiary:\n {str(sols[0].tertiary.subgroups)}\n"
+        )
+
+        assert False, error_message
+
+    for sol in sols:
+        if np.allclose(sol.ml_vector.ravel(), ag_sol):
+            agani_gf = df_gf.loc[smiles, "GC-Simple Prediction"]
+            assert np.isclose(
+                sol.ig_formation_gibbs.to("kJ/mol").magnitude, agani_gf
+            ), (
+                f"Ig formation Gibbs energy Abdulelah-Gani model failed for\n"
+                f"SMILES: {smiles}\n"
+                f"Expected: {agani_gf}\n"
+                f"Obtained: {sol.ig_formation_gibbs.magnitude}"
+            )

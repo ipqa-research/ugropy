@@ -104,17 +104,30 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         return sol
 
     def mol_preprocess(self, mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
-        """
+        """Preprocess the molecule to be ready for the fragmentation.
+
+        This method preprocess the molecule to be ready for the fragmentation
+        process. The preprocessing steps are:
+
+        1. Kekulize the molecule.
+        2. Identify the aromatic rings.
+        3. Check the aromaticity of the rings.
+        4. Make the rings aromatic or non-aromatic based on the aromaticity
+        check.
+
+        The criteria to check the aromaticity of the rings are based on the
+        criteria proposed by Abdulelah-Gani in the original paper datase
+        :cite:p:`gani`.
 
         Parameters
         ----------
         mol : Chem.rdchem.Mol
-            _description_
+            Molecule to preprocess
 
         Returns
         -------
         Chem.rdchem.Mol
-            _description_
+            Preprocessed molecule
         """
         # Clone of the molecule to kekulize
         kekulized_mol = Chem.Mol(mol)
@@ -173,21 +186,22 @@ class AbdulelahGaniPSTModel(FragmentationModel):
 
         return mol
 
-    def check_ring_aromaticity(self, mol, ring) -> bool:
-        """
-        Verifica si un anillo coincide con un patrón SMARTS en la molécula original.
+    def check_ring_aromaticity(
+        self, mol: Chem.rdchem.Mol, ring: List[int]
+    ) -> bool:
+        """Verify ring aromaticity along with the authors criteria.
 
         Parameters
         ----------
         mol : Chem.Mol
-            Molécula original.
+            Molecule
         ring : list[int]
-            Lista de índices de los átomos del anillo.
+            List of atom indexes that form the ring
 
         Returns
         -------
         bool
-            True si el anillo coincide con algún patrón SMARTS, False en caso contrario.
+            True if the ring is aromatic, False otherwise
         """
         # Non-aromatic patterns
         non_aromatic_patterns = [
@@ -229,8 +243,6 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         # Check if the ring matches any non aromatic pattern
         for smarts in non_aromatic_patterns:
             pattern = Chem.MolFromSmarts(smarts)
-            if pattern is None:
-                raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
 
             for match in mol.GetSubstructMatches(pattern):
                 match_set = set(match)
@@ -240,8 +252,6 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         # Check if the ring matches any aromatic pattern
         for smarts in aromatic_patterns:
             pattern = Chem.MolFromSmarts(smarts)
-            if pattern is None:
-                raise ValueError(f"El patrón SMARTS '{smarts}' no es válido.")
 
             for match in mol.GetSubstructMatches(pattern):
                 match_set = set(match)

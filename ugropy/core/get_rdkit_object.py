@@ -69,7 +69,6 @@ def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
     rdkit.Chem.rdchem.Mol
         RDKit Mol object.
     """
-
     try:
         pcp_object = pcp.get_compounds(name, "name")[0]
         smiles = pcp_object.canonical_smiles

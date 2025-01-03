@@ -1,3 +1,27 @@
+"""Abdulelah-Gani FragmentationModel implementation.
+
+Import and use with:
+
+.. code-block:: python
+
+    from ugropy import abdulelah_gani
+
+    # Get groups from molecule's name
+    tol = abdulelah_gani.get_groups("toluene")
+
+    print(tol.critical_temperature)
+
+    # Get groups from molecule's SMILES
+    eth = abdulelah_gani.get_groups("CCO", "smiles")
+
+    print(eth.critical_pressure)
+
+Attributes
+----------
+abdulelah_gani: AbdulelahGaniModel
+    Abdulelah-Gani FragmentationModel :cite:p:`gani`
+"""
+
 from ugropy.constants import _csvs
 from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani import (
     AbdulelahGaniModel,
