@@ -2,20 +2,12 @@ Joback good examples:
 
 "CCOC(O)=O" multiple solutions
 
-Abdulelah Gani
+Abdulelah Gani good examples:
 
-Thiopene not aromatic?!
-Furane not aromatic?!
+COc1ccccc1N(=O)=O multiple solutions Critical temperature better the multiple. Not always is better make the ether with the aromatic
 
-5-F-2'-Me-4'-Br Salicyanilide : good multiple solutions example ¿bug?
+O=C(C)CC(C)C lo mismo que el anterior
 
-N-Bz-Pentanamide,urea derivative : logp multiple solutions no optimal ¿bug?
-
-C=CCNC(=O)NCC=C : logp non optimal representation ¿bug?
-
-C=CCNC(=O)NCC=C : logp non optimal representation ¿bug?
-
-C=COC(=O)C(C)Oc1cc(ccc1N(=O)=O)Oc2ccc(cc2Cl)C(F)(F)F : logp non optimal representation ¿bug?
 
 # Truly bugs
 Azulene: not aromatic??? bug

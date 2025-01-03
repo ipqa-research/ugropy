@@ -14,7 +14,7 @@ CH3COCH or CH3COC|[CX4H3][CH0;!R](=[OH0])[CX4H,CX4H0;!R]
 CHCOOH or CCOOH|[CX4H,CX4H0;!R;!$([C][a,OH]);!$([C][N;!R])!$([C]([CH0](=O)[OH])[CH0](=O)[OH])][CH0;!R](=[OH0])[OH]
 CH3COOCH or CH3COOC|[CX4H3][CH0;!R](=[OH0])[O][CX4H,CX4H0;!R]
 CO-O-CO|[CH0;!R;!$([CH0]([OH0])[OH0])](=O)[OH0][CH0;!R;!$([CH0]([OH0])[OH0])](=O)
-CHOH|[CX4H;!R;!$([CH][C;!R][OH]);!$([CH][cH0]);!$([CH][CH2,CH][NH,NH2]);!$([CH][CH0]#N)][OH]
+CHOH|[CX4H;!R;!$([CH][CH0](=O)[OH0]);!$([CH][C;!R][OH]);!$([CH][cH0]);!$([CH][CH2,CH][NH,NH2]);!$([CH][CH0]#N)][OH]
 COH|[CX4H0;!R;$([CX4H0]([CX4])([CX4])[CX4])][OH]
 CH3COCHnOH (n in 0..2)|[CH3][CH0;!R](=[OH0])[CX4H0,CX4H1,CX4H2;!R][OH]
 NCCHOH or NCCOH|[NH0]#[CH0;!R][CX4H0,CX4H;!R][OH]
@@ -39,7 +39,7 @@ COO-CHn-CHm-OOC (n, m in 1..2)|[CH0;!R](=[OH0])[OH0;!R][CX4H,CX4H2;!R][CX4H,CX4H
 OOC-CHm-CHm-COO (n, m in 1..2)|[OH0;!R][CH0](=O)[CH,CH2;!R][CH,CH2;!R][CH0;!R](=O)[OH0;!R]
 NC-CHn-COO (n in 1..2)|[NH0]#[CH0;!R][CX4H,CX4H2;!R][CH0]([OH0])=O
 COCHnCOO (n in 1..2)|[CH0;!R;!$([CH0][OH0]);$([CH0]([CX4;!R])[CX4;!R])](=[OH0])[CX4H,CX4H2;!R][CH0;!R](=[OH0])[OH0;!R]
-CHm-O-CHn=CHp (m,n,p in 0..3)|[CH0,CH1,CH2,CH3;!R;!$([CH0,CH1,CH2,CH3;!R]=[OH0])][OH0;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
+CHm-O-CHn=CHp (m,n,p in 0..3)|[CX4H0,CX4H1,CX4H2,CX4H3;!R;!$([CH0,CH1,CH2,CH3;!R]=[OH0])][OH0;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
 CHm=CHn-F (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][F]
 CHm=CHn-Br (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][Br]
 ????CHm=CHn-I (m,n in 0..2)|
@@ -84,15 +84,15 @@ CHcyc-Cl|[CX4H;R][Cl]
 CHcyc-F|[CX4H;R][F]
 CHcyc-OH|[CX4H;R][OH]
 CHcyc-NH2|[CX4H;R][NH2]
-CHcyc-NH-CHn (n in 0..3)|[CX4H;R][NH;!R][CH0,CH1,CH2,CH3,cH0]
-CHcyc-N-CHn (n in 0..3)|[CX4H;R][NH0;!R][CX4H0&!R,CX4H1&!R,CX4H2&!R,CX4H3&!R,cH0]
-????CHcyc-SH|
+CHcyc-NH-CHn (n in 0..3)|[CX4H;R][NH;!R][CX4H0,CX4H1,CX4H2,CX4H3,cH0]
+CHcyc-N-CHn (n in 0..3)|[CX4H;R][NH0;!R][CX4H0,CX4H1,CX4H2,CX4H3,cH0]
+CHcyc-SH|[CX4H;R][SX2H]
 CHcyc-CN|[CX4H;R][CH0;!R]#N
 CHcyc-COOH|[CX4H;R][CH0;!R]([OH])=O
 CHcyc-CO|[CX4H;R][CH0;!R;!$([CH0][OH,OH0])]=O
 CHcyc-NO2|[CX4H;R][N+](=O)[O-]
 CHcyc-S-|[CX4H;R][SX2H0;!R]
-????CHcyc-CHO|
+CHcyc-CHO|[CX4;R][CH;!R]=O
 CHcyc-O-|[CX4H;R;x2][OH0;!R;!$([OH0][CH0]=[OH0]);!$([OH0][CH]=[OH0])]
 CHcyc-OOCH|[CX4H;R;x2][OH0][CH]=O
 CHcyc-COO|[CX4H;R;x2][CH0]([OH0;!R])=[OH0]

@@ -104,7 +104,7 @@ class AGaniFragmentationResult:
         w_sum = np.dot(w, self.ml_vector.T)[0]
 
         self.acentric_factor = (
-            np.log((w_sum + w_b3)) ** (1 / w_b2) * w_b1 * ureg.dimensionless
+            np.log((w_sum + w_b3) ** (1 / w_b2)) * w_b1 * ureg.dimensionless
         )
 
         # Liquid molar volume
