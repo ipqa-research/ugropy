@@ -18,8 +18,8 @@ Import and use the AbdulelahGani Primary Structures FragmentationModel with:
 
 Attributes
 ----------
-abdulelah_gani_p: AbdulelahGaniPrimaryModel
-    AbdulelahGaniPrimaryModel FragmentationModel :cite:p:`gani`
+abdulelah_gani_p: AbdulelahGaniPSTModel
+    AbdulelahGaniPSTModel FragmentationModel :cite:p:`gani`
 """
 
 from ugropy.constants import _csvs

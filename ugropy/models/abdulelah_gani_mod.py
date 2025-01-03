@@ -10,6 +10,9 @@ Import and use with:
     tol = abdulelah_gani.get_groups("toluene")
 
     print(tol.critical_temperature)
+    print(tol.primary.subgroups)
+    print(tol.secondary.subgroups)
+    print(tol.tertiary.subgroups)
 
     # Get groups from molecule's SMILES
     eth = abdulelah_gani.get_groups("CCO", "smiles")
