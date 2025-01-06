@@ -141,7 +141,10 @@ class AGaniFragmentationResult:
 
         tc_sum = np.dot(tc_c, self.ml_vector.T)[0]
 
-        self.critical_temperature = tc_b * np.log(tc_sum) * ureg.K
+        if tc_sum <= 0:
+            self.critical_temperature = np.nan * ureg.K
+        else:
+            self.critical_temperature = tc_b * np.log(tc_sum) * ureg.K
 
         # Critical pressure
         pc_c = properties_contributions["Pc"].values

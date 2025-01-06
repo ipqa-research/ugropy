@@ -39,8 +39,9 @@ libraries:
 
 
 # Example of use
-You can check the full tutorial
-[here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
+Here is a little taste of `ugropy`, please, check the full tutorial
+[here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html) to see
+all it has to offer!
 
 Get groups from the molecule's name:
 
@@ -54,11 +55,13 @@ hexane = Groups("hexane")
 print(hexane.unifac.subgroups)
 print(hexane.psrk.subgroups)
 print(hexane.joback.subgroups)
+print(hexane.agani.primary.subgroups)
 ```
 
     {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'-CH3': 2, '-CH2-': 4}
+    {'CH3': 2, 'CH2': 4}
 
 Get groups from molecule's SMILES:
 
@@ -68,13 +71,15 @@ propanol = Groups("CCCO", "smiles")
 print(propanol.unifac.subgroups)
 print(propanol.psrk.subgroups)
 print(propanol.joback.subgroups)
+print(propanol.agani.primary.subgroups)
 ```
 
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'-CH3': 1, '-CH2-': 2, '-OH (alcohol)': 1}
+    {'CH3': 1, 'CH2': 2, 'OH': 1}
 
-Estimate properties with the Joback model!
+Estimate properties with the Joback and Abdulelah-Gani models!
 
 ```python
 limonene = Groups("limonene")
@@ -85,8 +90,22 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
 ```
 
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
-    657.4486692170663 K
+    657.4486692170663 kelvin
     1.0254019428522743 bar
+
+```python
+print(limonene.agani.primary.subgroups)
+print(limonene.agani.secondary.subgroups)
+print(limonene.agani.tertiary.subgroups)
+print(f"{limonene.agani.critical_temperature}")
+print(limonene.agani.molecular_weight / limonene.agani.liquid_molar_volume)
+```
+
+    {'CH3': 2, 'CH2=C': 1, 'CH2 (cyclic)': 3, 'CH (cyclic)': 1, 'CH=C (cyclic)': 1}
+    {'CH3-CHm=CHn (m,n in 0..2)': 1, '(CHn=C)cyc-CH3 (n in 0..2)': 1, 'CHcyc-C=CHn (n in 1..2)': 1}
+    {}
+    640.1457030826214 kelvin
+    834.8700605718585 gram / liter
 
 Visualize your results! (The next code creates the `ugropy` logo)
 

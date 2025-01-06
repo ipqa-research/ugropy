@@ -3,9 +3,6 @@
 import pathlib
 from typing import List
 
-from ugropy.core.frag_classes.joback.joback_result import (
-    JobackFragmentationResult,
-)
 from ugropy.writers.clapeyron_writers.critical import write_critical
 from ugropy.writers.clapeyron_writers.molar_mass import write_molar_mass
 from ugropy.writers.clapeyron_writers.psrk_groups import write_psrk
@@ -16,7 +13,7 @@ def to_clapeyron(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
-    joback_objects: List[JobackFragmentationResult] = [],
+    property_estimator: List = [],
     path: str = "database",
     batch_name: str = "",
 ) -> None:
@@ -33,8 +30,9 @@ def to_clapeyron(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
-    joback_objects : List[JobackFragmentationResult], optional
-        List of JobackFragmentationResult objects, by default [].
+    property_estimator : List, optional
+        List of JobackFragmentationResult or AGaniFragmentationResult, by
+        default [].
     path : str, optional
         Path to the directory to store de .csv files, by default "./database".
     batch_name : str, optional
@@ -62,10 +60,10 @@ def to_clapeyron(
             "the molecules name list."
         )
 
-    if joback_objects and len(joback_objects) != len(molecules_names):
+    if property_estimator and len(property_estimator) != len(molecules_names):
         raise ValueError(
-            "Joback objects list must have the same amount of elements than"
-            "the molecules name list."
+            "Property estimators result objects list must have the same amount"
+            "of elements than the molecules name list."
         )
 
     # Create dir if not created
@@ -79,7 +77,7 @@ def to_clapeyron(
         molecules_names,
         unifac_groups,
         psrk_groups,
-        joback_objects,
+        property_estimator,
     )
 
     # LV-UNIFAC
@@ -91,7 +89,7 @@ def to_clapeyron(
         write_psrk(path_pathlib, batch_name, molecules_names, psrk_groups)
 
     # Critical
-    if joback_objects:
+    if property_estimator:
         write_critical(
-            path_pathlib, batch_name, molecules_names, joback_objects
+            path_pathlib, batch_name, molecules_names, property_estimator
         )
