@@ -166,10 +166,10 @@ class AGaniFragmentationResult:
         self.critical_volume = (vc_sum + vc_b1) * ureg.cm**3 / ureg.mol
 
         # Acentric factor
-        w = properties_contributions["ω"].values
-        w_b1 = properties_biases["ω"].loc["b1"]
-        w_b2 = properties_biases["ω"].loc["b2"]
-        w_b3 = properties_biases["ω"].loc["b3"]
+        w = properties_contributions["w"].values
+        w_b1 = properties_biases["w"].loc["b1"]
+        w_b2 = properties_biases["w"].loc["b2"]
+        w_b3 = properties_biases["w"].loc["b3"]
 
         w_sum = np.dot(w, self.ml_vector.T)[0]
 
