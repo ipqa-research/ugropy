@@ -12,6 +12,7 @@ markers = [
     "unifac: classic UNIFAC model tests",
     "psrk: predictive SRK model tests",
     "joback: Joback-Reid contribution model tests",
+    "agani: Abdulelah-Gani contribution model tests",
     # Tests cases markers
     "acids: tests cases for acids",
     "alcohols: tests cases for alcohols",
@@ -54,5 +55,6 @@ dependencies = [
     'rdkit >= 2023.9.5',
     'pandas >= 2.0.3',
     'pubchempy >= 1.0.4',
-    'pulp >= 2.9.0'
+    'pulp >= 2.9.0',
+    'pint >= 0.22'
 ]

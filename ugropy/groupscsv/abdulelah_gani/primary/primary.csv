@@ -1,0 +1,221 @@
+group|smarts|molecular_weight
+CH3|[CX4H3]|15.035
+CH2|[CX4H2;!R]|14.027
+CH|[CX4H;!R]|13.019
+C|[CX4H0;!R]|12.011
+CH2=CH|[CH2]=[CH]|27.046
+CH=CH|[CH;!R]=[CH;!R]|26.038
+CH2=C|[CH2]=[CH0;!R]|26.038
+CH=C|[CH;!R]=[CH0;!R]|25.03
+C=C|[CH0;!R]=[CH0;!R]|24.022
+CH2=C=CH|[CH2]=[CH0;!R]=[CH;!R]|39.0564
+CH2=C=C|[CH2]=[CH0;!R]=[CH0;!R]|38.0486
+C=C=C|[CH0;!R]=[CH0;!R]=[CH0;!R]|36.033
+CH≡C|[CH]#[CH0]|25.0298
+C≡C|[CH0]#[CH0]|24.022
+aCH|[cH]|13.019
+aC fused with aromatic ring|[cH0;$([cH0;R2,R3]([a;R2,R3]([a;R])[a;R])([a;R])[a;R])]|12.011
+aC fused with non-aromatic ring|[cH0;$([cH0;R2,R3]([a;R2,R3]([a;R])[A;R])([a;R])[a;R]),$([cH0;R2,R3]([a;R2,R3]([a;R])[a;R])([a;R])[A;R]),$([cH0;R2,R3]([a;R2,R3]([a;R])[A;R])([a;R])[A;R])]|12.011
+aC except as above|[cH0;R1]|12.011
+aN in aromatic ring|[nH0;R]|14.007
+aC-CH3|[cH0][CX4H3]|27.046
+aC-CH2|[cH0][CX4H2;!R]|26.038
+aC-CH|[cH0][CX4H;!R]|25.03
+aC-C|[cH0][CX4H0;!R]|24.0222
+aC-CH=CH2|[cH0][CH;!R]=[CH2]|39.0564
+aC-CH=CH|[cH0][CH;!R]=[CH;!R]|38.0486
+aC-C=CH2|[cH0][CH0;!R]=[CH2]|38.0486
+aC-C≡CH|[cH0][CH0;!R]#[CH]|37.0408
+aC-C≡C|[cH0][CH0;!R]#[CH0;!R]|36.033
+OH|[OH]|17.007
+aC-OH|[cH0][OH]|29.018
+COOH|[CH0](=O)[OH]|45.017
+aC-COOH|[cH0][CH0](=O)[OH]|57.028
+CH3CO|[CH3][CH0;!R;!$([CH0][OH,NH2])]=O|43.045
+CH2CO|[CH2][CH0;!R;!$([CH0][OH,NH2])]=O|42.037
+CHCO|[CH;!R][CH0;!R;!$([CH0][OH,NH2])]=O|41.028841
+CCO|[CH0;!R][CH0;!R;!$([CH0][OH,NH2])]=O|40.021
+aC-CO|[cH0][CH0;!R;!$([CH0][OH,NH2])]=O|40.021
+CHO|[CH](=O)|29.018
+aC-CHO|[cH0][CH](=O)|41.029
+CH3COO|[CH3;!R][C](=O)[OH0]|59.044
+CH2COO|[CX4H2;!R][C](=O)[OH0]|58.036
+CHCOO|[CX4H;!R][C](=O)[OH0]|57.0282
+CCOO|[CX4H0;!R][C](=O)[OH0]|56.0204
+HCOO|[CH](=O)[OH0]|45.017
+aC-COO|[cH0][CH0;!R](=O)[OH0]|56.0204
+aC-OOCH|[cH0][OH0;!R][CH](=O)|57.028
+aC-OOC|[cH0][OH0;!R][CH0](=O)|56.0202
+COO except as above|[CH0;!R](=[OH0;!R])[OH0;!R]|44.009
+CH3O|[CH3][OH0;!$([OH0]S=O);!$([OH0][P]);!$([OH0][CH0]=O)]|31.034
+CH2O|[CH2;!R][OH0;!$([OH0]S=O);!$([OH0][P]);!$([OH0][CH0]=O)]|30.026
+CH-O|[CH;!R][OH0;!$([OH0]S=O);!$([OH0][P]);!$([OH0][CH0]=O)]|29.018
+C-O|[CH0;!R][OH0;!$([OH0]S=O);!$([OH0][P]);!$([OH0][CH0]=O)]|28.0102
+aC-O|[cH0][OH0;!R;!$([OH0]S=O);!$([OH0][P]);!$([OH0][CH0]=O)]|28.0102
+CH2NH2|[CX4H2;!R][NH2]|30.05
+CHNH2|[CX4H;!R][NH2]|29.042
+CNH2|[CX4H0;!R][NH2]|28.0342
+CH3NH|[CH3][NH;!$([NH][CH0]=O)]|30.05
+CH2NH|[CH2;!R][NH;!R;!$([NH][CH0]=O)]|29.042
+CHNH|[CH;!R][NH;!R]|28.034
+CH3N|[CH3][NH0;!R]|29.042
+CH2N|[CH2;!R][NH0;!R]|28.034
+aC-NH2|[cH0][NH2]|28.0342
+aC-NH|[cH0][NH;!R]|27.0262
+aC-N|[cH0][NX3H0;!R]|26.0184
+NH2 except as above|[NH2]|16.0226
+CH=N|[CH;!R]=[NH0]|27.0258
+C=N|[CH0;!R]=[NH0]|26.018
+CH2CN|[CH2;!R][C]#[N]|40.045
+CHCN|[CX4H;!R][C]#[N]|39.0372
+CCN|[CX4H0;!R][C]#[N]|38.0294
+aC-CN|[cH0][C]#[N]|38.0294
+CN except as above|[C;!R]#[N]|26.018
+CH2NCO|[CH2][NH0]=[C]=[O]|56.0436
+CHNCO|[CH][NH0]=[C]=[O]|55.0358
+CNCO|[CH0][NH0]=[C]=[O]|54.028
+aC-NCO|[cH0][NH0]=[C]=[O]|54.028
+CH2NO2|[CH2]N(=O)(-O)|60.032
+CHNO2|[CH]N(=O)(-O)|59.024
+CNO2|[CH0]N(=O)(-O)|58.016
+aC-NO2|[cH0][NX3H0](=O)(-O)|58.016
+NO2 except as above|[NX3H0](=O)(-O)|46.005
+ONO|[NH]([OH0])=O|30.006
+ONO2|[OH0][NH0](=O)-[OH0]|62.004
+HCON(CH2)2|[CH2;!R][NH0]([CH2])[CH]=O|71.078
+HCONHCH2|[CH2;!R][NH][CH]=O|71.078
+CONH2|[CH0;!R](=O)([NH2])|44.0326
+CONHCH3|[CH0;!R](=O)([NH][CH3])|58.0592
+CONHCH2|[CH0;!R](=O)([NH][CH2])|57.0514
+CON(CH3)2|[CH0;!R](=O)([N;!R]([CH3])[CH3])|72.0858
+CONCH3CH2|[CH0;!R](=O)([N;!R]([CH3])[CH2;!R])|71.078
+CON(CH2)2|[CH0;!R](=O)([N;!R]([CH2;!R])[CH2;!R])|70.0702
+CONHCO|[CH0;!R](=O)[NH;!R][CH0;!R](=O)|71.0348
+CONCO|[CH0;!R](=[OH0;!R])[NH0;!R][CH0;!R](=[OH0;!R])|70.027
+aC-CONH2|[cH0][CH0](=O)[NH2]|56.0436
+aC-NH(CO)H|[cH0][NH][CH]=O|56.0436
+aC-N(CO)H|[cH0][NH0][CH]=O|55.0358
+aC-CONH|[cH0][CH0;!R](=O)[NH]|55.0358
+aC-NHCO|[cH0][NH;!R][CH0](=O)|55.0358
+aC-(N)CO|[cH0][NH0;!R][CH0](=O)|54.028
+NHCONH|[NH;!R][CH0;!R](=O)[NH;!R]|58.0396
+NH2CONH|[NH2][CH0](=O)[NH]|59.0474
+NH2CON|[NH2][CH0](=O)[NH0]|58.0396
+NHCON|[NH;!R][CH0;!R](=[OH0;!R])[NH0;!R]|57.0318
+NCON|[NH0;!R][CH0;!R](=O)[NH0;!R]|56.0239
+aC-NHCONH2|[NH2][CH0](=O)[NH][cH0]|71.0584
+aC-NHCONH|[NH][CH0](=O)[NH][cH0]|70.0506
+NHCO except as above|[NH;!R][CH0;!R]=[OH0]|43.0248
+CH2Cl|[CX4H2;!R][Cl]|49.48
+CHCl|[CX4H;!R][Cl]|48.472
+CCl|[CX4H0;!R][Cl]|47.464
+CHCl2|[CX4H;!R](Cl)[Cl]|83.925
+CCl2|[CX4H0;!R](Cl)[Cl]|82.917
+CCl3|[CX4H0;!R](Cl)(Cl)[Cl]|118.37
+CH2F|[CX4H2;!R][F]|33.0246
+CHF|[CX4H;!R][F]|32.0168
+CF|[CX4H0;!R][F]|31.009
+CHF2|[CX4H;!R]([F])[F]|51.0148
+CF2|[CX4H0;!R]([F])[F]|50.007
+CF3|[CX4H0;!R]([F])([F])[F]|70.0128
+CCl2F|[CX4H0;!R](Cl)(Cl)[F]|101.915
+HCClF|[CX4H;!R](Cl)[F]|67.4698
+CClF2|[CX4H0;!R](Cl)(F)[F]|85.46
+aC-Cl|[cH0][Cl]|47.464
+aC-F|[cH0][F]|31.009
+aC-I|[cH0][I]|138.911
+aC-Br|[cH0][Br]|91.915
+-I except as above|[I]|126.9
+-Br except as above|[Br]|79.904
+-F except as above|[F]|18.998
+-Cl except as above|[Cl]|35.453
+CHNOH|[CH;!R]=[NH0][OH]|44.0326
+CNOH|[CH0;!R]=[NH0][OH]|43.0248
+aC-CHNOH|[cH0][CH]=[NH0][OH]|44.0326
+OCH2CH2OH|[OH][CH2;!R][CH2;!R][OH0]|61.059
+OCHCH2OH|[OH][CH2;!R][CH;!R][OH0]|60.0512
+OCH2CHOH|[OH0][CH2;!R][CH;!R][OH]|60.0512
+-O-OH|[OH0][OH]|33.0058
+CH2SH|[CH2;!R][SH]|47.0994
+CHSH|[CH;!R][SH]|46.0916
+CSH|[CH0;!R][SH]|45.0838
+aC-SH|[cH0][SH]|45.0838
+-SH except as above|[SH]|33.0728
+CH3S|[CH3][SH0;!R]|47.0994
+CH2S|[CH2;!R][SH0;!R]|46.0916
+CHS|[CH;!R][SH0;!R]|45.0838
+CS|[CH0;!R][SH0;!R]|44.076
+aC-S-|[cH0][SH0;!R]|44.076
+SO|[SX3H0]=[OH0]|48.064
+SO2|[OH0]=[SX4H0;!R]=[OH0]|64.063
+SO3 (sulfite)|[OH0]-[SX3H0](=[OH0])-[OH0]|80.062
+SO3 (Sulfonate)|[OH0]-[SX4H0](=[OH0])=[OH0]|80.062
+SO4 (Sulfate)|[OH0]-[SX4H0](-[OH0])(=[OH0])=[OH0]|96.061
+aC-SO|[cH0][SX3H0]=[OH0]|60.075
+aC-SO2|[cH0][SX4H0;!R](=[OH0])=[OH0]|76.074
+PH (phosphine)|[PX3H]|31.9818
+P (Phospine)|[PX3H0]|30.974
+PO3 (Phospite)|[PX3H0]([OH0])([OH0])[OH0]|78.971
+PHO3 (Phosponate)|[PX4H1](=[OH0])(-[OH0])-[OH0]|79.9788
+PO3 (Phosponate)|[PX4H0](=[OH0])(-[OH0])-[OH0]|78.971
+PHO4 (Phospate)|[PX4H0](=[OH0])(-[OH1])(-[OH0])-[OH0]|95.9778
+PO4 (Phospate)|[PX4H0](=[OH0])(-[OH0])(-[OH0])-[OH0]|94.97
+aC-PO4|[cH0][OH0][PX4H0](=[OH0])(-[OH0])-[OH0]|106.981
+aC-P|[cH0][PX3H0]|42.985
+CO3 (Carbonate)|[CH0;!R](=O)(-[OH0;!R])-[OH0;!R]|60.008
+C2H3O|[CH2;R1]([O;R1]1)[CH;R1]1|43.0444
+C2H2O|[CH2;R1]([O;R1]1)[CH0;R1]1|42.0366
+C2HO|[CH;R1]([O;R1]1)[CH0;R1]1|41.0288
+CH2 (cyclic)|[CX4H2;R]|14.027
+CH (cyclic)|[CX4H;R]|13.019
+C (cyclic)|[CX4H0;R]|12.011
+CH=CH (cyclic)|[CH;R]=[CH;R]|26.038
+CH=C (cyclic)|[CH;R]=[CH0&R,cH0]|25.03
+C=C (cyclic)|[CH0;R]=;@[CH0;R]|24.022
+CH2=C (cyclic)|[CH2]=[CX3H0,cH0;R]|26.038
+NH (cyclic)|[NH;R]|15.0148
+N (cyclic)|[NH0;R]|14.007
+CH=N (cyclic)|[CH;R]=[NX2H0;R]|27.0258
+C=N (cyclic)|[CH0&R,cH0]=[NX2H0;R]|26.018
+O (cyclic)|[OH0,oH0;R]|15.999
+CO (cyclic)|[CH0;R]=O|28.01
+S (cyclic)|[#16H0;R]|32.065
+SO2 (cyclic)|[SH0;R](=O)(=O)|64.063
+>NH|[NX3H;!R]|15.0148
+-O-|[OX2H0;!R]|15.999
+-S-|[SX2H0;!R]|32.065
+>CO|[CX3H0;!R]=O|28.01
+PO2|[PX3H0]([OH0])([OH0])|62.972
+CH-N|[CH][NH0;!R]|27.0258
+SiHO|[SiX4H][OH0]|45.0928
+SiO|[SiX4H0][OH0]|44.085
+SiH2|[SiX4H2]|30.1016
+SiH|[SiX4H]|29.0938
+Si|[SiX4H0]|28.086
+? (CH3)3N||
+N=N (cyclic)|[NH0;R]=[NH0;R]|28.014
+Ccyclic=N-|[CH0;R]=[NH0;!R]|26.018
+Ccyclic=CH-|[CH0;R]=[CH;!R]|25.0298
+Ccyclic=NH|[CH0;R]=[NH]|27.0258
+N=O|[NH0]=O|30.006
+Ccyclic=C|[CH0;R]=;!@[CH0;!R]|24.022
+P=O|[PX4H0]=O|46.973
+N=N|[NH0;!R]=[NH0;!R]|28.014
+C=NH|[CH0]=[NH]|27.0258
+>C=S|[CX3H0]=[SH0]|44.076
+aC-CON|[cH0][CH0;!R](=O)[NH0;!R]|54.028
+aC=O|[cH0;R]=O|28.01
+aN-|[NX3H0;!R]|14.007
+-Na|[Na]|22.99
+-K|[K]|39.098
+HCONH|[CH](=O)[NH]|44.0326
+CHOCH|[CH;R1]([O;R1]1)[CH;R1]1|42.0366
+C2O|[CH0]([O]1)[CH0]1|40.021
+SiH3|[SiX4H3]|31.1094
+SiH2O|[SiX4H2][OH0]|46.1006
+CH=C=CH|[CH]=[CH0]=[CH]|38.0486
+CH=C=C|[CH]=[CH0]=[CH0]|37.0408
+OP(=S)O|[PX4H0]([OH0])([OH0])=[SH0]|95.037
+? R||
+CF2cyclic|[CH0;R]([F])[F]|50.007
+CFcyclic|[CH0;R;!$([CH0;R]([F])[F])]([F])|31.009

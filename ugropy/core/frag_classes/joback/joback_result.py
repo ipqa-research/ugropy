@@ -6,10 +6,12 @@ import numpy as np
 
 import pandas as pd
 
+import pint
+
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
-from ugropy.constants import R
+from ugropy.constants import R, ureg
 from ugropy.core.frag_classes.base.fragmentation_result import (
     FragmentationResult,
 )
@@ -39,41 +41,41 @@ class JobackFragmentationResult(FragmentationResult):
     ----------
     subgroups : dict
         Joback functional groups of the molecule.
-    experimental_boiling_temperature : float
+    experimental_boiling_temperature : pint.Quantity
         User provided experimental normal boiling point [K].
-    critical_temperature : float
+    critical_temperature : pint.Quantity
         Joback estimated critical temperature [K].
-    critical_pressure : float
+    critical_pressure : pint.Quantity
         Joback estimated critical pressure [bar].
-    critical_volume : float
+    critical_volume : pint.Quantity
         Joback estimated critical volume [cm³/mol].
-    normal_boiling_point : float
+    normal_boiling_point : pint.Quantity
         Joback estimated normal boiling point [K].
-    fusion_temperature : float
+    fusion_temperature : pint.Quantity
         Joback estimated fusion temperature [K].
-    h_formation : float
+    ig_formation_formation : pint.Quantity
         Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].
-    g_formation : float
+    ig_gibbs_formation : pint.Quantity
         Joback estimated Gibbs energy of formation ideal gas at 298 K [K].
     heat_capacity_ideal_gas_params : dict
         Joback estimated Reid's ideal gas heat capacity equation parameters
         [J/mol/K].
-    h_fusion : float
+    fusion_enthalpy : pint.Quantity
         Joback estimated fusion enthalpy [kJ/mol].
-    h_vaporization : float
+    vaporization_enthalpy : pint.Quantity
         Joback estimated vaporization enthalpy at the normal boiling point
         [kJ/mol].
     sum_na : float
-        Joback n_A contribution to liquid viscosity [N/s/m²].
+        Joback n_A contribution to liquid viscosity [Pa s].
     sum_nb : float
-        Joback n_B contribution to liquid viscosity [N/s/m²].
-    molecular_weight : float
+        Joback n_B contribution to liquid viscosity [Pa s].
+    molecular_weight : pint.Quantity
         Molecular weight from Joback's subgroups [g/mol].
-    acentric_factor : float
+    acentric_factor : pint.Quantity
         Acentric factor from Lee and Kesler's equation :cite:p:`joback1`.
     vapor_pressure_params : dict
         Vapor pressure G and k parameters for the Riedel-Plank-Miller
-        :cite:p:`joback1` equation [bar].
+        equation [bar] :cite:p:`joback1`.
     """
 
     def __init__(
@@ -91,22 +93,22 @@ class JobackFragmentationResult(FragmentationResult):
         self.experimental_boiling_temperature = normal_boiling_point
 
         # Original Joback properties
-        self.critical_temperature = None
-        self.critical_pressure = None
-        self.critical_volume = None
-        self.normal_boiling_point = None
-        self.fusion_temperature = None
-        self.h_formation = None
-        self.g_formation = None
+        self.critical_temperature: pint.Quantity = None
+        self.critical_pressure: pint.Quantity = None
+        self.critical_volume: pint.Quantity = None
+        self.normal_boiling_point: pint.Quantity = None
+        self.fusion_temperature: pint.Quantity = None
+        self.ig_enthalpy_formation: pint.Quantity = None
+        self.ig_gibbs_formation: pint.Quantity = None
         self.heat_capacity_ideal_gas_params = np.array([])
-        self.h_fusion = None
-        self.h_vaporization = None
+        self.fusion_enthalpy: pint.Quantity = None
+        self.vaporization_enthalpy: pint.Quantity = None
         self.sum_na = None
         self.sum_nb = None
-        self.molecular_weight = None
+        self.molecular_weight: pint.Quantity = None
 
         # Extra properties
-        self.acentric_factor = None
+        self.acentric_factor: pint.Quantity = None
         self.vapor_pressure_params = {}
 
         # Fill the properties' values
@@ -115,7 +117,7 @@ class JobackFragmentationResult(FragmentationResult):
 
     def heat_capacity_ideal_gas(
         self, temperature: Union[float, np.ndarray]
-    ) -> Union[float, np.ndarray]:
+    ) -> pint.Quantity:
         """Calculate the ideal gas heat capacity [J/mol/K].
 
         Uses the Joback estimated Reid's ideal gas heat capacity equation
@@ -135,11 +137,11 @@ class JobackFragmentationResult(FragmentationResult):
 
         t = temperature
 
-        return a + b * t + c * t**2 + d * t**3
+        return (a + b * t + c * t**2 + d * t**3) * ureg.J / ureg.mol / ureg.K
 
     def heat_capacity_liquid(
         self, temperature: Union[float, np.ndarray]
-    ) -> Union[float, np.ndarray]:
+    ) -> pint.Quantity:
         """Calculate the liquid heat capacity [J/mol/K].
 
         Uses the Rowlinson-Bondi :cite:p:`joback1` equation with the Joback
@@ -155,10 +157,10 @@ class JobackFragmentationResult(FragmentationResult):
         Union[float, np.ndarray]
             Ideal gas heat capacity [J/mol/K].
         """
-        tr = temperature / self.critical_temperature
-        w = self.acentric_factor
+        tr = temperature / self.critical_temperature.magnitude
+        w = self.acentric_factor.magnitude
 
-        c_p0 = self.heat_capacity_ideal_gas(temperature)
+        c_p0 = self.heat_capacity_ideal_gas(temperature).magnitude
 
         c_pl = c_p0 + R * (
             2.56
@@ -171,12 +173,12 @@ class JobackFragmentationResult(FragmentationResult):
             )
         )
 
-        return c_pl
+        return c_pl * ureg.J / ureg.mol / ureg.K
 
     def viscosity_liquid(
         self, temperature: Union[float, np.ndarray]
-    ) -> Union[float, np.ndarray]:
-        """Calculate the Joback estimated liquid viscosity [N/s/m²].
+    ) -> pint.Quantity:
+        """Calculate the Joback estimated liquid viscosity [Pa s].
 
         Parameters
         ----------
@@ -186,18 +188,18 @@ class JobackFragmentationResult(FragmentationResult):
         Returns
         -------
         Union[float, np.ndarray]
-            Liquid viscosity [N/s/m²].
+            Liquid viscosity [Pa s].
         """
         t = temperature
 
-        n_l = self.molecular_weight * np.exp(
+        n_l = self.molecular_weight.magnitude * np.exp(
             (self.sum_na - 597.82) / t + self.sum_nb - 11.202
         )
-        return n_l
+        return n_l * ureg.Pa * ureg.s
 
     def vapor_pressure(
         self, temperature: Union[float, np.ndarray]
-    ) -> Union[float, np.ndarray]:
+    ) -> pint.Quantity:
         """Calculate the vapor pressure [bar].
 
         Uses the Riedel-Plank-Miller :cite:p:`joback1` equation with the Joback
@@ -213,16 +215,16 @@ class JobackFragmentationResult(FragmentationResult):
         Union[float, np.ndarray]
             Vapor pressure [bar]
         """
-        tr = temperature / self.critical_temperature
+        tr = temperature / self.critical_temperature.magnitude
 
         g = self.vapor_pressure_params["G"]
         k = self.vapor_pressure_params["k"]
 
         vp_r = np.exp(-g / tr * (1 - tr**2 + k * (3 + tr) * (1 - tr) ** 3))
 
-        vp = vp_r * self.critical_pressure
+        vp = vp_r * self.critical_pressure.magnitude
 
-        return vp
+        return vp * ureg.bar
 
     def _calculate_properties(self, contribs: pd.DataFrame) -> None:
         """Obtain the molecule properties from Joback's groups."""
@@ -246,41 +248,56 @@ class JobackFragmentationResult(FragmentationResult):
         mw_c = Descriptors.MolWt(self.molecule)
 
         # Molecular weight
-        self.molecular_weight = mw_c
+        self.molecular_weight = mw_c * ureg.g / ureg.mol
 
         # Joback normal boiling point (Tb)
-        self.normal_boiling_point = 198.2 + np.dot(ocurr, tb_c)
+        self.normal_boiling_point = (198.2 + np.dot(ocurr, tb_c)) * ureg.K
 
         # Fusion temperature (Tf)
-        self.fusion_temperature = 122.5 + np.dot(ocurr, tf_c)
+        self.fusion_temperature = (122.5 + np.dot(ocurr, tf_c)) * ureg.K
 
         # Used normal boiling point for calculations
         if self.experimental_boiling_temperature is not None:
             tb = self.experimental_boiling_temperature
         else:
-            tb = self.normal_boiling_point
+            tb = self.normal_boiling_point.magnitude
 
         # Critical temperature (Tc) normal boiling temperature for calculations
-        self.critical_temperature = tb * (
-            0.584 + 0.965 * np.dot(ocurr, tc_c) - (np.dot(ocurr, tc_c)) ** 2
-        ) ** (-1)
+        self.critical_temperature = (
+            tb
+            * (
+                0.584
+                + 0.965 * np.dot(ocurr, tc_c)
+                - (np.dot(ocurr, tc_c)) ** 2
+            )
+            ** (-1)
+            * ureg.K
+        )
 
         # Critical pressure (Pc)
         self.critical_pressure = (
             0.113 + 0.0032 * np.dot(ocurr, numa_c) - np.dot(ocurr, pc_c)
-        ) ** (-2)
+        ) ** (-2) * ureg.bar
 
         # Critical volume (Vc)
-        self.critical_volume = 17.5 + np.dot(ocurr, vc_c)
+        self.critical_volume = (
+            (17.5 + np.dot(ocurr, vc_c)) * ureg.cm**3 / ureg.mol
+        )
 
         # Standard enthalpy of formation (298 K)
-        self.h_formation = 68.29 + np.dot(ocurr, hform_c)
+        self.ig_enthalpy_formation = (
+            (68.29 + np.dot(ocurr, hform_c)) * ureg.kJ / ureg.mol
+        )
 
         # Standard Gibbs energy of formation (298 K)
-        self.g_formation = 53.88 + np.dot(ocurr, gform_c)
+        self.ig_gibbs_formation = (
+            (53.88 + np.dot(ocurr, gform_c)) * ureg.kJ / ureg.mol
+        )
 
         # Enthalpy of vaporization
-        self.h_vaporization = 15.30 + np.dot(ocurr, hvap_c)
+        self.vaporization_enthalpy = (
+            (15.30 + np.dot(ocurr, hvap_c)) * ureg.kJ / ureg.mol
+        )
 
         # =====================================================================
         # Incomplete contribution properties (some contribution missing)
@@ -302,7 +319,9 @@ class JobackFragmentationResult(FragmentationResult):
         # Enthalpy of fusion
         if all(df["Hfusion"].notnull()):
             hfusion_c = df["Hfusion"].to_numpy()
-            self.h_fusion = -0.88 + np.dot(ocurr, hfusion_c)
+            self.fusion_enthalpy = (
+                (-0.88 + np.dot(ocurr, hfusion_c)) * ureg.kJ / ureg.mol
+            )
 
         # Liquid viscosity
         if all(df["na"].notnull()):
@@ -316,25 +335,30 @@ class JobackFragmentationResult(FragmentationResult):
         # Extra properties
         # =====================================================================
         # Reduced normal boiling point temperature
-        t_br = tb / self.critical_temperature
+        t_br = tb / self.critical_temperature.magnitude
 
         # Lee and Kesler's equation (acentric factor)
-        pc = self.critical_pressure
+        pc = self.critical_pressure.magnitude
+
         self.acentric_factor = (
-            -np.log(pc)
-            - 5.92714
-            + 6.09648 / t_br
-            + 1.28862 * np.log(t_br)
-            - 0.169347 * t_br**6
-        ) / (
-            15.2518
-            - 15.6875 / t_br
-            - 13.4721 * np.log(t_br)
-            + 0.43577 * t_br**6
+            (
+                -np.log(pc)
+                - 5.92714
+                + 6.09648 / t_br
+                + 1.28862 * np.log(t_br)
+                - 0.169347 * t_br**6
+            )
+            / (
+                15.2518
+                - 15.6875 / t_br
+                - 13.4721 * np.log(t_br)
+                + 0.43577 * t_br**6
+            )
+            * ureg.dimensionless
         )
 
         # Riedel-Plank-Miller equation (vapor pressure [bar])
-        h = t_br * np.log(self.critical_pressure / 1.01325) / (1 - t_br)
+        h = t_br * np.log(pc / 1.01325) / (1 - t_br)
 
         g = 0.4835 + 0.4605 * h
 

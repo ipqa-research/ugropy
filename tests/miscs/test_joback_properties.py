@@ -1,33 +1,108 @@
 import numpy as np
 
+from pint import Quantity
+
 import pytest
 
 from rdkit import Chem
 
-from ugropy import joback
+from ugropy import joback, ureg
 
 
 @pytest.mark.joback
 def test_p_dichlorobenzene():
     mol = joback.get_groups("C1=CC(=CC=C1Cl)Cl", "smiles")
+
     assert mol.subgroups == {"-Cl": 2, "ring=CH-": 4, "ring=C<": 2}
-    assert np.allclose(mol.normal_boiling_point, 443.4, atol=1e-2)
-    assert np.allclose(mol.fusion_temperature, 256, atol=1)
-    assert np.allclose(mol.critical_temperature, 675, atol=1)
-    assert np.allclose(mol.critical_pressure, 41.5, atol=1e-1)
-    assert np.allclose(mol.critical_volume, 362, atol=1)
-    assert np.allclose(mol.h_formation, 26.41, atol=1e-2)
-    assert np.allclose(mol.g_formation, 78.56, atol=1e-2)
-    assert np.allclose(mol.heat_capacity_ideal_gas(298), 112.3, atol=1)
-    assert np.allclose(mol.heat_capacity_ideal_gas(400), 139.2, atol=1)
-    assert np.allclose(mol.heat_capacity_ideal_gas(800), 206.8, atol=1)
-    assert np.allclose(mol.heat_capacity_ideal_gas(1000), 224.6, atol=1)
-    assert np.allclose(mol.h_vaporization, 40.66, atol=1e-2)
-    assert np.allclose(mol.h_fusion, 13.3, atol=1e-1)
-    assert np.allclose(mol.viscosity_liquid(333.8), 7.26e-4, atol=1e-6)
-    assert np.allclose(mol.viscosity_liquid(374.4), 4.92e-4, atol=1e-6)
-    assert np.allclose(mol.viscosity_liquid(403.1), 3.91e-4, atol=1e-6)
-    assert np.allclose(mol.viscosity_liquid(423.3), 3.40e-4, atol=1e-6)
+
+    assert np.allclose(
+        mol.normal_boiling_point, Quantity(443.4, "K"), atol=1e-2
+    )
+    assert mol.normal_boiling_point.units == ureg.kelvin
+
+    assert np.allclose(mol.fusion_temperature, Quantity(256, "K"), atol=1)
+    assert mol.fusion_temperature.units == ureg.kelvin
+
+    assert np.allclose(mol.critical_temperature, Quantity(675, "K"), atol=1)
+    assert mol.critical_temperature.units == ureg.kelvin
+
+    assert np.allclose(mol.critical_pressure, Quantity(41.5, "bar"), atol=1e-1)
+    assert mol.critical_pressure.units == ureg.bar
+
+    assert np.allclose(mol.critical_volume, Quantity(362, "cm^3/mol"), atol=1)
+    assert mol.critical_volume.units == ureg.centimeter**3 / ureg.mole
+
+    assert np.allclose(
+        mol.ig_enthalpy_formation, Quantity(26.41, "kJ/mol"), atol=1e-2
+    )
+    assert mol.ig_enthalpy_formation.units == ureg.kilojoule / ureg.mole
+
+    assert np.allclose(
+        mol.ig_gibbs_formation, Quantity(78.56, "kJ/mol"), atol=1e-2
+    )
+    assert mol.ig_gibbs_formation.units == ureg.kilojoule / ureg.mole
+
+    assert np.allclose(
+        mol.heat_capacity_ideal_gas(298), Quantity(112.3, "J/mol/K"), atol=1
+    )
+    assert (
+        mol.heat_capacity_ideal_gas(298).units
+        == ureg.joule / ureg.mole / ureg.kelvin
+    )
+
+    assert np.allclose(
+        mol.heat_capacity_ideal_gas(400), Quantity(139.2, "J/mol/K"), atol=1
+    )
+    assert (
+        mol.heat_capacity_ideal_gas(400).units
+        == ureg.joule / ureg.mole / ureg.kelvin
+    )
+
+    assert np.allclose(
+        mol.heat_capacity_ideal_gas(800), Quantity(206.8, "J/mol/K"), atol=1
+    )
+    assert (
+        mol.heat_capacity_ideal_gas(800).units
+        == ureg.joule / ureg.mole / ureg.kelvin
+    )
+
+    assert np.allclose(
+        mol.heat_capacity_ideal_gas(1000), Quantity(224.6, "J/mol/K"), atol=1
+    )
+    assert (
+        mol.heat_capacity_ideal_gas(1000).units
+        == ureg.joule / ureg.mole / ureg.kelvin
+    )
+
+    assert np.allclose(
+        mol.vaporization_enthalpy, Quantity(40.66, "kJ/mol"), atol=1e-2
+    )
+    assert mol.vaporization_enthalpy.units == ureg.kilojoule / ureg.mole
+
+    assert np.allclose(
+        mol.fusion_enthalpy, Quantity(13.3, "kJ/mol"), atol=1e-1
+    )
+    assert mol.fusion_enthalpy.units == ureg.kilojoule / ureg.mole
+
+    assert np.allclose(
+        mol.viscosity_liquid(333.8), Quantity(7.26e-4, "Pa s"), atol=1e-6
+    )
+    assert mol.viscosity_liquid(333.8).units == ureg.pascal * ureg.second
+
+    assert np.allclose(
+        mol.viscosity_liquid(374.4), Quantity(4.92e-4, "Pa s"), atol=1e-6
+    )
+    assert mol.viscosity_liquid(374.4).units == ureg.pascal * ureg.second
+
+    assert np.allclose(
+        mol.viscosity_liquid(403.1), Quantity(3.91e-4, "Pa s"), atol=1e-6
+    )
+    assert mol.viscosity_liquid(403.1).units == ureg.pascal * ureg.second
+
+    assert np.allclose(
+        mol.viscosity_liquid(423.3), Quantity(3.40e-4, "Pa s"), atol=1e-6
+    )
+    assert mol.viscosity_liquid(423.3).units == ureg.pascal * ureg.second
 
 
 @pytest.mark.joback
@@ -35,7 +110,7 @@ def test_p_dichlorobenzene_real_nbt():
     mol = joback.get_groups(
         "C1=CC(=CC=C1Cl)Cl", "smiles", normal_boiling_point=447
     )
-    assert np.allclose(mol.critical_temperature, 681, atol=1)
+    assert np.allclose(mol.critical_temperature.magnitude, 681, atol=1)
 
 
 @pytest.mark.joback
@@ -46,7 +121,8 @@ def test_acentric_factor():
         "smiles",
         normal_boiling_point=329.8,
     )
-    assert np.allclose(mol.acentric_factor, 0.525, atol=1e-2)
+    assert np.allclose(mol.acentric_factor.magnitude, 0.525, atol=1e-2)
+    assert mol.acentric_factor.units == ureg.dimensionless
 
 
 @pytest.mark.joback
@@ -54,15 +130,27 @@ def test_vapor_pressure():
     mol = joback.get_groups(
         "CC(C)O", identifier_type="smiles", normal_boiling_point=355.4
     )
-    assert np.allclose(mol.vapor_pressure(450), 15.09, atol=2)
+    assert np.allclose(mol.vapor_pressure(450).magnitude, 15.09, atol=2)
+    assert mol.vapor_pressure(450).units == ureg.bar
 
 
 @pytest.mark.joback
 def test_liquid_heat_capacity():
     mol = joback.get_groups("CC(=O)C", identifier_type="smiles")
-    assert np.allclose(28.0, mol.heat_capacity_liquid(180) * 0.239, atol=4e-1)
-    assert np.allclose(28.2, mol.heat_capacity_liquid(209) * 0.239, atol=1)
-    assert np.allclose(29.8, mol.heat_capacity_liquid(297) * 0.239, atol=3)
+    assert np.allclose(
+        28.0, mol.heat_capacity_liquid(180).magnitude * 0.239, atol=4e-1
+    )
+    assert (
+        mol.heat_capacity_liquid(180).units
+        == ureg.joule / ureg.mole / ureg.kelvin
+    )
+
+    assert np.allclose(
+        28.2, mol.heat_capacity_liquid(209).magnitude * 0.239, atol=1
+    )
+    assert np.allclose(
+        29.8, mol.heat_capacity_liquid(297).magnitude * 0.239, atol=3
+    )
 
 
 @pytest.mark.joback
@@ -88,14 +176,14 @@ def test_rdkit_mol():
     assert mol1.critical_volume == mol2.critical_volume
     assert mol1.normal_boiling_point == mol2.normal_boiling_point
     assert mol1.fusion_temperature == mol2.fusion_temperature
-    assert mol1.h_formation == mol2.h_formation
-    assert mol1.g_formation == mol2.g_formation
+    assert mol1.ig_enthalpy_formation == mol2.ig_enthalpy_formation
+    assert mol1.ig_gibbs_formation == mol2.ig_gibbs_formation
     assert np.allclose(
         mol1.heat_capacity_ideal_gas_params,
         mol2.heat_capacity_ideal_gas_params,
     )
-    assert mol1.h_fusion == mol2.h_fusion
-    assert mol1.h_vaporization == mol2.h_vaporization
+    assert mol1.fusion_enthalpy == mol2.fusion_enthalpy
+    assert mol1.vaporization_enthalpy == mol2.vaporization_enthalpy
     assert mol1.sum_na == mol2.sum_na
     assert mol1.sum_nb == mol2.sum_nb
     assert mol1.molecular_weight == mol2.molecular_weight

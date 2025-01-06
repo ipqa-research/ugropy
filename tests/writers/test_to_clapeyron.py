@@ -53,14 +53,10 @@ def test_to_clapeyron():
     with open(here / "database" / "PSRK/PSRK_groups.csv", mode="r") as f:
         df_psrk_ugropy = f.read()
 
-    if sys.platform != "darwin":
-        assert df_molarmass == df_molarmass_ugropy
-
-    assert df_psrk == df_psrk_ugropy
-    assert df_unifac == df_unifac_ugropy
-
-    if sys.platform != "darwin":
-        assert df_critical == df_critical_ugropy
+    mw_bool = df_molarmass == df_molarmass_ugropy
+    psrk_bool = df_psrk == df_psrk_ugropy
+    unifac_bool = df_unifac == df_unifac_ugropy
+    crit_bool = df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "critical.csv")
     os.remove(here / "database" / "molarmass.csv")
@@ -69,6 +65,15 @@ def test_to_clapeyron():
     os.rmdir(here / "database" / "ogUNIFAC")
     os.rmdir(here / "database/PSRK")
     os.rmdir(here / "database")
+
+    if sys.platform != "darwin":
+        assert mw_bool
+
+    assert psrk_bool
+    assert unifac_bool
+
+    if sys.platform != "darwin":
+        assert crit_bool
 
 
 def test_to_clapeyron_batch_name():
@@ -112,14 +117,10 @@ def test_to_clapeyron_batch_name():
     ) as f:
         df_psrk_ugropy = f.read()
 
-    if sys.platform != "darwin":
-        assert df_molarmass == df_molarmass_ugropy
-
-    assert df_psrk == df_psrk_ugropy
-    assert df_unifac == df_unifac_ugropy
-
-    if sys.platform != "darwin":
-        assert df_critical == df_critical_ugropy
+    mw_bool = df_molarmass == df_molarmass_ugropy
+    psrk_bool = df_psrk == df_psrk_ugropy
+    unifac_bool = df_unifac == df_unifac_ugropy
+    crit_bool = df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "otacon_critical.csv")
     os.remove(here / "database" / "otacon_molarmass.csv")
@@ -128,6 +129,15 @@ def test_to_clapeyron_batch_name():
     os.rmdir(here / "database" / "ogUNIFAC")
     os.rmdir(here / "database" / "PSRK")
     os.rmdir(here / "database")
+
+    if sys.platform != "darwin":
+        assert mw_bool
+
+    assert psrk_bool
+    assert unifac_bool
+
+    if sys.platform != "darwin":
+        assert crit_bool
 
 
 def test_molar_mass_csv():
@@ -194,5 +204,6 @@ def test_making_it_explode():
 
     with pytest.raises(ValueError):
         to_clapeyron(
-            molecules_names=["limonene", "ethanol"], joback_objects=["hello"]
+            molecules_names=["limonene", "ethanol"],
+            property_estimator=["hello"],
         )

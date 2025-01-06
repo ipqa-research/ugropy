@@ -6,16 +6,12 @@ from typing import List
 
 import pandas as pd
 
-from ugropy.core.frag_classes.joback.joback_result import (
-    JobackFragmentationResult,
-)
-
 
 def write_critical(
     path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
-    joback_objects: List[JobackFragmentationResult] = [],
+    property_estimator: List = [],
 ) -> None:
     """Create the DataFrame with the critical properties for Clapeyron.jl.
 
@@ -32,8 +28,9 @@ def write_critical(
         "ogUNIFAC_groups.csv", by default "".
     molecules_names : List[str]
         List of names for each chemical to write in the .csv files.
-    joback_objects : List[JobackFragmentationResult], optional
-        List of JobackFragmentationResult objects, by default [].
+    property_estimator : List, optional
+        List of JobackFragmentationResult or AGaniFragmentationResult, by
+        default [].
 
     Returns
     -------
@@ -55,10 +52,16 @@ def write_critical(
         new_row = {
             "Clapeyron Database File": name,
             "Unnamed: 1": "",
-            "Unnamed: 2": joback_objects[idx].critical_temperature,
-            "Unnamed: 3": joback_objects[idx].critical_pressure * 1e5,
-            "Unnamed: 4": joback_objects[idx].critical_volume * 1e-6,
-            "Unnamed: 5": joback_objects[idx].acentric_factor,
+            "Unnamed: 2": property_estimator[idx]
+            .critical_temperature.to("K")
+            .magnitude,  # noqa
+            "Unnamed: 3": property_estimator[idx]
+            .critical_pressure.to("Pa")
+            .magnitude,  # noqa
+            "Unnamed: 4": property_estimator[idx]
+            .critical_volume.to("m^3/mol")
+            .magnitude,  # noqa
+            "Unnamed: 5": property_estimator[idx].acentric_factor.magnitude,
         }
         df.loc[len(df)] = new_row
 

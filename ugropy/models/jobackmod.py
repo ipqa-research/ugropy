@@ -18,7 +18,7 @@ Import and use the Joback FragmentationModel with:
 
 Attributes
 ----------
-joback: PropertiesEstimator
+joback: JobackModel
     Joback FragmentationModel :cite:p:`joback1, joback2`
 """
 

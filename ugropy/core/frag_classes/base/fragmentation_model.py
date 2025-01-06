@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from rdkit import Chem
+from rdkit.Chem import rdMolEnumerator
 
 from ugropy.core.checks import check_atoms_fragments_presence
 from ugropy.core.frag_classes.base.fragmentation_result import (
@@ -34,14 +35,17 @@ class FragmentationModel:
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
         the molecule).
+    allow_overlapping : bool, optional
+        Weather allow overlapping or not, by default False
+    fragmentation_result : FragmentationResult, optional
+        Fragmentation result class, by default FragmentationResult
 
     Attributes
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
         'smarts' (SMARTS representations of the group to detect its precense in
-        the molecule), 'molecular_weight' (molecular weight of the subgroups
-        used to check that the result is correct).
+        the molecule).
     detection_mols : dict
         Dictionary cotaining all the rdkit Mol object from the detection_smarts
         subgroups column.
@@ -51,17 +55,28 @@ class FragmentationModel:
         self,
         subgroups: pd.DataFrame,
         allow_overlapping: bool = False,
-        check_molecular_weight: bool = False,
+        allow_free_atoms: bool = False,
+        fragmentation_result: FragmentationResult = FragmentationResult,
     ) -> None:
         self.subgroups = subgroups
         self.allow_overlapping = allow_overlapping
-        self.check_molecular_weight = check_molecular_weight
+        self.allow_free_atoms = allow_free_atoms
+        self.fragmentation_result = fragmentation_result
 
-        # Instantiate all de mol object from their smarts representation
+        # Instantiate all de mol object from their SMARTS representation
         self.detection_mols = {}
 
         for group, row in self.subgroups.iterrows():
-            self.detection_mols[group] = Chem.MolFromSmarts(row["smarts"])
+            smarts = row["smarts"]
+
+            if "LN:" in smarts:
+                # Linknode expression from Chemaxon SMARTS
+                smarts = smarts.replace("LN:", "|LN:") + "|"
+                query = Chem.MolFromSmarts(smarts)
+                enumerated_smarts = rdMolEnumerator.Enumerate(query)
+                self.detection_mols[group] = enumerated_smarts
+            else:
+                self.detection_mols[group] = Chem.MolFromSmarts(smarts)
 
     def get_groups(
         self,
@@ -99,7 +114,9 @@ class FragmentationModel:
         # =====================================================================
         # Direct fragments detection
         # =====================================================================
-        mol = instantiate_mol_object(identifier, identifier_type)
+        mol = self.mol_preprocess(
+            instantiate_mol_object(identifier, identifier_type)
+        )
 
         detections = self.detect_fragments(mol)
 
@@ -117,7 +134,7 @@ class FragmentationModel:
         )
 
         # If there is free atoms in the molecule can't fragment with the model
-        if np.size(free_atoms) > 0:
+        if np.size(free_atoms) > 0 and not self.allow_free_atoms:
             return self.set_fragmentation_result(
                 mol, [{}], search_multiple_solutions, **kwargs
             )
@@ -131,7 +148,7 @@ class FragmentationModel:
         # =====================================================================
         # Solve overlapping atoms
         # =====================================================================
-        problem = solver(
+        problem: ILPSolver = solver(
             overlapping_atoms, detections, search_multiple_solutions
         )
 
@@ -159,11 +176,34 @@ class FragmentationModel:
             mol, solutions, search_multiple_solutions, **kwargs
         )
 
+    def mol_preprocess(self, mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
+        """Preprocess the molecule.
+
+        This method is called before the detection of the fragments. It can be
+        used to preprocess the molecule before the detection of the fragments.
+        This allow to use RDKit functions to preprocess the molecule and make
+        your SMARTS detection easier. The default implementation does nothing
+        and leave the mol object as it is. You can inherit this class and
+        override this method to preprocess the molecule.
+
+        Parameters
+        ----------
+        mol : Chem.rdchem.Mol
+            Molecule to preprocess.
+
+        Returns
+        -------
+        Chem.rdchem.Mol
+            Preprocessed molecule.
+        """
+        return mol
+
     def set_fragmentation_result(
         self,
         molecule: Chem.rdchem.Mol,
         solutions_fragments: List[dict],
         search_multiple_solutions: bool = False,
+        **kwargs,
     ) -> Union[FragmentationResult, List[FragmentationResult]]:
         """Process the solutions and return the FragmentationResult objects.
 
@@ -195,8 +235,11 @@ class FragmentationModel:
 
             if occurrences not in occurs:
                 sols.append(
-                    FragmentationResult(
-                        molecule, dict(occurrences), dict(groups_atoms)
+                    self.fragmentation_result(
+                        molecule,
+                        dict(occurrences),
+                        dict(groups_atoms),
+                        **kwargs,
                     )
                 )
                 occurs.append(occurrences)

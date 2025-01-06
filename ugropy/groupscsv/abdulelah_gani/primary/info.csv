@@ -1,0 +1,221 @@
+group|group_number
+CH3|1
+CH2|2
+CH|3
+C|4
+CH2=CH|5
+CH=CH|6
+CH2=C|7
+CH=C|8
+C=C|9
+CH2=C=CH|10
+CH2=C=C|11
+C=C=C|12
+CH≡C|13
+C≡C|14
+aCH|15
+aC fused with aromatic ring|16
+aC fused with non-aromatic ring|17
+aC except as above|18
+aN in aromatic ring|19
+aC-CH3|20
+aC-CH2|21
+aC-CH|22
+aC-C|23
+aC-CH=CH2|24
+aC-CH=CH|25
+aC-C=CH2|26
+aC-C≡CH|27
+aC-C≡C|28
+OH|29
+aC-OH|30
+COOH|31
+aC-COOH|32
+CH3CO|33
+CH2CO|34
+CHCO|35
+CCO|36
+aC-CO|37
+CHO|38
+aC-CHO|39
+CH3COO|40
+CH2COO|41
+CHCOO|42
+CCOO|43
+HCOO|44
+aC-COO|45
+aC-OOCH|46
+aC-OOC|47
+COO except as above|48
+CH3O|49
+CH2O|50
+CH-O|51
+C-O|52
+aC-O|53
+CH2NH2|54
+CHNH2|55
+CNH2|56
+CH3NH|57
+CH2NH|58
+CHNH|59
+CH3N|60
+CH2N|61
+aC-NH2|62
+aC-NH|63
+aC-N|64
+NH2 except as above|65
+CH=N|66
+C=N|67
+CH2CN|68
+CHCN|69
+CCN|70
+aC-CN|71
+CN except as above|72
+CH2NCO|73
+CHNCO|74
+CNCO|75
+aC-NCO|76
+CH2NO2|77
+CHNO2|78
+CNO2|79
+aC-NO2|80
+NO2 except as above|81
+ONO|82
+ONO2|83
+HCON(CH2)2|84
+HCONHCH2|85
+CONH2|86
+CONHCH3|87
+CONHCH2|88
+CON(CH3)2|89
+CONCH3CH2|90
+CON(CH2)2|91
+CONHCO|92
+CONCO|93
+aC-CONH2|94
+aC-NH(CO)H|95
+aC-N(CO)H|96
+aC-CONH|97
+aC-NHCO|98
+aC-(N)CO|99
+NHCONH|100
+NH2CONH|101
+NH2CON|102
+NHCON|103
+NCON|104
+aC-NHCONH2|105
+aC-NHCONH|106
+NHCO except as above|107
+CH2Cl|108
+CHCl|109
+CCl|110
+CHCl2|111
+CCl2|112
+CCl3|113
+CH2F|114
+CHF|115
+CF|116
+CHF2|117
+CF2|118
+CF3|119
+CCl2F|120
+HCClF|121
+CClF2|122
+aC-Cl|123
+aC-F|124
+aC-I|125
+aC-Br|126
+-I except as above|127
+-Br except as above|128
+-F except as above|129
+-Cl except as above|130
+CHNOH|131
+CNOH|132
+aC-CHNOH|133
+OCH2CH2OH|134
+OCHCH2OH|135
+OCH2CHOH|136
+-O-OH|137
+CH2SH|138
+CHSH|139
+CSH|140
+aC-SH|141
+-SH except as above|142
+CH3S|143
+CH2S|144
+CHS|145
+CS|146
+aC-S-|147
+SO|148
+SO2|149
+SO3 (sulfite)|150
+SO3 (Sulfonate)|151
+SO4 (Sulfate)|152
+aC-SO|153
+aC-SO2|154
+PH (phosphine)|155
+P (Phospine)|156
+PO3 (Phospite)|157
+PHO3 (Phosponate)|158
+PO3 (Phosponate)|159
+PHO4 (Phospate)|160
+PO4 (Phospate)|161
+aC-PO4|162
+aC-P|163
+CO3 (Carbonate)|164
+C2H3O|165
+C2H2O|166
+C2HO|167
+CH2 (cyclic)|168
+CH (cyclic)|169
+C (cyclic)|170
+CH=CH (cyclic)|171
+CH=C (cyclic)|172
+C=C (cyclic)|173
+CH2=C (cyclic)|174
+NH (cyclic)|175
+N (cyclic)|176
+CH=N (cyclic)|177
+C=N (cyclic)|178
+O (cyclic)|179
+CO (cyclic)|180
+S (cyclic)|181
+SO2 (cyclic)|182
+>NH|183
+-O-|184
+-S-|185
+>CO|186
+PO2|187
+CH-N|188
+SiHO|189
+SiO|190
+SiH2|191
+SiH|192
+Si|193
+(CH3)3N|194
+N=N (cyclic)|195
+Ccyclic=N-|196
+Ccyclic=CH-|197
+Ccyclic=NH|198
+N=O|199
+Ccyclic=C|200
+P=O|201
+N=N|202
+C=NH|203
+>C=S|204
+aC-CON|205
+aC=O|206
+aN-|207
+-Na|208
+-K|209
+HCONH|210
+CHOCH|211
+C2O|212
+SiH3|213
+SiH2O|214
+CH=C=CH|215
+CH=C=C|216
+OP(=S)O|217
+R|218
+CF2cyclic|219
+CFcyclic|220

@@ -1,0 +1,75 @@
+group|smarts
+HOOC-(CHn)m-COOH (m>2, n in 0..2)|[CH0;$([CH0]([OH])=O)][CX4H2;!R][CH0;$([CH0]([OH])=O)] LN:1:3.20:2
+?NHn-(CHn)m-COOH (m>2, n in 0..2)|
+NH2-(CHn)m-OH (m>2, n in 0..2)|[NH2][CX4H2;!R][OH] LN:1:3.20:2
+OH-(CHn)m-OH (m>2, n in 0..2)|[OH][CX4H2;!R][OH] LN:1:3.20:2
+???OH-(CHp)k-O-(CHn)m-OH (m,k>0; p,n in 0..2)|
+???OH-(CHp)k-S-(CHn)m-OH (m,k>0; p,n in 0..2)|
+???OH-(CHp)k-NHx-(CHn)m-OH (m,k>0; p,n,x in 0..2)|
+???CHp-O-(CHn)m-OH (m>2; n,p in 0..2)|
+NH2-(CHn)m-NH2 (m>2; n in 0..2))|[NH2][CX4H2;!R][NH2] LN:1:3.20:2
+???NHk-(CHn)m-NH2 (m>2; k in 0..1; n in 0..2)|
+???SH-(CHn)m-SH (m>2; n in 0..2)|
+NC-(CHn)m-CN (m>2)|[NX1H0]#[CH0][CX4H2;!R][CH0]#[NX1H0] LN:2:3.20:4
+???COO-(CHn)m-OOC (m>2; n in 0..2)|
+aC-(CHn=CHm)cyc (fused rings) (n,m in 0..1)|[cH0;R;!R1]@[CH0,CH1;R]=;@[CH0,CH1;R]
+aC-aC (different rings)|[cH0]!:[cH0]
+aC-CHncyc (different rings) (n in 0..1)|[cH0]!@[CX4H0,CX4H1;R]
+aC-CHncyc (fused rings) (n in 0..1)|[cH0;R;!R1][CX4H0,CX4H1,CX4H2;R]
+aC-(CHn)m-aC (different rings) (m>1; n in 0..2)|[cH0][CX4H2;!R][cH0] LN:1:2.20:2
+aC-(CHn)m-CHcyc (different rings) (m>0; n in 0..2)|[cH0][CX4H2;!R][CX4H;R] LN:1:1.20:2
+CHcyc-CHcyc (different rings)|[CX4H;R]!@[CX4H;R]
+???CHcyc-(CHn)m-CHcyc (different rings) (m>0; n in 0..2)|
+CH multiring|[CX4H;R;!R1]
+C multiring|[CX4H0;R;!R1]
+aC-CHm-aC (different rings) (m in 0..2)|[cH0][CX4H0,CX4H1,CX4H2;!R]!@[cH0;R1]
+aC-(CHm=CHn)-aC (different rings) (m,n in 0..2)|[cH0][CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][cH0]
+???(CHm=C)cyc-CH=CH-(C=CHn)cyc (different rings)|
+?(CHm=C)cyc-CHp-(C=CHn)cyc (different rings)|
+aC-CO-aC (different rings)|[cH0][CH0;!R](=O)[cH0]
+aC-CHm-CO-aC (different rings) (m in 0..2)|[cH0][CH0;!R](=O)[cH0]
+aC-CO-(C=CHn)cyc (different rings) (n in 0..1)|[cH0][CH0;!R](=O)[CH0;R]=[CH0,CH1;R]
+?aC-CO-CO-aC (different rings)|
+aC-COcyc (fused rings)|[cH0;R;!R1][CH0;R]=O
+???aC-CO-(CHn)m-CO-aC (different rings)  (m>0; n in 0..2)|
+?aC-CO-CHncyc (different rings) (n in 0..1)|
+aC-CO-NHn-aC (different rings) (n in 0..1)|[cH0][CH0;!R;!$([CH0][OH0])](=O)[NX3H1;!R][cH0;R1]
+?aC-NHnCONHm-aC (different rings) (n,m in 0..1)|
+aC-CO-Ncyc (different rings)|[cH0][CH0;!R](=O)[NH0;R]
+aC-Scyc (fused rings)|[cH0;R;!R1][SX2H0;R]
+aC-S-aC (different rings)|[cH0][SX2H0;!R][cH0]
+???aC-POn-aC (different rings) (n in 0..4)|
+aC-SOn-aC (different rings) (n in 1..4)|[cH0]!@[SH0;!R](=O)(=O)!@[cH0;R1]
+aC-NHncyc (fused rings) (n in 0..1)|[cH0;R;!R1][NX3H0,NX3H1;R]
+aC-NH-aC (different rings)|[cH0]!@[NX3H1;!R][cH0;R1]
+aC-(C=N)cyc (different rings)|[cH0]!@[CH0;R]=[NH0;R]
+aC-(N=CHn)cyc (fused rings) (n in 0..1)|[cH0;R;!R1][NH0;R]=[CH0,CH1;R]
+aC-(CHn=N)cyc (fused rings) (n in 0..1)|[cH0;R;!R1]@[CH0,CH1;R]=[NH0;R]
+aC-O-CHn-aC (different rings) (n in 0..2)|[cH0][OH0;!R][CX4H0,CX4H1,CX4H2;!R][cH0]
+aC-O-aC (different rings)|[cH0][OH0;!R][cH0;R1]
+aC-CHn-O-CHm-aC (different rings) (n,m in 0..2)|[cH0][CX4H0,CX4H1,CX4H2;!R][OH0;!R][CX4H0,CX4H1,CX4H2;!R][cH0]
+aC-Ocyc (fused rings)|[cH0;R;!R1]@[OH0;R]
+AROM.FUSED[2]|[cH]1[cH][cH][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[2]s1|[cH0;R1]1[cH][cH][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[2]s2|[cH]1[cH0;R1][cH][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[2]s2s3|[cH]1[cH0;R1][cH0;R1][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[2]s1s4|[cH0;R;!R1]1[cH0;R;!R1][cH0;R1][cH][cH][cH0;R1]1
+AROM.FUSED[2]s1s2|[cH0;R;!R1]1[cH0;R;!R1][cH0;R1][cH0;R1][cH][cH]1
+AROM.FUSED[2]s1s3|[cH0;R1]1[cH][cH0;R1][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[3]|[cH0;R;!R1]1[cH0;R;!R1][cH0;R;!R1][cH][cH][cH]1
+AROM.FUSED[4a]|[cH0;R;!R1]1[cH0;R;!R1][cH][cH0;R;!R1][cH0;R;!R1][cH]1
+AROM.FUSED[4a]s1|[cH0;R1]1[cH0;R;!R1][cH0;R;!R1][cH][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[4a]s1s4|[cH0;R1]1[cH0;R;!R1][cH0;R;!R1][cH0;R1][cH0;R;!R1][cH0;R;!R1]1
+AROM.FUSED[4p]|[cH0;R;!R1]1[cH0;R;!R1][cH0;R;!R1][cH0;R;!R1][cH][cH]1
+???AROM.FUSED[4p]s3s4|
+PYRIDINE.FUSED[2]|n1[cH0;R2][cH0;R;!R1][cH][cH][cH]1
+PYRIDINE.FUSED[2-iso]|n1[cH][cH0;R;!R1][cH0;R;!R1][cH][cH]1
+PYRIDINE.FUSED[4]|n1[cH0;R;!R1][cH0;R;!R1][cH][cH0;R;!R1][cH0;R;!R1]1
+aC-N-CHcyc (different rings)|[cH0][NX3H0;!R][CX4H;R1]
+N multiring|[N;R;!R1]
+Ncyc-(CH2)3-Ncyc (different rings)|[NX3H0;R][CX4H2;!R][CX4H2;!R][CX4H2;!R][NX3H0;R]
+?aC-COCH2CH2-aC (different rings)|
+aC-O-(CH2)2-Ncyc (different rings)|[cH0][OH0;!R][CH2][CH2][NX3H0;R]
+?aC-CH(OH)(CH2)2-CHcyc (different rings)|
+?Ncyc-(CH2)2-CHcyc (different rings)|
+aC-CONHCH2-CHcyc (different rings)|[cH0][CH0;!R](=O)[NH;!R][CX4H2;!R][CX4H;R1]
