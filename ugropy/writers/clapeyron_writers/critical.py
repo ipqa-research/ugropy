@@ -1,4 +1,4 @@
-"""Joback critical properties writer module."""
+"""Critical properties writer module for Clapeyron.jl."""
 
 import pathlib
 from io import StringIO
@@ -15,7 +15,8 @@ def write_critical(
 ) -> None:
     """Create the DataFrame with the critical properties for Clapeyron.jl.
 
-    Uses the Joback to estimate the critical properties of the molecules.
+    Uses the estimated critical properties from any property estimator of
+    ugropy.
 
     Parameters
     ----------
@@ -31,11 +32,6 @@ def write_critical(
     property_estimator : List, optional
         List of JobackFragmentationResult or AGaniFragmentationResult, by
         default [].
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with the molecular weights for Clapeyron.jl
     """
     data_str = (
         "Clapeyron Database File,,,,,\n"
@@ -54,13 +50,13 @@ def write_critical(
             "Unnamed: 1": "",
             "Unnamed: 2": property_estimator[idx]
             .critical_temperature.to("K")
-            .magnitude,  # noqa
+            .magnitude,
             "Unnamed: 3": property_estimator[idx]
             .critical_pressure.to("Pa")
-            .magnitude,  # noqa
+            .magnitude,
             "Unnamed: 4": property_estimator[idx]
             .critical_volume.to("m^3/mol")
-            .magnitude,  # noqa
+            .magnitude,
             "Unnamed: 5": property_estimator[idx].acentric_factor.magnitude,
         }
         df.loc[len(df)] = new_row

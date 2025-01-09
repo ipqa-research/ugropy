@@ -37,4 +37,9 @@ _ag = _csvs / "abdulelah_gani" / "secondary"
 _ag_sg = _rd(_ag / "secondary.csv", "group")
 _ag_info = _rd(_ag / "info.csv", "group")
 
-abdulelah_gani_s = AbdulelahGaniPSTModel(_ag_sg, _ag_info, True, True)
+abdulelah_gani_s = AbdulelahGaniPSTModel(
+    subgroups=_ag_sg,
+    subgroups_info=_ag_info,
+    allow_overlapping=True,
+    allow_free_atoms=True,
+)

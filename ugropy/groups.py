@@ -1,4 +1,4 @@
-"""Groups module."""
+"""Groups class module."""
 
 from typing import List, Union
 
@@ -23,7 +23,7 @@ from .models.unifacmod import unifac
 class Groups:
     """Groups class.
 
-    Stores the solved FragmentationModels subgroups of a molecule. This class
+    Stores the solved FragmentationModels results of a molecule. This class
     was implemented on an early version of the `ugropy` library. Is not really
     meant to be used, instead is recommended to use directly the corresponding
     FragmentationModel independently since it provides more flexibility and
@@ -33,8 +33,8 @@ class Groups:
     Parameters
     ----------
     identifier : Union[str, Chem.rdchem.Mol]
-            Identifier of the molecule. You can use either the name of the
-            molecule, the SMILEs of the molecule or a rdkit Mol object.
+        Identifier of the molecule. You can use either the name of the
+        molecule, the SMILEs of the molecule or a rdkit Mol object.
     identifier_type : str, optional
         Identifier type of the molecule. Use "name" if you are providing
         the molecules' name, "smiles" if you are providing the SMILES
@@ -53,7 +53,7 @@ class Groups:
     Attributes
     ----------
     identifier : str
-        Identifier of a molecule. Example: hexane or CCCCCC.
+        Identifier of a molecule. Example: 'hexane' or 'CCCCCC'.
     identifier_type : str, optional
         Use 'name' to search a molecule by name or 'smiles' to provide the
         molecule SMILES representation, by default "name".
