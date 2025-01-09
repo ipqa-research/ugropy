@@ -25,9 +25,14 @@ OS.
 You can try `ugropy` without installing it by clicking on the Colab badge.
 
 # Models implemented
+
+## Gibbs / EoS models
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
+
+## Property estimators
 - Joback
+- Abdulelah-Gani (beta)
 
 # Writers
 `ugropy` allows you to convert the obtained functional groups or estimated

@@ -44,9 +44,9 @@ _ag_biases = _rd(_ag / "properties_biases.csv", "biases")
 
 
 abdulelah_gani = AbdulelahGaniModel(
-    abdulelah_gani_p,
-    abdulelah_gani_s,
-    abdulelah_gani_t,
-    _ag_pc,
-    _ag_biases,
+    abdulelah_gani_p=abdulelah_gani_p,
+    abdulelah_gani_s=abdulelah_gani_s,
+    abdulelah_gani_t=abdulelah_gani_t,
+    properties_contributions=_ag_pc,
+    properties_biases=_ag_biases,
 )

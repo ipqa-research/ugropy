@@ -19,17 +19,17 @@ class ILPSolver(ABC):
 
     - `solve_one_problem`:
         Method that solves one instance of the `Set Cover` problem. This method
-        must return a list of integers representing the chosen fragments and
-        also must append the solution to the `selected_fragments` attribute
-        as a dictionary.
+        must return a list of integers representing the chosen fragments. Also
+        must append the solution to the `selected_fragments` attribute as a
+        dictionary.
     - `solve`:
         This class call the `solve_one_problem` method multiples times if the
         `search_multiple_solutions` attribute is True. The successives calls
-        must include the previous solutions obtained
+        must include the previous solutions obtained as restrictions.
 
     You can personalize both methods as you want. The library will call the
-    `solve` method and at the end, the `selected_fragments` attribute must
-    contain the selected fragments as a list of dictionaries.
+    `solve` method and at the end of its execution the `selected_fragments`
+    attribute must contain the selected fragments for each solution.
 
     Parameters
     ----------
@@ -42,8 +42,9 @@ class ILPSolver(ABC):
         selected to cover all the universe. The key is the name of the fragment
         and the value is a list of atoms that compose the fragment. Some atoms
         that represents a fragment could not be present in the universe. This
-        is handled by adding thos "free atoms" to the universe, forcing that
-        fragment to appear on the solution.
+        is handled by adding those "free atoms" to the universe, forcing that
+        fragment to appear on the solution. This updating of the universe is
+        done on the `__init__` method, so you don't need to worry about it.
     search_multiple_solutions : bool, optional
         If True, the solver will search for multiple solutions, by default
         False
@@ -54,11 +55,19 @@ class ILPSolver(ABC):
         List of atoms that are overlapped. On the `Set Cover` problem therms,
         these atoms represents the universe of the problem.
     fragments : dict[str: List[int]]
-        Fragments to choose.
+        Fragments to choose to cover the universe.
     search_multiple_solutions : bool
         If True, the solver will search for multiple solutions.
-    selected_fragments : List[dict]
-        Solutions found by the `solve` method.
+    selected_fragments : List[List[str]]
+        Solutions found by the `solve` method. Its a list  that contains the
+        different obtained solutions as lists of strings. Each string
+        corresponds to the name of the selected fragments.
+    overlapped_fragments : dict
+        Fragments that participates on overlapped atoms.
+    universe : set
+        Set with all elements that must be covered by the fragments. This set
+        is composed by the overlapped atoms and the atoms that are present in
+        the overlapped fragments but not in the overlapped atoms.
     """
 
     def __init__(
@@ -70,6 +79,9 @@ class ILPSolver(ABC):
         self.overlapped_atoms = overlapped_atoms
         self.fragments = fragments
         self.search_multiple_solutions = search_multiple_solutions
+
+        # Attribute that will store the selected fragments after a
+        # `solve` method call.
         self.selected_fragments = []
 
         # Get overlapped fragments (which participates on overlapped atoms)
@@ -106,7 +118,8 @@ class ILPSolver(ABC):
         List[int]
             Solution found by the solver. The list must contain binary values
             representing the fragments that are choosen with a 1 and the not
-            choosen with a 0.
+            choosen with a 0. Of course, the length of the list must be equal
+            to the lenght of the `overlapped_fragments` attribute.
 
         Raises
         ------

@@ -40,11 +40,6 @@ def write_molar_mass(
     property_estimator : List, optional
         List of JobackFragmentationResult or AGaniFragmentationResult, by
         default [].
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with the molecular weights for Clapeyron.jl
     """
     data_str = (
         "Clapeyron Database File,,\n"

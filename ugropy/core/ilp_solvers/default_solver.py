@@ -16,7 +16,7 @@ class DefaultSolver(ILPSolver):
     """Default ILP solver for the set cover problem."""
 
     def solve_one_problem(self, not_valid_solutions: List = []) -> List[int]:
-        """Solve one problem with the Pulp library.
+        """Solve one `Set Cover` problem with the Pulp library.
 
         Parameters
         ----------
@@ -50,15 +50,15 @@ class DefaultSolver(ILPSolver):
 
             problem += pulp.lpSum(sum_list) == 1
 
-        # Constaints 2: if are not_valid_solutions, the newones cannot use less
-        # elements than the previous ones, otherwise the first one was not
+        # Constaints 2: if are not_valid_solutions, the new ones cannot use
+        # less elements than the previous ones, otherwise the first one was not
         # optimal.
         if not_valid_solutions:
             opt = np.sum(np.array(not_valid_solutions[0], dtype=int))
 
             problem += pulp.lpSum([x[i] for i in range(n_frag)]) == opt
 
-        # Constaints 3: already get solutions not allowed
+        # Constaints 3: already got solutions not allowed
         for solution in not_valid_solutions:
             problem += (
                 pulp.lpSum([x[i] * solution[i] for i in range(n_frag)])
@@ -83,6 +83,7 @@ class DefaultSolver(ILPSolver):
 
             return [pulp.value(x[i]) for i in range(n_frag)]
         else:
+            # No feasible problem
             return None
 
     def solve(self) -> None:
@@ -96,4 +97,4 @@ class DefaultSolver(ILPSolver):
                     break
                 not_valid_solutions.append(solution)
         else:
-            self.solve_one_problem()
+            _ = self.solve_one_problem()

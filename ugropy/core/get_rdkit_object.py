@@ -11,7 +11,10 @@ from rdkit import Chem
 def instantiate_mol_object(
     identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
 ) -> Chem.rdchem.Mol:
-    """Instantiate a RDKit Mol object from molecule's name or SMILES.
+    """Instantiate a RDKit Mol object from molecule's name, SMILES or mol.
+
+    In case that the input its already a RDKit Mol object, the function will
+    return the input object.
 
     Parameters
     ----------
