@@ -105,11 +105,39 @@ jobs:
         name: python-package-distributions
         path: dist/ugropy-${{ matrix.os }}-${{ matrix.python-version }}/
 
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+    - build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/ugropy
+
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+        pattern: ugropy-*
+        merge-multiple: true
+    - name: Publish distribution 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+        skip-existing: true
+
   publish_to_pypi:
     name: Publish Python 🐍 wheels 🛞 to PyPI
     if: github.event_name == 'release'
     needs:
       - build
+      - publish-to-testpypi
     runs-on: ubuntu-latest
     environment:
       name: pypi
