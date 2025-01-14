@@ -102,7 +102,7 @@ jobs:
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
       with:
-        name: ugropy-${{ matrix.os }}-${{ matrix.python-version }}/
+        name: ugropy-${{ matrix.os }}-${{ matrix.python-version }}
         path: dist/
 
   publish-to-testpypi:
