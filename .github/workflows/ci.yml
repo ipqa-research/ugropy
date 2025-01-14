@@ -103,7 +103,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions
-        path: dist/
+        path: dist/ugropy-${{ matrix.os }}-${{ matrix.python-version }}/
 
   publish_to_pypi:
     name: Publish Python 🐍 wheels 🛞 to PyPI
