@@ -1,4 +1,4 @@
-"""Joback critical properties writer module."""
+"""Critical properties writer module for Clapeyron.jl."""
 
 import pathlib
 from io import StringIO
@@ -6,18 +6,17 @@ from typing import List
 
 import pandas as pd
 
-from ugropy.properties.joback_properties import JobackProperties
-
 
 def write_critical(
     path: pathlib.Path,
     batch_name: str,
     molecules_names: List[str],
-    joback_objects: List[JobackProperties] = [],
+    property_estimator: List = [],
 ) -> None:
     """Create the DataFrame with the critical properties for Clapeyron.jl.
 
-    Uses the Joback to estimate the critical properties of the molecules.
+    Uses the estimated critical properties from any property estimator of
+    ugropy.
 
     Parameters
     ----------
@@ -30,13 +29,9 @@ def write_critical(
         "ogUNIFAC_groups.csv", by default "".
     molecules_names : List[str]
         List of names for each chemical to write in the .csv files.
-    joback_objects : List[Joback], optional
-        List of ugropy.properties.JobackProperties objects, by default [].
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with the molecular weights for Clapeyron.jl
+    property_estimator : List, optional
+        List of JobackFragmentationResult or AGaniFragmentationResult, by
+        default [].
     """
     data_str = (
         "Clapeyron Database File,,,,,\n"
@@ -53,10 +48,16 @@ def write_critical(
         new_row = {
             "Clapeyron Database File": name,
             "Unnamed: 1": "",
-            "Unnamed: 2": joback_objects[idx].critical_temperature,
-            "Unnamed: 3": joback_objects[idx].critical_pressure * 1e5,
-            "Unnamed: 4": joback_objects[idx].critical_volume * 1e-6,
-            "Unnamed: 5": joback_objects[idx].acentric_factor,
+            "Unnamed: 2": property_estimator[idx]
+            .critical_temperature.to("K")
+            .magnitude,
+            "Unnamed: 3": property_estimator[idx]
+            .critical_pressure.to("Pa")
+            .magnitude,
+            "Unnamed: 4": property_estimator[idx]
+            .critical_volume.to("m^3/mol")
+            .magnitude,
+            "Unnamed: 5": property_estimator[idx].acentric_factor.magnitude,
         }
         df.loc[len(df)] = new_row
 

@@ -1,6 +1,6 @@
 ![logo](logo.png)
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipqa-research/ugropy/main)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![Docs](https://img.shields.io/badge/docs%20-%20green?style=flat&label=Sphinx&link=https%3A%2F%2Fipqa-research.github.io%2Fugropy%2Findex.html)](https://salvadorbrandolin.github.io/ugropy/)
@@ -24,14 +24,17 @@ molecules that `ugropy` fails solving the subgroups of a model is very helpful.
 OS.
 
 # Try ugropy now
-You can try ugropy from its
-[Binder](https://mybinder.org/v2/gh/ipqa-research/ugropy/main). Open the
-binder.ipynb file to explore the basic features.
+You can try `ugropy` without installing it by clicking on the Colab badge.
 
-# Models supported v2.0.7
+# Models implemented
+
+## Gibbs / EoS models
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
+
+## Property estimators
 - Joback
+- Abdulelah-Gani (beta)
 
 # Writers
 `ugropy` allows you to convert the obtained functional groups or estimated
@@ -43,8 +46,9 @@ libraries:
 
 
 # Example of use
-You can check the full tutorial
-[here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html).
+Here is a little taste of `ugropy`, please, check the full tutorial
+[here](https://ipqa-research.github.io/ugropy/tutorial/tutorial.html) to see
+all it has to offer!
 
 Get groups from the molecule's name:
 
@@ -58,11 +62,13 @@ hexane = Groups("hexane")
 print(hexane.unifac.subgroups)
 print(hexane.psrk.subgroups)
 print(hexane.joback.subgroups)
+print(hexane.agani.primary.subgroups)
 ```
 
     {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'-CH3': 2, '-CH2-': 4}
+    {'CH3': 2, 'CH2': 4}
 
 Get groups from molecule's SMILES:
 
@@ -72,13 +78,15 @@ propanol = Groups("CCCO", "smiles")
 print(propanol.unifac.subgroups)
 print(propanol.psrk.subgroups)
 print(propanol.joback.subgroups)
+print(propanol.agani.primary.subgroups)
 ```
 
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'-CH3': 1, '-CH2-': 2, '-OH (alcohol)': 1}
+    {'CH3': 1, 'CH2': 2, 'OH': 1}
 
-Estimate properties with the Joback model!
+Estimate properties with the Joback and Abdulelah-Gani models!
 
 ```python
 limonene = Groups("limonene")
@@ -89,25 +97,35 @@ print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
 ```
 
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
-    657.4486692170663 K
+    657.4486692170663 kelvin
     1.0254019428522743 bar
+
+```python
+print(limonene.agani.primary.subgroups)
+print(limonene.agani.secondary.subgroups)
+print(limonene.agani.tertiary.subgroups)
+print(f"{limonene.agani.critical_temperature}")
+print(limonene.agani.molecular_weight / limonene.agani.liquid_molar_volume)
+```
+
+    {'CH3': 2, 'CH2=C': 1, 'CH2 (cyclic)': 3, 'CH (cyclic)': 1, 'CH=C (cyclic)': 1}
+    {'CH3-CHm=CHn (m,n in 0..2)': 1, '(CHn=C)cyc-CH3 (n in 0..2)': 1, 'CHcyc-C=CHn (n in 1..2)': 1}
+    {}
+    640.1457030826214 kelvin
+    834.8700605718585 gram / liter
 
 Visualize your results! (The next code creates the `ugropy` logo)
 
 ```Python
-from IPython.display import SVG
-
 mol = Groups("CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1", "smiles")
 
-svg = mol.unifac.draw(
+mol.unifac.draw(
     title="ugropy",
     width=800,
     height=450,
     title_font_size=50,
     legend_font_size=14
 )
-
-SVG(svg)
 ```
 
 Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
@@ -134,7 +152,7 @@ Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) subgroups
 ```python
 from ugropy import unifac
 
-names = ["hexane", "2-butanone"]
+names = ["hexane", "ethanol"]
 
 grps = [Groups(n) for n in names]
 
@@ -142,7 +160,7 @@ grps = [Groups(n) for n in names]
 ```
 
 ```
-[{1: 2, 2: 4}, {1: 1, 2: 1, 18: 1}]
+[{1: 2, 2: 4}, {1: 1, 2: 1, 14: 1}]
 ```
 
 ## Installation

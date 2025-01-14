@@ -13,5 +13,7 @@ ipython
 
 matplotlib
 
+pytest
+
 thermo >= 0.2.27
 toml

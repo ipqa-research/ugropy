@@ -4,9 +4,17 @@ Attributes
 ----------
 R : float
     Gas constant [J/mol/K]
+ureg : pint.UnitRegistry
+    Unit registry of Pint library
 """
 
 from pathlib import Path
+
+from pint import UnitRegistry
+
+
+# Unit registry
+ureg = UnitRegistry()
 
 
 # constants.py path

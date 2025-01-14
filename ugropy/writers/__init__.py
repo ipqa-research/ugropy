@@ -6,10 +6,11 @@ other thermodynamics libraries.
 Supported:
 
 - Clapeyron.jl: https://github.com/ClapeyronThermo/Clapeyron.jl
+- Caleb's Bell thermo: https://github.com/CalebBell/thermo
 """
 
-from .clapeyron import to_clapeyron
-from .thermo import to_thermo
+from ugropy.writers.clapeyron import to_clapeyron
+from ugropy.writers.thermo import to_thermo
 
 
 __all__ = ["to_clapeyron", "to_thermo"]

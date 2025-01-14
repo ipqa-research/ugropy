@@ -8,16 +8,33 @@ target-version = ["py310"]
 
 [tool.pytest.ini_options]
 markers = [
-    "UNIFAC: classic UNIFAC model tests",
-    "PSRK: predictive SRK model tests",
-    "Joback: Joback-Reid contribution model tests",
-    "Dortmund: Dortmund-UNIFAC model tests",
-    "ConstantinouGani: Constantinou and Gani contribution model tests"
+    # Models markers
+    "unifac: classic UNIFAC model tests",
+    "psrk: predictive SRK model tests",
+    "joback: Joback-Reid contribution model tests",
+    "agani: Abdulelah-Gani contribution model tests",
+    # Tests cases markers
+    "acids: tests cases for acids",
+    "alcohols: tests cases for alcohols",
+    "aldehydes: tests cases for aldehydes",
+    "aromatics: tests cases for aromatics",
+    "complex: tests cases for complex compounds",
+    "epoxides: tests cases for epoxides",
+    "esters: tests cases for esters",
+    "ethers: tests cases for ethers",
+    "halogens: tests cases for halogens",
+    "hydrocarbons: tests cases for hydrocarbons",
+    "unsaturated_hydrocarbons: tests cases for insaturated hydrocarbons",
+    "ketones: tests cases for ketones",
+    "nitrogen: tests cases for nitrogen compounds",
+    "particulars: tests cases for particular compounds",
+    "silicon: tests cases for silicon compounds",
+    "sulfur: tests cases for sulfur compounds",
 ]
 
 [project]
 name = "ugropy"
-version = "2.0.7"
+version = "3.0.0"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
@@ -35,8 +52,9 @@ classifiers = [
 urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
 dependencies = [
-    'numpy >= 1.25.1, <2.0.0',
+    'rdkit >= 2023.9.5',
     'pandas >= 2.0.3',
     'pubchempy >= 1.0.4',
-    'rdkit >= 2023.9.5'
+    'pulp >= 2.9.0',
+    'pint >= 0.22'
 ]

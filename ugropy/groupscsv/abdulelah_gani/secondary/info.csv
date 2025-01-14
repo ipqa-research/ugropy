@@ -1,0 +1,131 @@
+group|group_number
+(CH3)2CH|221
+(CH3)3C|222
+CH(CH3)CH(CH3)|223
+CH(CH3)C(CH3)2|224
+C(CH3)2C(CH3)2|225
+CHn=CHm-CHp=CHk (k,m,n,p in 0..2)|226
+CH3-CHm=CHn (m,n in 0..2)|227
+CH2-CHm=CHn (m,n in 0..2)|228
+CHp-CHm=CHn (m,n in 0..2; p in 0..1)|229
+CHCHO or CCHO|230
+CH3COCH2|231
+CH3COCH or CH3COC|232
+CHCOOH or CCOOH|233
+CH3COOCH or CH3COOC|234
+CO-O-CO|235
+CHOH|236
+COH|237
+CH3COCHnOH (n in 0..2)|238
+NCCHOH or NCCOH|239
+OH-CHn-COO (n in 0..2)|240
+CHm(OH)CHn(OH) (m,n in 0..2)|241
+CHm(OH)CHn(NHp) (m,n,p in 0..2)|242
+CHm(NH2)CHn(NH2) (m,n in 0..2)|243
+CHm(NH)CHn(NH2) (m,n in 1..2)|244
+H2NCOCHnCHmCONH2 (m,n in 1..2)|245
+CHm(NHn)-COOH (m,n in 0..2)|246
+HOOC-CHn-COOH (n in 1..2)|247
+HOOC-CHn-CHm-COOH (n, m in 1..2)|248
+HO-CHn-COOH (n in 0..2)|249
+NH2-CHn-CHm-COOH (n, m in 1..2)|250
+CH3-O-CHn-COOH (n in 1..2)|251
+HS-CH-COOH|252
+HS-CHn-CHm-COOH (n, m in 1..2)|253
+NC-CHn-CHm-CN (n, m in 1..2)|254
+OH-CHn-CHm-CN (n, m in 1..2)|255
+HS-CHn-CHm-SH (n, m in 1..2)|256
+COO-CHn-CHm-OOC (n, m in 1..2)|257
+OOC-CHm-CHm-COO (n, m in 1..2)|258
+NC-CHn-COO (n in 1..2)|259
+COCHnCOO (n in 1..2)|260
+CHm-O-CHn=CHp (m,n,p in 0..3)|261
+CHm=CHn-F (m,n in 0..2)|262
+CHm=CHn-Br (m,n in 0..2)|263
+CHm=CHn-I (m,n in 0..2)|264
+CHm=CHn-Cl (m,n in 0..2)|265
+CHm=CHn-CN (m,n in 0..2)|266
+CHn=CHm-COO-CHp (m,n,p in 0..3)|267
+CHm=CHn-CHO (m,n in 0..2)|268
+CHm=CHn-COOH (m,n in 0..2)|269
+aC-CHn-X (n in 1..2) X: Halogen|270
+aC-CHn-NHm (n in 1..2; m in 0..2))|271
+aC-CHn-O- (n in 1..2)|272
+aC-CHn-OH (n in 1..2)|273
+aC-CHn-CN (n in 1..2)|274
+aC-CHn-CHO (n in 1..2)|275
+aC-CHn-SH (n in 1..2)|276
+aC-CHn-COOH (n in 1..2)|277
+aC-CHn-CO- (n in 1..2)|278
+aC-CHn-S- (n in 1..2)|279
+aC-CHn-OOC-H (n in 1..2)|280
+aC-CHm-NO2 (n in 1..2)|281
+aC-CHn-CONH2 (n in 1..2)|282
+aC-CHn-OOC (n in 1..2)|283
+aC-CHn-COO (n in 1..2)|284
+aC-SO2-OH|285
+aC-CH(CH3)2|286
+aC-C(CH3)3|287
+aC-CF3|288
+(CHn=C)(cyc)-CHO (n in 0..2)|289
+(CHn=C)cyc-COO-CHm (n,m in 0..3)|290
+(CHn=C)cyc-CO- (n in 0..2)|291
+(CHn=C)cyc-CH3 (n in 0..2)|292
+(CHn=C)cyc-CH2 (n in 0..2)|293
+(CHn=C)cyc-CN (n in 0..2)|294
+(CHn=C)cyc-Cl (n in 0..2)|295
+CHcyc-CH3|296
+CHcyc-CH2|297
+CHcyc-CH|298
+CHcyc-C|299
+CHcyc-CH=CHn (n in 0..2)|300
+CHcyc-C=CHn (n in 1..2)|301
+CHcyc-Cl|302
+CHcyc-F|303
+CHcyc-OH|304
+CHcyc-NH2|305
+CHcyc-NH-CHn (n in 0..3)|306
+CHcyc-N-CHn (n in 0..3)|307
+CHcyc-SH|308
+CHcyc-CN|309
+CHcyc-COOH|310
+CHcyc-CO|311
+CHcyc-NO2|312
+CHcyc-S-|313
+CHcyc-CHO|314
+CHcyc-O-|315
+CHcyc-OOCH|316
+CHcyc-COO|317
+CHcyc-OOC|318
+Ccyc-CH3|319
+Ccyc-CH2|320
+Ccyc-OH|321
+>Ncyc-CH3|322
+>Ncyc-CH2|323
+AROMRINGs1s2|324
+AROMRINGs1s3|325
+AROMRINGs1s4|326
+AROMRINGs1s2s3|327
+AROMRINGs1s2s4|328
+AROMRINGs1s3s5|329
+AROMRINGs1s2s3s4|330
+AROMRINGs1s2s3s5|331
+AROMRINGs1s2s4s5|332
+PYRIDINEs2|333
+PYRIDINEs3|334
+PYRIDINEs4|335
+PYRIDINEs2s3|336
+PYRIDINEs2s4|337
+PYRIDINEs2s5|338
+PYRIDINEs2s6|339
+PYRIDINEs3s4|340
+PYRIDINEs3s5|341
+PYRIDINEs2s3s6|342
+(CHn=CHm)cyc-COOH|343
+AROMRINGs1s2s3s4s5|344
+aC-NHCOCH2N|345
+(N=C)cyc-CH3|346
+aC-CONH(CH2)2N|347
+aC-SO2NH|348
+aC-SO2N|349
+aC-SO2NH2|350
