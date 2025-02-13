@@ -1,0 +1,131 @@
+group|smarts
+(CH3)2CH|[CH;!R;!$([CH][cH0])]([CH3])[CH3]
+(CH3)3C|[CH0;!R;!$([CH0][cH0])]([CH3])([CH3])[CH3]
+CH(CH3)CH(CH3)|[CH;!R](*)([CH3])[CH;!R](*)([CH3])
+CH(CH3)C(CH3)2|[CH;!R](*)([CH3])[CH0;!R](*)([CH3])[CH3]
+C(CH3)2C(CH3)2|[CH0;!R](*)([CH3])([CH3])[CH0;!R](*)([CH3])[CH3]
+CHn=CHm-CHp=CHk (k,m,n,p in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
+CH3-CHm=CHn (m,n in 0..2)|[CH3][CH0,CH1;!R]=[CX3H0,CX3H1,CX3H2;!R]
+CH2-CHm=CHn (m,n in 0..2)|[CH2;!R][CH0,CH1;!R]=[CX3H0,CX3H1,CX3H2;!R]
+CHp-CHm=CHn (m,n in 0..2; p in 0..1)|[CX4H0,CX4H1;!R][CH0,CH1,CH2;!R]=[CX3H0,CX3H1,CX3H2;!R]
+CHCHO or CCHO|[CX4H,CX4H0;!R][CH;!R]=[OH0]
+CH3COCH2|[CX4H3][CH0;!R](=[OH0])[CX4H2;!R;!$([CH2][OH])]
+CH3COCH or CH3COC|[CX4H3][CH0;!R](=[OH0])[CX4H,CX4H0;!R]
+CHCOOH or CCOOH|[CX4H,CX4H0;!R;!$([C][a,OH]);!$([C][N;!R])!$([C]([CH0](=O)[OH])[CH0](=O)[OH])][CH0;!R](=[OH0])[OH]
+CH3COOCH or CH3COOC|[CX4H3][CH0;!R](=[OH0])[O][CX4H,CX4H0;!R]
+CO-O-CO|[CH0;!R;!$([CH0]([OH0])[OH0])](=O)[OH0][CH0;!R;!$([CH0]([OH0])[OH0])](=O)
+CHOH|[CX4H;!R;!$([CH][CH0](=O)[OH0]);!$([CH][C;!R][OH]);!$([CH][cH0]);!$([CH][CH2,CH][NH,NH2]);!$([CH][CH0]#N)][OH]
+COH|[CX4H0;!R;$([CX4H0]([CX4])([CX4])[CX4])][OH]
+CH3COCHnOH (n in 0..2)|[CH3][CH0;!R](=[OH0])[CX4H0,CX4H1,CX4H2;!R][OH]
+NCCHOH or NCCOH|[NH0]#[CH0;!R][CX4H0,CX4H;!R][OH]
+OH-CHn-COO (n in 0..2)|[OH][CH0,CH1,CH2;!R][CH0]([OH0])=O
+CHm(OH)CHn(OH) (m,n in 0..2)|[CX4H0,CX4H1,CX4H2;!R]([OH])[CX4H0,CX4H1,CX4H2;!R][OH]
+CHm(OH)CHn(NHp) (m,n,p in 0..2)|[CX4H0,CX4H1,CX4H2;!R]([OH])[CX4H0,CX4H1,CX4H2;!R][NH1,NH2;!R;!$([N][Cl,a])]
+CHm(NH2)CHn(NH2) (m,n in 0..2)|[CX4H0,CX4H1,CX4H2;!R]([NH2])[CX4H0,CX4H1,CX4H2;!R][NH2]
+CHm(NH)CHn(NH2) (m,n in 1..2)|[CX4H0,CX4H,CX4H2;!R]([NH;!R])[CX4H0,CX4H,CX4H2;!R][NH2]
+H2NCOCHnCHmCONH2 (m,n in 1..2)|[NH2][CH0](=O)[CX4H,CX4H2;!R][CX4H,CX4H2;!R][CH0](=O)[NH2]
+CHm(NHn)-COOH (m,n in 0..2)|[CX4H0,CX4H1,CX4H2;!R]([NH0,NH1,NH2;!R])[CH0]([OH])=[OH0]
+HOOC-CHn-COOH (n in 1..2)|[OH][CH0;!R](=O)[CX4H0,CX4H,CX4H2;!R][CH0;!R](=O)[OH]
+HOOC-CHn-CHm-COOH (n, m in 1..2)|[OH][CH0;!R](=O)[CX4H0,CX4H,CX4H2;!R][CX4H0,CX4H,CX4H2;!R][CH0;!R](=O)[OH]
+HO-CHn-COOH (n in 0..2)|[OH][CX4H0,CX4H1,CX4H2;!R][CH0]([OH])=O
+NH2-CHn-CHm-COOH (n, m in 1..2)|[NH2][CX4H1,CX4H2;!R][CX4H1,CX4H2;!R][CH0]([OH])=O
+CH3-O-CHn-COOH (n in 1..2)|[CX4H3][O][CX4H0,CX4H,CX4H2;!R][CH0]([OH])=O
+HS-CH-COOH|[SX2H][CX4H0,CX4H,CX4H2;!R][CH0]([OH])=O
+HS-CHn-CHm-COOH (n, m in 1..2)|[SX2H][CX4H0,CX4H1,CX4H2;!R][CX4H0,CX4H1,CX4H2;!R][CH0]([OH])=O
+NC-CHn-CHm-CN (n, m in 1..2)|[NH0]#[CH0;!R][CX4H,CX4H2;!R][CX4H,CX4H2;!R][CH0;!R]#[NH0]
+OH-CHn-CHm-CN (n, m in 1..2)|[OH][CX4H,CX4H2;!R][CX4H,CX4H2;!R][CH0;!R]#[NH0]
+HS-CHn-CHm-SH (n, m in 1..2)|[SX2H][CX4H0,CX4H1,CX4H2;!R][CX4H0,CX4H1,CX4H2;!R][SX2H]
+COO-CHn-CHm-OOC (n, m in 1..2)|[CH0;!R](=[OH0])[OH0;!R][CX4H,CX4H2;!R][CX4H,CX4H2;!R][OH0;!R][CH0;!R](=[OH0])
+OOC-CHm-CHm-COO (n, m in 1..2)|[OH0;!R][CH0](=O)[CH,CH2;!R][CH,CH2;!R][CH0;!R](=O)[OH0;!R]
+NC-CHn-COO (n in 1..2)|[NH0]#[CH0;!R][CX4H,CX4H2;!R][CH0]([OH0])=O
+COCHnCOO (n in 1..2)|[CH0;!R;!$([CH0][OH0]);$([CH0]([CX4;!R])[CX4;!R])](=[OH0])[CX4H,CX4H2;!R][CH0;!R](=[OH0])[OH0;!R]
+CHm-O-CHn=CHp (m,n,p in 0..3)|[CX4H0,CX4H1,CX4H2,CX4H3;!R;!$([CH0,CH1,CH2,CH3;!R]=[OH0])][OH0;!R][CH0,CH1;!R]=[CH0,CH1,CH2;!R]
+CHm=CHn-F (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][F]
+CHm=CHn-Br (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][Br]
+CHm=CHn-I (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1,CH2;!R][I]
+CHm=CHn-Cl (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][Cl]
+CHm=CHn-CN (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH0;!R]#N
+CHn=CHm-COO-CHp (m,n,p in 0..3)|[CH0,CH1,CH2;!R]=[CH0,CH1][CH0](=[OH0])[OH0][CH0,CH1,CH2,CH3;!R,R1]
+CHm=CHn-CHO (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH]=O
+CHm=CHn-COOH (m,n in 0..2)|[CH0,CH1,CH2;!R]=[CH0,CH1;!R][CH0]([OH])=[OH0]
+aC-CHn-X (n in 1..2) X: Halogen|[cH0][CX4H0,CX4H1,CX4H2;!R;!$([CH0](F)(F)F)][F,Cl,Br,I]
+aC-CHn-NHm (n in 1..2; m in 0..2))|[cH0][CX4H0,CX4H1,CX4H2;!R][NH0,NH1,NH2;!R;!$([NH0]=O)]
+aC-CHn-O- (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][OH0;!R;!$([OH0][CH0]=[OH0]);!$([OH0][CH]=[OH0])]
+aC-CHn-OH (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][OH]
+aC-CHn-CN (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH0]#N
+aC-CHn-CHO (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH]=O
+aC-CHn-SH (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][SH]
+aC-CHn-COOH (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH0;!R]([OH])=O
+aC-CHn-CO- (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH0;!R;!$([CH0][OH,OH0,NH2]);!$([CH0][NH][CH0;!R](=O))]=O
+aC-CHn-S- (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][SX2H0;!R]
+aC-CHn-OOC-H (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R]O[CH;!R]=O
+aC-CHm-NO2 (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][N+](=O)[O-]
+aC-CHn-CONH2 (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH0;!R](=[O])[NH2]
+aC-CHn-OOC (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R]O[CH0;!R]=O
+aC-CHn-COO (n in 1..2)|[cH0][CX4H0,CX4H,CX4H2;!R][CH0;!R]([OH0])=[OH0]
+aC-SO2-OH|[cH0][S](=O)(=O)[OH]
+aC-CH(CH3)2|[cH0][CH;!R]([CH3])([CH3])
+aC-C(CH3)3|[cH0][CH0;!R]([CH3])([CH3])[CH3]
+aC-CF3|[cH0][CH0;!R]([F])([F])[F]
+(CHn=C)(cyc)-CHO (n in 0..2)|[CH0,CH1;R]=[CH0;R][CH;!R]=[OX1H0]
+(CHn=C)cyc-COO-CHm (n,m in 0..3)|[CH0,CH1;R]=[CH0;R][CH0;!R](=[OH0])[OH0;!R][CH0,CH1,CH2,CH3,cH0]
+(CHn=C)cyc-CO- (n in 0..2)|[CH0,CH1;R;x2]=[CH0;R][CH0;!R;!$([CH0][OH0,OH])](=[OH0])
+(CHn=C)cyc-CH3 (n in 0..2)|[CH0,CH1;R;x2]=[CH0;R][CH3]
+(CHn=C)cyc-CH2 (n in 0..2)|[CH0,CH1;R;x2]=[CH0;R][CH2;!R]
+(CHn=C)cyc-CN (n in 0..2)|[CH0,CH1;R;x2]=[CH0;R][CH0;!R]#N
+(CHn=C)cyc-Cl (n in 0..2)|[CH0,CH1;R]=[CH0;R][Cl]
+CHcyc-CH3|[CX4H;R][CX4H3]
+CHcyc-CH2|[CX4H;R][CX4H2;!R]
+CHcyc-CH|[CX4H;R][CX4H;!R]
+CHcyc-C|[CX4H;R][CX4H0;!R]
+CHcyc-CH=CHn (n in 0..2)|[CX4H;R][CH;!R]=[CH0,CH1,CH2;!R]
+CHcyc-C=CHn (n in 1..2)|[CX4H;R][CH0;!R]=[CH0,CH1,CH2;!R]
+CHcyc-Cl|[CX4H;R][Cl]
+CHcyc-F|[CX4H;R][F]
+CHcyc-OH|[CX4H;R][OH]
+CHcyc-NH2|[CX4H;R][NH2]
+CHcyc-NH-CHn (n in 0..3)|[CX4H;R][NH;!R][CX4H0,CX4H1,CX4H2,CX4H3,cH0]
+CHcyc-N-CHn (n in 0..3)|[CX4H;R][NH0;!R][CX4H0,CX4H1,CX4H2,CX4H3,cH0]
+CHcyc-SH|[CX4H;R][SX2H]
+CHcyc-CN|[CX4H;R][CH0;!R]#N
+CHcyc-COOH|[CX4H;R][CH0;!R]([OH])=O
+CHcyc-CO|[CX4H;R][CH0;!R;!$([CH0][OH,OH0])]=O
+CHcyc-NO2|[CX4H;R][N+](=O)[O-]
+CHcyc-S-|[CX4H;R][SX2H0;!R]
+CHcyc-CHO|[CX4;R][CH;!R]=O
+CHcyc-O-|[CX4H;R;x2][OH0;!R;!$([OH0][CH0]=[OH0]);!$([OH0][CH]=[OH0])]
+CHcyc-OOCH|[CX4H;R;x2][OH0][CH]=O
+CHcyc-COO|[CX4H;R;x2][CH0]([OH0;!R])=[OH0]
+CHcyc-OOC|[CX4H;R;x2][OH0;!R][CH0]=[OH0]
+Ccyc-CH3|[CX4H0;R;x2][CH3]
+Ccyc-CH2|[CX4H0;R;x2][CH2;!R]
+Ccyc-OH|[CX4H0;R;x2][OH]
+>Ncyc-CH3|[NH0X3;R][CH3;!R]
+>Ncyc-CH2|[NH0X3;R][CH2;!R]
+AROMRINGs1s2|[cH0;R1;D3]1[cH0;R1;D3][c;D2][c;D2][c;D2][c;D2]1
+AROMRINGs1s3|[cH0;R1;D3]1[c;D2][cH0;R1;D3][c;D2][c;D2][c;D2]1
+AROMRINGs1s4|[cH0;R1;D3]1[c;D2][c;D2][cH0;R1;D3][c;D2][c;D2]1
+AROMRINGs1s2s3|[cH0;R1;D3]1[cH0;R1;D3][cH0;R1;D3][c;D2][c;D2][c;D2]1
+AROMRINGs1s2s4|[cH0;R1;D3]1[cH0;R1;D3][c;D2][cH0;R1;D3][c;D2][c;D2]1
+AROMRINGs1s3s5|[cH0;R1;D3]1[c;D2][cH0;R1;D3][c;D2][cH0;R1;D3][c;D2]1
+AROMRINGs1s2s3s4|[cH0;R1;D3]1[cH0;R1;D3][cH0;R1;D3][cH0;R1;D3][c;D2][c;D2]1
+AROMRINGs1s2s3s5|[cH0;R1;D3]1[cH0;R1;D3][cH0;R1;D3][c;D2][cH0;R1;D3][c;D2]1
+AROMRINGs1s2s4s5|[cH0;R1;D3]1[cH0;R1;D3][c;D2][cH0;R1;D3][cH0;R1;D3][c;D2]1
+PYRIDINEs2|[nH0;R1]1[cH0;R1;D3][c;D2][c;D2][c;D2][c;D2]1
+PYRIDINEs3|[nH0;R1]1[c;D2][cH0;R1;D3][c;D2][c;D2][c;D2]1
+PYRIDINEs4|[nH0;R1]1[c;D2][c;D2][cH0;R1;D3][c;D2][c;D2]1
+PYRIDINEs2s3|[nH0;R1]1[cH0;R1;D3][cH0;R1;D3][c;D2][c;D2][c;D2]1
+PYRIDINEs2s4|[nH0;R1]1[cH0;R1;D3][c;D2][cH0;R1;D3][c;D2][c;D2]1
+PYRIDINEs2s5|[nH0;R1]1[cH0;R1;D3][c;D2][c;D2][cH0;R1;D3][c;D2]1
+PYRIDINEs2s6|[nH0;R1]1[cH0;R1;D3][c;D2][c;D2][c;D2][cH0;R1;D3]1
+PYRIDINEs3s4|[nH0;R1]1[c;D2][cH0;R1;D3][cH0;R1;D3][c;D2][c;D2]1
+PYRIDINEs3s5|[nH0;R1]1[c;D2][cH0;R1;D3][c;D2][cH0;R1;D3][c;D2]1
+PYRIDINEs2s3s6|[nH0;R1]1[cH0;R1;D3][cH0;R1;D3][c;D2][c;D2][cH0;R1;D3]1
+(CHn=CHm)cyc-COOH|[CH0,CH1;R]=[CH0,CH1;R][CH0]([OH])=O
+AROMRINGs1s2s3s4s5|[cH0;R1]1(*)[cH0;R1](*)[cH0;R1](*)[cH0;R1](*)[cH0;R1](*)[c;D2]1
+aC-NHCOCH2N|[cH0][NH;!R][CH0](=O)[CH2][NH0;!R]
+(N=C)cyc-CH3|[N;R]=[CH0;R][CH3]
+aC-CONH(CH2)2N|[cH0][CH0;!R](=O)[NH;!R][CH2;!R][CH2;!R][NH0;!R]
+aC-SO2NH|[cH0][S;!R](=O)(=O)[NH]
+aC-SO2N|[cH0][S;!R](=O)(=O)[NH0;!R]
+aC-SO2NH2|[cH0][S;!R](=O)(=O)[NH2]

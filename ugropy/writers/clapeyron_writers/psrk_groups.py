@@ -25,11 +25,6 @@ def write_psrk(
         List of names for each chemical to write in the .csv files.
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with the LV-UNIFAC groups for Clapeyron.jl
     """
     lines = [
         "Clapeyron Database File,\n"

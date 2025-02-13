@@ -8,11 +8,13 @@ import pubchempy as pcp
 from rdkit import Chem
 
 
-@cache
 def instantiate_mol_object(
     identifier: Union[str, Chem.rdchem.Mol], identifier_type: str = "name"
 ) -> Chem.rdchem.Mol:
-    """Instantiate a RDKit Mol object from molecule's name or SMILES.
+    """Instantiate a RDKit Mol object from molecule's name, SMILES or mol.
+
+    In case that the input its already a RDKit Mol object, the function will
+    return the input object.
 
     Parameters
     ----------
@@ -34,9 +36,7 @@ def instantiate_mol_object(
         chem_object = Chem.MolFromSmiles(smiles)
 
     elif identifier_type.lower() == "name":
-        pcp_object = pcp.get_compounds(identifier, identifier_type)[0]
-        smiles = pcp_object.canonical_smiles
-        chem_object = Chem.MolFromSmiles(smiles)
+        chem_object = instantiate_mol_from_name(identifier)
 
     elif identifier_type.lower() == "mol":
         chem_object = identifier
@@ -46,11 +46,39 @@ def instantiate_mol_object(
                 "If 'mol' identifier type is used, the identifier must be a "
                 "rdkit.Chem.Chem.rdchem.Mol object."
             )
-
     else:
         raise ValueError(
             f"Identifier type: {identifier_type} not valid, use: 'name', "
             "'smiles' or 'mol'"
+        )
+
+    return chem_object
+
+
+@cache
+def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
+    """Instantiate a RDKit Mol object from molecule's name.
+
+    The funcion uses `pubchempy` to get the molecule's SMILES representation
+    from the molecule's name and then instantiate a RDKit Mol object.
+
+    Parameters
+    ----------
+    name : str
+        Name of the molecule.
+
+    Returns
+    -------
+    rdkit.Chem.rdchem.Mol
+        RDKit Mol object.
+    """
+    try:
+        pcp_object = pcp.get_compounds(name, "name")[0]
+        smiles = pcp_object.canonical_smiles
+        chem_object = Chem.MolFromSmiles(smiles)
+    except IndexError:
+        raise ValueError(
+            f"Could not find a molecule with the name '{name}' on " "PubChem"
         )
 
     return chem_object
