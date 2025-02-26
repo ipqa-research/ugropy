@@ -51,6 +51,11 @@ classifiers = [
 
 urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+dependencies = [
+    "rdkit >= 2023.9.5",
+    "pandas >= 2.0.3",
+    "pubchempy >= 1.0.4",
+    "pint >= 0.22",
+    "pulp >= 2.9.0; sys_platform != 'darwin'",
+    "pulp == 2.9.0; sys_platform == 'darwin'",
+]
