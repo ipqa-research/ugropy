@@ -43,7 +43,10 @@ alcohols_cases = [
             "-OH (alcohol)": 1,
             "-O- (non-ring)": 1,
         },
-        dortmund_result=[{"OH (P)": 1, "CH": 1, "CH2": 1, "CH2O": 1, "CH3": 2}, {"OH (P)": 1, "CH2": 2, "CHO": 1, "CH3": 2}]
+        dortmund_result=[
+            {"OH (P)": 1, "CH": 1, "CH2": 1, "CH2O": 1, "CH3": 2},
+            {"OH (P)": 1, "CH2": 2, "CHO": 1, "CH3": 2},
+        ],
     ),
     Case(
         "CC(C)(C)C1CCC(C(C1)O)(C2=CC=CC=C2)O",
@@ -88,7 +91,7 @@ alcohols_cases = [
             "C": 1,
             "ACH": 5,
             "AC": 1,
-        }
+        },
     ),
     Case(
         "CCCC(C(C)CO)O",
@@ -98,7 +101,13 @@ alcohols_cases = [
         unifac_result={"CH3": 2, "CH2": 3, "CH": 2, "OH": 2},
         psrk_result={"CH3": 2, "CH2": 3, "CH": 2, "OH": 2},
         joback_result={"-CH3": 2, "-CH2-": 3, ">CH-": 2, "-OH (alcohol)": 2},
-        dortmund_result={"OH (S)": 1, "OH (P)": 1, "CH3": 2, "CH2": 3, "CH": 2}
+        dortmund_result={
+            "OH (S)": 1,
+            "OH (P)": 1,
+            "CH3": 2,
+            "CH2": 3,
+            "CH": 2,
+        },
     ),
     Case(
         "CC(C)O",
@@ -108,7 +117,7 @@ alcohols_cases = [
         unifac_result={"CH3": 2, "CH": 1, "OH": 1},
         psrk_result={"CH3": 2, "CH": 1, "OH": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "-OH (alcohol)": 1},
-        dortmund_result={"OH (S)": 1, "CH3": 2, "CH": 1}
+        dortmund_result={"OH (S)": 1, "CH3": 2, "CH": 1},
     ),
     Case(
         "CO",
@@ -118,7 +127,7 @@ alcohols_cases = [
         unifac_result={"CH3OH": 1},
         psrk_result={"CH3OH": 1},
         joback_result={"-CH3": 1, "-OH (alcohol)": 1},
-        dortmund_result={"CH3OH": 1}
+        dortmund_result={"CH3OH": 1},
     ),
     Case(
         "CCO",
@@ -128,7 +137,7 @@ alcohols_cases = [
         unifac_result={"CH3": 1, "CH2": 1, "OH": 1},
         psrk_result={"CH3": 1, "CH2": 1, "OH": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "-OH (alcohol)": 1},
-        dortmund_result={"OH (P)": 1, "CH3": 1, "CH2": 1}
+        dortmund_result={"OH (P)": 1, "CH3": 1, "CH2": 1},
     ),
     Case(
         "CCCO",
@@ -138,7 +147,7 @@ alcohols_cases = [
         unifac_result={"CH3": 1, "CH2": 2, "OH": 1},
         psrk_result={"CH3": 1, "CH2": 2, "OH": 1},
         joback_result={"-CH3": 1, "-CH2-": 2, "-OH (alcohol)": 1},
-        dortmund_result={"OH (P)": 1, "CH3": 1, "CH2": 2}
+        dortmund_result={"OH (P)": 1, "CH3": 1, "CH2": 2},
     ),
     Case(
         "C1=CC=C2C(=C1)C=CC3=C2C(=C(C=C3)O)O",
@@ -177,9 +186,77 @@ alcohols_cases = [
         dortmund_result={"ACH": 7, "AC": 2, "ACOH": 3},
     ),
     Case(
+        "OC=CC",
+        "smiles",
+        "alcohols",
+        unifac_result={"CH3": 1, "CH=CH": 1, "OH": 1},
+        psrk_result={"CH3": 1, "CH=CH": 1, "OH": 1},
+        joback_result={"-CH3": 1, "=CH-": 2, "-OH (alcohol)": 1},
+        dortmund_result={"OH (P)": 1, "CH3": 1, "CH=CH": 1},
+    ),
+    Case(
+        "OC(O)=CC",
+        "smiles",
+        "alcohols",
+        unifac_result={"CH3": 1, "CH=C": 1, "OH": 2},
+        psrk_result={"CH3": 1, "CH=C": 1, "OH": 2},
+        joback_result={"-CH3": 1, "=CH-": 1, "=C<": 1, "-OH (alcohol)": 2},
+        dortmund_result={"OH (P)": 2, "CH3": 1, "CH=C": 1},
+    ),
+    Case(
+        "OC#CC",
+        "smiles",
+        "alcohols",
+        unifac_result={"CH3": 1, "OH": 1, "C=-C": 1},
+        psrk_result={"CH3": 1, "OH": 1, "C=-C": 1},
+        joback_result={"-CH3": 1, "C": 2, "-OH (alcohol)": 1},
+        dortmund_result={"CH3": 1, "OH (P)": 1, "C=-C": 1},
+    ),
+    Case(
+        "OCc1ccccc1",
+        "smiles",
+        "alcohols",
+        unifac_result={"OH": 1, "ACCH2": 1, "ACH": 5},
+        psrk_result={"OH": 1, "ACCH2": 1, "ACH": 5},
+        joback_result={
+            "-CH2-": 1,
+            "ring=CH-": 5,
+            "ring=C<": 1,
+            "-OH (alcohol)": 1,
+        },  # noqa
+        dortmund_result={"OH (P)": 1, "ACCH2": 1, "ACH": 5},
+    ),
+    Case(
+        "OC(C)c1ccccc1",
+        "smiles",
+        "alcohols",
+        unifac_result={"OH": 1, "CH3": 1, "ACCH": 1, "ACH": 5},
+        psrk_result={"OH": 1, "CH3": 1, "ACCH": 1, "ACH": 5},
+        joback_result={
+            "-CH3": 1,
+            ">CH-": 1,
+            "ring=CH-": 5,
+            "ring=C<": 1,
+            "-OH (alcohol)": 1,
+        },  # noqa
+        dortmund_result={"OH (S)": 1, "CH3": 1, "ACCH": 1, "ACH": 5},
+    ),
+    Case(
         "C=C(O)C",
         "smiles",
         "alcohols",
-        "2-Buten-1-ol",
-    )
+        unifac_result={"CH3": 1, "CH2=C": 1, "OH": 1},
+        psrk_result={"CH3": 1, "CH2=C": 1, "OH": 1},
+        joback_result={"-CH3": 1, "=CH2": 1, "=C<": 1, "-OH (alcohol)": 1},
+        dortmund_result={"OH (S)": 1, "CH3": 1, "CH2=C": 1},
+    ),
+    Case(
+        "OC(C)(C)C",
+        "smiles",
+        "alcohols",
+        unifac_result={"CH3": 3, "C": 1, "OH": 1},
+        psrk_result={"CH3": 3, "C": 1, "OH": 1},
+        joback_result={"-CH3": 3, ">C<": 1, "-OH (alcohol)": 1},
+        dortmund_result={"OH (T)": 1, "CH3": 3, "C": 1},
+    ),
 ]

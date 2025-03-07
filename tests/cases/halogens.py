@@ -12,6 +12,7 @@ halogens_cases = [
         unifac_result={"CH3": 1, "CH2": 2, "CH2CL": 1},
         psrk_result={"CH3": 1, "CH2": 2, "CH2CL": 1},
         joback_result={"-CH3": 1, "-CH2-": 3, "-Cl": 1},
+        dortmund_result={"CH3": 1, "CH2": 2, "CH2CL": 1},
     ),
     Case(
         identifier="CC(C)Cl",
@@ -20,6 +21,7 @@ halogens_cases = [
         unifac_result={"CH3": 2, "CHCL": 1},
         psrk_result={"CH3": 2, "CHCL": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "-Cl": 1},
+        dortmund_result={"CH3": 2, "CHCL": 1},
     ),
     Case(
         identifier="CC(C)(C)Cl",
@@ -28,6 +30,7 @@ halogens_cases = [
         unifac_result={"CH3": 3, "CCL": 1},
         psrk_result={"CH3": 3, "CCL": 1},
         joback_result={"-CH3": 3, ">C<": 1, "-Cl": 1},
+        dortmund_result={"CH3": 3, "CCL": 1},
     ),
     Case(
         identifier="OC(Cl)Cl",
@@ -36,6 +39,7 @@ halogens_cases = [
         unifac_result={"OH": 1, "CHCL2": 1},
         psrk_result={"OH": 1, "CHCL2": 1},
         joback_result={">CH-": 1, "-Cl": 2, "-OH (alcohol)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(Cl)Cl",
@@ -44,6 +48,7 @@ halogens_cases = [
         unifac_result={"CH2CL2": 1},
         psrk_result={"CH2CL2": 1},
         joback_result={"-CH2-": 1, "-Cl": 2},
+        dortmund_result={"CH2CL2": 1},
     ),
     Case(
         identifier="CC(Cl)Cl",
@@ -52,6 +57,7 @@ halogens_cases = [
         unifac_result={"CH3": 1, "CHCL2": 1},
         psrk_result={"CH3": 1, "CHCL2": 1},
         joback_result={"-CH3": 1, ">CH-": 1, "-Cl": 2},
+        dortmund_result={"CH3": 1, "CHCL2": 1},
     ),
     Case(
         identifier="CC(C)(Cl)Cl",
@@ -60,6 +66,7 @@ halogens_cases = [
         unifac_result={"CH3": 2, "CCL2": 1},
         psrk_result={"CH3": 2, "CCL2": 1},
         joback_result={"-CH3": 2, ">C<": 1, "-Cl": 2},
+        dortmund_result={"CH3": 2, "CCL2": 1},
     ),
     Case(
         identifier="C(Cl)(Cl)Cl",
@@ -68,6 +75,7 @@ halogens_cases = [
         unifac_result={"CHCL3": 1},
         psrk_result={"CHCL3": 1},
         joback_result={">CH-": 1, "-Cl": 3},
+        dortmund_result={"CHCL3": 1},
     ),
     Case(
         identifier="CC(Cl)(Cl)Cl",
@@ -76,6 +84,7 @@ halogens_cases = [
         unifac_result={"CH3": 1, "CCL3": 1},
         psrk_result={"CH3": 1, "CCL3": 1},
         joback_result={"-CH3": 1, ">C<": 1, "-Cl": 3},
+        dortmund_result={"CH3": 1, "CCL3": 1},
     ),
     Case(
         identifier="C(Cl)(Cl)(Cl)Cl",
@@ -84,6 +93,7 @@ halogens_cases = [
         unifac_result={"CCL4": 1},
         psrk_result={"CCL4": 1},
         joback_result={">C<": 1, "-Cl": 4},
+        dortmund_result={"CCL4": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)Cl",
@@ -92,6 +102,7 @@ halogens_cases = [
         unifac_result={"ACH": 5, "ACCL": 1},
         psrk_result={"ACH": 5, "ACCL": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-Cl": 1},
+        dortmund_result={"ACH": 5, "ACCL": 1},
     ),
     Case(
         identifier="CCI",
@@ -100,6 +111,7 @@ halogens_cases = [
         unifac_result={"CH3": 1, "CH2": 1, "I": 1},
         psrk_result={"CH3": 1, "CH2": 1, "I": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "-I": 1},
+        dortmund_result={"CH3": 1, "CH2": 1, "I": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)I",
@@ -108,6 +120,7 @@ halogens_cases = [
         unifac_result={"ACH": 5, "AC": 1, "I": 1},
         psrk_result={"ACH": 5, "AC": 1, "I": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-I": 1},
+        dortmund_result={"ACH": 5, "AC": 1, "I": 1},
     ),
     Case(
         identifier="CCBr",
@@ -116,6 +129,7 @@ halogens_cases = [
         unifac_result={"CH3": 1, "CH2": 1, "BR": 1},
         psrk_result={"CH3": 1, "CH2": 1, "BR": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "-Br": 1},
+        dortmund_result={"CH3": 1, "CH2": 1, "BR": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)Br",
@@ -124,6 +138,7 @@ halogens_cases = [
         unifac_result={"ACH": 5, "AC": 1, "BR": 1},
         psrk_result={"ACH": 5, "AC": 1, "BR": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-Br": 1},
+        dortmund_result={"ACH": 5, "AC": 1, "BR": 1},
     ),
     Case(
         identifier="ClC(I)=C(Br)C=CC=C",
@@ -153,6 +168,14 @@ halogens_cases = [
             "-Br": 1,
             "-I": 1,
         },
+        dortmund_result={
+            "CH2=CH": 1,
+            "CH=CH": 1,
+            "I": 1,
+            "BR": 1,
+            "CL-(C=C)": 1,
+            "C=C": 1,
+        },
     ),
     Case(
         identifier="C(=C(Cl)Cl)Cl",
@@ -161,6 +184,7 @@ halogens_cases = [
         unifac_result={"CH=C": 1, "CL-(C=C)": 3},
         psrk_result={"CH=C": 1, "CL-(C=C)": 3},
         joback_result={"=CH-": 1, "=C<": 1, "-Cl": 3},
+        dortmund_result={"CH=C": 1, "CL-(C=C)": 3},
     ),
     Case(
         identifier="C1(=C(C(=C(C(=C1F)F)F)F)F)F",
@@ -169,6 +193,7 @@ halogens_cases = [
         unifac_result={"ACF": 6},
         psrk_result={"ACF": 6},
         joback_result={"ring=C<": 6, "-F": 6},
+        dortmund_result={"ACF": 6},
     ),
     Case(
         identifier="FC1=CC=NC=C1",
@@ -177,6 +202,7 @@ halogens_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={"ring=CH-": 4, "ring=C<": 1, "-F": 1, "-N= (ring)": 1},
+        dortmund_result={"ACH": 2, "AC2H2N": 1, "ACF": 1},
     ),
     Case(
         identifier="OC(F)(Br)I",
@@ -191,6 +217,7 @@ halogens_cases = [
             "-I": 1,
             "-OH (alcohol)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="OC(O)(F)F",
@@ -199,6 +226,7 @@ halogens_cases = [
         unifac_result={"OH": 2, "CF2": 1},
         psrk_result={"OH": 2, "CF2": 1},
         joback_result={">C<": 1, "-F": 2, "-OH (alcohol)": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="OC(F)(F)F",
@@ -207,6 +235,7 @@ halogens_cases = [
         unifac_result={"OH": 1, "CF3": 1},
         psrk_result={"OH": 1, "CF3": 1},
         joback_result={">C<": 1, "-F": 3, "-OH (alcohol)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(C(C(C(F)(F)F)(F)F)(F)F)(C(C(F)(F)F)(F)F)(F)F",
@@ -215,6 +244,7 @@ halogens_cases = [
         unifac_result={"CF3": 2, "CF2": 4},
         psrk_result={"CF3": 2, "CF2": 4},
         joback_result={">C<": 6, "-F": 14},
+        dortmund_result={"CF3": 2, "CF2": 4},
     ),
     Case(
         identifier="C1(C(C(C(C(C1(F)F)(F)F)(F)F)(F)F)(F)F)(C(F)(F)F)F",
@@ -223,6 +253,7 @@ halogens_cases = [
         unifac_result={"CF3": 1, "CF2": 5, "CF": 1},
         psrk_result={"CF3": 1, "CF2": 5, "CF": 1},
         joback_result={">C<": 1, "ring>C<": 6, "-F": 14},
+        dortmund_result={"CF3": 1, "CF2": 5, "CF": 1},
     ),
     Case(
         identifier="FC(F)F",
@@ -231,6 +262,7 @@ halogens_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={">CH-": 1, "-F": 3},
+        dortmund_result={},
     ),
     Case(
         identifier="FCF",
@@ -239,6 +271,7 @@ halogens_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={"-CH2-": 1, "-F": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="CF",
@@ -247,6 +280,7 @@ halogens_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={"-CH3": 1, "-F": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(Cl)(Cl)Cl",
@@ -255,6 +289,7 @@ halogens_cases = [
         unifac_result={"CCL3F": 1},
         psrk_result={"CCL3F": 1},
         joback_result={">C<": 1, "-F": 1, "-Cl": 3},
+        dortmund_result={},
     ),
     Case(
         identifier="C(C(F)(Cl)Cl)(F)(Cl)Cl",
@@ -263,6 +298,7 @@ halogens_cases = [
         unifac_result={"CCL2F": 2},
         psrk_result={"CCL2F": 2},
         joback_result={">C<": 2, "-F": 2, "-Cl": 4},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(Cl)Cl",
@@ -271,6 +307,7 @@ halogens_cases = [
         unifac_result={"HCCL2F": 1},
         psrk_result={"HCCL2F": 1},
         joback_result={">CH-": 1, "-F": 1, "-Cl": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C(C(F)(F)F)(F)Cl",
@@ -279,6 +316,7 @@ halogens_cases = [
         unifac_result={"CF3": 1, "HCCLF": 1},
         psrk_result={"CF3": 1, "HCCLF": 1},
         joback_result={">CH-": 1, ">C<": 1, "-F": 4, "-Cl": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(C(F)(F)Cl)(F)(F)Cl",
@@ -287,6 +325,7 @@ halogens_cases = [
         unifac_result={"CCLF2": 2},
         psrk_result={"CCLF2": 2},
         joback_result={">C<": 2, "-F": 4, "-Cl": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(F)Cl",
@@ -295,6 +334,7 @@ halogens_cases = [
         unifac_result={"HCCLF2": 1},
         psrk_result={"HCCLF2": 1},
         joback_result={">CH-": 1, "-F": 2, "-Cl": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(F)(F)Cl",
@@ -303,6 +343,7 @@ halogens_cases = [
         unifac_result={"CCLF3": 1},
         psrk_result={"CCLF3": 1},
         joback_result={">C<": 1, "-F": 3, "-Cl": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(F)(Cl)Cl",
@@ -311,5 +352,6 @@ halogens_cases = [
         unifac_result={"CCL2F2": 1},
         psrk_result={"CCL2F2": 1},
         joback_result={">C<": 1, "-F": 2, "-Cl": 2},
+        dortmund_result={},
     ),
 ]

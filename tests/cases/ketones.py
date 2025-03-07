@@ -23,6 +23,13 @@ ketones_cases = [
             ">C=O (non-ring)": 1,
             "-COO- (ester)": 1,
         },
+        dortmund_result={
+            "CH3": 3,
+            "CH": 2,
+            "CH2COO": 1,
+            "CH2CO": 1,
+            "OH (S)": 1,
+        },
     ),
     Case(
         "O=C(CC1=CC=CC=C1)CC1=CC=CC=C1",
@@ -36,6 +43,7 @@ ketones_cases = [
             "ring=C<": 2,
             ">C=O (non-ring)": 1,
         },
+        dortmund_result={"ACH": 10, "AC": 1, "ACCH2": 1, "CH2CO": 1},
     ),
     Case(
         "CC(=O)CC1=CC=CC=C1",
@@ -50,6 +58,7 @@ ketones_cases = [
             "ring=C<": 1,
             ">C=O (non-ring)": 1,
         },
+        dortmund_result={"CH3CO": 1, "ACH": 5, "ACCH2": 1},
     ),
     Case(
         "CC(C)(C)C(=O)CC1=CC=CC=C1",
@@ -65,6 +74,7 @@ ketones_cases = [
             "ring=C<": 1,
             ">C=O (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "ACH": 5, "AC": 1, "CH2CO": 1, "C": 1},
     ),
     Case(
         "C1CC1=O",
@@ -74,6 +84,7 @@ ketones_cases = [
         unifac_result={"CH2": 1, "CH2CO": 1},
         psrk_result={"CH2": 1, "CH2CO": 1},
         joback_result={"ring-CH2-": 2, ">C=O (ring)": 1},
+        dortmund_result={"CY-CH2": 1, "CH2CO": 1},
     ),
     Case(
         "C1CCCC=CCCCCCCCC(=O)CCC1",
@@ -83,6 +94,7 @@ ketones_cases = [
         unifac_result={"CH2": 13, "CH=CH": 1, "CH2CO": 1},
         psrk_result={"CH2": 13, "CH=CH": 1, "CH2CO": 1},
         joback_result={"ring-CH2-": 14, "ring=CH-": 2, ">C=O (ring)": 1},
+        dortmund_result={"CY-CH2": 13, "CH=CH": 1, "CH2CO": 1},
     ),
     Case(
         "CC1=CC(=CC(=C1C(=O)C)C)C(C)(C)C",
@@ -112,6 +124,14 @@ ketones_cases = [
             "ring=C<": 4,
             ">C=O (non-ring)": 1,
         },
+        dortmund_result={
+            "ACH": 2,
+            "AC": 2,
+            "ACCH3": 2,
+            "CH3": 3,
+            "C": 1,
+            "CH3CO": 1,
+        },
     ),
     Case(
         "CC(=O)C1=CC=CC=C1",
@@ -126,6 +146,7 @@ ketones_cases = [
             "ring=C<": 1,
             ">C=O (non-ring)": 1,
         },
+        dortmund_result={"ACH": 5, "AC": 1, "CH3CO": 1},
     ),
     Case(
         "CC(=O)C",
@@ -135,6 +156,7 @@ ketones_cases = [
         unifac_result={"CH3CO": 1, "CH3": 1},
         psrk_result={"CH3CO": 1, "CH3": 1},
         joback_result={"-CH3": 2, ">C=O (non-ring)": 1},
+        dortmund_result={"CH3CO": 1, "CH3": 1},
     ),
     Case(
         "CCC(=O)CC",
@@ -144,6 +166,7 @@ ketones_cases = [
         unifac_result={"CH3": 2, "CH2": 1, "CH2CO": 1},
         psrk_result={"CH3": 2, "CH2": 1, "CH2CO": 1},
         joback_result={"-CH3": 2, "-CH2-": 2, ">C=O (non-ring)": 1},
+        dortmund_result={"CH3": 2, "CH2": 1, "CH2CO": 1},
     ),
     Case(
         "CCC(=O)C",
@@ -159,5 +182,9 @@ ketones_cases = [
             {"CH3": 2, "CH2CO": 1},
         ],
         joback_result={"-CH3": 2, "-CH2-": 1, ">C=O (non-ring)": 1},
+        dortmund_result=[
+            {"CH3": 1, "CH2": 1, "CH3CO": 1},
+            {"CH3": 2, "CH2CO": 1},
+        ],
     ),
 ]

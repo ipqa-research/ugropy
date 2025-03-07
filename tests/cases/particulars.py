@@ -16,6 +16,7 @@ particulars_cases = [
         unifac_result={"H2O": 1},
         psrk_result={"H2O": 1},
         joback_result={},
+        dortmund_result={"H2O": 1},
     ),
     Case(
         identifier="C1=COC(=C1)C=O",
@@ -29,6 +30,7 @@ particulars_cases = [
             "-O- (ring)": 1,
             "O=CH- (aldehyde)": 1,
         },
+        dortmund_result={"FURFURAL": 1},
     ),
     Case(
         identifier="CS(=O)C",
@@ -37,6 +39,7 @@ particulars_cases = [
         unifac_result={"DMSO": 1},
         psrk_result={"DMSO": 1},
         joback_result={},
+        dortmund_result={"DMSO": 1},
     ),
     Case(
         identifier="C=CC#N",
@@ -45,6 +48,7 @@ particulars_cases = [
         unifac_result={"ACRY": 1},
         psrk_result={"ACRY": 1},
         joback_result={"=CH2": 1, "=CH-": 1, "-CN": 1},
+        dortmund_result={"ACRY": 1},
     ),
     Case(
         identifier="BrCN(CC1=CC=NC=C1)C=O",
@@ -61,6 +65,13 @@ particulars_cases = [
             ">N- (non-ring)": 1,
             "-N= (ring)": 1,
         },
+        dortmund_result={
+            "ACH": 2,
+            "AC": 1,
+            "AC2H2N": 1,
+            "BR": 1,
+            "HCON(CH2)2": 1,
+        },
     ),
     Case(
         identifier="BrCN(CC1=CC=CC=C1)C=O",
@@ -76,6 +87,7 @@ particulars_cases = [
             "O=CH- (aldehyde)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"ACH": 5, "BR": 1, "HCON(CH2)2": 1, "AC": 1},
     ),
     Case(
         identifier="CN(C)C=O",
@@ -84,6 +96,7 @@ particulars_cases = [
         unifac_result={"DMF": 1},
         psrk_result={"DMF": 1},
         joback_result={"-CH3": 2, "O=CH- (aldehyde)": 1, ">N- (non-ring)": 1},
+        dortmund_result={"DMF": 1},
     ),
     Case(
         identifier="CCN(CC)C=O",
@@ -97,6 +110,7 @@ particulars_cases = [
             "O=CH- (aldehyde)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "HCON(CH2)2": 1},
     ),
     Case(
         identifier="CN1CCCC1=O",
@@ -105,6 +119,34 @@ particulars_cases = [
         unifac_result={"NMP": 1},
         psrk_result={"NMP": 1},
         joback_result={},
+        dortmund_result={"CY-CH2": 3, "NMP": 1},
+    ),
+    Case(
+        identifier="CCN1CCCC1=O",
+        identifier_type="smiles",
+        cases_module="particulars",
+        unifac_result={"CH3": 1, "CH2": 2, "AM(CH2)2": 1},
+        psrk_result={"CH3": 1, "CH2": 2, "AM(CH2)2": 1},
+        joback_result={},
+        dortmund_result={"CY-CH2": 3, "NEP": 1, "CH3": 1},
+    ),
+    Case(
+        identifier="CC(C)N1CCCC1=O",
+        identifier_type="smiles",
+        cases_module="particulars",
+        unifac_result={},
+        psrk_result={},
+        joback_result={},
+        dortmund_result={"CY-CH2": 3, "NIPP": 1, "CH3": 2},
+    ),
+    Case(
+        identifier="CC(C)(C)N1CCCC1=O",
+        identifier_type="smiles",
+        cases_module="particulars",
+        unifac_result={},
+        psrk_result={},
+        joback_result={},
+        dortmund_result={"CY-CH2": 3, "NTBP": 1, "CH3": 3},
     ),
     Case(
         identifier="C1COCCN1",
@@ -113,6 +155,7 @@ particulars_cases = [
         unifac_result={"MORPH": 1},
         psrk_result={"MORPH": 1},
         joback_result={"ring-CH2-": 4, "-O- (ring)": 1, ">NH (ring)": 1},
+        dortmund_result={"CH2NH": 1, "CY-CH2": 2, "CY-CH2O": 1},
     ),
     Case(
         identifier="OC1=CSC=C1",
@@ -126,6 +169,7 @@ particulars_cases = [
             "-OH (phenol)": 1,
             "-S- (ring)": 1,
         },
+        dortmund_result={"ACH": 1, "ACOH": 1, "AC2H2S": 1},
     ),
     Case(
         identifier="CC1=C(SC=C1)C",
@@ -139,6 +183,7 @@ particulars_cases = [
             "ring=C<": 2,
             "-S- (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "ACH": 1, "ACCH3": 1, "AC2HS": 1},
     ),
     Case(
         identifier="C1=CSC=C1",
@@ -147,6 +192,7 @@ particulars_cases = [
         unifac_result={"C4H4S": 1},
         psrk_result={"C4H4S": 1},
         joback_result={"ring=CH-": 4, "-S- (ring)": 1},
+        dortmund_result={"ACH": 2, "AC2H2S": 1},
     ),
     Case(
         identifier="CC1=CC=CS1",
@@ -160,6 +206,7 @@ particulars_cases = [
             "ring=C<": 1,
             "-S- (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "ACH": 2, "AC2HS": 1},
     ),
     Case(
         identifier="OC1=CC=CS1",
@@ -173,6 +220,7 @@ particulars_cases = [
             "-OH (phenol)": 1,
             "-S- (ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="OC1=CSC=C1O",
@@ -186,6 +234,7 @@ particulars_cases = [
             "-OH (phenol)": 2,
             "-S- (ring)": 1,
         },
+        dortmund_result={"ACOH": 2, "AC2H2S": 1},
     ),
     Case(
         identifier="OC1=CC(O)=CS1",
@@ -199,6 +248,7 @@ particulars_cases = [
             "-OH (phenol)": 2,
             "-S- (ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="OC1=CC=C(O)S1",
@@ -212,6 +262,7 @@ particulars_cases = [
             "-OH (phenol)": 2,
             "-S- (ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="N1C=CN=C1",
@@ -220,6 +271,7 @@ particulars_cases = [
         unifac_result={"IMIDAZOL": 1},
         psrk_result={},
         joback_result={"ring=CH-": 3, ">NH (ring)": 1, "-N= (ring)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="FC(F)(F)S(=O)(=O)[N-]S(=O)(=O)C(F)(F)F",
@@ -228,6 +280,7 @@ particulars_cases = [
         unifac_result={"BTI": 1},
         psrk_result={},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="hydrogen peroxide",
@@ -236,6 +289,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="methane",
@@ -244,6 +298,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CH4": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="C1(=CC=CC=C1)OC(C)(C)C",
@@ -258,6 +313,7 @@ particulars_cases = [
             "ring=C<": 1,
             "-O- (non-ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="[O-][O+]=O",
@@ -266,6 +322,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"O3": 1},
         joback_result={"-O- (non-ring)": 1, "=O (other than above)": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C=C",
@@ -274,6 +331,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"H2C=CH2": 1},
         joback_result={"=CH2": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C#C",
@@ -282,6 +340,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CH=-CH": 1},
         joback_result={"CH": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="N",
@@ -290,6 +349,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"NH3": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[C-]#[O+]",
@@ -298,6 +358,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CO": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="S",
@@ -306,6 +367,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"H2S": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="N#N",
@@ -314,6 +376,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"N2": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[Ar]",
@@ -322,6 +385,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"AR": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="C(=O)=O",
@@ -330,6 +394,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CO2": 1},
         joback_result={"=C=": 1, "=O (other than above)": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C",
@@ -338,6 +403,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CH4": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="O=O",
@@ -346,6 +412,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"O2": 1},
         joback_result={"=O (other than above)": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="O=S=O",
@@ -354,6 +421,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"SO2": 1},
         joback_result={"=O (other than above)": 2, "-S- (non-ring)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="[N]=O",
@@ -362,6 +430,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"NO": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[N-]=[N+]=O",
@@ -370,6 +439,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"N2O": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="FS(F)(F)(F)(F)F",
@@ -378,6 +448,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"SF6": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[He]",
@@ -386,6 +457,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HE": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[Ne]",
@@ -394,6 +466,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"NE": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[Kr]",
@@ -402,6 +475,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"KR": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="[Xe]",
@@ -410,6 +484,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"XE": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="F",
@@ -418,6 +493,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HF": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="Cl",
@@ -426,6 +502,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HCL": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="Br",
@@ -434,6 +511,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HBR": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="I",
@@ -442,6 +520,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HI": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="C(=O)=S",
@@ -450,6 +529,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"COS": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="C1CO1",
@@ -458,6 +538,7 @@ particulars_cases = [
         unifac_result={"CH2": 1, "CH2O": 1},
         psrk_result={"H2COCH2": 1},
         joback_result={"ring-CH2-": 2, "-O- (ring)": 1},
+        dortmund_result={"CY-CH2": 1, "CY-CH2O": 1},
     ),
     Case(
         identifier="FF",
@@ -466,6 +547,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"F2": 1},
         joback_result={"-F": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="ClCl",
@@ -474,6 +556,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CL2": 1},
         joback_result={"-Cl": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="BrBr",
@@ -482,6 +565,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"BR2": 1},
         joback_result={"-Br": 2},
+        dortmund_result={},
     ),
     Case(
         identifier="C#N",
@@ -490,6 +574,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"HCN": 1},
         joback_result={},
+        dortmund_result={},
     ),
     Case(
         identifier="N(=O)[O]",
@@ -498,6 +583,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"NO2": 1},
         joback_result={"=O (other than above)": 2, "-N= (non-ring)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="C(F)(F)(F)F",
@@ -506,6 +592,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CF4": 1},
         joback_result={">C<": 1, "-F": 4},
+        dortmund_result={},
     ),
     Case(
         identifier="N(=O)Cl",
@@ -518,6 +605,7 @@ particulars_cases = [
             "=O (other than above)": 1,
             "-N= (non-ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(C)(C)N",
@@ -526,6 +614,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CH3": 3, "CNH2": 1},
         joback_result={"-CH3": 3, ">C<": 1, "-NH2": 1},
+        dortmund_result={"CH3": 3, "CNH2": 1},
     ),
     Case(
         identifier="hydrogen",
@@ -534,6 +623,7 @@ particulars_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={},
+        dortmund_result={},
     ),
     # Case( TODO
     #     identifier="deuterium",

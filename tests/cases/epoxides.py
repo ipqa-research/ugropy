@@ -12,6 +12,7 @@ epoxides_cases = [
         unifac_result={"CHO": 2},
         psrk_result={"CHO": 2},
         joback_result={"-O- (ring)": 2, "ring>CH-": 2},
+        dortmund_result={"CHO": 2},
     ),
     Case(
         identifier="O1C23OC22OC132",
@@ -20,6 +21,7 @@ epoxides_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={"-O- (ring)": 3, "ring>C<": 3},
+        dortmund_result={},
     ),
     Case(
         identifier="C1OC11CO1",
@@ -28,6 +30,7 @@ epoxides_cases = [
         unifac_result={"CH2O": 2, "C": 1},
         psrk_result={"H2COC": 1, "CH2O": 1},
         joback_result={"-O- (ring)": 2, "ring>C<": 1, "ring-CH2-": 2},
+        dortmund_result={"CY-CH2O": 2, "CY-C": 1},
     ),
     Case(
         identifier="CC1CO1",
@@ -44,6 +47,7 @@ epoxides_cases = [
             "ring>CH-": 1,
             "-O- (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "H2COCH": 1},
     ),
     Case(
         identifier="C1OC1C1=CC=CC=C1",
@@ -61,6 +65,7 @@ epoxides_cases = [
             "ring=C<": 1,
             "-O- (ring)": 1,
         },
+        dortmund_result={"ACH": 5, "AC": 1, "H2COCH": 1},
     ),
     Case(
         identifier="CC1C(O1)C",
@@ -69,6 +74,7 @@ epoxides_cases = [
         unifac_result={"CH3": 2, "CH": 1, "CHO": 1},
         psrk_result={"CH3": 2, "HCOCH": 1},
         joback_result={"-CH3": 2, "ring>CH-": 2, "-O- (ring)": 1},
+        dortmund_result={"CH3": 2, "HCOCH": 1},
     ),
     Case(
         identifier="CC1OC1(C)C",
@@ -82,6 +88,7 @@ epoxides_cases = [
             "ring>C<": 1,
             "-O- (ring)": 1,
         },
+        dortmund_result={"CH3": 3, "CHO": 1, "CY-C": 1},
     ),
     Case(
         identifier="CC1(CO1)C",
@@ -95,6 +102,7 @@ epoxides_cases = [
             "ring>C<": 1,
             "-O- (ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CY-C": 1, "CY-CH2O": 1},
     ),
     Case(
         identifier="CC1(C(O1)(C)C)C",
@@ -103,5 +111,6 @@ epoxides_cases = [
         unifac_result={},
         psrk_result={"CH3": 4, "COC": 1},
         joback_result={"-CH3": 4, "ring>C<": 2, "-O- (ring)": 1},
+        dortmund_result={},
     ),
 ]

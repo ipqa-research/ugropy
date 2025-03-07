@@ -13,6 +13,7 @@ aldehydes_cases = [
         unifac_result={"HCO": 2},
         psrk_result={"HCO": 2},
         joback_result={"O=CH- (aldehyde)": 2},
+        dortmund_result={"HCO": 2},
     ),
     Case(
         identifier="C1=CC=C(C(=C1)C=O)O",
@@ -27,6 +28,7 @@ aldehydes_cases = [
             "-OH (phenol)": 1,
             "O=CH- (aldehyde)": 1,
         },
+        dortmund_result={"ACH": 4, "ACOH": 1, "AC": 1, "HCO": 1},
     ),
     Case(
         identifier="CC(C=C)C=O",
@@ -42,6 +44,7 @@ aldehydes_cases = [
             "=CH-": 1,
             "O=CH- (aldehyde)": 1,
         },
+        dortmund_result={"CH3": 1, "CH": 1, "CH2=CH": 1, "HCO": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)C=CC=O",
@@ -56,6 +59,7 @@ aldehydes_cases = [
             "ring=C<": 1,
             "O=CH- (aldehyde)": 1,
         },
+        dortmund_result={"ACH": 5, "AC": 1, "CH=CH": 1, "HCO": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)C=O",
@@ -65,6 +69,7 @@ aldehydes_cases = [
         unifac_result={"ACH": 5, "AC": 1, "HCO": 1},
         psrk_result={"ACH": 5, "AC": 1, "HCO": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "O=CH- (aldehyde)": 1},
+        dortmund_result={"ACH": 5, "AC": 1, "HCO": 1},
     ),
     Case(
         identifier="C1CCC(CC1)C=O",
@@ -74,6 +79,7 @@ aldehydes_cases = [
         unifac_result={"CH2": 5, "CH": 1, "HCO": 1},
         psrk_result={"CH2": 5, "CH": 1, "HCO": 1},
         joback_result={"ring-CH2-": 5, "ring>CH-": 1, "O=CH- (aldehyde)": 1},
+        dortmund_result={"CY-CH2": 5, "CY-CH": 1, "HCO": 1},
     ),
     Case(
         identifier="CCCCC=O",
@@ -83,6 +89,7 @@ aldehydes_cases = [
         unifac_result={"CH3": 1, "CH2": 3, "HCO": 1},
         psrk_result={"CH3": 1, "CH2": 3, "HCO": 1},
         joback_result={"-CH3": 1, "-CH2-": 3, "O=CH- (aldehyde)": 1},
+        dortmund_result={"CH3": 1, "CH2": 3, "HCO": 1},
     ),
     Case(
         identifier="CC(C)CC=O",
@@ -97,6 +104,7 @@ aldehydes_cases = [
             ">CH-": 1,
             "O=CH- (aldehyde)": 1,
         },
+        dortmund_result={"CH3": 2, "CH2": 1, "CH": 1, "HCO": 1},
     ),
     Case(
         identifier="CC=O",
@@ -106,6 +114,7 @@ aldehydes_cases = [
         unifac_result={"CH3": 1, "HCO": 1},
         psrk_result={"CH3": 1, "HCO": 1},
         joback_result={"-CH3": 1, "O=CH- (aldehyde)": 1},
+        dortmund_result={"CH3": 1, "HCO": 1},
     ),
     Case(
         identifier=r"CCCCCC\C(C=O)=C/C1=CC=CC=C1",
@@ -136,6 +145,14 @@ aldehydes_cases = [
             "ring=CH-": 5,
             "ring=C<": 1,
             "O=CH- (aldehyde)": 1,
+        },
+        dortmund_result={
+            "ACH": 5,
+            "AC": 1,
+            "CH=C": 1,
+            "CH2": 5,
+            "CH3": 1,
+            "HCO": 1,
         },
     ),
 ]

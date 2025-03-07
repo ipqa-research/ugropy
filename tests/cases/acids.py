@@ -12,6 +12,7 @@ acids_cases = [
         unifac_result={"OH": 1, "COOH": 1},
         psrk_result={"OH": 1, "COOH": 1},
         joback_result={"-OH (alcohol)": 1, "-COOH (acid)": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="CCOC(O)=O",
@@ -23,6 +24,7 @@ acids_cases = [
             {"-CH3": 1, "-CH2-": 1, "-O- (non-ring)": 1, "-COOH (acid)": 1},
             {"-CH3": 1, "-CH2-": 1, "-OH (alcohol)": 1, "-COO- (ester)": 1},
         ],
+        dortmund_result={"CH3": 1, "CH2O": 1, "COOH": 1},
     ),
     Case(
         identifier="C(CN)C(C(=O)O)N",
@@ -31,6 +33,7 @@ acids_cases = [
         unifac_result={"CH2": 1, "CH2NH2": 1, "CHNH2": 1, "COOH": 1},
         psrk_result={"CH2": 1, "CH2NH2": 1, "CHNH2": 1, "COOH": 1},
         joback_result={"-CH2-": 2, ">CH-": 1, "-COOH (acid)": 1, "-NH2": 2},
+        dortmund_result={"CH2": 1, "CH2NH2": 1, "CHNH2": 1, "COOH": 1},
     ),
     Case(
         identifier="CC(=O)O",
@@ -39,6 +42,7 @@ acids_cases = [
         unifac_result={"CH3": 1, "COOH": 1},
         psrk_result={"CH3": 1, "COOH": 1},
         joback_result={"-CH3": 1, "-COOH (acid)": 1},
+        dortmund_result={"CH3": 1, "COOH": 1},
     ),
     Case(
         identifier="C(=O)O",
@@ -47,5 +51,6 @@ acids_cases = [
         unifac_result={"HCOOH": 1},
         psrk_result={"HCOOH": 1},
         joback_result={},
+        dortmund_result={"HCOOH": 1},
     ),
 ]
