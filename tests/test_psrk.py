@@ -62,5 +62,5 @@ class TestPSRK(TCase):
 @pytest.mark.psrk
 def test_psrk_groups_coverage():
     # Check if all the groups were detected on at least one case
-    for group in TestPSRK.tested_groups:
-        assert group in psrk.subgroups.index, f"Group {group} not tested"
+    for group in psrk.subgroups.index:
+        assert group in TestPSRK.tested_groups, f"Group {group} not tested"

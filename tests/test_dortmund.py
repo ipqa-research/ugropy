@@ -60,7 +60,7 @@ class TestDortmund(TCase):
 
 @pytest.mark.dependency(depends=["dortmund"])
 @pytest.mark.dortmund
-def test_unifac_groups_coverage():
+def test_dortmund_groups_coverage():
     # Check if all the groups were detected on at least one case
-    for group in TestDortmund.tested_groups:
-        assert group in dortmund.subgroups.index, f"Group {group} not tested"
+    for group in dortmund.subgroups.index:
+        assert group in TestDortmund.tested_groups, f"Group {group} not tested"

@@ -62,5 +62,5 @@ class TestJoback(TCase):
 @pytest.mark.joback
 def test_joback_groups_coverage():
     # Check if all the groups were detected on at least one case
-    for group in TestJoback.tested_groups:
-        assert group in joback.subgroups.index, f"Group {group} not tested"
+    for group in joback.subgroups.index:
+        assert group in TestJoback.tested_groups, f"Group {group} not tested"

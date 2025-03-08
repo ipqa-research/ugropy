@@ -587,4 +587,14 @@ ethers_cases = [
         joback_result={"ring-CH2-": 3, "-O- (ring)": 2, ">NH (ring)": 1},
         dortmund_result={"CY-CH2O": 2, "CH2NH": 1},
     ),
+    Case(
+        identifier="C1OCOCO1",
+        identifier_type="smiles",
+        cases_module="ethers",
+        commentary="Trioxane",
+        unifac_result={"CH2O": 3},
+        psrk_result={"CH2O": 3},
+        joback_result={"ring-CH2-": 3, "-O- (ring)": 3},
+        dortmund_result={"TRIOXAN": 3},
+    ),
 ]
