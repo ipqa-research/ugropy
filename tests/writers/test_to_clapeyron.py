@@ -243,7 +243,7 @@ def test_making_it_explode():
             molecules_names=["limonene", "ethanol"],
             psrk_groups=[{"CH3": 1, "CH2": 1, "OH": 1}],
         )
-        
+
     with pytest.raises(ValueError):
         to_clapeyron(
             molecules_names=["limonene", "ethanol"],

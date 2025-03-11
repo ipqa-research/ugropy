@@ -23,7 +23,6 @@ def to_yaeos(mol_subgroups_list: List[dict], model: GibbsModel) -> str:
     str
         Yaeos Fortran source code.
     """
-
     n_mol = len(mol_subgroups_list)
 
     code = (

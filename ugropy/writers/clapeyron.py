@@ -63,7 +63,7 @@ def to_clapeyron(
             "PSRK groups list must have the same amount of elements than"
             "the molecules name list."
         )
-        
+
     if dortmund_groups and len(dortmund_groups) != len(molecules_names):
         raise ValueError(
             "Dortmund groups list must have the same amount of elements than"

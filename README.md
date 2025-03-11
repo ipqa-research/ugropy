@@ -44,6 +44,7 @@ libraries:
 
 - [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 - [Thermo](https://github.com/CalebBell/thermo)
+- [yaeos (Fortran)](https://github.com/ipqa-research/yaeos)
 
 
 # Example of use
@@ -62,10 +63,12 @@ hexane = Groups("hexane")
 
 print(hexane.unifac.subgroups)
 print(hexane.psrk.subgroups)
+print(hexane.dortmund.subgroups)
 print(hexane.joback.subgroups)
 print(hexane.agani.primary.subgroups)
 ```
 
+    {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'-CH3': 2, '-CH2-': 4}
@@ -78,12 +81,14 @@ propanol = Groups("CCCO", "smiles")
 
 print(propanol.unifac.subgroups)
 print(propanol.psrk.subgroups)
+print(propanol.dortmund.subgroups)
 print(propanol.joback.subgroups)
 print(propanol.agani.primary.subgroups)
 ```
 
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
+    {'CH3': 1, 'CH2': 2, 'OH (P)': 1}
     {'-CH3': 1, '-CH2-': 2, '-OH (alcohol)': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
 
