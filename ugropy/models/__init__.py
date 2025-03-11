@@ -10,7 +10,9 @@ You can check the group list and their SMARTS representation with:
 
 .. code-block:: python
 
-    joback.subgroups psrk.subgroups unifac.subgroups
+    joback.subgroups
+    psrk.subgroups
+    unifac.subgroups
 
 Obtain the contribution of each group to the properties with:
 
@@ -31,6 +33,9 @@ psrk: GibbsModel
 unifac : GibbsModel
     Classic LV-UNIFAC FragmentationModel :cite:p:`ddbst, unifac1, unifac2,
     unifac3, unifac4, unifac5, unifac6`
+dortmund : GibbsModel
+    Dortmund mod-UNIFAC FragmentationModel :cite:p:`dor1, dor2, dor3, dor4,
+    dor5, dor6, dor7, dor8, dor9, dor10, dor11`
 joback: JobackModel
     Joback FragmentationModel :cite:p:`joback1, joback2`
 abdulelah_gani_p: AbdulelahGaniPSTModel
@@ -47,6 +52,7 @@ from . import (
     abdulelah_gani_pmod,
     abdulelah_gani_smod,
     abdulelah_gani_tmod,
+    dortmundmod,
     jobackmod,
     psrkmod,
     read_csv,
@@ -58,6 +64,7 @@ __all__ = [
     "abdulelah_gani_pmod",
     "abdulelah_gani_smod",
     "abdulelah_gani_tmod",
+    "dortmundmod",
     "read_csv",
     "jobackmod",
     "psrkmod",

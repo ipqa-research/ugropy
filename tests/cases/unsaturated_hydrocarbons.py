@@ -36,6 +36,14 @@ unsaturated_hydrocarbons_cases = [
             "ring=CH-": 3,
             "ring=C<": 3,
         },
+        dortmund_result={
+            "CH3": 5,
+            "CH2=CH": 1,
+            "CH=C": 1,
+            "C=C": 1,
+            "ACH": 3,
+            "AC": 3,
+        },
     ),
     Case(
         "CC=CC(C)=C(C)C=C",
@@ -44,6 +52,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "CH3": 3},
         psrk_result={"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "CH3": 3},
         joback_result={"-CH3": 3, "=CH2": 1, "=CH-": 3, "=C<": 2},
+        dortmund_result={"CH2=CH": 1, "CH=CH": 1, "C=C": 1, "CH3": 3},
     ),
     Case(
         "CC1=CCC2CC1C2(C)C",
@@ -59,6 +68,13 @@ unsaturated_hydrocarbons_cases = [
             "ring>C<": 1,
             "ring=CH-": 1,
             "ring=C<": 1,
+        },
+        dortmund_result={
+            "CH3": 3,
+            "CH=C": 1,
+            "CY-CH2": 2,
+            "CY-CH": 2,
+            "CY-C": 1,
         },
     ),
     Case(
@@ -77,6 +93,13 @@ unsaturated_hydrocarbons_cases = [
             "ring=CH-": 1,
             "ring=C<": 1,
         },
+        dortmund_result={
+            "CH3": 2,
+            "CH2=C": 1,
+            "CH=C": 1,
+            "CY-CH2": 3,
+            "CY-CH": 1,
+        },
     ),
     Case(
         "CC1=CCCC=C1C",
@@ -86,6 +109,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2": 2, "CH=C": 2, "CH3": 2},
         psrk_result={"CH2": 2, "CH=C": 2, "CH3": 2},
         joback_result={"-CH3": 2, "ring-CH2-": 2, "ring=CH-": 2, "ring=C<": 2},
+        dortmund_result={"CH3": 2, "CH=C": 2, "CY-CH2": 2},
     ),
     Case(
         "CCC(CCC1CCCC=C1)C2CCCC=C2",
@@ -102,6 +126,14 @@ unsaturated_hydrocarbons_cases = [
             "ring>CH-": 2,
             "ring=CH-": 4,
         },
+        dortmund_result={
+            "CH3": 1,
+            "CH2": 3,
+            "CH": 1,
+            "CH=CH": 2,
+            "CY-CH2": 6,
+            "CY-CH": 2,
+        },
     ),
     Case(
         "C1CCC=CC1",
@@ -111,6 +143,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2": 4, "CH=CH": 1},
         psrk_result={"CH2": 4, "CH=CH": 1},
         joback_result={"ring-CH2-": 4, "ring=CH-": 2},
+        dortmund_result={"CH=CH": 1, "CY-CH2": 4},
     ),
     Case(
         "CC(=C(C)C)C",
@@ -120,6 +153,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"C=C": 1, "CH3": 4},
         psrk_result={"C=C": 1, "CH3": 4},
         joback_result={"-CH3": 4, "=C<": 2},
+        dortmund_result={"C=C": 1, "CH3": 4},
     ),
     Case(
         "CC=C(C)C",
@@ -129,6 +163,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH=C": 1, "CH3": 3},
         psrk_result={"CH=C": 1, "CH3": 3},
         joback_result={"-CH3": 3, "=CH-": 1, "=C<": 1},
+        dortmund_result={"CH=C": 1, "CH3": 3},
     ),
     Case(
         "CCC(=C)C",
@@ -138,6 +173,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2": 1, "CH2=C": 1, "CH3": 2},
         psrk_result={"CH2": 1, "CH2=C": 1, "CH3": 2},
         joback_result={"-CH3": 2, "-CH2-": 1, "=CH2": 1, "=C<": 1},
+        dortmund_result={"CH2": 1, "CH2=C": 1, "CH3": 2},
     ),
     Case(
         "CCCC=CC",
@@ -147,6 +183,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2": 2, "CH=CH": 1, "CH3": 2},
         psrk_result={"CH2": 2, "CH=CH": 1, "CH3": 2},
         joback_result={"-CH3": 2, "-CH2-": 2, "=CH-": 2},
+        dortmund_result={"CH2": 2, "CH=CH": 1, "CH3": 2},
     ),
     Case(
         "CCCCC=C",
@@ -156,6 +193,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH2": 3, "CH2=CH": 1, "CH3": 1},
         psrk_result={"CH2": 3, "CH2=CH": 1, "CH3": 1},
         joback_result={"-CH3": 1, "-CH2-": 3, "=CH2": 1, "=CH-": 1},
+        dortmund_result={"CH2": 3, "CH2=CH": 1, "CH3": 1},
     ),
     Case(
         "C=C=C",
@@ -164,6 +202,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={},
         psrk_result={},
         joback_result={"=CH2": 2, "=C=": 1},
+        dortmund_result={},
     ),
     Case(
         "CC=CC(C)C(C)=C=C",
@@ -179,6 +218,7 @@ unsaturated_hydrocarbons_cases = [
             "=C<": 1,
             "=C=": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC#CC1=CC=CC=C1",
@@ -187,6 +227,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH3": 1, "ACH": 5, "AC": 1, "C=-C": 1},
         psrk_result={"CH3": 1, "ACH": 5, "AC": 1, "C=-C": 1},
         joback_result={"-CH3": 1, "C": 2, "ring=CH-": 5, "ring=C<": 1},
+        dortmund_result={"CH3": 1, "ACH": 5, "AC": 1, "C=-C": 1},
     ),
     Case(
         identifier="CCCCC#C",
@@ -195,6 +236,7 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH3": 1, "CH2": 3, "CH=-C": 1},
         psrk_result={"CH3": 1, "CH2": 3, "CH=-C": 1},
         joback_result={"-CH3": 1, "-CH2-": 3, "CH": 1, "C": 1},
+        dortmund_result={"CH3": 1, "CH2": 3, "CH=-C": 1},
     ),
     Case(
         identifier="CCCC#CC",
@@ -203,5 +245,6 @@ unsaturated_hydrocarbons_cases = [
         unifac_result={"CH3": 2, "CH2": 2, "C=-C": 1},
         psrk_result={"CH3": 2, "CH2": 2, "C=-C": 1},
         joback_result={"-CH3": 2, "-CH2-": 2, "C": 2},
+        dortmund_result={"CH3": 2, "CH2": 2, "C=-C": 1},
     ),
 ]

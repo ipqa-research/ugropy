@@ -38,6 +38,16 @@ complex_cases = [
             "-O- (non-ring)": 2,
             "-COO- (ester)": 1,
         },
+        dortmund_result={
+            "CH3": 4,
+            "CH2": 1,
+            "C": 1,
+            "ACH": 8,
+            "AC": 2,
+            "ACCH2": 2,
+            "CH2O": 1,
+            "(CH2)2CB": 1,
+        },
     ),
     Case(
         identifier="CC(C)CC1=CC=C(C=C1)C(C)OC(C)(C)C",
@@ -70,6 +80,15 @@ complex_cases = [
             "ring=C<": 2,
             "-O- (non-ring)": 1,
         },
+        dortmund_result={
+            "CH3": 6,
+            "C": 1,
+            "ACH": 4,
+            "ACCH2": 1,
+            "CHO": 1,
+            "CH": 1,
+            "AC": 1,
+        },
     ),
     Case(
         identifier="CCCC1=CC=C(CC(=O)OC)C=C1",
@@ -90,6 +109,10 @@ complex_cases = [
             "ring=C<": 2,
             "-COO- (ester)": 1,
         },
+        dortmund_result=[
+            {"CH3": 2, "ACH": 4, "ACCH2": 1, "CH2COO": 1, "CH2": 1, "AC": 1},
+            {"CH3": 2, "ACH": 4, "ACCH2": 2, "CH2": 1, "COO": 1},
+        ],
     ),
     Case(
         identifier="C1=CC(=CC=C1COC(C)(C)C)CCC",
@@ -121,6 +144,15 @@ complex_cases = [
             "ring=C<": 2,
             "-O- (non-ring)": 1,
         },
+        dortmund_result={
+            "CH3": 4,
+            "C": 1,
+            "ACH": 4,
+            "ACCH2": 1,
+            "CH2O": 1,
+            "CH2": 1,
+            "AC": 1,
+        },
     ),
     Case(
         identifier="C13=C(C=C(C=C1)CC2=CC=CC(=C2)CC)CCCC3",
@@ -135,6 +167,7 @@ complex_cases = [
             "ring=CH-": 7,
             "ring=C<": 5,
         },
+        dortmund_result={"CH3": 1, "ACH": 7, "AC": 3, "ACCH2": 2, "CY-CH2": 4},
     ),
     Case(
         identifier="C13=C(C(=C(C(=C1C)C)CC2=C(C(=C(C(=C2C)CC)O[H])N([H])[H])C)C)CCCC3",  # noqa
@@ -166,6 +199,15 @@ complex_cases = [
             "-OH (phenol)": 1,
             "-NH2": 1,
         },
+        dortmund_result={
+            "CH3": 1,
+            "AC": 3,
+            "ACCH3": 5,
+            "ACCH2": 2,
+            "ACOH": 1,
+            "ACNH2": 1,
+            "CY-CH2": 4,
+        },
     ),
     Case(
         identifier="C1(=CC=CC=C1)COC(C)(C)C",
@@ -181,6 +223,7 @@ complex_cases = [
             "ring=C<": 1,
             "-O- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "C": 1, "ACH": 5, "CH2O": 1, "AC": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)CC2=CC=CC=C2",
@@ -189,6 +232,7 @@ complex_cases = [
         unifac_result={"ACH": 10, "ACCH2": 1, "AC": 1},
         psrk_result={"ACH": 10, "ACCH2": 1, "AC": 1},
         joback_result={"-CH2-": 1, "ring=CH-": 10, "ring=C<": 2},
+        dortmund_result={"ACH": 10, "ACCH2": 1, "AC": 1},
     ),
     Case(
         identifier="C1(=CC=CC=C1)C(OC(C)(C)C)C",
@@ -204,6 +248,7 @@ complex_cases = [
             "ring=C<": 1,
             "-O- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 4, "C": 1, "ACH": 5, "CHO": 1, "AC": 1},
     ),
     Case(
         identifier="C12=CC=CC=C1COC2",
@@ -217,5 +262,6 @@ complex_cases = [
             "ring=C<": 2,
             "-O- (ring)": 1,
         },
+        dortmund_result={"ACH": 4, "AC": 2, "CY-CH2": 1, "CY-CH2O": 1},
     ),
 ]

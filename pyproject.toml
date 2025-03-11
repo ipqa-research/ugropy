@@ -10,6 +10,7 @@ target-version = ["py310"]
 markers = [
     # Models markers
     "unifac: classic UNIFAC model tests",
+    "dortmund: Dortmund UNIFAC model tests",
     "psrk: predictive SRK model tests",
     "joback: Joback-Reid contribution model tests",
     "agani: Abdulelah-Gani contribution model tests",
@@ -34,7 +35,7 @@ markers = [
 
 [project]
 name = "ugropy"
-version = "3.0.0"
+version = "3.0.5"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
@@ -52,9 +53,10 @@ classifiers = [
 urls = {Homepage = "https://github.com/ipqa-research/ugropy"}
 
 dependencies = [
-    'rdkit >= 2023.9.5',
-    'pandas >= 2.0.3',
-    'pubchempy >= 1.0.4',
-    'pulp >= 2.9.0',
-    'pint >= 0.22'
+    "rdkit >= 2023.9.5",
+    "pandas >= 2.0.3",
+    "pubchempy >= 1.0.4",
+    "pint >= 0.22",
+    "pulp >= 2.9.0; sys_platform != 'darwin'",
+    "pulp == 2.9.0; sys_platform == 'darwin'",
 ]

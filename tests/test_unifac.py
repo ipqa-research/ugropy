@@ -62,5 +62,5 @@ class TestUNIFAC(TCase):
 @pytest.mark.unifac
 def test_unifac_groups_coverage():
     # Check if all the groups were detected on at least one case
-    for group in TestUNIFAC.tested_groups:
-        assert group in unifac.subgroups.index, f"Group {group} not tested"
+    for group in unifac.subgroups.index:
+        assert group in TestUNIFAC.tested_groups, f"Group {group} not tested"

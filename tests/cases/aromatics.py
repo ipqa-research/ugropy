@@ -12,6 +12,7 @@ aromatics_cases = [
         unifac_result={"ACH": 8, "AC": 2},
         psrk_result={"ACH": 8, "AC": 2},
         joback_result={"ring=CH-": 8, "ring=C<": 2},
+        dortmund_result={"ACH": 8, "AC": 2},
     ),
     Case(
         "C1=CC=CC=CC=CC=CC=CC=CC=CC=C1",
@@ -20,6 +21,7 @@ aromatics_cases = [
         unifac_result={"ACH": 18},
         psrk_result={"ACH": 18},
         joback_result={"ring=CH-": 18},
+        dortmund_result={"ACH": 18},
     ),
     Case(
         "C1=CC=CC=CC=CC=CC=CC=C1",
@@ -28,6 +30,7 @@ aromatics_cases = [
         unifac_result={"ACH": 14},
         psrk_result={"ACH": 14},
         joback_result={"ring=CH-": 14},
+        dortmund_result={"ACH": 14},
     ),
     Case(
         "C1=CC=C2C(=C1)C=CC3=CC=CC=C32",
@@ -37,6 +40,7 @@ aromatics_cases = [
         unifac_result={"ACH": 10, "AC": 4},
         psrk_result={"ACH": 10, "AC": 4},
         joback_result={"ring=CH-": 10, "ring=C<": 4},
+        dortmund_result={"ACH": 10, "AC": 4},
     ),
     Case(
         "C1=CC=C2C=C3C=CC=CC3=CC2=C1",
@@ -46,6 +50,7 @@ aromatics_cases = [
         unifac_result={"ACH": 10, "AC": 4},
         psrk_result={"ACH": 10, "AC": 4},
         joback_result={"ring=CH-": 10, "ring=C<": 4},
+        dortmund_result={"ACH": 10, "AC": 4},
     ),
     Case(
         "C=C(C1=CC=CC=C1)C2=CC=CC=C2",
@@ -55,6 +60,7 @@ aromatics_cases = [
         unifac_result={"ACH": 10, "AC": 2, "CH2=C": 1},
         psrk_result={"ACH": 10, "AC": 2, "CH2=C": 1},
         joback_result={"=CH2": 1, "=C<": 1, "ring=CH-": 10, "ring=C<": 2},
+        dortmund_result={"ACH": 10, "AC": 2, "CH2=C": 1},
     ),
     Case(
         "C1=CC=C(C=C1)C2=CC=CC=C2",
@@ -64,6 +70,7 @@ aromatics_cases = [
         unifac_result={"ACH": 10, "AC": 2},
         psrk_result={"ACH": 10, "AC": 2},
         joback_result={"ring=CH-": 10, "ring=C<": 2},
+        dortmund_result={"ACH": 10, "AC": 2},
     ),
     Case(
         "C1=CC=CC=C1",
@@ -73,6 +80,7 @@ aromatics_cases = [
         unifac_result={"ACH": 6},
         psrk_result={"ACH": 6},
         joback_result={"ring=CH-": 6},
+        dortmund_result={"ACH": 6},
     ),
     Case(
         "C=CC1=CC=CC=C1",
@@ -82,6 +90,7 @@ aromatics_cases = [
         unifac_result={"AC": 1, "CH2=CH": 1, "ACH": 5},
         psrk_result={"AC": 1, "CH2=CH": 1, "ACH": 5},
         joback_result={"=CH2": 1, "=CH-": 1, "ring=CH-": 5, "ring=C<": 1},
+        dortmund_result={"AC": 1, "CH2=CH": 1, "ACH": 5},
     ),
     Case(
         "CC(C1=CC=CC=C1)(C(=O)O)O",
@@ -105,6 +114,14 @@ aromatics_cases = [
             "-OH (alcohol)": 1,
             "-COOH (acid)": 1,
         },
+        dortmund_result={
+            "ACH": 5,
+            "AC": 1,
+            "OH (T)": 1,
+            "CH3": 1,
+            "C": 1,
+            "COOH": 1,
+        },
     ),
     Case(
         "CC(=CC1=CC=CC=C1)C=C",
@@ -121,6 +138,7 @@ aromatics_cases = [
             "ring=CH-": 5,
             "ring=C<": 1,
         },
+        dortmund_result={"ACH": 5, "AC": 1, "CH=C": 1, "CH2=CH": 1, "CH3": 1},
     ),
     Case(
         "C=CCCC1=C2C=CC=CC2=CC3=CC=CC=C31",
@@ -136,6 +154,7 @@ aromatics_cases = [
             "ring=CH-": 9,
             "ring=C<": 5,
         },
+        dortmund_result={"ACH": 9, "ACCH2": 1, "AC": 4, "CH2": 1, "CH2=CH": 1},
     ),
     Case(
         "CC1=C2C=CC=CC2=CC3=CC=CC=C13",
@@ -145,6 +164,7 @@ aromatics_cases = [
         unifac_result={"ACH": 9, "ACCH3": 1, "AC": 4},
         psrk_result={"ACH": 9, "ACCH3": 1, "AC": 4},
         joback_result={"-CH3": 1, "ring=CH-": 9, "ring=C<": 5},
+        dortmund_result={"ACH": 9, "ACCH3": 1, "AC": 4},
     ),
     Case(
         "CC1=CC(=CC=C1)C2=CC=CC=C2",
@@ -154,6 +174,7 @@ aromatics_cases = [
         unifac_result={"ACH": 9, "ACCH3": 1, "AC": 2},
         psrk_result={"ACH": 9, "ACCH3": 1, "AC": 2},
         joback_result={"-CH3": 1, "ring=CH-": 9, "ring=C<": 3},
+        dortmund_result={"ACH": 9, "ACCH3": 1, "AC": 2},
     ),
     Case(
         "CCC1=C(C=CC(=C1C)C)C",
@@ -163,6 +184,7 @@ aromatics_cases = [
         unifac_result={"ACH": 2, "ACCH3": 3, "ACCH2": 1, "CH3": 1},
         psrk_result={"ACH": 2, "ACCH3": 3, "ACCH2": 1, "CH3": 1},
         joback_result={"-CH3": 4, "-CH2-": 1, "ring=CH-": 2, "ring=C<": 4},
+        dortmund_result={"ACH": 2, "ACCH3": 3, "ACCH2": 1, "CH3": 1},
     ),
     Case(
         "CCC1=CC(=CC=C1)C(C)(C)C",
@@ -178,6 +200,7 @@ aromatics_cases = [
             "ring=CH-": 4,
             "ring=C<": 2,
         },
+        dortmund_result={"ACH": 4, "ACCH2": 1, "CH3": 4, "AC": 1, "C": 1},
     ),
     Case(
         "CCC1=CC=CC(=C1C)C",
@@ -187,6 +210,7 @@ aromatics_cases = [
         unifac_result={"ACH": 3, "ACCH2": 1, "ACCH3": 2, "CH3": 1},
         psrk_result={"ACH": 3, "ACCH2": 1, "ACCH3": 2, "CH3": 1},
         joback_result={"-CH3": 3, "-CH2-": 1, "ring=CH-": 3, "ring=C<": 3},
+        dortmund_result={"ACH": 3, "ACCH2": 1, "ACCH3": 2, "CH3": 1},
     ),
     Case(
         "CCC1=CC=CC=C1C",
@@ -196,6 +220,7 @@ aromatics_cases = [
         unifac_result={"ACH": 4, "ACCH3": 1, "ACCH2": 1, "CH3": 1},
         psrk_result={"ACH": 4, "ACCH3": 1, "ACCH2": 1, "CH3": 1},
         joback_result={"-CH3": 2, "-CH2-": 1, "ring=CH-": 4, "ring=C<": 2},
+        dortmund_result={"ACH": 4, "ACCH3": 1, "ACCH2": 1, "CH3": 1},
     ),
     Case(
         "CCC1=CC=C(C=C1)C(C)C",
@@ -211,6 +236,7 @@ aromatics_cases = [
             "ring=CH-": 4,
             "ring=C<": 2,
         },
+        dortmund_result={"ACH": 4, "ACCH": 1, "ACCH2": 1, "CH3": 3},
     ),
     Case(
         "C1=CC(=CC=C1CO)O",
@@ -226,6 +252,7 @@ aromatics_cases = [
             "-OH (alcohol)": 1,
             "-OH (phenol)": 1,
         },
+        dortmund_result={"ACH": 4, "ACOH": 1, "ACCH2": 1, "OH (P)": 1},
     ),
     Case(
         "CC(C)C1=CC=CC=C1",
@@ -235,6 +262,7 @@ aromatics_cases = [
         unifac_result={"CH3": 2, "ACH": 5, "ACCH": 1},
         psrk_result={"CH3": 2, "ACH": 5, "ACCH": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "ring=CH-": 5, "ring=C<": 1},
+        dortmund_result={"CH3": 2, "ACH": 5, "ACCH": 1},
     ),
     Case(
         "CCC1=CC=CC=C1",
@@ -244,6 +272,7 @@ aromatics_cases = [
         unifac_result={"CH3": 1, "ACH": 5, "ACCH2": 1},
         psrk_result={"CH3": 1, "ACH": 5, "ACCH2": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "ring=CH-": 5, "ring=C<": 1},
+        dortmund_result={"CH3": 1, "ACH": 5, "ACCH2": 1},
     ),
     Case(
         "CC1=CC=CC=C1",
@@ -253,6 +282,7 @@ aromatics_cases = [
         unifac_result={"ACH": 5, "ACCH3": 1},
         psrk_result={"ACH": 5, "ACCH3": 1},
         joback_result={"-CH3": 1, "ring=CH-": 5, "ring=C<": 1},
+        dortmund_result={"ACH": 5, "ACCH3": 1},
     ),
     Case(
         "C1=CC=C(C=C1)O",
@@ -262,5 +292,6 @@ aromatics_cases = [
         unifac_result={"ACH": 5, "ACOH": 1},
         psrk_result={"ACH": 5, "ACOH": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-OH (phenol)": 1},
+        dortmund_result={"ACH": 5, "ACOH": 1},
     ),
 ]

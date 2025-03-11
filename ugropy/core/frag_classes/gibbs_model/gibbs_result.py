@@ -45,6 +45,7 @@ class GibbsFragmentationResult(FragmentationResult):
         subgroups: dict,
         subgroups_atoms_indexes: dict,
         subgroups_info: pd.DataFrame,
+        calculate_r_q: bool,
     ):
         super().__init__(molecule, subgroups, subgroups_atoms_indexes)
 
@@ -52,9 +53,16 @@ class GibbsFragmentationResult(FragmentationResult):
         q = 0.0
 
         if self.subgroups != {}:
-            for group, n in self.subgroups.items():
-                r += n * subgroups_info.loc[group, "R"]
-                q += n * subgroups_info.loc[group, "Q"]
+            if calculate_r_q:
+                for group, n in self.subgroups.items():
+                    r += n * subgroups_info.loc[group, "R"]
+                    q += n * subgroups_info.loc[group, "Q"]
 
-            self.r = r
-            self.q = q
+                self.r = r
+                self.q = q
+            else:
+                self.r = None
+                self.q = None
+        else:
+            self.r = None
+            self.q = None

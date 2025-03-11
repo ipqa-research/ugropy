@@ -2,8 +2,8 @@
 
 A Python library designed to swiftly and effortlessly obtain the UNIFAC-like
 groups from molecules by their names and subsequently integrate them into
-inputs for thermodynamic libraries. UNIFAC, PSRK, and Joback models are
-implemented.
+inputs for thermodynamic libraries. UNIFAC, PSRK, Dortmund-UNIFAC,
+Abdulelah-Gani, and Joback models are implemented.
 """
 
 from .constants import ureg
@@ -33,6 +33,7 @@ from .models.abdulelah_gani_mod import abdulelah_gani
 from .models.abdulelah_gani_pmod import abdulelah_gani_p
 from .models.abdulelah_gani_smod import abdulelah_gani_s
 from .models.abdulelah_gani_tmod import abdulelah_gani_t
+from .models.dortmundmod import dortmund
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
@@ -72,6 +73,7 @@ __all__ = [
     "abdulelah_gani_p",
     "abdulelah_gani_s",
     "abdulelah_gani_t",
+    "dortmund",
     "joback",
     "unifac",
     "psrk",

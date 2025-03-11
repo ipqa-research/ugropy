@@ -13,6 +13,7 @@ esters_cases = [
         unifac_result={"CH3": 1, "CH2=CH": 1, "COO": 1},
         psrk_result={"CH3": 1, "CH2=CH": 1, "COO": 1},
         joback_result={"-CH3": 1, "=CH2": 1, "=CH-": 1, "-COO- (ester)": 1},
+        dortmund_result={"CH3": 1, "CH2=CH": 1, "COO": 1},
     ),
     Case(
         identifier="COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C",
@@ -40,6 +41,16 @@ esters_cases = [
             "CH3N": 1,
         },
         joback_result={},
+        dortmund_result={
+            "CH3": 1,
+            "CY-CH2": 3,
+            "CY-CH": 4,
+            "CH3N": 1,
+            "AC": 1,
+            "ACH": 5,
+            "COO": 2,
+            "CH3N": 1,
+        },
     ),
     Case(
         identifier="CCN(CC)CCOC(=O)C1=CC=C(N)C=C1",
@@ -73,6 +84,15 @@ esters_cases = [
             "-NH2": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={
+            "ACNH2": 1,
+            "ACH": 4,
+            "AC": 1,
+            "COO": 1,
+            "CH2": 3,
+            "CH3": 2,
+            "CH2N": 1,
+        },
     ),
     Case(
         identifier="OCC(O)C1OC(=O)C(O)=C1O",
@@ -89,6 +109,15 @@ esters_cases = [
             "-OH (alcohol)": 4,
             "-COO- (ester)": 1,
         },
+        dortmund_result={
+            "COO": 1,
+            "C=C": 1,
+            "OH (P)": 1,
+            "OH (S)": 3,
+            "CH": 1,
+            "CY-CH": 1,
+            "CH2": 1,
+        },
     ),
     Case(
         identifier="CCCCCCCCCCCC(=O)OCC(CO)OC(=O)CCCCCCCCCCC",
@@ -103,6 +132,13 @@ esters_cases = [
             ">CH-": 1,
             "-OH (alcohol)": 1,
             "-COO- (ester)": 2,
+        },
+        dortmund_result={
+            "CH3": 2,
+            "CH2": 20,
+            "CH2COO": 2,
+            "OH (P)": 1,
+            "CH": 1,
         },
     ),
     Case(
@@ -119,6 +155,7 @@ esters_cases = [
             "-COOH (acid)": 1,
             "-COO- (ester)": 1,
         },
+        dortmund_result={"CH3COO": 1, "AC": 2, "ACH": 4, "COOH": 1},
     ),
     Case(
         identifier="CC(=O)OC(C)(C)C",
@@ -128,6 +165,7 @@ esters_cases = [
         unifac_result={"CH3COO": 1, "CH3": 3, "C": 1},
         psrk_result={"CH3COO": 1, "CH3": 3, "C": 1},
         joback_result={"-CH3": 4, ">C<": 1, "-COO- (ester)": 1},
+        dortmund_result={"CH3COO": 1, "CH3": 3, "C": 1},
     ),
     Case(
         identifier="CC(=O)OCC(COC(=O)C)OC(=O)C",
@@ -137,6 +175,7 @@ esters_cases = [
         unifac_result={"CH3COO": 3, "CH2": 2, "CH": 1},
         psrk_result={"CH3COO": 3, "CH2": 2, "CH": 1},
         joback_result={"-CH3": 3, "-CH2-": 2, ">CH-": 1, "-COO- (ester)": 3},
+        dortmund_result={"CH3COO": 3, "CH2": 2, "CH": 1},
     ),
     Case(
         identifier="CCCCOC(=O)CC",
@@ -146,6 +185,7 @@ esters_cases = [
         unifac_result={"CH3": 2, "CH2": 3, "CH2COO": 1},
         psrk_result={"CH3": 2, "CH2": 3, "CH2COO": 1},
         joback_result={"-CH3": 2, "-CH2-": 4, "-COO- (ester)": 1},
+        dortmund_result={"CH3": 2, "CH2": 3, "CH2COO": 1},
     ),
     Case(
         identifier="CCCCOC(=O)C",
@@ -155,6 +195,7 @@ esters_cases = [
         unifac_result={"CH3": 1, "CH2": 3, "CH3COO": 1},
         psrk_result={"CH3": 1, "CH2": 3, "CH3COO": 1},
         joback_result={"-CH3": 2, "-CH2-": 3, "-COO- (ester)": 1},
+        dortmund_result={"CH3": 1, "CH2": 3, "CH3COO": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)OC=O",
@@ -164,6 +205,7 @@ esters_cases = [
         unifac_result={"ACH": 5, "AC": 1, "HCOO": 1},
         psrk_result={"ACH": 5, "AC": 1, "HCOO": 1},
         joback_result={},
+        dortmund_result={"ACH": 5, "AC": 1, "HCOO": 1},
     ),
     Case(
         identifier="COC=O",
@@ -173,6 +215,7 @@ esters_cases = [
         unifac_result={"HCOO": 1, "CH3": 1},
         psrk_result={"HCOO": 1, "CH3": 1},
         joback_result={},
+        dortmund_result={"HCOO": 1, "CH3": 1},
     ),
     Case(
         identifier="CCOC=O",
@@ -182,5 +225,6 @@ esters_cases = [
         unifac_result={"HCOO": 1, "CH2": 1, "CH3": 1},
         psrk_result={"HCOO": 1, "CH2": 1, "CH3": 1},
         joback_result={},
+        dortmund_result={"HCOO": 1, "CH2": 1, "CH3": 1},
     ),
 ]

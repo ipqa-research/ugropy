@@ -27,6 +27,8 @@ class Case:
         Result of the PSRK model, by default None.
     joback_result : Union[dict, None], optional
         Result of the Joback model, by default None.
+    dortmund_result : Union[dict, None], optional
+        Result of the Dortmund model, by default None.
     """
 
     def __init__(
@@ -38,6 +40,7 @@ class Case:
         unifac_result: Union[dict, None] = None,
         psrk_result: Union[dict, None] = None,
         joback_result: Union[dict, None] = None,
+        dortmund_result: Union[dict, None] = None,
     ):
         self.identifier = identifier
         self.identifier_type = identifier_type
@@ -46,3 +49,4 @@ class Case:
         self.unifac_result = unifac_result
         self.psrk_result = psrk_result
         self.joback_result = joback_result
+        self.dortmund_result = dortmund_result
