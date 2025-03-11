@@ -31,6 +31,7 @@ You can try `ugropy` without installing it by clicking on the Colab badge.
 ## Gibbs / EoS models
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
+- Dortmund (modified UNIFAC)
 
 ## Property estimators
 - Joback

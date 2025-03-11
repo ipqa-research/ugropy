@@ -36,4 +36,6 @@ _dor = _csvs / "dortmund"
 _dor_sg = _rd(_dor / "dortmund_subgroups.csv", "group")
 _dor_info = _rd(_dor / "dortmund_info.csv", "group")
 
-dortmund = GibbsModel(subgroups=_dor_sg, subgroups_info=_dor_info)
+dortmund = GibbsModel(
+    subgroups=_dor_sg, subgroups_info=_dor_info, calculate_r_q=False
+)

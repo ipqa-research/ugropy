@@ -4,6 +4,7 @@ import pathlib
 from typing import List
 
 from ugropy.writers.clapeyron_writers.critical import write_critical
+from ugropy.writers.clapeyron_writers.dortmund_groups import write_dortmund
 from ugropy.writers.clapeyron_writers.molar_mass import write_molar_mass
 from ugropy.writers.clapeyron_writers.psrk_groups import write_psrk
 from ugropy.writers.clapeyron_writers.unifac_groups import write_unifac
@@ -13,6 +14,7 @@ def to_clapeyron(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
+    dortmund_groups: List[dict] = [],
     property_estimator: List = [],
     path: str = "database",
     batch_name: str = "",
@@ -30,6 +32,8 @@ def to_clapeyron(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
+    dortmund_groups : List[dict], optional
+        List of Dortmund UNIFAC groups, by default [].
     property_estimator : List, optional
         List of JobackFragmentationResult or AGaniFragmentationResult, by
         default [].
@@ -59,6 +63,12 @@ def to_clapeyron(
             "PSRK groups list must have the same amount of elements than"
             "the molecules name list."
         )
+        
+    if dortmund_groups and len(dortmund_groups) != len(molecules_names):
+        raise ValueError(
+            "Dortmund groups list must have the same amount of elements than"
+            "the molecules name list."
+        )
 
     if property_estimator and len(property_estimator) != len(molecules_names):
         raise ValueError(
@@ -77,6 +87,7 @@ def to_clapeyron(
         molecules_names,
         unifac_groups,
         psrk_groups,
+        dortmund_groups,
         property_estimator,
     )
 
@@ -87,6 +98,12 @@ def to_clapeyron(
     # PSRK
     if psrk_groups:
         write_psrk(path_pathlib, batch_name, molecules_names, psrk_groups)
+
+    # Dortmund
+    if dortmund_groups:
+        write_dortmund(
+            path_pathlib, batch_name, molecules_names, dortmund_groups
+        )
 
     # Critical
     if property_estimator:

@@ -49,12 +49,15 @@ class GibbsModel(FragmentationModel):
         self,
         subgroups: pd.DataFrame,
         subgroups_info: Union[pd.DataFrame, None] = None,
+        calculate_r_q: bool = True,
     ) -> None:
         super().__init__(
             subgroups=subgroups,
             allow_overlapping=False,
             fragmentation_result=GibbsFragmentationResult,
         )
+
+        self._calculate_r_q = calculate_r_q
 
         # subgroups info
         if subgroups_info is None:
@@ -103,6 +106,7 @@ class GibbsModel(FragmentationModel):
             solver,
             search_multiple_solutions,
             subgroups_info=self.subgroups_info,
+            calculate_r_q=self._calculate_r_q,
         )
 
         return sol

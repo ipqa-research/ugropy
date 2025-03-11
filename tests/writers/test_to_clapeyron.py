@@ -25,6 +25,9 @@ def test_to_clapeyron():
     with open(path_db / "PSRK_groups.csv", mode="r") as f:
         df_psrk = f.read()
 
+    with open(path_db / "UNIFAC_groups.csv", mode="r") as f:
+        df_dortmund = f.read()
+
     with open(path_db / "critical.csv", mode="r") as f:
         df_critical = f.read()
 
@@ -35,6 +38,7 @@ def test_to_clapeyron():
         ["limonene", "ethanol"],
         [limonene.unifac.subgroups, ethanol.unifac.subgroups],
         [limonene.psrk.subgroups, ethanol.psrk.subgroups],
+        [limonene.dortmund.subgroups, ethanol.dortmund.subgroups],
         [limonene.joback, ethanol.joback],
         (here / "database").resolve(),
     )
@@ -53,17 +57,23 @@ def test_to_clapeyron():
     with open(here / "database" / "PSRK/PSRK_groups.csv", mode="r") as f:
         df_psrk_ugropy = f.read()
 
+    with open(here / "database" / "Dortmund/UNIFAC_groups.csv", mode="r") as f:
+        df_dortmund_ugropy = f.read()
+
     mw_bool = df_molarmass == df_molarmass_ugropy
     psrk_bool = df_psrk == df_psrk_ugropy
     unifac_bool = df_unifac == df_unifac_ugropy
+    dortmund_bool = df_dortmund == df_dortmund_ugropy
     crit_bool = df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "critical.csv")
     os.remove(here / "database" / "molarmass.csv")
     os.remove(here / "database" / "ogUNIFAC" / "ogUNIFAC_groups.csv")
     os.remove(here / "database" / "PSRK" / "PSRK_groups.csv")
+    os.remove(here / "database" / "Dortmund" / "UNIFAC_groups.csv")
     os.rmdir(here / "database" / "ogUNIFAC")
-    os.rmdir(here / "database/PSRK")
+    os.rmdir(here / "database" / "PSRK")
+    os.rmdir(here / "database" / "Dortmund")
     os.rmdir(here / "database")
 
     if sys.platform != "darwin":
@@ -71,6 +81,7 @@ def test_to_clapeyron():
 
     assert psrk_bool
     assert unifac_bool
+    assert dortmund_bool
 
     if sys.platform != "darwin":
         assert crit_bool
@@ -86,6 +97,9 @@ def test_to_clapeyron_batch_name():
     with open(path_db / "PSRK_groups.csv", mode="r") as f:
         df_psrk = f.read()
 
+    with open(path_db / "UNIFAC_groups.csv", mode="r") as f:
+        df_dortmund = f.read()
+
     with open(path_db / "critical.csv", mode="r") as f:
         df_critical = f.read()
 
@@ -96,6 +110,7 @@ def test_to_clapeyron_batch_name():
         ["limonene", "ethanol"],
         [limonene.unifac.subgroups, ethanol.unifac.subgroups],
         [limonene.psrk.subgroups, ethanol.psrk.subgroups],
+        [limonene.dortmund.subgroups, ethanol.dortmund.subgroups],
         [limonene.joback, ethanol.joback],
         (here / "database").resolve(),
         "otacon",
@@ -117,17 +132,25 @@ def test_to_clapeyron_batch_name():
     ) as f:
         df_psrk_ugropy = f.read()
 
+    with open(
+        here / "database" / "Dortmund" / "otacon_UNIFAC_groups.csv", mode="r"
+    ) as f:
+        df_dortmund_ugropy = f.read()
+
     mw_bool = df_molarmass == df_molarmass_ugropy
     psrk_bool = df_psrk == df_psrk_ugropy
     unifac_bool = df_unifac == df_unifac_ugropy
+    dortmund_bool = df_dortmund == df_dortmund_ugropy
     crit_bool = df_critical == df_critical_ugropy
 
     os.remove(here / "database" / "otacon_critical.csv")
     os.remove(here / "database" / "otacon_molarmass.csv")
     os.remove(here / "database" / "ogUNIFAC" / "otacon_ogUNIFAC_groups.csv")
     os.remove(here / "database" / "PSRK" / "otacon_PSRK_groups.csv")
+    os.remove(here / "database" / "Dortmund" / "otacon_UNIFAC_groups.csv")
     os.rmdir(here / "database" / "ogUNIFAC")
     os.rmdir(here / "database" / "PSRK")
+    os.rmdir(here / "database" / "Dortmund")
     os.rmdir(here / "database")
 
     if sys.platform != "darwin":
@@ -135,6 +158,7 @@ def test_to_clapeyron_batch_name():
 
     assert psrk_bool
     assert unifac_bool
+    assert dortmund_bool
 
     if sys.platform != "darwin":
         assert crit_bool
@@ -170,11 +194,29 @@ def test_molar_mass_csv():
     if sys.platform != "darwin":
         assert df_molarmass_unifac == df_molarmass_psrk
 
+    # Dortmund molar mass
+    to_clapeyron(
+        ["limonene", "ethanol"],
+        dortmund_groups=[
+            limonene.dortmund.subgroups,
+            ethanol.dortmund.subgroups,
+        ],
+        path=(here / "database").resolve(),
+    )
+
+    with open(here / "database" / "molarmass.csv", mode="r") as f:
+        df_molarmass_dortmund = f.read()
+
+    if sys.platform != "darwin":
+        assert df_molarmass_unifac == df_molarmass_dortmund
+
     os.remove(here / "database" / "molarmass.csv")
     os.remove(here / "database" / "ogUNIFAC" / "ogUNIFAC_groups.csv")
     os.remove(here / "database" / "PSRK" / "PSRK_groups.csv")
+    os.remove(here / "database" / "Dortmund" / "UNIFAC_groups.csv")
     os.rmdir(here / "database" / "ogUNIFAC")
     os.rmdir(here / "database" / "PSRK")
+    os.rmdir(here / "database" / "Dortmund")
     os.rmdir(here / "database")
 
     # Making it fail
@@ -200,6 +242,12 @@ def test_making_it_explode():
         to_clapeyron(
             molecules_names=["limonene", "ethanol"],
             psrk_groups=[{"CH3": 1, "CH2": 1, "OH": 1}],
+        )
+        
+    with pytest.raises(ValueError):
+        to_clapeyron(
+            molecules_names=["limonene", "ethanol"],
+            dortmund_groups=[{"CH3": 1, "CH2": 1, "OH (P)": 1}],
         )
 
     with pytest.raises(ValueError):

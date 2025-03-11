@@ -15,6 +15,7 @@ from .core.get_rdkit_object import instantiate_mol_object
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .models.abdulelah_gani_mod import abdulelah_gani
+from .models.dortmundmod import dortmund
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
@@ -65,6 +66,8 @@ class Groups:
         Classic LV-UNIFAC subgroups.
     psrk : Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
         Predictive Soave-Redlich-Kwong subgroups.
+    dortmund : Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
+        Dortmund UNIFAC subgroups.
     joback : Union[JobackFragmentationResult, List[JobackFragmentationResult]]
         JobackFragmentationResult object that contains the Joback subgroups and
         the estimated properties of the molecule.
@@ -100,6 +103,16 @@ class Groups:
         self.psrk: Union[
             GibbsFragmentationResult, List[GibbsFragmentationResult]
         ] = psrk.get_groups(
+            self.identifier,
+            self.identifier_type,
+            solver=solver,
+            search_multiple_solutions=search_multiple_solutions,
+        )
+
+        # Dortmund
+        self.dortmund: Union[
+            GibbsFragmentationResult, List[GibbsFragmentationResult]
+        ] = dortmund.get_groups(
             self.identifier,
             self.identifier_type,
             solver=solver,

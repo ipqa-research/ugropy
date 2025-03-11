@@ -13,7 +13,7 @@ def to_thermo(mol_subgroups: dict, model: GibbsModel) -> dict:
     mol_subgroups : dict
         ugropy subgroups.
     model : GibbsModel
-        Gibbs excess FragmentationModel (unifac or psrk).
+        Gibbs excess FragmentationModel (unifac, psrk, etc).
 
     Returns
     -------
@@ -22,7 +22,7 @@ def to_thermo(mol_subgroups: dict, model: GibbsModel) -> dict:
     """
     thermo_groups = {}
     for group, occurrence in mol_subgroups.items():
-        group_num = model.subgroups_info.loc[group, "subgroup_number"]
+        group_num = int(model.subgroups_info.loc[group, "subgroup_number"])
 
         thermo_groups[group_num] = occurrence
 

@@ -8,6 +8,7 @@ import numpy as np
 
 import pandas as pd
 
+from ugropy.models.dortmundmod import dortmund
 from ugropy.models.psrkmod import psrk
 from ugropy.models.unifacmod import unifac
 
@@ -18,6 +19,7 @@ def write_molar_mass(
     molecules_names: List[str],
     unifac_groups: List[dict] = [],
     psrk_groups: List[dict] = [],
+    dortmund_groups: List[dict] = [],
     property_estimator: List = [],
 ) -> None:
     """Create the DataFrame with the molecular weights for Clapeyron.jl.
@@ -37,6 +39,8 @@ def write_molar_mass(
         List of classic liquid-vapor UNIFAC groups, by default [].
     psrk_groups : List[dict], optional
         List of Predictive Soave-Redlich-Kwong groups, by default [].
+    dortmund_groups : List[dict], optional
+        List of Dortmund UNIFAC groups, by default [].
     property_estimator : List, optional
         List of JobackFragmentationResult or AGaniFragmentationResult, by
         default [].
@@ -71,8 +75,18 @@ def write_molar_mass(
             molecular_weigths.append(
                 np.dot(contribution, list(groups.values()))
             )
+    elif dortmund_groups:
+        df = dortmund.subgroups.copy()
+        molecular_weigths = []
+        for groups in dortmund_groups:
+            contribution = df.loc[groups.keys(), "molecular_weight"].to_numpy()
+            molecular_weigths.append(
+                np.dot(contribution, list(groups.values()))
+            )
     else:
-        raise ValueError("Joback, UNIFAC or PSRK groups must be provided.")
+        raise ValueError(
+            "Joback, UNIFAC, PSRK or Dortmund groups must be provided."
+        )
 
     # =========================================================================
     # Build dataframe

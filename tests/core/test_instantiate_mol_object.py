@@ -9,3 +9,6 @@ def test_making_it_explode():
 
     with pytest.raises(ValueError):
         instantiate_mol_object("acetone", "Argentina")
+
+    with pytest.raises(ValueError):
+        instantiate_mol_object("kratos")
