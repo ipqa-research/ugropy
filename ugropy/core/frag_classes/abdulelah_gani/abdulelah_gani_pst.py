@@ -67,6 +67,7 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
     ) -> Union[AGaniPSTFragmentationResult, List[AGaniPSTFragmentationResult]]:
         """Get the groups of a molecule.
 
@@ -77,14 +78,20 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             molecule, the SMILEs of the molecule or a rdkit Mol object.
         identifier_type : str, optional
             Identifier type of the molecule. Use "name" if you are providing
-            the molecules' name, "smiles" if you are providing the SMILES
-            or "mol" if you are providing a rdkir mol object, by default "name"
+            the molecules' name, "smiles" if you are providing the SMILES or
+            "mol" if you are providing a rdkir mol object, by default "name"
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
-            If False the return will be a FragmentationResult object, if True
-            the return will be a list of FragmentationResult objects.
+            Weather search for multiple solutions or not, by default False If
+            False the return will be a FragmentationResult object, if True the
+            return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
 
         Returns
         -------
@@ -98,6 +105,7 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             identifier_type,
             solver,
             search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
             subgroups_info=self.subgroups_info,
         )
 

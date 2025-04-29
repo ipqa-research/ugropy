@@ -1,4 +1,4 @@
-![logo](logo.png)
+![logo](https://github.com/ipqa-research/ugropy/blob/main/logo.png?raw=true)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
@@ -17,14 +17,18 @@ representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
 in the molecule.
 
-`ugropy` is in an early development stage, leaving issues of examples of
-molecules that `ugropy` fails solving the subgroups of a model is very helpful.
+`ugropy` is tested for `Python` 3.10, 3.11 and 3.12 on Linux, Windows and Mac OS.
 
-`ugropy` is tested for `Python` 3.10, 3.11 and 3.12 on Linux, Windows and Mac
-OS.
+You can access the documentation here: [https://ipqa-research.github.io/ugropy/](https://ipqa-research.github.io/ugropy/)
 
 # Try ugropy now
 You can try `ugropy` without installing it by clicking on the Colab badge.
+
+You can install `ugropy` by:
+
+```shell
+pip install ugropy
+```
 
 # Models implemented
 
@@ -134,6 +138,29 @@ mol.unifac.draw(
 )
 ```
 
+`ugropy` can obtain multiple solutions, even nonoptimal ones if desired. For
+example:
+
+```python
+from ugropy import unifac
+
+
+solutions = unifac.get_groups(
+    "9,10-dihydroanthracene",
+    search_multiple_solutions=True,
+    search_nonoptimal=True
+)
+
+for sol in solutions:
+    print(sol.subgroups)
+```
+
+```
+{'ACH': 8, 'AC': 2, 'ACCH2': 2}
+{'CH2': 1, 'ACH': 8, 'AC': 3, 'ACCH2': 1}
+{'CH2': 2, 'ACH': 8, 'AC': 4}
+```
+
 Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 .csv input files.
 
@@ -160,16 +187,11 @@ from ugropy import unifac
 
 names = ["hexane", "ethanol"]
 
-grps = [Groups(n) for n in names]
+grps = [unifac.get_groups(n) for n in names]
 
-[writers.to_thermo(g.unifac.subgroups, unifac) for g in grps]
+[writers.to_thermo(g.subgroups, unifac) for g in grps]
 ```
 
 ```
 [{1: 2, 2: 4}, {1: 1, 2: 1, 14: 1}]
-```
-
-## Installation
-```
-pip install ugropy
 ```

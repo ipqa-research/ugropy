@@ -62,6 +62,7 @@ class JobackModel(FragmentationModel):
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
         normal_boiling_point: float = None,
     ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
         """Get Jobacks groups from a molecule.
@@ -81,6 +82,12 @@ class JobackModel(FragmentationModel):
             Weather search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
         normal_boiling_point : float, optional
             Experimental normal boiling point of the molecule on Kelvin. Its
             used to improve the properties calculations. Joback uses the
@@ -98,6 +105,7 @@ class JobackModel(FragmentationModel):
             identifier_type=identifier_type,
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
             normal_boiling_point=normal_boiling_point,
             properties_contributions=self.properties_contributions,
         )
