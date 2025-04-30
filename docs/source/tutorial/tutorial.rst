@@ -6,7 +6,7 @@ Tutorial
 
    installation.ipynb
    easy_way.ipynb
-   gibbs_models
-   properties_estimators
-   ugropy_failing.ipynb
+   gibbs_models.ipynb
+   properties_estimators.ipynb
+   working_with_ugropy.ipynb
    writers.ipynb
