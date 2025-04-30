@@ -1,6 +1,0 @@
-Clapeyron Database File,
-PSRK Groups [csvtype = groups,grouptype = PSRK]
-species,groups
-limonene,"[""CH3"" => 2, ""CH2"" => 3, ""CH"" => 1, ""CH2=C"" => 1, ""CH=C"" => 1]"
-adrenaline,"[""CH3"" => 1, ""ACH"" => 3, ""ACCH"" => 1, ""OH"" => 1, ""ACOH"" => 2, ""CH2NH"" => 1]"
-Trinitrotoluene,"[""ACH"" => 2, ""ACCH3"" => 1, ""ACNO2"" => 3]"
