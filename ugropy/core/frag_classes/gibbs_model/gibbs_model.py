@@ -74,6 +74,7 @@ class GibbsModel(FragmentationModel):
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
     ) -> Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]:
         """Get the groups of a molecule.
 
@@ -92,6 +93,12 @@ class GibbsModel(FragmentationModel):
             Weather search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
 
         Returns
         -------
@@ -105,6 +112,7 @@ class GibbsModel(FragmentationModel):
             identifier_type,
             solver,
             search_multiple_solutions,
+            search_nonoptimal,
             subgroups_info=self.subgroups_info,
             calculate_r_q=self._calculate_r_q,
         )

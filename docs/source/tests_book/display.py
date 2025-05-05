@@ -35,6 +35,7 @@ def display_case_module(cases: list):
             <p><strong style="color: #3498DB;">UNIFAC Result:</strong> {case.unifac_result}</p>
             <p><strong style="color: #3498DB;">PSRK Result:</strong> {case.psrk_result}</p>
             <p><strong style="color: #3498DB;">Joback Result:</strong> {case.joback_result}</p>
+            <p><strong style="color: #3498DB;">Dortmund Result:</strong> {case.dortmund_result}</p>
             <div style="text-align: center;">
                 {svg}
             </div>

@@ -69,6 +69,7 @@ class AbdulelahGaniModel:
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
     ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
         """Get the groups of the molecule.
 
@@ -87,6 +88,12 @@ class AbdulelahGaniModel:
             Weather search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
 
         Returns
         -------
@@ -96,7 +103,11 @@ class AbdulelahGaniModel:
             will be a list of FragmentationResult objects.
         """
         primary_groups = self.primary_model.get_groups(
-            identifier, identifier_type, solver, search_multiple_solutions
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions,
+            search_nonoptimal,
         )
 
         secondary_groups = self.secondary_model.get_groups(
