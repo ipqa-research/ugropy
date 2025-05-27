@@ -70,6 +70,7 @@ class AbdulelahGaniModel:
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
         search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
     ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
         """Get the groups of the molecule.
 
@@ -94,6 +95,12 @@ class AbdulelahGaniModel:
             all possible combinations of fragments that cover the universe. By
             default False. If `search_multiple_solutions` is False, this
             parameter will be ignored.
+        solver_arguments : dict, optional
+            Dictionary with the arguments to be passed to the solver. For the
+            DefaultSolver of ugropy you can change de PulP solver passing a
+            dictionary like {"solver": "PULP_CBC_CMD"} and change the PulP
+            solver. If empty it will use the default solver arguments, by
+            default {}.
 
         Returns
         -------
@@ -108,6 +115,7 @@ class AbdulelahGaniModel:
             solver,
             search_multiple_solutions,
             search_nonoptimal,
+            solver_arguments,
         )
 
         secondary_groups = self.secondary_model.get_groups(

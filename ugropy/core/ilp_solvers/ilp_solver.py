@@ -54,6 +54,8 @@ class ILPSolver(ABC):
         possible combinations of fragments that cover the universe. By default
         False. If `search_multiple_solutions` is True, this parameter will be
         ignored.
+    solver_arguments : dict, optional
+        Dictionary with the arguments to be passed to the solver.
 
     Attributes
     ----------
@@ -85,11 +87,19 @@ class ILPSolver(ABC):
         fragments: dict,
         search_multiple_solutions: bool = False,
         search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
     ):
         self.overlapped_atoms = overlapped_atoms
         self.fragments = fragments
         self.search_multiple_solutions = search_multiple_solutions
         self.search_nonoptimal = search_nonoptimal
+
+        if solver_arguments == {}:
+            self.solver_arguments = {
+                "solver": "PULP_CBC_CMD",
+            }
+        else:
+            self.solver_arguments = solver_arguments
 
         # Attribute that will store the selected fragments after a
         # `solve` method call.

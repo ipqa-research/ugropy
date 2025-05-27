@@ -63,6 +63,7 @@ class JobackModel(FragmentationModel):
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
         search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
         normal_boiling_point: float = None,
     ) -> Union[JobackFragmentationResult, List[JobackFragmentationResult]]:
         """Get Jobacks groups from a molecule.
@@ -92,6 +93,12 @@ class JobackModel(FragmentationModel):
             Experimental normal boiling point of the molecule on Kelvin. Its
             used to improve the properties calculations. Joback uses the
             estimated normal boiling point if no provided, by default None
+        solver_arguments : dict, optional
+            Dictionary with the arguments to be passed to the solver. For the
+            DefaultSolver of ugropy you can change de PulP solver passing a
+            dictionary like {"solver": "PULP_CBC_CMD"} and change the PulP
+            solver. If empty it will use the default solver arguments, by
+            default {}.
 
         Returns
         -------
@@ -106,6 +113,7 @@ class JobackModel(FragmentationModel):
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
             search_nonoptimal=search_nonoptimal,
+            solver_arguments=solver_arguments,
             normal_boiling_point=normal_boiling_point,
             properties_contributions=self.properties_contributions,
         )

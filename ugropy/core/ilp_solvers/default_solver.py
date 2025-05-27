@@ -68,7 +68,7 @@ class DefaultSolver(ILPSolver):
             )
 
         # Solver configuration verbosity
-        solver = pulp.getSolver("PULP_CBC_CMD", msg=False)
+        solver = pulp.getSolver(self.solver_arguments["solver"], msg=False)
 
         # Solve
         problem.solve(solver)
