@@ -1,4 +1,5 @@
 cff-version: 1.2.0
+title: "Ugropy: An Extensible Python Package for Thermodynamic Model’s Functional Groups Identification via ILP Minimization"
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: Brandolín
@@ -12,9 +13,7 @@ authors:
     orcid: https://orcid.org/0000-0001-7909-4131
   - family-names: Scilipoti
     given-names: José Antonio
-title: "Ugropy: An Extensible Python Package for Thermodynamic Model’s Functional Groups Identification via ILP Minimization"
 version: 3.1.0
-identifiers:
-  - type: url
-    value: https://github.com/ipqa-research/ugropy
-date-released: 2025-05-07
+repository-code: 'https://github.com/ipqa-research/ugropy'
+url: 'https://ipqa-research.github.io/ugropy/'
+license: MIT
