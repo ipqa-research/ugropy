@@ -12,7 +12,7 @@ authors:
     orcid: https://orcid.org/0000-0001-7909-4131
   - family-names: Scilipoti
     given-names: José Antonio
-title: "Ugropy: n Extensible Python Package for Thermodynamic Model’s Functional Groups Identification via ILP Minimization"
+title: "Ugropy: An Extensible Python Package for Thermodynamic Model’s Functional Groups Identification via ILP Minimization"
 version: 3.1.0
 identifiers:
   - type: url
