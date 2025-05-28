@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Brandolín
+    given-names: Salvador Eduardo
+    orcid: https://orcid.org/0000-0002-8255-6322
+  - family-names: Benelli
+    given-names: Federico Ezequiel
+    orcid: https://orcid.org/0009-0002-0072-815X
+  - family-names: Magario
+    given-names: Ivana
+    orcid: https://orcid.org/0000-0001-7909-4131
+  - family-names: Scilipoti
+    given-names: José Antonio
+title: "Ugropy: n Extensible Python Package for Thermodynamic Model’s Functional Groups Identification via ILP Minimization"
+version: 3.1.0
+identifiers:
+  - type: url
+    value: https://github.com/ipqa-research/ugropy
+date-released: 2025-05-07
