@@ -11,7 +11,7 @@ class TestDortmund(TCase):
     # Store al the groups detected in all the cases here:
     tested_groups = set()
 
-    def asserts(self, case, solver):
+    def asserts(self, case, solver, arguments):
         if case.dortmund_result is None:
             pytest.skip(
                 f"No Dortmund result defined for {case.identifier}, "
@@ -23,6 +23,7 @@ class TestDortmund(TCase):
             identifier_type=case.identifier_type,
             solver=solver,
             search_multiple_solutions=True,
+            solver_arguments=arguments,
         )
 
         if len(result) > 1:
