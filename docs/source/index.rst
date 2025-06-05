@@ -7,6 +7,11 @@
    tutorial/tutorial
 
 .. toctree::
+   :maxdepth: 2
+
+   implementing_models.ipynb
+
+.. toctree::
    :maxdepth: 1
 
    tests_book/index
