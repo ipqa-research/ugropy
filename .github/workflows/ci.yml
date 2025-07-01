@@ -1,10 +1,12 @@
 name: Tox
 
 on:
-  - push
-  - pull_request
-  - release
-  - workflow_dispatch
+  push:
+  pull_request:
+  release:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *'  # Every day at 09:00 ART (12:00 UTC)
 
 jobs:
   test-linux:

@@ -74,8 +74,16 @@ def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
     """
     try:
         pcp_object = pcp.get_compounds(name, "name")[0]
-        smiles = pcp_object.canonical_smiles
-        chem_object = Chem.MolFromSmiles(smiles)
+
+        if pcp_object.canonical_smiles:
+            chem_object = Chem.MolFromSmiles(pcp_object.canonical_smiles)
+        elif pcp_object.inchi:
+            chem_object = Chem.MolFromInchi(pcp_object.inchi)
+        else:
+            raise IndexError(
+                f"Could not find a SMILES or InChI for the molecule '{name}' "
+                "on PubChem."
+            )
     except IndexError:
         raise ValueError(
             f"Could not find a molecule with the name '{name}' on " "PubChem"
