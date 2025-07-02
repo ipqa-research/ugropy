@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groups &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=b2e31178"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models/init.html" />
+    <link rel="prev" title="constants" href="constants.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="constants.html">constants</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Groups</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.groups.Groups"><code class="docutils literal notranslate"><span class="pre">Groups</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.identifier"><code class="docutils literal notranslate"><span class="pre">Groups.identifier</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.identifier_type"><code class="docutils literal notranslate"><span class="pre">Groups.identifier_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.mol_object"><code class="docutils literal notranslate"><span class="pre">Groups.mol_object</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.molecular_weight"><code class="docutils literal notranslate"><span class="pre">Groups.molecular_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.unifac"><code class="docutils literal notranslate"><span class="pre">Groups.unifac</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.psrk"><code class="docutils literal notranslate"><span class="pre">Groups.psrk</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.dortmund"><code class="docutils literal notranslate"><span class="pre">Groups.dortmund</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.joback"><code class="docutils literal notranslate"><span class="pre">Groups.joback</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ugropy.groups.Groups.agani"><code class="docutils literal notranslate"><span class="pre">Groups.agani</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Groups</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/groups.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.groups">
+<span id="groups"></span><h1>Groups<a class="headerlink" href="#module-ugropy.groups" title="Link to this heading"></a></h1>
+<p>Groups class module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.groups.Groups">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver:</span> <span class="pre">~ugropy.core.ilp_solvers.ilp_solver.ILPSolver</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'ugropy.core.ilp_solvers.default_solver.DefaultSolver'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_multiple_solutions:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_nonoptimal:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_boiling_temperature:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ugropy/groups.html#Groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.groups.Groups" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Groups class.</p>
+<p>Stores the solved FragmentationModels results of a molecule. This class
+was implemented on an early version of the <cite>ugropy</cite> library. Is not really
+meant to be used, instead is recommended to use directly the corresponding
+FragmentationModel independently since it provides more flexibility and
+control over the results. The class is kept since in most cases is very
+comfortable to have all the results in a single object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>Chem.rdchem.Mol</em><em>]</em>) – Identifier of the molecule. You can use either the name of the
+molecule, the SMILEs of the molecule or a rdkit Mol object.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Identifier type of the molecule. Use “name” if you are providing
+the molecules’ name, “smiles” if you are providing the SMILES
+or “mol” if you are providing a rdkir mol object, by default “name”</p></li>
+<li><p><strong>solver</strong> (<a class="reference internal" href="core/ilp_solvers/ilp_solver.html#ugropy.core.ilp_solvers.ilp_solver.ILPSolver" title="ugropy.core.ilp_solvers.ilp_solver.ILPSolver"><em>ILPSolver</em></a><em>, </em><em>optional</em>) – ILP solver class, by default DefaultSolver</p></li>
+<li><p><strong>search_multiple_solutions</strong> (<em>bool</em><em>, </em><em>optional</em>) – Weather search for multiple solutions or not, by default False
+If False the return will be a FragmentationResult object, if True
+the return will be a list of FragmentationResult objects.</p></li>
+<li><p><strong>search_nonoptimal</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the solver will search for non-optimal solutions along with
+the optimal ones. This is useful when the user wants to find all
+possible combinations of fragments that cover the universe. By default
+False. If <cite>search_multiple_solutions</cite> is False, this parameter will be
+ignored.</p></li>
+<li><p><strong>normal_boiling_temperature</strong> (<em>float</em><em>, </em><em>optional</em>) – If provided, will be used to estimate critical temperature, acentric
+factor, and vapor pressure instead of the estimated normal boiling
+point in the Joback group contribution model, by default None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.identifier">
+<span class="sig-name descname"><span class="pre">identifier</span></span><a class="headerlink" href="#ugropy.groups.Groups.identifier" title="Link to this definition"></a></dt>
+<dd><p>Identifier of a molecule. Example: ‘hexane’ or ‘CCCCCC’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.identifier_type">
+<span class="sig-name descname"><span class="pre">identifier_type</span></span><a class="headerlink" href="#ugropy.groups.Groups.identifier_type" title="Link to this definition"></a></dt>
+<dd><p>Use ‘name’ to search a molecule by name or ‘smiles’ to provide the
+molecule SMILES representation, by default “name”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.mol_object">
+<span class="sig-name descname"><span class="pre">mol_object</span></span><a class="headerlink" href="#ugropy.groups.Groups.mol_object" title="Link to this definition"></a></dt>
+<dd><p>RDKit Mol object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rdkit.Chem.rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#ugropy.groups.Groups.molecular_weight" title="Link to this definition"></a></dt>
+<dd><p>Molecule’s molecular weight from rdkit.Chem.Descriptors.MolWt [g/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.unifac">
+<span class="sig-name descname"><span class="pre">unifac</span></span><a class="headerlink" href="#ugropy.groups.Groups.unifac" title="Link to this definition"></a></dt>
+<dd><p>Classic LV-UNIFAC subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>, List[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.psrk">
+<span class="sig-name descname"><span class="pre">psrk</span></span><a class="headerlink" href="#ugropy.groups.Groups.psrk" title="Link to this definition"></a></dt>
+<dd><p>Predictive Soave-Redlich-Kwong subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>, List[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.dortmund">
+<span class="sig-name descname"><span class="pre">dortmund</span></span><a class="headerlink" href="#ugropy.groups.Groups.dortmund" title="Link to this definition"></a></dt>
+<dd><p>Dortmund UNIFAC subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>, List[<a class="reference internal" href="core/frag_classes/gibbs_model/gibbs_result.html#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">GibbsFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.joback">
+<span class="sig-name descname"><span class="pre">joback</span></span><a class="headerlink" href="#ugropy.groups.Groups.joback" title="Link to this definition"></a></dt>
+<dd><p>JobackFragmentationResult object that contains the Joback subgroups and
+the estimated properties of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult" title="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult">JobackFragmentationResult</a>, List[<a class="reference internal" href="core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult" title="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult">JobackFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.groups.Groups.agani">
+<span class="sig-name descname"><span class="pre">agani</span></span><a class="headerlink" href="#ugropy.groups.Groups.agani" title="Link to this definition"></a></dt>
+<dd><p>AGaniFragmentationResult object that contains the Abdulelah-Gani
+subgroups and the estimated properties of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">AGaniFragmentationResult</a>, List[<a class="reference internal" href="core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">AGaniFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="constants.html" class="btn btn-neutral float-left" title="constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models/init.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

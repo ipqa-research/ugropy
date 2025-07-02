@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Joback fragmentation module.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.base.fragmentation_model</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FragmentationModel</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.default_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.ilp_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">ILPSolver</span>
+
+
+<div class="viewcode-block" id="AbdulelahGaniPSTModel">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AbdulelahGaniPSTModel</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abdulelah-Gani model dedicated to properties estimation.</span>
+
+<span class="sd">    Class to construct the primary, secondary and tertiary structures detector</span>
+<span class="sd">    for the Abdulelah-Gani properties estimation model :cite:p:`gani`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its precense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    subgroups_info : pd.DataFrame</span>
+<span class="sd">        Group&#39;s subgroups numbers.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its precense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the detection_smarts</span>
+<span class="sd">        subgroups column</span>
+<span class="sd">    info : pd.DataFrame</span>
+<span class="sd">        Group&#39;s subgroups numbers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">subgroups_info</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">allow_overlapping</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">allow_free_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+            <span class="n">allow_overlapping</span><span class="o">=</span><span class="n">allow_overlapping</span><span class="p">,</span>
+            <span class="n">allow_free_atoms</span><span class="o">=</span><span class="n">allow_free_atoms</span><span class="p">,</span>
+            <span class="n">fragmentation_result</span><span class="o">=</span><span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">subgroups_info</span>
+
+<div class="viewcode-block" id="AbdulelahGaniPSTModel.get_groups">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel.get_groups">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+        <span class="n">identifier_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="n">solver</span><span class="p">:</span> <span class="n">ILPSolver</span> <span class="o">=</span> <span class="n">DefaultSolver</span><span class="p">,</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_nonoptimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">solver_arguments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">AGaniPSTFragmentationResult</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the groups of a molecule.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        identifier : Union[str, Chem.rdchem.Mol]</span>
+<span class="sd">            Identifier of the molecule. You can use either the name of the</span>
+<span class="sd">            molecule, the SMILEs of the molecule or a rdkit Mol object.</span>
+<span class="sd">        identifier_type : str, optional</span>
+<span class="sd">            Identifier type of the molecule. Use &quot;name&quot; if you are providing</span>
+<span class="sd">            the molecules&#39; name, &quot;smiles&quot; if you are providing the SMILES or</span>
+<span class="sd">            &quot;mol&quot; if you are providing a rdkir mol object, by default &quot;name&quot;</span>
+<span class="sd">        solver : ILPSolver, optional</span>
+<span class="sd">            ILP solver class, by default DefaultSolver</span>
+<span class="sd">        search_multiple_solutions : bool, optional</span>
+<span class="sd">            Weather search for multiple solutions or not, by default False If</span>
+<span class="sd">            False the return will be a FragmentationResult object, if True the</span>
+<span class="sd">            return will be a list of FragmentationResult objects.</span>
+<span class="sd">        search_nonoptimal : bool, optional</span>
+<span class="sd">            If True, the solver will search for non-optimal solutions along</span>
+<span class="sd">            with the optimal ones. This is useful when the user wants to find</span>
+<span class="sd">            all possible combinations of fragments that cover the universe. By</span>
+<span class="sd">            default False. If `search_multiple_solutions` is False, this</span>
+<span class="sd">            parameter will be ignored.</span>
+<span class="sd">        solver_arguments : dict, optional</span>
+<span class="sd">            Dictionary with the arguments to be passed to the solver. For the</span>
+<span class="sd">            DefaultSolver of ugropy you can change de PulP solver passing a</span>
+<span class="sd">            dictionary like {&quot;solver&quot;: &quot;PULP_CBC_CMD&quot;} and change the PulP</span>
+<span class="sd">            solver. If empty it will use the default solver arguments, by</span>
+<span class="sd">            default {}.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[AGaniPFragmentationResult, List[AGaniPFragmentationResult]]</span>
+<span class="sd">            Fragmentation result. If search_multiple_solutions is False the</span>
+<span class="sd">            return will be a FragmentationResult object, if True the return</span>
+<span class="sd">            will be a list of FragmentationResult objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sol</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span>
+            <span class="n">identifier</span><span class="p">,</span>
+            <span class="n">identifier_type</span><span class="p">,</span>
+            <span class="n">solver</span><span class="p">,</span>
+            <span class="n">search_multiple_solutions</span><span class="p">,</span>
+            <span class="n">search_nonoptimal</span><span class="o">=</span><span class="n">search_nonoptimal</span><span class="p">,</span>
+            <span class="n">solver_arguments</span><span class="o">=</span><span class="n">solver_arguments</span><span class="p">,</span>
+            <span class="n">subgroups_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sol</span></div>
+
+
+<div class="viewcode-block" id="AbdulelahGaniPSTModel.mol_preprocess">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel.mol_preprocess">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mol_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess the molecule to be ready for the fragmentation.</span>
+
+<span class="sd">        This method preprocess the molecule to be ready for the fragmentation</span>
+<span class="sd">        process. The preprocessing steps are:</span>
+
+<span class="sd">        1. Kekulize the molecule.</span>
+<span class="sd">        2. Identify the aromatic rings.</span>
+<span class="sd">        3. Check the aromaticity of the rings.</span>
+<span class="sd">        4. Make the rings aromatic or non-aromatic based on the setp 3 check.</span>
+
+<span class="sd">        The criteria to check the aromaticity of the rings are based on the</span>
+<span class="sd">        criteria proposed by Abdulelah-Gani in the original paper datase</span>
+<span class="sd">        :cite:p:`gani`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : Chem.rdchem.Mol</span>
+<span class="sd">            Molecule to preprocess</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Chem.rdchem.Mol</span>
+<span class="sd">            Preprocessed molecule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Clone of the molecule to kekulize</span>
+        <span class="n">kekulized_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">Kekulize</span><span class="p">(</span><span class="n">kekulized_mol</span><span class="p">,</span> <span class="n">clearAromaticFlags</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Step 1: Identify all ring on the molecule</span>
+        <span class="n">ring_info</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetRingInfo</span><span class="p">()</span>
+        <span class="n">atom_rings</span> <span class="o">=</span> <span class="n">ring_info</span><span class="o">.</span><span class="n">AtomRings</span><span class="p">()</span>
+
+        <span class="c1"># Step 2: Get only the aromatic rings</span>
+        <span class="n">rdkit_aromatic_rings</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ring</span>
+            <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">atom_rings</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Lists to store the AGani aromatic rings and not aromatic rings</span>
+        <span class="n">aromatic_rings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">non_aromatic_rings</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Step 3: Check which rings are aromatic</span>
+        <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">rdkit_aromatic_rings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_ring_aromaticity</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
+                <span class="n">aromatic_rings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">non_aromatic_rings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
+
+        <span class="c1"># Step 4: Preprocess the non aromatic rings</span>
+        <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">non_aromatic_rings</span><span class="p">:</span>
+            <span class="c1"># Make atoms of the ring non-aromatic</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">:</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">SetIsAromatic</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="c1"># Make bonds of the ring non-aromatic</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ring</span><span class="p">)):</span>
+                <span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span> <span class="o">=</span> <span class="n">ring</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ring</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">ring</span><span class="p">)]</span>
+                <span class="n">bond</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">)</span>
+
+                <span class="c1"># Set bond type to the kekulized bond type</span>
+                <span class="n">kekulized_bond</span> <span class="o">=</span> <span class="n">kekulized_mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span>
+                    <span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span>
+                <span class="p">)</span>
+                <span class="n">bond</span><span class="o">.</span><span class="n">SetBondType</span><span class="p">(</span><span class="n">kekulized_bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">())</span>
+
+        <span class="c1"># Step 5: Revisit aromatic rings to make sure they are aromatic</span>
+        <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">aromatic_rings</span><span class="p">:</span>
+            <span class="c1"># Restore atoms aromaticity</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">:</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">SetIsAromatic</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1"># Restore bonds aromaticity</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ring</span><span class="p">)):</span>
+                <span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span> <span class="o">=</span> <span class="n">ring</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ring</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">ring</span><span class="p">)]</span>
+                <span class="n">bond</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">)</span>
+                <span class="n">bond</span><span class="o">.</span><span class="n">SetBondType</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">AROMATIC</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">mol</span></div>
+
+
+<div class="viewcode-block" id="AbdulelahGaniPSTModel.check_ring_aromaticity">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel.check_ring_aromaticity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_ring_aromaticity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">ring</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify ring aromaticity along with the authors criteria.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : Chem.Mol</span>
+<span class="sd">            Molecule</span>
+<span class="sd">        ring : list[int]</span>
+<span class="sd">            List of atom indexes that form the ring</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the ring is aromatic, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Non-aromatic patterns</span>
+        <span class="n">non_aromatic_patterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># &quot;[nH0]1[cH0][nH0][cH0][cH0][cH0]1&quot;,</span>
+            <span class="c1"># &quot;[nH0]1[cH0][nH0][cH0][nH0][cH0]1&quot;,</span>
+            <span class="c1"># &quot;[nH0X2]1[c;R2][c;R2][nH0X3][c;R2][c;R2]1&quot;,</span>
+            <span class="s2">&quot;n1[cH0;$([cH0]=O)]nccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccnc[cH0;$([cH0]=O)]1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccn[cH0;$([cH0]=O)][cH0;$([cH0]=O)]1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nH0]1[cH0;$([cH0]=O)][nH0]cn[cH0;$([cH0]=O)]1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c1ccco1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1[nH0][cH0;$([cH0]=O)]ccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[cH0]1[cH0]cc[cH0]cc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nH0;R2]1ccccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1[cH0;$([cH0]=*)]cccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1c[cH0;$([cH0]=*)]ccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1cc[cH0;$([cH0]=*)]cc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccc[cH0;$([cH0]=*)]c1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1cccc[cH0;$([cH0]=*)]1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1cn[cH0;$([cH0]=O)]cc1&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Aromatic patterns</span>
+        <span class="n">aromatic_patterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;c1ccccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c1ncncn1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccncc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nH0;R1]1[c;R1][nH0]ccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nH0]1[nH0]cccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n1ccccc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nX2]1[nX2]c[nX2]cc1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;[nH0]1c[nH0]ccc1&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Ring as set to compare</span>
+        <span class="n">ring_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
+
+        <span class="c1"># Check if the ring matches any non aromatic pattern</span>
+        <span class="k">for</span> <span class="n">smarts</span> <span class="ow">in</span> <span class="n">non_aromatic_patterns</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+                <span class="n">match_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">match_set</span> <span class="o">==</span> <span class="n">ring_set</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Check if the ring matches any aromatic pattern</span>
+        <span class="k">for</span> <span class="n">smarts</span> <span class="ow">in</span> <span class="n">aromatic_patterns</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+                <span class="n">match_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">match_set</span> <span class="o">==</span> <span class="n">ring_set</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># Special case: all are carbon atoms</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># Default case, we consider the ring as non aromatic</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

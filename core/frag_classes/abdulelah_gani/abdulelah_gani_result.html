@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdulelah-Gani Result Class &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Abdulelah-Gani Class" href="abdulelah_gani.html" />
+    <link rel="prev" title="Abdulelah-Gani PST Class" href="abdulelah_gani_pst.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../init.html">Core</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.check_atoms_fragments_presence"><code class="docutils literal notranslate"><span class="pre">check_atoms_fragments_presence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.instantiate_mol_object"><code class="docutils literal notranslate"><span class="pre">instantiate_mol_object()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../checks.html">Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get_rdkit_object.html">get rdkit object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ilp_solvers/init.html">ILP solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../init.html">Fragmentation Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../base/init.html">Base fragmentation Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gibbs_model/init.html">Gibbs Fragmentation Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../joback_model/init.html">Joback Model</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="init.html">Abdulelah-Gani fragmentation Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani_pst_result.html">Abdulelah-Gani PST Result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani_pst.html">Abdulelah-Gani PST Class</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Abdulelah-Gani Result Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani.html">Abdulelah-Gani Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../init.html">Core</a></li>
+          <li class="breadcrumb-item"><a href="../init.html">Fragmentation Classes</a></li>
+          <li class="breadcrumb-item"><a href="init.html">Abdulelah-Gani fragmentation Classes</a></li>
+      <li class="breadcrumb-item active">Abdulelah-Gani Result Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/core/frag_classes/abdulelah_gani/abdulelah_gani_result.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result">
+<span id="abdulelah-gani-result-class"></span><h1>Abdulelah-Gani Result Class<a class="headerlink" href="#module-ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result" title="Link to this heading"></a></h1>
+<p>Abdulelah-Gani fragmentation model result module <span id="id1">[<a class="reference internal" href="../../../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AGaniFragmentationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_fragmentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><span class="pre">AGaniPSTFragmentationResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary_fragmentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><span class="pre">AGaniPSTFragmentationResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tertiary_fragmentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><span class="pre">AGaniPSTFragmentationResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_biases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#AGaniFragmentationResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abdulelah-Gani fragmentation model result <span id="id2">[<a class="reference internal" href="../../../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span>.</p>
+<p>Class to store the results of the Abdulelah-Gani fragmentation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecule</strong> (<em>Chem.rdchem.Mol</em>) – RDKit molecule object.</p></li>
+<li><p><strong>primary_fragmentation</strong> (<a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><em>AGaniPSTFragmentationResult</em></a>) – Primary fragmentation model result.</p></li>
+<li><p><strong>secondary_fragmentation</strong> (<a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><em>AGaniPSTFragmentationResult</em></a>) – Secondary fragmentation model result.</p></li>
+<li><p><strong>tertiary_fragmentation</strong> (<a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult"><em>AGaniPSTFragmentationResult</em></a>) – Tertiary fragmentation model result.</p></li>
+<li><p><strong>properties_contributions</strong> (<em>pd.DataFrame</em>) – Contribution parameters of each group for each property of the model.</p></li>
+<li><p><strong>properties_biases</strong> (<em>pd.DataFrame</em>) – Biases parameters of each property of the model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.molecule">
+<span class="sig-name descname"><span class="pre">molecule</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.molecule" title="Link to this definition"></a></dt>
+<dd><p>RDKit molecule object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Chem.rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.primary">
+<span class="sig-name descname"><span class="pre">primary</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.primary" title="Link to this definition"></a></dt>
+<dd><p>Primary fragmentation model result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult">AGaniPSTFragmentationResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.secondary">
+<span class="sig-name descname"><span class="pre">secondary</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.secondary" title="Link to this definition"></a></dt>
+<dd><p>Secondary fragmentation model result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult">AGaniPSTFragmentationResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.tertiary">
+<span class="sig-name descname"><span class="pre">tertiary</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.tertiary" title="Link to this definition"></a></dt>
+<dd><p>Tertiary fragmentation model result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result.AGaniPSTFragmentationResult">AGaniPSTFragmentationResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ml_vector">
+<span class="sig-name descname"><span class="pre">ml_vector</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ml_vector" title="Link to this definition"></a></dt>
+<dd><p>Vector of groups occurrences to evaluate ML model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.molecular_weight" title="Link to this definition"></a></dt>
+<dd><p>Molecular weight [g/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_temperature">
+<span class="sig-name descname"><span class="pre">critical_temperature</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_temperature" title="Link to this definition"></a></dt>
+<dd><p>Critical temperature [K] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_pressure">
+<span class="sig-name descname"><span class="pre">critical_pressure</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_pressure" title="Link to this definition"></a></dt>
+<dd><p>Critical pressure [bar] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_volume">
+<span class="sig-name descname"><span class="pre">critical_volume</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.critical_volume" title="Link to this definition"></a></dt>
+<dd><p>Critical volume [cm³/mol] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.acentric_factor">
+<span class="sig-name descname"><span class="pre">acentric_factor</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.acentric_factor" title="Link to this definition"></a></dt>
+<dd><p>Acentric factor [-] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.liquid_molar_volume">
+<span class="sig-name descname"><span class="pre">liquid_molar_volume</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.liquid_molar_volume" title="Link to this definition"></a></dt>
+<dd><p>Liquid molar volume [L/mol] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ig_formation_enthalpy">
+<span class="sig-name descname"><span class="pre">ig_formation_enthalpy</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ig_formation_enthalpy" title="Link to this definition"></a></dt>
+<dd><p>Ideal gas formation enthalpy [kJ/mol] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ig_formation_gibbs">
+<span class="sig-name descname"><span class="pre">ig_formation_gibbs</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.ig_formation_gibbs" title="Link to this definition"></a></dt>
+<dd><p>Ideal gas formation Gibbs [kJ/mol] GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.properties_calculation">
+<span class="sig-name descname"><span class="pre">properties_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">properties_contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_biases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#AGaniFragmentationResult.properties_calculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.properties_calculation" title="Link to this definition"></a></dt>
+<dd><p>Calculate the properties with the fragmentation results.</p>
+<p>Properties are calculated with the GC-Simple method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>properties_contributions</strong> (<em>pd.DataFrame</em>) – Contribution parameters of each group for each property of the
+model.</p></li>
+<li><p><strong>properties_biases</strong> (<em>pd.DataFrame</em>) – Biases parameters of each property of the model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="abdulelah_gani_pst.html" class="btn btn-neutral float-left" title="Abdulelah-Gani PST Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="abdulelah_gani.html" class="btn btn-neutral float-right" title="Abdulelah-Gani Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

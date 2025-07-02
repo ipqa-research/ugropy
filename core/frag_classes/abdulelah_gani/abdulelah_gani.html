@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdulelah-Gani Class &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Abdulelah-Gani Result Class" href="abdulelah_gani_result.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../init.html">Core</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.check_atoms_fragments_presence"><code class="docutils literal notranslate"><span class="pre">check_atoms_fragments_presence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.instantiate_mol_object"><code class="docutils literal notranslate"><span class="pre">instantiate_mol_object()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../checks.html">Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get_rdkit_object.html">get rdkit object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ilp_solvers/init.html">ILP solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../init.html">Fragmentation Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../base/init.html">Base fragmentation Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gibbs_model/init.html">Gibbs Fragmentation Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../joback_model/init.html">Joback Model</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="init.html">Abdulelah-Gani fragmentation Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani_pst_result.html">Abdulelah-Gani PST Result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani_pst.html">Abdulelah-Gani PST Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="abdulelah_gani_result.html">Abdulelah-Gani Result Class</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Abdulelah-Gani Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../init.html">Core</a></li>
+          <li class="breadcrumb-item"><a href="../init.html">Fragmentation Classes</a></li>
+          <li class="breadcrumb-item"><a href="init.html">Abdulelah-Gani fragmentation Classes</a></li>
+      <li class="breadcrumb-item active">Abdulelah-Gani Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/core/frag_classes/abdulelah_gani/abdulelah_gani.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani">
+<span id="abdulelah-gani-class"></span><h1>Abdulelah-Gani Class<a class="headerlink" href="#module-ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani" title="Link to this heading"></a></h1>
+<p>Abdulelah-Gani fragmentation module <span id="id1">[<a class="reference internal" href="../../../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbdulelahGaniModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">abdulelah_gani_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><span class="pre">AbdulelahGaniPSTModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">abdulelah_gani_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><span class="pre">AbdulelahGaniPSTModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">abdulelah_gani_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><span class="pre">AbdulelahGaniPSTModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_biases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/abdulelah_gani/abdulelah_gani.html#AbdulelahGaniModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abdulelah-Gani fragmentation model <span id="id2">[<a class="reference internal" href="../../../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>abdulelah_gani_p</strong> (<a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><em>AbdulelahGaniPSTModel</em></a>) – The primary Abdulelah-Gani fragmentation model.</p></li>
+<li><p><strong>abdulelah_gani_s</strong> (<a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><em>AbdulelahGaniPSTModel</em></a>) – The secondary Abdulelah-Gani fragmentation model.</p></li>
+<li><p><strong>abdulelah_gani_t</strong> (<a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel"><em>AbdulelahGaniPSTModel</em></a>) – The tertiary Abdulelah-Gani fragmentation model.</p></li>
+<li><p><strong>properties_contributions</strong> (<em>pd.DataFrame</em>) – The contributions parameters of each group for each property of the
+model.</p></li>
+<li><p><strong>properties_biases</strong> (<em>pd.DataFrame</em>) – The biases parameters of each property of the model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.primary_model">
+<span class="sig-name descname"><span class="pre">primary_model</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.primary_model" title="Link to this definition"></a></dt>
+<dd><p>The primary Abdulelah-Gani fragmentation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.secondary_model">
+<span class="sig-name descname"><span class="pre">secondary_model</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.secondary_model" title="Link to this definition"></a></dt>
+<dd><p>The secondary Abdulelah-Gani fragmentation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.tertiary_model">
+<span class="sig-name descname"><span class="pre">tertiary_model</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.tertiary_model" title="Link to this definition"></a></dt>
+<dd><p>The tertiary Abdulelah-Gani fragmentation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.properties_contributions">
+<span class="sig-name descname"><span class="pre">properties_contributions</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.properties_contributions" title="Link to this definition"></a></dt>
+<dd><p>The contributions parameters of each group for each property of the
+model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.properties_biases">
+<span class="sig-name descname"><span class="pre">properties_biases</span></span><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.properties_biases" title="Link to this definition"></a></dt>
+<dd><p>The biases parameters of each property of the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.get_groups">
+<span class="sig-name descname"><span class="pre">get_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">~rdkit.Chem.rdchem.Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver:</span> <span class="pre">~ugropy.core.ilp_solvers.ilp_solver.ILPSolver</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'ugropy.core.ilp_solvers.default_solver.DefaultSolver'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_multiple_solutions:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_nonoptimal:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver_arguments:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult"><span class="pre">AGaniFragmentationResult</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult"><span class="pre">AGaniFragmentationResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/abdulelah_gani/abdulelah_gani.html#AbdulelahGaniModel.get_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel.get_groups" title="Link to this definition"></a></dt>
+<dd><p>Get the groups of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>Chem.rdchem.Mol</em><em>]</em>) – Identifier of the molecule. You can use either the name of the
+molecule, the SMILEs of the molecule or a rdkit Mol object.</p></li>
+<li><p><strong>identifier_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Identifier type of the molecule. Use “name” if you are providing
+the molecules’ name, “smiles” if you are providing the SMILES
+or “mol” if you are providing a rdkir mol object, by default “name”</p></li>
+<li><p><strong>solver</strong> (<a class="reference internal" href="../../ilp_solvers/ilp_solver.html#ugropy.core.ilp_solvers.ilp_solver.ILPSolver" title="ugropy.core.ilp_solvers.ilp_solver.ILPSolver"><em>ILPSolver</em></a><em>, </em><em>optional</em>) – ILP solver class, by default DefaultSolver</p></li>
+<li><p><strong>search_multiple_solutions</strong> (<em>bool</em><em>, </em><em>optional</em>) – Weather search for multiple solutions or not, by default False
+If False the return will be a FragmentationResult object, if True
+the return will be a list of FragmentationResult objects.</p></li>
+<li><p><strong>search_nonoptimal</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the solver will search for non-optimal solutions along
+with the optimal ones. This is useful when the user wants to find
+all possible combinations of fragments that cover the universe. By
+default False. If <cite>search_multiple_solutions</cite> is False, this
+parameter will be ignored.</p></li>
+<li><p><strong>solver_arguments</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary with the arguments to be passed to the solver. For the
+DefaultSolver of ugropy you can change de PulP solver passing a
+dictionary like {“solver”: “PULP_CBC_CMD”} and change the PulP
+solver. If empty it will use the default solver arguments, by
+default {}.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fragmentation result. If search_multiple_solutions is False the
+return will be a FragmentationResult object, if True the return
+will be a list of FragmentationResult objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">AGaniFragmentationResult</a>, List[<a class="reference internal" href="abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">AGaniFragmentationResult</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="abdulelah_gani_result.html" class="btn btn-neutral float-left" title="Abdulelah-Gani Result Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

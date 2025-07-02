@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Abdulelah-Gani Model" href="abdulelah_gani_mod.html" />
+    <link rel="prev" title="Groups" href="../groups.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.psrk"><code class="docutils literal notranslate"><span class="pre">psrk</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.unifac"><code class="docutils literal notranslate"><span class="pre">unifac</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.dortmund"><code class="docutils literal notranslate"><span class="pre">dortmund</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.joback"><code class="docutils literal notranslate"><span class="pre">joback</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.abdulelah_gani_p"><code class="docutils literal notranslate"><span class="pre">abdulelah_gani_p</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.abdulelah_gani_s"><code class="docutils literal notranslate"><span class="pre">abdulelah_gani_s</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.abdulelah_gani_t"><code class="docutils literal notranslate"><span class="pre">abdulelah_gani_t</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ugropy.models.abdulelah_gani"><code class="docutils literal notranslate"><span class="pre">abdulelah_gani</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="abdulelah_gani_mod.html">Abdulelah-Gani Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abdulelah_gani_pmod.html">Abdulelah-Gani Primary Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abdulelah_gani_smod.html">Abdulelah-Gani Secondary Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abdulelah_gani_tmod.html">Abdulelah-Gani Tertiary Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobackmod.html">Joback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psrkmod.html">PSRK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unifacmod.html">UNIFAC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/models/init.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.models">
+<span id="models"></span><h1>Models<a class="headerlink" href="#module-ugropy.models" title="Link to this heading"></a></h1>
+<p>Fragmentation models implementations.</p>
+<p>All models can be imported directly with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">joback</span><span class="p">,</span> <span class="n">psrk</span><span class="p">,</span> <span class="n">unifac</span><span class="p">,</span> <span class="n">abdulelah_gani</span>
+</pre></div>
+</div>
+<p>You can check the group list and their SMARTS representation with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joback</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">psrk</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+<p>Obtain the contribution of each group to the properties with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joback</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;n-hexane&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;toluene&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">psrk</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">subgroups</span>
+<span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tertiary</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.psrk">
+<span class="sig-name descname"><span class="pre">psrk</span></span><a class="headerlink" href="#ugropy.models.psrk" title="Link to this definition"></a></dt>
+<dd><p>Predictive Soave-Redlich-Kwong FragmentationModel <span id="id1">[<a class="reference internal" href="../references.html#id3" title="Published Parameters UNIFAC - DDBST GmbH — ddbst.com. http://www.ddbst.com/published-parameters-unifac.html. [Accessed 23-04-2024].">1</a>, <a class="reference internal" href="../references.html#id12" title="T. Holderbaum and J. Gmehling. PSRK: A Group Contribution Equation of State Based on UNIFAC. Fluid Phase Equilibria, 70(2-3):251–265, December 1991. doi:10.1016/0378-3812(91)85038-V.">2</a>, <a class="reference internal" href="../references.html#id13" title="Sven Horstmann, Anna Jabłoniec, Jörg Krafczyk, Kai Fischer, and Jürgen Gmehling. PSRK group contribution equation of state: comprehensive revision and extension IV, including critical constants and α-function parameters for 1000 components. Fluid Phase Equilibria, 227(2):157–164, January 2005. doi:10.1016/j.fluid.2004.11.002.">3</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel" title="ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel">GibbsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.unifac">
+<span class="sig-name descname"><span class="pre">unifac</span></span><a class="headerlink" href="#ugropy.models.unifac" title="Link to this definition"></a></dt>
+<dd><p>Classic LV-UNIFAC FragmentationModel <span id="id2">[<a class="reference internal" href="../references.html#id3" title="Published Parameters UNIFAC - DDBST GmbH — ddbst.com. http://www.ddbst.com/published-parameters-unifac.html. [Accessed 23-04-2024].">1</a>, <a class="reference internal" href="../references.html#id6" title="Juergen Gmehling, Peter Rasmussen, and Aage Fredenslund. Vapor-liquid equilibriums by UNIFAC group contribution. Revision and extension. 2. Industrial &amp; Engineering Chemistry Process Design and Development, 21(1):118–127, January 1982. doi:10.1021/i200016a021.">4</a>, <a class="reference internal" href="../references.html#id7" title="Henrik K. Hansen, Peter Rasmussen, Aage Fredenslund, Martin Schiller, and Juergen Gmehling. Vapor-liquid equilibria by UNIFAC group contribution. 5. Revision and extension. Industrial &amp; Engineering Chemistry Research, 30(10):2352–2355, October 1991. doi:10.1021/ie00058a017.">5</a>, <a class="reference internal" href="../references.html#id8" title="Eugenia Almeida Macedo, Ulrich Weidlich, Juergen Gmehling, and Peter Rasmussen. Vapor-liquid equilibriums by UNIFAC group contribution. Revision and extension. 3. Industrial &amp; Engineering Chemistry Process Design and Development, 22(4):676–678, October 1983. doi:10.1021/i200023a023.">6</a>, <a class="reference internal" href="../references.html#id9" title="Steen Skjold-Jorgensen, Barbel Kolbe, Jurgen Gmehling, and Peter Rasmussen. Vapor-Liquid Equilibria by UNIFAC Group Contribution. Revision and Extension. Industrial &amp; Engineering Chemistry Process Design and Development, 18(4):714–722, October 1979. doi:10.1021/i260072a024.">7</a>, <a class="reference internal" href="../references.html#id10" title="Detlef Tiegs, Peter Rasmussen, Juergen Gmehling, and Aage Fredenslund. Vapor-liquid equilibria by UNIFAC group contribution. 4. Revision and extension. Industrial &amp; Engineering Chemistry Research, 26(1):159–161, January 1987. doi:10.1021/ie00061a030.">8</a>, <a class="reference internal" href="../references.html#id11" title="Roland Wittig, Jürgen Lohmann, and Jürgen Gmehling. Vapor-Liquid Equilibria by UNIFAC Group Contribution. 6. Revision and Extension. Industrial &amp; Engineering Chemistry Research, 42(1):183–188, January 2003. doi:10.1021/ie020506l.">9</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel" title="ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel">GibbsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.dortmund">
+<span class="sig-name descname"><span class="pre">dortmund</span></span><a class="headerlink" href="#ugropy.models.dortmund" title="Link to this definition"></a></dt>
+<dd><p>Dortmund mod-UNIFAC FragmentationModel <span id="id3">[<a class="reference internal" href="../references.html#id14" title="Roland Wittig, Jürgen Lohmann, Ralph Joh, Sven Horstmann, and Jürgen Gmehling. Vapor−Liquid Equilibria and Enthalpies of Mixing in a Temperature Range from 298.15 to 413.15 K for the Further Development of Modified UNIFAC (Dortmund). Industrial &amp; Engineering Chemistry Research, 40(24):5831–5838, November 2001. URL: https://pubs.acs.org/doi/10.1021/ie010444j (visited on 2023-10-27), doi:10.1021/ie010444j.">10</a>, <a class="reference internal" href="../references.html#id15" title="Ulrich Weidlich and Juergen Gmehling. A modified UNIFAC model. 1. Prediction of VLE, hE, and .gamma..infin. Industrial &amp; Engineering Chemistry Research, 26(7):1372–1381, July 1987. URL: https://pubs.acs.org/doi/abs/10.1021/ie00067a018 (visited on 2023-09-27), doi:10.1021/ie00067a018.">11</a>, <a class="reference internal" href="../references.html#id16" title="Juergen Gmehling, Jiding Li, and Martin Schiller. A modified UNIFAC model. 2. Present parameter matrix and results for different thermodynamic properties. Industrial &amp; Engineering Chemistry Research, 32(1):178–193, January 1993. URL: https://pubs.acs.org/doi/abs/10.1021/ie00013a024 (visited on 2023-09-27), doi:10.1021/ie00013a024.">12</a>, <a class="reference internal" href="../references.html#id17" title="Jürgen Gmehling, Jürgen Lohmann, Antje Jakob, Jiding Li, and Ralph Joh. A Modified UNIFAC (Dortmund) Model. 3. Revision and Extension. Industrial &amp; Engineering Chemistry Research, 37(12):4876–4882, December 1998. URL: https://pubs.acs.org/doi/10.1021/ie980347z (visited on 2023-09-27), doi:10.1021/ie980347z.">13</a>, <a class="reference internal" href="../references.html#id18" title="Jürgen Gmehling, Roland Wittig, Jürgen Lohmann, and Ralph Joh. A Modified UNIFAC (Dortmund) Model. 4. Revision and Extension. Industrial &amp; Engineering Chemistry Research, 41(6):1678–1688, March 2002. URL: https://pubs.acs.org/doi/10.1021/ie0108043 (visited on 2023-09-27), doi:10.1021/ie0108043.">14</a>, <a class="reference internal" href="../references.html#id19" title="Jürgen Lohmann, Ralph Joh, and Jürgen Gmehling. From UNIFAC to Modified UNIFAC (Dortmund). Industrial &amp; Engineering Chemistry Research, 40(3):957–964, February 2001. URL: https://pubs.acs.org/doi/10.1021/ie0005710 (visited on 2023-09-27), doi:10.1021/ie0005710.">15</a>, <a class="reference internal" href="../references.html#id20" title="Jürgen Lohmann and Jürgen Gmehling. Modified UNIFAC (Dortmund). Reliable Model for the Development of Thermal Separation Processes. JOURNAL OF CHEMICAL ENGINEERING OF JAPAN, 34(1):43–54, 2001. URL: http://www.jstage.jst.go.jp/article/jcej/34/1/34_1_43/_article (visited on 2023-09-27), doi:10.1252/jcej.34.43.">16</a>, <a class="reference internal" href="../references.html#id21" title="Roland Wittig, Jürgen Lohmann, and Jürgen Gmehling. Prediction of phase equilibria and excess properties for systems with sulfones. AIChE Journal, 49(2):530–537, February 2003. URL: https://onlinelibrary.wiley.com/doi/10.1002/aic.690490223 (visited on 2023-09-27), doi:10.1002/aic.690490223.">17</a>, <a class="reference internal" href="../references.html#id22" title="Antje Jakob, Hans Grensemann, Jürgen Lohmann, and Jürgen Gmehling. Further Development of Modified UNIFAC (Dortmund): Revision and Extension 5. Industrial &amp; Engineering Chemistry Research, 45(23):7924–7933, November 2006. URL: https://pubs.acs.org/doi/10.1021/ie060355c (visited on 2023-09-26), doi:10.1021/ie060355c.">18</a>, <a class="reference internal" href="../references.html#id23" title="Torben Hector and Jürgen Gmehling. Present status of the modified UNIFAC model for the prediction of phase equilibria and excess enthalpies for systems with ionic liquids. Fluid Phase Equilibria, 371:82–92, June 2014. URL: https://linkinghub.elsevier.com/retrieve/pii/S0378381214001642 (visited on 2023-09-26), doi:10.1016/j.fluid.2014.03.006.">19</a>, <a class="reference internal" href="../references.html#id24" title="Dana Constantinescu and Jürgen Gmehling. Further Development of Modified UNIFAC (Dortmund): Revision and Extension 6. Journal of Chemical &amp; Engineering Data, 61(8):2738–2748, August 2016. URL: https://pubs.acs.org/doi/10.1021/acs.jced.6b00136 (visited on 2023-09-26), doi:10.1021/acs.jced.6b00136.">20</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel" title="ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel">GibbsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.joback">
+<span class="sig-name descname"><span class="pre">joback</span></span><a class="headerlink" href="#ugropy.models.joback" title="Link to this definition"></a></dt>
+<dd><p>Joback FragmentationModel <span id="id4">[<a class="reference internal" href="../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>, <a class="reference internal" href="../references.html#id5" title="K.G. Joback and R.C. Reid. ESTIMATION OF PURE-COMPONENT PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications, 57(1-6):233–243, July 1987. doi:10.1080/00986448708960487.">22</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/joback_model/joback_model.html#ugropy.core.frag_classes.joback.joback_model.JobackModel" title="ugropy.core.frag_classes.joback.joback_model.JobackModel">JobackModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.abdulelah_gani_p">
+<span class="sig-name descname"><span class="pre">abdulelah_gani_p</span></span><a class="headerlink" href="#ugropy.models.abdulelah_gani_p" title="Link to this definition"></a></dt>
+<dd><p>Abdulelah-Gani Primary Structures FragmentationModel <span id="id5">[<a class="reference internal" href="../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.abdulelah_gani_s">
+<span class="sig-name descname"><span class="pre">abdulelah_gani_s</span></span><a class="headerlink" href="#ugropy.models.abdulelah_gani_s" title="Link to this definition"></a></dt>
+<dd><p>Abdulelah-Gani Secondary Structures FragmentationModel <span id="id6">[<a class="reference internal" href="../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.abdulelah_gani_t">
+<span class="sig-name descname"><span class="pre">abdulelah_gani_t</span></span><a class="headerlink" href="#ugropy.models.abdulelah_gani_t" title="Link to this definition"></a></dt>
+<dd><p>Abdulelah-Gani Tertiary Structures FragmentationModel <span id="id7">[<a class="reference internal" href="../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/abdulelah_gani/abdulelah_gani_pst.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst.AbdulelahGaniPSTModel">AbdulelahGaniPSTModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.models.abdulelah_gani">
+<span class="sig-name descname"><span class="pre">abdulelah_gani</span></span><a class="headerlink" href="#ugropy.models.abdulelah_gani" title="Link to this definition"></a></dt>
+<dd><p>Abdulelah-Gani properties estimation model <span id="id8">[<a class="reference internal" href="../references.html#id2" title="Abdulelah S. Alshehri, Anjan K. Tula, Fengqi You, and Rafiqul Gani. Next generation pure component property estimation models: With and without machine learning techniques. AIChE Journal, 68(6):e17469, June 2022. URL: https://aiche.onlinelibrary.wiley.com/doi/10.1002/aic.17469 (visited on 2023-10-24), doi:10.1002/aic.17469.">23</a>]</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/frag_classes/abdulelah_gani/abdulelah_gani.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel" title="ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani.AbdulelahGaniModel">AbdulelahGaniModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="abdulelah_gani_mod.html">Abdulelah-Gani Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abdulelah_gani_pmod.html">Abdulelah-Gani Primary Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abdulelah_gani_smod.html">Abdulelah-Gani Secondary Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abdulelah_gani_tmod.html">Abdulelah-Gani Tertiary Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jobackmod.html">Joback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="psrkmod.html">PSRK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unifacmod.html">UNIFAC</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../groups.html" class="btn btn-neutral float-left" title="Groups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="abdulelah_gani_mod.html" class="btn btn-neutral float-right" title="Abdulelah-Gani Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
