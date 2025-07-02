@@ -22,6 +22,10 @@ class GibbsFragmentationResult(FragmentationResult):
         Dictionary of subgroups atoms indexes.
     subgroups_info : pd.DataFrame
         DataFrame with subgroups information.
+    calculate_r_q : bool
+        If True, calculate R and Q values for the molecule.
+    calculate_num_dict : bool, optional
+        If True, calculate the subgroup numbers dictionary. Default is True.
 
     Attributes
     ----------
@@ -37,6 +41,9 @@ class GibbsFragmentationResult(FragmentationResult):
         Gibss excess model R value estimation of the molecule.
     q : float
         Gibss excess model Q value estimation of the molecule.
+    subgroups_num : dict
+        Dictionary with the subgroup numbers and the number of times they
+        appear in the molecule.
     """
 
     def __init__(
@@ -46,12 +53,14 @@ class GibbsFragmentationResult(FragmentationResult):
         subgroups_atoms_indexes: dict,
         subgroups_info: pd.DataFrame,
         calculate_r_q: bool,
+        calculate_num_dict: bool = True,
     ):
         super().__init__(molecule, subgroups, subgroups_atoms_indexes)
 
         r = 0.0
         q = 0.0
 
+        # R and Q
         if self.subgroups != {}:
             if calculate_r_q:
                 for group, n in self.subgroups.items():
@@ -66,3 +75,16 @@ class GibbsFragmentationResult(FragmentationResult):
         else:
             self.r = None
             self.q = None
+
+        # Subgroups numbers dictionary
+        if self.subgroups != {}:
+            if calculate_num_dict:
+                self.subgroups_num = {}
+
+                for group, occ in self.subgroups.items():
+                    snum = int(subgroups_info.loc[group, "subgroup_number"])
+
+                    self.subgroups_num[snum] = occ
+
+            else:
+                self.subgroups_num = None
