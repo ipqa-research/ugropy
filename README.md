@@ -31,6 +31,25 @@ You can install `ugropy` by:
 pip install ugropy
 ```
 
+# Citing ugropy
+`ugropy` now has an article! If you use `ugropy` in your research, please cite:
+
+```
+@article{brandolin2025ugropy,
+  title={Ugropy: An Extensible Python Package for Thermodynamic Model Functional Group Identification via Mathematical Optimization},
+  author={Brandol{\'\i}n, Salvador E and Benelli, Federico E and Magario, Ivana and Scilipoti, Jos{\'e} A},
+  journal={Industrial \& Engineering Chemistry Research},
+  volume={64},
+  number={35},
+  pages={17217--17227},
+  year={2025},
+  publisher={ACS Publications},
+  doi = {10.1021/acs.iecr.5c02552}
+}
+```
+
+Check the publication [here](https://pubs.acs.org/doi/10.1021/acs.iecr.5c02552).
+
 # Models implemented
 
 ## Gibbs / EoS models
