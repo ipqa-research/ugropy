@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joback Fragmentation Result &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Abdulelah-Gani fragmentation Classes" href="../abdulelah_gani/init.html" />
+    <link rel="prev" title="Joback Fragmentation Model" href="joback_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../init.html">Core</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.check_atoms_fragments_presence"><code class="docutils literal notranslate"><span class="pre">check_atoms_fragments_presence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.instantiate_mol_object"><code class="docutils literal notranslate"><span class="pre">instantiate_mol_object()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../checks.html">Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get_rdkit_object.html">get rdkit object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ilp_solvers/init.html">ILP solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../init.html">Fragmentation Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../base/init.html">Base fragmentation Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gibbs_model/init.html">Gibbs Fragmentation Model</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="init.html">Joback Model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="joback_model.html">Joback Fragmentation Model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Joback Fragmentation Result</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../abdulelah_gani/init.html">Abdulelah-Gani fragmentation Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../init.html">Core</a></li>
+          <li class="breadcrumb-item"><a href="../init.html">Fragmentation Classes</a></li>
+          <li class="breadcrumb-item"><a href="init.html">Joback Model</a></li>
+      <li class="breadcrumb-item active">Joback Fragmentation Result</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/core/frag_classes/joback_model/joback_result.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.core.frag_classes.joback.joback_result">
+<span id="joback-fragmentation-result"></span><h1>Joback Fragmentation Result<a class="headerlink" href="#module-ugropy.core.frag_classes.joback.joback_result" title="Link to this heading"></a></h1>
+<p>JobackFragmentationResult module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JobackFragmentationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups_atoms_indexes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties_contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_boiling_point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/joback/joback_result.html#JobackFragmentationResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/fragmentation_result.html#ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult" title="ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FragmentationResult</span></code></a></p>
+<p>Joback group contribution properties estimator.</p>
+<p>The class recieves either the Joback and Reid model’s <span id="id1">[<a class="reference internal" href="../../../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>, <a class="reference internal" href="../../../references.html#id5" title="K.G. Joback and R.C. Reid. ESTIMATION OF PURE-COMPONENT PROPERTIES FROM GROUP-CONTRIBUTIONS. Chemical Engineering Communications, 57(1-6):233–243, July 1987. doi:10.1080/00986448708960487.">22</a>]</span> groups, name or smiles of a molecule and estimates the its
+properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecule</strong> (<em>Chem.rdchem.Mol</em>) – RDKit molecule object.</p></li>
+<li><p><strong>subgroups</strong> (<em>dict</em>) – Dictionary of subgroups.</p></li>
+<li><p><strong>subgroups_atoms_indexes</strong> (<em>dict</em>) – Dictionary of subgroups atoms indexes.</p></li>
+<li><p><strong>properties_contributions</strong> (<em>pd.DataFrame</em>) – DataFrame with Joback’s properties contributions.</p></li>
+<li><p><strong>normal_boiling_point</strong> (<em>float</em><em>, </em><em>optional</em>) – User provided experimental normal boiling point [K].</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.subgroups" title="Link to this definition"></a></dt>
+<dd><p>Joback functional groups of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.experimental_boiling_temperature">
+<span class="sig-name descname"><span class="pre">experimental_boiling_temperature</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.experimental_boiling_temperature" title="Link to this definition"></a></dt>
+<dd><p>User provided experimental normal boiling point [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_temperature">
+<span class="sig-name descname"><span class="pre">critical_temperature</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_temperature" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated critical temperature [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_pressure">
+<span class="sig-name descname"><span class="pre">critical_pressure</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_pressure" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated critical pressure [bar].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_volume">
+<span class="sig-name descname"><span class="pre">critical_volume</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.critical_volume" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated critical volume [cm³/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.normal_boiling_point">
+<span class="sig-name descname"><span class="pre">normal_boiling_point</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.normal_boiling_point" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated normal boiling point [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.fusion_temperature">
+<span class="sig-name descname"><span class="pre">fusion_temperature</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.fusion_temperature" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated fusion temperature [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.ig_formation_formation">
+<span class="sig-name descname"><span class="pre">ig_formation_formation</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.ig_formation_formation" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.ig_gibbs_formation">
+<span class="sig-name descname"><span class="pre">ig_gibbs_formation</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.ig_gibbs_formation" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated Gibbs energy of formation ideal gas at 298 K [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_ideal_gas_params">
+<span class="sig-name descname"><span class="pre">heat_capacity_ideal_gas_params</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_ideal_gas_params" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated Reid’s ideal gas heat capacity equation parameters
+[J/mol/K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.fusion_enthalpy">
+<span class="sig-name descname"><span class="pre">fusion_enthalpy</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.fusion_enthalpy" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated fusion enthalpy [kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vaporization_enthalpy">
+<span class="sig-name descname"><span class="pre">vaporization_enthalpy</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vaporization_enthalpy" title="Link to this definition"></a></dt>
+<dd><p>Joback estimated vaporization enthalpy at the normal boiling point
+[kJ/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.sum_na">
+<span class="sig-name descname"><span class="pre">sum_na</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.sum_na" title="Link to this definition"></a></dt>
+<dd><p>Joback n_A contribution to liquid viscosity [Pa s].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.sum_nb">
+<span class="sig-name descname"><span class="pre">sum_nb</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.sum_nb" title="Link to this definition"></a></dt>
+<dd><p>Joback n_B contribution to liquid viscosity [Pa s].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.molecular_weight" title="Link to this definition"></a></dt>
+<dd><p>Molecular weight from Joback’s subgroups [g/mol].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.acentric_factor">
+<span class="sig-name descname"><span class="pre">acentric_factor</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.acentric_factor" title="Link to this definition"></a></dt>
+<dd><p>Acentric factor from Lee and Kesler’s equation <span id="id2">[<a class="reference internal" href="../../../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pint.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vapor_pressure_params">
+<span class="sig-name descname"><span class="pre">vapor_pressure_params</span></span><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vapor_pressure_params" title="Link to this definition"></a></dt>
+<dd><p>Vapor pressure G and k parameters for the Riedel-Plank-Miller
+equation [bar] <span id="id3">[<a class="reference internal" href="../../../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_ideal_gas">
+<span class="sig-name descname"><span class="pre">heat_capacity_ideal_gas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/joback/joback_result.html#JobackFragmentationResult.heat_capacity_ideal_gas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_ideal_gas" title="Link to this definition"></a></dt>
+<dd><p>Calculate the ideal gas heat capacity [J/mol/K].</p>
+<p>Uses the Joback estimated Reid’s ideal gas heat capacity equation
+parameters [J/mol/K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ideal gas heat capacity [J/mol/K].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_liquid">
+<span class="sig-name descname"><span class="pre">heat_capacity_liquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/joback/joback_result.html#JobackFragmentationResult.heat_capacity_liquid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_liquid" title="Link to this definition"></a></dt>
+<dd><p>Calculate the liquid heat capacity [J/mol/K].</p>
+<p>Uses the Rowlinson-Bondi <span id="id4">[<a class="reference internal" href="../../../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>]</span> equation with the Joback
+estimated properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ideal gas heat capacity [J/mol/K].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.viscosity_liquid">
+<span class="sig-name descname"><span class="pre">viscosity_liquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/joback/joback_result.html#JobackFragmentationResult.viscosity_liquid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.viscosity_liquid" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Joback estimated liquid viscosity [Pa s].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Liquid viscosity [Pa s].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vapor_pressure">
+<span class="sig-name descname"><span class="pre">vapor_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/joback/joback_result.html#JobackFragmentationResult.vapor_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vapor_pressure" title="Link to this definition"></a></dt>
+<dd><p>Calculate the vapor pressure [bar].</p>
+<p>Uses the Riedel-Plank-Miller <span id="id5">[<a class="reference internal" href="../../../references.html#id4" title="Kevin G Joback. Designing Molecules Possessing Desired Physical Property Values. Thesis (Ph. D.), Massachusetts Institute of Technology, Cambridge, Massachusetts, 1989.">21</a>]</span> equation with the Joback
+estimated properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>]</em>) – Temperature [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vapor pressure [bar]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="joback_model.html" class="btn btn-neutral float-left" title="Joback Fragmentation Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../abdulelah_gani/init.html" class="btn btn-neutral float-right" title="Abdulelah-Gani fragmentation Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

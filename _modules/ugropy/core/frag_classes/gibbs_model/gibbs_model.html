@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.gibbs_model.gibbs_model &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.gibbs_model.gibbs_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.gibbs_model.gibbs_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;GibbsModel fragmentation module.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.base.fragmentation_model</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FragmentationModel</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.gibbs_model.gibbs_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GibbsFragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.default_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.ilp_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">ILPSolver</span>
+
+
+<div class="viewcode-block" id="GibbsModel">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GibbsModel</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GibbsModel it&#39;s a fragmentation model dedicated to Gibbs excess models.</span>
+
+<span class="sd">    unifac, psrk, dortmund are instances of this class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its precense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    subgroups_info : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Information of the model&#39;s subgroups (R, Q, subgroup_number,</span>
+<span class="sd">        main_group), by default None</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Columns: &#39;smarts&#39;</span>
+<span class="sd">        (SMARTS representations of the group to detect its precense in the</span>
+<span class="sd">        molecule).</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the detection_smarts</span>
+<span class="sd">        subgroups column</span>
+<span class="sd">    subgroups_info : pd.DataFrame</span>
+<span class="sd">        Information of the model&#39;s subgroups. Columns: R, Q, subgroup_number,</span>
+<span class="sd">        main_group. Index: &#39;group&#39; (subgroups names)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">subgroups_info</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculate_r_q</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+            <span class="n">allow_overlapping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fragmentation_result</span><span class="o">=</span><span class="n">GibbsFragmentationResult</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_r_q</span> <span class="o">=</span> <span class="n">calculate_r_q</span>
+
+        <span class="c1"># subgroups info</span>
+        <span class="k">if</span> <span class="n">subgroups_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;subgroup_number&quot;</span><span class="p">,</span> <span class="s2">&quot;main_group&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">],</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">subgroups_info</span>
+
+<div class="viewcode-block" id="GibbsModel.get_groups">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel.get_groups">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+        <span class="n">identifier_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="n">solver</span><span class="p">:</span> <span class="n">ILPSolver</span> <span class="o">=</span> <span class="n">DefaultSolver</span><span class="p">,</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_nonoptimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">solver_arguments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the groups of a molecule.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        identifier : Union[str, Chem.rdchem.Mol]</span>
+<span class="sd">            Identifier of the molecule. You can use either the name of the</span>
+<span class="sd">            molecule, the SMILEs of the molecule or a rdkit Mol object.</span>
+<span class="sd">        identifier_type : str, optional</span>
+<span class="sd">            Identifier type of the molecule. Use &quot;name&quot; if you are providing</span>
+<span class="sd">            the molecules&#39; name, &quot;smiles&quot; if you are providing the SMILES</span>
+<span class="sd">            or &quot;mol&quot; if you are providing a rdkir mol object, by default &quot;name&quot;</span>
+<span class="sd">        solver : ILPSolver, optional</span>
+<span class="sd">            ILP solver class, by default DefaultSolver</span>
+<span class="sd">        search_multiple_solutions : bool, optional</span>
+<span class="sd">            Weather search for multiple solutions or not, by default False</span>
+<span class="sd">            If False the return will be a FragmentationResult object, if True</span>
+<span class="sd">            the return will be a list of FragmentationResult objects.</span>
+<span class="sd">        search_nonoptimal : bool, optional</span>
+<span class="sd">            If True, the solver will search for non-optimal solutions along</span>
+<span class="sd">            with the optimal ones. This is useful when the user wants to find</span>
+<span class="sd">            all possible combinations of fragments that cover the universe. By</span>
+<span class="sd">            default False. If `search_multiple_solutions` is False, this</span>
+<span class="sd">            parameter will be ignored.</span>
+<span class="sd">        solver_arguments : dict, optional</span>
+<span class="sd">            Dictionary with the arguments to be passed to the solver. For the</span>
+<span class="sd">            DefaultSolver of ugropy you can change de PulP solver passing a</span>
+<span class="sd">            dictionary like {&quot;solver&quot;: &quot;PULP_CBC_CMD&quot;} and change the PulP</span>
+<span class="sd">            solver. If empty it will use the default solver arguments, by</span>
+<span class="sd">            default {}.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]</span>
+<span class="sd">            Fragmentation result. If search_multiple_solutions is False the</span>
+<span class="sd">            return will be a FragmentationResult object, if True the return</span>
+<span class="sd">            will be a list of FragmentationResult objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sol</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span>
+            <span class="n">identifier</span><span class="p">,</span>
+            <span class="n">identifier_type</span><span class="p">,</span>
+            <span class="n">solver</span><span class="p">,</span>
+            <span class="n">search_multiple_solutions</span><span class="p">,</span>
+            <span class="n">search_nonoptimal</span><span class="p">,</span>
+            <span class="n">solver_arguments</span><span class="p">,</span>
+            <span class="n">subgroups_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span><span class="p">,</span>
+            <span class="n">calculate_r_q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_calculate_r_q</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sol</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

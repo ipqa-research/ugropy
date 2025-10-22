@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.ilp_solvers.ilp_solver &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.ilp_solvers.ilp_solver</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.ilp_solvers.ilp_solver</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;ILPSolver abstract class.</span>
+
+<span class="sd">Template for defining ILP solvers used by `ugropy` to solve the `Set Cover`</span>
+<span class="sd">problem.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+
+<div class="viewcode-block" id="ILPSolver">
+<a class="viewcode-back" href="../../../../core/ilp_solvers/ilp_solver.html#ugropy.core.ilp_solvers.ilp_solver.ILPSolver">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ILPSolver</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ILPSolver abstract class.</span>
+
+<span class="sd">    Template for defining ILP solvers used by `ugropy` to solve the `Set Cover`</span>
+<span class="sd">    problem.</span>
+
+<span class="sd">    To inherit from this class, the following methods must be implemented:</span>
+
+<span class="sd">    - `solve_one_problem`:</span>
+<span class="sd">        Method that solves one instance of the `Set Cover` problem. This method</span>
+<span class="sd">        must return a list of integers representing the chosen fragments. Also</span>
+<span class="sd">        must append the solution to the `selected_fragments` attribute as a</span>
+<span class="sd">        dictionary.</span>
+<span class="sd">    - `solve`:</span>
+<span class="sd">        This class call the `solve_one_problem` method multiples times if the</span>
+<span class="sd">        `search_multiple_solutions` attribute is True. The successives calls</span>
+<span class="sd">        must include the previous solutions obtained as restrictions.</span>
+
+<span class="sd">    You can personalize both methods as you want. The library will call the</span>
+<span class="sd">    `solve` method and at the end of its execution the `selected_fragments`</span>
+<span class="sd">    attribute must contain the selected fragments for each solution.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    overlapped_atoms : List[int]</span>
+<span class="sd">        List of atoms that are overlapped. On the `Set Cover` problem therms,</span>
+<span class="sd">        these atoms represents the universe of the problem.</span>
+<span class="sd">    fragments : dict[str: List[int]]</span>
+<span class="sd">        Dictionary with the fragments (groups) to be selected. On the `Set</span>
+<span class="sd">        Cover` problem therms, these fragments represents the sets to be</span>
+<span class="sd">        selected to cover all the universe. The key is the name of the fragment</span>
+<span class="sd">        and the value is a list of atoms that compose the fragment. Some atoms</span>
+<span class="sd">        that represents a fragment could not be present in the universe. This</span>
+<span class="sd">        is handled by adding those &quot;free atoms&quot; to the universe, forcing that</span>
+<span class="sd">        fragment to appear on the solution. This updating of the universe is</span>
+<span class="sd">        done on the `__init__` method, so you don&#39;t need to worry about it.</span>
+<span class="sd">    search_multiple_solutions : bool, optional</span>
+<span class="sd">        If True, the solver will search for multiple solutions, by default</span>
+<span class="sd">        False</span>
+<span class="sd">    search_nonoptimal : bool, optional</span>
+<span class="sd">        If True, the solver will search for non-optimal solutions along with</span>
+<span class="sd">        the optimal ones. This is useful when the user wants to find all</span>
+<span class="sd">        possible combinations of fragments that cover the universe. By default</span>
+<span class="sd">        False. If `search_multiple_solutions` is True, this parameter will be</span>
+<span class="sd">        ignored.</span>
+<span class="sd">    solver_arguments : dict, optional</span>
+<span class="sd">        Dictionary with the arguments to be passed to the solver.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    overlapped_atoms : List[int]</span>
+<span class="sd">        List of atoms that are overlapped. On the `Set Cover` problem therms,</span>
+<span class="sd">        these atoms represents the universe of the problem.</span>
+<span class="sd">    fragments : dict[str: List[int]]</span>
+<span class="sd">        Fragments to choose to cover the universe.</span>
+<span class="sd">    search_multiple_solutions : bool</span>
+<span class="sd">        If True, the solver will search for multiple solutions.</span>
+<span class="sd">    search_nonoptimal : bool</span>
+<span class="sd">        If True, the solver will search for non-optimal solutions along with</span>
+<span class="sd">        the optimal ones.</span>
+<span class="sd">    selected_fragments : List[List[str]]</span>
+<span class="sd">        Solutions found by the `solve` method. Its a list  that contains the</span>
+<span class="sd">        different obtained solutions as lists of strings. Each string</span>
+<span class="sd">        corresponds to the name of the selected fragments.</span>
+<span class="sd">    overlapped_fragments : dict</span>
+<span class="sd">        Fragments that participates on overlapped atoms.</span>
+<span class="sd">    universe : set</span>
+<span class="sd">        Set with all elements that must be covered by the fragments. This set</span>
+<span class="sd">        is composed by the overlapped atoms and the atoms that are present in</span>
+<span class="sd">        the overlapped fragments but not in the overlapped atoms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">overlapped_atoms</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+        <span class="n">fragments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_nonoptimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">solver_arguments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overlapped_atoms</span> <span class="o">=</span> <span class="n">overlapped_atoms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fragments</span> <span class="o">=</span> <span class="n">fragments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_multiple_solutions</span> <span class="o">=</span> <span class="n">search_multiple_solutions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_nonoptimal</span> <span class="o">=</span> <span class="n">search_nonoptimal</span>
+
+        <span class="k">if</span> <span class="n">solver_arguments</span> <span class="o">==</span> <span class="p">{}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solver_arguments</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;solver&quot;</span><span class="p">:</span> <span class="s2">&quot;PULP_CBC_CMD&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solver_arguments</span> <span class="o">=</span> <span class="n">solver_arguments</span>
+
+        <span class="c1"># Attribute that will store the selected fragments after a</span>
+        <span class="c1"># `solve` method call.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selected_fragments</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Get overlapped fragments (which participates on overlapped atoms)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overlapped_fragments</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fragments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlapped_atoms</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">fragment</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">overlapped_fragments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">fragment</span>
+
+        <span class="c1"># set universe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">overlapped_atoms</span><span class="p">)</span>
+
+        <span class="c1"># Update universe with all elements in the overlapped fragments that</span>
+        <span class="c1"># not present in the overlapped atoms but participates in a fragment.</span>
+        <span class="n">all_elements</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+            <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">overlapped_fragments</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">all_elements</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ILPSolver.solve_one_problem">
+<a class="viewcode-back" href="../../../../core/ilp_solvers/ilp_solver.html#ugropy.core.ilp_solvers.ilp_solver.ILPSolver.solve_one_problem">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve_one_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">not_valid_solutions</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves one instance of the `Set Cover` problem.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        not_valid_solutions : List[list[int]]</span>
+<span class="sd">            List with binary values representing the fragments that are choosen</span>
+<span class="sd">            with a 1 and the not choosen with a 0. This list contains the lists</span>
+<span class="sd">            of the solutions already found.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[int]</span>
+<span class="sd">            Solution found by the solver. The list must contain binary values</span>
+<span class="sd">            representing the fragments that are choosen with a 1 and the not</span>
+<span class="sd">            choosen with a 0. Of course, the length of the list must be equal</span>
+<span class="sd">            to the lenght of the `overlapped_fragments` attribute.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NotImplementedError</span>
+<span class="sd">            Abstract method not implemented</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s2">&quot;Abstract method `solve_one_problem` not implemented&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ILPSolver.solve">
+<a class="viewcode-back" href="../../../../core/ilp_solvers/ilp_solver.html#ugropy.core.ilp_solvers.ilp_solver.ILPSolver.solve">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve method called by fragmentations models.</span>
+
+<span class="sd">        Ath the end of this method&#39;s execution, the `selected_fragments` must</span>
+<span class="sd">        contain the selected fragments (solutions) as a list of dictionaries.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NotImplementedError</span>
+<span class="sd">            Abstract method not implemented</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Abstract method `solve` not implemented&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

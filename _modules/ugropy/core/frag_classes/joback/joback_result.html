@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.joback.joback_result &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.joback.joback_result</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.joback.joback_result</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;JobackFragmentationResult module.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pint</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Descriptors</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span><span class="p">,</span> <span class="n">ureg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.base.fragmentation_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="JobackFragmentationResult">
+<a class="viewcode-back" href="../../../../../core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JobackFragmentationResult</span><span class="p">(</span><span class="n">FragmentationResult</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Joback group contribution properties estimator.</span>
+
+<span class="sd">    The class recieves either the Joback and Reid model&#39;s :cite:p:`joback1,</span>
+<span class="sd">    joback2` groups, name or smiles of a molecule and estimates the its</span>
+<span class="sd">    properties.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    molecule : Chem.rdchem.Mol</span>
+<span class="sd">        RDKit molecule object.</span>
+<span class="sd">    subgroups : dict</span>
+<span class="sd">        Dictionary of subgroups.</span>
+<span class="sd">    subgroups_atoms_indexes : dict</span>
+<span class="sd">        Dictionary of subgroups atoms indexes.</span>
+<span class="sd">    properties_contributions : pd.DataFrame</span>
+<span class="sd">        DataFrame with Joback&#39;s properties contributions.</span>
+<span class="sd">    normal_boiling_point : float, optional</span>
+<span class="sd">        User provided experimental normal boiling point [K].</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : dict</span>
+<span class="sd">        Joback functional groups of the molecule.</span>
+<span class="sd">    experimental_boiling_temperature : pint.Quantity</span>
+<span class="sd">        User provided experimental normal boiling point [K].</span>
+<span class="sd">    critical_temperature : pint.Quantity</span>
+<span class="sd">        Joback estimated critical temperature [K].</span>
+<span class="sd">    critical_pressure : pint.Quantity</span>
+<span class="sd">        Joback estimated critical pressure [bar].</span>
+<span class="sd">    critical_volume : pint.Quantity</span>
+<span class="sd">        Joback estimated critical volume [cm³/mol].</span>
+<span class="sd">    normal_boiling_point : pint.Quantity</span>
+<span class="sd">        Joback estimated normal boiling point [K].</span>
+<span class="sd">    fusion_temperature : pint.Quantity</span>
+<span class="sd">        Joback estimated fusion temperature [K].</span>
+<span class="sd">    ig_formation_formation : pint.Quantity</span>
+<span class="sd">        Joback estimated enthalpy of formation ideal gas at 298 K [kJ/mol].</span>
+<span class="sd">    ig_gibbs_formation : pint.Quantity</span>
+<span class="sd">        Joback estimated Gibbs energy of formation ideal gas at 298 K [K].</span>
+<span class="sd">    heat_capacity_ideal_gas_params : dict</span>
+<span class="sd">        Joback estimated Reid&#39;s ideal gas heat capacity equation parameters</span>
+<span class="sd">        [J/mol/K].</span>
+<span class="sd">    fusion_enthalpy : pint.Quantity</span>
+<span class="sd">        Joback estimated fusion enthalpy [kJ/mol].</span>
+<span class="sd">    vaporization_enthalpy : pint.Quantity</span>
+<span class="sd">        Joback estimated vaporization enthalpy at the normal boiling point</span>
+<span class="sd">        [kJ/mol].</span>
+<span class="sd">    sum_na : float</span>
+<span class="sd">        Joback n_A contribution to liquid viscosity [Pa s].</span>
+<span class="sd">    sum_nb : float</span>
+<span class="sd">        Joback n_B contribution to liquid viscosity [Pa s].</span>
+<span class="sd">    molecular_weight : pint.Quantity</span>
+<span class="sd">        Molecular weight from Joback&#39;s subgroups [g/mol].</span>
+<span class="sd">    acentric_factor : pint.Quantity</span>
+<span class="sd">        Acentric factor from Lee and Kesler&#39;s equation :cite:p:`joback1`.</span>
+<span class="sd">    vapor_pressure_params : dict</span>
+<span class="sd">        Vapor pressure G and k parameters for the Riedel-Plank-Miller</span>
+<span class="sd">        equation [bar] :cite:p:`joback1`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">molecule</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">subgroups_atoms_indexes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">properties_contributions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">normal_boiling_point</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Initialize the FragmentationResult attributes</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span> <span class="n">subgroups</span><span class="p">,</span> <span class="n">subgroups_atoms_indexes</span><span class="p">)</span>
+
+        <span class="c1"># experimental boiling temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experimental_boiling_temperature</span> <span class="o">=</span> <span class="n">normal_boiling_point</span>
+
+        <span class="c1"># Original Joback properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_volume</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normal_boiling_point</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fusion_temperature</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_enthalpy_formation</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_gibbs_formation</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity_ideal_gas_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fusion_enthalpy</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vaporization_enthalpy</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sum_na</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sum_nb</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Extra properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acentric_factor</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vapor_pressure_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Fill the properties&#39; values</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span> <span class="o">!=</span> <span class="p">{}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_properties</span><span class="p">(</span><span class="n">properties_contributions</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JobackFragmentationResult.heat_capacity_ideal_gas">
+<a class="viewcode-back" href="../../../../../core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_ideal_gas">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heat_capacity_ideal_gas</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ideal gas heat capacity [J/mol/K].</span>
+
+<span class="sd">        Uses the Joback estimated Reid&#39;s ideal gas heat capacity equation</span>
+<span class="sd">        parameters [J/mol/K].</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature : Union[float, np.ndarray]</span>
+<span class="sd">            Temperature [K]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[float, np.ndarray]</span>
+<span class="sd">            Ideal gas heat capacity [J/mol/K].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity_ideal_gas_params</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">temperature</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">J</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span></div>
+
+
+<div class="viewcode-block" id="JobackFragmentationResult.heat_capacity_liquid">
+<a class="viewcode-back" href="../../../../../core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.heat_capacity_liquid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heat_capacity_liquid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the liquid heat capacity [J/mol/K].</span>
+
+<span class="sd">        Uses the Rowlinson-Bondi :cite:p:`joback1` equation with the Joback</span>
+<span class="sd">        estimated properties.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature : Union[float, np.ndarray]</span>
+<span class="sd">            Temperature [K]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[float, np.ndarray]</span>
+<span class="sd">            Ideal gas heat capacity [J/mol/K].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tr</span> <span class="o">=</span> <span class="n">temperature</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span><span class="o">.</span><span class="n">magnitude</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">acentric_factor</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="n">c_p0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity_ideal_gas</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="n">c_pl</span> <span class="o">=</span> <span class="n">c_p0</span> <span class="o">+</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="mf">2.56</span>
+            <span class="o">+</span> <span class="mf">0.436</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tr</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">w</span>
+            <span class="o">*</span> <span class="p">(</span>
+                <span class="mf">2.91</span>
+                <span class="o">+</span> <span class="mf">4.28</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tr</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">tr</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="o">+</span> <span class="mf">0.296</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tr</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">c_pl</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">J</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span></div>
+
+
+<div class="viewcode-block" id="JobackFragmentationResult.viscosity_liquid">
+<a class="viewcode-back" href="../../../../../core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.viscosity_liquid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">viscosity_liquid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the Joback estimated liquid viscosity [Pa s].</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature : Union[float, np.ndarray]</span>
+<span class="sd">            Temperature [K]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[float, np.ndarray]</span>
+<span class="sd">            Liquid viscosity [Pa s].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">temperature</span>
+
+        <span class="n">n_l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sum_na</span> <span class="o">-</span> <span class="mf">597.82</span><span class="p">)</span> <span class="o">/</span> <span class="n">t</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_nb</span> <span class="o">-</span> <span class="mf">11.202</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">n_l</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Pa</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="JobackFragmentationResult.vapor_pressure">
+<a class="viewcode-back" href="../../../../../core/frag_classes/joback_model/joback_result.html#ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult.vapor_pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vapor_pressure</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the vapor pressure [bar].</span>
+
+<span class="sd">        Uses the Riedel-Plank-Miller :cite:p:`joback1` equation with the Joback</span>
+<span class="sd">        estimated properties.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature : Union[float, np.ndarray]</span>
+<span class="sd">            Temperature [K]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[float, np.ndarray]</span>
+<span class="sd">            Vapor pressure [bar]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tr</span> <span class="o">=</span> <span class="n">temperature</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vapor_pressure_params</span><span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vapor_pressure_params</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
+
+        <span class="n">vp_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">g</span> <span class="o">/</span> <span class="n">tr</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tr</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="n">tr</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tr</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">vp</span> <span class="o">=</span> <span class="n">vp_r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="k">return</span> <span class="n">vp</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">bar</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contribs</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Obtain the molecule properties from Joback&#39;s groups.&quot;&quot;&quot;</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">ocurr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">contribs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">groups</span><span class="p">]</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Calculate complete contribution properties (no contribution missing)</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="n">tc_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Tc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">pc_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Pc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">vc_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Vc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">tb_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Tb&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">tf_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Tf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">hform_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hform&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">gform_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Gform&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">hvap_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hvap&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">numa_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_of_atoms&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">mw_c</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">MolWt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">molecule</span><span class="p">)</span>
+
+        <span class="c1"># Molecular weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span> <span class="o">=</span> <span class="n">mw_c</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+
+        <span class="c1"># Joback normal boiling point (Tb)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normal_boiling_point</span> <span class="o">=</span> <span class="p">(</span><span class="mf">198.2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">tb_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span>
+
+        <span class="c1"># Fusion temperature (Tf)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fusion_temperature</span> <span class="o">=</span> <span class="p">(</span><span class="mf">122.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">tf_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span>
+
+        <span class="c1"># Used normal boiling point for calculations</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">experimental_boiling_temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">experimental_boiling_temperature</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_boiling_point</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="c1"># Critical temperature (Tc) normal boiling temperature for calculations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tb</span>
+            <span class="o">*</span> <span class="p">(</span>
+                <span class="mf">0.584</span>
+                <span class="o">+</span> <span class="mf">0.965</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">tc_c</span><span class="p">)</span>
+                <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">tc_c</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+            <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Critical pressure (Pc)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mf">0.113</span> <span class="o">+</span> <span class="mf">0.0032</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">numa_c</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">pc_c</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">bar</span>
+
+        <span class="c1"># Critical volume (Vc)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_volume</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">17.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">vc_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Standard enthalpy of formation (298 K)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_enthalpy_formation</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">68.29</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">hform_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Standard Gibbs energy of formation (298 K)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_gibbs_formation</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">53.88</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">gform_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Enthalpy of vaporization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vaporization_enthalpy</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">15.30</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">hvap_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+        <span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Incomplete contribution properties (some contribution missing)</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Heat capacity</span>
+        <span class="k">if</span> <span class="s2">&quot;-N= (ring)&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">a_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+            <span class="n">b_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+            <span class="n">c_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+            <span class="n">d_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">a_c</span><span class="p">)</span> <span class="o">-</span> <span class="mf">37.93</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">b_c</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.21</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">c_c</span><span class="p">)</span> <span class="o">-</span> <span class="mf">3.91e-4</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">d_c</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.06e-7</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">heat_capacity_ideal_gas_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span>
+
+        <span class="c1"># Enthalpy of fusion</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hfusion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()):</span>
+            <span class="n">hfusion_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hfusion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fusion_enthalpy</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="o">-</span><span class="mf">0.88</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">hfusion_c</span><span class="p">))</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Liquid viscosity</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;na&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()):</span>
+            <span class="n">na_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;na&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+            <span class="n">nb_c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;nb&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">sum_na</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">na_c</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sum_nb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ocurr</span><span class="p">,</span> <span class="n">nb_c</span><span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Extra properties</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Reduced normal boiling point temperature</span>
+        <span class="n">t_br</span> <span class="o">=</span> <span class="n">tb</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="c1"># Lee and Kesler&#39;s equation (acentric factor)</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">acentric_factor</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span>
+                <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span>
+                <span class="o">-</span> <span class="mf">5.92714</span>
+                <span class="o">+</span> <span class="mf">6.09648</span> <span class="o">/</span> <span class="n">t_br</span>
+                <span class="o">+</span> <span class="mf">1.28862</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_br</span><span class="p">)</span>
+                <span class="o">-</span> <span class="mf">0.169347</span> <span class="o">*</span> <span class="n">t_br</span><span class="o">**</span><span class="mi">6</span>
+            <span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span>
+                <span class="mf">15.2518</span>
+                <span class="o">-</span> <span class="mf">15.6875</span> <span class="o">/</span> <span class="n">t_br</span>
+                <span class="o">-</span> <span class="mf">13.4721</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t_br</span><span class="p">)</span>
+                <span class="o">+</span> <span class="mf">0.43577</span> <span class="o">*</span> <span class="n">t_br</span><span class="o">**</span><span class="mi">6</span>
+            <span class="p">)</span>
+            <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">dimensionless</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Riedel-Plank-Miller equation (vapor pressure [bar])</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">t_br</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pc</span> <span class="o">/</span> <span class="mf">1.01325</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t_br</span><span class="p">)</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="mf">0.4835</span> <span class="o">+</span> <span class="mf">0.4605</span> <span class="o">*</span> <span class="n">h</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">/</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">t_br</span><span class="p">))</span> <span class="o">/</span> <span class="p">((</span><span class="mi">3</span> <span class="o">+</span> <span class="n">t_br</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t_br</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vapor_pressure_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

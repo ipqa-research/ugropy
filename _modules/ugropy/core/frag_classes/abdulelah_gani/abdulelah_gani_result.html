@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Abdulelah-Gani fragmentation model result module :cite:p:`gani`.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pint</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Descriptors</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ureg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="AGaniFragmentationResult">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AGaniFragmentationResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abdulelah-Gani fragmentation model result :cite:p:`gani`.</span>
+
+<span class="sd">    Class to store the results of the Abdulelah-Gani fragmentation model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    molecule : Chem.rdchem.Mol</span>
+<span class="sd">        RDKit molecule object.</span>
+<span class="sd">    primary_fragmentation : AGaniPSTFragmentationResult</span>
+<span class="sd">        Primary fragmentation model result.</span>
+<span class="sd">    secondary_fragmentation : AGaniPSTFragmentationResult</span>
+<span class="sd">        Secondary fragmentation model result.</span>
+<span class="sd">    tertiary_fragmentation : AGaniPSTFragmentationResult</span>
+<span class="sd">        Tertiary fragmentation model result.</span>
+<span class="sd">    properties_contributions : pd.DataFrame</span>
+<span class="sd">        Contribution parameters of each group for each property of the model.</span>
+<span class="sd">    properties_biases : pd.DataFrame</span>
+<span class="sd">        Biases parameters of each property of the model.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    molecule : Chem.rdchem.Mol</span>
+<span class="sd">        RDKit molecule object.</span>
+<span class="sd">    primary : AGaniPSTFragmentationResult</span>
+<span class="sd">        Primary fragmentation model result.</span>
+<span class="sd">    secondary : AGaniPSTFragmentationResult</span>
+<span class="sd">        Secondary fragmentation model result.</span>
+<span class="sd">    tertiary : AGaniPSTFragmentationResult</span>
+<span class="sd">        Tertiary fragmentation model result.</span>
+<span class="sd">    ml_vector : np.ndarray</span>
+<span class="sd">        Vector of groups occurrences to evaluate ML model.</span>
+<span class="sd">    molecular_weight : pint.Quantity</span>
+<span class="sd">        Molecular weight [g/mol].</span>
+<span class="sd">    critical_temperature : pint.Quantity</span>
+<span class="sd">        Critical temperature [K] GC-Simple method.</span>
+<span class="sd">    critical_pressure : pint.Quantity</span>
+<span class="sd">        Critical pressure [bar] GC-Simple method.</span>
+<span class="sd">    critical_volume : pint.Quantity</span>
+<span class="sd">        Critical volume [cm³/mol] GC-Simple method.</span>
+<span class="sd">    acentric_factor : pint.Quantity</span>
+<span class="sd">        Acentric factor [-] GC-Simple method.</span>
+<span class="sd">    liquid_molar_volume : pint.Quantity</span>
+<span class="sd">        Liquid molar volume [L/mol] GC-Simple method.</span>
+<span class="sd">    ig_formation_enthalpy : pint.Quantity</span>
+<span class="sd">        Ideal gas formation enthalpy [kJ/mol] GC-Simple method.</span>
+<span class="sd">    ig_formation_gibbs : pint.Quantity</span>
+<span class="sd">        Ideal gas formation Gibbs [kJ/mol] GC-Simple method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">molecule</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+        <span class="n">primary_fragmentation</span><span class="p">:</span> <span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+        <span class="n">secondary_fragmentation</span><span class="p">:</span> <span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+        <span class="n">tertiary_fragmentation</span><span class="p">:</span> <span class="n">AGaniPSTFragmentationResult</span><span class="p">,</span>
+        <span class="n">properties_contributions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">properties_biases</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Fragmentation models</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecule</span> <span class="o">=</span> <span class="n">molecule</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">primary</span> <span class="o">=</span> <span class="n">primary_fragmentation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secondary</span> <span class="o">=</span> <span class="n">secondary_fragmentation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tertiary</span> <span class="o">=</span> <span class="n">tertiary_fragmentation</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># ML Vector. Vector of parameters occurrences to evaluate ML model</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">424</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ocurrences</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups_numbers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="p">[</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ocurrences</span>
+
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ocurrences</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">subgroups_numbers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="p">[</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ocurrences</span>
+
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">ocurrences</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tertiary</span><span class="o">.</span><span class="n">subgroups_numbers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="p">[</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ocurrences</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Properties</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Descriptors</span><span class="o">.</span><span class="n">MolWt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">molecule</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_volume</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acentric_factor</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">liquid_molar_volume</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_formation_enthalpy</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_formation_gibbs</span><span class="p">:</span> <span class="n">pint</span><span class="o">.</span><span class="n">Quantity</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span> <span class="o">!=</span> <span class="p">{}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">properties_calculation</span><span class="p">(</span>
+                <span class="n">properties_contributions</span><span class="p">,</span> <span class="n">properties_biases</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="AGaniFragmentationResult.properties_calculation">
+<a class="viewcode-back" href="../../../../../core/frag_classes/abdulelah_gani/abdulelah_gani_result.html#ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_result.AGaniFragmentationResult.properties_calculation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">properties_calculation</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">properties_contributions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">properties_biases</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the properties with the fragmentation results.</span>
+
+<span class="sd">        Properties are calculated with the GC-Simple method.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        properties_contributions : pd.DataFrame</span>
+<span class="sd">            Contribution parameters of each group for each property of the</span>
+<span class="sd">            model.</span>
+<span class="sd">        properties_biases : pd.DataFrame</span>
+<span class="sd">            Biases parameters of each property of the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Critical temperature</span>
+        <span class="n">tc_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Tc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">tc_b</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Tc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+
+        <span class="n">tc_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tc_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">tc_sum</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">critical_temperature</span> <span class="o">=</span> <span class="n">tc_b</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tc_sum</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">K</span>
+
+        <span class="c1"># Critical pressure</span>
+        <span class="n">pc_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Pc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">pc_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Pc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+        <span class="n">pc_b2</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Pc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b2&quot;</span><span class="p">]</span>
+
+        <span class="n">pc_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pc_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_pressure</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">pc_sum</span> <span class="o">+</span> <span class="n">pc_b2</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="n">pc_b1</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">bar</span>
+
+        <span class="c1"># Critical volume</span>
+        <span class="n">vc_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Vc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">vc_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Vc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+
+        <span class="n">vc_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vc_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">critical_volume</span> <span class="o">=</span> <span class="p">(</span><span class="n">vc_sum</span> <span class="o">+</span> <span class="n">vc_b1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+
+        <span class="c1"># Acentric factor</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">w_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+        <span class="n">w_b2</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b2&quot;</span><span class="p">]</span>
+        <span class="n">w_b3</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b3&quot;</span><span class="p">]</span>
+
+        <span class="n">w_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">acentric_factor</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">w_sum</span> <span class="o">+</span> <span class="n">w_b3</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">w_b2</span><span class="p">))</span> <span class="o">*</span> <span class="n">w_b1</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">dimensionless</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Liquid molar volume</span>
+        <span class="n">lmv_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Lmv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">lmv_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Lmv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+
+        <span class="n">lmv_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">lmv_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">liquid_molar_volume</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmv_sum</span> <span class="o">+</span> <span class="n">lmv_b1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">L</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+
+        <span class="c1"># Ideal gas formation enthalpy</span>
+        <span class="n">h_f_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Hf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">h_f_c_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Hf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+
+        <span class="n">h_f_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">h_f_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_formation_enthalpy</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_f_sum</span> <span class="o">+</span> <span class="n">h_f_c_b1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span>
+
+        <span class="c1"># Ideal gas formation Gibbs</span>
+        <span class="n">g_f_c</span> <span class="o">=</span> <span class="n">properties_contributions</span><span class="p">[</span><span class="s2">&quot;Gf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">g_f_c_b1</span> <span class="o">=</span> <span class="n">properties_biases</span><span class="p">[</span><span class="s2">&quot;Gf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;b1&quot;</span><span class="p">]</span>
+
+        <span class="n">g_f_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g_f_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_vector</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ig_formation_gibbs</span> <span class="o">=</span> <span class="p">(</span><span class="n">g_f_sum</span> <span class="o">+</span> <span class="n">g_f_c_b1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kJ</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

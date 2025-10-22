@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gibbs Fragmentation Result &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Joback Model" href="../joback_model/init.html" />
+    <link rel="prev" title="Gibbs Model" href="gibbs_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../init.html">Core</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.check_atoms_fragments_presence"><code class="docutils literal notranslate"><span class="pre">check_atoms_fragments_presence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../init.html#ugropy.core.instantiate_mol_object"><code class="docutils literal notranslate"><span class="pre">instantiate_mol_object()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../checks.html">Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../get_rdkit_object.html">get rdkit object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ilp_solvers/init.html">ILP solvers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../init.html">Fragmentation Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../base/init.html">Base fragmentation Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="init.html">Gibbs Fragmentation Model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="gibbs_model.html">Gibbs Model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Gibbs Fragmentation Result</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../joback_model/init.html">Joback Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../abdulelah_gani/init.html">Abdulelah-Gani fragmentation Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../init.html">Core</a></li>
+          <li class="breadcrumb-item"><a href="../init.html">Fragmentation Classes</a></li>
+          <li class="breadcrumb-item"><a href="init.html">Gibbs Fragmentation Model</a></li>
+      <li class="breadcrumb-item active">Gibbs Fragmentation Result</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/core/frag_classes/gibbs_model/gibbs_result.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ugropy.core.frag_classes.gibbs_model.gibbs_result">
+<span id="gibbs-fragmentation-result"></span><h1>Gibbs Fragmentation Result<a class="headerlink" href="#module-ugropy.core.frag_classes.gibbs_model.gibbs_result" title="Link to this heading"></a></h1>
+<p>Gibbs fragmentation result module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GibbsFragmentationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups_atoms_indexes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroups_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculate_r_q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculate_num_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ugropy/core/frag_classes/gibbs_model/gibbs_result.html#GibbsFragmentationResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/fragmentation_result.html#ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult" title="ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FragmentationResult</span></code></a></p>
+<p>Gibbs fragmentation result class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecule</strong> (<em>Chem.rdchem.Mol</em>) – RDKit molecule object.</p></li>
+<li><p><strong>subgroups</strong> (<em>dict</em>) – Dictionary of subgroups.</p></li>
+<li><p><strong>subgroups_atoms_indexes</strong> (<em>dict</em>) – Dictionary of subgroups atoms indexes.</p></li>
+<li><p><strong>subgroups_info</strong> (<em>pd.DataFrame</em>) – DataFrame with subgroups information.</p></li>
+<li><p><strong>calculate_r_q</strong> (<em>bool</em>) – If True, calculate R and Q values for the molecule.</p></li>
+<li><p><strong>calculate_num_dict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, calculate the subgroup numbers dictionary. Default is True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.molecule">
+<span class="sig-name descname"><span class="pre">molecule</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.molecule" title="Link to this definition"></a></dt>
+<dd><p>Molecule to fragment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Chem.rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups">
+<span class="sig-name descname"><span class="pre">subgroups</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups" title="Link to this definition"></a></dt>
+<dd><p>Dictionary with the subgroups and the number of times they appear in
+the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups_atoms">
+<span class="sig-name descname"><span class="pre">subgroups_atoms</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups_atoms" title="Link to this definition"></a></dt>
+<dd><p>Dictionary with the subgroups and the atoms indexes that belong to
+each subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.r">
+<span class="sig-name descname"><span class="pre">r</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.r" title="Link to this definition"></a></dt>
+<dd><p>Gibss excess model R value estimation of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.q">
+<span class="sig-name descname"><span class="pre">q</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.q" title="Link to this definition"></a></dt>
+<dd><p>Gibss excess model Q value estimation of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups_num">
+<span class="sig-name descname"><span class="pre">subgroups_num</span></span><a class="headerlink" href="#ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult.subgroups_num" title="Link to this definition"></a></dt>
+<dd><p>Dictionary with the subgroup numbers and the number of times they
+appear in the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gibbs_model.html" class="btn btn-neutral float-left" title="Gibbs Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../joback_model/init.html" class="btn btn-neutral float-right" title="Joback Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

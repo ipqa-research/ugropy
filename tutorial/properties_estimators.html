@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properties estimators &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working with ugropy" href="working_with_ugropy.html" />
+    <link rel="prev" title="Gibbs Models" href="gibbs_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The easy way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_models.html">Gibbs Models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Properties estimators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Joback-model">Joback model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Abdulelah-Gani-model">Abdulelah-Gani model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_ugropy.html">Working with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Writers</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Properties estimators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/properties_estimators.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Properties-estimators">
+<h1>Properties estimators<a class="headerlink" href="#Properties-estimators" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/properties_estimators.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>Some group contribution models could be used to predict properties of pure substances.</p>
+<section id="Joback-model">
+<h2>Joback model<a class="headerlink" href="#Joback-model" title="Link to this heading"></a></h2>
+<p>The Joback model is a well known model to estimate properties of pure substances. We can use it independently of the Groups class by doing:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+  <span class="o">%</span><span class="k">pip</span> install -q ugropy
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+  <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">joback</span>
+
+<span class="n">toluene</span> <span class="o">=</span> <span class="n">joback</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;toluene&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_3_0.svg" src="../_images/tutorial_properties_estimators_3_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_volume</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">acentric_factor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">fusion_temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+41.144119209325225 bar
+319.5 centimeter ** 3 / mole
+598.0611700010388 kelvin
+0.25208296412216535 dimensionless
+195.07 kelvin
+</pre></div></div>
+</div>
+<p>You may notice that the attributes of the <code class="docutils literal notranslate"><span class="pre">Joback</span></code> class are numbers with units. This is possible thanks to the <code class="docutils literal notranslate"><span class="pre">pint</span></code> library. The <code class="docutils literal notranslate"><span class="pre">pint</span></code> library allows us to work with units in a very simple way. For example, we can convert the value of the <code class="docutils literal notranslate"><span class="pre">critical_pressure</span></code> attribute to pascal by doing:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_pressure</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;Pa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+4114411.9209325225 pascal</div>
+</div>
+<p>If you want to obtain the value of the attribute without units, you can use the <code class="docutils literal notranslate"><span class="pre">magnitude</span></code> attribute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_pressure</span><span class="o">.</span><span class="n">magnitude</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+np.float64(41.144119209325225)
+</pre></div></div>
+</div>
+<p>Or combine all that we know:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_pressure</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;mmHg&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+np.float64(30860.62289092802)
+</pre></div></div>
+</div>
+<p>For more information about the <code class="docutils literal notranslate"><span class="pre">pint</span></code> library, you can visit their documentation.</p>
+<p>On the other hand, we can use the <code class="docutils literal notranslate"><span class="pre">Joback</span></code> class to estimate temperature-dependent properties of the molecule (also with <code class="docutils literal notranslate"><span class="pre">pint</span></code> units). In the API documentation you can check the available methods to estimate properties and how its done.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">vapor_pressure</span><span class="p">(</span><span class="mi">110</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.923433500943906 bar
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">viscosity_liquid</span><span class="p">(</span><span class="mi">25</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.0004848511681835698 pascal * second
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">heat_capacity_liquid</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+174.140191226778 joule / kelvin / mole
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span><span class="o">.</span><span class="n">heat_capacity_ideal_gas</span><span class="p">(</span><span class="mi">150</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+150.13004821343338 joule/(kelvin mole)</div>
+</div>
+<p>You can check the full documentation and check all the properties you can estimate by doing:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>toluene
+</pre></div>
+</div>
+</div>
+<p>Joback model allows the user to provide the experimental normal boiling temperature of the subtance to increase the accuracy of some properties estimations. This value will be used instead of the Joback estimated normal boiling temperature to calculate some properties, for example the critical temperature.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toluene</span> <span class="o">=</span> <span class="n">joback</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;toluene&quot;</span><span class="p">,</span> <span class="n">normal_boiling_point</span><span class="o">=</span><span class="p">(</span><span class="mf">110.6</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+593.8980798775972 kelvin
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">toluene</span><span class="o">.</span><span class="n">vapor_pressure</span><span class="p">(</span><span class="mf">110.6</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.0132500000000007 bar
+</pre></div></div>
+</div>
+</section>
+<section id="Abdulelah-Gani-model">
+<h2>Abdulelah-Gani model<a class="headerlink" href="#Abdulelah-Gani-model" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/PEESEgroup/Pure-Component-Property-Estimation">https://github.com/PEESEgroup/Pure-Component-Property-Estimation</a></p>
+<p>The recently developed Abdulelah-Gani model is also available in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. This model is on an early stage of development and it is not as complete as the original publication. Some of tertiary structures are not yet implemented and for that, the properties that depend on them are not available. Let’s see how to use it:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">abdulelah_gani</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adrenaline</span> <span class="o">=</span> <span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;adrenaline&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adrenaline</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 1, &#39;aCH&#39;: 3, &#39;aC-CH&#39;: 1, &#39;OH&#39;: 1, &#39;aC-OH&#39;: 2, &#39;CH2NH&#39;: 1}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adrenaline</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CHm(OH)CHn(NHp) (m,n,p in 0..2)&#39;: 1,
+ &#39;aC-CHn-OH (n in 1..2)&#39;: 1,
+ &#39;AROMRINGs1s2s4&#39;: 1}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adrenaline</span><span class="o">.</span><span class="n">tertiary</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{}
+</pre></div></div>
+</div>
+<p>As you can see, The Abdulelah-Gani model includes different kinds of subgropus. The primary structures works as the other models we have discussed before. The secondary and tertiary are additional structures that are used to increase the accuracy of the estimations. Also, differentiates isomers. For example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa23</span> <span class="o">=</span> <span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;2,3-dimethylhexane&quot;</span><span class="p">)</span>
+<span class="n">hexa24</span> <span class="o">=</span> <span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;2,4-dimethylhexane&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa23</span><span class="o">.</span><span class="n">critical_temperature</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+564.8418659474339 kelvin</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa24</span><span class="o">.</span><span class="n">critical_temperature</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+549.3932758799738 kelvin</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa24</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 4, &#39;CH2&#39;: 2, &#39;CH&#39;: 2}
+{&#39;CH3&#39;: 4, &#39;CH2&#39;: 2, &#39;CH&#39;: 2}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa24</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;(CH3)2CH&#39;: 1, &#39;CH(CH3)CH(CH3)&#39;: 1}
+{&#39;(CH3)2CH&#39;: 1}
+</pre></div></div>
+</div>
+<p>As you can see, both molecules have the same primary structure but different secondary structures. This is why the properties are different. On a Property Estimator that only have primary structures like the Joback model we would get the same properties for both molecules.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">joback</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;2,3-dimethylhexane&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">joback</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;2,4-dimethylhexane&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+552.9339856842008 kelvin
+552.9339856842008 kelvin
+</pre></div></div>
+</div>
+<p>All the properties that can be estimated with the Abdulelah-Gani model (implemented on <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>) are:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">critical_volume</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">acentric_factor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">ig_formation_enthalpy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hexa23</span><span class="o">.</span><span class="n">ig_formation_gibbs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+564.8418659474339 kelvin
+26.35038783694938 bar
+465.335 centimeter ** 3 / mole
+0.35672642267081217 dimensionless
+-214.82596509091175 kilojoule / mole
+15.59002996305599 kilojoule / mole
+</pre></div></div>
+</div>
+<p>If you refer to the original publication you will notice that the Abdulelah-Gani model allows to estimate the properties by to methods:</p>
+<ul class="simple">
+<li><p>GC-SIMPLE: Algebraic correlations</p></li>
+<li><p>ML: trained neural networks</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> evaluates the properties using the GC-SIMPLE method. The ML method is not provided in this library. To learn how evaluate the properties with the ML method, please refer to the original publication supplementary material:</p>
+<p><a class="reference external" href="https://github.com/PEESEgroup/Pure-Component-Property-Estimation">https://github.com/PEESEgroup/Pure-Component-Property-Estimation</a></p>
+<p>However, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>helps you a little to evaluate the trained neural networks. The fragmentation results give you the numpy array needed to evaluate the ML model ready to use:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa23</span><span class="o">.</span><span class="n">ml_vector</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[4, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0]])
+</pre></div></div>
+</div>
+<p>To visualize the fragmentation results you can use the <code class="docutils literal notranslate"><span class="pre">draw</span></code> method for each structure type:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa24</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_42_0.svg" src="../_images/tutorial_properties_estimators_42_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexa24</span><span class="o">.</span><span class="n">secondary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_43_0.svg" src="../_images/tutorial_properties_estimators_43_0.svg" />
+</div>
+</div>
+<p>The example molecules doesn’t have tertiary structures, let’s get the solution for a molecule that has tertiary structures:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fluorene</span> <span class="o">=</span> <span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;9H-Fluorene&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fluorene</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_46_0.svg" src="../_images/tutorial_properties_estimators_46_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fluorene</span><span class="o">.</span><span class="n">tertiary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_47_0.svg" src="../_images/tutorial_properties_estimators_47_0.svg" />
+</div>
+</div>
+<p>Finally, getting multiple solutions. Secondary and tertiary structures can be overlapped so they doesn’t generate multiple solutions. But of course, the primary structures will generate multiple solutions. Let’s see an example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;COc1ccccc1N(=O)=O&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_50_0.svg" src="../_images/tutorial_properties_estimators_50_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_properties_estimators_51_0.svg" src="../_images/tutorial_properties_estimators_51_0.svg" />
+</div>
+</div>
+<p>Both solutions have the same secondary and tertiary results, but different primary results. This is why the properties are different.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">critical_temperature</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+750.949961574131 kelvin</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">critical_temperature</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+784.2891401277112 kelvin</div>
+</div>
+<p>What a difference!! In this case, the second solution provides a much better estimation of critical temperature (782 K). You can check it by yourself on the publication original dataset.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gibbs_models.html" class="btn btn-neutral float-left" title="Gibbs Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="working_with_ugropy.html" class="btn btn-neutral float-right" title="Working with ugropy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.base.fragmentation_model &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.base.fragmentation_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.base.fragmentation_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;FragmentationModel module.</span>
+
+<span class="sd">All ugropy models (joback, unifac, psrk, etc) are instances of the</span>
+<span class="sd">FragmentationModule class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdMolEnumerator</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.checks</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_atoms_fragments_presence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.frag_classes.base.fragmentation_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.get_rdkit_object</span><span class="w"> </span><span class="kn">import</span> <span class="n">instantiate_mol_object</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.default_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ugropy.core.ilp_solvers.ilp_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">ILPSolver</span>
+
+
+<div class="viewcode-block" id="FragmentationModel">
+<a class="viewcode-back" href="../../../../../core/frag_classes/base/fragmentation_model.html#ugropy.core.frag_classes.base.fragmentation_model.FragmentationModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FragmentationModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FragmentationModel class.</span>
+
+<span class="sd">    All ugropy supported models are an instance of this class. This class must</span>
+<span class="sd">    be inherited to create a new type of FragmentationModel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its precense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    allow_overlapping : bool, optional</span>
+<span class="sd">        Weather allow overlapping or not, by default False</span>
+<span class="sd">    fragmentation_result : FragmentationResult, optional</span>
+<span class="sd">        Fragmentation result class, by default FragmentationResult</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its precense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary cotaining all the rdkit Mol object from the detection_smarts</span>
+<span class="sd">        subgroups column.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">allow_overlapping</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">allow_free_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fragmentation_result</span><span class="p">:</span> <span class="n">FragmentationResult</span> <span class="o">=</span> <span class="n">FragmentationResult</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span> <span class="o">=</span> <span class="n">subgroups</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_overlapping</span> <span class="o">=</span> <span class="n">allow_overlapping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_free_atoms</span> <span class="o">=</span> <span class="n">allow_free_atoms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fragmentation_result</span> <span class="o">=</span> <span class="n">fragmentation_result</span>
+
+        <span class="c1"># Instantiate all de mol object from their SMARTS representation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">smarts</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="s2">&quot;LN:&quot;</span> <span class="ow">in</span> <span class="n">smarts</span><span class="p">:</span>
+                <span class="c1"># Linknode expression from Chemaxon SMARTS</span>
+                <span class="n">smarts</span> <span class="o">=</span> <span class="n">smarts</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;LN:&quot;</span><span class="p">,</span> <span class="s2">&quot;|LN:&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;|&quot;</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+                <span class="n">enumerated_smarts</span> <span class="o">=</span> <span class="n">rdMolEnumerator</span><span class="o">.</span><span class="n">Enumerate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">enumerated_smarts</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FragmentationModel.get_groups">
+<a class="viewcode-back" href="../../../../../core/frag_classes/base/fragmentation_model.html#ugropy.core.frag_classes.base.fragmentation_model.FragmentationModel.get_groups">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+        <span class="n">identifier_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="n">solver</span><span class="p">:</span> <span class="n">ILPSolver</span> <span class="o">=</span> <span class="n">DefaultSolver</span><span class="p">,</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_nonoptimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">solver_arguments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FragmentationResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">FragmentationResult</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the groups of a molecule.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        identifier : Union[str, Chem.rdchem.Mol]</span>
+<span class="sd">            Identifier of the molecule. You can use either the name of the</span>
+<span class="sd">            molecule, the SMILEs of the molecule or a rdkit Mol object.</span>
+<span class="sd">        identifier_type : str, optional</span>
+<span class="sd">            Identifier type of the molecule. Use &quot;name&quot; if you are providing</span>
+<span class="sd">            the molecules&#39; name, &quot;smiles&quot; if you are providing the SMILES or</span>
+<span class="sd">            &quot;mol&quot; if you are providing a rdkir mol object, by default &quot;name&quot;</span>
+<span class="sd">        solver : ILPSolver, optional</span>
+<span class="sd">            ILP solver class, by default DefaultSolver</span>
+<span class="sd">        search_multiple_solutions : bool, optional</span>
+<span class="sd">            Weather search for multiple solutions or not, by default False If</span>
+<span class="sd">            False the return will be a FragmentationResult object, if True the</span>
+<span class="sd">            return will be a list of FragmentationResult objects.</span>
+<span class="sd">        search_nonoptimal : bool, optional</span>
+<span class="sd">            If True, the solver will search for non-optimal solutions along</span>
+<span class="sd">            with the optimal ones. This is useful when the user wants to find</span>
+<span class="sd">            all possible combinations of fragments that cover the universe. By</span>
+<span class="sd">            default False. If `search_multiple_solutions` is False, this</span>
+<span class="sd">            parameter will be ignored.</span>
+<span class="sd">        solver_arguments : dict, optional</span>
+<span class="sd">            Dictionary with the arguments to be passed to the solver. For the</span>
+<span class="sd">            DefaultSolver of ugropy you can change de PulP solver passing a</span>
+<span class="sd">            dictionary like {&quot;solver&quot;: &quot;PULP_CBC_CMD&quot;} and change the PulP</span>
+<span class="sd">            solver. If empty it will use the default solver arguments, by</span>
+<span class="sd">            default {}.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[FragmentationResult, List[FragmentationResult]]</span>
+<span class="sd">            Fragmentation result. If search_multiple_solutions is False the</span>
+<span class="sd">            return will be a FragmentationResult object, if True the return</span>
+<span class="sd">            will be a list of FragmentationResult objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Direct fragments detection</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_preprocess</span><span class="p">(</span>
+            <span class="n">instantiate_mol_object</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">identifier_type</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">detections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_fragments</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># No groups detected</span>
+        <span class="k">if</span> <span class="n">detections</span> <span class="o">==</span> <span class="p">{}:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_fragmentation_result</span><span class="p">(</span>
+                <span class="n">mol</span><span class="p">,</span> <span class="p">[{}],</span> <span class="n">search_multiple_solutions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Search for overlapping atoms and free atoms</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="n">overlapping_atoms</span><span class="p">,</span> <span class="n">free_atoms</span> <span class="o">=</span> <span class="n">check_atoms_fragments_presence</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">detections</span>
+        <span class="p">)</span>
+
+        <span class="c1"># If there is free atoms in the molecule can&#39;t fragment with the model</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">free_atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_free_atoms</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_fragmentation_result</span><span class="p">(</span>
+                <span class="n">mol</span><span class="p">,</span> <span class="p">[{}],</span> <span class="n">search_multiple_solutions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="c1"># If no overlapping or the model allows overlapping we are done</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">overlapping_atoms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_overlapping</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_fragmentation_result</span><span class="p">(</span>
+                <span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">detections</span><span class="p">],</span> <span class="n">search_multiple_solutions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="c1"># =====================================================================</span>
+        <span class="c1"># Solve overlapping atoms</span>
+        <span class="c1"># =====================================================================</span>
+        <span class="n">problem</span><span class="p">:</span> <span class="n">ILPSolver</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span>
+            <span class="n">overlapping_atoms</span><span class="p">,</span>
+            <span class="n">detections</span><span class="p">,</span>
+            <span class="n">search_multiple_solutions</span><span class="p">,</span>
+            <span class="n">search_nonoptimal</span><span class="p">,</span>
+            <span class="n">solver_arguments</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">problem</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">problem</span><span class="o">.</span><span class="n">selected_fragments</span><span class="p">:</span>
+            <span class="c1"># This could happend, no solution found. Example:</span>
+            <span class="c1"># &quot;CC(C)(C)OC(=O)OC1=CC=CC=C1&quot; on UNIFAC.</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_fragmentation_result</span><span class="p">(</span>
+                <span class="n">mol</span><span class="p">,</span> <span class="p">[{}],</span> <span class="n">search_multiple_solutions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="n">solutions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">problem</span><span class="o">.</span><span class="n">selected_fragments</span><span class="p">:</span>
+            <span class="n">solution</span> <span class="o">=</span> <span class="n">detections</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">problem</span><span class="o">.</span><span class="n">overlapped_fragments</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">frag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">:</span>
+                    <span class="n">solution</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+
+            <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_fragmentation_result</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">solutions</span><span class="p">,</span> <span class="n">search_multiple_solutions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FragmentationModel.mol_preprocess">
+<a class="viewcode-back" href="../../../../../core/frag_classes/base/fragmentation_model.html#ugropy.core.frag_classes.base.fragmentation_model.FragmentationModel.mol_preprocess">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mol_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess the molecule.</span>
+
+<span class="sd">        This method is called before the detection of the fragments. It can be</span>
+<span class="sd">        used to preprocess the molecule before the detection of the fragments.</span>
+<span class="sd">        This allow to use RDKit functions to preprocess the molecule and make</span>
+<span class="sd">        your SMARTS detection easier. The default implementation does nothing</span>
+<span class="sd">        and leave the mol object as it is. You can inherit this class and</span>
+<span class="sd">        override this method to preprocess the molecule.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : Chem.rdchem.Mol</span>
+<span class="sd">            Molecule to preprocess.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Chem.rdchem.Mol</span>
+<span class="sd">            Preprocessed molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">mol</span></div>
+
+
+<div class="viewcode-block" id="FragmentationModel.set_fragmentation_result">
+<a class="viewcode-back" href="../../../../../core/frag_classes/base/fragmentation_model.html#ugropy.core.frag_classes.base.fragmentation_model.FragmentationModel.set_fragmentation_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_fragmentation_result</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">molecule</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+        <span class="n">solutions_fragments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FragmentationResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">FragmentationResult</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the solutions and return the FragmentationResult objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        molecule : Chem.rdchem.Mol</span>
+<span class="sd">            Rdkit mol object.</span>
+<span class="sd">        solutions_fragments : List[dict]</span>
+<span class="sd">            Fragments detected in the molecule.</span>
+<span class="sd">        search_multiple_solutions : bool, optional</span>
+<span class="sd">            Weather search for multiple solutions or not, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[FragmentationResult, List[FragmentationResult]]</span>
+<span class="sd">            List of FragmentationResult objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">occurs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># solutions registry to avoid repeated solutions</span>
+
+        <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">solutions_fragments</span><span class="p">:</span>
+            <span class="n">occurrences</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">groups_atoms</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">frag</span><span class="p">,</span> <span class="n">atoms</span> <span class="ow">in</span> <span class="n">solution</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">frag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">occurrences</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">groups_atoms</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">occurrences</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">occurs</span><span class="p">:</span>
+                <span class="n">sols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">fragmentation_result</span><span class="p">(</span>
+                        <span class="n">molecule</span><span class="p">,</span>
+                        <span class="nb">dict</span><span class="p">(</span><span class="n">occurrences</span><span class="p">),</span>
+                        <span class="nb">dict</span><span class="p">(</span><span class="n">groups_atoms</span><span class="p">),</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">occurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">occurrences</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">search_multiple_solutions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sols</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="FragmentationModel.detect_fragments">
+<a class="viewcode-back" href="../../../../../core/frag_classes/base/fragmentation_model.html#ugropy.core.frag_classes.base.fragmentation_model.FragmentationModel.detect_fragments">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_fragments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecule</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detect all the fragments in the molecule.</span>
+
+<span class="sd">        Return a dictionary with the detected fragments as keys and a tuple</span>
+<span class="sd">        with the atoms indexes of the fragment as values. For example, n-hexane</span>
+<span class="sd">        for the UNIFAC model will return:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;CH3_0&#39;: (0,),</span>
+<span class="sd">                &#39;CH3_1&#39;: (5,),</span>
+<span class="sd">                &#39;CH2_0&#39;: (1,),</span>
+<span class="sd">                &#39;CH2_1&#39;: (2,),</span>
+<span class="sd">                &#39;CH2_2&#39;: (3,),</span>
+<span class="sd">                &#39;CH2_3&#39;: (4,)</span>
+<span class="sd">            }</span>
+
+<span class="sd">        You may note that multiple occurrence of a fragment name will be</span>
+<span class="sd">        indexed. The convention is always: &lt;fragment_name&gt;_i where `i` is the</span>
+<span class="sd">        index of the occurrence.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : Chem.rdchem.Mol</span>
+<span class="sd">            Molecule to detect the fragments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Detected fragments in the molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">detected_fragments</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fragment_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">atoms_tuple</span>
+            <span class="k">for</span> <span class="n">fragment_name</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atoms_tuple</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">mol</span><span class="p">))</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">detected_fragments</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

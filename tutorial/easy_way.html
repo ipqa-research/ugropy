@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The easy way &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gibbs Models" href="gibbs_models.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The easy way</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#The-Groups-class">The Groups class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#WARNING">WARNING</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_models.html">Gibbs Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties_estimators.html">Properties estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_ugropy.html">Working with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Writers</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">The easy way</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/easy_way.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="The-easy-way">
+<h1>The easy way<a class="headerlink" href="#The-easy-way" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+    <span class="o">%</span><span class="k">pip</span> install -q ugropy
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<section id="The-Groups-class">
+<h2>The Groups class<a class="headerlink" href="#The-Groups-class" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> is relatively straightforward to use, but let’s explore what it has to offer. Now, let’s start with the easy methods…</p>
+<p>We’ll utilize the Groups class to retrieve the subgroups of all the models supported by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Groups</span>
+
+<span class="n">carvone</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span><span class="s2">&quot;carvone&quot;</span><span class="p">)</span>
+
+<span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;CH&#39;: 1, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1}
+</pre></div></div>
+</div>
+<p>Well, that was easy… <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> utilizes <code class="docutils literal notranslate"><span class="pre">PubChemPy</span></code> (<a class="reference external" href="https://github.com/mcs07/PubChemPy">link</a>) to access <code class="docutils literal notranslate"><span class="pre">PubChem</span></code> and retrieve the SMILES representation of the molecule. <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> then employs the SMILES representation along with the <code class="docutils literal notranslate"><span class="pre">rdkit</span></code> (<a class="reference external" href="https://github.com/rdkit/rdkit">link</a>) library to identify the functional groups of the molecules.</p>
+<p>The complete signature of the Groups class is as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultSolver</span>
+
+<span class="n">carvone</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;carvone&quot;</span><span class="p">,</span>
+    <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+    <span class="n">solver</span><span class="o">=</span><span class="n">DefaultSolver</span><span class="p">,</span>
+    <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">normal_boiling_temperature</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The identifier_type argument (default: “name”) can be set to “name”, “smiles” or “mol”.</p>
+<p>When “name” is set, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> will use the identifier argument to search in pubchem for the canonical SMILES of the molecule.</p>
+<p>When “smiles” is set, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> uses it directly, this also means that the library will not suffer the overhead of searching on pubchem. Try it yourself:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;CC1=CCC(CC1=O)C(=C)C&quot;</span><span class="p">,</span>
+    <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;CH&#39;: 1, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1}
+</pre></div></div>
+</div>
+<p>If you are familiar with the <code class="docutils literal notranslate"><span class="pre">rdkit</span></code> library, you’ll know that there are numerous ways to define a molecule (e.g., SMILES, SMARTS, PDB file, InChIKey, etc.). <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> supports the provision of a Mol object from the <code class="docutils literal notranslate"><span class="pre">rdkit</span></code> library.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="n">mol_obj</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="s2">&quot;InChI=1S/C10H14O/c1-7(2)9-5-4-8(3)10(11)6-9/h4,9H,1,5-6H2,2-3H3&quot;</span><span class="p">)</span>
+
+<span class="n">carvone</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="n">mol_obj</span><span class="p">,</span>
+    <span class="n">identifier_type</span><span class="o">=</span><span class="s2">&quot;mol&quot;</span><span class="p">,</span>
+    <span class="n">normal_boiling_temperature</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;CH&#39;: 1, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1}
+</pre></div></div>
+</div>
+<p>The current supported models are the classic liquid-vapor UNIFAC, Predictive Soave-Redlich-Kwong (PSRK), Joback, Dortmund and Abdulelah-Gani. You can access the functional groups this way:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span><span class="s2">&quot;carvone&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">dortmund</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">agani</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;CH&#39;: 1, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1}
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;CH&#39;: 1, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1}
+{&#39;-CH3&#39;: 2, &#39;=CH2&#39;: 1, &#39;=C&lt;&#39;: 1, &#39;ring-CH2-&#39;: 2, &#39;ring&gt;CH-&#39;: 1, &#39;ring=CH-&#39;: 1, &#39;ring=C&lt;&#39;: 1, &#39;&gt;C=O (ring)&#39;: 1}
+{&#39;CH3&#39;: 2, &#39;CH2=C&#39;: 1, &#39;CH=C&#39;: 1, &#39;CH2CO&#39;: 1, &#39;CY-CH2&#39;: 1, &#39;CY-CH&#39;: 1}
+{&#39;CH3&#39;: 2, &#39;CH2=C&#39;: 1, &#39;CH2 (cyclic)&#39;: 2, &#39;CH (cyclic)&#39;: 1, &#39;CH=C (cyclic)&#39;: 1, &#39;CO (cyclic)&#39;: 1}
+</pre></div></div>
+</div>
+<p>You can obtain more information about the molecule from each model. For example, UNIFAC and PSRK are Excess Gibbs Models, soy you can obtain the estimation of the R and Q values of the molecule (molecule’s reduced VdW volume and area)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UNIFAC R: &quot;</span><span class="p">,</span> <span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UNIFAC Q: &quot;</span><span class="p">,</span> <span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PSRK R: &quot;</span><span class="p">,</span> <span class="n">carvone</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PSRK Q: &quot;</span><span class="p">,</span> <span class="n">carvone</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+UNIFAC R:  6.3751
+UNIFAC Q:  5.308
+PSRK R:  6.3751
+PSRK Q:  5.308
+</pre></div></div>
+</div>
+<p>On the Joback model, you can obtain the estimation of different properties. We will discuss the Properties estimators later.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">acentric_factor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">normal_boiling_point</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">critical_pressure</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">critical_volume</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">vapor_pressure</span><span class="p">(</span><span class="mi">430</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.42452945182153057 dimensionless
+516.47 kelvin
+742.5207962108279 kelvin
+28.596757127741714 bar
+503.5 centimeter ** 3 / mole
+0.09232883692318564 bar
+</pre></div></div>
+</div>
+<p>The normal_boiling_temperature parameter is provided, it is used in the Joback properties calculations instead of the Joback-estimated normal boiling temperature (refer to the Joback tutorial).</p>
+<p>Finally the search_multiple_solutions parameter is used to determine if the solver should return multiple solutions or not. If set to True, the solver will return multiple solutions if they exist. If set to False, the solver will return only one solution. The default value is False. In next sections we will explore in more detail how to obtain more solutions from the solver.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of multiple solutions</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span><span class="s2">&quot;CCCC1=CC=C(CC(=O)OC)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">molecule</span><span class="o">.</span><span class="n">unifac</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7fd268f2f410&gt;,
+ &lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7fd268f2f4d0&gt;]
+</pre></div></div>
+</div>
+<p>As you can see we obtained a list of GibbsFragmentationResult objects. The result always will be a list when the search_multiple_solutions parameter is set to True independently of the number of solutions found.</p>
+<p>We can check both solutions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">unifac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">unifac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 2, &#39;COO&#39;: 1}
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;ACH&#39;: 4, &#39;AC&#39;: 1, &#39;ACCH2&#39;: 1, &#39;CH2COO&#39;: 1}
+</pre></div></div>
+</div>
+<p>Multiple solution searching is intended to get all the solution for a given model and try different representations of the molecule to obtain properties. For example, different UNIFAC representations could lead to different liquid-liquid or liquid-vapor equilibrium predictions.</p>
+<p>The full documentation of the <code class="docutils literal notranslate"><span class="pre">Groups</span></code> class may be accessed in the API documentation. Or you can do…</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>Groups
+</pre></div>
+</div>
+</div>
+<p>Also, you can visualize your fragmentations results. Let’s see the multiple solutions obtained before:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span><span class="o">.</span><span class="n">unifac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_24_0.svg" src="../_images/tutorial_easy_way_24_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span><span class="o">.</span><span class="n">unifac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_25_0.svg" src="../_images/tutorial_easy_way_25_0.svg" />
+</div>
+</div>
+<p>Let’s also draw the carvone solutions obtained before:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_27_0.svg" src="../_images/tutorial_easy_way_27_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span><span class="o">.</span><span class="n">psrk</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_28_0.svg" src="../_images/tutorial_easy_way_28_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span><span class="o">.</span><span class="n">joback</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_29_0.svg" src="../_images/tutorial_easy_way_29_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carvone</span><span class="o">.</span><span class="n">agani</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_30_0.svg" src="../_images/tutorial_easy_way_30_0.svg" />
+</div>
+</div>
+<p>You can save the figure by doing:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;figure.svg&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">carvone</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">get_solution_svg</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Check the full documentation of the draw funcion:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>carvone.unifac.draw
+</pre></div>
+</div>
+</div>
+<p>Finally, lets draw the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> logo:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Groups</span><span class="p">(</span><span class="s2">&quot;CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">mol</span><span class="o">.</span><span class="n">unifac</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ugropy&quot;</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span>
+    <span class="n">title_font_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">legend_font_size</span><span class="o">=</span><span class="mi">14</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_easy_way_36_0.svg" src="../_images/tutorial_easy_way_36_0.svg" />
+</div>
+</div>
+</section>
+<section id="WARNING">
+<h2>WARNING<a class="headerlink" href="#WARNING" title="Link to this heading"></a></h2>
+<p>For the UNIFAC, and PSRK groups the aldehyde group name is changed to HCO according to the discussion: <a class="reference external" href="https://github.com/ClapeyronThermo/Clapeyron.jl/issues/225">https://github.com/ClapeyronThermo/Clapeyron.jl/issues/225</a></p>
+<p>This is more consistent with the ether groups and formate group.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gibbs_models.html" class="btn btn-neutral float-right" title="Gibbs Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

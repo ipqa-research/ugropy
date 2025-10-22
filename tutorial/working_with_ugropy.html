@@ -1,0 +1,1556 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with ugropy &mdash; ugropy 3.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=b2e31178"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Writers" href="writers.html" />
+    <link rel="prev" title="Properties estimators" href="properties_estimators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The easy way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_models.html">Gibbs Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties_estimators.html">Properties estimators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Working with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Failing">Failing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#More-than-one-solution">More than one solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#More-solutions-(non-optimal)">More solutions (non-optimal)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Models-information">Models information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Changing-the-default-ILP-solver">Changing the default ILP solver</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Writers</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../implementing_models.html">User defined fragmentation models</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Working with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/working_with_ugropy.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Working-with-ugropy">
+<h1>Working with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code><a class="headerlink" href="#Working-with-ugropy" title="Link to this heading"></a></h1>
+<section id="Failing">
+<h2>Failing<a class="headerlink" href="#Failing" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/ugropy_failing.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> may fail to obtain the subgroups of a molecule for a certain model for two reasons: either there is a bug in the code, or the molecule cannot be represented by the subgroups of the failing model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> utilizes SMARTS for the representation of functional groups to inquire whether the molecule contains those structures. Let’s examine the functional group list for the classic liquid-vapor UNIFAC model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="kn">import</span><span class="w"> </span><span class="nn">google.colab</span>
+  <span class="o">%</span><span class="k">pip</span> install -q ugropy
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+  <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>smarts</th>
+      <th>molecular_weight</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH3</th>
+      <td>[CX4H3]</td>
+      <td>15.03500</td>
+    </tr>
+    <tr>
+      <th>CH2</th>
+      <td>[CX4H2]</td>
+      <td>14.02700</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>[CX4H]</td>
+      <td>13.01900</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>[CX4H0]</td>
+      <td>12.01100</td>
+    </tr>
+    <tr>
+      <th>CH2=CH</th>
+      <td>[CH2]=[CH]</td>
+      <td>27.04600</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>NCO</th>
+      <td>[NX2H0]=[CX2H0]=[OX1H0]</td>
+      <td>42.01700</td>
+    </tr>
+    <tr>
+      <th>(CH2)2SU</th>
+      <td>[CH2]S(=O)(=O)[CH2]</td>
+      <td>92.11620</td>
+    </tr>
+    <tr>
+      <th>CH2CHSU</th>
+      <td>[CH2]S(=O)(=O)[CH]</td>
+      <td>91.10840</td>
+    </tr>
+    <tr>
+      <th>IMIDAZOL</th>
+      <td>[c]1:[c]:[n]:[c]:[n]:1</td>
+      <td>68.07820</td>
+    </tr>
+    <tr>
+      <th>BTI</th>
+      <td>C(F)(F)(F)S(=O)(=O)[N-]S(=O)(=O)C(F)(F)F</td>
+      <td>279.91784</td>
+    </tr>
+  </tbody>
+</table>
+<p>113 rows × 2 columns</p>
+</div></div>
+</div>
+<p>For example, let’s check the SMARTS representation of the alcohol group ACOH:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;ACOH&quot;</span><span class="p">,</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;[cH0][OH]&#39;
+</pre></div></div>
+</div>
+<p>The SMARTS representation it’s telling us that the OH group it’s, of course, a hydroxyl group bounded by a single bound to an aromatic carbon atom.</p>
+<p>An example of a molecule that cannot be represented by UNIFAC groups:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;C1(=CC=CC=C1)OC(C)(C)C&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">molecule</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_6_0.png" src="../_images/tutorial_working_with_ugropy_6_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{}
+</pre></div></div>
+</div>
+<p>The library “fails” to obtain any functional groups to accurately represent the molecule. This failure is represented by an empty dictionary. In this case, the “fail” is correct, but it could fail due to errors in the groups SMARTS representations or the algorithm, resulting in an empty dictionary as well. Currently, the supported models are tested against 444 different molecules.</p>
+<p>If you encounter a failing representation, you can examine the structure of the molecule and the list of functional groups of the failing model. If you determine that the molecule can indeed be modeled, you may have discovered a bug. Feel free to report the issue on the repository along with the failing molecule’s SMILES/name, the failing model and the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> version.</p>
+<section id="More-than-one-solution">
+<h3>More than one solution<a class="headerlink" href="#More-than-one-solution" title="Link to this heading"></a></h3>
+<p>Models like UNIFAC or PSRK can have multiple solutions to represent a molecule, and ugropy tries its best to find them all. In such cases, you will receive a list of dictionaries, each containing one of the solutions found. Let’s take a look.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">unifac</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CCCC1=CC=C(CC(=O)OC)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecule</span><span class="p">,</span> <span class="n">highlightAtoms</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_9_0.png" src="../_images/tutorial_working_with_ugropy_9_0.png" />
+</div>
+</div>
+<p>This molecule can be modeled in two ways depending on how we treat the CH2 attached to the ring and the ester carbon (highlighted in red). We can either form an ACCH2 group and model the ester group with COO, or we can use an AC group and model the ester group with CH2COO.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution 1:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solution 2:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Solution 1:
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;ACH&#39;: 4, &#39;ACCH2&#39;: 2, &#39;COO&#39;: 1}
+solution 2:
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 1, &#39;ACH&#39;: 4, &#39;AC&#39;: 1, &#39;ACCH2&#39;: 1, &#39;CH2COO&#39;: 1}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_12_0.svg" src="../_images/tutorial_working_with_ugropy_12_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_13_0.svg" src="../_images/tutorial_working_with_ugropy_13_0.svg" />
+</div>
+</div>
+<p>This could be useful in cases where some groups have more interaction parameters than others in the mixture that you want to model with UNIFAC. Alternatively, you can try both approaches and compare if there are any differences.</p>
+</section>
+</section>
+<section id="More-solutions-(non-optimal)">
+<h2>More solutions (non-optimal)<a class="headerlink" href="#More-solutions-(non-optimal)" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> allows you to search multiple solutions for the models, but all these solutions are optimal (uses the same number of groups to represent the molecule). It’s possible to search for non-optimal solutions along with the optimal ones. This is useful when the user wants to find all possible combinations of fragments that cover the molecule. This feature is intended for research purposes and is not recommended to actually model the molecules.</p>
+<p>We can do this with the <code class="docutils literal notranslate"><span class="pre">search_nonoptimal</span></code> parameter:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span>
+    <span class="s2">&quot;9,10-dihydroanthracene&quot;</span><span class="p">,</span>
+    <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># If this is False, search_nonoptimal is ignored</span>
+    <span class="n">search_nonoptimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">solutions</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f3e4d1a5cd0&gt;,
+ &lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f3e4d1a5ba0&gt;,
+ &lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f3e92cc3410&gt;]
+</pre></div></div>
+</div>
+<p>We can check all the obtained solutions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_18_0.svg" src="../_images/tutorial_working_with_ugropy_18_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_19_0.svg" src="../_images/tutorial_working_with_ugropy_19_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_20_0.svg" src="../_images/tutorial_working_with_ugropy_20_0.svg" />
+</div>
+</div>
+<p>If you are an experienced user of UNIFAC-like models, you may notice that the only “correct” solution is the first one. All <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> models have the capacity to also search for non-optimal solutions.</p>
+</section>
+<section id="Models-information">
+<h2>Models information<a class="headerlink" href="#Models-information" title="Link to this heading"></a></h2>
+<p>You can check information about the models’ fragments. For example, the UNIFAC, PSRK, and Dortmund models have the information about the R and Q values, the subgroup number, and main group number. you can access to this information with <code class="docutils literal notranslate"><span class="pre">model</span></code>.subgroups_info:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">unifac</span><span class="p">,</span> <span class="n">psrk</span><span class="p">,</span> <span class="n">dortmund</span>
+
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups_info</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subgroup_number</th>
+      <th>main_group</th>
+      <th>R</th>
+      <th>Q</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0.9011</td>
+      <td>0.848</td>
+    </tr>
+    <tr>
+      <th>CH2</th>
+      <td>2</td>
+      <td>1</td>
+      <td>0.6744</td>
+      <td>0.540</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0.4469</td>
+      <td>0.228</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>4</td>
+      <td>1</td>
+      <td>0.2195</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>CH2=CH</th>
+      <td>5</td>
+      <td>2</td>
+      <td>1.3454</td>
+      <td>1.176</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>NCO</th>
+      <td>109</td>
+      <td>51</td>
+      <td>1.0567</td>
+      <td>0.732</td>
+    </tr>
+    <tr>
+      <th>(CH2)2SU</th>
+      <td>118</td>
+      <td>55</td>
+      <td>2.6869</td>
+      <td>2.120</td>
+    </tr>
+    <tr>
+      <th>CH2CHSU</th>
+      <td>119</td>
+      <td>55</td>
+      <td>2.4595</td>
+      <td>1.808</td>
+    </tr>
+    <tr>
+      <th>IMIDAZOL</th>
+      <td>178</td>
+      <td>84</td>
+      <td>2.0260</td>
+      <td>0.868</td>
+    </tr>
+    <tr>
+      <th>BTI</th>
+      <td>179</td>
+      <td>85</td>
+      <td>5.7740</td>
+      <td>4.932</td>
+    </tr>
+  </tbody>
+</table>
+<p>113 rows × 4 columns</p>
+</div></div>
+</div>
+<p>Moreover, you can consult the fragments properties contributions of models like Joback:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">joback</span><span class="p">,</span> <span class="n">abdulelah_gani</span>
+
+<span class="n">joback</span><span class="o">.</span><span class="n">properties_contributions</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tc</th>
+      <th>Pc</th>
+      <th>Vc</th>
+      <th>Tb</th>
+      <th>Tf</th>
+      <th>Hform</th>
+      <th>Gform</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>Hfusion</th>
+      <th>Hvap</th>
+      <th>na</th>
+      <th>nb</th>
+      <th>num_of_atoms</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-CH3</th>
+      <td>0.0141</td>
+      <td>-0.0012</td>
+      <td>65.0</td>
+      <td>23.58</td>
+      <td>-5.10</td>
+      <td>-76.45</td>
+      <td>-43.96</td>
+      <td>19.500</td>
+      <td>-0.00808</td>
+      <td>0.000153</td>
+      <td>-9.670000e-08</td>
+      <td>0.908</td>
+      <td>2.373</td>
+      <td>548.29</td>
+      <td>-1.719</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>-CH2-</th>
+      <td>0.0189</td>
+      <td>0.0000</td>
+      <td>56.0</td>
+      <td>22.88</td>
+      <td>11.27</td>
+      <td>-20.64</td>
+      <td>8.42</td>
+      <td>-0.909</td>
+      <td>0.09500</td>
+      <td>-0.000054</td>
+      <td>1.190000e-08</td>
+      <td>2.590</td>
+      <td>2.226</td>
+      <td>94.16</td>
+      <td>-0.199</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>&gt;CH-</th>
+      <td>0.0164</td>
+      <td>0.0020</td>
+      <td>41.0</td>
+      <td>21.74</td>
+      <td>12.64</td>
+      <td>29.89</td>
+      <td>58.36</td>
+      <td>-23.000</td>
+      <td>0.20400</td>
+      <td>-0.000265</td>
+      <td>1.200000e-07</td>
+      <td>0.749</td>
+      <td>1.691</td>
+      <td>-322.15</td>
+      <td>1.187</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>&gt;C&lt;</th>
+      <td>0.0067</td>
+      <td>0.0043</td>
+      <td>27.0</td>
+      <td>18.25</td>
+      <td>46.43</td>
+      <td>82.23</td>
+      <td>116.02</td>
+      <td>-66.200</td>
+      <td>0.42700</td>
+      <td>-0.000641</td>
+      <td>3.010000e-07</td>
+      <td>-1.460</td>
+      <td>0.636</td>
+      <td>-573.56</td>
+      <td>2.307</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>=CH2</th>
+      <td>0.0113</td>
+      <td>-0.0028</td>
+      <td>56.0</td>
+      <td>18.18</td>
+      <td>-4.32</td>
+      <td>-9.63</td>
+      <td>3.77</td>
+      <td>23.600</td>
+      <td>-0.03810</td>
+      <td>0.000172</td>
+      <td>-1.030000e-07</td>
+      <td>-0.473</td>
+      <td>1.724</td>
+      <td>495.01</td>
+      <td>-1.539</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>=CH-</th>
+      <td>0.0129</td>
+      <td>-0.0006</td>
+      <td>46.0</td>
+      <td>24.96</td>
+      <td>8.73</td>
+      <td>37.97</td>
+      <td>48.53</td>
+      <td>-8.000</td>
+      <td>0.10500</td>
+      <td>-0.000096</td>
+      <td>3.560000e-08</td>
+      <td>2.691</td>
+      <td>2.205</td>
+      <td>82.28</td>
+      <td>-0.242</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>=C&lt;</th>
+      <td>0.0117</td>
+      <td>0.0011</td>
+      <td>38.0</td>
+      <td>24.14</td>
+      <td>11.14</td>
+      <td>83.99</td>
+      <td>92.36</td>
+      <td>-28.100</td>
+      <td>0.20800</td>
+      <td>-0.000306</td>
+      <td>1.460000e-07</td>
+      <td>3.063</td>
+      <td>2.138</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>=C=</th>
+      <td>0.0026</td>
+      <td>0.0028</td>
+      <td>36.0</td>
+      <td>26.15</td>
+      <td>17.78</td>
+      <td>142.14</td>
+      <td>136.70</td>
+      <td>27.400</td>
+      <td>-0.05570</td>
+      <td>0.000101</td>
+      <td>-5.020000e-08</td>
+      <td>4.720</td>
+      <td>2.661</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>0.0027</td>
+      <td>-0.0008</td>
+      <td>46.0</td>
+      <td>9.20</td>
+      <td>-11.18</td>
+      <td>79.30</td>
+      <td>77.71</td>
+      <td>24.500</td>
+      <td>-0.02710</td>
+      <td>0.000111</td>
+      <td>-6.780000e-08</td>
+      <td>2.322</td>
+      <td>1.155</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.0020</td>
+      <td>0.0016</td>
+      <td>37.0</td>
+      <td>27.38</td>
+      <td>64.32</td>
+      <td>115.51</td>
+      <td>109.82</td>
+      <td>7.870</td>
+      <td>0.02010</td>
+      <td>-0.000008</td>
+      <td>1.390000e-09</td>
+      <td>4.151</td>
+      <td>3.302</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ring-CH2-</th>
+      <td>0.0100</td>
+      <td>0.0025</td>
+      <td>48.0</td>
+      <td>27.15</td>
+      <td>7.75</td>
+      <td>-26.80</td>
+      <td>-3.68</td>
+      <td>-6.030</td>
+      <td>0.08540</td>
+      <td>-0.000008</td>
+      <td>-1.800000e-08</td>
+      <td>0.490</td>
+      <td>2.398</td>
+      <td>307.53</td>
+      <td>-0.798</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>ring&gt;CH-</th>
+      <td>0.0122</td>
+      <td>0.0004</td>
+      <td>38.0</td>
+      <td>21.78</td>
+      <td>19.88</td>
+      <td>8.67</td>
+      <td>40.99</td>
+      <td>-20.500</td>
+      <td>0.16200</td>
+      <td>-0.000160</td>
+      <td>6.240000e-08</td>
+      <td>3.243</td>
+      <td>1.942</td>
+      <td>-394.29</td>
+      <td>1.251</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>ring&gt;C&lt;</th>
+      <td>0.0042</td>
+      <td>0.0061</td>
+      <td>27.0</td>
+      <td>21.32</td>
+      <td>60.15</td>
+      <td>79.72</td>
+      <td>87.88</td>
+      <td>-90.900</td>
+      <td>0.55700</td>
+      <td>-0.000900</td>
+      <td>4.690000e-07</td>
+      <td>-1.373</td>
+      <td>0.644</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ring=CH-</th>
+      <td>0.0082</td>
+      <td>0.0011</td>
+      <td>41.0</td>
+      <td>26.73</td>
+      <td>8.13</td>
+      <td>2.09</td>
+      <td>11.30</td>
+      <td>-2.140</td>
+      <td>0.05740</td>
+      <td>-0.000002</td>
+      <td>-1.590000e-08</td>
+      <td>1.101</td>
+      <td>2.544</td>
+      <td>259.65</td>
+      <td>-0.702</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>ring=C&lt;</th>
+      <td>0.0143</td>
+      <td>0.0008</td>
+      <td>32.0</td>
+      <td>31.01</td>
+      <td>37.02</td>
+      <td>46.43</td>
+      <td>54.05</td>
+      <td>-8.250</td>
+      <td>0.10100</td>
+      <td>-0.000142</td>
+      <td>6.780000e-08</td>
+      <td>2.394</td>
+      <td>3.059</td>
+      <td>-245.74</td>
+      <td>0.912</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-F</th>
+      <td>0.0111</td>
+      <td>-0.0057</td>
+      <td>27.0</td>
+      <td>-0.03</td>
+      <td>-15.78</td>
+      <td>-251.92</td>
+      <td>-247.19</td>
+      <td>26.500</td>
+      <td>-0.09130</td>
+      <td>0.000191</td>
+      <td>-1.030000e-07</td>
+      <td>1.398</td>
+      <td>-0.670</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-Cl</th>
+      <td>0.0105</td>
+      <td>-0.0049</td>
+      <td>58.0</td>
+      <td>38.13</td>
+      <td>13.55</td>
+      <td>-71.55</td>
+      <td>-64.31</td>
+      <td>33.300</td>
+      <td>-0.09630</td>
+      <td>0.000187</td>
+      <td>-9.960000e-08</td>
+      <td>2.515</td>
+      <td>4.532</td>
+      <td>625.45</td>
+      <td>-1.814</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-Br</th>
+      <td>0.0133</td>
+      <td>0.0057</td>
+      <td>71.0</td>
+      <td>66.86</td>
+      <td>43.43</td>
+      <td>-29.48</td>
+      <td>-38.06</td>
+      <td>28.600</td>
+      <td>-0.06490</td>
+      <td>0.000136</td>
+      <td>-7.450000e-08</td>
+      <td>3.603</td>
+      <td>6.582</td>
+      <td>738.91</td>
+      <td>-2.038</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-I</th>
+      <td>0.0068</td>
+      <td>-0.0034</td>
+      <td>97.0</td>
+      <td>93.84</td>
+      <td>41.69</td>
+      <td>21.06</td>
+      <td>5.74</td>
+      <td>32.100</td>
+      <td>-0.06410</td>
+      <td>0.000126</td>
+      <td>-6.870000e-08</td>
+      <td>2.724</td>
+      <td>9.520</td>
+      <td>809.55</td>
+      <td>-2.224</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-OH (alcohol)</th>
+      <td>0.0741</td>
+      <td>0.0112</td>
+      <td>28.0</td>
+      <td>92.88</td>
+      <td>44.45</td>
+      <td>-208.04</td>
+      <td>-189.20</td>
+      <td>25.700</td>
+      <td>-0.06910</td>
+      <td>0.000177</td>
+      <td>-9.880000e-08</td>
+      <td>2.406</td>
+      <td>16.826</td>
+      <td>2173.72</td>
+      <td>-5.057</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>-OH (phenol)</th>
+      <td>0.0240</td>
+      <td>0.0184</td>
+      <td>-25.0</td>
+      <td>76.34</td>
+      <td>82.83</td>
+      <td>-221.65</td>
+      <td>-197.37</td>
+      <td>-2.810</td>
+      <td>0.11100</td>
+      <td>-0.000116</td>
+      <td>4.940000e-08</td>
+      <td>4.490</td>
+      <td>12.499</td>
+      <td>3018.17</td>
+      <td>-7.314</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>-O- (non-ring)</th>
+      <td>0.0168</td>
+      <td>0.0015</td>
+      <td>18.0</td>
+      <td>22.42</td>
+      <td>22.23</td>
+      <td>-132.22</td>
+      <td>-105.00</td>
+      <td>25.500</td>
+      <td>-0.06320</td>
+      <td>0.000111</td>
+      <td>-5.480000e-08</td>
+      <td>1.188</td>
+      <td>2.410</td>
+      <td>122.09</td>
+      <td>-0.386</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-O- (ring)</th>
+      <td>0.0098</td>
+      <td>0.0048</td>
+      <td>13.0</td>
+      <td>31.22</td>
+      <td>23.05</td>
+      <td>-138.16</td>
+      <td>-98.22</td>
+      <td>12.200</td>
+      <td>-0.01260</td>
+      <td>0.000060</td>
+      <td>-3.860000e-08</td>
+      <td>5.879</td>
+      <td>4.682</td>
+      <td>440.24</td>
+      <td>-0.953</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>&gt;C=O (non-ring)</th>
+      <td>0.0380</td>
+      <td>0.0031</td>
+      <td>62.0</td>
+      <td>76.75</td>
+      <td>61.20</td>
+      <td>-133.22</td>
+      <td>-120.50</td>
+      <td>6.450</td>
+      <td>0.06700</td>
+      <td>-0.000036</td>
+      <td>2.860000e-09</td>
+      <td>4.189</td>
+      <td>8.972</td>
+      <td>340.35</td>
+      <td>-0.350</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>&gt;C=O (ring)</th>
+      <td>0.0284</td>
+      <td>0.0028</td>
+      <td>55.0</td>
+      <td>94.97</td>
+      <td>75.97</td>
+      <td>-164.50</td>
+      <td>-126.27</td>
+      <td>30.400</td>
+      <td>-0.08290</td>
+      <td>0.000236</td>
+      <td>-1.310000e-07</td>
+      <td>NaN</td>
+      <td>6.645</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>O=CH- (aldehyde)</th>
+      <td>0.0379</td>
+      <td>0.0030</td>
+      <td>82.0</td>
+      <td>72.24</td>
+      <td>36.90</td>
+      <td>-162.03</td>
+      <td>-143.48</td>
+      <td>30.900</td>
+      <td>-0.03360</td>
+      <td>0.000160</td>
+      <td>-9.880000e-08</td>
+      <td>3.197</td>
+      <td>9.093</td>
+      <td>740.92</td>
+      <td>-1.713</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>-COOH (acid)</th>
+      <td>0.0791</td>
+      <td>0.0077</td>
+      <td>89.0</td>
+      <td>169.09</td>
+      <td>155.50</td>
+      <td>-426.72</td>
+      <td>-387.87</td>
+      <td>24.100</td>
+      <td>0.04270</td>
+      <td>0.000080</td>
+      <td>-6.870000e-08</td>
+      <td>11.051</td>
+      <td>19.537</td>
+      <td>1317.23</td>
+      <td>-2.578</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>-COO- (ester)</th>
+      <td>0.0481</td>
+      <td>0.0005</td>
+      <td>82.0</td>
+      <td>81.10</td>
+      <td>53.60</td>
+      <td>-337.92</td>
+      <td>-301.95</td>
+      <td>24.500</td>
+      <td>0.04020</td>
+      <td>0.000040</td>
+      <td>-4.520000e-08</td>
+      <td>6.959</td>
+      <td>9.633</td>
+      <td>483.88</td>
+      <td>-0.966</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>=O (other than above)</th>
+      <td>0.0143</td>
+      <td>0.0101</td>
+      <td>36.0</td>
+      <td>-10.50</td>
+      <td>2.08</td>
+      <td>-247.61</td>
+      <td>-250.83</td>
+      <td>6.820</td>
+      <td>0.01960</td>
+      <td>0.000013</td>
+      <td>-1.780000e-08</td>
+      <td>3.624</td>
+      <td>5.909</td>
+      <td>675.24</td>
+      <td>-1.340</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-NH2</th>
+      <td>0.0243</td>
+      <td>0.0109</td>
+      <td>38.0</td>
+      <td>73.23</td>
+      <td>66.89</td>
+      <td>-22.02</td>
+      <td>14.07</td>
+      <td>26.900</td>
+      <td>-0.04120</td>
+      <td>0.000164</td>
+      <td>-9.760000e-08</td>
+      <td>3.515</td>
+      <td>10.788</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>&gt;NH (non-ring)</th>
+      <td>0.0295</td>
+      <td>0.0077</td>
+      <td>35.0</td>
+      <td>50.17</td>
+      <td>52.66</td>
+      <td>53.47</td>
+      <td>89.39</td>
+      <td>-1.210</td>
+      <td>0.07620</td>
+      <td>-0.000049</td>
+      <td>1.050000e-08</td>
+      <td>5.009</td>
+      <td>6.436</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>&gt;NH (ring)</th>
+      <td>0.0130</td>
+      <td>0.0114</td>
+      <td>29.0</td>
+      <td>52.82</td>
+      <td>101.51</td>
+      <td>31.65</td>
+      <td>75.61</td>
+      <td>11.800</td>
+      <td>-0.02300</td>
+      <td>0.000107</td>
+      <td>-6.280000e-08</td>
+      <td>7.490</td>
+      <td>6.930</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>&gt;N- (non-ring)</th>
+      <td>0.0169</td>
+      <td>0.0074</td>
+      <td>9.0</td>
+      <td>11.74</td>
+      <td>48.84</td>
+      <td>123.34</td>
+      <td>163.16</td>
+      <td>-31.100</td>
+      <td>0.22700</td>
+      <td>-0.000320</td>
+      <td>1.460000e-07</td>
+      <td>4.703</td>
+      <td>1.896</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-N= (non-ring)</th>
+      <td>0.0255</td>
+      <td>-0.0099</td>
+      <td>NaN</td>
+      <td>74.60</td>
+      <td>NaN</td>
+      <td>23.61</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.335</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-N= (ring)</th>
+      <td>0.0085</td>
+      <td>0.0076</td>
+      <td>34.0</td>
+      <td>57.55</td>
+      <td>68.40</td>
+      <td>55.52</td>
+      <td>79.93</td>
+      <td>8.830</td>
+      <td>-0.00384</td>
+      <td>0.000044</td>
+      <td>-2.600000e-08</td>
+      <td>3.649</td>
+      <td>6.528</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>=NH</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>83.08</td>
+      <td>68.91</td>
+      <td>93.70</td>
+      <td>119.66</td>
+      <td>5.690</td>
+      <td>-0.00412</td>
+      <td>0.000128</td>
+      <td>-8.880000e-08</td>
+      <td>NaN</td>
+      <td>12.169</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>-CN</th>
+      <td>0.0496</td>
+      <td>-0.0101</td>
+      <td>91.0</td>
+      <td>125.66</td>
+      <td>59.89</td>
+      <td>88.43</td>
+      <td>89.22</td>
+      <td>36.500</td>
+      <td>-0.07330</td>
+      <td>0.000184</td>
+      <td>-1.030000e-07</td>
+      <td>2.414</td>
+      <td>12.851</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>-NO2</th>
+      <td>0.0437</td>
+      <td>0.0064</td>
+      <td>91.0</td>
+      <td>152.54</td>
+      <td>127.24</td>
+      <td>-66.57</td>
+      <td>-16.83</td>
+      <td>25.900</td>
+      <td>-0.00374</td>
+      <td>0.000129</td>
+      <td>-8.880000e-08</td>
+      <td>9.679</td>
+      <td>16.738</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>-SH</th>
+      <td>0.0031</td>
+      <td>0.0084</td>
+      <td>63.0</td>
+      <td>63.56</td>
+      <td>20.09</td>
+      <td>-17.33</td>
+      <td>-22.99</td>
+      <td>35.300</td>
+      <td>-0.07580</td>
+      <td>0.000185</td>
+      <td>-1.030000e-07</td>
+      <td>2.360</td>
+      <td>6.884</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>-S- (non-ring)</th>
+      <td>0.0119</td>
+      <td>0.0049</td>
+      <td>54.0</td>
+      <td>68.78</td>
+      <td>34.40</td>
+      <td>41.87</td>
+      <td>33.12</td>
+      <td>19.600</td>
+      <td>-0.00561</td>
+      <td>0.000040</td>
+      <td>-2.760000e-08</td>
+      <td>4.130</td>
+      <td>6.817</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>-S- (ring)</th>
+      <td>0.0019</td>
+      <td>0.0051</td>
+      <td>38.0</td>
+      <td>52.10</td>
+      <td>79.93</td>
+      <td>39.10</td>
+      <td>27.76</td>
+      <td>16.700</td>
+      <td>0.00481</td>
+      <td>0.000028</td>
+      <td>-2.110000e-08</td>
+      <td>1.557</td>
+      <td>5.984</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>From all fragmentation models you have all the RDKit mol objects of each fragment already instantiated on a dictionary. This could be helpful to for calculations, multiple solution filtering, or visualization:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unifac</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="s2">&quot;CH3&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_27_0.png" src="../_images/tutorial_working_with_ugropy_27_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unifac</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="s2">&quot;CH2O&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2
+</pre></div></div>
+</div>
+</section>
+<section id="Changing-the-default-ILP-solver">
+<h2>Changing the default ILP solver<a class="headerlink" href="#Changing-the-default-ILP-solver" title="Link to this heading"></a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> uses the default CBC solver from the PulP library. But PulP supports a lot of different solvers. An example could be de XPRESS_PY solver.</p>
+<p>First, you must install XPRESS with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>xpress
+</pre></div>
+</div>
+<p>Then you can change the default solver with a simple argument:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ugropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">unifac</span>
+
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;toluene&quot;</span><span class="p">,</span> <span class="n">solver_arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;solver&quot;</span><span class="p">:</span> <span class="s2">&quot;XPRESS_PY&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/pulp/apis/xpress_api.py:751: LicenseWarning: Using the Community license in this session. If you have a full Xpress license, pass the full path to your license file to xpress.init(). If you want to use the FICO Community license and no longer want to see this message, use the following code before using the xpress module:
+  xpress.init(&#39;/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/xpress/license/community-xpauth.xpr&#39;)
+  model = xpress.problem()
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_working_with_ugropy_30_1.svg" src="../_images/tutorial_working_with_ugropy_30_1.svg" />
+</div>
+</div>
+<p>Changing the ILP solver has impact on the execution time of the library.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="properties_estimators.html" class="btn btn-neutral float-left" title="Properties estimators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="writers.html" class="btn btn-neutral float-right" title="Writers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
