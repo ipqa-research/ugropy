@@ -6,7 +6,7 @@ on:
 
 jobs:
   testing:
-    uses: ipqa-research/ugropy/.github/workflows/ci.yml@main
+    uses: ipqa-research/ugropy/.github/workflows/ci.yml@dev_ci_publish
   publish:
     runs-on: ubuntu-latest
     strategy:
