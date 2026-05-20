@@ -8,7 +8,6 @@ from ugropy import Groups
 from ugropy.writers import to_clapeyron
 from ugropy.writers.clapeyron_writers import write_molar_mass
 
-
 here = Path(__file__).parent
 path_db = here / "test_expected_result"
 

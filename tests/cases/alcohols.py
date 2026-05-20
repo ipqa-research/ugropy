@@ -5,7 +5,6 @@
 # =============================================================================
 from .case import Case
 
-
 alcohols_cases = [
     Case(
         identifier="C(CO)O",

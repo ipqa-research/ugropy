@@ -75,8 +75,8 @@ def instantiate_mol_from_name(name: str) -> Chem.rdchem.Mol:
     try:
         pcp_object = pcp.get_compounds(name, "name")[0]
 
-        if pcp_object.canonical_smiles:
-            chem_object = Chem.MolFromSmiles(pcp_object.canonical_smiles)
+        if pcp_object.connectivity_smiles:
+            chem_object = Chem.MolFromSmiles(pcp_object.connectivity_smiles)
         elif pcp_object.inchi:
             chem_object = Chem.MolFromInchi(pcp_object.inchi)
         else:

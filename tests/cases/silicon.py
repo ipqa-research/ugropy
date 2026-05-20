@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 silicon_cases = [
     Case(
         identifier="C[SiH3]",

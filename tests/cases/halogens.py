@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 halogens_cases = [
     Case(
         identifier="CCCCCl",

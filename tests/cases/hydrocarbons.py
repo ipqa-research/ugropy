@@ -8,7 +8,6 @@
 # =============================================================================
 from .case import Case
 
-
 hydrocarbons_cases = [
     Case(  # Ethane
         "CC",

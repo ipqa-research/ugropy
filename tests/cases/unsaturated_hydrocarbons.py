@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 unsaturated_hydrocarbons_cases = [
     Case(
         "CC=C(C)C1=C(C=CC=C1C=C)C(C)=C(C)C",

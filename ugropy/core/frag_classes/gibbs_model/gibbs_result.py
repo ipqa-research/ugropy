@@ -78,11 +78,10 @@ class GibbsFragmentationResult(FragmentationResult):
 
         # Subgroups numbers dictionary
         self.subgroups_num = {}
-        
+
         if self.subgroups != {}:
             if calculate_num_dict:
                 for group, occ in self.subgroups.items():
                     snum = int(subgroups_info.loc[group, "subgroup_number"])
 
                     self.subgroups_num[snum] = occ
-

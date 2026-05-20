@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 sulfur_cases = [
     Case(
         identifier="C(=S)=S",

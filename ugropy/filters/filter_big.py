@@ -1,7 +1,9 @@
 from typing import List
 
-from ugropy.core.frag_classes.gibbs_model.gibbs_result import GibbsFragmentationResult
 from ugropy.core.frag_classes.gibbs_model.gibbs_model import GibbsModel
+from ugropy.core.frag_classes.gibbs_model.gibbs_result import (
+    GibbsFragmentationResult,
+)
 
 
 def filter_big_solutions(

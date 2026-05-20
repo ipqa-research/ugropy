@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 nitrogen_cases = [
     Case(
         identifier="CC1(CC(CC(C1)(C)CN=C=O)N=C=O)C",

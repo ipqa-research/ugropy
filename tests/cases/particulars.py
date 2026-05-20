@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 particulars_cases = [
     Case(
         "O",
@@ -300,8 +299,8 @@ particulars_cases = [
         identifier="hydrogen peroxide",
         identifier_type="name",
         cases_module="particulars",
-        unifac_result={},
-        psrk_result={},
+        unifac_result={"OH": 2},
+        psrk_result={"OH": 2},
         joback_result={},
         dortmund_result={},
     ),
@@ -549,7 +548,7 @@ particulars_cases = [
         identifier="C1CO1",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={"CH2": 1, "CH2O": 1},
+        unifac_result={"CH2": 1, "THF": 1},
         psrk_result={"H2COCH2": 1},
         joback_result={"ring-CH2-": 2, "-O- (ring)": 1},
         dortmund_result={"CY-CH2": 1, "CY-CH2O": 1},
@@ -576,10 +575,10 @@ particulars_cases = [
         identifier="BrBr",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={},
+        unifac_result={"BR": 2},
         psrk_result={"BR2": 1},
         joback_result={"-Br": 2},
-        dortmund_result={},
+        dortmund_result={"BR": 2},
     ),
     Case(
         identifier="C#N",

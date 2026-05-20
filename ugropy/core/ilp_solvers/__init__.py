@@ -8,5 +8,4 @@ on a molecule.
 
 from . import default_solver, ilp_solver
 
-
 __all__ = ["ilp_solver", "default_solver"]

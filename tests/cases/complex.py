@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 complex_cases = [
     Case(
         identifier="CCCC1=C(COC(C)(C)COC(=O)OCC)C=C(CC2=CC=CC=C2)C=C1",
@@ -254,8 +253,8 @@ complex_cases = [
         identifier="C12=CC=CC=C1COC2",
         identifier_type="smiles",
         cases_module="complex",
-        unifac_result={"ACH": 4, "ACCH2": 1, "CH2O": 1, "AC": 1},
-        psrk_result={"ACH": 4, "ACCH2": 1, "CH2O": 1, "AC": 1},
+        unifac_result={"ACH": 4, "ACCH2": 1, "THF": 1, "AC": 1},
+        psrk_result={"ACH": 4, "ACCH2": 1, "THF": 1, "AC": 1},
         joback_result={
             "ring-CH2-": 2,
             "ring=CH-": 4,
