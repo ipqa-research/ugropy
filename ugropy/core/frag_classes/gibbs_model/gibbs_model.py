@@ -129,50 +129,140 @@ class GibbsModel(FragmentationModel):
 
         return sol
 
-    def filter_multiple_solutions(
-        self, solutions: List[GibbsFragmentationResult], with_bigger: str = "R"
+    def filter_polyatomic_criteria(
+        self, solutions: List[GibbsFragmentationResult], criteria: str = "Q"
     ) -> List[GibbsFragmentationResult]:
         """Filter multiple solutions based on the R or Q values of the groups.
-        
-        The method analyzes all the solutiones provided and filters them based
-        on wich of them has more polyatomic groups with bigger R or Q values.
-        The user can choose to filter based on R or Q values by setting the
-        `with_bigger` parameter to "R" or "Q" respectively.
+
+        The method analyzes all provided solutions and filters them according
+        to the cumulative contribution of the R or Q values of their polyatomic
+        groups. The returned solutions are those with the maximum sum of the
+        selected R or Q parameter weighted by the occurrence of each polyatomic
+        group. The user can choose to filter based on either R or Q values by
+        setting the `criteria` parameter to `"R"` or `"Q"`, respectively.
 
         Parameters
         ----------
         solutions : List[GibbsFragmentationResult]
             List of Gibbs fragmentation results to filter.
-        with_bigger : str, optional
-            Whether to filter solutions with bigger R or Q values, by default
-            "R"
+        criteria : {"R", "Q"}, optional
+            The criteria to use for filtering, either "R" or "Q", by default
+            "Q"
 
         Returns
         -------
         List[GibbsFragmentationResult]
             Filtered list of Gibbs fragmentation results.
-            
+
         Raises
         ------
         ValueError
-            If with_bigger is not "R" or "Q".
+            If criteria is not "R" or "Q".
         """
-        
-        if with_bigger not in {"R", "Q"}:
+
+        if criteria not in {"R", "Q"}:
             raise ValueError(
-                f"with_bigger must be either 'R' or 'Q', got {with_bigger}"
+                f"criteria must be either 'R' or 'Q', got {criteria}"
             )
 
-        obj_values = np.array([
-            sum(
-                n * self.subgroups_info.loc[group, with_bigger]
-                for group, n in sol.subgroups.items()
-                if self.detection_mols[group].GetNumAtoms() > 1
-            )
-            for sol in solutions
-        ])
+        obj_values = np.array(
+            [
+                sum(
+                    n * self.subgroups_info.loc[group, criteria]
+                    for group, n in sol.subgroups.items()
+                    if self.detection_mols[group].GetNumAtoms() > 1
+                )
+                for sol in solutions
+            ]
+        )
 
-        # Floats tolerances
         idx = np.flatnonzero(np.isclose(obj_values, obj_values.max()))
+
+        return [solutions[i] for i in idx]
+
+    def filter_polarity_contribution(
+        self,
+        solutions: List[GibbsFragmentationResult],
+        criteria: str = "Q",
+        polarity: str = "polar",
+    ) -> List[GibbsFragmentationResult]:
+        """Filter solutions based on R or Q and desired polarity.
+
+        Filter solutions according to the cumulative R or Q contribution
+        of polar or nonpolar groups.
+
+        The method analyzes all provided solutions and computes the cumulative
+        contribution of the selected UNIFAC parameter (`R` or `Q`) over groups
+        classified according to their polarity. A group is considered polar if
+        its SMARTS pattern contains at least one of the following atoms:
+
+        {"O", "N", "S", "P", "F", "Cl", "Br", "I"}.
+
+        For each solution, the selected parameter is multiplied by the
+        occurrence of each matching group and summed over all groups satisfying
+        the selected polarity criterion. The solutions with the maximum
+        cumulative contribution are returned.
+
+        Parameters
+        ----------
+        solutions : List[GibbsFragmentationResult]
+            List of Gibbs fragmentation results to filter.
+
+        criteria : {"R", "Q"}, optional
+            UNIFAC parameter used to compute the contribution score,
+            by default `"Q"`.
+
+        polarity : {"polar", "nonpolar"}, optional
+            Type of groups to consider during filtering,
+            by default `"polar"`.
+
+        Returns
+        -------
+        List[GibbsFragmentationResult]
+            Solutions with the maximum cumulative contribution of the selected
+            parameter for the selected polarity type.
+
+        Raises
+        ------
+        ValueError
+            If `criteria` is not `"R"` or `"Q"`.
+
+        ValueError
+            If `polarity` is not `"polar"` or `"nonpolar"`.
+        """
+
+        if criteria not in {"R", "Q"}:
+            raise ValueError(
+                f"criteria must be either 'R' or 'Q', got {criteria}"
+            )
+
+        if polarity not in {"polar", "nonpolar"}:
+            raise ValueError(
+                "polarity must be either 'polar'"
+                f" or 'nonpolar', got {polarity}"
+            )
+
+        polar_atoms = {"O", "N", "S", "P", "F", "Cl", "Br", "I"}
+
+        sum_sols = []
+
+        for sol in solutions:
+            sol_sum = 0.0
+
+            for group, n in sol.subgroups.items():
+                mol = self.detection_mols[group]
+                is_polar = any(
+                    atom.GetSymbol() in polar_atoms for atom in mol.GetAtoms()
+                )
+
+                check = is_polar if polarity == "polar" else not is_polar
+
+                if check:
+                    sol_sum += n * self.subgroups_info.loc[group, criteria]
+
+            sum_sols.append(sol_sum)
+
+        max_value = max(sum_sols)
+        idx = np.flatnonzero(np.isclose(sum_sols, max_value))
 
         return [solutions[i] for i in idx]
