@@ -2,6 +2,8 @@
 
 from typing import List, Union
 
+import numpy as np
+
 import pandas as pd
 
 from rdkit import Chem
@@ -126,3 +128,51 @@ class GibbsModel(FragmentationModel):
         )
 
         return sol
+
+    def filter_multiple_solutions(
+        self, solutions: List[GibbsFragmentationResult], with_bigger: str = "R"
+    ) -> List[GibbsFragmentationResult]:
+        """Filter multiple solutions based on the R or Q values of the groups.
+        
+        The method analyzes all the solutiones provided and filters them based
+        on wich of them has more polyatomic groups with bigger R or Q values.
+        The user can choose to filter based on R or Q values by setting the
+        `with_bigger` parameter to "R" or "Q" respectively.
+
+        Parameters
+        ----------
+        solutions : List[GibbsFragmentationResult]
+            List of Gibbs fragmentation results to filter.
+        with_bigger : str, optional
+            Whether to filter solutions with bigger R or Q values, by default
+            "R"
+
+        Returns
+        -------
+        List[GibbsFragmentationResult]
+            Filtered list of Gibbs fragmentation results.
+            
+        Raises
+        ------
+        ValueError
+            If with_bigger is not "R" or "Q".
+        """
+        
+        if with_bigger not in {"R", "Q"}:
+            raise ValueError(
+                f"with_bigger must be either 'R' or 'Q', got {with_bigger}"
+            )
+
+        obj_values = np.array([
+            sum(
+                n * self.subgroups_info.loc[group, with_bigger]
+                for group, n in sol.subgroups.items()
+                if self.detection_mols[group].GetNumAtoms() > 1
+            )
+            for sol in solutions
+        ])
+
+        # Floats tolerances
+        idx = np.flatnonzero(np.isclose(obj_values, obj_values.max()))
+
+        return [solutions[i] for i in idx]
