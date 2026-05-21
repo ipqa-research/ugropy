@@ -1,7 +1,7 @@
 setuptools
 
 Sphinx
-sphinx_rtd_theme
+furo
 
 myst-parser
 nbsphinx
