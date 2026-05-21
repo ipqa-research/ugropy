@@ -159,7 +159,6 @@ class GibbsModel(FragmentationModel):
         ValueError
             If criteria is not "R" or "Q".
         """
-
         if criteria not in {"R", "Q"}:
             raise ValueError(
                 f"criteria must be either 'R' or 'Q', got {criteria}"
@@ -212,7 +211,7 @@ class GibbsModel(FragmentationModel):
             UNIFAC parameter used to compute the contribution score,
             by default `"Q"`.
 
-        polarity : {"polar", "nonpolar"}, optional
+        polarity : {"polar", "apolar"}, optional
             Type of groups to consider during filtering,
             by default `"polar"`.
 
@@ -230,16 +229,15 @@ class GibbsModel(FragmentationModel):
         ValueError
             If `polarity` is not `"polar"` or `"nonpolar"`.
         """
-
         if criteria not in {"R", "Q"}:
             raise ValueError(
                 f"criteria must be either 'R' or 'Q', got {criteria}"
             )
 
-        if polarity not in {"polar", "nonpolar"}:
+        if polarity not in {"polar", "apolar"}:
             raise ValueError(
                 "polarity must be either 'polar'"
-                f" or 'nonpolar', got {polarity}"
+                f" or 'apolar', got {polarity}"
             )
 
         polar_atoms = {"O", "N", "S", "P", "F", "Cl", "Br", "I"}

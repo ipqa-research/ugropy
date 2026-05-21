@@ -333,7 +333,6 @@ class FragmentationModel:
         List[FragmentationResult]
             Filtered list of fragmentation results.
         """
-
         if polarity.lower() not in ["polar", "apolar"]:
             raise ValueError("polarity must be either 'polar' or 'apolar'")
 

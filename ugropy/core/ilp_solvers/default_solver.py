@@ -36,7 +36,11 @@ class DefaultSolver(ILPSolver):
         n_frag = len(self.overlapped_fragments)
 
         # Decision variables
-        x = pulp.LpVariable.dicts("x", range(n_frag), cat="Binary")
+        x = problem.add_variable_dicts(
+            "x",
+            indices=range(n_frag),
+            cat="Binary",
+        )
 
         # Objective function
         problem += pulp.lpSum([x[i] for i in range(n_frag)])
