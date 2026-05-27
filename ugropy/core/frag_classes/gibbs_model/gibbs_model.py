@@ -129,7 +129,7 @@ class GibbsModel(FragmentationModel):
 
         return sol
 
-    def filter_polyatomic_criteria(
+    def filter_biggers_polyatomics(
         self, solutions: List[GibbsFragmentationResult], criteria: str = "Q"
     ) -> List[GibbsFragmentationResult]:
         """Filter multiple solutions based on the R or Q values of the groups.
@@ -139,7 +139,8 @@ class GibbsModel(FragmentationModel):
         groups. The returned solutions are those with the maximum sum of the
         selected R or Q parameter weighted by the occurrence of each polyatomic
         group. The user can choose to filter based on either R or Q values by
-        setting the `criteria` parameter to `"R"` or `"Q"`, respectively.
+        setting the `criteria` parameter to `"R"` or `"Q"`, respectively. The
+        solution with bigger polyatomics occurrences (R or Q) will be selected.
 
         Parameters
         ----------

@@ -316,17 +316,18 @@ class FragmentationModel:
         polar or apolar groups (specified by the user). The method inspects all
         the provided solutions and counts how many total atoms are occupied by
         the specified polarity groups. The solutions with the highest number of
-        atoms belonging to the specified polarity groups are returned. A group
-        is considered polar if its SMARTS pattern contains at least one of the
-        following atoms: {"O", "N", "S", "P", "F", "Cl", "Br", "I"}.
+        atoms belonging to the specified polarity groups are returned
+        (hydrogens doesn't count). A group is considered polar if its SMARTS
+        pattern contains at least one of the following atoms: {"O", "N", "S",
+        "P", "F", "Cl", "Br", "I"}.
 
         Parameters
         ----------
         solutions : List[FragmentationResult]
             List of fragmentation results to filter.
         polarity : {"polar", "nonpolar"}, optional
-            The type of polarity groups to consider ("polar" or "apolar").
-            by default, "polar"
+            The type of polarity groups to consider ("polar" or "apolar"). by
+            default, "polar"
 
         Returns
         -------
@@ -352,6 +353,45 @@ class FragmentationModel:
                 check = is_polar if polarity == "polar" else not is_polar
 
                 if check:
+                    sol_sum += sum(len(a) for a in atoms)
+
+            atom_counts.append(sol_sum)
+
+        max_value = max(atom_counts)
+        idx = np.flatnonzero(np.isclose(atom_counts, max_value))
+
+        return [solutions[i] for i in idx]
+
+    def filter_mostly_polyatomic(
+        self, solutions: List[FragmentationResult]
+    ) -> List[FragmentationResult]:
+        """Filter the solutions with most atoms occupied by polyatomic groups.
+
+        Return the solutions with the largest number of atoms belonging to
+        polyatomic groups. The method inspects all the provided solutions and
+        counts how many total atoms are occupied by polyatomic groups. The
+        solutions with the highest number of atoms belonging to polyatomic
+        groups are returned (hydrogens doesn't count).
+
+        Parameters
+        ----------
+        solutions : List[FragmentationResult]
+            List of fragmentation results to filter.
+
+        Returns
+        -------
+        List[FragmentationResult]
+            Filtered list of fragmentation results.
+        """
+        atom_counts = []
+
+        for sol in solutions:
+            sol_sum = 0
+
+            for group, atoms in sol.subgroups_atoms.items():
+                mol = self.detection_mols[group]
+
+                if mol.GetNumAtoms() > 1:
                     sol_sum += sum(len(a) for a in atoms)
 
             atom_counts.append(sol_sum)
