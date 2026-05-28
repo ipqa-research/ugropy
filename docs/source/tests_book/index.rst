@@ -3,6 +3,11 @@ Tests book
 
 .. toctree::
    :maxdepth: 1
+   against_ddbst/ddbst_tests.ipynb
+
+
+.. toctree::
+   :maxdepth: 1
 
    acids.ipynb
    alcohols.ipynb

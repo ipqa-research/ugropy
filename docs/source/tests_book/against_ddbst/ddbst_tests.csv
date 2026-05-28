@@ -1,6 +1,6 @@
 ?: I'm not agree with the solution
 ??: Slow to get multiple solutions
-?!: Rdkit considers aromatic some rings that DDBST not, of course provokes fails
+?!: RDkit considers aromatic some rings that DDBST not, of course provokes fails
 code,smiles,number,solution
 ZOXPZFFPPKVNEA-UHFFFAOYSA-N,CC1=C(C(=CC(=C1Cl)Cl)Cl)Cl,13870,9:1|11:1|53:4
 XMLSXPIVAXONDL-UHFFFAOYSA-N,CCC=CCC1=C(CCC1=O)C,10261,1:2|2:3|19:1|70:1|6:1
