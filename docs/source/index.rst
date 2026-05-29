@@ -4,8 +4,14 @@
    :end-before: <!-- docs-include-end -->
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: User documentation
+
+   tutorial/getting_started.ipynb
+
+
+.. toctree::
+   :maxdepth: 4
 
    tutorial/tutorial
 

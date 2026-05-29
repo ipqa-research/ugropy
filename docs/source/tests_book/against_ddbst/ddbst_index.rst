@@ -3,7 +3,7 @@ DDBST Validation
 
 In this notebook, we evaluate the performance of `ugropy` against the DDBST
 fragmentation database. The database file was originally published in Simon
-Müller's article:
+Müller's article :cite:p:`muller2019`:
 
 https://doi.org/10.1186/s13321-019-0382-3
 

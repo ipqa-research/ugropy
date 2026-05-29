@@ -2,21 +2,20 @@
 
 from typing import List
 
-from ugropy.core.frag_classes.gibbs_model.gibbs_model import GibbsModel
-from ugropy.writers.thermo import to_thermo
+from ugropy.core.frag_classes.gibbs_model.gibbs_result import (
+    GibbsFragmentationResult,
+)
 
 
-def to_yaeos(mol_subgroups_list: List[dict], model: GibbsModel) -> str:
+def to_yaeos(mol_subgroups_list: List[GibbsFragmentationResult]) -> str:
     """Obtain the Fortran source code for yaeos groups definition.
 
     yaeos: https://github.com/ipqa-research/yaeos
 
     Parameters
     ----------
-    mol_subgroups_list : List[dict]
-        List of ugropy subgroups dictionaries.
-    model : GibbsModel
-        Gibbs excess FragmentationModel (unifac, psrk, etc).
+    mol_subgroups_list : List[GibbsFragmentationResult]
+        List of ugropy GibbsModel solutions (UNIFAC, PSRK, Dortmund, etc).
 
     Returns
     -------
@@ -32,15 +31,14 @@ def to_yaeos(mol_subgroups_list: List[dict], model: GibbsModel) -> str:
         "\n"
     )
 
-    # Obtain the dictionary of subgroups for each molecule but with index
-    for i, mol_subgroups in enumerate(mol_subgroups_list):
-        thermo_groups = to_thermo(mol_subgroups, model)
+    subgroups_numbers = [g.subgroups_num for g in mol_subgroups_list]
 
+    for i, mol_subgroups in enumerate(subgroups_numbers):
         molecule_code = (
             f"molecules({i+1})%groups_ids = "
-            f"{list(thermo_groups.keys())}\n"
+            f"{list(mol_subgroups.keys())}\n"
             f"molecules({i+1})%number_of_groups = "
-            f"{list(thermo_groups.values())}\n"
+            f"{list(mol_subgroups.values())}\n"
             "\n"
         )
 
