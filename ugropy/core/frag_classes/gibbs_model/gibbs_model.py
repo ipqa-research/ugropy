@@ -129,7 +129,7 @@ class GibbsModel(FragmentationModel):
 
         return sol
 
-    def filter_biggers_polyatomics(
+    def filter_bigger_polyatomics(
         self, solutions: List[GibbsFragmentationResult], criteria: str = "Q"
     ) -> List[GibbsFragmentationResult]:
         """Filter multiple solutions based on the R or Q values of the groups.

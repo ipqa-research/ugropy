@@ -10,7 +10,7 @@ from ugropy.core.get_rdkit_object import instantiate_mol_object
 
 # path tests
 project_root = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../../tests/")
+    os.path.join(os.path.dirname(__file__), "../../../../tests/")
 )
 
 sys.path.append(project_root)

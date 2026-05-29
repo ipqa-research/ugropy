@@ -44,7 +44,7 @@ exclude_patterns = ["_build", "**.ipynb_checkpoints"]
 # EXTRA CONF
 # =============================================================================
 # nbsphinx
-nbsphinx_execute = "always"
+nbsphinx_execute = "never"
 
 autodoc_member_order = "bysource"
 
@@ -75,11 +75,7 @@ master_doc = "index"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = "furo"
-
-html_theme_options = {
-    "default_mode": "light",
-}
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

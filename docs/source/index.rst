@@ -1,8 +1,11 @@
 .. include:: ../../README.md
    :parser: myst_parser.sphinx_
+   :start-after: <!-- docs-include-start -->
+   :end-before: <!-- docs-include-end -->
 
 .. toctree::
    :maxdepth: 2
+   :caption: User documentation
 
    tutorial/tutorial
 
