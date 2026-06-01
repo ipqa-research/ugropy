@@ -1,11 +1,6 @@
 name: Tox
 
-on:
-  push:
-  pull_request:
-  release:
-    types: [published]
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test-linux:
