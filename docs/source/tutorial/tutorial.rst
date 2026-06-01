@@ -2,7 +2,7 @@ Tutorial
 ========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
    easy_way.ipynb
    gibbs_models.ipynb
