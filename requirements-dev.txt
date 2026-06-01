@@ -11,7 +11,7 @@ myst-parser
 nbsphinx
 sphinx
 sphinx_copybutton
-furo
+sphinx_rtd_theme
 sphinxcontrib.bibtex
 toml
 
