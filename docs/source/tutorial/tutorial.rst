@@ -7,5 +7,6 @@ Tutorial
    easy_way.ipynb
    gibbs_models.ipynb
    properties_estimators.ipynb
-   writers.ipynb
+   filtering.ipynb
    working_with_ugropy.ipynb
+   writers.ipynb

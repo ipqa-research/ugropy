@@ -9,8 +9,7 @@ Core
 .. toctree::
    :maxdepth: 1
 
-   checks
-   get_rdkit_object
-   ilp_solvers/init
    frag_classes/init
-
+   ilp_solvers/init
+   get_rdkit_object
+   checks
