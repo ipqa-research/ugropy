@@ -23,6 +23,7 @@ def test_smiles():
         == joback.get_groups("CCO", identifier_type="smiles").subgroups
     )
 
+
 def test_mol():
     chm = Chem.MolFromInchi("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
     mol = Groups(chm, identifier_type="mol")
