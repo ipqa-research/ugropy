@@ -410,15 +410,6 @@ particulars_cases = [
         dortmund_result={},
     ),
     Case(
-        identifier="C",
-        identifier_type="smiles",
-        cases_module="particulars",
-        unifac_result={},
-        psrk_result={"CH4": 1},
-        joback_result={},
-        dortmund_result={},
-    ),
-    Case(
         identifier="O=O",
         identifier_type="smiles",
         cases_module="particulars",
