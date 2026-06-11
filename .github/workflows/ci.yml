@@ -21,7 +21,7 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"
 
   test-windows:
 
@@ -42,7 +42,7 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"
 
   test-macos:
 
@@ -62,4 +62,4 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"

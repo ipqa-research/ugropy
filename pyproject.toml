@@ -8,6 +8,8 @@ target-version = ["py310"]
 
 [tool.pytest.ini_options]
 markers = [
+    # Ignore on github
+    "not_github: tests that should be ignored on GitHub CI",
     # Models markers
     "unifac: classic UNIFAC model tests",
     "dortmund: Dortmund UNIFAC model tests",
