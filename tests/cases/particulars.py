@@ -296,8 +296,8 @@ particulars_cases = [
         dortmund_result={},
     ),
     Case(
-        identifier="hydrogen peroxide",
-        identifier_type="name",
+        identifier="OO",
+        identifier_type="smiles",
         cases_module="particulars",
         unifac_result={"OH": 2},
         psrk_result={"OH": 2},
@@ -305,8 +305,8 @@ particulars_cases = [
         dortmund_result={},
     ),
     Case(
-        identifier="methane",
-        identifier_type="name",
+        identifier="C",
+        identifier_type="smiles",
         cases_module="particulars",
         unifac_result={},
         psrk_result={"CH4": 1},
