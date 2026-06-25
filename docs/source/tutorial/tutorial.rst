@@ -8,5 +8,6 @@ Tutorial
    gibbs_models.ipynb
    properties_estimators.ipynb
    filtering.ipynb
-   working_with_ugropy.ipynb
+   failing_fragmentations.ipynb
    writers.ipynb
+   power_user.ipynb
