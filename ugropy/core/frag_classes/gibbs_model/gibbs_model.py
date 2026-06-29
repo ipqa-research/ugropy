@@ -27,21 +27,23 @@ class GibbsModel(FragmentationModel):
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     subgroups_info : Union[pd.DataFrame, None], optional
         Information of the model's subgroups (R, Q, subgroup_number,
         main_group), by default None
+    calculate_r_q : bool, optional
+        Whether calculate R and Q values or not, by default True
 
     Attributes
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Columns: 'smarts'
-        (SMARTS representations of the group to detect its precense in the
+        (SMARTS representations of the group to detect its presense in the
         molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column
     subgroups_info : pd.DataFrame
         Information of the model's subgroups. Columns: R, Q, subgroup_number,
         main_group. Index: 'group' (subgroups names)
@@ -88,14 +90,14 @@ class GibbsModel(FragmentationModel):
             molecule, the SMILEs of the molecule or a rdkit Mol object.
         identifier_type : str, optional
             Identifier type of the molecule. Use "name" if you are providing
-            the molecules' name, "smiles" if you are providing the SMILES
-            or "mol" if you are providing a rdkir mol object, by default "name"
+            the molecules' name, "smiles" if you are providing the SMILES or
+            "mol" if you are providing a rdkir mol object, by default "name"
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
-            If False the return will be a FragmentationResult object, if True
-            the return will be a list of FragmentationResult objects.
+            Whether search for multiple solutions or not, by default False If
+            False the return will be a FragmentationResult object, if True the
+            return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional
             If True, the solver will search for non-optimal solutions along
             with the optimal ones. This is useful when the user wants to find

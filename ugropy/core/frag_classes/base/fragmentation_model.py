@@ -33,10 +33,12 @@ class FragmentationModel:
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     allow_overlapping : bool, optional
-        Weather allow overlapping or not, by default False
+        Whether allow overlapping or not, by default False
+    allow_free_atoms : bool, optional
+        Whether allow free atoms or not, by default False
     fragmentation_result : FragmentationResult, optional
         Fragmentation result class, by default FragmentationResult
 
@@ -44,11 +46,11 @@ class FragmentationModel:
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column.
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column.
     """
 
     def __init__(
@@ -102,7 +104,7 @@ class FragmentationModel:
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False If
+            Whether search for multiple solutions or not, by default False If
             False the return will be a FragmentationResult object, if True the
             return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional
@@ -232,7 +234,7 @@ class FragmentationModel:
         solutions_fragments : List[dict]
             Fragments detected in the molecule.
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
+            Whether search for multiple solutions or not, by default False
 
         Returns
         -------

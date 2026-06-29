@@ -86,7 +86,7 @@ class AbdulelahGaniModel:
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
+            Whether search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional

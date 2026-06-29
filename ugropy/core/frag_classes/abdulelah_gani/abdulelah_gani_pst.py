@@ -26,20 +26,24 @@ class AbdulelahGaniPSTModel(FragmentationModel):
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     subgroups_info : pd.DataFrame
         Group's subgroups numbers.
+    allow_overlapping : bool, optional
+        Whether allow overlapping or not, by default False
+    allow_free_atoms : bool, optional
+        Whether allow free atoms or not, by default False
 
     Attributes
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column
     info : pd.DataFrame
         Group's subgroups numbers.
     """
@@ -84,7 +88,7 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False If
+            Whether search for multiple solutions or not, by default False If
             False the return will be a FragmentationResult object, if True the
             return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional

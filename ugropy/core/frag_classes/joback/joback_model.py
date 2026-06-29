@@ -23,7 +23,7 @@ class JobackModel(FragmentationModel):
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     properties_contributions : pd.DataFrame, optional
         Group's properties contributions, by default None.
@@ -32,11 +32,11 @@ class JobackModel(FragmentationModel):
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Columns: 'smarts'
-        (SMARTS representations of the group to detect its precense in the
+        (SMARTS representations of the group to detect its presense in the
         molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column
     properties_contributions : pd.DataFrame
         Group's properties contributions.
     """
@@ -80,7 +80,7 @@ class JobackModel(FragmentationModel):
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
+            Whether search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional
