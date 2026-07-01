@@ -69,6 +69,8 @@ class AbdulelahGaniModel:
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
     ) -> Union[AGaniFragmentationResult, List[AGaniFragmentationResult]]:
         """Get the groups of the molecule.
 
@@ -84,9 +86,21 @@ class AbdulelahGaniModel:
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
+            Whether search for multiple solutions or not, by default False
             If False the return will be a FragmentationResult object, if True
             the return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
+        solver_arguments : dict, optional
+            Dictionary with the arguments to be passed to the solver. For the
+            DefaultSolver of ugropy you can change de PulP solver passing a
+            dictionary like {"solver": "PULP_CBC_CMD"} and change the PulP
+            solver. If empty it will use the default solver arguments, by
+            default {}.
 
         Returns
         -------
@@ -96,7 +110,12 @@ class AbdulelahGaniModel:
             will be a list of FragmentationResult objects.
         """
         primary_groups = self.primary_model.get_groups(
-            identifier, identifier_type, solver, search_multiple_solutions
+            identifier,
+            identifier_type,
+            solver,
+            search_multiple_solutions,
+            search_nonoptimal,
+            solver_arguments,
         )
 
         secondary_groups = self.secondary_model.get_groups(

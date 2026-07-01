@@ -15,6 +15,7 @@ from .core.get_rdkit_object import instantiate_mol_object
 from .core.ilp_solvers.default_solver import DefaultSolver
 from .core.ilp_solvers.ilp_solver import ILPSolver
 from .models.abdulelah_gani_mod import abdulelah_gani
+from .models.dortmundmod import dortmund
 from .models.jobackmod import joback
 from .models.psrkmod import psrk
 from .models.unifacmod import unifac
@@ -45,6 +46,12 @@ class Groups:
         Weather search for multiple solutions or not, by default False
         If False the return will be a FragmentationResult object, if True
         the return will be a list of FragmentationResult objects.
+    search_nonoptimal : bool, optional
+        If True, the solver will search for non-optimal solutions along with
+        the optimal ones. This is useful when the user wants to find all
+        possible combinations of fragments that cover the universe. By default
+        False. If `search_multiple_solutions` is False, this parameter will be
+        ignored.
     normal_boiling_temperature : float, optional
         If provided, will be used to estimate critical temperature, acentric
         factor, and vapor pressure instead of the estimated normal boiling
@@ -65,6 +72,8 @@ class Groups:
         Classic LV-UNIFAC subgroups.
     psrk : Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
         Predictive Soave-Redlich-Kwong subgroups.
+    dortmund : Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]
+        Dortmund UNIFAC subgroups.
     joback : Union[JobackFragmentationResult, List[JobackFragmentationResult]]
         JobackFragmentationResult object that contains the Joback subgroups and
         the estimated properties of the molecule.
@@ -79,6 +88,7 @@ class Groups:
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
         normal_boiling_temperature: float = None,
     ) -> None:
         self.identifier_type = identifier_type.lower()
@@ -94,6 +104,7 @@ class Groups:
             self.identifier_type,
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
         )
 
         # PSRK
@@ -104,6 +115,18 @@ class Groups:
             self.identifier_type,
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
+        )
+
+        # Dortmund
+        self.dortmund: Union[
+            GibbsFragmentationResult, List[GibbsFragmentationResult]
+        ] = dortmund.get_groups(
+            self.identifier,
+            self.identifier_type,
+            solver=solver,
+            search_multiple_solutions=search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
         )
 
         # Joback
@@ -115,6 +138,7 @@ class Groups:
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
             normal_boiling_point=normal_boiling_temperature,
+            search_nonoptimal=search_nonoptimal,
         )
 
         # Abdulelah-Gani
@@ -125,4 +149,5 @@ class Groups:
             self.identifier_type,
             solver=solver,
             search_multiple_solutions=search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
         )

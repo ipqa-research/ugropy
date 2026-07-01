@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 sulfur_cases = [
     Case(
         identifier="C(=S)=S",
@@ -12,6 +11,7 @@ sulfur_cases = [
         unifac_result={"CS2": 1},
         psrk_result={"CS2": 1},
         joback_result={},
+        dortmund_result={"CS2": 1},
     ),
     Case(
         identifier="CCCC1=CC=C(C=C1)C(C)S",
@@ -34,6 +34,7 @@ sulfur_cases = [
             "ring=C<": 2,
             "-SH": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CCCC1=CC=C(CS)C=C1",
@@ -62,6 +63,14 @@ sulfur_cases = [
             "ring=C<": 2,
             "-SH": 1,
         },
+        dortmund_result={
+            "CH3": 1,
+            "ACH": 4,
+            "ACCH2": 1,
+            "CH2SH": 1,
+            "CH2": 1,
+            "AC": 1,
+        },
     ),
     Case(
         identifier="CC1=CC=C(CS)C=C1",
@@ -76,6 +85,7 @@ sulfur_cases = [
             "ring=C<": 2,
             "-SH": 1,
         },
+        dortmund_result={"ACH": 4, "ACCH3": 1, "CH2SH": 1, "AC": 1},
     ),
     Case(
         identifier="SCC1=CC=NC=C1",
@@ -90,6 +100,7 @@ sulfur_cases = [
             "-N= (ring)": 1,
             "-SH": 1,
         },
+        dortmund_result={"ACH": 2, "AC": 1, "AC2H2N": 1, "CH2SH": 1},
     ),
     Case(
         identifier="CS",
@@ -98,6 +109,7 @@ sulfur_cases = [
         unifac_result={"CH3SH": 1},
         psrk_result={"CH3SH": 1},
         joback_result={"-CH3": 1, "-SH": 1},
+        dortmund_result={"CH3SH": 1},
     ),
     Case(
         identifier="CCS",
@@ -106,6 +118,7 @@ sulfur_cases = [
         unifac_result={"CH3": 1, "CH2SH": 1},
         psrk_result={"CH3": 1, "CH2SH": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "-SH": 1},
+        dortmund_result={"CH3": 1, "CH2SH": 1},
     ),
     Case(
         identifier="CSC",
@@ -114,6 +127,7 @@ sulfur_cases = [
         unifac_result={"CH3": 1, "CH3S": 1},
         psrk_result={"CH3": 1, "CH3S": 1},
         joback_result={"-CH3": 2, "-S- (non-ring)": 1},
+        dortmund_result={"CH3": 1, "CH3S": 1},
     ),
     Case(
         identifier="CCSCC",
@@ -122,6 +136,7 @@ sulfur_cases = [
         unifac_result={"CH3": 2, "CH2": 1, "CH2S": 1},
         psrk_result={"CH3": 2, "CH2": 1, "CH2S": 1},
         joback_result={"-CH3": 2, "-CH2-": 2, "-S- (non-ring)": 1},
+        dortmund_result={"CH3": 2, "CH2": 1, "CH2S": 1},
     ),
     Case(
         identifier="CC(C)SC(C)C",
@@ -130,6 +145,7 @@ sulfur_cases = [
         unifac_result={"CH3": 4, "CH": 1, "CHS": 1},
         psrk_result={"CH3": 4, "CH": 1, "CHS": 1},
         joback_result={"-CH3": 4, ">CH-": 2, "-S- (non-ring)": 1},
+        dortmund_result={"CH3": 4, "CH": 1, "CHS": 1},
     ),
     Case(
         identifier="C1CCS(=O)(=O)C1",
@@ -138,6 +154,7 @@ sulfur_cases = [
         unifac_result={"CH2": 2, "(CH2)2SU": 1},
         psrk_result={},
         joback_result={},
+        dortmund_result={"CY-CH2": 2, "(CH2)2SU": 1},
     ),
     Case(
         identifier="CC1CC(S(=O)(=O)C1)C",
@@ -146,6 +163,7 @@ sulfur_cases = [
         unifac_result={"CH3": 2, "CH2": 1, "CH": 1, "CH2CHSU": 1},
         psrk_result={},
         joback_result={},
+        dortmund_result={"CH3": 2, "CY-CH2": 1, "CY-CH": 1, "CH2SUCH": 1},
     ),
     Case(
         identifier="CC(C)S",
@@ -154,6 +172,7 @@ sulfur_cases = [
         unifac_result={},
         psrk_result={"CH3": 2, "CHSH": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "-SH": 1},
+        dortmund_result={},
     ),
     Case(
         identifier="CC(S)C1=CC=CC=C1",
@@ -168,6 +187,7 @@ sulfur_cases = [
             "ring=C<": 1,
             "-SH": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(C)(C)S",
@@ -176,5 +196,36 @@ sulfur_cases = [
         unifac_result={},
         psrk_result={"CH3": 3, "CSH": 1},
         joback_result={"-CH3": 3, ">C<": 1, "-SH": 1},
+        dortmund_result={},
+    ),
+    Case(
+        identifier="CSSC",
+        identifier_type="smiles",
+        cases_module="sulfur",
+        commentary="dimethyl disulfide",
+        unifac_result={"CH3S": 2},
+        psrk_result={"CH3S": 2},
+        joback_result={"-CH3": 2, "-S- (non-ring)": 2},
+        dortmund_result={"CH3": 2, "-S-S-": 1},
+    ),
+    Case(
+        identifier="CCSSCC",
+        identifier_type="smiles",
+        cases_module="sulfur",
+        commentary="dimethyl disulfide",
+        unifac_result={"CH2S": 2, "CH3": 2},
+        psrk_result={"CH2S": 2, "CH3": 2},
+        joback_result={"-CH3": 2, "-CH2-": 2, "-S- (non-ring)": 2},
+        dortmund_result={"CH3": 2, "CH2": 2, "-S-S-": 1},
+    ),
+    Case(
+        identifier="CC(C)SSC(C)C",
+        identifier_type="smiles",
+        cases_module="sulfur",
+        commentary="dimethyl disulfide",
+        unifac_result={"CHS": 2, "CH3": 4},
+        psrk_result={"CHS": 2, "CH3": 4},
+        joback_result={"-CH3": 4, ">CH-": 2, "-S- (non-ring)": 2},
+        dortmund_result={"CH3": 4, "CH": 2, "-S-S-": 1},
     ),
 ]

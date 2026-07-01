@@ -36,7 +36,11 @@ class DefaultSolver(ILPSolver):
         n_frag = len(self.overlapped_fragments)
 
         # Decision variables
-        x = pulp.LpVariable.dicts("x", range(n_frag), cat="Binary")
+        x = problem.add_variable_dicts(
+            "x",
+            indices=range(n_frag),
+            cat="Binary",
+        )
 
         # Objective function
         problem += pulp.lpSum([x[i] for i in range(n_frag)])
@@ -56,17 +60,19 @@ class DefaultSolver(ILPSolver):
         if not_valid_solutions:
             opt = np.sum(np.array(not_valid_solutions[0], dtype=int))
 
-            problem += pulp.lpSum([x[i] for i in range(n_frag)]) == opt
+            if not self.search_nonoptimal:
+                # Do you want to search only optimals solutions?
+                problem += pulp.lpSum([x[i] for i in range(n_frag)]) == opt
 
         # Constaints 3: already got solutions not allowed
         for solution in not_valid_solutions:
             problem += (
                 pulp.lpSum([x[i] * solution[i] for i in range(n_frag)])
-                <= opt - 1
+                <= pulp.lpSum([solution[i] for i in range(n_frag)]) - 1
             )
 
         # Solver configuration verbosity
-        solver = pulp.getSolver("PULP_CBC_CMD", msg=False)
+        solver = pulp.getSolver(self.solver_arguments["solver"], msg=False)
 
         # Solve
         problem.solve(solver)

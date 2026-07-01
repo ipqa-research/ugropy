@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 nitrogen_cases = [
     Case(
         identifier="CC1(CC(CC(C1)(C)CN=C=O)N=C=O)C",
@@ -24,6 +23,7 @@ nitrogen_cases = [
             "=O (other than above)": 2,
             "-N= (non-ring)": 2,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(=O)N",
@@ -32,6 +32,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "AMH2": 1},
         psrk_result={"CH3": 1, "AMH2": 1},
         joback_result={"-CH3": 1, ">C=O (non-ring)": 1, "-NH2": 1},
+        dortmund_result={"CH3": 1, "CONH2": 1},
     ),
     Case(
         identifier="CC(=O)NC",
@@ -40,6 +41,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "AMHCH3": 1},
         psrk_result={"CH3": 1, "AMHCH3": 1},
         joback_result={"-CH3": 2, ">C=O (non-ring)": 1, ">NH (non-ring)": 1},
+        dortmund_result={"CH3": 1, "CONHCH3": 1},
     ),
     Case(
         identifier="CCNC(=O)C",
@@ -53,6 +55,21 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CONHCH2": 1},
+    ),
+    Case(
+        identifier="CCNC(=O)CC",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        unifac_result={"CH3": 2, "AMHCH2": 1, "CH2": 1},
+        psrk_result={"CH3": 2, "AMHCH2": 1, "CH2": 1},
+        joback_result={
+            "-CH3": 2,
+            "-CH2-": 2,
+            ">C=O (non-ring)": 1,
+            ">NH (non-ring)": 1,
+        },
+        dortmund_result={"CH3": 2, "CONHCH2": 1, "CH2": 1},
     ),
     Case(
         identifier="CC(=O)N(C)C",
@@ -61,6 +78,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "AM(CH3)2": 1},
         psrk_result={"CH3": 1, "AM(CH3)2": 1},
         joback_result={"-CH3": 3, ">C=O (non-ring)": 1, ">N- (non-ring)": 1},
+        dortmund_result={"CH3": 1, "AM(CH3)2": 1},
     ),
     Case(
         identifier="CCN(C)C(=O)C",
@@ -74,6 +92,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "AMCH3CH2": 1},
     ),
     Case(
         identifier="CCN(CC)C(=O)C",
@@ -87,6 +106,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "AM(CH2)2": 1},
     ),
     Case(
         identifier="CCN(C(C)C)C(=O)NC(C)C",
@@ -102,6 +122,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(C)NC(=O)N(C)C(C)C",
@@ -116,6 +137,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CCN(CC)C(=O)NC(C)C",
@@ -131,6 +153,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 4, "CHNH": 1, "AM(CH2)2": 1},
     ),
     Case(
         identifier="CCN(C)C(=O)NC(C)C",
@@ -146,6 +169,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "CHNH": 1, "AMCH3CH2": 1},
     ),
     Case(
         identifier="CC(C)NC(=O)N(C)C",
@@ -160,6 +184,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CHNH": 1, "AM(CH3)2": 1},
     ),
     Case(
         identifier="CCNC(=O)N(CC)C(C)C",
@@ -175,6 +200,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 4, "CH": 1, "CH2N": 1, "CONHCH2": 1},
     ),
     Case(
         identifier="CCNC(=O)N(C)C(C)C",
@@ -190,6 +216,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "CH": 1, "CH3N": 1, "CONHCH2": 1},
     ),
     Case(
         identifier="CCNC(=O)N(CC)CC",
@@ -204,6 +231,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "CH2NH": 1, "AM(CH2)2": 1},
     ),
     Case(
         identifier="CCNC(=O)N(C)CC",
@@ -218,6 +246,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CH2NH": 1, "AMCH3CH2": 1},
     ),
     Case(
         identifier="CCNC(=O)N(C)C",
@@ -232,6 +261,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH2NH": 1, "AM(CH3)2": 1, "CH3": 1},
     ),
     Case(
         identifier="CCN(C(C)C)C(=O)NC",
@@ -247,6 +277,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 3, "CH": 1, "CH2N": 1, "CONHCH3": 1},
     ),
     Case(
         identifier="CNC(=O)N(C)C(C)C",
@@ -261,6 +292,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CH": 1, "CH3N": 1, "CONHCH3": 1},
     ),
     Case(
         identifier="CCN(CC)C(=O)NC",
@@ -275,6 +307,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CH3NH": 1, "AM(CH2)2": 1},
     ),
     Case(
         identifier="CCN(C)C(=O)NC",
@@ -289,6 +322,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 1, "CH3NH": 1, "AMCH3CH2": 1},
     ),
     Case(
         identifier="CNC(=O)N(C)C",
@@ -302,6 +336,7 @@ nitrogen_cases = [
             ">NH (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3NH": 1, "AM(CH3)2": 1},
     ),
     Case(
         identifier="CC(C)NC(=O)NC(C)C",
@@ -315,6 +350,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 2,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CCNC(=O)NC(C)C",
@@ -329,6 +365,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 2,
         },
+        dortmund_result={"CH3": 3, "CHNH": 1, "CONHCH2": 1},
     ),
     Case(
         identifier="CCNC(=O)NCC",
@@ -342,6 +379,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 2,
         },
+        dortmund_result={"CH3": 2, "CH2NH": 1, "CONHCH2": 1},
     ),
     Case(
         identifier="CNC(=O)NC(C)C",
@@ -355,6 +393,7 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 2,
         },
+        dortmund_result={"CH3": 2, "CHNH": 1, "CONHCH3": 1},
     ),
     Case(
         identifier="CCNC(=O)NC",
@@ -374,6 +413,10 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">NH (non-ring)": 2,
         },
+        dortmund_result=[
+            {"CH2NH": 1, "CONHCH3": 1, "CH3": 1},
+            {"CH3": 1, "CH3NH": 1, "CONHCH2": 1},
+        ],
     ),
     Case(
         identifier="CNC(=O)NC",
@@ -382,6 +425,7 @@ nitrogen_cases = [
         unifac_result={"CH3NH": 1, "AMHCH3": 1},
         psrk_result={"CH3NH": 1, "AMHCH3": 1},
         joback_result={"-CH3": 2, ">C=O (non-ring)": 1, ">NH (non-ring)": 2},
+        dortmund_result={"CH3NH": 1, "CONHCH3": 1},
     ),
     Case(
         identifier="CN",
@@ -390,6 +434,7 @@ nitrogen_cases = [
         unifac_result={"CH3NH2": 1},
         psrk_result={"CH3NH2": 1},
         joback_result={"-CH3": 1, "-NH2": 1},
+        dortmund_result={"CH3NH2": 1},
     ),
     Case(
         identifier="CC(C)N",
@@ -398,6 +443,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 2, "CHNH2": 1},
         psrk_result={"CH3": 2, "CHNH2": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "-NH2": 1},
+        dortmund_result={"CH3": 2, "CHNH2": 1},
     ),
     Case(
         identifier="CCCN",
@@ -406,6 +452,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "CH2": 1, "CH2NH2": 1},
         psrk_result={"CH3": 1, "CH2": 1, "CH2NH2": 1},
         joback_result={"-CH3": 1, "-CH2-": 2, "-NH2": 1},
+        dortmund_result={"CH3": 1, "CH2": 1, "CH2NH2": 1},
     ),
     Case(
         identifier="COC1=C(OC)C2=C3C(CC22CCC(=O)C=C2)NCCC3=C1",
@@ -446,6 +493,29 @@ nitrogen_cases = [
             ">C=O (ring)": 1,
             ">NH (ring)": 1,
         },
+        dortmund_result=[
+            {
+                "CH=CH": 1,
+                "ACH": 1,
+                "AC": 5,
+                "CH2CO": 1,
+                "CH3O": 2,
+                "CH2NH": 1,
+                "CY-CH2": 3,
+                "CY-CH": 1,
+                "CY-C": 1,
+            },
+            {
+                "CH=CH": 1,
+                "ACH": 1,
+                "AC": 5,
+                "CH2CO": 1,
+                "CH3O": 2,
+                "CHNH": 1,
+                "CY-CH2": 4,
+                "CY-C": 1,
+            },
+        ],
     ),
     Case(
         identifier="C1C2=C(C=CN1)C3=CC=CC=C3N2",
@@ -459,6 +529,7 @@ nitrogen_cases = [
             "ring=C<": 4,
             ">NH (ring)": 2,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(C)N(CN)C(C)C",
@@ -473,6 +544,7 @@ nitrogen_cases = [
             "-NH2": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={},
     ),
     Case(
         identifier="CC(C)N(C)CN",
@@ -487,6 +559,7 @@ nitrogen_cases = [
             "-NH2": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CH": 1, "CH2NH2": 1, "CH3N": 1},
     ),
     Case(
         identifier="CC(C)NC(C)NC(C)(C)C",
@@ -495,6 +568,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 6, "C": 1, "CHNH": 2},
         psrk_result={"CH3": 6, "C": 1, "CHNH": 2},
         joback_result={"-CH3": 6, ">CH-": 2, ">C<": 1, ">NH (non-ring)": 2},
+        dortmund_result={"CH3": 6, "C": 1, "CHNH": 2},
     ),
     Case(
         identifier="CC(C)NC(C)N",
@@ -503,6 +577,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 3, "CHNH2": 1, "CHNH": 1},
         psrk_result={"CH3": 3, "CHNH2": 1, "CHNH": 1},
         joback_result={"-CH3": 3, ">CH-": 2, "-NH2": 1, ">NH (non-ring)": 1},
+        dortmund_result={"CH3": 3, "CHNH2": 1, "CHNH": 1},
     ),
     Case(
         identifier="CCC(C)(C)NC(C)C",
@@ -517,6 +592,7 @@ nitrogen_cases = [
             ">C<": 1,
             ">NH (non-ring)": 1,
         },
+        dortmund_result={"CH3": 5, "CH2": 1, "C": 1, "CHNH": 1},
     ),
     Case(
         identifier="CCNC(C)CC",
@@ -531,6 +607,10 @@ nitrogen_cases = [
             {"CH3": 3, "CH2": 1, "CH": 1, "CH2NH": 1},
         ],
         joback_result={"-CH3": 3, "-CH2-": 2, ">CH-": 1, ">NH (non-ring)": 1},
+        dortmund_result=[
+            {"CH3": 3, "CH2": 2, "CHNH": 1},
+            {"CH3": 3, "CH2": 1, "CH": 1, "CH2NH": 1},
+        ],
     ),
     Case(
         identifier="CCCNC",
@@ -545,6 +625,10 @@ nitrogen_cases = [
             {"CH3": 1, "CH2": 2, "CH3NH": 1},
         ],
         joback_result={"-CH3": 2, "-CH2-": 2, ">NH (non-ring)": 1},
+        dortmund_result=[
+            {"CH3": 2, "CH2": 1, "CH2NH": 1},
+            {"CH3": 1, "CH2": 2, "CH3NH": 1},
+        ],
     ),
     Case(
         identifier="CN1CCCC1CC(=O)CC1CCCN1C",
@@ -561,6 +645,26 @@ nitrogen_cases = [
             {"CH3": 2, "CH2": 5, "CH": 2, "CH2CO": 1, "CH2N": 2},
         ],
         joback_result={},
+        dortmund_result=[
+            {
+                "CH3": 2,
+                "CH2": 1,
+                "CH2CO": 1,
+                "CH2N": 2,
+                "CY-CH2": 4,
+                "CY-CH": 2,
+            },
+            {"CH2": 1, "CH2CO": 1, "CH3N": 2, "CY-CH2": 6, "CY-CH": 2},
+            {
+                "CH3": 1,
+                "CH2": 1,
+                "CH2CO": 1,
+                "CH3N": 1,
+                "CH2N": 1,
+                "CY-CH2": 5,
+                "CY-CH": 2,
+            },
+        ],
     ),
     Case(
         identifier="CNC",
@@ -569,6 +673,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "CH3NH": 1},
         psrk_result={"CH3": 1, "CH3NH": 1},
         joback_result={"-CH3": 2, ">NH (non-ring)": 1},
+        dortmund_result={"CH3": 1, "CH3NH": 1},
     ),
     Case(
         identifier="CCNCC",
@@ -577,6 +682,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 2, "CH2": 1, "CH2NH": 1},
         psrk_result={"CH3": 2, "CH2": 1, "CH2NH": 1},
         joback_result={"-CH3": 2, "-CH2-": 2, ">NH (non-ring)": 1},
+        dortmund_result={"CH3": 2, "CH2": 1, "CH2NH": 1},
     ),
     Case(
         identifier="CC(C)NC(C)C",
@@ -585,6 +691,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 4, "CH": 1, "CHNH": 1},
         psrk_result={"CH3": 4, "CH": 1, "CHNH": 1},
         joback_result={"-CH3": 4, ">CH-": 2, ">NH (non-ring)": 1},
+        dortmund_result={"CH3": 4, "CH": 1, "CHNH": 1},
     ),
     Case(
         identifier="CC(C)NCN",
@@ -599,6 +706,7 @@ nitrogen_cases = [
             "-NH2": 1,
             ">NH (non-ring)": 1,
         },
+        dortmund_result={"CH3": 2, "CH2NH2": 1, "CHNH": 1},
     ),
     Case(
         identifier="C1CN2CCC1CC2",
@@ -607,6 +715,7 @@ nitrogen_cases = [
         unifac_result={"CH2": 5, "CH": 1, "CH2N": 1},
         psrk_result={"CH2": 5, "CH": 1, "CH2N": 1},
         joback_result={},
+        dortmund_result={"CY-CH2": 5, "CY-CH": 1, "CH2N": 1},
     ),
     Case(
         identifier="CCN(CC(=O)CC)C1=CC=CC=C1",
@@ -636,6 +745,14 @@ nitrogen_cases = [
             ">C=O (non-ring)": 1,
             ">N- (non-ring)": 1,
         },
+        dortmund_result={
+            "CH3": 2,
+            "CH2": 1,
+            "ACH": 5,
+            "AC": 1,
+            "CH2CO": 1,
+            "CH2N": 1,
+        },
     ),
     Case(
         identifier="CCN(C(C)C)C(C)C",
@@ -644,6 +761,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 5, "CH": 2, "CH2N": 1},
         psrk_result={"CH3": 5, "CH": 2, "CH2N": 1},
         joback_result={"-CH3": 5, "-CH2-": 1, ">CH-": 2, ">N- (non-ring)": 1},
+        dortmund_result={"CH3": 5, "CH": 2, "CH2N": 1},
     ),
     Case(
         identifier="CCN(C)CC",
@@ -658,6 +776,10 @@ nitrogen_cases = [
             {"CH3": 3, "CH2": 1, "CH2N": 1},
         ],
         joback_result={"-CH3": 3, "-CH2-": 2, ">N- (non-ring)": 1},
+        dortmund_result=[
+            {"CH3": 2, "CH2": 2, "CH3N": 1},
+            {"CH3": 3, "CH2": 1, "CH2N": 1},
+        ],
     ),
     Case(
         identifier="CN(C)C",
@@ -666,6 +788,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 2, "CH3N": 1},
         psrk_result={"CH3": 2, "CH3N": 1},
         joback_result={"-CH3": 3, ">N- (non-ring)": 1},
+        dortmund_result={"CH3": 2, "CH3N": 1},
     ),
     Case(
         identifier="CCN(CC)CC",
@@ -674,6 +797,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 3, "CH2": 2, "CH2N": 1},
         psrk_result={"CH3": 3, "CH2": 2, "CH2N": 1},
         joback_result={"-CH3": 3, "-CH2-": 3, ">N- (non-ring)": 1},
+        dortmund_result={"CH3": 3, "CH2": 2, "CH2N": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)N",
@@ -682,6 +806,7 @@ nitrogen_cases = [
         unifac_result={"ACH": 5, "ACNH2": 1},
         psrk_result={"ACH": 5, "ACNH2": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-NH2": 1},
+        dortmund_result={"ACH": 5, "ACNH2": 1},
     ),
     Case(
         identifier="C1=CC2=C(C=C1)C1=C(C=NC=C1)C1=C2C=CC=C1",
@@ -690,6 +815,7 @@ nitrogen_cases = [
         unifac_result={"ACH": 8, "AC": 4, "C5H3N": 1},
         psrk_result={"ACH": 8, "AC": 4, "C5H3N": 1},
         joback_result={"ring=CH-": 11, "ring=C<": 6, "-N= (ring)": 1},
+        dortmund_result={"ACH": 9, "AC": 6, "AC2H2N": 1},
     ),
     Case(
         identifier="CC1=CC(C)=CN=C1",
@@ -703,6 +829,7 @@ nitrogen_cases = [
             "ring=C<": 2,
             "-N= (ring)": 1,
         },
+        dortmund_result={"ACH": 1, "ACCH3": 2, "AC2H2N": 1},
     ),
     Case(
         identifier="O=C1CCC2=C(O1)C=CN=C2",
@@ -716,6 +843,13 @@ nitrogen_cases = [
             "ring=C<": 2,
             "-COO- (ester)": 1,
             "-N= (ring)": 1,
+        },
+        dortmund_result={
+            "ACH": 1,
+            "AC": 2,
+            "CH2COO": 1,
+            "AC2H2N": 1,
+            "CY-CH2": 1,
         },
     ),
     Case(
@@ -731,6 +865,14 @@ nitrogen_cases = [
             "ring=C<": 3,
             "-N= (ring)": 1,
         },
+        dortmund_result={
+            "CH3": 1,
+            "CH2": 1,
+            "ACH": 6,
+            "AC": 1,
+            "ACCH2": 2,
+            "AC2H2N": 1,
+        },
     ),
     Case(
         identifier="CN1CCCC1C2=CN=CC=C2",
@@ -745,6 +887,25 @@ nitrogen_cases = [
             {"CH3": 1, "CH2": 2, "CH": 1, "CH2N": 1, "C5H4N": 1},
         ],
         joback_result={},
+        dortmund_result=[
+            {
+                "CH3": 1,
+                "ACH": 2,
+                "AC": 1,
+                "CH2N": 1,
+                "AC2H2N": 1,
+                "CY-CH2": 2,
+                "CY-CH": 1,
+            },
+            {
+                "ACH": 2,
+                "AC": 1,
+                "CH3N": 1,
+                "AC2H2N": 1,
+                "CY-CH2": 3,
+                "CY-CH": 1,
+            },
+        ],
     ),
     Case(
         identifier="CC1=CC(C)=C(C)C=N1",
@@ -758,6 +919,7 @@ nitrogen_cases = [
             "ring=C<": 3,
             "-N= (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "ACH": 1, "ACCH3": 2, "AC2HN": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)C1=CC=NC=C1",
@@ -766,6 +928,7 @@ nitrogen_cases = [
         unifac_result={"ACH": 5, "AC": 1, "C5H4N": 1},
         psrk_result={"ACH": 5, "AC": 1, "C5H4N": 1},
         joback_result={"ring=CH-": 9, "ring=C<": 2, "-N= (ring)": 1},
+        dortmund_result={"ACH": 7, "AC": 2, "AC2H2N": 1},
     ),
     Case(
         identifier="CC(=C)C1=CC=NC=C1",
@@ -781,6 +944,7 @@ nitrogen_cases = [
             "ring=C<": 1,
             "-N= (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "CH2=C": 1, "ACH": 2, "AC": 1, "AC2H2N": 1},
     ),
     Case(
         identifier="CC1=NC=CC(O)=C1",
@@ -795,6 +959,7 @@ nitrogen_cases = [
             "-OH (phenol)": 1,
             "-N= (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "ACH": 2, "ACOH": 1, "AC2HN": 1},
     ),
     Case(
         identifier="C1=CC=NC=C1",
@@ -803,6 +968,7 @@ nitrogen_cases = [
         unifac_result={"C5H5N": 1},
         psrk_result={"C5H5N": 1},
         joback_result={"ring=CH-": 5, "-N= (ring)": 1},
+        dortmund_result={"ACH": 3, "AC2H2N": 1},
     ),
     Case(
         identifier="CC1=CN=CC=C1",
@@ -816,6 +982,7 @@ nitrogen_cases = [
             "ring=C<": 1,
             "-N= (ring)": 1,
         },
+        dortmund_result={"ACH": 2, "ACCH3": 1, "AC2H2N": 1},
     ),
     Case(
         identifier="CC1=C(N=CC=C1)C",
@@ -829,6 +996,21 @@ nitrogen_cases = [
             "ring=C<": 2,
             "-N= (ring)": 1,
         },
+        dortmund_result={"CH3": 1, "ACH": 2, "ACCH3": 1, "AC2HN": 1},
+    ),
+    Case(
+        identifier="CC1=CC=CC(C)=N1",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        unifac_result={"CH3": 2, "C5H3N": 1},
+        psrk_result={"CH3": 2, "C5H3N": 1},
+        joback_result={
+            "-CH3": 2,
+            "ring=CH-": 3,
+            "ring=C<": 2,
+            "-N= (ring)": 1,
+        },
+        dortmund_result={"AC2N": 1, "CH3": 2, "ACH": 3},
     ),
     Case(
         identifier="CC#N",
@@ -837,6 +1019,7 @@ nitrogen_cases = [
         unifac_result={"CH3CN": 1},
         psrk_result={"CH3CN": 1},
         joback_result={"-CH3": 1, "-CN": 1},
+        dortmund_result={"CH3CN": 1},
     ),
     Case(
         identifier="CCC#N",
@@ -845,6 +1028,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "CH2CN": 1},
         psrk_result={"CH3": 1, "CH2CN": 1},
         joback_result={"-CH3": 1, "-CH2-": 1, "-CN": 1},
+        dortmund_result={"CH3": 1, "CH2CN": 1},
     ),
     Case(
         identifier="CCCC1=CC=C(C[N+]([O-])=O)C=C1",
@@ -873,6 +1057,14 @@ nitrogen_cases = [
             "ring=C<": 2,
             "-NO2": 1,
         },
+        dortmund_result={
+            "CH3": 1,
+            "ACH": 4,
+            "ACCH2": 1,
+            "CH2NO2": 1,
+            "CH2": 1,
+            "AC": 1,
+        },
     ),
     Case(
         identifier="[O-][N+](=O)CC1=CC=CC=C1",
@@ -881,6 +1073,7 @@ nitrogen_cases = [
         unifac_result={"ACH": 5, "CH2NO2": 1, "AC": 1},
         psrk_result={"ACH": 5, "CH2NO2": 1, "AC": 1},
         joback_result={"-CH2-": 1, "ring=CH-": 5, "ring=C<": 1, "-NO2": 1},
+        dortmund_result={"ACH": 5, "CH2NO2": 1, "AC": 1},
     ),
     Case(
         identifier="C[N+](=O)[O-]",
@@ -889,6 +1082,7 @@ nitrogen_cases = [
         unifac_result={"CH3NO2": 1},
         psrk_result={"CH3NO2": 1},
         joback_result={"-CH3": 1, "-NO2": 1},
+        dortmund_result={"CH3NO2": 1},
     ),
     Case(
         identifier="CCC[N+](=O)[O-]",
@@ -897,6 +1091,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 1, "CH2": 1, "CH2NO2": 1},
         psrk_result={"CH3": 1, "CH2": 1, "CH2NO2": 1},
         joback_result={"-CH3": 1, "-CH2-": 2, "-NO2": 1},
+        dortmund_result={"CH3": 1, "CH2": 1, "CH2NO2": 1},
     ),
     Case(
         identifier="CC(C)[N+](=O)[O-]",
@@ -905,6 +1100,7 @@ nitrogen_cases = [
         unifac_result={"CH3": 2, "CHNO2": 1},
         psrk_result={"CH3": 2, "CHNO2": 1},
         joback_result={"-CH3": 2, ">CH-": 1, "-NO2": 1},
+        dortmund_result={"CH3": 2, "CHNO2": 1},
     ),
     Case(
         identifier="C1=CC=C(C=C1)[N+](=O)[O-]",
@@ -913,6 +1109,7 @@ nitrogen_cases = [
         unifac_result={"ACH": 5, "ACNO2": 1},
         psrk_result={"ACH": 5, "ACNO2": 1},
         joback_result={"ring=CH-": 5, "ring=C<": 1, "-NO2": 1},
+        dortmund_result={"ACH": 5, "ACNO2": 1},
     ),
     Case(
         identifier="[O-][N+](=O)C1=CC=NC=C1",
@@ -926,5 +1123,40 @@ nitrogen_cases = [
             "-N= (ring)": 1,
             "-NO2": 1,
         },
+        dortmund_result={"ACH": 2, "AC2H2N": 1, "ACNO2": 1},
+    ),
+    Case(
+        identifier="CCC=N",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        unifac_result={},
+        psrk_result={},
+        joback_result={"-CH3": 1, "-CH2-": 1, "=CH-": 1, "=NH": 1},
+        dortmund_result={},
+    ),
+    Case(
+        identifier="CNC=O",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        commentary="n-methylformamide",
+        unifac_result={"HCO": 1, "CH3NH": 1},
+        psrk_result={"HCO": 1, "CH3NH": 1},
+        joback_result={"-CH3": 1, "O=CH- (aldehyde)": 1, ">NH (non-ring)": 1},
+        dortmund_result={"HCONHCH3": 1},
+    ),
+    Case(
+        identifier="CCNC=O",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        commentary="n-ethylformamide",
+        unifac_result={"HCO": 1, "CH2NH": 1, "CH3": 1},
+        psrk_result={"HCO": 1, "CH2NH": 1, "CH3": 1},
+        joback_result={
+            "-CH3": 1,
+            "-CH2-": 1,
+            "O=CH- (aldehyde)": 1,
+            ">NH (non-ring)": 1,
+        },
+        dortmund_result={"HCONHCH2": 1, "CH3": 1},
     ),
 ]

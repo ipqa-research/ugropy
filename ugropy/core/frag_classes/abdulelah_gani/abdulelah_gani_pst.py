@@ -26,20 +26,24 @@ class AbdulelahGaniPSTModel(FragmentationModel):
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     subgroups_info : pd.DataFrame
         Group's subgroups numbers.
+    allow_overlapping : bool, optional
+        Whether allow overlapping or not, by default False
+    allow_free_atoms : bool, optional
+        Whether allow free atoms or not, by default False
 
     Attributes
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column
     info : pd.DataFrame
         Group's subgroups numbers.
     """
@@ -67,6 +71,8 @@ class AbdulelahGaniPSTModel(FragmentationModel):
         identifier_type: str = "name",
         solver: ILPSolver = DefaultSolver,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
     ) -> Union[AGaniPSTFragmentationResult, List[AGaniPSTFragmentationResult]]:
         """Get the groups of a molecule.
 
@@ -77,14 +83,26 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             molecule, the SMILEs of the molecule or a rdkit Mol object.
         identifier_type : str, optional
             Identifier type of the molecule. Use "name" if you are providing
-            the molecules' name, "smiles" if you are providing the SMILES
-            or "mol" if you are providing a rdkir mol object, by default "name"
+            the molecules' name, "smiles" if you are providing the SMILES or
+            "mol" if you are providing a rdkir mol object, by default "name"
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
-            If False the return will be a FragmentationResult object, if True
-            the return will be a list of FragmentationResult objects.
+            Whether search for multiple solutions or not, by default False If
+            False the return will be a FragmentationResult object, if True the
+            return will be a list of FragmentationResult objects.
+        search_nonoptimal : bool, optional
+            If True, the solver will search for non-optimal solutions along
+            with the optimal ones. This is useful when the user wants to find
+            all possible combinations of fragments that cover the universe. By
+            default False. If `search_multiple_solutions` is False, this
+            parameter will be ignored.
+        solver_arguments : dict, optional
+            Dictionary with the arguments to be passed to the solver. For the
+            DefaultSolver of ugropy you can change de PulP solver passing a
+            dictionary like {"solver": "PULP_CBC_CMD"} and change the PulP
+            solver. If empty it will use the default solver arguments, by
+            default {}.
 
         Returns
         -------
@@ -98,6 +116,8 @@ class AbdulelahGaniPSTModel(FragmentationModel):
             identifier_type,
             solver,
             search_multiple_solutions,
+            search_nonoptimal=search_nonoptimal,
+            solver_arguments=solver_arguments,
             subgroups_info=self.subgroups_info,
         )
 

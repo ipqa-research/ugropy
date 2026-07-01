@@ -48,6 +48,14 @@ class ILPSolver(ABC):
     search_multiple_solutions : bool, optional
         If True, the solver will search for multiple solutions, by default
         False
+    search_nonoptimal : bool, optional
+        If True, the solver will search for non-optimal solutions along with
+        the optimal ones. This is useful when the user wants to find all
+        possible combinations of fragments that cover the universe. By default
+        False. If `search_multiple_solutions` is True, this parameter will be
+        ignored.
+    solver_arguments : dict, optional
+        Dictionary with the arguments to be passed to the solver.
 
     Attributes
     ----------
@@ -58,6 +66,9 @@ class ILPSolver(ABC):
         Fragments to choose to cover the universe.
     search_multiple_solutions : bool
         If True, the solver will search for multiple solutions.
+    search_nonoptimal : bool
+        If True, the solver will search for non-optimal solutions along with
+        the optimal ones.
     selected_fragments : List[List[str]]
         Solutions found by the `solve` method. Its a list  that contains the
         different obtained solutions as lists of strings. Each string
@@ -75,10 +86,20 @@ class ILPSolver(ABC):
         overlapped_atoms: List,
         fragments: dict,
         search_multiple_solutions: bool = False,
+        search_nonoptimal: bool = False,
+        solver_arguments: dict = {},
     ):
         self.overlapped_atoms = overlapped_atoms
         self.fragments = fragments
         self.search_multiple_solutions = search_multiple_solutions
+        self.search_nonoptimal = search_nonoptimal
+
+        if solver_arguments == {}:
+            self.solver_arguments = {
+                "solver": "PULP_CBC_CMD",
+            }
+        else:
+            self.solver_arguments = solver_arguments
 
         # Attribute that will store the selected fragments after a
         # `solve` method call.

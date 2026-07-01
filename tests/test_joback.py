@@ -11,7 +11,7 @@ class TestJoback(TCase):
     # Store al the groups detected in all the cases here:
     tested_groups = set()
 
-    def asserts(self, case, solver):
+    def asserts(self, case, solver, arguments):
         if case.joback_result is None:
             pytest.skip(
                 f"No Joback result defined for {case.identifier}, "
@@ -23,6 +23,7 @@ class TestJoback(TCase):
             identifier_type=case.identifier_type,
             solver=solver,
             search_multiple_solutions=True,
+            solver_arguments=arguments,
         )
 
         if len(result) > 1:
@@ -62,5 +63,5 @@ class TestJoback(TCase):
 @pytest.mark.joback
 def test_joback_groups_coverage():
     # Check if all the groups were detected on at least one case
-    for group in TestJoback.tested_groups:
-        assert group in joback.subgroups.index, f"Group {group} not tested"
+    for group in joback.subgroups.index:
+        assert group in TestJoback.tested_groups, f"Group {group} not tested"

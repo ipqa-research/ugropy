@@ -1,4 +1,5 @@
-![logo](logo.png)
+<!-- docs-include-start -->
+![logo](https://github.com/ipqa-research/ugropy/blob/main/logo.png?raw=true)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
@@ -6,6 +7,8 @@
 [![Docs](https://img.shields.io/badge/docs%20-%20green?style=flat&label=Sphinx&link=https%3A%2F%2Fipqa-research.github.io%2Fugropy%2Findex.html)](https://salvadorbrandolin.github.io/ugropy/)
 [![PyPI
 version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
+[![Powered by RDKit](https://img.shields.io/badge/Powered%20by-RDKit-3838ff.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEXc3NwUFP8UPP9kZP+MjP+0tP////9ZXZotAAAAAXRSTlMAQObYZgAAAAFiS0dEBmFmuH0AAAAHdElNRQfmAwsPGi+MyC9RAAAAQElEQVQI12NgQABGQUEBMENISUkRLKBsbGwEEhIyBgJFsICLC0iIUdnExcUZwnANQWfApKCK4doRBsKtQFgKAQC5Ww1JEHSEkAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMi0wMy0xMVQxNToyNjo0NyswMDowMDzr2J4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjItMDMtMTFUMTU6MjY6NDcrMDA6MDBNtmAiAAAAAElFTkSuQmCC)](https://www.rdkit.org/)
+    
 
 `ugropy` is a `Python` library to obtain subgroups from different thermodynamic
 group contribution models using both the name or the SMILES representation of a
@@ -15,20 +18,28 @@ representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
 in the molecule.
 
-`ugropy` is in an early development stage, leaving issues of examples of
-molecules that `ugropy` fails solving the subgroups of a model is very helpful.
+`ugropy` is tested for `Python` 3.10, 3.11, 3.12, 3.13 and 3.14 on Linux,
+Windows and Mac OS.
 
-`ugropy` is tested for `Python` 3.10, 3.11 and 3.12 on Linux, Windows and Mac
-OS.
+<!-- docs-include-end -->
+
+You can access the documentation here: [https://ipqa-research.github.io/ugropy/](https://ipqa-research.github.io/ugropy/)
 
 # Try ugropy now
 You can try `ugropy` without installing it by clicking on the Colab badge.
+
+You can install `ugropy` by:
+
+```shell
+pip install ugropy
+```
 
 # Models implemented
 
 ## Gibbs / EoS models
 - Classic liquid-vapor UNIFAC
 - Predictive Soave-Redlich-Kwong (PSRK)
+- Dortmund (modified UNIFAC)
 
 ## Property estimators
 - Joback
@@ -41,6 +52,7 @@ libraries:
 
 - [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 - [Thermo](https://github.com/CalebBell/thermo)
+- [yaeos (Fortran)](https://github.com/ipqa-research/yaeos)
 
 
 # Example of use
@@ -59,10 +71,12 @@ hexane = Groups("hexane")
 
 print(hexane.unifac.subgroups)
 print(hexane.psrk.subgroups)
+print(hexane.dortmund.subgroups)
 print(hexane.joback.subgroups)
 print(hexane.agani.primary.subgroups)
 ```
 
+    {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'CH3': 2, 'CH2': 4}
     {'-CH3': 2, '-CH2-': 4}
@@ -75,12 +89,14 @@ propanol = Groups("CCCO", "smiles")
 
 print(propanol.unifac.subgroups)
 print(propanol.psrk.subgroups)
+print(propanol.dortmund.subgroups)
 print(propanol.joback.subgroups)
 print(propanol.agani.primary.subgroups)
 ```
 
     {'CH3': 1, 'CH2': 2, 'OH': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
+    {'CH3': 1, 'CH2': 2, 'OH (P)': 1}
     {'-CH3': 1, '-CH2-': 2, '-OH (alcohol)': 1}
     {'CH3': 1, 'CH2': 2, 'OH': 1}
 
@@ -90,8 +106,8 @@ Estimate properties with the Joback and Abdulelah-Gani models!
 limonene = Groups("limonene")
 
 print(limonene.joback.subgroups)
-print(f"{limonene.joback.critical_temperature} K")
-print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
+print(f"{limonene.joback.critical_temperature}")
+print(f"{limonene.joback.vapor_pressure(176 + 273.15)}")
 ```
 
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
@@ -126,6 +142,29 @@ mol.unifac.draw(
 )
 ```
 
+`ugropy` can obtain multiple solutions, even nonoptimal ones if desired. For
+example:
+
+```python
+from ugropy import unifac
+
+
+solutions = unifac.get_groups(
+    "9,10-dihydroanthracene",
+    search_multiple_solutions=True,
+    search_nonoptimal=True
+)
+
+for sol in solutions:
+    print(sol.subgroups)
+```
+
+```
+{'ACH': 8, 'AC': 2, 'ACCH2': 2}
+{'CH2': 1, 'ACH': 8, 'AC': 3, 'ACCH2': 1}
+{'CH2': 2, 'ACH': 8, 'AC': 4}
+```
+
 Write down the [Clapeyron.jl](https://github.com/ClapeyronThermo/Clapeyron.jl)
 .csv input files.
 
@@ -145,23 +184,21 @@ writers.to_clapeyron(
     path="database"
 )
 ```
-Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) subgroups
+Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) and
+[yaeos API Python](https://github.com/ipqa-research/yaeos) subgroups
 
 ```python
 from ugropy import unifac
 
 names = ["hexane", "ethanol"]
 
-grps = [Groups(n) for n in names]
+grps = [unifac.get_groups(n) for n in names]
 
-[writers.to_thermo(g.unifac.subgroups, unifac) for g in grps]
+groups_numbers = [g.subgroups_num for g in grps]
+
+print(groups_numbers)
 ```
 
 ```
 [{1: 2, 2: 4}, {1: 1, 2: 1, 14: 1}]
-```
-
-## Installation
-```
-pip install ugropy
 ```
