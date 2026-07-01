@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ugropy.core.frag_classes.gibbs_model.gibbs_model &mdash; ugropy 3.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=4f6ddb47"></script>
+      <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/getting_started.html">Getting started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ugropy.core.frag_classes.gibbs_model.gibbs_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ugropy.core.frag_classes.gibbs_model.gibbs_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;GibbsModel fragmentation module.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span> <span class="nn">ugropy.core.frag_classes.base.fragmentation_model</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FragmentationModel</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ugropy.core.frag_classes.gibbs_model.gibbs_result</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GibbsFragmentationResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ugropy.core.ilp_solvers.default_solver</span> <span class="kn">import</span> <span class="n">DefaultSolver</span>
+<span class="kn">from</span> <span class="nn">ugropy.core.ilp_solvers.ilp_solver</span> <span class="kn">import</span> <span class="n">ILPSolver</span>
+
+
+<div class="viewcode-block" id="GibbsModel">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel">[docs]</a>
+<span class="k">class</span> <span class="nc">GibbsModel</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GibbsModel it&#39;s a fragmentation model dedicated to Gibbs excess models.</span>
+
+<span class="sd">    unifac, psrk, dortmund are instances of this class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:</span>
+<span class="sd">        &#39;smarts&#39; (SMARTS representations of the group to detect its presense in</span>
+<span class="sd">        the molecule).</span>
+<span class="sd">    subgroups_info : Union[pd.DataFrame, None], optional</span>
+<span class="sd">        Information of the model&#39;s subgroups (R, Q, subgroup_number,</span>
+<span class="sd">        main_group), by default None</span>
+<span class="sd">    calculate_r_q : bool, optional</span>
+<span class="sd">        Whether calculate R and Q values or not, by default True</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subgroups : pd.DataFrame</span>
+<span class="sd">        Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Columns: &#39;smarts&#39;</span>
+<span class="sd">        (SMARTS representations of the group to detect its presense in the</span>
+<span class="sd">        molecule).</span>
+<span class="sd">    detection_mols : dict</span>
+<span class="sd">        Dictionary containing all the rdkit Mol object from the</span>
+<span class="sd">        detection_smarts subgroups column</span>
+<span class="sd">    subgroups_info : pd.DataFrame</span>
+<span class="sd">        Information of the model&#39;s subgroups. Columns: R, Q, subgroup_number,</span>
+<span class="sd">        main_group. Index: &#39;group&#39; (subgroups names)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subgroups</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">subgroups_info</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculate_r_q</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+            <span class="n">allow_overlapping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fragmentation_result</span><span class="o">=</span><span class="n">GibbsFragmentationResult</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_r_q</span> <span class="o">=</span> <span class="n">calculate_r_q</span>
+
+        <span class="c1"># subgroups info</span>
+        <span class="k">if</span> <span class="n">subgroups_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">[],</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;subgroup_number&quot;</span><span class="p">,</span> <span class="s2">&quot;main_group&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">],</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">subgroups_info</span>
+
+<div class="viewcode-block" id="GibbsModel.get_groups">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel.get_groups">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_groups</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+        <span class="n">identifier_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="n">solver</span><span class="p">:</span> <span class="n">ILPSolver</span> <span class="o">=</span> <span class="n">DefaultSolver</span><span class="p">,</span>
+        <span class="n">search_multiple_solutions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_nonoptimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">solver_arguments</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the groups of a molecule.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        identifier : Union[str, Chem.rdchem.Mol]</span>
+<span class="sd">            Identifier of the molecule. You can use either the name of the</span>
+<span class="sd">            molecule, the SMILEs of the molecule or a rdkit Mol object.</span>
+<span class="sd">        identifier_type : str, optional</span>
+<span class="sd">            Identifier type of the molecule. Use &quot;name&quot; if you are providing</span>
+<span class="sd">            the molecules&#39; name, &quot;smiles&quot; if you are providing the SMILES or</span>
+<span class="sd">            &quot;mol&quot; if you are providing a rdkir mol object, by default &quot;name&quot;</span>
+<span class="sd">        solver : ILPSolver, optional</span>
+<span class="sd">            ILP solver class, by default DefaultSolver</span>
+<span class="sd">        search_multiple_solutions : bool, optional</span>
+<span class="sd">            Whether search for multiple solutions or not, by default False If</span>
+<span class="sd">            False the return will be a FragmentationResult object, if True the</span>
+<span class="sd">            return will be a list of FragmentationResult objects.</span>
+<span class="sd">        search_nonoptimal : bool, optional</span>
+<span class="sd">            If True, the solver will search for non-optimal solutions along</span>
+<span class="sd">            with the optimal ones. This is useful when the user wants to find</span>
+<span class="sd">            all possible combinations of fragments that cover the universe. By</span>
+<span class="sd">            default False. If `search_multiple_solutions` is False, this</span>
+<span class="sd">            parameter will be ignored.</span>
+<span class="sd">        solver_arguments : dict, optional</span>
+<span class="sd">            Dictionary with the arguments to be passed to the solver. For the</span>
+<span class="sd">            DefaultSolver of ugropy you can change de PulP solver passing a</span>
+<span class="sd">            dictionary like {&quot;solver&quot;: &quot;PULP_CBC_CMD&quot;} and change the PulP</span>
+<span class="sd">            solver. If empty it will use the default solver arguments, by</span>
+<span class="sd">            default {}.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[GibbsFragmentationResult, List[GibbsFragmentationResult]]</span>
+<span class="sd">            Fragmentation result. If search_multiple_solutions is False the</span>
+<span class="sd">            return will be a FragmentationResult object, if True the return</span>
+<span class="sd">            will be a list of FragmentationResult objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sol</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span>
+            <span class="n">identifier</span><span class="p">,</span>
+            <span class="n">identifier_type</span><span class="p">,</span>
+            <span class="n">solver</span><span class="p">,</span>
+            <span class="n">search_multiple_solutions</span><span class="p">,</span>
+            <span class="n">search_nonoptimal</span><span class="p">,</span>
+            <span class="n">solver_arguments</span><span class="p">,</span>
+            <span class="n">subgroups_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span><span class="p">,</span>
+            <span class="n">calculate_r_q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_calculate_r_q</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sol</span></div>
+
+
+<div class="viewcode-block" id="GibbsModel.filter_bigger_polyatomics">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel.filter_bigger_polyatomics">[docs]</a>
+    <span class="k">def</span> <span class="nf">filter_bigger_polyatomics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">solutions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">],</span> <span class="n">criteria</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter multiple solutions based on the R or Q values of the groups.</span>
+
+<span class="sd">        The method analyzes all provided solutions and filters them according</span>
+<span class="sd">        to the cumulative contribution of the R or Q values of their polyatomic</span>
+<span class="sd">        groups. The returned solutions are those with the maximum sum of the</span>
+<span class="sd">        selected R or Q parameter weighted by the occurrence of each polyatomic</span>
+<span class="sd">        group. The user can choose to filter based on either R or Q values by</span>
+<span class="sd">        setting the `criteria` parameter to `&quot;R&quot;` or `&quot;Q&quot;`, respectively. The</span>
+<span class="sd">        solution with bigger polyatomics occurrences (R or Q) will be selected.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        solutions : List[GibbsFragmentationResult]</span>
+<span class="sd">            List of Gibbs fragmentation results to filter.</span>
+<span class="sd">        criteria : {&quot;R&quot;, &quot;Q&quot;}, optional</span>
+<span class="sd">            The criteria to use for filtering, either &quot;R&quot; or &quot;Q&quot;, by default</span>
+<span class="sd">            &quot;Q&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[GibbsFragmentationResult]</span>
+<span class="sd">            Filtered list of Gibbs fragmentation results.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If criteria is not &quot;R&quot; or &quot;Q&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">criteria</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;criteria must be either &#39;R&#39; or &#39;Q&#39;, got </span><span class="si">{</span><span class="n">criteria</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">obj_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="nb">sum</span><span class="p">(</span>
+                    <span class="n">n</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="n">criteria</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">solutions</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">obj_values</span><span class="p">,</span> <span class="n">obj_values</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">solutions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="GibbsModel.filter_polarity_contribution">
+<a class="viewcode-back" href="../../../../../core/frag_classes/gibbs_model/gibbs_model.html#ugropy.core.frag_classes.gibbs_model.gibbs_model.GibbsModel.filter_polarity_contribution">[docs]</a>
+    <span class="k">def</span> <span class="nf">filter_polarity_contribution</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">solutions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">],</span>
+        <span class="n">criteria</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span>
+        <span class="n">polarity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;polar&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">GibbsFragmentationResult</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter solutions based on R or Q and desired polarity.</span>
+
+<span class="sd">        Filter solutions according to the cumulative R or Q contribution</span>
+<span class="sd">        of polar or nonpolar groups.</span>
+
+<span class="sd">        The method analyzes all provided solutions and computes the cumulative</span>
+<span class="sd">        contribution of the selected UNIFAC parameter (`R` or `Q`) over groups</span>
+<span class="sd">        classified according to their polarity. A group is considered polar if</span>
+<span class="sd">        its SMARTS pattern contains at least one of the following atoms:</span>
+
+<span class="sd">        {&quot;O&quot;, &quot;N&quot;, &quot;S&quot;, &quot;P&quot;, &quot;F&quot;, &quot;Cl&quot;, &quot;Br&quot;, &quot;I&quot;}.</span>
+
+<span class="sd">        For each solution, the selected parameter is multiplied by the</span>
+<span class="sd">        occurrence of each matching group and summed over all groups satisfying</span>
+<span class="sd">        the selected polarity criterion. The solutions with the maximum</span>
+<span class="sd">        cumulative contribution are returned.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        solutions : List[GibbsFragmentationResult]</span>
+<span class="sd">            List of Gibbs fragmentation results to filter.</span>
+
+<span class="sd">        criteria : {&quot;R&quot;, &quot;Q&quot;}, optional</span>
+<span class="sd">            UNIFAC parameter used to compute the contribution score,</span>
+<span class="sd">            by default `&quot;Q&quot;`.</span>
+
+<span class="sd">        polarity : {&quot;polar&quot;, &quot;apolar&quot;}, optional</span>
+<span class="sd">            Type of groups to consider during filtering,</span>
+<span class="sd">            by default `&quot;polar&quot;`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[GibbsFragmentationResult]</span>
+<span class="sd">            Solutions with the maximum cumulative contribution of the selected</span>
+<span class="sd">            parameter for the selected polarity type.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `criteria` is not `&quot;R&quot;` or `&quot;Q&quot;`.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            If `polarity` is not `&quot;polar&quot;` or `&quot;nonpolar&quot;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">criteria</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;criteria must be either &#39;R&#39; or &#39;Q&#39;, got </span><span class="si">{</span><span class="n">criteria</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">polarity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;polar&quot;</span><span class="p">,</span> <span class="s2">&quot;apolar&quot;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;polarity must be either &#39;polar&#39;&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; or &#39;apolar&#39;, got </span><span class="si">{</span><span class="n">polarity</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">polar_atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">}</span>
+
+        <span class="n">sum_sols</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">solutions</span><span class="p">:</span>
+            <span class="n">sol_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+            <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">[</span><span class="n">group</span><span class="p">]</span>
+                <span class="n">is_polar</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span> <span class="ow">in</span> <span class="n">polar_atoms</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span>
+                <span class="p">)</span>
+
+                <span class="n">check</span> <span class="o">=</span> <span class="n">is_polar</span> <span class="k">if</span> <span class="n">polarity</span> <span class="o">==</span> <span class="s2">&quot;polar&quot;</span> <span class="k">else</span> <span class="ow">not</span> <span class="n">is_polar</span>
+
+                <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
+                    <span class="n">sol_sum</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroups_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="n">criteria</span><span class="p">]</span>
+
+            <span class="n">sum_sols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol_sum</span><span class="p">)</span>
+
+        <span class="n">max_value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sum_sols</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">sum_sols</span><span class="p">,</span> <span class="n">max_value</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">solutions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

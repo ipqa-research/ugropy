@@ -1,0 +1,881 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDBST fragmentation database &mdash; ugropy 3.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Internal test cases" href="../internal_tests/internals_index.html" />
+    <link rel="prev" title="DDBST Validation" href="ddbst_index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/getting_started.html">Getting started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tests book</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ddbst_index.html">DDBST Validation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DDBST fragmentation database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Auxiliary-function">Auxiliary function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#First-attempt-success-rate">First-attempt success rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Solution-multiplicity-success-rate">Solution multiplicity success rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Testing-ugropy-multi-solution-filters">Testing ugropy multi-solution filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../internal_tests/internals_index.html">Internal test cases</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Tests book</a></li>
+          <li class="breadcrumb-item"><a href="ddbst_index.html">DDBST Validation</a></li>
+      <li class="breadcrumb-item active">DDBST fragmentation database</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tests_book/against_ddbst/ddbst_tests.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="DDBST-fragmentation-database">
+<h1>DDBST fragmentation database<a class="headerlink" href="#DDBST-fragmentation-database" title="Link to this heading"></a></h1>
+<p>In this notebook, we evaluate the performance of <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> against the DDBST fragmentation database. The database file was originally published in Simon Müller’s article (<a class="reference external" href="https://doi.org/10.1186/s13321-019-0382-3">https://doi.org/10.1186/s13321-019-0382-3</a>) and is hosted in the official repository: <a class="reference external" href="https://github.com/simonmb/fragmentation_algorithm">https://github.com/simonmb/fragmentation_algorithm</a>.</p>
+<p>To run these tests, the database file has been replicated in the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> repository. All rights to the original data are retained by the authors. Both this notebook and the database file are available at: <a class="reference external" href="https://github.com/ipqa-research/ugropy/tree/main/docs/source/tests_book/against_ddbst">https://github.com/ipqa-research/ugropy/tree/main/docs/source/tests_book/against_ddbst</a></p>
+<p>The database file in the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> repository has been slightly modified by adding custom comments for tracking purposes; however, this notebook can be executed using the original, unmodified database file with identical results.</p>
+<p>These comments were added to the “code” column of the file to identify specific edge cases or behaviors for certain molecules of interest. The documentation for these characters can be found at the beginning of the database file, and their meanings are defined as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span></code>: <strong>Disagreement with the database solution.</strong> Indicates cases where <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> yields a different fragmentation than the DDBST solution, and the database solution appears questionable. For the purpose of this test, these molecules are still accounted for as failed solutions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">??</span></code>: <strong>Combinatorial explosion / Slow multi-solution retrieval.</strong> <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> fails to obtain the correct solution on its first attempt. Reaching the correct solution requires exploring all possible alternative fragmentation pathways. Since these molecules exhibit a high number of symmetric multi-solutions, the computational time required to resolve them all is significantly high. Consequently, these molecules are skipped in this test and counted as failed solutions, even though the correct
+solution could eventually be reached with sufficient time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">?!</span></code>: <strong>Aromaticity mismatches.</strong> The RDKit library detects aromatic rings that DDBST considers non-aromatic, which inevitably leads to a mismatch in the group assignment. In this test, these molecules are considered failed solutions.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Skip the comment lines at the beginning of the file</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;ddbst_tests.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>code</th>
+      <th>number</th>
+      <th>solution</th>
+    </tr>
+    <tr>
+      <th>smiles</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CC1=C(C(=CC(=C1Cl)Cl)Cl)Cl</th>
+      <td>ZOXPZFFPPKVNEA-UHFFFAOYSA-N</td>
+      <td>13870</td>
+      <td>9:1|11:1|53:4</td>
+    </tr>
+    <tr>
+      <th>CCC=CCC1=C(CCC1=O)C</th>
+      <td>XMLSXPIVAXONDL-UHFFFAOYSA-N</td>
+      <td>10261</td>
+      <td>1:2|2:3|19:1|70:1|6:1</td>
+    </tr>
+    <tr>
+      <th>C#CCCl</th>
+      <td>LJZPPWWHKPGCHS-UHFFFAOYSA-N</td>
+      <td>12221</td>
+      <td>65:1|44:1</td>
+    </tr>
+    <tr>
+      <th>C1=CN=CC=C1CCN</th>
+      <td>IDLHTECVNDEOIY-UHFFFAOYSA-N</td>
+      <td>83275</td>
+      <td>2:1|29:1|38:1</td>
+    </tr>
+    <tr>
+      <th>C[Si](C)(C)C[Si](C)(C)CCl</th>
+      <td>WBZTYASEAQTKBK-UHFFFAOYSA-N</td>
+      <td>87574</td>
+      <td>1:5|2:1|44:1|81:2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>CN(C)C1=CC=CC2=C1C=CC=C2N(C)C</th>
+      <td>TYMBOHQMUQAOBA-UHFFFAOYSA-N</td>
+      <td>139088</td>
+      <td>1:2|10:4|34:2|9:6</td>
+    </tr>
+    <tr>
+      <th>C=CCCCCCCCCCC=C</th>
+      <td>BPHFKBMQSYYNGQ-UHFFFAOYSA-N</td>
+      <td>30874</td>
+      <td>2:9|5:2</td>
+    </tr>
+    <tr>
+      <th>C=CC#N.C1=CC(=CC(=C1)CN)CN</th>
+      <td>XMEXUJUMKRUUNG-UHFFFAOYSA-N</td>
+      <td>71311341</td>
+      <td>9:4|10:2|68:1|29:2</td>
+    </tr>
+    <tr>
+      <th>CCN(CC)CCOC(=O)C1=C(C=C(C=C1)N)O</th>
+      <td>GHSCYMOJHVOGDJ-UHFFFAOYSA-N</td>
+      <td>68097</td>
+      <td>1:2|2:3|35:1|36:1|9:3|10:1|77:1|17:1</td>
+    </tr>
+    <tr>
+      <th>CC1CC(C2=CC=CC=C12)C</th>
+      <td>IIJUYSSJMAITHJ-UHFFFAOYSA-N</td>
+      <td>20143</td>
+      <td>1:2|2:1|13:2|9:4</td>
+    </tr>
+  </tbody>
+</table>
+<p>28675 rows × 3 columns</p>
+</div></div>
+</div>
+<section id="Auxiliary-function">
+<h2>Auxiliary function<a class="headerlink" href="#Auxiliary-function" title="Link to this heading"></a></h2>
+<p>The following function converts the DDBST fragmentation strings into a dictionary format compatible with <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> outputs. While the DDBST database provides fragmentation results as a serialized string of group IDs and counts, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> returns a Python dictionary. This function parses the DDBST string into a matching dictionary to facilitate a direct comparison.</p>
+<p><strong>Example:</strong></p>
+<p>For a given DDBST string representing a molecule’s functional groups: <code class="docutils literal notranslate"><span class="pre">&quot;9:1|11:1|53:4&quot;</span></code></p>
+<p>The function processes it as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;9:1|11:1|53:4&quot; -&gt; get_sol_dict -&gt; {&quot;ACH&quot;: 1, &quot;ACCH3&quot;: 1, &quot;ACCL&quot;: 4}
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to convert the solution string into a dictionary of group</span>
+<span class="c1"># occurrences. E.g. 9:1|11:1|53:4 -&gt; {&#39;ACH&#39;: 1, &#39;ACCH3&#39;: 1, &#39;ACCL&#39;: 4}</span>
+<span class="n">subgroup_lookup</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">unifac</span><span class="o">.</span><span class="n">subgroups_info</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;subgroup_number&quot;</span><span class="p">)[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_sol_dict</span><span class="p">(</span><span class="n">solution</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">subgroup_lookup</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">g</span><span class="p">)]:</span> <span class="nb">int</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">solution</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">))</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="First-attempt-success-rate">
+<h2>First-attempt success rate<a class="headerlink" href="#First-attempt-success-rate" title="Link to this heading"></a></h2>
+<p>Due to the nature of the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> fragmentation algorithm, certain molecules may exhibit solution multiplicity. In these cases, the first generated solution might not match the expected one, even though the correct fragmentation can be obtained by exploring all the solutions. In this specific test, we evaluate only the success rate of the <strong>first obtained solution</strong>.</p>
+<p>The following counters and lists track the benchmarking results:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count_total</span></code>: Total number of molecules evaluated (at the end is the same as the total rows processed from the dataframe).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_first_correct</span></code>: Number of molecules where the first solution obtained by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> matches the DDBST database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_skipped</span></code>: Number of molecules skipped due to the <code class="docutils literal notranslate"><span class="pre">??</span></code> tag (tracked as failed solutions for this test).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smiles_incorrects</span></code>: SMILES strings of the molecules that failed on the first attempt. These are stored for later analysis to determine if they can be resolved via multi-solution search.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sol_expected_incorrects</span></code>: The expected DDBST solution dictionaries for the failed cases, stored to avoid parsing the raw strings again during post-analysis.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_total</span> <span class="o">=</span> <span class="mi">0</span>                 <span class="c1"># Total number of solutions compared</span>
+<span class="n">count_first_correct</span> <span class="o">=</span> <span class="mi">0</span>         <span class="c1"># Number of times the first solution matches</span>
+<span class="n">count_skipped</span> <span class="o">=</span> <span class="mi">0</span>               <span class="c1"># Number of solutions skipped due to &quot;??&quot;</span>
+<span class="n">smiles_incorrects</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c1"># List of SMILES for which the first solution is incorrect</span>
+<span class="n">sol_expected_incorrects</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># List of expected solutions for the incorrect cases</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">solution</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;solution&quot;</span><span class="p">]):</span>
+
+    <span class="n">count_total</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="s2">&quot;??&quot;</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+        <span class="n">count_skipped</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="n">ddbst_sol</span> <span class="o">=</span> <span class="n">get_sol_dict</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+    <span class="n">ugropy_sol</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">subgroups</span>
+
+    <span class="k">if</span> <span class="n">ddbst_sol</span> <span class="o">==</span> <span class="n">ugropy_sol</span><span class="p">:</span>
+        <span class="n">count_first_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">smiles_incorrects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="n">sol_expected_incorrects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ddbst_sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Following the initial evaluation (which takes approximately 2 minutes on a standard desktop computer), we can compute the primary performance metrics for <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count_compared</span></code>: The number of molecules evaluated in the comparison (total molecules minus those skipped).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_incorrect</span></code>: The number of molecules that failed on the first attempt (the sum of the <code class="docutils literal notranslate"><span class="pre">smiles_incorrects</span></code> list plus the skipped molecules).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pct_correct</span></code>: The first-attempt success rate, calculated as: <code class="docutils literal notranslate"><span class="pre">count_first_correct</span> <span class="pre">/</span> <span class="pre">count_total</span> <span class="pre">*</span> <span class="pre">100</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pct_incorrect</span></code>: The first-attempt failure rate, calculated as: <code class="docutils literal notranslate"><span class="pre">count_incorrect</span> <span class="pre">/</span> <span class="pre">count_total</span> <span class="pre">*</span> <span class="pre">100</span></code>.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_compared</span> <span class="o">=</span> <span class="n">count_total</span> <span class="o">-</span> <span class="n">count_skipped</span>
+<span class="n">count_incorrect</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_incorrects</span><span class="p">)</span> <span class="o">+</span> <span class="n">count_skipped</span>
+<span class="n">pct_correct</span> <span class="o">=</span> <span class="n">count_first_correct</span> <span class="o">/</span> <span class="n">count_total</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">pct_incorrect</span> <span class="o">=</span> <span class="n">count_incorrect</span> <span class="o">/</span> <span class="n">count_total</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;UGROPY VALIDATION RESULTS&#39;</span><span class="si">:</span><span class="s2">^45</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total molecules:     </span><span class="si">{</span><span class="n">count_total</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Skipped (??):        </span><span class="si">{</span><span class="n">count_skipped</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Compared:            </span><span class="si">{</span><span class="n">count_compared</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Correct:          </span><span class="si">{</span><span class="n">count_first_correct</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_correct</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Incorrect:        </span><span class="si">{</span><span class="n">count_incorrect</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_incorrect</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=============================================
+          UGROPY VALIDATION RESULTS
+=============================================
+  Total molecules:      28675
+  Skipped (??):            29
+  Compared:             28646
+---------------------------------------------
+  ✅ Correct:           26567  (92.649%)
+  ❌ Incorrect:          2108  (7.351%)
+=============================================
+</pre></div></div>
+</div>
+</section>
+<section id="Solution-multiplicity-success-rate">
+<h2>Solution multiplicity success rate<a class="headerlink" href="#Solution-multiplicity-success-rate" title="Link to this heading"></a></h2>
+<p>From the solutions that failed on the first attempt, we can analyze how many of them can be resolved by exploring all the alternative solutions generated by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. This analysis provides insight into the algorithm’s ability to eventually find the correct fragmentation, even if it is not the first choice. In this analysis, a solution is considered correct if the expected DDBST solution is found within any of the alternative paths generated by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. This process takes around 1 minute on
+a standard desktop computer.</p>
+<p>The following counters and lists track the results of this analysis:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count_multiplicity_correct</span></code>: The number of molecules that were initially incorrect but could be resolved by exploring all alternative solutions (additional correct solutions found).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">store_multiple_solutions</span></code>: A list that stores the alternative solutions generated by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> where one of them was correct. This is used later to test the different multi-solution filters that <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> provides (avoiding the need to search for them again in subsequent tests).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smiles_multiple_correct</span></code>: The SMILES strings of the molecules successfully resolved by exploring all solutions. This is also used later to test the different multi-solution filters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expected_multiple_correct</span></code>: The expected DDBST solution dictionaries for the molecules successfully resolved by exploring all solutions. This is also stored to test the different multi-solution filters later.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incorrects_smiles</span></code>: The SMILES strings of the molecules that remain incorrect even after exploring all alternative solutions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incorrects_expected</span></code>: The expected DDBST solution dictionaries for the molecules that remain incorrect even after exploring all alternative solutions.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_multiplicity_correct</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># Counts correct solutions for molecules with solutions multiplicity</span>
+<span class="n">store_multiple_solutions</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># List multiple solutions for filters testing</span>
+<span class="n">smiles_multiple_correct</span> <span class="o">=</span> <span class="p">[]</span>        <span class="c1"># Store SMILES of molecules with multiple correct solutions</span>
+<span class="n">expected_multiple_correct</span> <span class="o">=</span> <span class="p">[]</span>      <span class="c1"># Store expected solutions of molecules with multiple correct solutions</span>
+<span class="n">incorrects_smiles</span> <span class="o">=</span> <span class="p">[]</span>              <span class="c1"># Store SMILES of definitely incorrect solutions</span>
+<span class="n">incorrects_expected</span> <span class="o">=</span> <span class="p">[]</span>            <span class="c1"># Store expected solutions of definitely incorrect solutions</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_incorrects</span><span class="p">,</span> <span class="n">sol_expected_incorrects</span><span class="p">):</span>
+    <span class="n">solutions</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sols_groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">sol</span><span class="o">.</span><span class="n">subgroups</span> <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">solutions</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">sols_groups</span><span class="p">:</span>
+        <span class="n">count_multiplicity_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">smiles_multiple_correct</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="n">expected_multiple_correct</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span>
+        <span class="n">store_multiple_solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">incorrects_smiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="n">incorrects_expected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>After this secondary evaluation, we can analyze the following cumulative metrics:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count_total_correct</span></code>: The total number of successfully fragmented molecules, either on the first attempt or through multi-solution search, calculated as: <code class="docutils literal notranslate"><span class="pre">count_first_correct</span> <span class="pre">+</span> <span class="pre">count_multiplicity_correct</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_definitely_incorrect</span></code>: The number of molecules that remain unresolved even after exploring all alternative paths, calculated as the length of <code class="docutils literal notranslate"><span class="pre">incorrects_smiles</span></code>. Note that skipped molecules are excluded here since they were not processed in the multi-solution search loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_total_incorrect</span></code>: The total number of failed cases, combining both unresolved molecules and skipped ones, calculated as: <code class="docutils literal notranslate"><span class="pre">count_definitely_incorrect</span> <span class="pre">+</span> <span class="pre">count_skipped</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pct_total_correct</span></code>: The overall success rate considering both first-attempt matches and multi-solution resolutions, calculated as: <code class="docutils literal notranslate"><span class="pre">count_total_correct</span> <span class="pre">/</span> <span class="pre">count_total</span> <span class="pre">*</span> <span class="pre">100</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pct_multi</span></code>: The percentage of total dataset molecules that were successfully resolved specifically via multi-solution search, calculated as: <code class="docutils literal notranslate"><span class="pre">count_multiplicity_correct</span> <span class="pre">/</span> <span class="pre">count_total</span> <span class="pre">*</span> <span class="pre">100</span></code>. This metric reflects the fraction of the complete dataset that required exploring alternative pathways to achieve a correct fragmentation.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_total_correct</span> <span class="o">=</span> <span class="n">count_first_correct</span> <span class="o">+</span> <span class="n">count_multiplicity_correct</span>
+<span class="n">count_definitely_incorrect</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">incorrects_smiles</span><span class="p">)</span>
+<span class="n">count_total_incorrect</span> <span class="o">=</span> <span class="n">count_definitely_incorrect</span> <span class="o">+</span> <span class="n">count_skipped</span>
+<span class="n">pct_total_correct</span> <span class="o">=</span> <span class="n">count_total_correct</span> <span class="o">/</span> <span class="n">count_total</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">pct_multi</span> <span class="o">=</span> <span class="n">count_multiplicity_correct</span> <span class="o">/</span> <span class="n">count_total</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">pct_not_correct</span> <span class="o">=</span> <span class="n">count_total_incorrect</span> <span class="o">/</span> <span class="n">count_total</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;UGROPY VALIDATION RESULTS&#39;</span><span class="si">:</span><span class="s2">^45</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total molecules:     </span><span class="si">{</span><span class="n">count_total</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Skipped (??):        </span><span class="si">{</span><span class="n">count_skipped</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Compared:            </span><span class="si">{</span><span class="n">count_compared</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Correct (first):  </span><span class="si">{</span><span class="n">count_first_correct</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_correct</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Correct (multiple):  </span><span class="si">{</span><span class="n">count_multiplicity_correct</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_multi</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;                          </span><span class="si">{</span><span class="s1">&#39;─&#39;</span><span class="o">*</span><span class="mi">19</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Total correct:    </span><span class="si">{</span><span class="n">count_total_correct</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_total_correct</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Incorrect:        </span><span class="si">{</span><span class="n">count_total_incorrect</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="n">pct_not_correct</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=============================================
+          UGROPY VALIDATION RESULTS
+=============================================
+  Total molecules:      28675
+  Skipped (??):            29
+  Compared:             28646
+---------------------------------------------
+  ✅ Correct (first):      26567  (92.649%)
+  ✅ Correct (multiple):    1817  (6.337%)
+                          ───────────────────
+  ✅ Total correct:        28384  (98.985%)
+  ❌ Incorrect:              291  (1.015%)
+=============================================
+</pre></div></div>
+</div>
+</section>
+<section id="Testing-ugropy-multi-solution-filters">
+<h2>Testing ugropy multi-solution filters<a class="headerlink" href="#Testing-ugropy-multi-solution-filters" title="Link to this heading"></a></h2>
+<p>Now we are going to evaluate the different multi-solution filters provided by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. The objective is to determine which filter performs best at selecting the correct solution from the multiple alternatives generated by the algorithm. For a detailed explanation of how each filter operates, please refer to the tutorial documentation.</p>
+<p>The variables <code class="docutils literal notranslate"><span class="pre">smiles_multiple_correct</span></code> and <code class="docutils literal notranslate"><span class="pre">expected_multiple_correct</span></code> contain the molecules that required a multi-solution search to reach the correct fragmentation (SMILES and expected solution). Additionally, <code class="docutils literal notranslate"><span class="pre">store_multiple_solutions</span></code> holds the alternative solutions generated by <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> for these specific molecules.</p>
+<p>The next variable <code class="docutils literal notranslate"><span class="pre">count_multiple_needed</span></code> represents the total number of molecules that required a multi-solution search. For each filter, we will count how many of these cases are correctly resolved and compute their respective success rates.</p>
+<p>In some cases, a filter may fail to select a unique correct solution. Naturally, those ambiguous cases are not counted as successful resolutions, but the corresponding code block can be uncommented to print them for further analysis. The other way of obtaining a fail case is when filters retain an unique solution but, of course, is the incorrect one.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_multiple_needed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of molecules that needed multiplicity to be correct: </span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of molecules that needed multiplicity to be correct: 1817
+</pre></div></div>
+</div>
+<p>First we will evaluate the performance of the base <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> filters which are not specifically designed for a <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> (spoiler: they are very bad for UNIFAC).</p>
+<section id="filter_mostly_polyatomic">
+<h3>filter_mostly_polyatomic<a class="headerlink" href="#filter_mostly_polyatomic" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_mostly_polyatomic</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_mostly_polyatomic</span><span class="p">(</span><span class="n">sols</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions: {[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_mostly_polyatomic</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_mostly_polyatomic: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_mostly_polyatomic</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_mostly_polyatomic</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_mostly_polyatomic: 0/1817 (0.00%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_mostly_polarity-—-polar">
+<h3>filter_mostly_polarity — polar<a class="headerlink" href="#filter_mostly_polarity-—-polar" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_mostly_polarity__polar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_mostly_polarity</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;polar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions: {[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_mostly_polarity__polar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_mostly_polarity (polar): &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_mostly_polarity__polar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_mostly_polarity__polar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_mostly_polarity (polar): 78/1817 (4.29%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_mostly_polarity-—-apolar">
+<h3>filter_mostly_polarity — apolar<a class="headerlink" href="#filter_mostly_polarity-—-apolar" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_mostly_polarity__apolar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_mostly_polarity</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;apolar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions: {[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_mostly_polarity__apolar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_mostly_polarity (apolar): &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_mostly_polarity__apolar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_mostly_polarity__apolar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_mostly_polarity (apolar): 0/1817 (0.00%)
+</pre></div></div>
+</div>
+<p>Now we are going to evaluate the performance of the multi-solution filter specifically designed for Gibbs models.</p>
+</section>
+<section id="filter_bigger_polyatomics-—-Q">
+<h3>filter_bigger_polyatomics — Q<a class="headerlink" href="#filter_bigger_polyatomics-—-Q" title="Link to this heading"></a></h3>
+<p>The <span class="math notranslate nohighlight">\(Q\)</span> parameters (surface area fractions) of each subgroup are highly relevant because they weight the residual term of the excess Gibbs free energy models.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_biggers_polyatomics__Q</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_bigger_polyatomics</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions: {[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_biggers_polyatomics__Q</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_bigger_polyatomics: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_biggers_polyatomics__Q</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_biggers_polyatomics__Q</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_bigger_polyatomics: 1732/1817 (95.32%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_bigger_polyatomics-—-R">
+<h3>filter_bigger_polyatomics — R<a class="headerlink" href="#filter_bigger_polyatomics-—-R" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_biggers_polyatomics__R</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_bigger_polyatomics</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions: {[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_biggers_polyatomics__R</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_bigger_polyatomics: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_biggers_polyatomics__R</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_biggers_polyatomics__R</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_bigger_polyatomics: 1631/1817 (89.76%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_polarity_contribution-—-Q-—-polar">
+<h3>filter_polarity_contribution — Q — polar<a class="headerlink" href="#filter_polarity_contribution-—-Q-—-polar" title="Link to this heading"></a></h3>
+<p>Definitely the most accurate heuristic for UNIFAC implemented in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> at the moment.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_polarity_contribution__Q__polar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_polarity_contribution</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;polar&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SMILES: </span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected solution: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All solutions:</span><span class="si">{</span><span class="p">[</span><span class="n">sol</span><span class="o">.</span><span class="n">subgroups</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">sols</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_polarity_contribution__Q__polar</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SMILES: </span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected solution: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filtered solution: </span><span class="si">{</span><span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All solutions:</span><span class="si">{</span><span class="p">[</span><span class="n">sol</span><span class="o">.</span><span class="n">subgroups</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">sols</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_polarity_contribution: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_polarity_contribution__Q__polar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_polarity_contribution__Q__polar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SMILES: CCC(C)OCOC(C)CC
+Expected solution: {&#39;CH3&#39;: 4, &#39;CH2&#39;: 3, &#39;CHO&#39;: 2}
+Filtered solution: {&#39;CH3&#39;: 4, &#39;CH2&#39;: 2, &#39;CH&#39;: 1, &#39;CH2O&#39;: 1, &#39;CHO&#39;: 1}
+All solutions:[{&#39;CH3&#39;: 4, &#39;CH2&#39;: 2, &#39;CH&#39;: 1, &#39;CH2O&#39;: 1, &#39;CHO&#39;: 1}, {&#39;CH3&#39;: 4, &#39;CH2&#39;: 3, &#39;CHO&#39;: 2}]
+----------------------------------------------------------------------------------------------------
+SMILES: CN(CC1COC2=CC=CC=C2O1)C(=O)N(CC=C)CC=C
+Expected solution: {&#39;CH2&#39;: 1, &#39;CH2N&#39;: 1, &#39;CH2=CH&#39;: 2, &#39;ACH&#39;: 4, &#39;AC&#39;: 2, &#39;AMCH3CH2&#39;: 1, &#39;CHO&#39;: 1, &#39;THF&#39;: 1}
+All solutions:[{&#39;CH3&#39;: 1, &#39;CH2=CH&#39;: 2, &#39;ACH&#39;: 4, &#39;AC&#39;: 2, &#39;CHO&#39;: 1, &#39;THF&#39;: 1, &#39;CH2N&#39;: 1, &#39;AM(CH2)2&#39;: 1}, {&#39;CH2&#39;: 1, &#39;CH2=CH&#39;: 2, &#39;ACH&#39;: 4, &#39;AC&#39;: 2, &#39;CHO&#39;: 1, &#39;THF&#39;: 1, &#39;CH2N&#39;: 1, &#39;AMCH3CH2&#39;: 1}, {&#39;CH2&#39;: 1, &#39;CH2=CH&#39;: 2, &#39;ACH&#39;: 4, &#39;AC&#39;: 2, &#39;CHO&#39;: 1, &#39;THF&#39;: 1, &#39;CH3N&#39;: 1, &#39;AM(CH2)2&#39;: 1}]
+----------------------------------------------------------------------------------------------------
+Success rate of filter_polarity_contribution: 1815/1817 (99.89%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_polarity_contribution-—-Q-—-apolar">
+<h3>filter_polarity_contribution — Q — apolar<a class="headerlink" href="#filter_polarity_contribution-—-Q-—-apolar" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_polarity_contribution__Q__apolar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_polarity_contribution</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;apolar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions:{[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_polarity_contribution__Q__apolar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_polarity_contribution: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_polarity_contribution__Q__apolar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_polarity_contribution__Q__apolar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_polarity_contribution: 10/1817 (0.55%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_polarity_contribution-—-R-—-polar">
+<h3>filter_polarity_contribution — R — polar<a class="headerlink" href="#filter_polarity_contribution-—-R-—-polar" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_polarity_contribution__R__polar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_polarity_contribution</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;polar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions:{[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_polarity_contribution__R__polar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_polarity_contribution: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_polarity_contribution__R__polar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_polarity_contribution__R__polar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_polarity_contribution: 1715/1817 (94.39%)
+</pre></div></div>
+</div>
+</section>
+<section id="filter_polarity_contribution-—-R-—-apolar">
+<h3>filter_polarity_contribution — R — apolar<a class="headerlink" href="#filter_polarity_contribution-—-R-—-apolar" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">success_polarity_contribution__R__apolar</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">sols</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smiles_multiple_correct</span><span class="p">,</span> <span class="n">expected_multiple_correct</span><span class="p">,</span> <span class="n">store_multiple_solutions</span><span class="p">):</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">filter_polarity_contribution</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;apolar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if len(filtered) &gt; 1:</span>
+    <span class="c1">#     print(f&quot;SMILES: {smiles}&quot;)</span>
+    <span class="c1">#     print(f&quot;Expected solution: {expected}&quot;)</span>
+    <span class="c1">#     print(f&quot;All solutions:{[sol.subgroups for sol in sols]}&quot;)</span>
+    <span class="c1">#     print(f&quot;-&quot;*100)</span>
+    <span class="c1">#     continue</span>
+
+    <span class="k">if</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subgroups</span><span class="p">:</span>
+        <span class="n">success_polarity_contribution__R__apolar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Success rate of filter_polarity_contribution: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">success_polarity_contribution__R__apolar</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">count_multiple_needed</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">success_polarity_contribution__R__apolar</span><span class="o">/</span><span class="n">count_multiple_needed</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+<span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Success rate of filter_polarity_contribution: 143/1817 (7.87%)
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ddbst_index.html" class="btn btn-neutral float-left" title="DDBST Validation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../internal_tests/internals_index.html" class="btn btn-neutral float-right" title="Internal test cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,2047 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ugropy power users &mdash; ugropy 3.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tests book" href="../tests_book/index.html" />
+    <link rel="prev" title="Ugropy writers" href="writers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="easy_way.html">The Groups class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_models.html">Gibbs Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties_estimators.html">Properties estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html">Filtering multiple solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="failing_fragmentations.html">Failing fragmentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writers.html">Ugropy writers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ugropy power users</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Non-optimal-solutions">Non-optimal solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Changing-the-default-ILP-solver">Changing the default ILP solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Understanding-model-instances-and-their-configuration">Understanding model instances and their configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Changing-the-behavior-of-an-existing-model">Changing the behavior of an existing model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Understanding-which-fragment-is-not-being-detected">Understanding which fragment is not being detected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#User-defined-fragmentation-models">User defined fragmentation models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SMARTS-tutorial">SMARTS tutorial</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#The-basics">The basics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Logical-operators,-ring-constraints,-and-aromaticity">Logical operators, ring constraints, and aromaticity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#More-complex-logical-patterns-and-recursive-SMARTS">More complex logical patterns and recursive SMARTS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Link-nodes">Link-nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Ugropy power users</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/power_user.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Ugropy-power-users">
+<h1>Ugropy power users<a class="headerlink" href="#Ugropy-power-users" title="Link to this heading"></a></h1>
+<p>In this final section of the tutorial, we will explore some advanced features of <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> that were not covered in the previous sections. These features are intended for users who want to customize the behavior of the already implemented models in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> or who want to implement their own models.</p>
+<section id="Non-optimal-solutions">
+<h2>Non-optimal solutions<a class="headerlink" href="#Non-optimal-solutions" title="Link to this heading"></a></h2>
+<p>As explained in previous sections, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> allows you to search for multiple solutions for the models, but all these solutions are optimal (they use the same number of groups to represent the molecule). However, it is possible to search for non-optimal solutions along with the optimal ones. This is useful when you want to find all possible combinations of fragments that cover the molecule. Please note that this feature is intended for research purposes and is not recommended for actually
+modeling molecules.</p>
+<p>We can enable this for all <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> models using the <code class="docutils literal notranslate"><span class="pre">search_nonoptimal</span></code> parameter:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span>
+    <span class="s2">&quot;9,10-dihydroanthracene&quot;</span><span class="p">,</span>
+    <span class="n">search_multiple_solutions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># If this is False, search_nonoptimal is ignored</span>
+    <span class="n">search_nonoptimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Three solutions were found:</span>
+<span class="n">solutions</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f25881316a0&gt;,
+ &lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f2569dff8c0&gt;,
+ &lt;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult at 0x7f2569109d30&gt;]
+</pre></div></div>
+</div>
+<p>We can visualize all the obtained solutions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_5_0.svg" src="../_images/tutorial_power_user_5_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_6_0.svg" src="../_images/tutorial_power_user_6_0.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solutions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_7_0.svg" src="../_images/tutorial_power_user_7_0.svg" />
+</div>
+</div>
+<p>If you are an experienced user of UNIFAC-like models, you may notice that the only “correct” solution is the first one. When non-optimal solutions are enabled, the algorithm will always find the optimal solutions first, and then it will search for non-optimal solutions in a “non-optimal” order.</p>
+</section>
+<section id="Changing-the-default-ILP-solver">
+<h2>Changing the default ILP solver<a class="headerlink" href="#Changing-the-default-ILP-solver" title="Link to this heading"></a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> uses the standard CBC solver from the <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> library. However, <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> supports a wide variety of solvers. Changing the ILP solver can significantly impact the library’s execution time. A great alternative is the <code class="docutils literal notranslate"><span class="pre">XPRESS_PY</span></code> solver.</p>
+<p>First, you must install <code class="docutils literal notranslate"><span class="pre">XPRESS</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>xpress
+</pre></div>
+</div>
+<p>Then, you can change the default solver by passing it as an argument:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;toluene&quot;</span><span class="p">,</span> <span class="n">solver_arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;solver&quot;</span><span class="p">:</span> <span class="s2">&quot;XPRESS_PY&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/runner/.local/lib/python3.12/site-packages/pulp/apis/xpress_api.py:751: LicenseWarning: Using the Community license in this session. If you have a full Xpress license, pass the full path to your license file to xpress.init(). If you want to use the FICO Community license and no longer want to see this message, use the following code before using the xpress module:
+  xpress.init(&#39;/home/runner/.local/lib/python3.12/site-packages/xpresslibs/bin/community-xpauth.xpr&#39;)
+  model = xpress.problem()
+/home/runner/.local/lib/python3.12/site-packages/pulp/apis/xpress_api.py:774: DeprecationWarning: Deprecated in Xpress 9.8: use problem.addCols instead.
+  model.addcols(obj, [0] * (len(obj) + 1), [], [], lb, ub, names, ctype)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_11_1.svg" src="../_images/tutorial_power_user_11_1.svg" />
+</div>
+</div>
+</section>
+<section id="Understanding-model-instances-and-their-configuration">
+<h2>Understanding model instances and their configuration<a class="headerlink" href="#Understanding-model-instances-and-their-configuration" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> is designed using the singleton pattern; therefore, all the models we have been using throughout this tutorial are instances of the <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class. This class possesses several attributes that can be used to inspect the models’ information and definitions.</p>
+<p>Each model in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> is composed of two distinct classes: <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> and <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class contains all the fundamental information about a model, such as its fragment definitions. It serves as the base class required to define a minimal model and implements the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> method. The specific models in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> are not direct instances of this base class, but rather instances of subclasses that inherit from it. For example, the UNIFAC model is an instance of the <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> class (a subclass of <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code>). The advantage of these
+subclasses is that they provide additional methods (such as multiple-solution filtering). Furthermore, a <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> requires more detailed fragment information to be instantiated, such as the <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> parameters.</p>
+<p>Finally, each <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> returns an instance of its specific <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code> subclass when the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> method is called. In the case of a <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code>, the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">GibbsFragmentationResult</span></code> instance (which inherits from <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code>). This architectural design allows different models to perform specific post-processing tasks after fragment detection. For instance, the <code class="docutils literal notranslate"><span class="pre">GibbsFragmentationResult</span></code> class automatically calculates
+the <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> values of the solution, while the <code class="docutils literal notranslate"><span class="pre">JobackFragmentationResult</span></code> class computes the Joback group-contribution properties.</p>
+<p>Understanding this architecture is important because it guarantees that while all models share the core attributes and methods required by the <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> base class, they also offer specialized features depending on their specific subclass.</p>
+<p>Let’s examine the documentation of a base <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class (you can always check the API documentation for the complete list of methods and attributes).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">FragmentationModel</span>
+
+<span class="n">help</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on class FragmentationModel in module ugropy.core.frag_classes.base.fragmentation_model:
+
+class FragmentationModel(builtins.object)
+ |  FragmentationModel(subgroups: pandas.DataFrame, allow_overlapping: bool = False, allow_free_atoms: bool = False, fragmentation_result: ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult = &lt;class &#39;ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult&#39;&gt;) -&gt; None
+ |
+ |  FragmentationModel class.
+ |
+ |  All ugropy supported models are an instance of this class. This class must
+ |  be inherited to create a new type of FragmentationModel.
+ |
+ |  Parameters
+ |  ----------
+ |  subgroups : pd.DataFrame
+ |      Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:
+ |      &#39;smarts&#39; (SMARTS representations of the group to detect its presense in
+ |      the molecule).
+ |  allow_overlapping : bool, optional
+ |      Whether allow overlapping or not, by default False
+ |  allow_free_atoms : bool, optional
+ |      Whether allow free atoms or not, by default False
+ |  fragmentation_result : FragmentationResult, optional
+ |      Fragmentation result class, by default FragmentationResult
+ |
+ |  Attributes
+ |  ----------
+ |  subgroups : pd.DataFrame
+ |      Model&#39;s subgroups. Index: &#39;group&#39; (subgroups names). Mandatory columns:
+ |      &#39;smarts&#39; (SMARTS representations of the group to detect its presense in
+ |      the molecule).
+ |  detection_mols : dict
+ |      Dictionary containing all the rdkit Mol object from the
+ |      detection_smarts subgroups column.
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, subgroups: pandas.DataFrame, allow_overlapping: bool = False, allow_free_atoms: bool = False, fragmentation_result: ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult = &lt;class &#39;ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult&#39;&gt;) -&gt; None
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  detect_fragments(self, molecule: rdkit.Chem.rdchem.Mol) -&gt; dict
+ |      Detect all the fragments in the molecule.
+ |
+ |      Return a dictionary with the detected fragments as keys and a tuple
+ |      with the atoms indexes of the fragment as values. For example, n-hexane
+ |      for the UNIFAC model will return:
+ |
+ |      .. code-block:: python
+ |
+ |          {
+ |              &#39;CH3_0&#39;: (0,),
+ |              &#39;CH3_1&#39;: (5,),
+ |              &#39;CH2_0&#39;: (1,),
+ |              &#39;CH2_1&#39;: (2,),
+ |              &#39;CH2_2&#39;: (3,),
+ |              &#39;CH2_3&#39;: (4,)
+ |          }
+ |
+ |      You may note that multiple occurrence of a fragment name will be
+ |      indexed. The convention is always: &lt;fragment_name&gt;_i where `i` is the
+ |      index of the occurrence.
+ |
+ |      Parameters
+ |      ----------
+ |      mol : Chem.rdchem.Mol
+ |          Molecule to detect the fragments.
+ |
+ |      Returns
+ |      -------
+ |      dict
+ |          Detected fragments in the molecule.
+ |
+ |  filter_mostly_polarity(self, solutions: List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult], polarity: str = &#39;polar&#39;) -&gt; List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult]
+ |      Filter the solutions with most atoms occupied by &#34;polarity&#34; groups.
+ |
+ |      Return the solutions with the largest number of atoms belonging to
+ |      polar or apolar groups (specified by the user). The method inspects all
+ |      the provided solutions and counts how many total atoms are occupied by
+ |      the specified polarity groups. The solutions with the highest number of
+ |      atoms belonging to the specified polarity groups are returned
+ |      (hydrogens doesn&#39;t count). A group is considered polar if its SMARTS
+ |      pattern contains at least one of the following atoms: {&#34;O&#34;, &#34;N&#34;, &#34;S&#34;,
+ |      &#34;P&#34;, &#34;F&#34;, &#34;Cl&#34;, &#34;Br&#34;, &#34;I&#34;}.
+ |
+ |      Parameters
+ |      ----------
+ |      solutions : List[FragmentationResult]
+ |          List of fragmentation results to filter.
+ |      polarity : {&#34;polar&#34;, &#34;nonpolar&#34;}, optional
+ |          The type of polarity groups to consider (&#34;polar&#34; or &#34;apolar&#34;). by
+ |          default, &#34;polar&#34;
+ |
+ |      Returns
+ |      -------
+ |      List[FragmentationResult]
+ |          Filtered list of fragmentation results.
+ |
+ |  filter_mostly_polyatomic(self, solutions: List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult]) -&gt; List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult]
+ |      Filter the solutions with most atoms occupied by polyatomic groups.
+ |
+ |      Return the solutions with the largest number of atoms belonging to
+ |      polyatomic groups. The method inspects all the provided solutions and
+ |      counts how many total atoms are occupied by polyatomic groups. The
+ |      solutions with the highest number of atoms belonging to polyatomic
+ |      groups are returned (hydrogens doesn&#39;t count).
+ |
+ |      Parameters
+ |      ----------
+ |      solutions : List[FragmentationResult]
+ |          List of fragmentation results to filter.
+ |
+ |      Returns
+ |      -------
+ |      List[FragmentationResult]
+ |          Filtered list of fragmentation results.
+ |
+ |  get_groups(self, identifier: Union[str, rdkit.Chem.rdchem.Mol], identifier_type: str = &#39;name&#39;, solver: ugropy.core.ilp_solvers.ilp_solver.ILPSolver = &lt;class &#39;ugropy.core.ilp_solvers.default_solver.DefaultSolver&#39;&gt;, search_multiple_solutions: bool = False, search_nonoptimal: bool = False, solver_arguments: dict = {}, **kwargs) -&gt; Union[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult, List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult]]
+ |      Get the groups of a molecule.
+ |
+ |      Parameters
+ |      ----------
+ |      identifier : Union[str, Chem.rdchem.Mol]
+ |          Identifier of the molecule. You can use either the name of the
+ |          molecule, the SMILEs of the molecule or a rdkit Mol object.
+ |      identifier_type : str, optional
+ |          Identifier type of the molecule. Use &#34;name&#34; if you are providing
+ |          the molecules&#39; name, &#34;smiles&#34; if you are providing the SMILES or
+ |          &#34;mol&#34; if you are providing a rdkir mol object, by default &#34;name&#34;
+ |      solver : ILPSolver, optional
+ |          ILP solver class, by default DefaultSolver
+ |      search_multiple_solutions : bool, optional
+ |          Whether search for multiple solutions or not, by default False If
+ |          False the return will be a FragmentationResult object, if True the
+ |          return will be a list of FragmentationResult objects.
+ |      search_nonoptimal : bool, optional
+ |          If True, the solver will search for non-optimal solutions along
+ |          with the optimal ones. This is useful when the user wants to find
+ |          all possible combinations of fragments that cover the universe. By
+ |          default False. If `search_multiple_solutions` is False, this
+ |          parameter will be ignored.
+ |      solver_arguments : dict, optional
+ |          Dictionary with the arguments to be passed to the solver. For the
+ |          DefaultSolver of ugropy you can change de PulP solver passing a
+ |          dictionary like {&#34;solver&#34;: &#34;PULP_CBC_CMD&#34;} and change the PulP
+ |          solver. If empty it will use the default solver arguments, by
+ |          default {}.
+ |
+ |      Returns
+ |      -------
+ |      Union[FragmentationResult, List[FragmentationResult]]
+ |          Fragmentation result. If search_multiple_solutions is False the
+ |          return will be a FragmentationResult object, if True the return
+ |          will be a list of FragmentationResult objects.
+ |
+ |  mol_preprocess(self, mol: rdkit.Chem.rdchem.Mol) -&gt; rdkit.Chem.rdchem.Mol
+ |      Preprocess the molecule.
+ |
+ |      This method is called before the detection of the fragments. It can be
+ |      used to preprocess the molecule before the detection of the fragments.
+ |      This allow to use RDKit functions to preprocess the molecule and make
+ |      your SMARTS detection easier. The default implementation does nothing
+ |      and leave the mol object as it is. You can inherit this class and
+ |      override this method to preprocess the molecule.
+ |
+ |      Parameters
+ |      ----------
+ |      mol : Chem.rdchem.Mol
+ |          Molecule to preprocess.
+ |
+ |      Returns
+ |      -------
+ |      Chem.rdchem.Mol
+ |          Preprocessed molecule.
+ |
+ |  set_fragmentation_result(self, molecule: rdkit.Chem.rdchem.Mol, solutions_fragments: List[dict], search_multiple_solutions: bool = False, **kwargs) -&gt; Union[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult, List[ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult]]
+ |      Process the solutions and return the FragmentationResult objects.
+ |
+ |      Parameters
+ |      ----------
+ |      molecule : Chem.rdchem.Mol
+ |          Rdkit mol object.
+ |      solutions_fragments : List[dict]
+ |          Fragments detected in the molecule.
+ |      search_multiple_solutions : bool, optional
+ |          Whether search for multiple solutions or not, by default False
+ |
+ |      Returns
+ |      -------
+ |      Union[FragmentationResult, List[FragmentationResult]]
+ |          List of FragmentationResult objects.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+
+</pre></div></div>
+</div>
+<p>You can instantiate a base <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class with the minimum required information.</p>
+<p>This class expects a pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">subgroups</span></code> parameter) that contains a specific index and a mandatory column. The index, named <code class="docutils literal notranslate"><span class="pre">group</span></code>, contains the names of the fragments, and the column, named <code class="docutils literal notranslate"><span class="pre">smarts</span></code>, contains the SMARTS patterns of the fragments.</p>
+<p>The class also accepts a boolean parameter called <code class="docutils literal notranslate"><span class="pre">allow_overlapping</span></code>, which indicates whether the model allows the detected fragments within the molecule to overlap. Similarly, the <code class="docutils literal notranslate"><span class="pre">allow_free_atoms</span></code> argument indicates whether the model allows free atoms (atoms not occupied by any group). Finally, it requires a <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code> class; by default, the base <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code> class is used.</p>
+<p>In the “Getting Started - About the Algorithm” section of the tutorial, we defined some models by identifying the fragments directly with the RDKit library. Now, let’s achieve the same result using the <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class.</p>
+<p>The fragments that we previously defined were:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition of the fragments of our model</span>
+
+<span class="c1"># Aliphatic CH2</span>
+<span class="n">ch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic CH</span>
+<span class="n">ach</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic C without H</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic C bonded with aliphatic CH2</span>
+<span class="n">acch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0][CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="c1"># List of fragments of our model</span>
+<span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch2</span><span class="p">,</span> <span class="n">ach</span><span class="p">,</span> <span class="n">ac</span><span class="p">,</span> <span class="n">acch2</span><span class="p">]</span>
+<span class="n">fragments_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CH2&quot;</span><span class="p">,</span> <span class="s2">&quot;ACH&quot;</span><span class="p">,</span> <span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACCH2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let’s build a DataFrame with this information (later, you can store it as a .csv file and load it with pandas to reinstantiate the model):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">FragmentationModel</span><span class="p">,</span> <span class="n">FragmentationResult</span>
+
+
+<span class="n">subgroups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;CH2&quot;</span><span class="p">,</span> <span class="s2">&quot;ACH&quot;</span><span class="p">,</span> <span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACCH2&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;smarts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;[CX4H2]&quot;</span><span class="p">,</span> <span class="s2">&quot;[cH]&quot;</span><span class="p">,</span> <span class="s2">&quot;[cH0]&quot;</span><span class="p">,</span> <span class="s2">&quot;[cH0][CX4H2]&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="n">subgroups</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>smarts</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH2</th>
+      <td>[CX4H2]</td>
+    </tr>
+    <tr>
+      <th>ACH</th>
+      <td>[cH]</td>
+    </tr>
+    <tr>
+      <th>AC</th>
+      <td>[cH0]</td>
+    </tr>
+    <tr>
+      <th>ACCH2</th>
+      <td>[cH0][CX4H2]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Now, let’s instantiate our model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">our_model</span> <span class="o">=</span> <span class="n">FragmentationModel</span><span class="p">(</span>
+    <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+    <span class="n">allow_overlapping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">allow_free_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fragmentation_result</span><span class="o">=</span><span class="n">FragmentationResult</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We can use this model to fragment a molecule in the same way we used the other <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> models. The result will be a FragmentationResult instance (you can check the API documentation for more details on this class). Let’s test it with the same molecule we used in the “About the Algorithm” section of the tutorial.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">our_model</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;c1ccccc1Cc2ccccc2&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_20_0.svg" src="../_images/tutorial_power_user_20_0.svg" />
+</div>
+</div>
+<p>This returns the result as a dictionary of group occurrences, using the names we defined in our DataFrame as keys:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ACH&#39;: 10, &#39;AC&#39;: 1, &#39;ACCH2&#39;: 1}
+</pre></div></div>
+</div>
+<p>The specific molecule atoms covered by each fragment can be accessed via the <code class="docutils literal notranslate"><span class="pre">subgroups_atoms</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code> instance. This attribute is a dictionary where the keys are the fragment names, and the values are lists of lists containing the atom indices covered by each occurrence. Consequently, the number of nested lists matches the total occurrences of that fragment in the molecule.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">subgroups_atoms</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ACH&#39;: [(0,), (1,), (2,), (3,), (4,), (8,), (9,), (10,), (11,), (12,)],
+ &#39;AC&#39;: [(5,)],
+ &#39;ACCH2&#39;: [(7, 6)]}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult
+</pre></div></div>
+</div>
+<p>Since we did not allow overlapping in the previous example, the algorithm found the optimal solution, ensuring that each atom of the molecule was covered by only one fragment (while using the minimum number of groups).</p>
+<p>Let’s see what happens if we allow overlapping:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">our_model_olap</span> <span class="o">=</span> <span class="n">FragmentationModel</span><span class="p">(</span>
+    <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+    <span class="n">allow_overlapping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">allow_free_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fragmentation_result</span><span class="o">=</span><span class="n">FragmentationResult</span>
+<span class="p">)</span>
+
+<span class="n">result_overlapping</span> <span class="o">=</span> <span class="n">our_model_olap</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;c1ccccc1Cc2ccccc2&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result_overlapping</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_overlapping</span><span class="o">.</span><span class="n">subgroups_atoms</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH2&#39;: 1, &#39;ACH&#39;: 10, &#39;AC&#39;: 2, &#39;ACCH2&#39;: 2}
+{&#39;CH2&#39;: [(6,)], &#39;ACH&#39;: [(0,), (1,), (2,), (3,), (4,), (8,), (9,), (10,), (11,), (12,)], &#39;AC&#39;: [(5,), (7,)], &#39;ACCH2&#39;: [(5, 6), (7, 6)]}
+</pre></div></div>
+</div>
+<p>As you can see, because overlapping was enabled, the algorithm directly returned all detected fragments in the molecule without searching for an optimal selection. Consequently, some atoms are now covered by multiple fragments.</p>
+<p>Let’s inspect the internal attributes of our <code class="docutils literal notranslate"><span class="pre">our_model</span></code> instance. First, we can access the same parameters we specified during instantiation. Since these are attributes of the base class, they are available across all models in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fragments of the model:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">our_model</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow overlapping:&quot;</span><span class="p">,</span> <span class="n">our_model</span><span class="o">.</span><span class="n">allow_overlapping</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow free atoms:&quot;</span><span class="p">,</span> <span class="n">our_model</span><span class="o">.</span><span class="n">allow_free_atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fragmentation result class:&quot;</span><span class="p">,</span> <span class="n">our_model</span><span class="o">.</span><span class="n">fragmentation_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fragments of the model:
+             smarts
+group
+CH2         [CX4H2]
+ACH            [cH]
+AC            [cH0]
+ACCH2  [cH0][CX4H2]
+Allow overlapping: False
+Allow free atoms: False
+Fragmentation result class: &lt;class &#39;ugropy.core.frag_classes.base.fragmentation_result.FragmentationResult&#39;&gt;
+</pre></div></div>
+</div>
+<p>We have an additional, and important, attribute called <code class="docutils literal notranslate"><span class="pre">detection_mols</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">our_model</span><span class="o">.</span><span class="n">detection_mols</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH2&#39;: &lt;rdkit.Chem.rdchem.Mol at 0x7f2565574120&gt;,
+ &#39;ACH&#39;: &lt;rdkit.Chem.rdchem.Mol at 0x7f2565574190&gt;,
+ &#39;AC&#39;: &lt;rdkit.Chem.rdchem.Mol at 0x7f2565574200&gt;,
+ &#39;ACCH2&#39;: &lt;rdkit.Chem.rdchem.Mol at 0x7f2565574270&gt;}
+</pre></div></div>
+</div>
+<p>When you instantiate a model, during initialization, all the fragments defined in the DataFrame are used to create a dictionary. This dictionary contains the fragment names as keys, and the corresponding RDKit Mol objects as values, which are created internally as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this reason, all the SMARTS patterns we define must be compatible with the <code class="docutils literal notranslate"><span class="pre">RDKit</span></code> library. This attribute is used internally by the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> method to search for fragments within the molecule. Pre-building these objects avoids recreating the <code class="docutils literal notranslate"><span class="pre">RDKit</span></code> <code class="docutils literal notranslate"><span class="pre">Mol</span></code> instances every time <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> is called, significantly optimizing execution time.</p>
+<p>As mentioned before, these are the attributes common to any <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> subclass, but specific subclasses can implement additional attributes. For example, an instance of the <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> class possesses all the core attributes we just explored, plus several others:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="c1"># Commented out to avoid printing a large DataFrame</span>
+<span class="c1"># print(&quot;Fragments of the model:&quot;, unifac.subgroups)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow overlapping:&quot;</span><span class="p">,</span> <span class="n">unifac</span><span class="o">.</span><span class="n">allow_overlapping</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow free atoms:&quot;</span><span class="p">,</span> <span class="n">unifac</span><span class="o">.</span><span class="n">allow_free_atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fragmentation result class:&quot;</span><span class="p">,</span> <span class="n">unifac</span><span class="o">.</span><span class="n">fragmentation_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Detection mol objects:&quot;</span><span class="p">,</span> <span class="n">unifac</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Allow overlapping: False
+Allow free atoms: False
+Fragmentation result class: &lt;class &#39;ugropy.core.frag_classes.gibbs_model.gibbs_result.GibbsFragmentationResult&#39;&gt;
+Detection mol objects: {&#39;CH3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4040&gt;, &#39;CH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f40b0&gt;, &#39;CH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4120&gt;, &#39;C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4190&gt;, &#39;CH2=CH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4200&gt;, &#39;CH=CH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4270&gt;, &#39;CH2=C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f42e0&gt;, &#39;CH=C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4350&gt;, &#39;ACH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f43c0&gt;, &#39;AC&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4430&gt;, &#39;ACCH3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f44a0&gt;, &#39;ACCH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4510&gt;, &#39;ACCH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4580&gt;, &#39;OH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f45f0&gt;, &#39;CH3OH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4660&gt;, &#39;H2O&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f46d0&gt;, &#39;ACOH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4740&gt;, &#39;CH3CO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f47b0&gt;, &#39;CH2CO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4820&gt;, &#39;HCO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4890&gt;, &#39;CH3COO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4900&gt;, &#39;CH2COO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4970&gt;, &#39;HCOO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f49e0&gt;, &#39;CH3O&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4a50&gt;, &#39;CH2O&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4ac0&gt;, &#39;CHO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4b30&gt;, &#39;THF&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4ba0&gt;, &#39;CH3NH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4c10&gt;, &#39;CH2NH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4c80&gt;, &#39;CHNH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4cf0&gt;, &#39;CH3NH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4d60&gt;, &#39;CH2NH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4dd0&gt;, &#39;CHNH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4e40&gt;, &#39;CH3N&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4eb0&gt;, &#39;CH2N&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4f20&gt;, &#39;ACNH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f4f90&gt;, &#39;C5H5N&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5000&gt;, &#39;C5H4N&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5070&gt;, &#39;C5H3N&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f50e0&gt;, &#39;CH3CN&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5150&gt;, &#39;CH2CN&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f51c0&gt;, &#39;COOH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5230&gt;, &#39;HCOOH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f52a0&gt;, &#39;CH2CL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5310&gt;, &#39;CHCL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5380&gt;, &#39;CCL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f53f0&gt;, &#39;CH2CL2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5460&gt;, &#39;CHCL2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f54d0&gt;, &#39;CCL2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5540&gt;, &#39;CHCL3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f55b0&gt;, &#39;CCL3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5620&gt;, &#39;CCL4&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5690&gt;, &#39;ACCL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5700&gt;, &#39;CH3NO2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5770&gt;, &#39;CH2NO2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f57e0&gt;, &#39;CHNO2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5850&gt;, &#39;ACNO2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f58c0&gt;, &#39;CS2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5930&gt;, &#39;CH3SH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f59a0&gt;, &#39;CH2SH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5a10&gt;, &#39;FURFURAL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5a80&gt;, &#39;DOH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5af0&gt;, &#39;I&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5b60&gt;, &#39;BR&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5bd0&gt;, &#39;CH=-C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5c40&gt;, &#39;C=-C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5cb0&gt;, &#39;DMSO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5d20&gt;, &#39;ACRY&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5d90&gt;, &#39;CL-(C=C)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5e00&gt;, &#39;C=C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5e70&gt;, &#39;ACF&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5ee0&gt;, &#39;DMF&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5f50&gt;, &#39;HCON(CH2)2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f5fc0&gt;, &#39;CF3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6030&gt;, &#39;CF2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f60a0&gt;, &#39;CF&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6110&gt;, &#39;COO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6180&gt;, &#39;SIH3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f61f0&gt;, &#39;SIH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6260&gt;, &#39;SIH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f62d0&gt;, &#39;SI&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6340&gt;, &#39;SIH2O&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f63b0&gt;, &#39;SIHO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6420&gt;, &#39;SIO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6490&gt;, &#39;NMP&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6500&gt;, &#39;CCL3F&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6570&gt;, &#39;CCL2F&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f65e0&gt;, &#39;HCCL2F&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6650&gt;, &#39;HCCLF&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f66c0&gt;, &#39;CCLF2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6730&gt;, &#39;HCCLF2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f67a0&gt;, &#39;CCLF3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6810&gt;, &#39;CCL2F2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6880&gt;, &#39;AMH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f68f0&gt;, &#39;AMHCH3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6960&gt;, &#39;AMHCH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f69d0&gt;, &#39;AM(CH3)2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6a40&gt;, &#39;AMCH3CH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6ab0&gt;, &#39;AM(CH2)2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6b20&gt;, &#39;C2H5O2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6b90&gt;, &#39;C2H4O2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6c00&gt;, &#39;CH3S&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6c70&gt;, &#39;CH2S&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6ce0&gt;, &#39;CHS&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6d50&gt;, &#39;MORPH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6dc0&gt;, &#39;C4H4S&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6e30&gt;, &#39;C4H3S&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6ea0&gt;, &#39;C4H2S&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6f10&gt;, &#39;NCO&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6f80&gt;, &#39;(CH2)2SU&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f6ff0&gt;, &#39;CH2CHSU&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f7060&gt;, &#39;IMIDAZOL&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f70d0&gt;, &#39;BTI&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691f7140&gt;}
+</pre></div></div>
+</div>
+<p>Another example is the <code class="docutils literal notranslate"><span class="pre">JobackModel</span></code> class, which shares the same attributes as the base class but also includes an additional attribute called <code class="docutils literal notranslate"><span class="pre">properties_contributions</span></code>. This attribute contains the contribution of each fragment to the various Joback properties.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">joback</span>
+
+<span class="c1"># Commented out to avoid printing a large DataFrame</span>
+<span class="c1"># print(&quot;Fragments of the model:&quot;, joback.subgroups)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow overlapping:&quot;</span><span class="p">,</span> <span class="n">joback</span><span class="o">.</span><span class="n">allow_overlapping</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Allow free atoms:&quot;</span><span class="p">,</span> <span class="n">joback</span><span class="o">.</span><span class="n">allow_free_atoms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fragmentation result class:&quot;</span><span class="p">,</span> <span class="n">joback</span><span class="o">.</span><span class="n">fragmentation_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Detection mol objects:&quot;</span><span class="p">,</span> <span class="n">joback</span><span class="o">.</span><span class="n">detection_mols</span><span class="p">)</span>
+
+<span class="c1"># Commented out to avoid printing a large DataFrame</span>
+<span class="c1"># print(&quot;Properties contributions:&quot;, joback.properties_contributions)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Allow overlapping: False
+Allow free atoms: False
+Fragmentation result class: &lt;class &#39;ugropy.core.frag_classes.joback.joback_result.JobackFragmentationResult&#39;&gt;
+Detection mol objects: {&#39;-CH3&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d68f0&gt;, &#39;-CH2-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6960&gt;, &#39;&gt;CH-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d69d0&gt;, &#39;&gt;C&lt;&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6a40&gt;, &#39;=CH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6ab0&gt;, &#39;=CH-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6b20&gt;, &#39;=C&lt;&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6b90&gt;, &#39;=C=&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6c00&gt;, &#39;CH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6c70&gt;, &#39;C&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6ce0&gt;, &#39;ring-CH2-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6d50&gt;, &#39;ring&gt;CH-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6dc0&gt;, &#39;ring&gt;C&lt;&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6e30&gt;, &#39;ring=CH-&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6ea0&gt;, &#39;ring=C&lt;&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6f10&gt;, &#39;-F&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6f80&gt;, &#39;-Cl&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d6ff0&gt;, &#39;-Br&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7060&gt;, &#39;-I&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d70d0&gt;, &#39;-OH (alcohol)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7140&gt;, &#39;-OH (phenol)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d71b0&gt;, &#39;-O- (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7220&gt;, &#39;-O- (ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7290&gt;, &#39;&gt;C=O (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7300&gt;, &#39;&gt;C=O (ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7370&gt;, &#39;O=CH- (aldehyde)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d73e0&gt;, &#39;-COOH (acid)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7450&gt;, &#39;-COO- (ester)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d74c0&gt;, &#39;=O (other than above)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7530&gt;, &#39;-NH2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d75a0&gt;, &#39;&gt;NH (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7610&gt;, &#39;&gt;NH (ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7680&gt;, &#39;&gt;N- (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d76f0&gt;, &#39;-N= (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7760&gt;, &#39;-N= (ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d77d0&gt;, &#39;=NH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7840&gt;, &#39;-CN&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d78b0&gt;, &#39;-NO2&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7920&gt;, &#39;-SH&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7990&gt;, &#39;-S- (non-ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7a00&gt;, &#39;-S- (ring)&#39;: &lt;rdkit.Chem.rdchem.Mol object at 0x7f25691d7a70&gt;}
+</pre></div></div>
+</div>
+<p>Please refer to the API documentation of each model for more information about the parameters, attributes, and methods available for each specific class.</p>
+</section>
+<section id="Changing-the-behavior-of-an-existing-model">
+<h2>Changing the behavior of an existing model<a class="headerlink" href="#Changing-the-behavior-of-an-existing-model" title="Link to this heading"></a></h2>
+<p>In certain situations, you might want to alter the behavior of one or a few fragments within an existing <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> model. Naturally, modifying the behavior of those specific fragments does not justify creating an entirely new model from scratch.</p>
+<p>This section is inspired by the following <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> GitHub issue:</p>
+<p><a class="reference external" href="https://github.com/ipqa-research/ugropy/issues/41">https://github.com/ipqa-research/ugropy/issues/41</a></p>
+<p>Although the built-in models in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> are not intended to be directly mutated by the user, we can easily leverage the data inside the model’s attributes to instantiate a new one with the desired modifications.</p>
+<p>In that GitHub issue, the user wanted to modify the behavior of the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment within the UNIFAC model. Specifically, they wanted to enable the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment to match both <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> and <code class="docutils literal notranslate"><span class="pre">ACNH</span></code> structures. First, let’s inspect how the SMARTS pattern for <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> is originally defined in the UNIFAC model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;ACNH2&quot;</span><span class="p">,</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;[cH0][NH2]&#39;
+</pre></div></div>
+</div>
+<p>As you can observe, the SMARTS pattern for <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">[cH0][NH2]</span></code> (an aromatic carbon without hydrogen bonded to a nitrogen with two hydrogens). The molecule provided by the user in the GitHub issue was:</p>
+<p>SMILES: CC(=O)NC1=CC=C(O)C=C1</p>
+<p>As currently defined in the library, the UNIFAC model will not detect the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment in this molecule because the actual structure present is an <code class="docutils literal notranslate"><span class="pre">ACNH</span></code> group (an aromatic carbon without hydrogen bonded to a nitrogen with only one hydrogen). Furthermore, the standard UNIFAC model does not provide an <code class="docutils literal notranslate"><span class="pre">ACNH</span></code> fragment in its original literature. Let’s check what happens:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CC(=O)NC1=CC=C(O)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_42_0.svg" src="../_images/tutorial_power_user_42_0.svg" />
+</div>
+</div>
+<p>As expected, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> fails to obtain the fragmentation of the molecule because the <code class="docutils literal notranslate"><span class="pre">NH</span></code> group is not covered by any available fragment, leaving free atoms unaccounted for.</p>
+<p>First, let’s leverage our knowledge from the previous section to retrieve the complete data from the UNIFAC model’s attributes.</p>
+<p>First, the SMARTS DataFrame:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subgroups</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>smarts</th>
+      <th>molecular_weight</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH3</th>
+      <td>[CX4H3]</td>
+      <td>15.03500</td>
+    </tr>
+    <tr>
+      <th>CH2</th>
+      <td>[CX4H2]</td>
+      <td>14.02700</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>[CX4H]</td>
+      <td>13.01900</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>[CX4H0]</td>
+      <td>12.01100</td>
+    </tr>
+    <tr>
+      <th>CH2=CH</th>
+      <td>[CH2]=[CH]</td>
+      <td>27.04600</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>NCO</th>
+      <td>[NX2H0]=[CX2H0]=[OX1H0]</td>
+      <td>42.01700</td>
+    </tr>
+    <tr>
+      <th>(CH2)2SU</th>
+      <td>[CH2]S(=O)(=O)[CH2]</td>
+      <td>92.11620</td>
+    </tr>
+    <tr>
+      <th>CH2CHSU</th>
+      <td>[CH2]S(=O)(=O)[CH]</td>
+      <td>91.10840</td>
+    </tr>
+    <tr>
+      <th>IMIDAZOL</th>
+      <td>[c]1:[c]:[n]:[c]:[n]:1</td>
+      <td>68.07820</td>
+    </tr>
+    <tr>
+      <th>BTI</th>
+      <td>C(F)(F)(F)S(=O)(=O)[N-]S(=O)(=O)C(F)(F)F</td>
+      <td>279.91784</td>
+    </tr>
+  </tbody>
+</table>
+<p>113 rows × 2 columns</p>
+</div></div>
+</div>
+<p>Since UNIFAC is a <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code>, we also need to retrieve the fragments information to instantiate a new model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subgroups_info</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">subgroups_info</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">subgroups_info</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subgroup_number</th>
+      <th>main_group</th>
+      <th>R</th>
+      <th>Q</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CH3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0.9011</td>
+      <td>0.848</td>
+    </tr>
+    <tr>
+      <th>CH2</th>
+      <td>2</td>
+      <td>1</td>
+      <td>0.6744</td>
+      <td>0.540</td>
+    </tr>
+    <tr>
+      <th>CH</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0.4469</td>
+      <td>0.228</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>4</td>
+      <td>1</td>
+      <td>0.2195</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>CH2=CH</th>
+      <td>5</td>
+      <td>2</td>
+      <td>1.3454</td>
+      <td>1.176</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>NCO</th>
+      <td>109</td>
+      <td>51</td>
+      <td>1.0567</td>
+      <td>0.732</td>
+    </tr>
+    <tr>
+      <th>(CH2)2SU</th>
+      <td>118</td>
+      <td>55</td>
+      <td>2.6869</td>
+      <td>2.120</td>
+    </tr>
+    <tr>
+      <th>CH2CHSU</th>
+      <td>119</td>
+      <td>55</td>
+      <td>2.4595</td>
+      <td>1.808</td>
+    </tr>
+    <tr>
+      <th>IMIDAZOL</th>
+      <td>178</td>
+      <td>84</td>
+      <td>2.0260</td>
+      <td>0.868</td>
+    </tr>
+    <tr>
+      <th>BTI</th>
+      <td>179</td>
+      <td>85</td>
+      <td>5.7740</td>
+      <td>4.932</td>
+    </tr>
+  </tbody>
+</table>
+<p>113 rows × 4 columns</p>
+</div></div>
+</div>
+<p>Now, lets modify the SMARTS pattern of the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment to match both <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> and <code class="docutils literal notranslate"><span class="pre">ACNH</span></code> structures and instantiate a new model with the modified SMARTS pattern:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">GibbsModel</span>
+
+<span class="c1"># Change directly the SMARTS column for the ACNH2 fragment</span>
+<span class="c1"># now the aromatic carbon could be bonded to either NH2 or NH.</span>
+<span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;ACNH2&quot;</span><span class="p">,</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;[cH0][NH2,NH]&quot;</span>
+
+<span class="n">new_unifac</span> <span class="o">=</span> <span class="n">GibbsModel</span><span class="p">(</span>
+    <span class="n">subgroups</span><span class="o">=</span><span class="n">subgroups</span><span class="p">,</span>
+    <span class="n">subgroups_info</span><span class="o">=</span><span class="n">subgroups_info</span><span class="p">,</span>
+    <span class="n">calculate_r_q</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, lets try to fragment the same molecule with our modified UNIFAC model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">new_unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;CC(=O)NC1=CC=C(O)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ACH&#39;: 4, &#39;ACOH&#39;: 1, &#39;CH3CO&#39;: 1, &#39;ACNH2&#39;: 1}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_51_0.svg" src="../_images/tutorial_power_user_51_0.svg" />
+</div>
+</div>
+<p>Success! Now, the <code class="docutils literal notranslate"><span class="pre">ACNH</span></code> structure present in the molecule is successfully detected under the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment definition.</p>
+</section>
+<section id="Understanding-which-fragment-is-not-being-detected">
+<h2>Understanding which fragment is not being detected<a class="headerlink" href="#Understanding-which-fragment-is-not-being-detected" title="Link to this heading"></a></h2>
+<p>There is an additional technique available for all models that helps you determine whether a specific fragment is being successfully detected within a molecule. This short section serves as a diagnostic bridge between modifying an existing model and creating your own from scratch.</p>
+<p>To explore this, we can use the <code class="docutils literal notranslate"><span class="pre">instantiate_mol_object</span></code> function from <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. This function processes any of the molecular identifiers supported by the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> method to return an RDKit Mol object.</p>
+<p>Additionally, all <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> instances implement the <code class="docutils literal notranslate"><span class="pre">detect_fragments</span></code> method. While this method is typically executed internally during the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> call, we can call it explicitly to inspect which fragments are captured during the initial direct detection step of the algorithm.</p>
+<p>Let’s check the <code class="docutils literal notranslate"><span class="pre">instantiate_mol_object</span></code> docstring:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">instantiate_mol_object</span>
+
+<span class="n">help</span><span class="p">(</span><span class="n">instantiate_mol_object</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function instantiate_mol_object in module ugropy.core.get_rdkit_object:
+
+instantiate_mol_object(identifier: Union[str, rdkit.Chem.rdchem.Mol], identifier_type: str = &#39;name&#39;) -&gt; rdkit.Chem.rdchem.Mol
+    Instantiate a RDKit Mol object from molecule&#39;s name, SMILES or mol.
+
+    In case that the input its already a RDKit Mol object, the function will
+    return the input object.
+
+    Parameters
+    ----------
+    identifier : str or rdkit.Chem.rdchem.Mol
+        Identifier of a molecule (name, SMILES or rdkit.Chem.rdchem.Mol).
+        Example: hexane or CCCCCC for name or SMILES respectively.
+    identifier_type : str, optional
+        Use &#39;name&#39; to search a molecule by name, &#39;smiles&#39; to provide the
+        molecule SMILES representation or &#39;mol&#39; to provide a
+        rdkit.Chem.rdchem.Mol object, by default &#34;name&#34;.
+
+    Returns
+    -------
+    rdkit.Chem.rdchem.Mol
+        RDKit Mol object.
+
+</pre></div></div>
+</div>
+<p>Now, let’s test this with the molecule from the previous example, comparing the original UNIFAC model against our modified version (<code class="docutils literal notranslate"><span class="pre">new_unifac</span></code>). First, using the original model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">instantiate_mol_object</span><span class="p">(</span><span class="s2">&quot;CC(=O)NC1=CC=C(O)C=C1&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">detect_fragments</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3_0&#39;: (0,),
+ &#39;ACH_0&#39;: (5,),
+ &#39;ACH_1&#39;: (6,),
+ &#39;ACH_2&#39;: (9,),
+ &#39;ACH_3&#39;: (10,),
+ &#39;AC_0&#39;: (4,),
+ &#39;AC_1&#39;: (7,),
+ &#39;OH_0&#39;: (8,),
+ &#39;ACOH_0&#39;: (7, 8),
+ &#39;CH3CO_0&#39;: (0, 1, 2)}
+</pre></div></div>
+</div>
+<p>As you can observe, the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment is missing from the detections. Now, let’s run the same check using our modified UNIFAC instance:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_unifac</span><span class="o">.</span><span class="n">detect_fragments</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3_0&#39;: (0,),
+ &#39;ACH_0&#39;: (5,),
+ &#39;ACH_1&#39;: (6,),
+ &#39;ACH_2&#39;: (9,),
+ &#39;ACH_3&#39;: (10,),
+ &#39;AC_0&#39;: (4,),
+ &#39;AC_1&#39;: (7,),
+ &#39;OH_0&#39;: (8,),
+ &#39;ACOH_0&#39;: (7, 8),
+ &#39;CH3CO_0&#39;: (0, 1, 2),
+ &#39;ACNH2_0&#39;: (4, 3)}
+</pre></div></div>
+</div>
+<p>Now, the <code class="docutils literal notranslate"><span class="pre">ACNH2</span></code> fragment is successfully detected.</p>
+<p>The numbers inside each tuple represent the atom indices occupied by that specific detection. The numeric suffix of each fragment key indicates the distinct occurrences of that fragment type. For example:</p>
+<ul class="simple">
+<li><p>ACH_<strong>0</strong>: (5,)</p></li>
+<li><p>ACH_<strong>1</strong>: (6,)</p></li>
+<li><p>ACH_<strong>2</strong>: (9,)</p></li>
+<li><p>ACH_<strong>3</strong>: (10,)</p></li>
+</ul>
+<p>This indicates that our molecule contains four total <code class="docutils literal notranslate"><span class="pre">ACH</span></code> fragments, each occupying different atoms (note that implicit hydrogens are never counted as independent atoms in the RDKit library).</p>
+</section>
+<section id="User-defined-fragmentation-models">
+<h2>User defined fragmentation models<a class="headerlink" href="#User-defined-fragmentation-models" title="Link to this heading"></a></h2>
+<p>This section will be brief, as it involves advanced Python concepts that are beyond the scope of this tutorial and will not be explained from scratch.</p>
+<p>If you want to create your own specialized category of <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code>, you need to master two key elements. First, you must learn the SMARTS notation to define your fragments (covered as a brief introduction in the next section). Second, you need to understand how to extend the behavior of the base <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> and <code class="docutils literal notranslate"><span class="pre">FragmentationResult</span></code> classes via inheritance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">FragmentationModel</span><span class="p">,</span> <span class="n">FragmentationResult</span>
+
+
+<span class="k">class</span> <span class="nc">MyFragModel</span><span class="p">(</span><span class="n">FragmentationModel</span><span class="p">):</span>
+    <span class="o">...</span>
+
+
+<span class="k">class</span> <span class="nc">MyFragModelResult</span><span class="p">(</span><span class="n">FragmentationResult</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Maybe you want to create a model that only fragments the molecules without doing anything else. In that case, you can simply instantiate the base <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> class with the required information as we have seen in the previous section: “Understanding model instances and their configuration”.</p>
+<p>On the other hand, maybe you want to create a model that, after detecting the fragments, performs additional operations with them, such as property estimations. The best approach at this point is to check the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> source code and learn from it directly (it is not that much code, I promise!).</p>
+<p>First, explore the two base classes to understand their core architecture:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/blob/main/ugropy/core/frag_classes/base/fragmentation_model.py">FragmentationModel</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/blob/main/ugropy/core/frag_classes/base/fragmentation_result.py">FragmentationResult</a></p></li>
+</ul>
+<p>Then, you can look at a straightforward extension of the base class, the <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> and its corresponding result class:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/blob/main/ugropy/core/frag_classes/gibbs_model/gibbs_model.py">GibbsModel</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/blob/main/ugropy/core/frag_classes/gibbs_model/gibbs_result.py">GibbsResult</a></p></li>
+</ul>
+<p>In the <code class="docutils literal notranslate"><span class="pre">GibbsModel</span></code> definition, you will see how the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method is <strong>overridden</strong> to customize its docstring and incorporate new parameters. Moreover, additional validation filters are implemented in this subclass (while those already present in <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> are automatically inherited). In <code class="docutils literal notranslate"><span class="pre">GibbsResult</span></code>, you can check how the calculation of the <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> values is triggered once the fragmentation result is received.</p>
+<p>Finally, you can inspect a more complex implementation, specifically its result class, <code class="docutils literal notranslate"><span class="pre">JobackResult</span></code>. While the underlying logic remains the same, it serves as a more advanced example that demonstrates how <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> internally integrates the <code class="docutils literal notranslate"><span class="pre">Pint</span></code> library for unit management:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/blob/main/ugropy/core/frag_classes/joback/joback_result.py">JobackFragmentationResult</a></p></li>
+</ul>
+<p>Every class definition is available in the repository, providing a clear blueprint to build your own custom models.</p>
+<p>Finally, there is an optional method in the <code class="docutils literal notranslate"><span class="pre">FragmentationModel</span></code> base class that we haven’t discussed yet: <code class="docutils literal notranslate"><span class="pre">mol_preprocess</span></code>.</p>
+<p>This method is executed internally during the <code class="docutils literal notranslate"><span class="pre">get_groups</span></code> call. The algorithm first creates the RDKit Mol object via <code class="docutils literal notranslate"><span class="pre">instantiate_mol_object</span></code> and then passes that object directly to <code class="docutils literal notranslate"><span class="pre">mol_preprocess</span></code>. By default, this method returns the molecule unchanged. However, if you inherit from the base class, you can <strong>override</strong> it to leverage RDKit’s full capabilities to modify the nature of the molecule before any fragment detection takes place. For instance, you could force specific rings to be
+considered aromatic (or non-aromatic), sanitize functional groups, or perform advanced structural manipulations tailored to your needs.</p>
+<p>That being said, for the majority of use cases, you won’t need to touch this method. Most fragmentation challenges can be resolved simply by defining your SMARTS patterns correctly!</p>
+</section>
+<section id="SMARTS-tutorial">
+<h2>SMARTS tutorial<a class="headerlink" href="#SMARTS-tutorial" title="Link to this heading"></a></h2>
+<p>This is the final piece of the puzzle you need to master to define your own fragmentation models. Before diving in, a quick word of caution: this is not a trivial task. It requires not only a solid grasp of the SMARTS syntax but also an understanding of how fragment definitions can be deeply dependent on the thermodynamic model itself (we will explore some examples of this later).</p>
+<p>This brief tutorial is based on the official Daylight documentation, where you can find all the fundamental directives of the SMARTS syntax:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.daylight.com/dayhtml/doc/theory/theory.smarts.html">Daylight SMARTS Theory</a></p></li>
+</ul>
+<p>Additionally, RDKit supports certain extended SMARTS features, such as Chemaxon extended SMARTS link nodes, which can be incredibly useful for complex macro-structures:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.chemaxon.com/latest/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.html">Chemaxon Extended SMARTS</a></p></li>
+</ul>
+<p>The first golden rule is: <strong>you must strictly follow the SMARTS syntax that RDKit understands</strong>. Furthermore, you can inspect the production-ready SMARTS definitions for all built-in models directly in the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> repository. While perhaps not exhaustive, they serve as a learning resource:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ipqa-research/ugropy/tree/main/ugropy/groupscsv">Groups CSV in Repository</a></p></li>
+</ul>
+<p>If you want to open them on excel/LibreOffice, you can download the CSV files directly from the repository and open them with your preferred spreadsheet software. The column separator is the character <code class="docutils literal notranslate"><span class="pre">|</span></code> (sorry, I didn’t like spaces and all other characters are already used in the SMARTS syntax). Also, you may find the character <code class="docutils literal notranslate"><span class="pre">?</span></code> at the beginning of some SMARTS patterns. This character is used to indicate commented lines, which are ignored.</p>
+<p>Ultimately, the performance of your custom model will be strictly dictated by how precisely you define your fragments, defining “performance” here as: the model detects the exact fragments I want it to detect for this molecule. For that, testing is crucial (refer to the test book to find some examples of molecules with their SMILES representations).</p>
+<section id="The-basics">
+<h3>The basics<a class="headerlink" href="#The-basics" title="Link to this heading"></a></h3>
+<p>In SMARTS (as in SMILES notation), we define chemical structures using specific structural or logical patterns. These structures are read and evaluated from left to right. For example, consider the n-hexane molecule:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;CCCCCC&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_66_0.png" src="../_images/tutorial_power_user_66_0.png" />
+</div>
+</div>
+<p>Here, we are defining six aliphatic carbons “bonded” one after the other. I emphasize “bonded” because we are not explicitly specifying the type of bond yet. Let’s explicitly define that these connections are single bonds:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;C-C-C-C-C-C&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_68_0.png" src="../_images/tutorial_power_user_68_0.png" />
+</div>
+</div>
+<p>See how the drawing changes? Now we have explicitly defined six aliphatic carbons connected by single bonds.</p>
+<p>Let’s add a double bond in the middle:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;C-C-C=C-C-C&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_70_0.png" src="../_images/tutorial_power_user_70_0.png" />
+</div>
+</div>
+<p>Now, a double bond is specified between positions 3 and 4. As a side note, implicit hydrohens are automatically accounted for in this simplified notation until the standard valence of the atom is satisfied.</p>
+<p>This approach feels very similar to writing standard SMILES. However, when defining robust SMARTS patterns for group contribution models, we usually need to enforce the exact connectivity of an atom and specify precisely how many hydrogens are bonded to it. Let’s completely and explicitly define the n-hexane molecule using strict SMARTS syntax:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H3]-[CX4H2]-[CX4H2]-[CX4H2]-[CX4H2]-[CX4H3]&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_72_0.png" src="../_images/tutorial_power_user_72_0.png" />
+</div>
+</div>
+<p>Nothing seems to change in the visual representation, but we have introduced a lot of new notation. Let’s break it down step by step.</p>
+<p>First, the brackets: in SMARTS notation, brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> indicate that an atom is being defined by specific logical properties or constraints. The structure <code class="docutils literal notranslate"><span class="pre">[CX4H3]</span></code> is telling the engine: “This is an aliphatic carbon (<code class="docutils literal notranslate"><span class="pre">C</span></code>) bonded to four total atoms (<code class="docutils literal notranslate"><span class="pre">X4</span></code>), and exactly three of those four connections are hydrogens (<code class="docutils literal notranslate"><span class="pre">H3</span></code>, which sets the explicit hydrogen count).”</p>
+<p>Similarly, with <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code>, we are specifying an aliphatic carbon bonded to four total atoms, two of which must be hydrogens.</p>
+<p>Therefore, when we write <code class="docutils literal notranslate"><span class="pre">[CX4H3]-[CX4H2]</span></code>, we are saying—and pardon the redundancy: <em>“An aliphatic carbon with a total connectivity of 4 and three hydrogens is bonded via a single covalent bond to an aliphatic carbon with a total connectivity of 4 and two hydrogens.”</em></p>
+<p>Let’s define this small substructure (<code class="docutils literal notranslate"><span class="pre">[CX4H3]-[CX4H2]</span></code>) and search for it within the n-hexane molecule. Naturally, we should find exactly two occurrences:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hexane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCCCCC&quot;</span><span class="p">)</span> <span class="c1"># n-hexane</span>
+
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H3]-[CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="n">matches</span> <span class="o">=</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smt</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matches:&quot;</span><span class="p">,</span> <span class="n">matches</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of matches:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Matches: ((0, 1), (5, 4))
+Number of matches: 2
+</pre></div></div>
+</div>
+<p>As expected, we found two of these substructures at atom indices (0, 1) and (5, 4).</p>
+<p>At this point, an attentive reader might think:</p>
+<p>“Well, if I am already enforcing the connectivity of the carbons (<code class="docutils literal notranslate"><span class="pre">X4</span></code>) and the exact number of hydrogens, explicitly defining the single bond in this particular case seems redundant.”</p>
+<p>And you would be absolutely right! In logical terms, these two definitions are completely equivalent:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[CX4H3]-[CX4H2]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[CX4H3][CX4H2]</span></code></p></li>
+</ul>
+<p>But be careful: if you don’t restrict the total connectivity of an atom, it can lead to unexpected false positives. Let’s analyze the pattern <code class="docutils literal notranslate"><span class="pre">[CH2]</span></code>. Here, we are enforcing the hydrogen count but leaving the total connectivity open. It works perfectly fine for n-hexane:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CH2]&quot;</span><span class="p">)</span>
+
+<span class="n">hexane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCCCCC&quot;</span><span class="p">)</span> <span class="c1"># n-hexane</span>
+
+<span class="n">matches</span> <span class="o">=</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smt</span><span class="p">)</span>
+
+<span class="n">matches</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((1,), (2,), (3,), (4,))
+</pre></div></div>
+</div>
+<p>However, let’s see what happens when we test this exact same pattern against the propene molecule:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">propene</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C=CC&quot;</span><span class="p">)</span> <span class="c1"># propene</span>
+
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CH2]&quot;</span><span class="p">)</span>
+
+<span class="n">matches</span> <span class="o">=</span> <span class="n">propene</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smt</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+
+<span class="n">propene</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((0,),)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_78_1.png" src="../_images/tutorial_power_user_78_1.png" />
+</div>
+</div>
+<p>We found a detection! And of course we did: the <code class="docutils literal notranslate"><span class="pre">[CH2]</span></code> pattern simply asks for <em>any aliphatic carbon with exactly two hydrogens</em>. In propene, the terminal alkene carbon (position 2 or 0 depending on RDKit indexing) satisfies this exact condition.</p>
+<p>If your thermodynamic model needs to distinguish between an unreactive aliphatic alkane group and an olefinic group, a generic pattern like <code class="docutils literal notranslate"><span class="pre">[CH2]</span></code> will ruin your fragmentation parameters. This is precisely where the <strong>SMARTS craftsmanship</strong> comes into play.</p>
+<p>Let’s design two distinct patterns to cleanly separate both cases:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alkane CH2 (sp3 carbon bonded to 4 atoms total)</span>
+<span class="n">alkane_ch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Alkene CH2 (sp2 carbon bonded to 3 atoms total)</span>
+<span class="n">alkene_ch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX3H2]&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hexane alkane CH2 matches:&quot;</span><span class="p">,</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">alkane_ch2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hexane alkene CH2 matches:&quot;</span><span class="p">,</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">alkene_ch2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Propene alkane CH2 matches:&quot;</span><span class="p">,</span> <span class="n">propene</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">alkane_ch2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Propene alkene CH2 matches:&quot;</span><span class="p">,</span> <span class="n">propene</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">alkene_ch2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Hexane alkane CH2 matches: ((1,), (2,), (3,), (4,))
+Hexane alkene CH2 matches: ()
+Propene alkane CH2 matches: ()
+Propene alkene CH2 matches: ((0,),)
+</pre></div></div>
+</div>
+<p>While evaluating structures from left to right works perfectly for linear chains, chemistry is full of branched architectures. Using purely linear logic makes it impossible to define non-linear molecules. To solve this, SMARTS introduces <strong>parentheses</strong>.</p>
+<p>Consider the following pattern:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[CX4H3][CX4H2]([OH])[CX4H3]</span></code></p>
+<p>In chemical terms, we are defining:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[CX4H3]</span></code>: An aliphatic carbon with four connections and three hydrogens (<span class="math notranslate nohighlight">\(\text{-CH}_3\)</span>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code>: An aliphatic carbon with four connections and two hydrogens (<span class="math notranslate nohighlight">\(\text{-CH}_2\text{-}\)</span> before branching).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[OH]</span></code>: A hydroxyl group.</p></li>
+</ul>
+<p>The structure can be read as follows: We have a <span class="math notranslate nohighlight">\(\text{-CH}_3\)</span> group bonded to a carbon, which is simultaneously bonded to both an <span class="math notranslate nohighlight">\(\text{-OH}\)</span> group and another <span class="math notranslate nohighlight">\(\text{-CH}_3\)</span> group. Let’s build and render this structure in RDKit:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CX4H3][CX4H2]([OH])[CX4H3]&#39;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_82_0.png" src="../_images/tutorial_power_user_82_0.png" />
+</div>
+</div>
+<p>The golden rule for branching is: <strong>any atom or chain written inside parentheses is always bonded to the atom immediately to its left</strong> (in this case, the <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code> carbon).</p>
+<p>If we want to explicitly specify every single bond in this branched structure, notice carefully where the bond dashes <code class="docutils literal notranslate"><span class="pre">-</span></code> must be placed:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CX4H3]-[CX4H2](-[OH])-[CX4H3]&#39;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_84_0.png" src="../_images/tutorial_power_user_84_0.png" />
+</div>
+</div>
+<p>What happens if we have multiple branches bonded to the same central atom? In that case, we simply append another set of parentheses consecutive to the first one:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A central CH2 bonded to an -OH branch and a -CH2-CH3 branch</span>
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CH3]-[CH2](-[OH])(-[CH2]-[CH3])-[CH3]&quot;</span><span class="p">)</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_86_0.png" src="../_images/tutorial_power_user_86_0.png" />
+</div>
+</div>
+<p>Now, the central <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code> carbon is simultaneously bonded to two distinct branches: one containing a hydroxyl group (<code class="docutils literal notranslate"><span class="pre">-[OH]</span></code>) and another containing an ethyl chain (<code class="docutils literal notranslate"><span class="pre">-[CX4H2]-[CX4H3]</span></code>).</p>
+<p>The rule remains unshakable: <strong>all parentheses are attached directly to the atom immediately to their left</strong>. Furthermore, this logic is perfectly scalable, meaning you can nest parentheses inside other parentheses to build as many complex sub-branches as your thermodynamic model requires!</p>
+<p>Finally, to conclude the core basics of SMARTS syntax, we have <strong>rings</strong>. This is incredibly useful for defining specific aromatic or aliphatic cyclic fragments.</p>
+<p>How do we define a ring? We use numbers. By labeling two separate atoms with the same digit, we instruct the engine to form a bond between them, effectively bridging the gap and bypassing the strict left-to-right progression. For example, a cyclohexane ring can be defined as follows:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the first and the last [CX4H2] have a 1, they are going to be bonded</span>
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]1[CX4H2][CX4H2][CX4H2][CX4H2][CX4H2]1&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_89_0.png" src="../_images/tutorial_power_user_89_0.png" />
+</div>
+</div>
+<p>If your molecule contains multiple rings, you can use different numbers to define each individual cycle. For example, consider this bicyclic system:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A bicyclic system combining a 6-membered and a 5-membered ring</span>
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]1[CX4H2][CX4H]2[CX4H2][CX4H2][CX4H2][CX4H2][CX4H]2[CX4H2][CX4H2]1&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_91_0.png" src="../_images/tutorial_power_user_91_0.png" />
+</div>
+</div>
+<p>Let’s carefully analyze where the ring labels are placed to understand the connectivity:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>CX4H2<span class="o">]</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">[</span>CX4H2<span class="o">][</span>CX4H<span class="o">]</span><span class="w"> </span><span class="o">([</span>CX4H2<span class="o">][</span>CX4H2<span class="o">][</span>CX4H2<span class="o">][</span>CX4H2<span class="o">]</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">[</span>CX4H<span class="o">]</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">[</span>CX4H2<span class="o">][</span>CX4H2<span class="o">]</span><span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Here is how the engine interprets it:</p>
+<ul class="simple">
+<li><p>The labels <strong>1</strong> open and close the main 6-membered ring.</p></li>
+<li><p>Inside that main ring, we encounter the first bridgehead carbon (<code class="docutils literal notranslate"><span class="pre">[CX4H]</span></code>), which opens the second ring (in the parenthesis).</p></li>
+<li><p>The structure then continues along a linear chain of four <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code> groups.</p></li>
+<li><p>At the end of this chain the final <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code> is labeled with a <strong>2</strong>, the second bridgehead carbon (<code class="docutils literal notranslate"><span class="pre">[CX4H]</span></code>) is also labeled with a <strong>2</strong>, closing the second ring and fusing the two cycles together.</p></li>
+</ul>
+<p>(Note: Notice that the bridgehead carbons are defined as <code class="docutils literal notranslate"><span class="pre">[CX4H]</span></code> instead of <code class="docutils literal notranslate"><span class="pre">[CX4H2]</span></code>, because they are bonded to three heavy atoms total, leaving room for only one hydrogen).</p>
+</section>
+<section id="Logical-operators,-ring-constraints,-and-aromaticity">
+<h3>Logical operators, ring constraints, and aromaticity<a class="headerlink" href="#Logical-operators,-ring-constraints,-and-aromaticity" title="Link to this heading"></a></h3>
+<p>What happens when we want to define a fragment that must only be detected if it is part of an aliphatic ring? To achieve this level of control, we need to utilize SMARTS logical expressions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!</span></code>: “NOT” (highest precedence)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code>: “AND” (high precedence)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">,</span></code>: “OR” (low precedence)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">;</span></code>: “AND” (lowest precedence)</p></li>
+</ul>
+<p>Precedence here follows the exact same concept as in any programming language: operators are evaluated in a specific order. High-precedence operators are resolved first. It is important to note that <strong>you cannot use parentheses to group logical operations</strong> in SMARTS, because parentheses are strictly reserved for chemical branching.</p>
+<p>To illustrate how precedence changes the evaluation order, consider the operands <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span>:</p>
+<p><strong>A&amp;B,C</strong></p>
+<p>This expression means “either (<span class="math notranslate nohighlight">\(A\)</span> AND <span class="math notranslate nohighlight">\(B\)</span>), or <span class="math notranslate nohighlight">\(C\)</span>”, which translates mathematically to <span class="math notranslate nohighlight">\((A \wedge B) \vee C\)</span>. The high-precedence <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator is evaluated first.</p>
+<p>On the other hand:</p>
+<p><strong>A;B,C</strong></p>
+<p>This expression means “<span class="math notranslate nohighlight">\(A\)</span> AND (<span class="math notranslate nohighlight">\(B\)</span> or <span class="math notranslate nohighlight">\(C\)</span>)”, which translates mathematically to <span class="math notranslate nohighlight">\(A \wedge (B \vee C)\)</span>. The low-precedence <code class="docutils literal notranslate"><span class="pre">;</span></code> operator is evaluated last, effectively binding the entire “OR” block that precedes it.</p>
+<p>Now, imagine you want to define two different <span class="math notranslate nohighlight">\(-\text{CH}_2-\)</span> fragment types: one that must be part of an aliphatic ring (like in cyclohexane) and another that must strictly belong to an open chain (like in n-hexane). We can cleanly separate them using the ring membership primitive <code class="docutils literal notranslate"><span class="pre">R</span></code> combined with our logical operators:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cyclohexane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C1CCCCC1&quot;</span><span class="p">)</span> <span class="c1"># Cyclohexane</span>
+<span class="n">hexane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCCCCC&quot;</span><span class="p">)</span>        <span class="c1"># n-Hexane</span>
+
+<span class="c1"># CH2 must NOT be part of a ring</span>
+<span class="n">ch2_chain</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2;!R]&quot;</span><span class="p">)</span>
+
+<span class="c1"># CH2 MUST be part of a ring</span>
+<span class="n">ch2_ring</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2;R]&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cyclohexane ring CH2 matches:&quot;</span><span class="p">,</span> <span class="n">cyclohexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_ring</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cyclohexane chain CH2 matches:&quot;</span><span class="p">,</span> <span class="n">cyclohexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_chain</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hexane ring CH2 matches:&quot;</span><span class="p">,</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_ring</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hexane chain CH2 matches:&quot;</span><span class="p">,</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_chain</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Cyclohexane ring CH2 matches: ((0,), (1,), (2,), (3,), (4,), (5,))
+Cyclohexane chain CH2 matches: ()
+Hexane ring CH2 matches: ()
+Hexane chain CH2 matches: ((1,), (2,), (3,), (4,))
+</pre></div></div>
+</div>
+<p>In the expression <code class="docutils literal notranslate"><span class="pre">[CX4H2;!R]</span></code>, the engine interprets the logic as: “This is an aliphatic carbon with a total connectivity of 4 and exactly two hydrogens, <strong>AND</strong> it is <strong>NOT</strong> part of a ring.” The <code class="docutils literal notranslate"><span class="pre">!</span></code> operator negates the <code class="docutils literal notranslate"><span class="pre">R</span></code> primitive, ensuring no cyclic carbons are matched.</p>
+<p>Conversely, in the expression <code class="docutils literal notranslate"><span class="pre">[CX4H2;R]</span></code>, we are enforcing the opposite constraint: “This is an aliphatic carbon with a total connectivity of 4 and exactly two hydrogens, <strong>AND</strong> it <strong>MUST</strong> be part of a ring.”</p>
+<p>You can also specify the exact size of the ring by using a numeric value after the lowercase <code class="docutils literal notranslate"><span class="pre">r</span></code> primitive. For example, <code class="docutils literal notranslate"><span class="pre">[CX4H2;r5]</span></code> will strictly match aliphatic carbons that are part of a 5-membered ring:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cyclopentane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C1CCCC1&quot;</span><span class="p">)</span> <span class="c1"># cyclopentane</span>
+
+<span class="n">ch2_5ring</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2;r5]&quot;</span><span class="p">)</span> <span class="c1"># CH2 must be part of a 5-membered ring</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cyclopentane 5-membered ring CH2 matches:&quot;</span><span class="p">,</span> <span class="n">cyclopentane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_5ring</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cyclohexane 5-membered ring CH2 matches:&quot;</span><span class="p">,</span> <span class="n">cyclohexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2_5ring</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Cyclopentane 5-membered ring CH2 matches: ((0,), (1,), (2,), (3,), (4,))
+cyclohexane 5-membered ring CH2 matches: ()
+</pre></div></div>
+</div>
+<p>Note the lowercase <code class="docutils literal notranslate"><span class="pre">r5</span></code> used to indicate the ring size. If you accidentally use an uppercase <code class="docutils literal notranslate"><span class="pre">R5</span></code>, the meaning changes completely: the engine will search for a <code class="docutils literal notranslate"><span class="pre">CX4H2</span></code> carbon that belongs to <strong>five different rings simultaneously</strong>.</p>
+<p>Finally, how do we define an aromatic fragment? In many cases, you don’t even need explicit logical operators for this. Instead, you can simply use the <strong>lowercase</strong> atom primitives to indicate aromaticity.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">[cH]</span></code> defines an aromatic carbon with exactly one hydrogen, while <code class="docutils literal notranslate"><span class="pre">[cH0]</span></code> defines an aromatic carbon with no hydrogens. In SMARTS (and SMILES), lowercase atom symbols always denote aromatic atoms, whereas uppercase symbols specify aliphatic ones.</p>
+<p>By combining what we have learned so far, we can build highly specific filters. For instance, if you need to target an aromatic carbon with one hydrogen inside an 8-membered ring, you can write: <code class="docutils literal notranslate"><span class="pre">[cH;r8]</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[cH0;R1]</span></code> may seem redundant at first glance, since an aromatic atom is by definition always part of a ring system. However, if your model needs to strictly distinguish peripheral aromatic carbons from those at a ring fusion, enforcing the <code class="docutils literal notranslate"><span class="pre">R1</span></code> constraint becomes mandatory to prevent cross-contamination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[cH0;R2]</span></code> is <strong>NOT redundant</strong>: This pattern specifically targets an aromatic carbon with no hydrogens that is shared by <strong>exactly two different rings simultaneously</strong> (a bridgehead fusion carbon).</p></li>
+</ul>
+<p>Let’s visualize this distinction using a naphthalene:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ac_onering</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0;R1]&quot;</span><span class="p">)</span> <span class="c1"># Aromatic carbon only in one ring</span>
+<span class="n">ac_tworings</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0;R2]&quot;</span><span class="p">)</span> <span class="c1"># Aromatic carbon on two rings simultaneously</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CC1=CC2=C(C=CC=C2)C=C1&quot;</span><span class="p">)</span> <span class="c1"># Naphthalene</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_99_0.png" src="../_images/tutorial_power_user_99_0.png" />
+</div>
+</div>
+<p>With the fragments we have defined, we can differentiate between the different aromatic carbons with no hydrogens:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ac_onering</span><span class="p">)</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_101_0.png" src="../_images/tutorial_power_user_101_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ac_tworings</span><span class="p">)</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_102_0.png" src="../_images/tutorial_power_user_102_0.png" />
+</div>
+</div>
+<p>Finally, it is possible to define a pattern that matches an element regardless of whether it is aliphatic or aromatic. This is extremely powerful for generalization and can be applied to any element in the periodic table.</p>
+<p>To define a generic element, you use the <code class="docutils literal notranslate"><span class="pre">#</span></code> primitive followed by its atomic number. For instance, carbon is represented by <code class="docutils literal notranslate"><span class="pre">#6</span></code>. Every other constraint we have learned so far (connectivity, hydrogen count, ring constraints) remains fully applicable:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[#6H]</span></code>: A carbon atom (either aliphatic or aromatic) with an unspecified total connectivity, but possessing exactly one hydrogen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[#6X3H]</span></code>: A carbon atom (either aliphatic or aromatic) with a total connectivity of 3 and exactly one hydrogen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[#7X3H2]</span></code>: A nitrogen atom (either aliphatic or aromatic) with a total connectivity of 3 and exactly two hydrogens.</p></li>
+</ul>
+</section>
+<section id="More-complex-logical-patterns-and-recursive-SMARTS">
+<h3>More complex logical patterns and recursive SMARTS<a class="headerlink" href="#More-complex-logical-patterns-and-recursive-SMARTS" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> requires you to provide a single, unique SMARTS pattern for each distinct fragment. For that reason, isolating complex groups requires a combination of creativity and advanced logic to ensure RDKit identifies <em>exactly</em> the atoms belonging to that fragment, without accidentally matching the surrounding environment.</p>
+<p>Let’s inspect a real-world example from <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>. The Dortmund UNIFAC model differentiates between three different types of hydroxyl groups: primary, secondary, and tertiary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">dortmund</span>
+
+<span class="c1"># Let&#39;s inspect the SMARTS for Dortmund UNIFAC OH subgroups</span>
+<span class="n">dortmund</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;OH (P)&quot;</span><span class="p">,</span> <span class="s2">&quot;OH (S)&quot;</span><span class="p">,</span> <span class="s2">&quot;OH (T)&quot;</span><span class="p">],</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;[OH;$([OH][CX4H0]([!#6])([!#6])[#6]),$([OH][CX4H]([!#6])[#6]),$([OH][CX4H2][#6]),$([OH][CX3H]=[#6]),$([OH][CX3H0](=[#6])[!#6]),$([OH][CX2]#[#6])]&#39;,
+ &#39;[OH;$([OH][CX4H0]([!#6])([#6])[#6]),$([OH][CX4H]([#6])[#6]),$([OH][CX3H0](=[#6])[#6])]&#39;,
+ &#39;[OH;$([OH][#6]);$([OH][CX4H0]([#6])([#6])[#6])]&#39;]
+</pre></div></div>
+</div>
+<p>This is where things get interesting because we are introducing a highly advanced notation.</p>
+<p>Let’s dissect the <strong>tertiary hydroxyl group</strong> (<code class="docutils literal notranslate"><span class="pre">OH</span> <span class="pre">(T)</span></code>). By definition, a tertiary hydroxyl is an <span class="math notranslate nohighlight">\(-\text{OH}\)</span> group bonded to a tertiary carbon (a carbon bonded to three other carbon atoms).</p>
+<p>Here is the tricky part for <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>: we only want to match and count the <span class="math notranslate nohighlight">\(-\text{OH}\)</span> group itself, not the carbons that it is attached to.</p>
+<p>If we try to define it using the basic linear and branching syntax we learned before, we might instinctively write something like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH][#6]([#6])([#6])([#6])</span></code></p>
+<p>While it is chemically intuitive—an <span class="math notranslate nohighlight">\(-\text{OH}\)</span> group bonded to a carbon that is simultaneously bonded to three other carbons—if we feed this pattern to RDKit, the engine will return a match that includes <strong>all five atoms</strong> in that cluster.</p>
+<p>Let’s see this issue in action with a branched alcohol:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;OC(CCC)(C)(CC)&quot;</span><span class="p">)</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_107_0.png" src="../_images/tutorial_power_user_107_0.png" />
+</div>
+</div>
+<p>There we clearly have a tertiary hydroxyl group, let try to search for matches:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smt_naive</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[OH][#6]([#6])([#6])([#6])&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Naive matches:&quot;</span><span class="p">,</span> <span class="n">molecule</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smt_naive</span><span class="p">))</span>
+
+<span class="n">molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Naive matches: ((0, 1, 2, 5, 6),)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_109_1.png" src="../_images/tutorial_power_user_109_1.png" />
+</div>
+</div>
+<p>Of course, the definitions currently in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> are far from perfect. However, by critiquing my own past implementations, we can uncover some incredibly valuable lessons. The tertiary hydroxyl group is defined in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> as follows:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH;$([OH][#6]);$([OH][CX4H0]([#6])([#6])[#6])]</span></code></p>
+<p>First, let’s look at the outer brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> enclosing the entire structure. As we established earlier, brackets allow us to define a single target atom using specific logical constraints. Up until now, we have restricted atoms by their aliphatic/aromatic nature, total connectivity, hydrogen count, or ring status. Now, we are introducing a new superpower: <strong>Recursive SMARTS</strong>.</p>
+<p>When building a complex pattern like this from scratch, you should always start by writing the outer brackets:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>Next, ask yourself: <em>What single atom am I actually trying to isolate and count?</em> Since only the hydroxyl group should be counted when this fragment is matched, our primary target is the <code class="docutils literal notranslate"><span class="pre">OH</span></code> group. So, we place it inside:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH]</span></code></p>
+<p>Now, we can append our environmental constraints. A <strong>Recursive SMARTS</strong> expression allows us to specify a structural pattern that must exist around our target atom <em>without</em> actually matching or “claiming” those neighboring atoms. This is done using the <code class="docutils literal notranslate"><span class="pre">$()</span></code> syntax, joined by our low-precedence AND (<code class="docutils literal notranslate"><span class="pre">;</span></code>) operator:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH;$()]</span></code></p>
+<p>This translates to: “Match a hydroxyl group AND (<code class="docutils literal notranslate"><span class="pre">;</span></code>) ensure that this exact oxygen is part of the structural environment described inside the parenthesis <code class="docutils literal notranslate"><span class="pre">$()</span></code>.”</p>
+<p>The first recursive condition in the <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> pattern is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH;$([OH][#6])]</span></code></p>
+<p>Here, we are saying: “Match a hydroxyl group, but only if it is part of a larger <code class="docutils literal notranslate"><span class="pre">[OH][#6]</span></code> environment (meaning it must be directly bonded to a carbon of any nature).”</p>
+<p>We can chain as many of these recursive conditions as we need by using additional low-precedence AND (<code class="docutils literal notranslate"><span class="pre">;</span></code>) operators. This brings us to the full <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> expression:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[OH;$([OH][#6]);$([OH][CX4H0]([#6])([#6])[#6])]</span></code></p>
+<p>For the match to be successful, our target <code class="docutils literal notranslate"><span class="pre">OH</span></code> must now <em>also</em> satisfy this second environmental checkpoint:</p>
+<p><code class="docutils literal notranslate"><span class="pre">$([OH][CX4H0]([#6])([#6])[#6])</span></code></p>
+<p>Which explicitly states: “The hydroxyl group must be part of an environment where it is bonded to an aliphatic carbon with a total connectivity of 4 and zero hydrogens (<code class="docutils literal notranslate"><span class="pre">[CX4H0]</span></code>), which in turn is bonded to three other carbons of any nature (<code class="docutils literal notranslate"><span class="pre">[#6]</span></code>).”</p>
+<p><strong>Time for some self-critique!</strong> Looking back at my past code, the first condition (<code class="docutils literal notranslate"><span class="pre">$([OH][#6])</span></code>) is kind of redundant. Why? Because the second, much stricter condition already mandates that the <code class="docutils literal notranslate"><span class="pre">OH</span></code> must be bonded to a carbon. If it satisfies the second environment, it automatically satisfies the first one.</p>
+<p>But as I mentioned, the definitions in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> are a work in progress—and making (and analyzing) these redundant steps is exactly how we master SMARTS craftsmanship!</p>
+<p>Let’s use this pattern to search for tertiary hydroxyl groups in the previous molecule:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molecule</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;OC(CCC)(C)(CC)&quot;</span><span class="p">)</span>
+
+<span class="n">smt</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[OH;$([OH][#6]);$([OH][CX4H0]([#6])([#6])[#6])]&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tertiary hydroxyl groups:&quot;</span><span class="p">,</span> <span class="n">molecule</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smt</span><span class="p">))</span>
+
+<span class="n">molecule</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tertiary hydroxyl groups: ((0,),)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_power_user_111_1.png" src="../_images/tutorial_power_user_111_1.png" />
+</div>
+</div>
+<p>Now, let’s look at one final example that demonstrates how the presence of <em>other</em> groups within a fragmentation model can heavily influence how you design the logic of a single fragment.</p>
+<p>The fragment in question seems fairly simple: the classic UNIFAC <strong>ketone fragment</strong> (<code class="docutils literal notranslate"><span class="pre">CH3CO</span></code>). This group consists of a methyl carbon bonded to a carbonyl carbon (a carbon with zero hydrogens, double-bonded to an oxygen). The pattern must match exactly those two carbons and the oxygen atom.</p>
+<p>It seems easy enough. Let’s build it directly and intuitively:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[CX4H3][CX3H0]=O</span></code></p>
+<p>And basically, that’s it! It looks flawless. However, let’s see how it is actually defined in <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+
+<span class="n">unifac</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;CH3CO&quot;</span><span class="p">,</span> <span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;[CH3][CH0;!$(C(-[O,NH2,$([NH][CH3]),$([NH][CH2]),$([NH0]([CH3])[CH3]),$([NH0]([CH3])[CH2]),$([NH0]([CH2])[CH2])])=O)]=O&#39;
+</pre></div></div>
+</div>
+<p>Well, what a masterpiece of a mess! Let’s break down what is happening here. First, let’s look at the straightforward components of this beast:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[CH3][CH0;!$(C(-[O,NH2,$([NH][CH3]),$([NH][CH2]),$([NH0]([CH3])[CH3]),$([NH0]([CH3])[CH2]),$([NH0]([CH2])[CH2])])=O)]=O</span></code></p>
+<p>We can dissect it into three main parts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[CH3]</span></code>: The methyl group. Simple enough. This is directly bonded to the logical nightmare in the middle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[CH0;</span> <span class="pre">with</span> <span class="pre">a</span> <span class="pre">lot</span> <span class="pre">of</span> <span class="pre">conditions]</span></code>: The carbonyl carbon, which contains all the protective constraints.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=O</span></code>: The double bond connecting the carbonyl carbon to its oxygen.</p></li>
+</ul>
+<p>The entire challenge lies in decoding the environmental conditions imposed on that central carbonyl carbon:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[CH0;!$(C(-[O,NH2,...])=O)]</span></code></p>
+<p>Here, we are applying the structural filter we just learned: <code class="docutils literal notranslate"><span class="pre">[CH0;!$()]</span></code> (“This is a carbonyl carbon, <strong>AND IT MUST NOT</strong> match the following environments”).</p>
+<p>Essentially, we are telling RDKit: <em>“It is a carbonyl, but it cannot be bonded to X, or Y, or Z.”</em> Let’s look at what we are excluding:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-[O...]</span></code>: The carbonyl carbon must <strong>not</strong> have a single bond to an oxygen. If it did, this group would actually be an <strong>ester</strong> or a <strong>carboxylic acid</strong>. We definitely don’t want a ketone pattern falsely triggering there.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NH2</span></code>, <code class="docutils literal notranslate"><span class="pre">[NH][CH3]</span></code>, <code class="docutils literal notranslate"><span class="pre">[NH][CH2]</span></code>, …: These represent the various amide patterns parameterized within this UNIFAC model. Above all, we want to prevent molecules that <em>should</em> be resolved as amides from prematurely converging into a ketone due to a multiplicity of valid matching paths. By explicitly excluding these environments, we ensure that the more specific amide group takes priority, preventing the simpler ketone pattern from cannibalizing its atoms.</p></li>
+</ul>
+<p>This is a prime example of how the presence of other functional groups within a model can force you to transform a straightforward SMARTS pattern into a highly complex, defensive one. Of course, you could still define the ketone as easily as we saw at the beginning—but only if you don’t mind dealing with the chaos of multiple overlapping solutions and prioritization errors later on during the fragmentation process.</p>
+</section>
+<section id="Link-nodes">
+<h3>Link-nodes<a class="headerlink" href="#Link-nodes" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code> supports Chemaxon-style <strong>link-nodes</strong>, though it implements them in a custom way to fit its <code class="docutils literal notranslate"><span class="pre">.csv</span></code> storage format. For a deeper dive into the theory, please check the official Chemaxon documentation, or inspect the <code class="docutils literal notranslate"><span class="pre">abdulelah_gani</span></code> model definitions for real-world examples of how this is structured:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">abdulelah_gani</span>
+
+<span class="c1"># Inspecting a link-node pattern in the Gani model</span>
+<span class="n">abdulelah_gani</span><span class="o">.</span><span class="n">tertiary_model</span><span class="o">.</span><span class="n">subgroups</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;smarts&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;[CH0;$([CH0]([OH])=O)][CX4H2;!R][CH0;$([CH0]([OH])=O)] LN:1:3.20:2&#39;
+</pre></div></div>
+</div>
+<p>Since RDKit does not natively support link-nodes infinitely, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> expands these custom definitions up to a user-defined threshold.</p>
+<p>When writing these patterns, you must specify an upper limit for the repetition size that you consider large enough for your systems. Keep in mind that there is an inherent trade-off: <strong>the larger the repetition limits, the higher the computational cost</strong> during the substructure detection phase.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="writers.html" class="btn btn-neutral float-left" title="Ugropy writers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tests_book/index.html" class="btn btn-neutral float-right" title="Tests book" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; ugropy 3.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Indices and tables" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ugropy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Citing-ugropy">Citing ugropy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#About-the-algorithm">About the algorithm</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tests_book/index.html">Tests book</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../constants.html">constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groups.html">Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/init.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writers/init.html">Writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/init.html">Core</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ugropy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/getting_started.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Getting-started">
+<h1>Getting started<a class="headerlink" href="#Getting-started" title="Link to this heading"></a></h1>
+<section id="Installation">
+<h2>Installation<a class="headerlink" href="#Installation" title="Link to this heading"></a></h2>
+<p>To install the last version of <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> uploaded to <a class="reference external" href="https://pypi.org/project/ugropy/">PyPI</a> simply do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install ugropy
+</pre></div>
+</div>
+<p>If you are working on a google colab use:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%pip install ugropy
+</pre></div>
+</div>
+<p>If you are a developer who wants to contribute to <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>, you can install it in development mode by cloning the repository and running:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install -e .
+</pre></div>
+</div>
+</section>
+<section id="Citing-ugropy">
+<h2>Citing ugropy<a class="headerlink" href="#Citing-ugropy" title="Link to this heading"></a></h2>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> in your research, please cite the following <a class="reference external" href="https://doi.org/10.1021/acs.iecr.5c02552">article</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@article{brandolin2025ugropy,
+  title={Ugropy: An Extensible Python Package for Thermodynamic Model Functional Group Identification via Mathematical Optimization},
+  author={Brandol{\&#39;\i}n, Salvador E and Benelli, Federico E and Magario, Ivana and Scilipoti, Jos{\&#39;e} A},
+  journal={Industrial \&amp; Engineering Chemistry Research},
+  volume={64},
+  number={35},
+  pages={17217--17227},
+  year={2025},
+  publisher={ACS Publications},
+  doi = {10.1021/acs.iecr.5c02552}
+}
+</pre></div>
+</div>
+</section>
+<section id="About-the-algorithm">
+<h2>About the algorithm<a class="headerlink" href="#About-the-algorithm" title="Link to this heading"></a></h2>
+<p>First, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>’s algorithm relies on three major dependency libraries:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.rdkit.org/">RDKit</a>: for handling chemical structures and performing substructure searches.</p></li>
+<li><p><a class="reference external" href="https://github.com/coin-or/pulp">PuLP</a>: for formulating and solving the integer optimization problems.</p></li>
+<li><p><a class="reference external" href="https://github.com/mcs07/PubChemPy">PubChemPy</a>: for retrieving chemical information (SMILES) from the PubChem database.</p></li>
+</ul>
+<p>Without the capabilities of these libraries, <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> would not be able to perform its core functions effectively. <code class="docutils literal notranslate"><span class="pre">RDKit</span></code> allows for efficient manipulation of chemical structures, while <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> provides a powerful framework for solving the optimization problems that arise in functional group identification. <code class="docutils literal notranslate"><span class="pre">PubChemPy</span></code> enables access to SMILES strings from the molecules’ names.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ugropy</span></code>’s algorithm is based on the concept of fragmentation, which involves selecting a set of fragments (functional groups) that can be used to represent the molecule from a list of structures.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">RDKit</span></code> library is used to perform substructure searches, for example, let’s imagine that we have a very simple fragmentation model that only detects the presence of methyl (CH3) and ethyl (CH2) fragments.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+
+<span class="c1"># Definition of the fragments of our model</span>
+<span class="n">ch3</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H3]&quot;</span><span class="p">)</span>
+<span class="n">ch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In the majority of fragmentation models, we usually have to specify which fragments are used to represent a molecule and the number of times that fragments are present in the molecule. For example, if we want to fragment the n-hexane molecule with our simple fragmentation model, we can simply do it with the <code class="docutils literal notranslate"><span class="pre">RDKit</span></code> library as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Molecule to fragment</span>
+<span class="n">hexane</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCCCCC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch3_detections</span> <span class="o">=</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch3</span><span class="p">)</span>
+
+<span class="n">ch3_detections</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((0,), (5,))
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch2_detections</span> <span class="o">=</span> <span class="n">hexane</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">ch2</span><span class="p">)</span>
+
+<span class="n">ch2_detections</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((1,), (2,), (3,), (4,))
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">RDKit</span></code> is returning a tuple of tuples for each fragment, where each inner tuple contains the indices of the atoms that match the fragment. The length of the outer tuple indicates how many times the fragment is present in the molecule. In this case, we have 2 methyl groups and 4 ethyl groups in the n-hexane molecule. For that we can directly build a dictionary that represents the result of the n-hexane fragmentation with our simple model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;CH3&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ch3_detections</span><span class="p">),</span>
+    <span class="s2">&quot;CH2&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ch2_detections</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">solution</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;CH3&#39;: 2, &#39;CH2&#39;: 4}
+</pre></div></div>
+</div>
+<p>This simple molecule with this simple fragmentation model was the start of the development of <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;Well... now we just need to add all the fragments of a model like UNIFAC,
+make a direct detection with RDKit for each one and that&#39;s all... right?&quot;.
+</pre></div>
+</div>
+<p>Well, no. The problem is that some fragments can overlap on the molecule’s atoms when performing a direct detection. Let’s check the following example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">rdMolDraw2D</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;c1ccccc1Cc2ccccc2&quot;</span><span class="p">)</span>
+
+<span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span>
+
+<span class="n">opts</span><span class="o">.</span><span class="n">addAtomIndices</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
+
+<span class="n">SVG</span><span class="p">(</span><span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_getting_started_15_0.svg" src="../_images/tutorial_getting_started_15_0.svg" />
+</div>
+</div>
+<p>In many fragmentation models like UNIFAC, there are fragments to differentiate between aliphatic and aromatic carbons. Let’s imagine the following fragmentation model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition of the fragments of our model</span>
+
+<span class="c1"># Aliphatic CH2</span>
+<span class="n">ch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic CH</span>
+<span class="n">ach</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic C without H</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Aromatic C bonded with aliphatic CH2</span>
+<span class="n">acch2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[cH0][CX4H2]&quot;</span><span class="p">)</span>
+
+<span class="c1"># List of fragments of our model</span>
+<span class="n">fragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch2</span><span class="p">,</span> <span class="n">ach</span><span class="p">,</span> <span class="n">ac</span><span class="p">,</span> <span class="n">acch2</span><span class="p">]</span>
+<span class="n">fragments_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CH2&quot;</span><span class="p">,</span> <span class="s2">&quot;ACH&quot;</span><span class="p">,</span> <span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACCH2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s analyze the molecule with our model doing a direct detection with <code class="docutils literal notranslate"><span class="pre">RDKit</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;c1ccccc1Cc2ccccc2&quot;</span><span class="p">)</span>
+<span class="n">occurrences</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;====================================================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atoms occupied by each fragment:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------------------------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fragment</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fragments</span><span class="p">,</span> <span class="n">fragments_names</span><span class="p">):</span>
+    <span class="n">detections</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">detections</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">occurrences</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">detections</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">====================================================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Occurrence of each fragment:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------------------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">occurrences</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+====================================================================
+Atoms occupied by each fragment:
+--------------------------------------------------------------------
+CH2: ((6,),)
+ACH: ((0,), (1,), (2,), (3,), (4,), (8,), (9,), (10,), (11,), (12,))
+AC: ((5,), (7,))
+ACCH2: ((5, 6), (7, 6))
+
+====================================================================
+Occurrence of each fragment:
+--------------------------------------------------------------------
+{&#39;CH2&#39;: 1, &#39;ACH&#39;: 10, &#39;AC&#39;: 2, &#39;ACCH2&#39;: 2}
+</pre></div></div>
+</div>
+<p>Anyone with some experience with the UNIFAC model will know that the correct fragmentation for this molecule is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;ACH&#39;: 10, &#39;AC&#39;: 1, &#39;ACCH2&#39;: 1}
+</pre></div>
+</div>
+<p>You may notice that the direct detection of <code class="docutils literal notranslate"><span class="pre">ACCH2</span></code> fragment is getting two detections. Moreover, the direct detection of <code class="docutils literal notranslate"><span class="pre">AC</span></code>, <code class="docutils literal notranslate"><span class="pre">ACCH2</span></code> and <code class="docutils literal notranslate"><span class="pre">CH2</span></code> are overlapping in the same three atoms of the molecule.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ugropy</span></code>’s algorithm creates an integer (binary) optimization to solve this decision problem of which fragments use to occupy the atoms that present overlaps. This mathematical optimization problem is called a Set Cover Problem, and it is solved with the <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> library.</p>
+<p>For more details about the algorithm, please refer to the <a class="reference external" href="https://doi.org/10.1021/acs.iecr.5c02552">ugropy’s article</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@article{brandolin2025ugropy,
+  title={Ugropy: An Extensible Python Package for Thermodynamic Model Functional Group Identification via Mathematical Optimization},
+  author={Brandol{\&#39;\i}n, Salvador E and Benelli, Federico E and Magario, Ivana and Scilipoti, Jos{\&#39;e} A},
+  journal={Industrial \&amp; Engineering Chemistry Research},
+  volume={64},
+  number={35},
+  pages={17217--17227},
+  year={2025},
+  publisher={ACS Publications},
+  doi = {10.1021/acs.iecr.5c02552}
+}
+</pre></div>
+</div>
+<p>Now, let’s use <code class="docutils literal notranslate"><span class="pre">ugropy</span></code> to obtain the correct fragmentation of the molecule with the UNIFAC model.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ugropy</span> <span class="kn">import</span> <span class="n">unifac</span>
+
+
+<span class="n">solution</span> <span class="o">=</span> <span class="n">unifac</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="s2">&quot;c1ccccc1Cc2ccccc2&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="o">.</span><span class="n">subgroups</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ACH&#39;: 10, &#39;AC&#39;: 1, &#39;ACCH2&#39;: 1}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorial_getting_started_22_0.svg" src="../_images/tutorial_getting_started_22_0.svg" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Indices and tables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Salvador Eduardo Brandolín.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
