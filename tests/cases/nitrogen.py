@@ -58,6 +58,20 @@ nitrogen_cases = [
         dortmund_result={"CH3": 2, "CONHCH2": 1},
     ),
     Case(
+        identifier="CCNC(=O)CC",
+        identifier_type="smiles",
+        cases_module="nitrogen",
+        unifac_result={"CH3": 2, "AMHCH2": 1, "CH2": 1},
+        psrk_result={"CH3": 2, "AMHCH2": 1, "CH2": 1},
+        joback_result={
+            "-CH3": 2,
+            "-CH2-": 2,
+            ">C=O (non-ring)": 1,
+            ">NH (non-ring)": 1,
+        },
+        dortmund_result={"CH3": 2, "CONHCH2": 1, "CH2": 1},
+    ),
+    Case(
         identifier="CC(=O)N(C)C",
         identifier_type="smiles",
         cases_module="nitrogen",
