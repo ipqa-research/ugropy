@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 particulars_cases = [
     Case(
         "O",
@@ -134,8 +133,8 @@ particulars_cases = [
         identifier="CC(C)N1CCCC1=O",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={},
-        psrk_result={},
+        unifac_result={"CH2": 1, "CH2CO": 1, "CH2N": 1, "CH": 1, "CH3": 2},
+        psrk_result={"CH2": 1, "CH2CO": 1, "CH2N": 1, "CH": 1, "CH3": 2},
         joback_result={},
         dortmund_result={"CY-CH2": 3, "NIPP": 1, "CH3": 2},
     ),
@@ -143,8 +142,8 @@ particulars_cases = [
         identifier="CC(C)(C)N1CCCC1=O",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={},
-        psrk_result={},
+        unifac_result={"CH2": 1, "CH2CO": 1, "CH2N": 1, "C": 1, "CH3": 3},
+        psrk_result={"CH2": 1, "CH2CO": 1, "CH2N": 1, "C": 1, "CH3": 3},
         joback_result={},
         dortmund_result={"CY-CH2": 3, "NTBP": 1, "CH3": 3},
     ),
@@ -297,17 +296,17 @@ particulars_cases = [
         dortmund_result={},
     ),
     Case(
-        identifier="hydrogen peroxide",
-        identifier_type="name",
+        identifier="OO",
+        identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={},
-        psrk_result={},
+        unifac_result={"OH": 2},
+        psrk_result={"OH": 2},
         joback_result={},
         dortmund_result={},
     ),
     Case(
-        identifier="methane",
-        identifier_type="name",
+        identifier="C",
+        identifier_type="smiles",
         cases_module="particulars",
         unifac_result={},
         psrk_result={"CH4": 1},
@@ -408,15 +407,6 @@ particulars_cases = [
         unifac_result={},
         psrk_result={"CO2": 1},
         joback_result={"=C=": 1, "=O (other than above)": 2},
-        dortmund_result={},
-    ),
-    Case(
-        identifier="C",
-        identifier_type="smiles",
-        cases_module="particulars",
-        unifac_result={},
-        psrk_result={"CH4": 1},
-        joback_result={},
         dortmund_result={},
     ),
     Case(
@@ -549,7 +539,7 @@ particulars_cases = [
         identifier="C1CO1",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={"CH2": 1, "CH2O": 1},
+        unifac_result={"CH2": 1, "THF": 1},
         psrk_result={"H2COCH2": 1},
         joback_result={"ring-CH2-": 2, "-O- (ring)": 1},
         dortmund_result={"CY-CH2": 1, "CY-CH2O": 1},
@@ -576,10 +566,10 @@ particulars_cases = [
         identifier="BrBr",
         identifier_type="smiles",
         cases_module="particulars",
-        unifac_result={},
+        unifac_result={"BR": 2},
         psrk_result={"BR2": 1},
         joback_result={"-Br": 2},
-        dortmund_result={},
+        dortmund_result={"BR": 2},
     ),
     Case(
         identifier="C#N",

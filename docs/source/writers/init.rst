@@ -8,6 +8,6 @@ Writers
 .. toctree::
    :maxdepth: 1
 
-   thermo
    clapeyron
    clapeyron_writers/init
+   yaeosf

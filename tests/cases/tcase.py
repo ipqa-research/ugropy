@@ -22,7 +22,6 @@ from .silicon import silicon_cases
 from .sulfur import sulfur_cases
 from .unsaturated_hydrocarbons import unsaturated_hydrocarbons_cases
 
-
 # Having multiple solvers in the future we can check them all here.
 solvers = [DefaultSolver]
 

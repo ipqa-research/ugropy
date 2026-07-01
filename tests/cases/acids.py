@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 acids_cases = [
     Case(
         identifier="OC(O)=O",

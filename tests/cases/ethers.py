@@ -6,7 +6,6 @@
 # =============================================================================
 from .case import Case
 
-
 ethers_cases = [
     Case(
         identifier="OC1CC(OC2=CC=CC=C12)C1=CC=CC=C1",
@@ -51,11 +50,11 @@ ethers_cases = [
         cases_module="ethers",
         unifac_result=[
             {"CH2": 1, "CH": 3, "OH": 4, "CHO": 1},
-            {"CH": 4, "OH": 4, "CH2O": 1},
+            {"CH": 4, "OH": 4, "THF": 1},
         ],
         psrk_result=[
             {"CH2": 1, "CH": 3, "OH": 4, "CHO": 1},
-            {"CH": 4, "OH": 4, "CH2O": 1},
+            {"CH": 4, "OH": 4, "THF": 1},
         ],
         joback_result={
             "ring-CH2-": 1,
@@ -72,8 +71,8 @@ ethers_cases = [
         identifier="C1COCCOCCOCCOC1",
         identifier_type="smiles",
         cases_module="ethers",
-        unifac_result={"CH2O": 4, "CH2": 5},
-        psrk_result={"CH2O": 4, "CH2": 5},
+        unifac_result={"THF": 4, "CH2": 5},
+        psrk_result={"THF": 4, "CH2": 5},
         joback_result={"ring-CH2-": 9, "-O- (ring)": 4},
         dortmund_result={"CY-CH2O": 4, "CY-CH2": 5},
     ),
@@ -81,8 +80,8 @@ ethers_cases = [
         identifier="C1COCCO1",
         identifier_type="smiles",
         cases_module="ethers",
-        unifac_result={"CH2O": 2, "CH2": 2},
-        psrk_result={"CH2O": 2, "CH2": 2},
+        unifac_result={"THF": 2, "CH2": 2},
+        psrk_result={"THF": 2, "CH2": 2},
         joback_result={"ring-CH2-": 4, "-O- (ring)": 2},
         dortmund_result={"CY-CH2O": 2, "CY-CH2": 2},
     ),
@@ -90,8 +89,8 @@ ethers_cases = [
         identifier="C1COCO1",
         identifier_type="smiles",
         cases_module="ethers",
-        unifac_result={"CH2O": 2, "CH2": 1},
-        psrk_result={"CH2O": 2, "CH2": 1},
+        unifac_result={"THF": 2, "CH2": 1},
+        psrk_result={"THF": 2, "CH2": 1},
         joback_result={"ring-CH2-": 3, "-O- (ring)": 2},
         dortmund_result={"CY-CH2O": 2, "CY-CH2": 1},
     ),
@@ -99,8 +98,8 @@ ethers_cases = [
         identifier="C1COCCOCCOCCOCCOCCO1",
         identifier_type="smiles",
         cases_module="ethers",
-        unifac_result={"CH2O": 6, "CH2": 6},
-        psrk_result={"CH2O": 6, "CH2": 6},
+        unifac_result={"THF": 6, "CH2": 6},
+        psrk_result={"THF": 6, "CH2": 6},
         joback_result={"ring-CH2-": 12, "-O- (ring)": 6},
         dortmund_result={"CY-CH2O": 6, "CY-CH2": 6},
     ),
@@ -174,11 +173,11 @@ ethers_cases = [
         identifier_type="smiles",
         cases_module="ethers",
         unifac_result=[
-            {"CH2": 8, "CH": 1, "CH2O": 1, "CHO": 1},
+            {"CH2": 8, "CH": 1, "THF": 1, "CHO": 1},
             {"CH2": 9, "CHO": 2},
         ],
         psrk_result=[
-            {"CH2": 8, "CH": 1, "CH2O": 1, "CHO": 1},
+            {"CH2": 8, "CH": 1, "THF": 1, "CHO": 1},
             {"CH2": 9, "CHO": 2},
         ],
         joback_result={
@@ -582,8 +581,8 @@ ethers_cases = [
         identifier="C1COCON1",
         identifier_type="smiles",
         cases_module="ethers",
-        unifac_result={"CH2O": 2, "CH2NH": 1},
-        psrk_result={"CH2O": 2, "CH2NH": 1},
+        unifac_result={"THF": 2, "CH2NH": 1},
+        psrk_result={"THF": 2, "CH2NH": 1},
         joback_result={"ring-CH2-": 3, "-O- (ring)": 2, ">NH (ring)": 1},
         dortmund_result={"CY-CH2O": 2, "CH2NH": 1},
     ),
@@ -592,8 +591,8 @@ ethers_cases = [
         identifier_type="smiles",
         cases_module="ethers",
         commentary="Trioxane",
-        unifac_result={"CH2O": 3},
-        psrk_result={"CH2O": 3},
+        unifac_result={"THF": 3},
+        psrk_result={"THF": 3},
         joback_result={"ring-CH2-": 3, "-O- (ring)": 3},
         dortmund_result={"TRIOXAN": 3},
     ),

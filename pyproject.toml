@@ -8,6 +8,8 @@ target-version = ["py310"]
 
 [tool.pytest.ini_options]
 markers = [
+    # Ignore on github
+    "not_github: tests that should be ignored on GitHub CI",
     # Models markers
     "unifac: classic UNIFAC model tests",
     "dortmund: Dortmund UNIFAC model tests",
@@ -35,7 +37,7 @@ markers = [
 
 [project]
 name = "ugropy"
-version = "3.1.6"
+version = "3.2.0"
 authors = [{name = "Brandolín, Salvador Eduardo", email = "salvadorebrandolin@mi.unc.edu.ar"}]
 license = {text = "The MIT License"}
 readme = "README.md"
@@ -57,6 +59,7 @@ dependencies = [
     "pandas >= 2.0.3",
     "pubchempy >= 1.0.5",
     "pint >= 0.22",
-    "pulp >= 2.9.0; sys_platform != 'darwin'",
-    "pulp == 2.9.0; sys_platform == 'darwin'",
+    "pulp >= 3.3.2",
+    # "pulp >= 2.9.0; sys_platform != 'darwin'",
+    # "pulp == 2.9.0; sys_platform == 'darwin'",
 ]

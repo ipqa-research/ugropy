@@ -1,3 +1,4 @@
+<!-- docs-include-start -->
 ![logo](https://github.com/ipqa-research/ugropy/blob/main/logo.png?raw=true)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb)
@@ -17,8 +18,10 @@ representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
 in the molecule.
 
-`ugropy` is tested for `Python` 3.10, 3.11, 3.12, and 3.13 on Linux, Windows
-and Mac OS.
+`ugropy` is tested for `Python` 3.10, 3.11, 3.12, 3.13 and 3.14 on Linux,
+Windows and Mac OS.
+
+<!-- docs-include-end -->
 
 You can access the documentation here: [https://ipqa-research.github.io/ugropy/](https://ipqa-research.github.io/ugropy/)
 
@@ -122,8 +125,8 @@ Estimate properties with the Joback and Abdulelah-Gani models!
 limonene = Groups("limonene")
 
 print(limonene.joback.subgroups)
-print(f"{limonene.joback.critical_temperature} K")
-print(f"{limonene.joback.vapor_pressure(176 + 273.15)} bar")
+print(f"{limonene.joback.critical_temperature}")
+print(f"{limonene.joback.vapor_pressure(176 + 273.15)}")
 ```
 
     {'-CH3': 2, '=CH2': 1, '=C<': 1, 'ring-CH2-': 3, 'ring>CH-': 1, 'ring=CH-': 1, 'ring=C<': 1}
@@ -200,7 +203,8 @@ writers.to_clapeyron(
     path="database"
 )
 ```
-Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) subgroups
+Obtain the [Caleb Bell's Thermo](https://github.com/CalebBell/thermo) and
+[yaeos API Python](https://github.com/ipqa-research/yaeos) subgroups
 
 ```python
 from ugropy import unifac
@@ -209,7 +213,9 @@ names = ["hexane", "ethanol"]
 
 grps = [unifac.get_groups(n) for n in names]
 
-[writers.to_thermo(g.subgroups, unifac) for g in grps]
+groups_numbers = [g.subgroups_num for g in grps]
+
+print(groups_numbers)
 ```
 
 ```

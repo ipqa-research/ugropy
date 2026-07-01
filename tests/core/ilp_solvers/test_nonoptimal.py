@@ -1,6 +1,9 @@
+import pytest
+
 from ugropy import abdulelah_gani, dortmund, psrk, unifac
 
 
+@pytest.mark.unifac
 def test_unifac_nonoptimal():
     result = unifac.get_groups(
         "C1OC1C1=CC=CC=C1",
@@ -11,9 +14,9 @@ def test_unifac_nonoptimal():
     assert len(result) == 3
 
     nonop = [
-        {"ACH": 5, "ACCH": 1, "CH2O": 1},
+        {"ACH": 5, "ACCH": 1, "THF": 1},
         {"CH2": 1, "ACH": 5, "AC": 1, "CHO": 1},
-        {"CH": 1, "ACH": 5, "AC": 1, "CH2O": 1},
+        {"CH": 1, "ACH": 5, "AC": 1, "THF": 1},
     ]
 
     assert result[0].subgroups in nonop
@@ -21,6 +24,7 @@ def test_unifac_nonoptimal():
     assert result[2].subgroups in nonop
 
 
+@pytest.mark.dortmund
 def test_dortmund_nonoptimal():
     result = dortmund.get_groups(
         "C1OC1C1=CC=CC=C1",
@@ -41,6 +45,7 @@ def test_dortmund_nonoptimal():
     assert result[2].subgroups in nonop
 
 
+@pytest.mark.psrk
 def test_psrk_nonoptimal():
     result = psrk.get_groups(
         "C1OC1C1=CC=CC=C1",
@@ -53,8 +58,8 @@ def test_psrk_nonoptimal():
     nonop = [
         {"ACH": 5, "AC": 1, "H2COCH": 1},
         {"CH2": 1, "ACH": 5, "AC": 1, "CHO": 1},
-        {"ACH": 5, "ACCH": 1, "CH2O": 1},
-        {"CH": 1, "ACH": 5, "AC": 1, "CH2O": 1},
+        {"ACH": 5, "ACCH": 1, "THF": 1},
+        {"CH": 1, "ACH": 5, "AC": 1, "THF": 1},
     ]
 
     assert result[0].subgroups in nonop
@@ -63,6 +68,7 @@ def test_psrk_nonoptimal():
     assert result[3].subgroups in nonop
 
 
+@pytest.mark.agani
 def test_abdulelah_gani_nonoptimal():
     result = abdulelah_gani.get_groups(
         "C1OC1C1=CC=CC=C1",

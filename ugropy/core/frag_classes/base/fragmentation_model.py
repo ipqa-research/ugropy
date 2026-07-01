@@ -33,10 +33,12 @@ class FragmentationModel:
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     allow_overlapping : bool, optional
-        Weather allow overlapping or not, by default False
+        Whether allow overlapping or not, by default False
+    allow_free_atoms : bool, optional
+        Whether allow free atoms or not, by default False
     fragmentation_result : FragmentationResult, optional
         Fragmentation result class, by default FragmentationResult
 
@@ -44,11 +46,11 @@ class FragmentationModel:
     ----------
     subgroups : pd.DataFrame
         Model's subgroups. Index: 'group' (subgroups names). Mandatory columns:
-        'smarts' (SMARTS representations of the group to detect its precense in
+        'smarts' (SMARTS representations of the group to detect its presense in
         the molecule).
     detection_mols : dict
-        Dictionary cotaining all the rdkit Mol object from the detection_smarts
-        subgroups column.
+        Dictionary containing all the rdkit Mol object from the
+        detection_smarts subgroups column.
     """
 
     def __init__(
@@ -102,7 +104,7 @@ class FragmentationModel:
         solver : ILPSolver, optional
             ILP solver class, by default DefaultSolver
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False If
+            Whether search for multiple solutions or not, by default False If
             False the return will be a FragmentationResult object, if True the
             return will be a list of FragmentationResult objects.
         search_nonoptimal : bool, optional
@@ -232,7 +234,7 @@ class FragmentationModel:
         solutions_fragments : List[dict]
             Fragments detected in the molecule.
         search_multiple_solutions : bool, optional
-            Weather search for multiple solutions or not, by default False
+            Whether search for multiple solutions or not, by default False
 
         Returns
         -------
@@ -306,3 +308,97 @@ class FragmentationModel:
         }
 
         return detected_fragments
+
+    def filter_mostly_polarity(
+        self, solutions: List[FragmentationResult], polarity: str = "polar"
+    ) -> List[FragmentationResult]:
+        """Filter the solutions with most atoms occupied by "polarity" groups.
+
+        Return the solutions with the largest number of atoms belonging to
+        polar or apolar groups (specified by the user). The method inspects all
+        the provided solutions and counts how many total atoms are occupied by
+        the specified polarity groups. The solutions with the highest number of
+        atoms belonging to the specified polarity groups are returned
+        (hydrogens doesn't count). A group is considered polar if its SMARTS
+        pattern contains at least one of the following atoms: {"O", "N", "S",
+        "P", "F", "Cl", "Br", "I"}.
+
+        Parameters
+        ----------
+        solutions : List[FragmentationResult]
+            List of fragmentation results to filter.
+        polarity : {"polar", "nonpolar"}, optional
+            The type of polarity groups to consider ("polar" or "apolar"). by
+            default, "polar"
+
+        Returns
+        -------
+        List[FragmentationResult]
+            Filtered list of fragmentation results.
+        """
+        if polarity.lower() not in ["polar", "apolar"]:
+            raise ValueError("polarity must be either 'polar' or 'apolar'")
+
+        polar_atoms = {"O", "N", "S", "P", "F", "Cl", "Br", "I"}
+
+        atom_counts = []
+
+        for sol in solutions:
+            sol_sum = 0
+
+            for group, atoms in sol.subgroups_atoms.items():
+                mol = self.detection_mols[group]
+                is_polar = any(
+                    atom.GetSymbol() in polar_atoms for atom in mol.GetAtoms()
+                )
+
+                check = is_polar if polarity == "polar" else not is_polar
+
+                if check:
+                    sol_sum += sum(len(a) for a in atoms)
+
+            atom_counts.append(sol_sum)
+
+        max_value = max(atom_counts)
+        idx = np.flatnonzero(np.isclose(atom_counts, max_value))
+
+        return [solutions[i] for i in idx]
+
+    def filter_mostly_polyatomic(
+        self, solutions: List[FragmentationResult]
+    ) -> List[FragmentationResult]:
+        """Filter the solutions with most atoms occupied by polyatomic groups.
+
+        Return the solutions with the largest number of atoms belonging to
+        polyatomic groups. The method inspects all the provided solutions and
+        counts how many total atoms are occupied by polyatomic groups. The
+        solutions with the highest number of atoms belonging to polyatomic
+        groups are returned (hydrogens doesn't count).
+
+        Parameters
+        ----------
+        solutions : List[FragmentationResult]
+            List of fragmentation results to filter.
+
+        Returns
+        -------
+        List[FragmentationResult]
+            Filtered list of fragmentation results.
+        """
+        atom_counts = []
+
+        for sol in solutions:
+            sol_sum = 0
+
+            for group, atoms in sol.subgroups_atoms.items():
+                mol = self.detection_mols[group]
+
+                if mol.GetNumAtoms() > 1:
+                    sol_sum += sum(len(a) for a in atoms)
+
+            atom_counts.append(sol_sum)
+
+        max_value = max(atom_counts)
+        idx = np.flatnonzero(np.isclose(atom_counts, max_value))
+
+        return [solutions[i] for i in idx]

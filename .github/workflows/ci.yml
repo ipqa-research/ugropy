@@ -1,12 +1,6 @@
 name: Tox
 
-on:
-  push:
-  pull_request:
-  release:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 12 * * *'  # Every day at 09:00 ART (12:00 UTC)
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test-linux:
@@ -14,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version}}
       - name: Install pandoc
@@ -27,19 +21,19 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"
 
   test-windows:
 
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version}}
           architecture: x64
@@ -48,19 +42,19 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"
 
   test-macos:
 
     runs-on: macOS-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.11', '3.12', '3.13', '3.14']
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version}}
       - name: Install pandoc
@@ -68,4 +62,4 @@ jobs:
       - name: Install tox
         run: pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -r
+        run: tox -r -- -m "not not_github"

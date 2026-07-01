@@ -2,11 +2,11 @@ from ugropy import dortmund, psrk, unifac, writers
 
 
 def test_to_yaeos_dortmund():
-    names = ["ethane", "ethanol", "cyclohexane", "water"]
+    identifiers = ["CC", "CCO", "C1CCCCC1", "O"]
 
-    groups = [dortmund.get_groups(name).subgroups for name in names]
+    groups = [dortmund.get_groups(iden, "smiles") for iden in identifiers]
 
-    fortran_code = writers.to_yaeos(groups, dortmund)
+    fortran_code = writers.to_yaeos(groups)
 
     expected = (
         "use yaeos__models_ge_group_contribution_unifac, only: Groups\n"
@@ -31,11 +31,11 @@ def test_to_yaeos_dortmund():
 
 
 def test_to_yaeos_psrk():
-    names = ["ethane", "ethanol", "cyclohexane", "oxygen"]
+    identifiers = ["CC", "CCO", "C1CCCCC1", "O=O"]
 
-    groups = [psrk.get_groups(name).subgroups for name in names]
+    groups = [psrk.get_groups(iden, "smiles") for iden in identifiers]
 
-    fortran_code = writers.to_yaeos(groups, psrk)
+    fortran_code = writers.to_yaeos(groups)
 
     expected = (
         "use yaeos__models_ge_group_contribution_unifac, only: Groups\n"
@@ -60,11 +60,11 @@ def test_to_yaeos_psrk():
 
 
 def test_to_yaeos_unifac():
-    names = ["ethane", "ethanol", "toluene", "water"]
+    identifiers = ["CC", "CCO", "c1ccccc1C", "O"]
 
-    groups = [unifac.get_groups(name).subgroups for name in names]
+    groups = [unifac.get_groups(iden, "smiles") for iden in identifiers]
 
-    fortran_code = writers.to_yaeos(groups, unifac)
+    fortran_code = writers.to_yaeos(groups)
 
     expected = (
         "use yaeos__models_ge_group_contribution_unifac, only: Groups\n"

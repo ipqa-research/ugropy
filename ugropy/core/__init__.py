@@ -18,7 +18,6 @@ from . import frag_classes, ilp_solvers
 from .checks import check_atoms_fragments_presence
 from .get_rdkit_object import instantiate_mol_object
 
-
 __all__ = [
     "ilp_solvers",
     "frag_classes",

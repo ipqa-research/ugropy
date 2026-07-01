@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 esters_cases = [
     Case(
         identifier="COC(=O)C=C",

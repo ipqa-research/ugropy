@@ -3,7 +3,6 @@
 # =============================================================================
 from .case import Case
 
-
 aldehydes_cases = [
     Case(
         identifier="C(=O)C=O",

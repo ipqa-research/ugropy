@@ -28,7 +28,6 @@ from ugropy.core.frag_classes.abdulelah_gani.abdulelah_gani_pst import (
 )
 from ugropy.models.read_csv import _rd
 
-
 # =============================================================================
 # Abdulelah Gani Secondary Structures FragmentationModel
 # =============================================================================

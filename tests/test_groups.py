@@ -24,23 +24,6 @@ def test_smiles():
     )
 
 
-def test_name():
-    mol = Groups("ethanol", identifier_type="name")
-
-    assert (
-        mol.unifac.subgroups
-        == unifac.get_groups("ethanol", identifier_type="name").subgroups
-    )
-    assert (
-        mol.psrk.subgroups
-        == psrk.get_groups("ethanol", identifier_type="name").subgroups
-    )
-    assert (
-        mol.joback.subgroups
-        == joback.get_groups("ethanol", identifier_type="name").subgroups
-    )
-
-
 def test_mol():
     chm = Chem.MolFromInchi("InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3")
     mol = Groups(chm, identifier_type="mol")

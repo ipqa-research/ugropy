@@ -2,11 +2,12 @@ Tutorial
 ========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
-   installation.ipynb
    easy_way.ipynb
    gibbs_models.ipynb
    properties_estimators.ipynb
-   working_with_ugropy.ipynb
+   filtering.ipynb
+   failing_fragmentations.ipynb
    writers.ipynb
+   power_user.ipynb
