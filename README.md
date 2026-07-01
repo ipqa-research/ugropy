@@ -18,6 +18,7 @@ representation from PubChem. In both cases, `ugropy` uses the
 [RDKit](https://github.com/rdkit/rdkit) library to search the functional groups
 in the molecule.
 
+
 `ugropy` is tested for `Python` 3.10, 3.11, 3.12, 3.13 and 3.14 on Linux,
 Windows and Mac OS.
 
