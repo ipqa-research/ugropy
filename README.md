@@ -3,7 +3,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ipqa-research/ugropy/blob/main/docs/source/tutorial/easy_way.ipynb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
-![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-blue)
 [![Docs](https://img.shields.io/badge/docs%20-%20green?style=flat&label=Sphinx&link=https%3A%2F%2Fipqa-research.github.io%2Fugropy%2Findex.html)](https://salvadorbrandolin.github.io/ugropy/)
 [![PyPI
 version](https://badge.fury.io/py/ugropy.svg)](https://badge.fury.io/py/ugropy)
@@ -19,7 +19,7 @@ representation from PubChem. In both cases, `ugropy` uses the
 in the molecule.
 
 
-`ugropy` is tested for `Python` 3.10, 3.11, 3.12, 3.13 and 3.14 on Linux,
+`ugropy` is tested for `Python` 3.12, 3.13 and 3.14 on Linux,
 Windows and Mac OS.
 
 <!-- docs-include-end -->
