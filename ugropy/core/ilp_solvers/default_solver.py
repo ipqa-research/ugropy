@@ -58,7 +58,7 @@ class DefaultSolver(ILPSolver):
         # less elements than the previous ones, otherwise the first one was not
         # optimal.
         if not_valid_solutions:
-            opt = np.sum(np.array(not_valid_solutions[0], dtype=int))
+            opt = int(np.sum(np.array(not_valid_solutions[0], dtype=int)))
 
             if not self.search_nonoptimal:
                 # Do you want to search only optimals solutions?
@@ -71,23 +71,24 @@ class DefaultSolver(ILPSolver):
                 <= pulp.lpSum([solution[i] for i in range(n_frag)]) - 1
             )
 
-        # Solver configuration verbosity
-        solver = pulp.getSolver(self.solver_arguments["solver"], msg=False)
+        # Solver configuration - respect solver_arguments
+        solver_name = self.solver_arguments.get("solver", "COIN_CMD")
+        solver = pulp.getSolver(solver_name, msg=False)
 
         # Solve
-        problem.solve(solver)
+        stats = problem.solve(solver)
 
         # Selected fragments (solution)
-        if pulp.LpStatus[problem.status] == "Optimal":
+        if stats.has_solution:
             selected_subsets = [
                 name
                 for i, name in enumerate(self.overlapped_fragments.keys())
-                if pulp.value(x[i]) == 1
+                if x[i].varValue == 1
             ]
 
             self.selected_fragments.append(selected_subsets)
 
-            return [pulp.value(x[i]) for i in range(n_frag)]
+            return [int(x[i].varValue) for i in range(n_frag)]
         else:
             # No feasible problem
             return None
