@@ -96,7 +96,7 @@ class ILPSolver(ABC):
 
         if solver_arguments == {}:
             self.solver_arguments = {
-                "solver": "PULP_CBC_CMD",
+                "solver": "COIN_CMD",
             }
         else:
             self.solver_arguments = solver_arguments

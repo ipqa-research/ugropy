@@ -21,6 +21,7 @@ pytest
 pytest-cov
 pytest-dependency
 tox
+xpress
 
 # General purpose
 ipdb
