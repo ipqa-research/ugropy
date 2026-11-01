@@ -338,11 +338,11 @@ class JobackFragmentationResult(FragmentationResult):
         t_br = tb / self.critical_temperature.magnitude
 
         # Lee and Kesler's equation (acentric factor)
-        pc = self.critical_pressure.to("atm").magnitude
+        pc = self.critical_pressure.magnitude
 
         self.acentric_factor = (
             (
-                -np.log(pc)
+                -np.log(pc / 1.01325)
                 - 5.92714
                 + 6.09648 / t_br
                 + 1.28862 * np.log(t_br)
