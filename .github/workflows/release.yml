@@ -1,0 +1,164 @@
+name: Publish release to PyPI
+
+# Publica el paquete en PyPI cuando se publica un GitHub Release en el
+# repositorio canonico SalvadorBrandolin/ugropy.
+#
+# Autenticacion con PyPI Trusted Publishing (OIDC): no se guarda ningun
+# token en el repositorio. El proyecto en PyPI debe tener un trusted
+# publisher configurado con:
+#   owner:       SalvadorBrandolin
+#   repository:  ugropy
+#   workflow:    release.yml
+#   environment: pypi
+#
+# Un fork puede contener este archivo, pero el guard de repositorio evita
+# que un release publicado en un fork publique en PyPI.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: Full CI
+    if: github.repository == 'SalvadorBrandolin/ugropy'
+    uses: ./.github/workflows/ci.yml
+
+  build:
+    name: Build and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: github.repository == 'SalvadorBrandolin/ugropy'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - name: Check out the released tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install build tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Check release tag matches the package version
+        id: version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+
+          ref = os.environ["RELEASE_TAG"].strip()
+          tag = ref[1:] if ref.startswith("v") else ref
+
+          with open("pyproject.toml", "rb") as handle:
+              project = tomllib.load(handle)["project"]
+
+          version = project["version"]
+          name = project["name"]
+
+          if name != "ugropy":
+              raise SystemExit(f"Unexpected project name: {name!r}")
+          if tag != version:
+              raise SystemExit(
+                  f"Release tag {ref!r} does not match pyproject version "
+                  f"{version!r}. Bump the version and cut the release again."
+              )
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"version={version}\n")
+              out.write(f"tag={ref}\n")
+          print(f"Releasing {name} {version} from {ref}")
+          PY
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Validate distribution metadata
+        run: python -m twine check --strict dist/*
+
+      - name: Install the wheel in a clean environment
+        run: |
+          python -m venv /tmp/ugropy-release
+          /tmp/ugropy-release/bin/python -m pip install --upgrade pip
+          /tmp/ugropy-release/bin/python -m pip install dist/*.whl
+          /tmp/ugropy-release/bin/python -m pip check
+          /tmp/ugropy-release/bin/python - <<'PY'
+          import importlib.metadata as metadata
+          import ugropy
+
+          installed = metadata.version("ugropy")
+          print(f"imported ugropy, version {installed}")
+          print(f"module file: {ugropy.__file__}")
+          PY
+
+      - name: Store distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: Publish to PyPI
+    needs: [build, ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.repository == 'SalvadorBrandolin/ugropy'
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ugropy
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+
+  attach:
+    name: Attach distributions to the release
+    needs: [build, publish, ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.repository == 'SalvadorBrandolin/ugropy'
+    permissions:
+      contents: write
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Upload to the GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.build.outputs.tag }}
+        run: gh release upload "$TAG" dist/* --clobber

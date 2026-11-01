@@ -342,7 +342,7 @@ class JobackFragmentationResult(FragmentationResult):
 
         self.acentric_factor = (
             (
-                -np.log(pc)
+                -np.log(pc / 1.01325)
                 - 5.92714
                 + 6.09648 / t_br
                 + 1.28862 * np.log(t_br)
