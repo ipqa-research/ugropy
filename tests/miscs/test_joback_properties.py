@@ -121,7 +121,7 @@ def test_acentric_factor():
         "smiles",
         normal_boiling_point=329.8,
     )
-    assert np.allclose(mol.acentric_factor.magnitude, 0.525, atol=1e-2)
+    assert np.allclose(mol.acentric_factor.magnitude, 0.51499, atol=1e-2)
     assert mol.acentric_factor.units == ureg.dimensionless
 
 
